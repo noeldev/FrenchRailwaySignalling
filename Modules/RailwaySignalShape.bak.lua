@@ -1,0 +1,589 @@
+local p = {}
+
+-- shape-to-shape-info (lights/states) map
+local shapeInfo = {
+    A = {
+        imageWidth = 90,
+        lights = {
+            { group = {
+        		{ pattern = "x-x", color = "Green" },
+        		{ pattern = "-x-", color = "White" },
+            } },
+            { group = {
+                { pattern = "x--", color = "Red" },
+                { pattern = "-xx" } -- Cover
+            } },
+            { pattern = "x--", color = "Yellow" },
+            { pattern = "-x-", color = "Purple" },
+            { pattern = "--x", color = "Red" }
+        },
+        states = {
+            { pattern = "x-x", states = { "VL", "(VL)" } },
+            { pattern = "x--", states = { "A", "(A)" } },
+            { pattern = "-x-", states = { "M", "(M)" } },
+            { pattern = "x-x", states = { "S", "(S)" } },
+            { pattern = "-x-", states = { "CV" } }
+        }
+    },
+    C = {
+        imageWidth = 90,
+        lights = {
+            { group = {
+	            { pattern = "-x-", color = "Purple" },
+    		    { pattern = "x-x", color = "Red" },
+        	} },
+            { group = {
+                { pattern = "xx-", color = "White" },
+                { pattern = "--x" } -- Cover
+            } },
+            { pattern = "xxx", color = "Green" },
+            { pattern = "xxx", color = "Red" },
+            { pattern = "xxx", color = "Yellow" }
+        },
+        states = {
+            { pattern = "xxx", states = { "VL", "(VL)" } },
+            { pattern = "xxx", states = { "A", "(A)" } },
+            { pattern = "xx-", states = { "M", "(M)" } },
+            { pattern = "xxx", states = { "S", "(S)" } },
+            { pattern = "-x-", states = { "CV" } },
+            { pattern = "x-x", states = { "C" } }
+        }
+    },
+    F = {
+        imageWidth = 180,
+        lights = {
+            { pattern = "xxxxx", color = "Yellow" },
+            { group = {
+                { pattern = "-x-x-", color = "Purple" },
+                { pattern = "x-x--", color = "Red" },
+                { pattern = "----x" } -- Cover
+            } },
+            { group = {
+                { pattern = "xx---", color = "White" },
+                { pattern = "--xxx" } -- Cover
+            } },
+            { pattern = "xxxxx", color = "Green" },
+            { pattern = "xxxxx", color = "Red" },
+            { pattern = "xxxxx", color = "Yellow" }
+        },
+        states = {
+            { pattern = "xxxxx", states = { "VL", "(VL)" } },
+            { pattern = "xxxxx", states = { "R", "(R)" } },
+            { pattern = "xxxxx", states = { "A", "(A)" } },
+            { pattern = "xx---", states = { "M", "(M)" } },
+            { pattern = "xxxxx", states = { "S", "(S)" } },
+            { pattern = "-x-x-", states = { "CV" } },
+            { pattern = "x-x--", states = { "C" } }
+        }
+    },
+    H = {
+        imageWidth = 180,
+        lights = {
+            { pattern = "xxxxxxx", color = "Yellow" },
+            { group = {
+                { pattern = "xxx----", color = "Yellow" },
+                { pattern = "---xxxx" } -- Cover
+            } },
+            { group = {
+                { pattern = "x-xx-x-", color = "Red" },
+                { pattern = "-x--x-x", color = "Purple" }
+            } },
+            { group = {
+                { pattern = "xx-xx--", color = "White" },
+                { pattern = "--x--xx" } -- Cover
+            } },
+            { pattern = "xxxxxxx", color = "Green" },
+            { pattern = "xxxxxxx", color = "Red" },
+            { pattern = "xxxxxxx", color = "Yellow" }
+        },
+        states = {
+            { pattern = "xxxxxxx", states = { "VL", "(VL)" } },
+            { pattern = "xxx----", states = { "R", "(R)" } },
+            { pattern = "xxxxxxx", states = { "A", "(A)" } },
+            { pattern = "xxxxxxx", states = { "RR", "(RR)" } },
+            { pattern = "xx-xx--", states = { "M", "(M)" } },
+            { pattern = "xxxxxxx", states = { "S", "(S)" } },
+            { pattern = "-x--x-x", states = { "CV" } },
+            { pattern = "x-xx-x-", states = { "C" } }
+        }
+    },
+    R = {
+        imageWidth = 180,
+        lights = {
+            { group = {
+        		{ pattern = "-x-x-x", color = "Yellow" },
+        		{ pattern = "x-x-x-" }, -- Cover
+        	} },
+        	{ group = {
+                { pattern = "x-xxxx", color = "Green" },
+                { pattern = "-x----" } -- Cover
+            } },
+            { group = {
+                { pattern = "--x-xx", color = "Red" },
+                { pattern = "xx-x--" } -- Cover
+            } },
+            { group = {
+                { pattern = "--x-xx", color = "Yellow" },
+                { pattern = "xx-x--" } -- Cover
+            } },
+            { group = {
+                { pattern = "xx-xxx", color = "Yellow" },
+                { pattern = "--x---" } -- Cover
+            } }
+        },
+        states = {
+            { pattern = "x-xxxx", states = { "VL" } },
+            { pattern = "-x-x-x", states = { "R", "(R)" } },
+            { pattern = "xx-xxx", states = { "A", "(A)" } },
+            { pattern = "--x-xx", states = { "D" } }
+        }
+    },
+    K = {
+        imageWidth = 69,
+        lights = {
+            { group = {
+            	{ pattern = "x-", color = "Green" },
+            	{ pattern = "-x", color = "White" }
+            } },
+            { group = {
+            	{ pattern = "x-", color = "Red" },
+            	{ pattern = "-x", color = "Purple" }
+            } }
+        },
+        states = {
+            { pattern = "x-", states = { "VL", "(VL)" } },
+            { pattern = "-x", states = { "M", "(M)" } },
+            { pattern = "x-", states = { "S", "(S)" } },
+            { pattern = "-x", states = { "CV" } }
+        }
+    },
+    ID = {
+        imageWidth = 195,
+        lights = {
+            { group = {
+		    	{ pattern = "-x", color = "White" },
+        		{ pattern = "x-" }, -- Cover
+        	} },
+            { pattern = "xx", color = "White" },
+            { pattern = "xx", color = "White" }
+        },
+        states = {
+            { pattern = "x-", states = { "ID2" } },
+            { pattern = "-x", states = { "ID3" } }
+        }
+    }
+}
+
+-- signal-to-plate map
+local plateMap = {
+	CARRE = "NF",
+	CV = "NF",
+	S = "F",
+	D = "D",
+	A = "A"
+}
+
+-- state/type-to-signal map
+local signalMap = {
+	C = "CARRE",
+	CV = "CV",
+	S = "S",
+	A = "A",
+	D = "D",
+	ID2 = "ID",
+	ID3 = "ID"
+}
+
+-- Helper function to generate the row content based on the pattern
+local function generatePattern(pattern, target)
+    local row = {}
+    local index = target and tonumber(target:match("%d+")) or nil  -- Extract the number if target is provided
+    local i = 1
+    for c in pattern:gmatch(".") do
+    	if c == "x" then
+          	table.insert(row, i == index and "||'''✓'''" or "||✓")
+        else
+        	table.insert(row, "|| ")
+        end
+        i = i + 1
+    end
+    return table.concat(row)
+end
+
+local function generateLightRow(color, pattern, target)
+	return (color or "Cover") .. generatePattern(pattern, target)
+end
+
+-- Generate the light rows
+local function generateLightRows(info, target)
+    local result = {}
+    local lights = info.lights
+    local light = #lights -- "light" will count in reverse order
+    local groupStyle = "style=\"border-top: 1.5pt solid darkgray;\""
+    local endOfGroup = false
+
+    for _, item in ipairs(lights) do
+        if item.group then
+            for i, groupItem in ipairs(item.group) do
+                local row = generateLightRow(groupItem.color, groupItem.pattern, target)
+                if i == 1 then
+                    if light ~= #lights then
+                        table.insert(result, "|- " .. groupStyle)
+                    else
+                        table.insert(result, "|-")
+                    end
+                    table.insert(result, "|" .. row)
+                    table.insert(result, "!scope=\"rowgroup\" rowspan=\"" .. #item.group .. "\"|" .. light)
+                else
+                    table.insert(result, "|-")
+                    table.insert(result, "|" .. row)
+                end
+            end
+            endOfGroup = true
+        else
+            if endOfGroup then
+                table.insert(result, "|- " .. groupStyle)
+                endOfGroup = false
+            else
+                table.insert(result, "|-")
+            end
+            table.insert(result, "|" .. generateLightRow(item.color, item.pattern, target))
+            table.insert(result, "!" .. light)
+        end
+        light = light - 1
+    end
+    return result
+end
+
+-- Generate the state rows
+local function generateStateRows(info, target, frame, statesKey)
+    local result = {}
+    local states = info.states
+    for _, item in ipairs(states) do
+        local stateTags = {}
+        for _, state in ipairs(item.states) do
+            table.insert(stateTags, frame:expandTemplate{ title = "TagValue", args = { statesKey, "FR:" .. state } })
+        end
+        table.insert(result, "|-")
+        table.insert(result, "|" .. table.concat(stateTags, " or ") .. generatePattern(item.pattern, target))
+        table.insert(result, "!")
+    end
+    return result
+end
+
+-- Function to get the number of targets for the shape
+local function getNumTargets(info)
+    return #info.states[1].pattern
+end
+
+-- Function to generate the wikitable for a given shape
+function p.generateTable(frame)
+    local args = frame:getParent().args
+    local shape = args.shape or "C"  -- Default to "C" if no shape is provided
+    local category = args.category or "main"
+    local target = args.target
+
+    local function validateTarget()
+        local pattern = "^" .. shape
+        return string.match(target, pattern) ~= nil
+    end
+
+	if target and not validateTarget() then
+		return "Type and shape mismatch."
+	end
+
+    local info = shapeInfo[shape]
+	if not info then
+        return "Shape not found."
+	end
+
+	local numTargets = getNumTargets(info)
+    local result = {}
+
+    -- Generate lights header
+    table.insert(result, "{| class=\"wikitable\" style=\"margin-top: 0;\"")
+    table.insert(result, "! scope=\"colgroup\" colspan=\"" .. (numTargets + 1) .. "\" |Lights||#")
+
+    -- Generate light rows
+    local lightRows = generateLightRows(info, target)
+	for _, row in ipairs(lightRows) do
+        table.insert(result, row)
+	end
+
+    -- Generate states header
+    table.insert(result, "|-")
+    table.insert(result, "!scope=\"colgroup\" colspan=\"" .. (numTargets + 2) .. "\"|<span id=\"States\">States</span>")
+
+    -- Generate state rows
+   	local statesKey = "railway:signal:" .. category .. ":states"
+   	local statesRows = generateStateRows(info, target, frame, statesKey)
+	for _, row in ipairs(statesRows) do
+        table.insert(result, row)
+    end
+
+    -- Add the bottom row
+    local bottomRow = { "!style=\"text-align:right;\"|'''" .. shape .. "'''||" }
+    for i = 1, numTargets do
+        table.insert(bottomRow, i .. "||")
+    end
+    table.insert(result, "|-")
+    table.insert(result, table.concat(bottomRow))
+
+    -- End of table
+    table.insert(result, "|}")
+
+    return table.concat(result, "\n")
+end
+
+-- Function to generate the image 
+function p.generateImage(frame)
+    local args = frame:getParent().args
+    local shape = args.shape or "C"  -- Default to "C" if no shape is provided
+    local info = shapeInfo[shape]
+	if not info then
+        return "Image not available."
+	end
+    return "[[File:Numbering Type " .. shape .. ".svg|frameless|" .. info.imageWidth .. "px]]"
+end
+
+-- Function to generate the tags
+function p.generateTags(frame)
+    local args = frame:getParent().args
+    local shape = args.shape or "C"
+    local category = args.category or "main"
+    local target = args.target
+    local info = shapeInfo[shape]
+	if not info then
+        return "Shape not found."
+	end
+
+	local signalKey = "railway:signal:" .. category
+	local numTargets = getNumTargets(info)
+    local result = {}
+
+	-- Function to generate a tag with optional value and option
+	local function generateTag(key, value, option)
+        return "*" .. frame:expandTemplate{title = "Tag", args = {key, value or "", option or ""}}
+	end
+
+	-- Function to generate a tag value
+	local function generateTagValue(key, value)
+        return frame:expandTemplate{title = "TagValue", args = {key, value}}
+	end
+
+	-- Function to enumerate signals and plates
+    local function enumSignalsAndPlates(signals)
+        local signalList = {}
+        local plateList = {}
+        local seenSignals = {}
+        local seenPlates = {}
+
+        for i = 1, numTargets do
+            local key = shape .. i
+            local signal = signals[key]
+            if signal and not seenSignals[signal] then
+                seenSignals[signal] = true
+                table.insert(signalList, generateTagValue(signalKey, "FR:" .. signal))
+
+                local plate = plateMap[signal]
+                if plate and not seenPlates[plate] then
+                    seenPlates[plate] = true
+                    table.insert(plateList, generateTagValue(signalKey .. ":plates", "FR:" .. plate))
+                end
+            end
+        end
+
+        return signalList, plateList
+    end
+
+	-- Function to fill signal table
+    local function getSignals()
+        local signals = {}
+        local states = info.states
+        local count = 0
+
+        for i = #states, 1, -1 do
+            local state = states[i]
+            local index = 1
+            for char in state.pattern:gmatch(".") do
+                if char == 'x' then
+                    local key = shape .. index
+                    if not signals[key] then
+                        signals[key] = signalMap[state.states[1]]
+
+                        -- Return signals as soon as all targets are collected
+                        count = count + 1
+                        if count == numTargets then
+                            return signals
+                        end
+                    end
+                end
+                index = index + 1
+            end
+        end
+        return signals
+    end
+
+    -- Insert signal tags
+    local signals = getSignals()
+
+    if target and signals[target] then
+        -- Target type was provided and found
+        local signal = signals[target]
+        local plateValue = generateTagValue(signalKey .. ":plates", "FR:" .. plateMap[signal])
+        table.insert(result, generateTag(signalKey, "FR:" .. signal))
+        table.insert(result, generateTag(signalKey .. ":plates",  plateValue .. ";*"))
+    else
+		-- Lists supported signals and related plates, avoiding duplicates
+		local signalList, plateList = enumSignalsAndPlates(signals)
+        table.insert(result, generateTag(signalKey, "", "(" .. table.concat(signalList, "/") .. ")"))
+    	if #plateList > 1 then
+        	table.insert(result, generateTag(signalKey .. ":plates", "(" .. table.concat(plateList, "/") .. ")"))
+        elseif #plateList == 1 then
+        	table.insert(result, generateTag(signalKey .. ":plates", plateList[1] .. ";*"))
+        else
+        	table.insert(result, "no plates available")
+        end
+    end
+
+	-- Insert form tag
+   	table.insert(result, generateTag(signalKey .. ":form", "light"))
+
+	-- Insert shape tag
+   	table.insert(result, generateTag(signalKey .. ":shape", "FR:" .. shape))
+
+	-- Insert type tag(s)
+	local typeKey = signalKey .. ":type";
+
+    if target then
+    	-- Target type was provided
+    	table.insert(result, generateTag(typeKey, "FR:" .. target))
+    else
+    	-- Lists supported target types
+    	local typeList = {}
+        for i = 1, numTargets do
+        	local type = shape .. i
+	        table.insert(typeList, generateTagValue(typeKey, "FR:" .. type))
+        end
+
+		table.insert(result, generateTag(typeKey, "", "(" .. table.concat(typeList, "/") .. ")"))
+    end
+
+	-- Insert states tag with wildcard
+	table.insert(result, generateTag(signalKey .. ":states") .. " (see [[#States|possible states]])")
+
+    return table.concat(result, "\n")
+end
+
+function p.Test()
+	local shape = "H"
+	local target = "H2"
+	local category = "main"
+	local info = shapeInfo[shape]
+	if not info then
+        mw.log("Shape not found: " .. shape)
+        return
+    end
+
+    local function validateTarget()
+        local pattern = "^" .. shape
+        return string.match(target, pattern) ~= nil
+    end
+
+	if target and not validateTarget() then
+		return "Type and shape mismatch."
+	end
+
+	local numTargets = getNumTargets(info)
+
+	-- Function to enumerate signals and plates
+    local function enumSignalsAndPlates(signals)
+        local signalList = {}
+        local plateList = {}
+        local seenSignals = {}
+        local seenPlates = {}
+
+        for i = 1, numTargets do
+            local key = shape .. i
+            local signal = signals[key]
+            if signal and not seenSignals[signal] then
+                seenSignals[signal] = true
+                table.insert(signalList, "FR:" .. signal)
+
+                local plate = plateMap[signal]
+                if plate and not seenPlates[plate] then
+                    seenPlates[plate] = true
+                    table.insert(plateList, "FR:" .. plate)
+                end
+            end
+        end
+
+        return signalList, plateList
+    end
+
+	-- Function to build the target-type-to-state map
+	local function getSignals()
+		local signals = {}
+		local states = info.states
+		local count = 0
+
+	    for i = #states, 1, -1 do
+	        local state = states[i]
+	        local index = 1
+            mw.log(state.pattern .. " @" .. i)
+	        for char in state.pattern:gmatch(".") do
+	            if char == 'x' then
+	                local key = shape .. index
+	                if not signals[key] then
+                        signals[key] = signalMap[state.states[1]]
+                        mw.log(key .. "=" .. signals[key])
+
+                        -- Return signals as soon as numTargets signals are collected
+                        count = count + 1
+                        if count == numTargets then
+                        	return signals
+                        end
+                    end
+	            end
+	            index = index + 1
+	        end
+	    end
+        -- Return the collected signals if numTargets is not reached
+	    return signals
+	end
+
+	-- Dump signal table
+	local signals = getSignals()
+	local signalList, plateList = enumSignalsAndPlates(signals)
+	for signal, state in pairs(signals) do
+	    mw.log(signal .. " = " .. state)
+	end
+	for _,signal in pairs(signalList) do
+	    mw.log("Signal = " .. signal)
+	end
+	for _,plate in pairs(plateList) do
+	    mw.log("Plate = " .. plate)
+	end
+
+    -- Insert signal tags
+	local signalKey = "railway:signal:" .. category
+
+    if target and signals[target] then
+        -- Target type was provided and found
+        local signal = signals[target]
+        mw.log(signalKey .. "=FR:" .. signal)
+        mw.log(signalKey .. ":plates=FR:" .. plateMap[signal])
+    else
+		-- Lists supported signals and related plates, avoiding duplicates
+        mw.log(signalKey .. "=(" .. table.concat(signalList, "/") .. ")")
+    	if #plateList > 1 then
+        	mw.log(signalKey .. ":plates=(" .. table.concat(plateList, "/") .. ")")
+        elseif #plateList == 1 then
+        	mw.log(signalKey .. ":plates=" .. plateList[1])
+        else
+        	mw.log("No plates available")
+        end
+    end
+end
+
+return p

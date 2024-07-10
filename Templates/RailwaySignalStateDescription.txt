@@ -1,0 +1,22 @@
+<includeonly>
+==State==
+
+'''{{{fullname}}}''', shortened as '''{{{state}}}'''.
+
+==Description==
+
+{{{description}}}
+
+==Action==
+
+{{{action}}}
+
+==Examples==
+<!-- The examples are generated from the Lua module -->
+
+Rendering on different types of signals.
+</includeonly>
+<noinclude>
+{{Documentation}}
+[[Category:Templates using TemplateData]]
+</noinclude>

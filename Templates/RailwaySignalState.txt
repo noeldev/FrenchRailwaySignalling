@@ -1,0 +1,12 @@
+<includeonly>
+{{#invoke:Noeld/Sandbox/RailwaySignalState|render}}
+
+== Sources ==
+
+* [https://ressources.data.sncf.com/explore/dataset/signalisation-permanente Signalisation Permanente] (SNCF)
+* [https://www.jonroma.net/media/rail/opdocs/world/france/S%201%20A%20I-%20Signalisation%20au%20sol.pdf Signalisation au sol] (SNCF, 2005, PDF)
+</includeonly>
+<noinclude>
+{{Documentation}}
+[[Category:Templates using TemplateData]]
+</noinclude>

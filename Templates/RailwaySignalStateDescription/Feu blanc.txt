@@ -1,0 +1,8 @@
+{{Template:FR:RailwaySignalStateDescription
+|fullname=Feu blanc
+|state=M
+|description=
+TBD.
+|action=
+TBD.
+}}

@@ -1,0 +1,8 @@
+{{Template:FR:RailwaySignalStateDescription
+|fullname=Feu vert clignotant
+|state=(VL)
+|description=
+TBD.
+|action=
+TBD.
+}}

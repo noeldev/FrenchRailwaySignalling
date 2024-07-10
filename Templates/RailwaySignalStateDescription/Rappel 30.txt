@@ -1,0 +1,8 @@
+{{Template:FR:RailwaySignalStateDescription
+|fullname=Rappel 30
+|state=RR
+|description=
+TBD.
+|action=
+TBD.
+}}

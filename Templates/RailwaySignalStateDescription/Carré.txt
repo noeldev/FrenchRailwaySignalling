@@ -1,0 +1,10 @@
+{{Template:FR:RailwaySignalStateDescription
+|fullname=Carré
+|state=C
+|description=
+Two steady red lights, either arranged vertically or horizontally.
+
+Signals that can display this state, also known as '''Carré''' signals, are equipped with both a clearing light ('''œilleton''') and an '''Nf''' (''Non franchissable'') plate. The clearing light is always lit except when the Carré state is displayed.
+|action=
+Absolute Stop.
+}}

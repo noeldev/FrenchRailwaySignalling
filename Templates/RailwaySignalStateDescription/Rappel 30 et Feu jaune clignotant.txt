@@ -1,0 +1,8 @@
+{{Template:FR:RailwaySignalStateDescription
+|fullname=Rappel 30 et Feu jaune clignotant
+|state=RR+(A)
+|description=
+TBD.
+|action=
+TBD.
+}}

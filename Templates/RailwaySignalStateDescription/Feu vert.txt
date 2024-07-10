@@ -1,0 +1,8 @@
+{{Template:FR:RailwaySignalStateDescription
+|fullname=Feu vert
+|state=VL
+|description=
+One steady green light.
+|action=
+Proceed.
+}}

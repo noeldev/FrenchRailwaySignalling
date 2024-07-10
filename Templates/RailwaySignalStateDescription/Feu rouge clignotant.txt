@@ -1,0 +1,8 @@
+{{Template:FR:RailwaySignalStateDescription
+|fullname=Feu rouge clignotant
+|state=(S)
+|description=
+TBD.
+|action=
+TBD.
+}}

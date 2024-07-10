@@ -1,0 +1,8 @@
+{{Template:FR:RailwaySignalStateDescription
+|fullname=Rappel 60
+|state=(RR)
+|description=
+TBD.
+|action=
+TBD.
+}}

@@ -1,0 +1,9 @@
+{{Template:FR:RailwaySignalStateDescription
+|fullname=Disque
+|state=D
+|description=
+Two steady lights, one yellow (left) and one red (right), horizontally aligned.
+|action=
+|action=
+TBD.
+}}

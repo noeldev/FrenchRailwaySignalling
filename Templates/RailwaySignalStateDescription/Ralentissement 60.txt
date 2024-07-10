@@ -1,0 +1,8 @@
+{{Template:FR:RailwaySignalStateDescription
+|fullname=Ralentissement 60
+|state=(R)
+|description=
+TBD.
+|action=
+TBD.
+}}
