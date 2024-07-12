@@ -159,13 +159,13 @@ local shapeInfo = {
     }
 }
 
--- state-to-info (name/plate) mapping
-local signalInfo = {
-	C  = { name = "CARRE", plate = "NF" },
-	CV = { name = "CV", plate = "NF" },
-	S  = { name = "S", plate = "F" },
-	D  = { name = "D", plate = "D" },
-	A  = { name = "A", plate = "A" },
+-- state-to-info (signal/plate) mapping
+local stateInfo = {
+	C  = { signal = "CARRE", plate = "NF" },
+	CV = { signal = "CV", plate = "NF" },
+	S  = { signal = "S", plate = "F" },
+	D  = { signal = "D", plate = "D" },
+	A  = { signal = "A", plate = "A" },
 }
 
 -- Helper function to generate the row content based on the pattern
@@ -355,12 +355,12 @@ function p.generateTags(frame)
         for i = 1, numTargets do
             local key = shape .. i
             local state = states[key]
-            local signal = signalInfo[state].name
+            local signal = stateInfo[state].signal
             if signal and not seenSignals[signal] then
                 seenSignals[signal] = true
                 table.insert(signalList, generateTagValue(signalKey, "FR:" .. signal))
 
-                local plate = signalInfo[state].plate
+                local plate = stateInfo[state].plate
                 if plate and not seenPlates[plate] then
                     seenPlates[plate] = true
                     table.insert(plateList, generateTagValue(signalKey .. ":plates", "FR:" .. plate))
@@ -406,8 +406,8 @@ function p.generateTags(frame)
     if target and states[target] then
         -- Target type was provided and found
         local state = states[target]
-        local plateValue = generateTagValue(signalKey .. ":plates", "FR:" .. signalInfo[state].plate)
-        table.insert(result, generateTag(signalKey, "FR:" .. signalInfo[state].name))
+        local plateValue = generateTagValue(signalKey .. ":plates", "FR:" .. stateInfo[state].plate)
+        table.insert(result, generateTag(signalKey, "FR:" .. stateInfo[state].signal))
         table.insert(result, generateTag(signalKey .. ":plates",  plateValue .. ";*"))
     else
 		-- Lists supported signals and related plates, avoiding duplicates
@@ -446,7 +446,7 @@ function p.generateTags(frame)
     end
 
 	-- Insert states tag with wildcard
-	table.insert(result, generateTag(signalKey .. ":states") .. " (see [[#States|possible states]])")
+	table.insert(result, generateTag(signalKey .. ":states") .. " (→ [[#States|possible states]])")
 
     return table.concat(result, "\n")
 end
@@ -482,12 +482,12 @@ function p.Test()
         for i = 1, numTargets do
             local key = shape .. i
             local state = states[key]
-            local signal = signalInfo[state].name
+            local signal = stateInfo[state].signal
             if state and not seenSignals[signal] then
                 seenSignals[signal] = true
                 table.insert(signalList, "FR:" .. signal)
 
-                local plate = signalInfo[state].plate
+                local plate = stateInfo[state].plate
                 if plate and not seenPlates[plate] then
                     seenPlates[plate] = true
                     table.insert(plateList, "FR:" .. plate)
@@ -550,8 +550,8 @@ function p.Test()
     if target and states[target] then
         -- Target type was provided and found
         local state = states[target]
-        mw.log(signalKey .. "=FR:" .. signalInfo[state].name)
-        mw.log(signalKey .. ":plates=FR:" .. signalInfo[state].plate)
+        mw.log(signalKey .. "=FR:" .. stateInfo[state].signal)
+        mw.log(signalKey .. ":plates=FR:" .. stateInfo[state].plate)
     else
 		-- Lists supported signals and related plates, avoiding duplicates
         mw.log(signalKey .. "=(" .. table.concat(signalList, "/") .. ")")

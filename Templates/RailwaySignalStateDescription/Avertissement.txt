@@ -1,0 +1,8 @@
+{{Template:FR:RailwaySignalStateDescription
+|fullname=Avertissement
+|state=A
+|description=
+TBD.
+|action=
+TBD.
+}}

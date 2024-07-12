@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
+    author="Noël Danjou" 
+    version="1.[[revision]]_[[date]]" 
+    shortdescription="SNCF Signalling"
+    description="">
+    <chunk id="common_signal_tags">
+        <text key="ref" value="*"/>
+        <text key="railway" value="signal"/>
+        <text key="railway:position" value="*"/>
+        <text key="railway:position:exact" value="*"/>
+        <combo key="railway:signal:direction" text="Signal Direction" values="forward,backward,both"/>
+        <combo key="railway:signal:position" text="Signal Position" values="bridge"/>
+    </chunk>
+    <chunk id="main_signal_tags">
+        <reference ref="common_signal_tags"/>
+        <text key="railway:signal:main:form" value="light"/>
+    </chunk>
+    <chunk id="distant_signal_tags">
+        <reference ref="common_signal_tags"/>
+        <text key="railway:signal:distant:form" value="light"/>
+        <text key="railway:signal:distant:shape" value="FR:R"/>
+    </chunk>
+    <group name="SNCF Signalling">
+        <item name="Carré" type="node">
+            <reference ref="main_signal_tags"/>
+            <combo key="railway:signal:main:height" text="Height" values="normal,dwarf"/>
+            <combo key="railway:signal:main:clearing_light" text="Clearing Light" values="yes,no"/>
+            <text key="railway:signal:main:plates:id" value="FR:NF"/>
+            <combo key="railway:signal:main:shape" text="Chassis" values="FR:C,FR:F,FR:H"/>
+            <combo key="railway:signal:main:type" text="Target" values="FR:C1,FR:C3,FR:F1,FR:F3,FR:H1,FR:H3,FR:H4,FR:H6"/>
+            <combo key="railway:signal:main:shortened" text="Yellow Stripe" values="yes,no"/>
+            <multiselect key="railway:signal:main:states" text="Possible States" values="FR:C,FR:VL,FR:S,FR:A"/>
+            <optional>
+                <text key="railway:signal:main:plates:marker" value="FR:C"/>
+                <text key="railway:signal:main:plates:marker:caption" value="*"/>
+                <combo key="railway:signal:main:plates:block" text="Cantonment Plate" values="FR:BM,FR:PR"/>
+                <text key="railway:signal:main:plates:block:caption" value="*"/>
+            </optional>
+        </item>
+        <item name="Carré violet" type="node">
+            <reference ref="main_signal_tags"/>
+            <text key="railway:signal:main" value="FR:CV" />
+            <combo key="railway:signal:main:height" text="Installation" values="high@Mast,low@Ground"/>
+            <text key="railway:signal:main:plates:id" value="FR:NF"/>
+            <combo key="railway:signal:main:shape" text="Chassis" values="FR:A,FR:C,FR:F,FR:H,FR:K"/>
+            <combo key="railway:signal:main:type" text="Target" values="FR:A2,FR:C2,FR:F2,FR:F4,FR:H2,FR:H5,FR:H7,FR:K2"/>
+            <multiselect key="railway:signal:main:states" text="Possible States" values="FR:CV,FR:M,FR:VL,FR:S,FR:A"/>
+            <optional>
+                <text key="railway:signal:main:plates:marker" value="FR:CV"/>
+                <text key="railway:signal:main:plates:marker:caption" value="*"/>
+                <combo key="railway:signal:main:plates:block" text="Cantonment Plate" values="FR:BM,FR:PR"/>
+                <text key="railway:signal:main:plates:block:caption" values="*"/>
+            </optional>
+        </item>
+        <item name="Sémaphore" type="node">
+            <reference ref="main_signal_tags"/>
+            <text key="railway:signal:main" value="FR:S" />
+            <combo key="railway:signal:main:plates:id" values="FR:F,FR:BM,FR:PR"/>
+            <combo key="railway:signal:main:shape" text="Chassis" values="FR:A,FR:F,FR:K"/>
+            <combo key="railway:signal:main:type" text="Target" values="FR:A1,FR:A3,FR:F5,FR:K1"/>
+            <multiselect key="railway:signal:main:states" text="Possible States" values="FR:VL,FR:S,FR:A"/>
+            <optional>
+                <text key="railway:signal:main:plates:marker" value="FR:S"/>
+                <text key="railway:signal:main:plates:marker:caption" value="*"/>
+            </optional>
+        </item>
+
+        <separator />
+
+        <item name="Guidon d'Arrêt" type="node">
+            <reference ref="main_signal_tags"/>
+            <text key="railway:signal:main" value="FR:GA" />
+            <optional>
+                <text key="railway:signal:distant:plates:id" value="FR:GA"/>
+                <text key="railway:signal:main:plates:marker" value="FR:GA"/>
+                <text key="railway:signal:main:plates:marker:caption" value="*"/>
+            </optional>
+        </item>
+
+        <separator />
+
+        <item name="Disque" type="node">
+            <reference ref="distant_signal_tags"/>
+            <text key="railway:signal:distant" value="FR:D"/>
+            <combo key="railway:signal:main:type" text="Target" values="FR:R3,FR:R5,FR:R6"/>
+            <multiselect key="railway:signal:distant:states" text="Possible States" values="FR:D,FR:VL,FR:A,FR:R"/>
+            <optional>
+                <text key="railway:signal:distant:plates:id" value="FR:D"/>
+            </optional>
+        </item>
+        <item name="Avertissement" type="node">
+            <reference ref="distant_signal_tags"/>
+            <text key="railway:signal:distant" value="FR:A"/>
+            <combo key="railway:signal:main:type" text="Target" values="FR:R1,FR:R2,FR:R4"/>
+            <multiselect key="railway:signal:distant:states" text="Possible States" values="FR:VL,FR:A,FR:R"/>
+            <optional>
+                <text key="railway:signal:distant:plates:id" value="FR:A"/>
+            </optional>
+        </item>
+
+        <separator />
+
+        <!-- TIV-D Type Ordinaire -->
+        <item name="TIV-D (Type Ordinaire)" type="node">
+            <reference ref="common_signal_tags"/>
+            <text key="railway:signal:speed_limit_distant" value="FR:TIV_PENDIS"/>
+            <combo key="railway:signal:speed_limit_distant:form" text="Forme" values="sign@Pancarte,light@Tableau"/>
+            <text key="railway:signal:speed_limit_distant:speed" value="*"/>
+            <combo key="railway:crocodile" text="Crocodile" values="yes,no"/>
+            <optional>
+                <text key="railway:signal:speed_limit:plates" value="FR:L"/>
+            </optional>
+        </item>
+
+        <!-- TIV-D Type B -->
+        <!-- TIV-D Type C -->
+        <!-- Tableau Z -->
+        <!-- Tableau R -->
+
+        <!-- TIV_PENDIS -->
+        <item name="TIV Pentagonal Distant" type="node">
+            <reference ref="common_signal_tags"/>
+            <text key="railway:signal:speed_limit" value="FR:TIV_PENDIS"/>
+            <text key="railway:signal:speed_limit:form" value="sign"/>
+            <text key="railway:signal:speed_limit:speed" value="*"/>
+            <optional>
+                <text key="railway:signal:speed_limit:plates" value="FR:L"/>
+            </optional>
+        </item>
+
+        <!-- TIV_PENEXE -->
+        <item name="TIV Pentagonal d'Execution" type="node">
+            <reference ref="common_signal_tags"/>
+            <text key="railway:signal:speed_limit" value="FR:TIV_PENEXE"/>
+            <text key="railway:signal:speed_limit:form" value="sign"/>
+            <text key="railway:signal:speed_limit:function" value="entry"/>
+            <text key="railway:signal:speed_limit:speed" value="*"/>
+        </item>
+
+        <!-- TIV_PENREP -->
+        <item name="TIV Pentagonal de Reprise" type="node">
+            <reference ref="common_signal_tags"/>
+            <text key="railway:signal:speed_limit" value="FR:TIV_PENREP"/>
+            <text key="railway:signal:speed_limit:form" value="sign"/>
+            <text key="railway:signal:speed_limit:function" value="exit"/>
+            <text key="railway:signal:speed_limit:speed" value="none"/>
+        </item>
+    </group>
+</presets>

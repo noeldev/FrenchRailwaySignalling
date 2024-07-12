@@ -1,5 +1,5 @@
 {{Template:FR:RailwaySignalStateDescription
-|fullname=Rappel 30 et Feu jaune clignotant
+|fullname=Rappel 60 et Feu jaune clignotant
 |state=(RR)+(A)
 |description=
 TBD.
