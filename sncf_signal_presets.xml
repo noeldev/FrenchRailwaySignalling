@@ -3,15 +3,18 @@
     author="Noël Danjou" 
     version="1.[[revision]]_[[date]]" 
     shortdescription="SNCF Signalling"
-    description="Signalisation Ferroviaire Française">
+    fr.shortdescription="Signalisation SNCF"
+    description="French Railway Signalling"
+    fr.description="Signalisation Ferroviaire Française">
     
     <!-- Chunk for all signals, boards and signs -->
     <chunk id="common_tags">
         <key key="railway" value="signal" />
+        <key key="source" value="SNCF - 03/2022" />
         <text key="ref" text="Identifiant" />
         <text key="railway:position" text="PK arrondi (e.g. 100.3)" />
         <text key="railway:position:exact" text="PK exact (e.g. 100.325)" />
-        <combo key="railway:signal:direction" text="Direction" values="forward,backward,both" display_values="Croissante,Décroissante,Toutes" default="forward" editable="false" />
+        <combo key="railway:signal:direction" text="Direction" values="forward,backward,both" display_values="Croissante,Décroissante,Bidirectionnelle" default="forward" editable="false" />
         <combo key="railway:signal:position" text="Position" values="left,right,bridge,overhead,in_track" display_values="Gauche,Droite,Portique/Potence,Caténaire,Heurtoir" default="left" editable="false" />
     </chunk>
 
@@ -30,81 +33,109 @@
     <group name="Signalisation SNCF">
 
         <!-- Carré -->
+        <chunk id="carre_options_tags">
+            <optional>
+                <text key="railway:signal:main:caption:marker" text="Intitulé du Repérage" default="" />
+                <combo key="railway:signal:main:plate:block" text="Plaque de Cantonnement" values="FR:BM,FR:PR" display_values="BM (Bloc Manuel),PR (BAPR)" default="" editable="false" />
+                <text key="railway:signal:main:caption:block" text="Intitulé du Cantonnement" default="" />
+            </optional>
+        </chunk>
+
         <chunk id="carre_tags">
             <reference ref="main_signal_tags" />
             <key key="railway:signal:main" value="FR:CARRE" />
             <key key="railway:signal:main:plate" value="FR:NF" /> <!-- Plaque d'Identification -->
+
+            <item_separator />
+
             <checkgroup columns="3">
                 <check key="railway:signal:main:clearing_light" text="Œilleton" default="on" />
                 <check key="railway:signal:main:shortened" text="Bande Jaune" default="off" />
                 <check key="railway:signal:main:height" text="Taille Réduite" value_on="dwarf" value_off="normal" default="off" />
             </checkgroup>
-            <optional>
-                <text key="railway:signal:main:caption:marker" text="Intitulé du Repérage" default="" />
-                <combo key="railway:signal:main:plate:block" text="Plaque de Cantonnement" values="FR:BM,FR:PR," display_values="BM,PR,(aucune)" default="" editable="false" />
-                <text key="railway:signal:main:caption:block" text="Intitulé du Cantonnement" default="" />
-            </optional>
+
+            <reference ref="carre_options_tags" />
+            <link wiki="OpenRailwayMap/Tagging in France#Carré" />
         </chunk>
 
         <group name="Carré">
-            <item name="Cible C1" type="node">
+
+            <item name="Cible C1 (5 feux)" type="node">
+                <label text="Carré sur cible type &quot;C1&quot;" /><space />
                 <reference ref="carre_tags" />
                 <key key="railway:signal:main:shape" value="FR:C" />
                 <key key="railway:signal:main:type" value="FR:C1" />
-                <multiselect key="railway:signal:main:states" text="Aspects" 
-                    values="FR:C;FR:VL;FR:S;FR:A" display_values="C;VL;A" />
+                <key key="railway:signal:main:states" 
+                    value="FR:C;FR:S;FR:(S);FR:M;FR:(M);FR:A;FR:(A);FR:VL;FR:(VL)" />
             </item>
-            <item name="Cible C3" type="node">
+
+            <item name="Cible C3 (4 feux)" type="node">
+                <label text="Carré sur cible type &quot;C3&quot;" /><space />
                 <reference ref="carre_tags" />
                 <key key="railway:signal:main:shape" value="FR:C" />
                 <key key="railway:signal:main:type" value="FR:C3" />
-                <multiselect key="railway:signal:main:states" text="Aspects" 
-                    values="FR:C;FR:VL;FR:S;FR:A" display_values="C;VL;A" />
+                <key key="railway:signal:main:states" 
+                    value="FR:C;FR:S;FR:(S);FR:A;FR:(A);FR:VL;FR:(VL)" />
             </item>
-            <item_separator />
-            <item name="Cible F1" type="node">
+
+            <separator />
+
+            <item name="Cible F1 (7 feux)" type="node">
+                <label text="Carré sur cible type &quot;F1&quot;" /><space />
                 <reference ref="carre_tags" />
                 <key key="railway:signal:main:shape" value="FR:F" />
                 <key key="railway:signal:main:type" value="FR:F1" />
-                <multiselect key="railway:signal:main:states" text="Aspects" 
-                    values="FR:C;FR:VL;FR:S;FR:A" display_values="C;VL;A" />
+                <key key="railway:signal:main:states" 
+                    value="FR:C;FR:S;FR:(S);FR:M;FR:(M);FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)" />
             </item>
-            <item name="Cible F3" type="node">
+
+            <item name="Cible F3 (6 feux)" type="node">
+                <label text="Carré sur cible type &quot;F3&quot;" /><space />
                 <reference ref="carre_tags" />
                 <key key="railway:signal:main:shape" value="FR:F" />
                 <key key="railway:signal:main:type" value="FR:F3" />
-                <multiselect key="railway:signal:main:states" text="Aspects" 
-                    values="FR:C;FR:VL;FR:S;FR:A" display_values="C;VL;A" />
+                <key key="railway:signal:main:states" 
+                    value="FR:C;FR:S;FR:(S);FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)" />
             </item>
-            <item_separator />
-            <item name="Cible H1" type="node">
+
+            <separator />
+
+            <item name="Cible H1 (9 feux)" type="node">
+                <label text="Carré sur cible type &quot;H1&quot;" /><space />
                 <reference ref="carre_tags" />
                 <key key="railway:signal:main:shape" value="FR:H" />
                 <key key="railway:signal:main:type" value="FR:H1" />
-                <multiselect key="railway:signal:main:states" text="Aspects" 
-                    values="FR:C;FR:VL;FR:S;FR:A" display_values="C;VL;A" />
+                <key key="railway:signal:main:states" 
+                    value="FR:C;FR:S;FR:(S);FR:M;FR:(M);FR:RR;FR:RR+A;FR:RR+(A);FR:(RR);FR:(RR)+A;FR:(RR)+(A);FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)" />
             </item>
-            <item name="Cible H3" type="node">
+
+            <item name="Cible H3 (8 feux)" type="node">
+                <label text="Carré sur cible type &quot;H3&quot;" /><space />
                 <reference ref="carre_tags" />
                 <key key="railway:signal:main:shape" value="FR:H" />
                 <key key="railway:signal:main:type" value="FR:H3" />
-                <multiselect key="railway:signal:main:states" text="Aspects" 
-                    values="FR:C;FR:VL;FR:S;FR:A" display_values="C;VL;A" />
+                <key key="railway:signal:main:states" 
+                    value="FR:C;FR:S;FR:(S);FR:RR;FR:RR+A;FR:RR+(A);FR:(RR);FR:(RR)+A;FR:(RR)+(A);FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)" />
             </item>
-            <item name="Cible H4" type="node">
+
+            <item name="Cible H4 (7 feux)" type="node">
+                <label text="Carré sur cible type &quot;H4&quot;" /><space />
                 <reference ref="carre_tags" />
                 <key key="railway:signal:main:shape" value="FR:H" />
                 <key key="railway:signal:main:type" value="FR:H4" />
-                <multiselect key="railway:signal:main:states" text="Aspects" 
-                    values="FR:C;FR:VL;FR:S;FR:A" display_values="C;VL;A" />
+                <key key="railway:signal:main:states" 
+                    value="FR:C;FR:S;FR:(S);FR:M;FR:(M);FR:RR;FR:RR+A;FR:RR+(A);FR:(RR);FR:(RR)+A;FR:(RR)+(A);FR:A;FR:(A);FR:VL;FR:(VL)" />
             </item>
-            <item name="Cible H6" type="node">
+
+            <item name="Cible H6 (6 feux)" type="node">
+                <label text="Carré sur cible type &quot;H6&quot;" /><space />
                 <reference ref="carre_tags" />
                 <key key="railway:signal:main:shape" value="FR:H" />
                 <key key="railway:signal:main:type" value="FR:H6" />
-                <multiselect key="railway:signal:main:states" text="Aspects" 
-                    values="FR:C;FR:VL;FR:S;FR:A" display_values="C;VL;A" />
+                <key key="railway:signal:main:states" 
+                    value="FR:C;FR:S;FR:(S);FR:RR;FR:RR+A;FR:RR+(A);FR:(RR);FR:(RR)+A;FR:(RR)+(A);FR:A;FR:(A);FR:VL;FR:(VL)" />
             </item>
+
         </group>
 
         <!-- Carré violet -->
@@ -112,130 +143,194 @@
             <reference ref="main_signal_tags" />
             <key key="railway:signal:main" value="FR:CV" />
             <key key="railway:signal:main:plate" value="FR:NF" />
-            <combo key="railway:signal:main:height" text="Installation" values="high,low" display_values="Sur mât,Au sol" default="high" editable="false" />
-            <optional>
-                <text key="railway:signal:main:caption:marker" default="" />
-            </optional>
+            <check key="railway:signal:main:height" text="Sur mât" value_off="low" value_on="high" default="on" editable="false" />
+            <reference ref="carre_options_tags" />
+            <link wiki="OpenRailwayMap/Tagging in France#Carré violet" />
         </chunk>
 
         <group name="Carré violet">
-            <item name="Cible A2" type="node">
+
+            <item name="Cible A2 (2 feux)" type="node">
+                <label text="Carré violet sur cible type &quot;A2&quot;" /><space />
                 <reference ref="cv_tags" />
                 <key key="railway:signal:main:shape" value="FR:A" />
                 <key key="railway:signal:main:type" value="FR:A2" />
+                <key key="railway:signal:main:states" 
+                    value="FR:CV;FR:M;FR:(M)" />
             </item>
-            <item_separator />
-            <item name="Cible C2" type="node">
+
+            <separator />
+
+            <item name="Cible C2 (5 feux)" type="node">
+                <label text="Carré violet sur cible type &quot;C2&quot;" /><space />
                 <reference ref="cv_tags" />
                 <key key="railway:signal:main:shape" value="FR:C" />
                 <key key="railway:signal:main:type" value="FR:C2" />
+                <key key="railway:signal:main:states" 
+                    value="FR:CV;FR:S;FR:(S);FR:M;FR:(M);FR:A;FR:(A);FR:VL;FR:(VL)" />
             </item>
-            <item_separator />
-            <item name="Cible F2" type="node">
+
+            <separator />
+
+            <item name="Cible F2 (7 feux)" type="node">
+                <label text="Carré violet sur cible type &quot;F2&quot;" /><space />
                 <reference ref="cv_tags" />
                 <key key="railway:signal:main:shape" value="FR:F" />
                 <key key="railway:signal:main:type" value="FR:F2" />
+                <key key="railway:signal:main:states" 
+                    value="FR:CV;FR:S;FR:(S);FR:M;FR:(M);FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)" />
             </item>
-            <item name="Cible F4" type="node">
+
+            <item name="Cible F4 (6 feux)" type="node">
+                <label text="Carré violet sur cible type &quot;F4&quot;" /><space />
                 <reference ref="cv_tags" />
                 <key key="railway:signal:main:shape" value="FR:F" />
                 <key key="railway:signal:main:type" value="FR:F4" />
+                <key key="railway:signal:main:states" 
+                    value="FR:CV;FR:S;FR:(S);FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)" />
             </item>
-            <item_separator />
-            <item name="Cible H2" type="node">
+
+            <separator />
+
+            <item name="Cible H2 (9 feux)" type="node">
+                <label text="Carré violet sur cible type &quot;H2&quot;" /><space />
                 <reference ref="cv_tags" />
                 <key key="railway:signal:main:shape" value="FR:H" />
                 <key key="railway:signal:main:type" value="FR:H2" />
+                <key key="railway:signal:main:states" 
+                    value="FR:CV;FR:S;FR:(S);FR:M;FR:(M);FR:RR;FR:RR+A;FR:RR+(A);FR:(RR);FR:(RR)+A;FR:(RR)+(A);FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)" />
             </item>
-            <item name="Cible H5" type="node">
+
+            <item name="Cible H5 (7 feux)" type="node">
+                <label text="Carré violet sur cible type &quot;H5&quot;" /><space />
                 <reference ref="cv_tags" />
                 <key key="railway:signal:main:shape" value="FR:H" />
                 <key key="railway:signal:main:type" value="FR:H5" />
+                <key key="railway:signal:main:states" 
+                    value="FR:CV;FR:S;FR:(S);FR:M;FR:(M);FR:RR;FR:RR+A;FR:RR+(A);FR:(RR);FR:(RR)+A;FR:(RR)+(A);FR:A;FR:(A);FR:VL;FR:(VL)" />
             </item>
-            <item name="Cible H7" type="node">
+
+            <item name="Cible H7 (6 feux)" type="node">
+                <label text="Carré violet sur cible type &quot;H7&quot;" /><space />
                 <reference ref="cv_tags" />
                 <key key="railway:signal:main:shape" value="FR:H" />
                 <key key="railway:signal:main:type" value="FR:H7" />
+                <key key="railway:signal:main:states" 
+                    value="FR:CV;FR:S;FR:(S);FR:RR;FR:RR+A;FR:RR+(A);FR:(RR);FR:(RR)+A;FR:(RR)+(A);FR:A;FR:(A);FR:VL;FR:(VL)" />
             </item>
-            <item_separator />
-            <item name="Cible K2" type="node">
+
+            <separator />
+
+            <item name="Cible K2 (2 feux)" type="node">
+                <label text="Carré violet sur cible type &quot;K2&quot;" /><space />
                 <reference ref="cv_tags" />
                 <key key="railway:signal:main:shape" value="FR:K" />
                 <key key="railway:signal:main:type" value="FR:K2" />
-                <multiselect key="railway:signal:main:states" text="Aspects" 
-                    values="FR:CV;FR:M;FR:VL;FR:S;FR:A"
-                    display_values="CV;M;VL;S;A" />
+                <key key="railway:signal:main:states" value="FR:CV;FR:M;FR:(M)" />
             </item>
+
         </group>
 
         <!-- Guidon d'Arrêt -->
         <item name="Guidon d'Arrêt" type="node">
+            <label text="Guidon d'Arrêt" /><space />
             <reference ref="main_signal_tags" />
             <key key="railway:signal:main" value="FR:GA" />
             <optional>
                 <text key="railway:signal:main:caption:marker" text="Intitulé de repérage" />
             </optional>
+            <link wiki="OpenRailwayMap/Tagging in France#Guidon d'Arrêt" />
         </item>
 
-        <!-- Disque -->
-        <chunk id="disk_tags">
-            <reference ref="distant_signal_tags" />
-            <key key="railway:signal:distant" value="FR:D" />
-            <key key="railway:signal:distant:shape" value="FR:R" />
-        </chunk>
-
-        <group name="Disque">
-            <item name="Cible R3" type="node">
-                <reference ref="disk_tags" />
-                <key key="railway:signal:distant:type" value="FR:R3" />
-            </item>
-            <item name="Cible R5" type="node">
-                <reference ref="disk_tags" />
-                <key key="railway:signal:distant:type" value="FR:R5" />
-            </item>
-            <item name="Cible R6" type="node">
-                <reference ref="disk_tags" />
-                <key key="railway:signal:distant:type" value="FR:R6" />
-                <multiselect key="railway:signal:distant:states" text="Aspects" 
-                    values="FR:D,FR:VL,FR:A,FR:R" 
-                    display_values="D;VL;A;R" />
-            </item>
-        </group>
+        <separator />
 
         <!-- Sémaphore -->
         <chunk id="semaphore_tags">
             <reference ref="main_signal_tags" />
             <key key="railway:signal:main" value="FR:S"  />
             <combo key="railway:signal:main:plate" text="Plaque d'Identification" values="FR:F,FR:BM,FR:PR" display_values="F,BM,PR" default="FR:F" editable="false" />
+            <link wiki="OpenRailwayMap/Tagging in France#Sémaphore" />
         </chunk>
 
         <group name="Sémaphore">
-            <item name="Cible A1" type="node">
+
+            <item name="Cible A1 (3 feux)" type="node">
+                <label text="Sémaphore sur cible type &quot;A1&quot;" /><space />
                 <reference ref="semaphore_tags" />
                 <key key="railway:signal:main:shape" value="FR:A" />
                 <key key="railway:signal:main:type" value="FR:A1" />
-                <multiselect key="railway:signal:main:states" text="Aspects" values="FR:VL,FR:A,FR:S" />
+                <key key="railway:signal:main:states" 
+                    value="FR:S;FR:(S);FR:A;FR:(A);FR:VL;FR:(VL)" />
             </item>
-            <item name="Cible A3" type="node">
+
+            <item name="Cible A3 (2 feux)" type="node">
+                <label text="Sémaphore sur cible type &quot;A3&quot;" /><space />
                 <reference ref="semaphore_tags" />
                 <key key="railway:signal:main:shape" value="FR:A" />
                 <key key="railway:signal:main:type" value="FR:A3" />
-                <multiselect key="railway:signal:main:states" text="Aspects" values="FR:VL,FR:S" />
+                <key key="railway:signal:main:states" 
+                    value="FR:S;FR:(S);FR:VL;FR:(VL)" />
             </item>
-            <item_separator />
-            <item name="Cible F5" type="node">
+
+            <separator />
+
+            <item name="Cible F5 (5 feux)" type="node">
+                <label text="Sémaphore sur cible type &quot;F5&quot;" /><space />
                 <reference ref="semaphore_tags" />
                 <key key="railway:signal:main:shape" value="FR:F" />
                 <key key="railway:signal:main:type" value="FR:F5" />
-                <multiselect key="railway:signal:main:states" text="Aspects" values="FR:VL,FR:S,FR:A" />
+                <key key="railway:signal:main:states" 
+                    value="FR:S;FR:(S);FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)" />
             </item>
-            <item_separator />
-            <item name="Cible K1" type="node">
+
+            <separator />
+
+            <item name="Cible K1 (2 feux)" type="node">
+                <label text="Sémaphore sur cible type &quot;K1&quot;" /><space />
                 <reference ref="semaphore_tags" />
                 <key key="railway:signal:main:shape" value="FR:K" />
                 <key key="railway:signal:main:type" value="FR:K1" />
-                <multiselect key="railway:signal:main:states" text="Aspects" values="FR:VL,FR:S,FR:A" />
+                <key key="railway:signal:main:states" value="FR:S;FR:(S);FR:VL" />
             </item>
+
+        </group>
+
+        <separator />
+
+        <!-- Disque -->
+        <chunk id="disk_tags">
+            <reference ref="distant_signal_tags" />
+            <key key="railway:signal:distant" value="FR:D" />
+            <key key="railway:signal:distant:shape" value="FR:R" />
+            <link wiki="OpenRailwayMap/Tagging in France#Disque" />
+        </chunk>
+
+        <group name="Disque">
+
+            <item name="Cible R3 (3 feux)" type="node">
+                <label text="Disque sur cible type &quot;R3&quot;" /><space />
+                <reference ref="disk_tags" />
+                <key key="railway:signal:distant:type" value="FR:R3" />
+                <key key="railway:signal:distant:states" 
+                    value="FR:D;FR:VL;FR:(VL)" />
+            </item>
+
+            <item name="Cible R5 (4 feux)" type="node">
+                <label text="Disque sur cible type &quot;R5&quot;" /><space />
+                <reference ref="disk_tags" />
+                <key key="railway:signal:distant:type" value="FR:R5" />
+                <key key="railway:signal:distant:states" 
+                    value="FR:D;FR:A;FR:(A);FR:VL;FR:(VL)" />
+            </item>
+
+            <item name="Cible R6 (6 feux)" type="node">
+                <label text="Disque sur cible type &quot;R6&quot;" /><space />
+                <reference ref="disk_tags" />
+                <key key="railway:signal:distant:type" value="FR:R6" />
+                <key key="railway:signal:distant:states" 
+                    value="FR:D;FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)" />
+            </item>
+
         </group>
 
         <!-- Avertissement -->
@@ -243,69 +338,121 @@
             <reference ref="distant_signal_tags" />
             <key key="railway:signal:distant" value="FR:A" />
             <key key="railway:signal:distant:shape" value="FR:R" />
+            <link wiki="OpenRailwayMap/Tagging in France#Avertissement" />
         </chunk>
 
         <group name="Avertissement">
-            <item name="Cible R1" type="node">
+
+            <item name="Cible R1 (2 feux)" type="node">
+                <label text="Avertissement sur cible type &quot;R1&quot;" /><space />
                 <reference ref="announcement_tags" />
                 <key key="railway:signal:distant:type" value="FR:R1" />
-                <!-- multiselect -->
+                <key key="railway:signal:main:states" 
+                    value="FR:A;FR:(A);FR:VL" />
             </item>
-            <item name="Cible R2" type="node">
+
+            <item name="Cible R2 (3 feux)" type="node">
+                <label text="Avertissement sur cible type &quot;R2&quot;" /><space />
                 <reference ref="announcement_tags" />
                 <key key="railway:signal:distant:type" value="FR:R2" />
-                <!-- multiselect -->
+                <key key="railway:signal:main:states" 
+                    value="FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A)" />
             </item>
-            <item name="Cible R4" type="node">
+
+            <item name="Cible R4 (4 feux)" type="node">
+                <label text="Avertissement sur cible type &quot;R4&quot;" /><space />
                 <reference ref="announcement_tags" />
                 <key key="railway:signal:distant:type" value="FR:R4" />
-                <multiselect key="railway:signal:distant:states" text="Aspects" 
-                    values="FR:VL,FR:A,FR:R" 
-                    display_values="D;VL;A;R" />
+                <key key="railway:signal:main:states" 
+                    value="FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)" />
             </item>
+
         </group>
 
         <separator  />
 
         <group name="Indicateurs de Direction">
+
             <item name="ID" type="node">
+                <label text="Indicateur de Direction (ID)" /><space />
                 <reference ref="common_tags" />
                 <key key="railway:signal:route" value="FR:ID" />
                 <key key="railway:signal:route:form" value="light" />
                 <combo key="railway:signal:route:type" text="Nb de directions" values="FR:ID2,FR:ID3,FR:ID4,FR:ID5" display_values="2,3,4,5" default="FR:ID2" editable="false" />
+                <link wiki="OpenRailwayMap/Tagging in France#Indicateur de Direction" />
             </item>
+
             <item name="TIDD" type="node">
+                <label text="Tableau Indicateur de Direction à Distance (TIDD)" /><space />
                 <reference ref="common_tags" />
                 <key key="railway:signal:route_distant" value="FR:TIDD" />
                 <key key="railway:signal:route_distant:form" value="light" />
+                <link wiki="OpenRailwayMap/Tagging in France#Tableau Indicateur de Direction à Distance" />
             </item>
+
         </group>
 
-        <group name="Limitation de Vitesse">
+        <group name="Tableaux Indicateurs de Vitesse">
 
             <group name="TIV Mobiles">
-            </group>
 
-            <group name="TIV Fixes">
-                <!-- TIV-D Type Ordinaire -->
-                <item name="TIV-D Type Ordinaire" type="node">
+                <chunk id="mobile_speed_indicator_tags">
                     <reference ref="common_tags" />
-                    <key key="railway:signal:speed_limit_distant" value="FR:TIV-D" />
-                    <text key="railway:signal:speed_limit_distant:speed" text="Vitesse limite" default="" />
+                    <link wiki="OpenRailwayMap/Tagging in France#Mobile Speed Indicators" />
+                </chunk>
+
+                <item name="TIV Mobile à Distance" type="node">
+                    <label text="TIV Mobile à Distance" /><space />
+                    <reference ref="mobile_speed_indicator_tags" />
+                    <key key="railway:signal:speed_limit_distant" value="FR:TIV-D_MOB" />
+                    <text key="railway:signal:speed_limit_distant:speed" text="Vitesse limite" default="60" />
                     <checkgroup>
-                        <check key="railway:signal:speed_limit_distant:form" text="Éclairé" value_off="sign" value_on="light" default="light" />
+                        <check key="railway:signal:speed_limit_distant:form" text="Éclairé" value_off="sign" value_on="light" default="on" />
                         <check key="railway:crocodile" text="Crocodile" default="yes" />
                     </checkgroup>
                 </item>
 
-                <item name="TIV-D Type B" type="node">
+                <item name="TIV Mobile de Rappel" type="node">
+                    <label text="TIV Mobile de Rappel" /><space />
+                    <reference ref="mobile_speed_indicator_tags" />
+                    <key key="railway:signal:speed_limit_distant" value="FR:TIV-R_MOB" />
+                    <key key="railway:signal:speed_limit_distant:type" value="FR:B" />
+                    <key key="railway:signal:speed_limit_distant:form" value="light" />
+                    <text key="railway:signal:speed_limit_distant:speed" text="Vitesse limite" />
+                </item>
+
+            </group>
+
+            <group name="TIV Fixes">
+
+                <chunk id="fixed_speed_indicator_tags">
+                    <reference ref="common_tags" />
+                    <link wiki="OpenRailwayMap/Tagging in France#Fixed Speed Indicators" />
+                </chunk>
+
+                <item name="TIV à Distance du Type Ordinaire" type="node">
+                    <label text="TIV à Distance du Type Ordinaire" /><space />
+                    <reference ref="fixed_speed_indicator_tags" />
+                    <key key="railway:signal:speed_limit_distant" value="FR:TIV-D" />
+                    <text key="railway:signal:speed_limit_distant:speed" text="Vitesse limite" default="40" />
+                    <checkgroup>
+                        <check key="railway:signal:speed_limit_distant:form" text="Éclairé" value_off="sign" value_on="light" default="on" />
+                        <check key="railway:crocodile" text="Crocodile" default="yes" />
+                    </checkgroup>
+                </item>
+
+                <item name="TIV à Distance du Type B" type="node">
+                    <label text="TIV à Distance du Type B" /><space />
+                    <reference ref="fixed_speed_indicator_tags" />
                     <key key="railway:signal:speed_limit_distant" value="FR:TIV-D" />
                     <key key="railway:signal:speed_limit_distant:type" value="FR:B" />
                     <key key="railway:signal:speed_limit_distant:form" value="light" />
                     <text key="railway:signal:speed_limit_distant:speed" text="Vitesse limite" />
                 </item>
 
-                <item name="TIV-D Type C" type="node">
+                <item name="TIV-D du Type C" type="node">
+                    <label text="TIV à Distance du Type C" /><space />
+                    <reference ref="fixed_speed_indicator_tags" />
                     <key key="railway:signal:speed_limit_distant" value="FR:TIV-D" />
                     <key key="railway:signal:speed_limit_distant:type" value="FR:C" />
                     <key key="railway:signal:speed_limit_distant:form" value="sign" />
@@ -315,18 +462,26 @@
             </group>
 
             <group name="TIV Pentagonaux">
-                <item name="TIV à Distance" type="node">
+
+                <chunk id="pentagonal_speed_indicator_tags">
                     <reference ref="common_tags" />
+                    <link wiki="OpenRailwayMap/Tagging in France#Pentagonal Speed Indicators" />
+                </chunk>
+
+                <item name="TIV à Distance" type="node">
+                    <label text="TIV à distance de forme pentagonale" /><space />
+                    <reference ref="pentagonal_speed_indicator_tags" />
                     <key key="railway:signal:speed_limit_distant" value="FR:TIV_PENDIS" />
                     <key key="railway:signal:speed_limit_distant:form" value="sign" />
                     <text key="railway:signal:speed_limit_distant:speed" />
                     <optional>
-                        <check key="railway:signal:speed_limit_distant:plate" value_off="" value_on="FR:L" default="off" />
+                        <check key="railway:signal:speed_limit_distant:plate" text="Pour certaines séries de locomotives" value_off="" value_on="FR:L" default="off" />
                     </optional>
                 </item>
 
                 <item name="TIV d'Exécution" type="node">
-                    <reference ref="common_tags" />
+                    <label text="TIV d'exécution de forme pentagonale" /><space />
+                    <reference ref="pentagonal_speed_indicator_tags" />
                     <key key="railway:signal:speed_limit" value="FR:TIV_PENEXE" />
                     <key key="railway:signal:speed_limit:form" value="sign" />
                     <key key="railway:signal:speed_limit:function" value="entry" />
@@ -334,97 +489,218 @@
                 </item>
 
                 <item name="TIV de Reprise" type="node">
-                    <reference ref="common_tags" />
+                    <label text="TIV de reprise de forme pentagonale" /><space />
+                    <reference ref="pentagonal_speed_indicator_tags" />
                     <key key="railway:signal:speed_limit" value="FR:TIV_PENREP" />
                     <key key="railway:signal:speed_limit:form" value="sign" />
                     <key key="railway:signal:speed_limit:function" value="exit" />
                     <key key="railway:signal:speed_limit:speed" value="none" />
                 </item>
+            
             </group>
 
-            <separator />          
+        </group>
 
-            <!-- Pancarte KM, Repère de vitesse -->
-            <!-- Tableau P -->
-            <item name="Pancarte Z">
+        <group name="Pancartes et Tableaux">
+
+            <item name="Pancarte Z" type="node">
+                <label text="Pancarte Z" /><space />
                 <reference ref="common_tags" />
                 <key key="railway:signal:speed_limit" value="FR:Z" />
                 <key key="railway:signal:speed_limit:form" value="sign" />
                 <key key="railway:signal:speed_limit:function" value="entry" />
+                <link wiki="OpenRailwayMap/Tagging in France#Fixed Speed Indicators" />
             </item>
-            <item name="Pancarte R">
+
+            <item name="Pancarte R" type="node">
+                <label text="Pancarte R" /><space />
                 <reference ref="common_tags" />
-                <key key="railway:signal:speed_limit" value="FR:Z" />
+                <key key="railway:signal:speed_limit" value="FR:R" />
                 <key key="railway:signal:speed_limit:form" value="sign" />
                 <key key="railway:signal:speed_limit:function" value="exit" />
                 <key key="railway:signal:speed_limit:speed" value="none" />
+                <link wiki="OpenRailwayMap/Tagging in France#Fixed Speed Indicators" />
             </item>
-            <item name="Pancarte Km">
+            
+            <item name="Pancarte Km" type="node"> <!-- Repère de vitesse -->
+                <label text="Pancarte Km" /><space />
                 <reference ref="common_tags" />
-                <key key="railway:signal:speed_limit" value="FR:Z" />
+                <key key="railway:signal:speed_limit" value="FR:KM" />
                 <key key="railway:signal:speed_limit:form" value="sign" />
-                <key key="railway:signal:speed_limit:function" value="exit" />
-                <key key="railway:signal:speed_limit:speed" value="none" />
+                <link wiki="OpenRailwayMap/Tagging in France#Repère de Vitess (Km sign)" />
             </item>
-            <item name="Tableau P">
+
+            <item name="Tableau P" type="node">
+                <label text="Tableau P" /><space />
                 <reference ref="common_tags" />
                 <key key="railway:signal:speed_limit_distant" value="FR:P" />
                 <key key="railway:signal:speed_limit_distant:form" value="light" />
-                <text key="railway:signal:speed_limit_distant:speed" text="Vitesse limite" default="" />
+                <link wiki="OpenRailwayMap/Tagging in France#Speed Limit Announcement (P board)" />
             </item>
+        
         </group>
         
-        <!-- TODO main -->
-        <!--
-        <check key="railway:signal:main:form" text="Éclairé" value_off="sign" value_on="light" default="off" />
-        -->
-
         <group name="Chevrons">
-            <item name="Chevron Bas">
+            
+            <item name="Chevron Bas" type="node">
+                <label text="Chevron Bas" /><space />
                 <reference ref="common_tags" />
                 <key key="railway:signal:speed_limit" value="FR:CHEVRON" />
                 <key key="railway:signal:speed_limit:form" value="sign" />
                 <key key="railway:signal:speed_limit:type" value="downwards" />
+                <link wiki="OpenRailwayMap/Tagging in France#Chevron" />
             </item>
-            <item name="Chevron Haut">
+            
+            <item name="Chevron Haut" type="node">
+                <label text="Chevron Haut" /><space />
                 <reference ref="common_tags" />
                 <key key="railway:signal:shunting" value="FR:CHEVRON" />
                 <key key="railway:signal:shunting:form" value="sign" />
                 <key key="railway:signal:shunting:type" value="upwards" />
+                <link wiki="OpenRailwayMap/Tagging in France#Upward-pointing Chevrons" />
             </item>
+        
         </group>
 
-        <separator  />
+        <separator />
 
-        <group name="Arrêts">
-            <group name="Arrêts Voyageurs">
-                <item name="TT">
-                    <reference ref="common_tags" />
-                </item>
-                <item name="TTL">
-                    <reference ref="common_tags" />
-                </item>
-                <item name="TT EAS">
-                    <reference ref="common_tags" />
-                </item>
-                <item name="...V">
-                    <reference ref="common_tags" />
-                </item>
-                
-                <item_separator />
+        <group name="Arrêts Voyageurs">
+            
+            <chunk id="passenger_stop_tags">
+                <reference ref="common_tags" />
+                <link wiki="OpenRailwayMap/Tagging in France#Passenger Stops" />
+            </chunk>
 
-                <item name="TGV 1">
-                    <reference ref="common_tags" />
-                </item>
-                <item name="TGV 2">
-                    <reference ref="common_tags" />
-                </item>
-                <item name="TGV 1-2">
-                    <reference ref="common_tags" />
-                </item>
+            <item name="TT" type="node">
+                <label text="Arrêt voyageurs - Tête de Train" /><space />
+                <reference ref="passenger_stop_tags" />
+                <key key="railway:signal:stop" value="FR:ARRET_VOY" />
+                <key key="railway:signal:stop:form" value="sign" />
+            </item>
 
-            </group>
+            <item name="TTL" type="node">
+                <label text="Arrêt voyageurs - Trains avec locomotive" /><space />
+                <reference ref="passenger_stop_tags" />
+                <key key="railway:signal:stop" value="FR:ARRET_VOY" />
+                <key key="railway:signal:stop:form" value="sign" />
+                <key key="railway:signal:stop:for" value="locomotive" />
+            </item>
+
+            <item name="TT EAS" type="node">
+                <label text="Arrêt voyageurs - Trains équipés EAS" /><space />
+                <reference ref="passenger_stop_tags" />
+                <key key="railway:signal:stop" value="FR:ARRET_VOY" />
+                <key key="railway:signal:stop:form" value="sign" />
+                <key key="railway:signal:stop:for" value="FR:EAS" />
+            </item>
+
+            <item name="...V" type="node">
+                <label text="Arrêt voyageurs - Trains de x voitures" /><space />
+                <reference ref="passenger_stop_tags" />
+                <key key="railway:signal:stop" value="FR:ARRET_VOY" />
+                <key key="railway:signal:stop:form" value="sign" />
+                <key key="railway:signal:stop:for" value="vehicles" />
+                <text key="railway:signal:stop:caption" text="Nb de voitures" default="6" />
+            </item>
+            
+            <separator />
+
+            <item name="TGV 1" type="node">
+                <label text="Arrêt voyageurs - TGV unités simples" /><space />
+                <reference ref="passenger_stop_tags" />
+                <key key="railway:signal:stop" value="FR:ARRET_VOY" />
+                <key key="railway:signal:stop:form" value="sign" />
+                <key key="railway:signal:stop:for" value="single_unit" />
+            </item>
+
+            <item name="TGV 2" type="node">
+                <label text="Arrêt voyageurs - TGV unités multiples" /><space />
+                <reference ref="passenger_stop_tags" />
+                <key key="railway:signal:stop" value="FR:ARRET_VOY" />
+                <key key="railway:signal:stop:form" value="sign" />
+                <key key="railway:signal:stop:for" value="multiple_unit" />
+            </item>
+
+            <item name="TGV 1-2" type="node">
+                <label text="Arrêt voyageurs - TGV" />
+                <reference ref="passenger_stop_tags" />
+                <key key="railway:signal:stop" value="FR:ARRET_VOY" />
+                <key key="railway:signal:stop:form" value="sign" />
+                <key key="railway:signal:stop:for" value="single_unit;multiple_unit" />
+            </item>
+
+        </group>
+
+        <group name="Contresens">
+
+            <chunk id="wrong_way_tags">
+                <reference ref="common_tags" />
+                <link wiki="OpenRailwayMap/Tagging in France#Wrong Ways" />
+            </chunk>
+
+            <item name="Tableau d'Entrée" type="node">
+                <label text="Tableau d'Entrée de Contresens" /><space />
+                <reference ref="wrong_way_tags" />
+                <key key="railway:signal:train_protection" value="FR:TECS" />
+                <key key="railway:signal:train_protection:form" value="light" />
+                <key key="railway:signal:train_protection:function" value="entry" />
+            </item>
+
+            <item name="Tableau de Sortie" type="node">
+                <label text="Tableau de Sortie de Contresens" /><space />
+                <reference ref="wrong_way_tags" />
+                <key key="railway:signal:train_protection" value="FR:TSCS" />
+                <key key="railway:signal:train_protection:form" value="light" />
+                <key key="railway:signal:train_protection:function" value="exit" />
+            </item>
+            
+        </group>
+
+        <group name="Signalisation en Cabine">
+
+            <item name="Tableau CAB à Distance" type="node">
+                <label text="Tableau CAB à Distance" /><space />
+                <reference ref="common_tags" />
+                <key key="railway:signal:train_protection" value="FR:CAB_E" />
+                <key key="railway:signal:train_protection:form" value="light" />
+            </item>
+
+            <item name="Tableau CAB d'Exécution" type="node">
+                <label text="Tableau CAB d'Exécution" /><space />
+                <reference ref="common_tags" />
+                <key key="railway:signal:train_protection" value="FR:CAB_R" />
+                <key key="railway:signal:train_protection:form" value="light" />
+                <key key="railway:signal:train_protection:function" value="entry" />
+                <combo key="railway:signal:train_protection:type" values="FR:KVB,FR:ETSC" display_values="KVB,ETSC" default="FR:KVB" />
+            </item>
+
+            <item name="Tableau CAB de Fin" type="node">
+                <label text="Tableau CAB de Fin" /><space />
+                <reference ref="common_tags" />
+                <key key="railway:signal:train_protection" value="FR:CAB_S" />
+                <key key="railway:signal:train_protection:form" value="light" />
+                <key key="railway:signal:train_protection:function" value="entry" />
+            </item>
+
+            <separator />
+
+            <item name="Repère TGV" type="node">
+                <label text="Repère TGV" /><space />
+                <reference ref="common_tags" />
+                <key key="railway:signal:train_protection" value="FR:REP_TGV" />
+                <key key="railway:signal:train_protection:form" value="sign" />
+                <key key="railway:signal:train_protection:function" value="block" />
+            </item>
+
+            <item name="Jalon de Manœuvre" type="node">
+                <label text="Jalon de Manœuvre" /><space />
+                <reference ref="common_tags" />
+                <key key="railway:signal:shunting" value="FR:JALON_MAN" />
+                <key key="railway:signal:shunting:form" value="sign" />
+            </item>
+
         </group>
 
     </group>
+
 </presets>
