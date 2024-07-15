@@ -1,4 +1,4 @@
--- /!\ Work in progress.
+-- Module:FR:RailwaySignalState
 local p = {}
 
 -- Signal names

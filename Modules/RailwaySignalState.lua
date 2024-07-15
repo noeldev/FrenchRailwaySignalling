@@ -1,3 +1,4 @@
+-- Module:FR:RailwaySignalState
 local p = {}
 
 -- Signal shapes mapped to signal widths

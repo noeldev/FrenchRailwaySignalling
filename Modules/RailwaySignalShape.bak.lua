@@ -1,3 +1,4 @@
+-- Module:FR:RailwaySignalShape
 local p = {}
 
 -- shape-to-shape-info (lights/states) map
