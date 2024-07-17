@@ -1,5 +1,5 @@
 <includeonly>
-{{#invoke:Noeld/Sandbox/RailwaySignalState|render}}
+{{#invoke:FR:RailwaySignalState|render}}
 
 == Sources ==
 
@@ -8,5 +8,6 @@
 </includeonly>
 <noinclude>
 {{Documentation}}
-[[Category:Templates using TemplateData]]
+<!-- CATEGORIES HERE, THANKS -->
+[[Category:FR:Modèles|RailwaySignalState]]
 </noinclude>

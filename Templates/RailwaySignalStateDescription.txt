@@ -18,5 +18,6 @@ Rendering on different types of signals.
 </includeonly>
 <noinclude>
 {{Documentation}}
-[[Category:Templates using TemplateData]]
+<!-- CATEGORIES HERE, THANKS -->
+[[Category:FR:Modèles|RailwaySignalStateDescription]]
 </noinclude>

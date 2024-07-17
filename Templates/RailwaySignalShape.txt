@@ -1,0 +1,27 @@
+<includeonly>
+== Signal Specifications ==
+
+<div style="display: flex; align-items: flex-start; margin-top: 20px;">
+  <div>
+{{#invoke:FR:RailwaySignalShape|generateTable}}
+  </div>
+  <div style="margin-left: 20px;">
+{{#invoke:FR:RailwaySignalShape|generateImage}}
+  </div>
+</div>
+
+== Signal Tags ==
+
+<div style="margin-top: 20px; margin-bottom: 20px;">
+{{#invoke:FR:RailwaySignalShape|generateTags}}
+</div>
+
+== Sources ==
+
+* '''Référentiel IN 0544''' (SNCF)
+</includeonly>
+<noinclude>
+{{Documentation}}
+<!-- CATEGORIES HERE, THANKS -->
+[[Category:FR:Modèles|RailwaySignalShape]]
+</noinclude>

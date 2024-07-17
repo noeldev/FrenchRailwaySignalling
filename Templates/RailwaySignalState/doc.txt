@@ -1,0 +1,75 @@
+{{Documentation subpage}}
+<!-- PLEASE ADD CATEGORIES AT THE BOTTOM OF THIS PAGE -->
+__NOTOC__
+
+Ce template est utilisé pour documenter les différents aspects des principaux signaux lumineux ferroviaires français.
+
+== Exemples ==
+ <code><nowiki>{{Template:FR:RailwaySignalState|state=A|category=distant}}</nowiki></code>
+ <code><nowiki>{{Template:FR:RailwaySignalState|state=VL}}</nowiki></code>
+
+== Paramètres ==
+<templatedata>
+{
+	"description": "Description d'un aspect d'un signal ferroviaire lumineux.",
+	"format": "inline",
+	"params": {
+		"state": {
+			"label": "Nom de l'aspect",
+			"description": "Nom abrégé de l'aspect.",
+			"suggestedvalues": [
+				"C",
+				"CV",
+				"S",
+				"(S)",
+				"D",
+				"A",
+				"(A)",
+				"R",
+				"R+A",
+				"R+(A)",
+				"(R)",
+				"(R)+A",
+				"(R)+(A)",
+				"RR",
+				"RR+A",
+				"RR+(A)",
+				"(RR)",
+				"(RR)+A",
+				"(RR)+(A)",
+				"M",
+				"(M)",
+				"VL",
+				"(VL)"
+			],
+			"type": "line",
+			"required": true
+		},
+		"category": {
+			"label": "Catégorie",
+			"description": "Catégorie du signal qui présente l'aspect.",
+			"type": "line",
+			"suggestedvalues": [
+				"main",
+				"distant",
+				"shunting"
+			],
+			"default": "main",
+			"required": false
+		}
+	},
+	"paramOrder": [
+		"state",
+		"category"
+	]
+}
+</templatedata>
+
+== Voir aussi ==
+* [[OpenRailwayMap/Tagging in France]]
+* [[Module:FR:RailwaySignalState]]
+
+<includeonly>
+<!-- CATEGORIES HERE, THANKS -->
+[[Category:Templates using TemplateData]]
+</includeonly>

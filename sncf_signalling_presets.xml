@@ -14,7 +14,7 @@
         <text key="ref" text="Identifiant" />
         <text key="railway:position" text="PK arrondi (e.g. 100.3)" />
         <text key="railway:position:exact" text="PK exact (e.g. 100.325)" />
-        <combo key="railway:signal:direction" text="Direction" values="forward,backward,both" display_values="Croissante,Décroissante,Bidirectionnelle" default="forward" editable="false" />
+        <combo key="railway:signal:direction" text="Sens" values="forward,backward,both" display_values="Croissant,Décroissant,Bidirectionnel" default="forward" editable="false" />
         <combo key="railway:signal:position" text="Position" values="left,right,bridge,overhead,in_track" display_values="Gauche,Droite,Portique/Potence,Caténaire,Heurtoir" default="left" editable="false" />
     </chunk>
 

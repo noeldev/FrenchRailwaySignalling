@@ -1,0 +1,22 @@
+{{Documentation subpage}}
+<!-- PLEASE ADD CATEGORIES AT THE BOTTOM OF THIS PAGE -->
+__NOTOC__
+== Usage ==
+
+=== Notes ===
+
+== Syntax ==
+<code><nowiki></nowiki></code>
+
+== Parameters ==
+
+== Examples ==
+* <code><nowiki></nowiki></code> rendered :
+
+== See also ==
+* {{t|FR:RailwaySignalState}}
+
+<includeonly>
+<!-- CATEGORIES HERE, THANKS -->
+[[Category:Templates using TemplateData]]
+</includeonly>
