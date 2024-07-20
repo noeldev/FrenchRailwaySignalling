@@ -10,10 +10,10 @@
 	<!-- Chunk for all signals, boards and signs -->
 	<chunk id="common_tags">
 		<key key="railway" value="signal" />
-		<key key="source" value="SNCF - 03/2022" />
+		<key key="source" value="SNCF" />
+		<key key="source:date" value="2022-03" />
 		<text key="ref" text="Identifiant" />
-		<text key="railway:position" text="PK arrondi (ex. : 100.3)" />
-		<text key="railway:position:exact" text="PK exact (ex. : 100.325)" />
+		<text key="railway:position:exact" text="PK (ex. : 100.325)" />
 		<combo key="railway:signal:direction" text="Sens" values="forward,backward,both" display_values="Croissant,Décroissant,Bidirectionnel" default="forward" editable="false" />
 		<combo key="railway:signal:position" text="Position" values="left,right,bridge,overhead,in_track" display_values="Gauche,Droite,Portique/Potence,Caténaire,Heurtoir" default="left" editable="false" />
 	</chunk>
@@ -49,7 +49,6 @@
 			<reference ref="main_signal_tags" />
 			<key key="railway:signal:main" value="FR:CARRE" />
 			<key key="railway:signal:main:plate" value="FR:NF" />
-			<!-- Plaque d'Identification -->
 
 			<item_separator />
 
