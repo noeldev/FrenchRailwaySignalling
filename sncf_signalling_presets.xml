@@ -7,7 +7,6 @@
     description="French Railway Signalling"
     fr.description="Signalisation Ferroviaire Française">
 
-	<!-- Chunk for all signals, boards and signs -->
 	<chunk id="common_tags">
 		<key key="railway" value="signal" />
 		<key key="source" value="SNCF" />
@@ -18,7 +17,6 @@
 		<combo key="railway:signal:position" text="Position" values="left,right,bridge,overhead,in_track" display_values="Gauche,Droite,Portique/Potence,Caténaire,Heurtoir" default="left" editable="false" />
 	</chunk>
 
-	<!-- Chunks based on category -->
 	<chunk id="main_signal_tags">
 		<reference ref="common_tags" />
 		<key key="railway:signal:main:form" value="light" />
@@ -39,7 +37,7 @@
 				<combo key="railway:signal:main:plate:block" text="Plaque de Cantonnement" default="" editable="false">
 					<list_entry value="FR:BM" display_value="BM" short_description="Bloc Manuel" />
 					<list_entry value="FR:PR" display_value="PR" short_description="Bloc Automatique à Permissivité Restreinte" />
-					<list_entry value="" display_value="-- aucune --" />
+					<list_entry value="" display_value="-- Aucune --" />
 				</combo>
 				<text key="railway:signal:main:caption:block" text="Intitulé du Cantonnement" default="" />
 			</optional>
@@ -482,14 +480,15 @@
 				<chunk id="mobile_speed_indicator_tags">
 					<reference ref="common_tags" />
 					<link wiki="OpenRailwayMap/Tagging_in_France#Mobile_Speed_Indicators" />
-					<key key="railway:signal:speed_limit_distant:form" value="sign" />
 				</chunk>
 
 				<item name="TIV à Distance" type="node">
 					<label text="TIV Mobile à Distance" />
 					<space />
 					<reference ref="mobile_speed_indicator_tags" />
-					<key key="railway:signal:speed_limit_distant" value="FR:TIV-D_MOB" />
+					<key key="railway:signal:speed_limit_distant" value="FR:TIV-D" />
+					<key key="railway:signal:speed_limit_distant:form" value="sign" />
+					<key key="railway:signal:speed_limit_distant:states" value="open;closed" />
 					<text key="railway:signal:speed_limit_distant:speed" text="Vitesse limite (km/h)" default="60" />
 
 					<item_separator />
@@ -501,9 +500,10 @@
 					<label text="TIV Mobile de Rappel" />
 					<space />
 					<reference ref="mobile_speed_indicator_tags" />
-					<key key="railway:signal:speed_limit_distant" value="FR:TIV-R_MOB" />
-					<key key="railway:signal:speed_limit_distant:type" value="FR:B" />
-					<text key="railway:signal:speed_limit_distant:speed" text="Vitesse limite (en km/h)" default="" />
+					<key key="railway:signal:speed_limit_reminder" value="FR:TIV-R" />
+					<key key="railway:signal:speed_limit_reminder:form" value="sign" />
+					<key key="railway:signal:speed_limit_reminder:states" value="open;closed" />
+					<text key="railway:signal:speed_limit_reminder:speed" text="Vitesse limite (en km/h)" default="" />
 				</item>
 
 			</group>

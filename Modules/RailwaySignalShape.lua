@@ -1,7 +1,8 @@
 -- Module:FR:RailwaySignalShape
 local p = {}
 
--- shape-to-info (lights/states) mapping
+-- shape-to-info (lights/states) mapping 
+-- (based on SNCF Référentiel IN 0544)
 local shapeInfo = {
     A = {
         imageWidth = 90,
