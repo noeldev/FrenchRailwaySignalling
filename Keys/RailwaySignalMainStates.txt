@@ -1,0 +1,23 @@
+<!-- https://wiki.openstreetmap.org/wiki/Key:railway:signal:main:states -->
+
+{{KeyDescription
+| key           = railway:signal:main:states
+| image         = 
+| description   = List of possible signal aspects for variable signals, each separated by a semicolon.
+| group         = 
+| onNode        = 
+| onWay         = 
+| onArea        = 
+| onRelation    = 
+| requires      = 
+| implies       = 
+| combination   = 
+| seeAlso       = 
+| status        = in use
+| statuslink    = 
+}}
+List of states that a '''main''' railway light signal can display at a given time; the states are separated by semicolons <code>;</code>.
+
+Optional keys {{TagKey|railway:signal:main:shape}} and {{TagKey|railway:signal:main:type}} may provide additional information about which states can be displayed by the signal defined with the tag {{TagKey|railway:signal:main}}.
+
+States are country-specific and/or company-specific, prefixed with a two-letter country code and possibly additional characters or letters. Click any state to learn more about its meaning and usage.

@@ -1,3 +1,5 @@
+<!-- https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalState/doc -->
+
 {{Documentation subpage}}
 <!-- PLEASE ADD CATEGORIES AT THE BOTTOM OF THIS PAGE -->
 __NOTOC__

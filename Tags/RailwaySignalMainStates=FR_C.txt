@@ -1,0 +1,5 @@
+<!-- https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:states=FR:C -->
+
+{{Template:FR:RailwaySignalState|state=C}}
+
+

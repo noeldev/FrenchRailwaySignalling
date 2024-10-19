@@ -1,0 +1,3 @@
+<!-- https://wiki.openstreetmap.org/wiki/Tag:railway:signal:distant:states=FR:A -->
+
+{{Template:FR:RailwaySignalState|state=A|category=distant}}

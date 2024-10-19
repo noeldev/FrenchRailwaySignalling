@@ -1,0 +1,29 @@
+<!-- https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalPlate -->
+
+<includeonly>
+< [[OpenRailwayMap/Tagging in France]]
+
+== Identification Plate ==
+
+[[File:{{{image_file}}}|frameless|{{#if:{{{image_width|}}}|{{{image_width}}}|40px}}]]
+
+*{{Tag|railway:signal:{{#if:{{{category|}}}|{{{category}}}|main}}|FR:{{{signal}}}}}
+{{#if:{{#if:{{{signal|}}}|{{#ifeq:{{{signal}}}|CARRE|true|false}}}}|
+*{{Tag|railway:signal:{{#if:{{{category|}}}|{{{category}}}|main}}:plates||{{TagValue|railway:signal:{{#if:{{{category|}}}|{{{category}}}|main}}:plates|FR:NF}};{{#if:{{#ifeq:{{{plate|}}}|NF|false|true}}|{{TagValue|railway:signal:{{#if:{{{category|}}}|{{{category}}}|main}}:plates|FR:{{{plate}}}}}}}}
+*{{Tag|railway:signal:{{#if:{{{category|}}}|{{{category}}}|main}}:caption{{#if:{{{caption|}}}|={{caption}}}}}}
+|
+*{{Tag|railway:signal:{{#if:{{{category|}}}|{{{category}}}|main}}:plates|FR:{{{plate}}}}}
+}}
+
+
+== Description ==
+
+Every signal is equipped with an '''identification plate''' that allows the driver to determine the most imperative state it may display.
+
+{{{description}}}
+</includeonly>
+<noinclude>
+{{Documentation}}
+<!-- CATEGORIES HERE, THANKS -->
+[[Category:FR:Modèles|RailwaySignalPlate]]
+</noinclude>

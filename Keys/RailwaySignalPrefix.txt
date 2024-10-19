@@ -1,0 +1,79 @@
+<!-- https://wiki.openstreetmap.org/wiki/Key:railway:signal:prefix -->
+
+{{KeyPrefixDescription
+| prefix        = railway:signal
+| image         = 
+| description   = 
+| group         = 
+| onNode        = 
+| onWay         = 
+| onArea        = 
+| onRelation    = 
+| requires      = 
+| implies       = 
+| combination   = 
+| seeAlso       = 
+| status        = 
+| statuslink    = 
+}}
+== Description ==
+
+The value of this tag is a [[Namespace|key prefix]] (or [https://wikipedia.org/wiki/Wikipedia:Namespace namespace]) for country-specific values of all the {{TagKey|railway:signal:*}} tags that describe the signal.
+
+With this tagging scheme, the <code>prefix</code> is specified only once using this tag and implicitly prepended to any country-specific values, making the describing tags easier to read.
+
+A <code>namespace</code>, like a <code>prefix</code>, is composed of a [https://wikipedia.org/wiki/ISO_3166-1/ two-letter country code] (ISO_3166-1) optionally followed by some country-specific values (e.g. '''DE-ESO''', '''AT-V2''', '''FR'''). 
+
+This tagging scheme is optional and does not replace the existing tagging scheme with prefixed values.
+
+== Examples ==
+
+=== Without using the <code>prefix</code> tag ===
+
+In Germany:
+
+*{{Tag|railway|signal}}
+*{{Tag|ref|51VA}}
+*{{Tag|railway:signal:direction|forward}}
+*{{Tag|railway:signal:position|right}}
+*{{Tag|railway:signal:distant|'''DE-ESO:ks'''}}
+*{{Tag|railway:signal:distant:form|light}}
+*{{Tag|railway:signal:distant:height|normal}}
+*{{Tag|railway:signal:distant:states|'''DE-ESO:ks1;DE-ESO:ks2'''}}
+
+In Austria:
+
+*{{Tag|railway|signal}}
+*{{Tag|ref|H503}}
+*{{Tag|railway:signal:direction|backward}}
+*{{Tag|railway:signal:position|right}}
+*{{Tag|railway:signal:main|'''AT-V2:hauptsignal'''}}
+*{{Tag|railway:signal:main:form|light}}
+*{{Tag|railway:signal:main:states|'''AT-V2:halt;AT-V2:frei;AT-V2:frei_mit_60'''}}
+*{{Tag|railway:signal:main:function|exit}}
+
+=== Using the <code>prefix</code> tag ===
+
+In Germany:
+
+*{{Tag|railway|signal}}
+*{{Tag|ref|51VA}}
+*{{Tag|railway:signal:prefix|'''DE-ESO'''}}
+*{{Tag|railway:signal:direction|forward}}
+*{{Tag|railway:signal:position|right}}
+*{{Tag|railway:signal:distant|'''ks'''}}
+*{{Tag|railway:signal:distant:form|light}}
+*{{Tag|railway:signal:distant:height|normal}}
+*{{Tag|railway:signal:distant:states|'''ks1;ks2'''}}
+
+In Austria:
+
+*{{Tag|railway|signal}}
+*{{Tag|ref|H503}}
+*{{Tag|railway:signal:prefix|'''AT-V2'''}}
+*{{Tag|railway:signal:direction|backward}}
+*{{Tag|railway:signal:position|right}}
+*{{Tag|railway:signal:main|'''hauptsignal'''}}
+*{{Tag|railway:signal:main:form|light}}
+*{{Tag|railway:signal:main:states|'''halt;frei;frei_mit_60'''}}
+*{{Tag|railway:signal:main:function|exit}}

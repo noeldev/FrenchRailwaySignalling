@@ -1,0 +1,3 @@
+<!-- https://wiki.openstreetmap.org/wiki/Tag:railway:signal:distant:states=FR:VL -->
+
+{{Template:FR:RailwaySignalState|state=VL|category=distant}}

@@ -1,0 +1,5 @@
+<!-- https://wiki.openstreetmap.org/wiki/Key:railway:signal:distant:states -->
+
+List of states that a '''distant''' railway light signal can display at a given time; the states are separated by semicolons <code>;</code>.
+
+States are country-specific and/or company-specific, prefixed with a two-letter country code and possibly additional characters or letters. Click any state to learn more about its meaning and usage.
