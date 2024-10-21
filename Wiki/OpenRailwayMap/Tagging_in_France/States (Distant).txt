@@ -1,0 +1,26 @@
+<!-- https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France/States_(Distant) -->
+
+== States ==
+
+{| class="wikitable"
+!States
+!Description
+|-
+|{{TagValue|railway:signal:distant:states|FR:VL}}
+|Green light
+|-
+|{{TagValue|railway:signal:distant:states|FR:R}}, {{TagValue|railway:signal:distant:states|FR:R+A}}, {{TagValue|railway:signal:distant:states|FR:R+(A)}}
+|Ralentissement 30 (Slow 30)
+|-
+|{{TagValue|railway:signal:distant:states|FR:(R)}}, {{TagValue|railway:signal:distant:states|FR:(R)+A}}, {{TagValue|railway:signal:distant:states|FR:(R)+(A)}}
+|Ralentissement 60 (Slow 60)
+|-
+|{{TagValue|railway:signal:distant:states|FR:A}}
+|Avertissement (Announcement)
+|-
+|{{TagValue|railway:signal:distant:states|FR:(A)}}
+|Flashing yellow light
+|-
+|{{TagValue|railway:signal:distant:states|FR:D}}
+|Disque
+|}

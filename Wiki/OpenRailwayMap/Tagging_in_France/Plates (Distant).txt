@@ -1,0 +1,16 @@
+<!-- https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France/Plates_(Distant) -->
+
+== Identification Plates ==
+
+Following the most imperative state that a signal can present, a corresponding '''identification plate''' may bear one of the following inscriptions in black letters on a white background:
+
+{| class="wikitable"
+!Inscription
+!Description
+|-
+|{{TagValue|railway:signal:distant:plates|FR:D}}
+|[[OpenRailwayMap/Tagging in France#Disque|Disque]] signal.
+|-
+|{{TagValue|railway:signal:distant:plates|FR:A}}
+|[[OpenRailwayMap/Tagging in France#Avertissement|Avertissement]].
+|}
