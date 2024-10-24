@@ -35,8 +35,8 @@
 			<optional>
 				<text key="railway:signal:main:caption:marker" text="Intitulé du Repérage" default="" />
 				<combo key="railway:signal:main:plate:block" text="Plaque de Cantonnement" default="" editable="false">
-					<list_entry value="FR:BM" display_value="BM" short_description="Bloc Manuel" />
-					<list_entry value="FR:PR" display_value="PR" short_description="Bloc Automatique à Permissivité Restreinte" />
+					<list_entry value="FR:BM" display_value="BM" short_description="Block Manuel" />
+					<list_entry value="FR:PR" display_value="PR" short_description="Block Automatique à Permissivité Restreinte" />
 					<list_entry value="" display_value="-- Aucune --" />
 				</combo>
 				<text key="railway:signal:main:caption:block" text="Intitulé du Cantonnement" default="" />
@@ -272,8 +272,8 @@
 			<key key="railway:signal:main" value="FR:S"  />
 			<combo key="railway:signal:main:plate" text="Plaque d'Identification" editable="false" default="FR:F">
 				<list_entry value="FR:F" display_value="F" short_description="Franchissable" />
-				<list_entry value="FR:BM" display_value="BM" short_description="Bloc Manuel" />
-				<list_entry value="FR:PR" display_value="PR" short_description="Bloc Automatique à Permissivité Restreinte" />
+				<list_entry value="FR:BM" display_value="BM" short_description="Block Manuel" />
+				<list_entry value="FR:PR" display_value="PR" short_description="Block Automatique à Permissivité Restreinte" />
 			</combo>
 			<optional>
 				<text key="railway:signal:main:caption:marker" text="Intitulé du repérage" default="" />
