@@ -2,10 +2,10 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
     version="1.[[revision]]_[[date]]"
+    description="Presets for tagging French railway signalling"
+    fr.description="Préréglages pour étiqueter la signalisation ferroviaire en France"
     shortdescription="SNCF Signalling"
-    fr.shortdescription="Signalisation SNCF"
-    description="French Railway Signalling"
-    fr.description="Signalisation Ferroviaire Française">
+    fr.shortdescription="Signalisation SNCF">
 
 	<chunk id="common_tags">
 		<key key="railway" value="signal" />

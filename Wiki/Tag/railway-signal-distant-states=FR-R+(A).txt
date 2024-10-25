@@ -1,0 +1,20 @@
+<!-- https://wiki.openstreetmap.org/wiki/Tag:railway:signal:distant:states=FR:R+(A) -->
+
+{{ValueDescription
+| key           = railway:signal:distant:states
+| value         = FR:R+(A)
+| image         = File:R%2B(A)_Cible_R6.gif
+| description   = Ralentissement 30 et Feu jaune clignotant
+| group         = 
+| onNode        = yes
+| onWay         = no
+| onArea        = no
+| onRelation    = no
+| requires      = {{Key|railway:signal:distant}}
+| implies       = 
+| combination   = 
+| seeAlso       = 
+| status        = in use
+| statuslink    = 
+}}
+{{Template:FR:RailwaySignalState|state=R+(A)|category=distant}}

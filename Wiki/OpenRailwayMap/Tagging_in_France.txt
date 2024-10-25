@@ -33,7 +33,7 @@ The signal may also be equipped with a marker plate ({{TagKey|railway:signal:mai
 *{{Tag|railway:signal:main:short_route||({{TagValue|railway:signal:main:short_route|yes}}/{{TagValue|railway:signal:main:short_route|no}})}} (optional; default is '''no''', set to '''yes''' if the signal is topped with a luminous [[#BJ|yellow stripe]].)
 *{{Tag|railway:signal:main:form|light}}
 *{{Tag|railway:signal:main:shape||({{TagValue|railway:signal:main:shape|FR:C}}/{{TagValue|railway:signal:main:shape|FR:F}}/{{TagValue|railway:signal:main:shape|FR:H}})}} (optional and only if {{Tag|railway:signal:main:height|normal}})
-*{{Tag|railway:signal:main:states|}} (→ [[OpenRailwayMap/Tagging in France/States|States]], separated by <code>;</code>)
+*{{Tag|railway:signal:main:states|}} (→ [[FR:Key:railway:signal:main:states|available states]], separated by <code>;</code>)
 
 
 In some stations, the entrance [[#Carré|Carré signal]] may be topped with a luminous <span id="BJ">yellow stripe</span> ('''Bande jaune'''). This stripe is lit in addition to the [[Tag:railway:signal:main:states=FR:A|announcement]] ('''Avertissement''') signal. It instructs the driver to be prepared to stop at the platform within a short distance, either due to the presence of vehicles or the closure of an intermediate stop signal.
@@ -57,7 +57,7 @@ Like the Carré signal, this signal may be equipped with a marker plate and/or a
 *{{Tag|railway:signal:main:form|light}}
 *{{Tag|railway:signal:main:height||({{TagValue|railway:signal:main:height|high}}/{{TagValue|railway:signal:main:height|low}})}}
 *{{Tag|railway:signal:main:shape||({{TagValue|railway:signal:main:shape|FR:A}}/{{TagValue|railway:signal:main:shape|FR:C}}/{{TagValue|railway:signal:main:shape|FR:F}}/{{TagValue|railway:signal:main:shape|FR:H}})}} (optional)
-*{{Tag|railway:signal:main:states|}} (→ [[OpenRailwayMap/Tagging in France/States|States]], separated by <code>;</code>)
+*{{Tag|railway:signal:main:states|}} (→ [[FR:Key:railway:signal:main:states|available states]], separated by <code>;</code>)
 
 
 ====Sémaphore====
@@ -77,7 +77,7 @@ The actual inscription is specified with the {{TagKey|railway:signal:main:plate}
 ({{TagValue|railway:signal:main:plate|FR:F}}/{{TagValue|railway:signal:main:plate|FR:PR}}/{{TagValue|railway:signal:main:plate|FR:BM}})}} (identification plate)
 *{{Tag|railway:signal:main:form|light}}
 *{{Tag|railway:signal:main:shape||({{TagValue|railway:signal:main:shape|FR:A}}/{{TagValue|railway:signal:main:shape|FR:F}})}} (optional)
-*{{Tag|railway:signal:main:states|}} (→ [[OpenRailwayMap/Tagging in France/States|States]], separated by <code>;</code>)
+*{{Tag|railway:signal:main:states|}} (→ [[FR:Key:railway:signal:main:states|available states]], separated by <code>;</code>)
 
 
 ====Guidon d'Arrêt====
@@ -91,6 +91,8 @@ A stop signal that requires the driver to come to a complete stop before the sig
 *{{Tag|railway:signal:main:caption:marker|}} (optional; text written on the marker plate)
 
 
+===Distant Signals===
+
 ====Disque====
 
 A '''Disque''' (Disk) signal instructs the driver to proceed at sight ('''Marche à Vue''') as soon as possible or to stop before the first set of points (switch or crossing) protected by the disk. It is equipped with an identification plate bearing the inscription '''D''' in black letters on a white background.
@@ -100,7 +102,7 @@ A '''Disque''' (Disk) signal instructs the driver to proceed at sight ('''Marche
 *{{Tag|railway:signal:distant|FR:D}}
 *{{Tag|railway:signal:distant:caption:marker|}} (optional; text written on the marker plate)
 *{{Tag|railway:signal:distant:form|light}}
-*{{Tag|railway:signal:distant:states|}} (→ [[OpenRailwayMap/Tagging in France/States (Distant)|States]], separated by <code>;</code>)
+*{{Tag|railway:signal:distant:states|}} (→ [[FR:Key:railway:signal:distant:states|available states]], separated by <code>;</code>)
 
 
 ====Avertissement====
@@ -112,16 +114,17 @@ An '''Avertissement''' (Announcement) signal indicates the approach to a closed 
 *{{Tag|railway:signal:distant|FR:A}}
 *{{Tag|railway:signal:distant:caption:marker|}} (optional; text written on the marker plate)
 *{{Tag|railway:signal:distant:form|light}}
-*{{Tag|railway:signal:distant:states|}} (→ [[OpenRailwayMap/Tagging in France/States (Distant)|States]], separated by <code>;</code>)
+*{{Tag|railway:signal:distant:states|}} (→ [[FR:Key:railway:signal:distant:states|available states]], separated by <code>;</code>)
 
 
-====Disabled Signal====
+===Disabled Signal===
 
 [[File:PermCancelled_H_BAL.svg|frameless|60px]]
 
 Use  
 *{{Tag|railway:signal:main:deactivated|yes}} or
 *{{Tag|railway:signal:distant:deactivated|yes}}
+
 
 ===Speed Limits===
 Speed limits are signaled by '''Speed Indicators''' called '''Tableau Indicateur de Vitesse limite''' (TIV); TIVs can be either mobile, fixed or pentagonal.

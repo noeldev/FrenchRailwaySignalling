@@ -1,0 +1,54 @@
+<!-- https://wiki.openstreetmap.org/wiki/FR:Key:railway:signal:main:states -->
+
+== Available states ==
+
+{| class="wikitable"
+!States
+!Description
+|-
+|{{TagValue|railway:signal:main:states|FR:VL}}
+|Green light
+|-
+|{{TagValue|railway:signal:main:states|FR:(VL)}}
+|Flashing green light
+|-
+|{{TagValue|railway:signal:main:states|FR:R}}, {{TagValue|railway:signal:main:states|FR:R+A}}, {{TagValue|railway:signal:main:states|FR:R+(A)}}
+|Ralentissement 30 (Slow 30)
+|-
+|{{TagValue|railway:signal:main:states|FR:(R)}}, {{TagValue|railway:signal:main:states|FR:(R)+A}}, {{TagValue|railway:signal:main:states|FR:(R)+(A)}}
+|Ralentissement 60 (Slow 60)
+|-
+|{{TagValue|railway:signal:main:states|FR:A}}
+|Avertissement (Announcement)
+|-
+|{{TagValue|railway:signal:main:states|FR:(A)}}
+|Flashing yellow light
+|-
+|{{TagValue|railway:signal:main:states|FR:RR}}, {{TagValue|railway:signal:main:states|FR:RR+A}}, {{TagValue|railway:signal:main:states|FR:RR+(A)}}
+|Rappel 30 (Reminder 30)
+|-
+|{{TagValue|railway:signal:main:states|FR:(RR)}}, {{TagValue|railway:signal:main:states|FR:(RR)+A}}, {{TagValue|railway:signal:main:states|FR:(RR)+(A)}}
+|Rappel 60 (Reminder 60)
+|-
+|{{TagValue|railway:signal:main:states|FR:M}}
+|White light
+|-
+|{{TagValue|railway:signal:main:states|FR:(M)}}
+|Flashing white light
+|-
+|{{TagValue|railway:signal:main:states|FR:S}}
+|Sémaphore
+|-
+|{{TagValue|railway:signal:main:states|FR:(S)}}
+|Flashing red light
+|-
+|{{TagValue|railway:signal:main:states|FR:CV}}
+|Carré violet
+|-
+|{{TagValue|railway:signal:main:states|FR:C}}
+|Carré
+|}
+
+== See also ==
+
+* [[OpenRailwayMap/Tagging_in_France|Tagging in France]]

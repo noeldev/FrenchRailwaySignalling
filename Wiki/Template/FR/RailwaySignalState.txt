@@ -3,6 +3,10 @@
 <includeonly>
 {{#invoke:FR:RailwaySignalState|render}}
 
+== See also ==
+
+* [[OpenRailwayMap/Tagging_in_France|Tagging in France]]
+
 == Sources ==
 
 * [https://ressources.data.sncf.com/explore/dataset/signalisation-permanente Signalisation Permanente] (SNCF)

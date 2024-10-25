@@ -5,11 +5,11 @@
 | image         = 
 | description   = List of possible signal aspects for variable signals, each separated by a semicolon.
 | group         = 
-| onNode        = 
-| onWay         = 
-| onArea        = 
-| onRelation    = 
-| requires      = 
+| onNode        = yes
+| onWay         = no
+| onArea        = no
+| onRelation    = no
+| requires      = {{Key|railway:signal:main}}
 | implies       = 
 | combination   = 
 | seeAlso       = 
