@@ -29,10 +29,10 @@ The signal may also be equipped with a marker plate ({{TagKey|railway:signal:mai
 *{{Tag|railway:signal:main:caption:marker|}} (optional; text written on the marker plate)
 <!-- Plaque de cantonnement --> 
 *{{Tag|railway:signal:main:plate:block||({{TagValue|railway:signal:main:plate:block|FR:BM}}/{{TagValue|railway:signal:main:plate:block|FR:PR}})}} (optional; block plate)
-*{{Tag|railway:signal:main:plate:departure||({{TagValue|railway:signal:main:plate:departure|yes}}/{{TagValue|railway:signal:main:plate:departure|request}})}} (optional; either an [[#Departure Authorization|half-white, half-green]] or [[#Departure Request|Demande de Départ]] plate)
-*{{Tag|railway:signal:main:short_route||({{TagValue|railway:signal:main:short_route|yes}}/{{TagValue|railway:signal:main:short_route|no}})}} (optional; default is '''no''', set to '''yes''' if the signal is topped with a luminous [[#BJ|yellow stripe]].)
+*{{Tag|railway:signal:main:plate:departure||({{TagValue|railway:signal:main:plate:departure|yes}}/{{TagValue|railway:signal:main:plate:departure|no}}/{{TagValue|railway:signal:main:plate:departure|request}})}} (optional; default is '''no'''. Set to '''yes''' if the signal is equipped with a [[#Departure Authorization|half-white, half-green]] plate, or '''request''' if it is equipped with a [[#Departure Request|Demande de Départ]] plate)
+*{{Tag|railway:signal:main:short_route||({{TagValue|railway:signal:main:short_route|yes}}/{{TagValue|railway:signal:main:short_route|no}})}} (optional; default is '''no'''. Set to '''yes''' if the signal is topped with a luminous [[#BJ|yellow stripe]])
 *{{Tag|railway:signal:main:form|light}}
-*{{Tag|railway:signal:main:shape||({{TagValue|railway:signal:main:shape|FR:C}}/{{TagValue|railway:signal:main:shape|FR:F}}/{{TagValue|railway:signal:main:shape|FR:H}})}} (optional and only if {{Tag|railway:signal:main:height|normal}})
+*{{Tag|railway:signal:main:shape||({{TagValue|railway:signal:main:shape|FR:C}}/{{TagValue|railway:signal:main:shape|FR:F}}/{{TagValue|railway:signal:main:shape|FR:H}})}} (optional and only if {{Tag|railway:signal:main:height|normal}}).
 *{{Tag|railway:signal:main:states|}} (→ [[FR:Key:railway:signal:main:states|available states]], separated by <code>;</code>)
 
 

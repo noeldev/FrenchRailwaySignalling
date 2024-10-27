@@ -33,13 +33,18 @@
 		<!-- Carré -->
 		<chunk id="carre_options_tags">
 			<optional>
-				<text key="railway:signal:main:caption:marker" text="Intitulé du Repérage" default="" />
+				<combo key="railway:signal:main:plate:departure" text="Plaque de Départ" default="" editable="false">
+					<list_entry value="yes" display_value="Mi-blanche, Mi-verte" />
+					<list_entry value="request" display_value="Demande de Départ" />
+					<list_entry value="no" display_value="-- Aucune --" />
+				</combo>
 				<combo key="railway:signal:main:plate:block" text="Plaque de Cantonnement" default="" editable="false">
 					<list_entry value="FR:BM" display_value="BM" short_description="Block Manuel" />
 					<list_entry value="FR:PR" display_value="PR" short_description="Block Automatique à Permissivité Restreinte" />
 					<list_entry value="" display_value="-- Aucune --" />
 				</combo>
 				<text key="railway:signal:main:caption:block" text="Intitulé du Cantonnement" default="" />
+				<text key="railway:signal:main:caption:marker" text="Intitulé du Repérage" default="" />
 			</optional>
 		</chunk>
 
