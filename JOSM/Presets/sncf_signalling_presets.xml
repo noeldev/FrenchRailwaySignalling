@@ -11,10 +11,10 @@
 		<key key="railway" value="signal" />
 		<key key="source" value="SNCF" />
 		<key key="source:date" value="2022-03" />
-		<text key="ref" text="Identifiant" />
-		<text key="railway:position:exact" text="PK (ex. : 100.325)" />
-		<combo key="railway:signal:direction" text="Sens" values="forward,backward,both" display_values="Croissant,Décroissant,Bidirectionnel" default="forward" editable="false" />
-		<combo key="railway:signal:position" text="Position" values="left,right,bridge,overhead,in_track" display_values="Gauche,Droite,Portique/Potence,Caténaire,Heurtoir" default="left" editable="false" />
+		<text key="ref" text="Identifier" fr.text="Identifiant" />
+		<text key="railway:position:exact" text="PK (e.g.: 100.325)" fr.text="PK (ex. : 100.325)" />
+		<combo key="railway:signal:direction" text="Direction" fr.text="Sens" values="forward,backward,both" display_values="Forward,Backward,Bidirectional" fr.display_values="Croissant,Décroissant,Bidirectionnel" default="forward" editable="false" />
+		<combo key="railway:signal:position" text="Position" fr.text="Position" values="left,right,bridge,overhead,in_track" display_values="Left,Right,Gantry,Catenary,Buffer Stop" fr.display_values="Gauche,Droite,Portique/Potence,Caténaire,Heurtoir" default="left" editable="false" />
 	</chunk>
 
 	<chunk id="main_signal_tags">
@@ -33,18 +33,18 @@
 		<!-- Carré -->
 		<chunk id="carre_options_tags">
 			<optional>
-				<combo key="railway:signal:main:plate:departure" text="Plaque de Départ" default="" editable="false">
-					<list_entry value="yes" display_value="Mi-blanche, Mi-verte" />
-					<list_entry value="request" display_value="Demande de Départ" />
-					<list_entry value="no" display_value="-- Aucune --" />
+				<combo key="railway:signal:main:plate:departure" text="Departure Plate" fr.text="Plaque de Départ" default="" editable="false">
+					<list_entry value="yes" display_value="Half-white, Half-green" fr.display_value="Mi-blanche, Mi-verte" />
+					<list_entry value="request" display_value="Departure Request" fr.display_value="Demande de Départ" />
+					<list_entry value="no" display_value="-- None --" fr.display_value="-- Aucune --" />
 				</combo>
-				<combo key="railway:signal:main:plate:block" text="Plaque de Cantonnement" default="" editable="false">
-					<list_entry value="FR:BM" display_value="BM" short_description="Block Manuel" />
-					<list_entry value="FR:PR" display_value="PR" short_description="Block Automatique à Permissivité Restreinte" />
-					<list_entry value="" display_value="-- Aucune --" />
+				<combo key="railway:signal:main:plate:block" text="Block Plate" fr.text="Plaque de Cantonnement" default="" editable="false">
+					<list_entry value="FR:BM" display_value="BM" short_description="Manual Block" fr.short_description="Block Manuel" />
+					<list_entry value="FR:PR" display_value="PR" short_description="Automatic Block with Restricted Permissiveness" fr.short_description="Block Automatique à Permissivité Restreinte" />
+					<list_entry value="" display_value="-- None --" fr.display_value="-- Aucune --" />
 				</combo>
-				<text key="railway:signal:main:caption:block" text="Intitulé du Cantonnement" default="" />
-				<text key="railway:signal:main:caption:marker" text="Intitulé du Repérage" default="" />
+				<text key="railway:signal:main:caption:block" text="Block Title" fr.text="Intitulé du Cantonnement" default="" />
+				<text key="railway:signal:main:caption:marker" text="Marker Title" fr.text="Intitulé du Repérage" default="" />
 			</optional>
 		</chunk>
 
@@ -56,9 +56,9 @@
 			<item_separator />
 
 			<checkgroup columns="3">
-				<check key="railway:signal:main:clearing_light" text="Œilleton" default="on" />
-				<check key="railway:signal:main:short_route" text="Bande Jaune" default="off" />
-				<check key="railway:signal:main:height" text="Taille Réduite" value_on="dwarf" value_off="normal" default="off" />
+				<check key="railway:signal:main:clearing_light" text="Clearing Light" fr.text="Œilleton" default="on" />
+				<check key="railway:signal:main:short_route" text="Yellow Stripe" fr.text="Bande Jaune" default="off" />
+				<check key="railway:signal:main:height" text="Dwarf" fr.text="Taille Réduite" value_on="dwarf" value_off="normal" default="off" />
 			</checkgroup>
 
 			<reference ref="carre_options_tags" />
