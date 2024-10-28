@@ -36,7 +36,7 @@
 				<combo key="railway:signal:main:plate:departure" text="Departure Plate" fr.text="Plaque de Départ" default="" editable="false">
 					<list_entry value="yes" display_value="Half-white, Half-green" fr.display_value="Mi-blanche, Mi-verte" />
 					<list_entry value="request" display_value="Departure Request" fr.display_value="Demande de Départ" />
-					<list_entry value="no" display_value="-- None --" fr.display_value="-- Aucune --" />
+					<list_entry value="" display_value="-- None --" fr.display_value="-- Aucune --" />
 				</combo>
 				<combo key="railway:signal:main:plate:block" text="Block Plate" fr.text="Plaque de Cantonnement" default="" editable="false">
 					<list_entry value="FR:BM" display_value="BM" short_description="Manual Block" fr.short_description="Block Manuel" />
@@ -264,7 +264,7 @@
 			<reference ref="main_signal_tags" />
 			<key key="railway:signal:main" value="FR:GA" />
 			<optional>
-				<text key="railway:signal:main:caption:marker" text="Intitulé du repérage" default="" />
+				<text key="railway:signal:main:caption:marker" text="Marker Title" fr.text="Intitulé du Repérage" default="" />
 			</optional>
 			<link wiki="OpenRailwayMap/Tagging_in_France#Guidon_d'Arrêt" />
 		</item>
@@ -281,7 +281,7 @@
 				<list_entry value="FR:PR" display_value="PR" short_description="Block Automatique à Permissivité Restreinte" />
 			</combo>
 			<optional>
-				<text key="railway:signal:main:caption:marker" text="Intitulé du repérage" default="" />
+				<text key="railway:signal:main:caption:marker" text="Marker Title" fr.text="Intitulé du Repérage" default="" />
 			</optional>
 			<link wiki="OpenRailwayMap/Tagging_in_France#Sémaphore" />
 		</chunk>
@@ -341,7 +341,7 @@
 			<key key="railway:signal:distant" value="FR:D" />
 			<key key="railway:signal:distant:shape" value="FR:R" />
 			<optional>
-				<text key="railway:signal:distant:caption:marker" text="Intitulé du repérage" default="" />
+				<text key="railway:signal:distant:caption:marker" text="Marker Title" fr.text="Intitulé du Repérage" default="" />
 			</optional>
 			<link wiki="OpenRailwayMap/Tagging_in_France#Disque" />
 		</chunk>
@@ -383,7 +383,7 @@
 			<key key="railway:signal:distant" value="FR:A" />
 			<key key="railway:signal:distant:shape" value="FR:R" />
 			<optional>
-				<text key="railway:signal:distant:caption:marker" text="Intitulé du repérage" default="" />
+				<text key="railway:signal:distant:caption:marker" text="Marker Title" fr.text="Intitulé du Repérage" default="" />
 			</optional>
 			<link wiki="OpenRailwayMap/Tagging_in_France#Avertissement" />
 		</chunk>
