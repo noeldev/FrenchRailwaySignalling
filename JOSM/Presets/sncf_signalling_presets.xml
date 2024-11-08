@@ -855,17 +855,17 @@
 					<space />
 					<reference ref="power_tags" />
 					<key key="railway:signal:electricity" value="FR:SECT" />
-					<key key="railway:signal:electricity:type" value="power_off" />
-					<text key="railway:signal:electricity:caption" text="Intitulé de la pancarte" value="SECt à ---m" />
+					<key key="railway:signal:electricity:type" value="power_off_advance" />
+					<text key="railway:signal:electricity:caption" text="Title of the sign" fr.text="Intitulé de la pancarte" value="SECt à ---m" />
 				</item>
 
 				<item name="Signal d'Exécution" type="node">
 					<label text="Signal d'Exécution &quot;Coupez Courant&quot;" />
 					<space />
 					<reference ref="power_tags" />
-					<key key="railway:signal:electricity" value="FR:SECT" />
+					<key key="railway:signal:electricity" value="FR:CC_EXE" />
 					<key key="railway:signal:electricity:type" value="power_off" />
-					<text key="railway:signal:electricity:caption" text="Intitulé de la pancarte" value="SECt à ---m" />
+					<text key="railway:signal:electricity:caption" text="Title of the sign" fr.text="Intitulé de la pancarte" value="SECt à ---m" />
 				</item>
 
 				<item name="Signal de Fin de Parcours" type="node">
@@ -876,8 +876,8 @@
 					<key key="railway:signal:electricity:type" value="power_on" />
 					<key key="railway:signal:electricity:function" value="exit" />
 					<optional>
-						<text key="railway:signal:electricity:voltage" text="Tension" value="---- V" />
-						<text key="railway:signal:electricity:frequency" text="Fréquence de la Tension" value="50 Hz" />
+						<text key="railway:signal:electricity:voltage" text="Voltage" fr.text="Tension" value="---- V" />
+						<text key="railway:signal:electricity:frequency" text="Voltage Frequency" fr.text="Fréquence de la Tension" value="50 Hz" />
 					</optional>
 				</item>
 
@@ -893,8 +893,8 @@
 					<key key="railway:signal:electricity:type" value="power_on" />
 					<key key="railway:signal:electricity:function" value="exit" />
 					<optional>
-						<text key="railway:signal:electricity:voltage" text="Tension" value="---- V" />
-						<text key="railway:signal:electricity:frequency" text="Fréquence de la Tension" value="50 Hz" />
+						<text key="railway:signal:electricity:voltage" text="Voltage" fr.text="Tension" value="---- V" />
+						<text key="railway:signal:electricity:frequency" text="Voltage Frequency" fr.text="Fréquence de la Tension" value="50 Hz" />
 					</optional>
 				</item>
 
@@ -913,7 +913,7 @@
 					<space />
 					<reference ref="panto_tags" />
 					<key key="railway:signal:electricity" value="FR:BP_DIS" />
-					<key key="railway:signal:electricity:type" value="pantograph_down" />
+					<key key="railway:signal:electricity:type" value="pantograph_down_advance" />
 				</item>
 
 				<item name="Signal d'Exécution" type="node">
@@ -924,7 +924,7 @@
 					<key key="railway:signal:electricity:type" value="pantograph_down" />
 					<key key="railway:signal:electricity:function" value="entry" />
 					<optional>
-						<text key="railway:signal:electricity:voltage" text="Tension" value="25000 V" />
+						<text key="railway:signal:electricity:voltage" text="Voltage" fr.text="Tension" value="25000 V" />
 					</optional>
 				</item>
 
@@ -948,7 +948,7 @@
 					</chunk>
 
 					<item name="Signal d'Exécution" type="node">
-						<label text="Début de circulation bimode" />
+						<label text="Entering dual-mode operation zone" fr.text="Début de circulation bimode" />
 						<space />
 						<reference ref="dual-mode_tags" />
 						<key key="railway:signal:electricity" value="FR:BIMODE_A" />
@@ -957,7 +957,7 @@
 					</item>
 
 					<item name="Signal de Fin de Parcours" type="node">
-						<label text="Fin de circulation bimode" />
+						<label text="Exiting dual-mode operation zone" fr.text="Fin de circulation bimode" />
 						<space />
 						<reference ref="dual-mode_tags" />
 						<key key="railway:signal:electricity" value="FR:BIMODE" />
@@ -970,12 +970,12 @@
 			</group>
 
 			<item name="Fin de Caténaires" type="node">
-				<label text="Fin de Caténaires" />
+				<label text="End of Catenary" fr.text="Fin de Caténaires" />
 				<space />
 				<reference ref="common_tags" />
 				<key key="railway:signal:position" value="overhead" />
 				<key key="railway:signal:electricity" value="FR:FIN_CAT" />
-				<key key="railway:signal:electricity:type" value="pantograph_down" />
+				<key key="railway:signal:electricity:type" value="end_of_catenary" />
 				<key key="railway:signal:electricity:form" value="sign" />
 			</item>
 
@@ -1085,7 +1085,7 @@
 
 		</group>
 
-		<group name="Pancartes et Tableaux Divers">
+		<group name="Various Signs and Boards" fr.name="Pancartes et Tableaux Divers">
 
 			<item name="Pancarte S" type="node">
 				<label text="Pancarte S (Sifflet)" />
@@ -1098,15 +1098,15 @@
 				</optional>
 			</item>
 
-			<group name="Passages à Niveau">
+			<group name="Level Crossing" fr.name="Passages à Niveau">
 
-				<item name="Approche d'un PN" type="node">
-					<label text="Approche d'un PN" />
+				<item name="Level crossing ahead" fr.name="Approche d'un PN" type="node">
+					<label text="Level crossing ahead" fr.text="Approche d'un PN" />
 					<space />
 					<reference ref="common_tags" />
 					<key key="railway:signal:crossing_hint" value="FR:PN_A" />
 					<key key="railway:signal:crossing_hint:form" value="sign" />
-					<text key="railway:signal:crossing_hint:caption" text="Intitulé de la pancarte" default="PN 000 à ---m" />
+					<text key="railway:signal:crossing_hint:caption" text="Title of the sign" fr.text="Intitulé de la pancarte" default="PN 000 à ---m" />
 				</item>
 
 				<item name="Proximité immédiate d'un PN" type="node">
@@ -1132,7 +1132,7 @@
 					<reference ref="common_tags" />
 					<key key="railway:signal:main" value="FR:APPROCHE_ETS_A" />
 					<key key="railway:signal:main:form" value="sign" />
-					<text key="railway:signal:main:caption" text="Intitulé de la pancarte" default="XXX à ---m" />
+					<text key="railway:signal:main:caption" text="Title of the sign" fr.text="Intitulé de la pancarte" default="XXX à ---m" />
 				</item>
 
 				<item name="Limite d'un Établissement" type="node">

@@ -598,7 +598,7 @@ The distant signal announces a neutral zone at the specified distance in meters.
 
 *{{Tag|railway:signal:electricity|FR:SECT}}
 *{{Tag|railway:signal:electricity:form|sign}}
-*{{Tag|railway:signal:electricity:type|power_off}}
+*{{Tag|railway:signal:electricity:type|power_off_advance}}
 *{{Tag|railway:signal:electricity:distance|}} (specified distance in meters)
 
 =====Start of Neutral Zone=====
@@ -653,7 +653,7 @@ This signal instructs the lowering of the train's pantograph(s) under specific c
 
 *{{Tag|railway:signal:electricity|FR:BP_DIS}}
 *{{Tag|railway:signal:electricity:form|sign}}
-*{{Tag|railway:signal:electricity:type|pantograph_down}}
+*{{Tag|railway:signal:electricity:type|pantograph_down_advance}}
 
 =====Start of Pantograph Down=====
 
@@ -705,7 +705,7 @@ Beyond this sign, the line is no longer electrified and only thermal or dual-mod
 
 *{{Tag|railway:signal:electricity|FR:FIN_CAT}} 
 *{{Tag|railway:signal:electricity:form|sign}}
-*{{Tag|railway:signal:electricity:type|pantograph_down}}
+*{{Tag|railway:signal:electricity:type|end_of_catenary}}
 *{{Tag|railway:signal:position|overhead}}
 
 ====Stop Markers====
