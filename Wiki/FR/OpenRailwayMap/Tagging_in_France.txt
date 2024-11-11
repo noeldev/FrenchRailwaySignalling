@@ -1,18 +1,18 @@
-<!-- https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France -->
+<!-- https://wiki.openstreetmap.org/wiki/FR:OpenRailwayMap/Tagging_in_France -->
 
-{{language}}
+{{Language}}
 
-==Signalling==
-All railway signals have the following tags:
+==Signalisation==
+Tous les signaux ferroviaires ont les étiquettes suivantes :
 
-*{{Tag|ref|}}: unique signal identifier
+*{{Tag|ref|}}: identifiant unique du signal
 *{{Tag|railway|signal}}
-*{{Tag|railway:signal:direction||({{TagValue|railway:signal:direction|forward}}/{{TagValue|railway:signal:direction|backward}}/{{TagValue|railway:signal:direction|both}})}} according to the direction of the way.
+*{{Tag|railway:signal:direction||({{TagValue|railway:signal:direction|forward}}/{{TagValue|railway:signal:direction|backward}}/{{TagValue|railway:signal:direction|both}})}} suivant la direction de la ligne.
 *{{Tag|railway:signal:position||({{TagValue|railway:signal:position|left}}/{{TagValue|railway:signal:position|right}}/{{TagValue|railway:signal:position|bridge}}/{{TagValue|railway:signal:position|overhead}}/{{TagValue|railway:signal:position|in_track}})}}
-*{{Tag|railway:position:exact||365.913}} where 365.913 is an example. Position of the signal according to the direction of the way. This is the Kilometric point (PK) of the signal installation relative to the start of the line.
+*{{Tag|railway:position:exact||365.913}} où 365.913 est un exemple. La position du signal est relative à la direction de la ligne. Le Point Kilométrique (PK) du signal est mesuré par rapport au départ de la ligne.
 
 
-===Main Signals===
+===Signaux de Protection===
 
 ====Carré====
 
@@ -93,7 +93,7 @@ A stop signal that requires the driver to come to a complete stop before the sig
 *{{Tag|railway:signal:main:caption:marker|}} (optional; text written on the marker plate)
 
 
-===Distant Signals===
+===Signaux à Distance===
 
 ====Disque====
 
@@ -109,7 +109,7 @@ A '''Disque''' (Disk) signal instructs the driver to proceed at sight ('''Marche
 
 ====Avertissement====
 
-An '''Avertissement''' (Announcement) signal indicates the approach to a closed [[#Sémaphore|sémaphore]] of [https://fr.wikipedia.org/wiki/Block_automatique_%C3%A0_permissivit%C3%A9_restreinte Block Automatique à Permissivité Restreinte] (BAPR). It is equipped with an identification plate bearing the inscription '''A''' in black letters on a white background.
+Un signal d''''Avertissement''' indique l'approche d'un sémaphore fermé du [https://fr.wikipedia.org/wiki/Block_automatique_%C3%A0_permissivit%C3%A9_restreinte Block Automatique à Permissivité Restreinte] (BAPR). Il est muni d'une plaque d'identification portant l'inscription '''A''' en lettres noires sur fond blanc.
 
 [[File:Av_R_BAPR_BM.svg|frameless|60px]]
 
@@ -118,86 +118,92 @@ An '''Avertissement''' (Announcement) signal indicates the approach to a closed 
 *{{Tag|railway:signal:distant:form|light}}
 *{{Tag|railway:signal:distant:states|}} (→ [[FR:Key:railway:signal:distant:states|available states]], separated by <code>;</code>)
 
-===Disabled Signal===
+===Annulation des signaux===
 
 [[File:PermCancelled_H_BAL.svg|frameless|60px]]
 
-Use  
-*{{Tag|railway:signal:main:deactivated|yes}} or
+Utiliser
+*{{Tag|railway:signal:main:deactivated|yes}} ou
 *{{Tag|railway:signal:distant:deactivated|yes}}
 
 
-===Speed Limits===
+===Limitations de vitesse===
 Speed limits are signaled by '''Speed Indicators''' called '''Tableau Indicateur de Vitesse limite''' (TIV); TIVs can be either mobile, fixed or pentagonal.
 
-====Mobile Speed Indicators====
+====TIV Mobiles====
 
-Switches that can only be crossed at reduced speed in the thrown direction (approximately 60 km/h) are typically preceded by two mobile TIVs: a diamond-shaped '''TIV à Distance''' (TIV-D) followed by a ''speed limit reminder'' called '''TIV de Rappel''' (TIV-R).
 
+{| class="wikitable"
+|-
+|
 [[File:TIV D MOB 100.svg|frameless|85px]]
-
+|
 *{{Tag|railway:signal:speed_limit_distant|FR:TIV-D}}
-*{{Tag|railway:signal:speed_limit_distant:form||{{TagValue|railway:signal:speed_limit_distant:form|sign}}/{{TagValue|railway:signal:speed_limit_distant:form|light}}}}
+*{{Tag|railway:signal:speed_limit_distant:form||/{{TagValue|railway:signal:speed_limit_distant:form|sign}}}}
 *{{Tag|railway:signal:speed_limit_distant:states|{{TagValue|railway:signal:speed_limit_distant:states|closed}}}}
 *{{Tag|railway:signal:speed_limit_distant:speed|100}}
 *{{Tag|railway:crocodile|yes}} (if equipped with crocodile)
-
-
+| rowspan="3"|
+* Switches that can only be crossed at reduced speed in the thrown direction (approximately 60 km/h) are typically preceded by two mobile TIVs: a diamond-shaped '''TIV à Distance''' (TIV-D) followed by a ''speed limit reminder'' called '''TIV de Rappel''' (TIV-R).
+* Les aiguillages qui ne peuvent être franchis qu'à vitesse réduite en position déviée (environ 60 km/h) sont généralement précédés de deux TIV mobiles : un '''TIV à Distance'''  (TIV-D) en forme de losange suivi d'un ''TIV de rappel de limitation de vitesse'' appelé '''TIV de Rappel''' (TIV-R).
+|-
+|
 [[File:TIV Mobile O.svg|frameless|85px]]
-
+|
 *{{Tag|railway:signal:speed_limit_distant|FR:TIV-D}}
 *{{Tag|railway:signal:speed_limit_distant:form||{{TagValue|railway:signal:speed_limit_distant:form|light}}}}
 *{{Tag|railway:signal:speed_limit_distant:states|{{TagValue|railway:signal:speed_limit_distant:states|open}}}}
 *{{Tag|railway:signal:speed_limit_distant:speed|none}}
 *{{Tag|railway:crocodile|yes}} (if equipped with crocodile)
-
-
+|-
+|
 [[File:TIV Mobile 100.svg|frameless|85px]]
-
+|
 *{{Tag|railway:signal:speed_limit_distant|FR:TIV-D}}
 *{{Tag|railway:signal:speed_limit_distant:form||{{TagValue|railway:signal:speed_limit_distant:form|light}}}}
 *{{Tag|railway:signal:speed_limit_distant:states|{{TagValue|railway:signal:speed_limit_distant:states|closed}}}}
 *{{Tag|railway:signal:speed_limit_distant:speed|100}}
 *{{Tag|railway:crocodile|yes}} (if equipped with crocodile)
-
-
-The '''TIV-R''' is always paired with the [[#Carré|Carré]] signal preceding the point.
-
+|-
+|
 [[File:TIV R MOB 60.svg|frameless|60px]]
-
+|
 *{{Tag|railway:signal:speed_limit_reminder|FR:TIV-R}}
 *{{Tag|railway:signal:speed_limit_reminder:form||
 {{TagValue|railway:signal:speed_limit_reminder:form|sign}}}}
 *{{Tag|railway:signal:speed_limit_reminder:states|{{TagValue|railway:signal:speed_limit_reminder:states|closed}}}}
 *{{Tag|railway:signal:speed_limit_reminder:speed|60}}
-
-
+|rowspan="4"|
+* The '''TIV-R''' is always paired with the [[#Carré|Carré]] signal preceding the point.
+* Le '''TIV-R''' est toujours associé au signal [[#Carré|Carré]] précédant le point.
+|-
+|
 [[File:TIV Rappel 80.svg|frameless|60px]]
-
+|
 *{{Tag|railway:signal:speed_limit_reminder|FR:TIV-R}}
 *{{Tag|railway:signal:speed_limit_reminder:form||
 {{TagValue|railway:signal:speed_limit_reminder:form|sign}}}}
 *{{Tag|railway:signal:speed_limit_reminder:states|{{TagValue|railway:signal:speed_limit_reminder:states|closed}}}}
 *{{Tag|railway:signal:speed_limit_reminder:speed|80}}
-
-
+|-
+|
 [[File:TIV Rappel Lumineux O.svg|frameless|85px]]
-
+|
 *{{Tag|railway:signal:speed_limit_reminder|FR:TIV-R}}
 *{{Tag|railway:signal:speed_limit_reminder:form||
 {{TagValue|railway:signal:speed_limit_reminder:form|light}}}}
 *{{Tag|railway:signal:speed_limit_reminder:states|{{TagValue|railway:signal:speed_limit_reminder:states|open}}}}
 *{{Tag|railway:signal:speed_limit_reminder:speed|none}}
-
-
+|-
+|
 [[File:TIV Rappel Lumineux 60.svg|frameless|85px]]
-
+|
 *{{Tag|railway:signal:speed_limit_reminder|FR:TIV-R}}
 *{{Tag|railway:signal:speed_limit_reminder:form||
 {{TagValue|railway:signal:speed_limit_reminder:form|light}}}}
 *{{Tag|railway:signal:speed_limit_reminder:states|{{TagValue|railway:signal:speed_limit_reminder:states|closed}}}}
 *{{Tag|railway:signal:speed_limit_reminder:speed|60}}
-
+|}
 
 ====Chevron====
 Additionally, if necessary, the location of the point (or the first point in the case of successive points) is identified by a downward-pointing Chevron.
@@ -209,50 +215,51 @@ Additionally, if necessary, the location of the point (or the first point in the
 *{{Tag|railway:signal:speed_limit:type|downwards}} (optional; '''downwards''' by default)
 
 
-====Fixed Speed Indicators ====
+====TIV Fixes====
 
-=====Fixed Distant Speed Indicators (Ordinary Type)=====
-
-Fixed distant speed indicators of ordinary type ('''TIV fixes à distance du type ordinaire''') are usually square in shape. They are diamond-shaped when the speed limit is less than or equal to 40 km/h.
-
-[[File:TIV Distance 80.svg|frameless|60px]]
-
+=====TIV fixes à distance du type ordinaire=====
+{| class="wikitable"
+|
+<div style="text-align: center;">[[File:TIV Distance 80.svg|frameless|60px]]</div>
+|
 *{{Tag|railway:signal:speed_limit_distant|FR:TIV-D}}
 *{{Tag|railway:signal:speed_limit_distant:form||
 ({{TagValue|railway:signal:speed_limit_distant:form|light}}/{{TagValue|railway:signal:speed_limit_distant:form|sign}})}}
 *{{Tag|railway:signal:speed_limit_distant:speed|80}}
-*{{Tag|railway:crocodile|yes}} (if equipped with crocodile)
-
-
-[[File:TIV Distance Crocodile 40.svg|frameless|85px]]
-
+*{{Tag|railway:crocodile|yes}} (si équipé d'un crocodile)
+| rowspan="2" |
+Les '''TIV fixes à distance du type ordinaire''' sont généralement de forme carrée. Ils sont en forme de losange lorsque la vitesse limite est inférieure ou égale à 40 km/h.
+|-
+|
+<div style="text-align: center;">[[File:TIV Distance Crocodile 40.svg|frameless|85px]]</div>
+|
 *{{Tag|railway:signal:speed_limit_distant|FR:TIV-D}}
 *{{Tag|railway:signal:speed_limit_distant:form||
 ({{TagValue|railway:signal:speed_limit_distant:form|light}}/{{TagValue|railway:signal:speed_limit_distant:form|sign}})}}
 *{{Tag|railway:signal:speed_limit_distant:speed|40}}
 *{{Tag|railway:crocodile|yes}} (if equipped with crocodile)
-
-
-The '''Z''' sign is the execution signal indicating the start of the zone to be traveled at limited speed.
-
-[[File:Tableau Z.svg|frameless|60px]]
-
+|-
+|
+<div style="text-align: center;">[[File:Tableau Z.svg|frameless|60px]]</div>
+|
 *{{Tag|railway:signal:speed_limit|FR:Z}}
 *{{Tag|railway:signal:speed_limit:form|sign}}
 *{{Tag|railway:signal:speed_limit:function|entry}}
-
-
-The '''R''' sign indicates the end of the zone where the speed limit is required and the return to normal speed ('''Reprise de vitesse''').
-
-[[File:Tableau R.svg|frameless|60px]]
-
+|
+Le tableau '''Z''' est le signal d'exécution indiquant le début de la zone à parcourir à vitesse limitée.
+|-
+|
+<div style="text-align: center;">[[File:Tableau R.svg|frameless|60px]]</div>
+|
 *{{Tag|railway:signal:speed_limit|FR:R}}
 *{{Tag|railway:signal:speed_limit:form|sign}}
 *{{Tag|railway:signal:speed_limit:function|exit}}
 *{{Tag|railway:signal:speed_limit:speed|none}}
+|
+Le tableau '''R''' indique la fin de la zone où la limitation de vitesse est requise et le retour à la vitesse normale ('''Reprise de vitesse''').
+|}
 
-
-=====Fixed Distant Speed Indicators (Type B)=====
+=====TIV fixes à distance du type B=====
 Fixed distant speed indicators ('''TIV-D''') of type B indicate that the speed limit must be observed by trains authorized to travel at speeds greater than 140 km/h. When only TIV-D of type B signals are present, the speed limit also applies to self-propelled trains (automoteurs).
 
 [[File:FR-TIV-type-B-160.svg|frameless|60px]]
@@ -262,7 +269,7 @@ Fixed distant speed indicators ('''TIV-D''') of type B indicate that the speed l
 *{{Tag|railway:signal:speed_limit_distant:form|sign}}
 *{{Tag|railway:signal:speed_limit_distant:speed|}}
 
-=====Fixed Distant Speed Indicators (Type C)=====
+=====TIV fixes à distance du type C=====
 Fixed distant speed indicators ('''TIV-D''') of type C specifically apply to railcars and self-propelled trains (autorails et automoteurs). 
 
 [[File:FR_TIV-type-C-180.svg|frameless|60px]]
@@ -276,7 +283,7 @@ If the speed limit differs between pendular trains and other self-propelled trai
 *{{Tag|railway:signal:speed_limit_distant:form|sign}}
 *{{Tag|railway:signal:speed_limit_distant:speed|}} (separated by <code>;</code> if more than one speed limit has to be specified)
 
-==== Speed Limit Announcement (P board)====
+====Préannonce de Limitation de Vitesse (Tableau P)====
 The P board announces a distant speed indicator (TIV-D) for lines equipped with pre-announcement signalling. This sign applies only to trains running at speeds higher than 160 km/h and requires the train to pass the next TIV-D at a speed lower than 160 km/h. This sign is lit at night.
 
 [[File:FR_Tableau_P.svg|frameless|60px]]
@@ -286,7 +293,7 @@ The P board announces a distant speed indicator (TIV-D) for lines equipped with 
 *{{Tag|railway:signal:speed_limit_distant:speed|}}
 
 
-==== Pentagonal Speed Indicators====
+====TIV Pentagonaux====
 Pentagonal TIVs typically concern freight trains and possibly certain locomotive series. The TIV figure specifies the maximum speed in tens of kilometers per hour (e.g. 5 stands for 50 km/h).
 
 A distant upward-pointing pentagonal speed indicator (TIV-D) announces a special speed restriction. When the restriction applies only to certain locomotive series, the pentagonal TIV-D is accompanied by an '''L''' plate placed below it.
@@ -317,7 +324,7 @@ A downward-pointing pentagonal TIV without any markings indicates the end of the
 *{{Tag|railway:signal:speed_limit:speed|none}}
 
 
-====Repère de Vitesse (Km sign)====
+====Repère de Vitesse (Pancarte Km)====
 The Km sign is used in conjunction with TIVs to indicate transition points of the speed limit when these do not coincide with notable landmarks.
 
 [[File:FR_Pancarte_Km.svg|frameless|60px]]
@@ -325,7 +332,7 @@ The Km sign is used in conjunction with TIVs to indicate transition points of th
 *{{Tag|railway:signal:speed_limit|FR:KM}}  <!-- SNCF:REPER VIT -->
 *{{Tag|railway:signal:speed_limit:form|sign}}
 
-===Route Indicators===
+===Signaux Indicateurs de Direction===
 Routes are signaled with either an '''Indicateur de Direction''' (ID) or a '''Tableau Indicateur de Direction à Distance''' (TIDD), or both. 
 
 ====Indicateur de Direction====
@@ -364,9 +371,9 @@ The '''Y''' board announces a facing switch junction.
 *{{Tag|railway:signal:route_distant:form|sign}}
 
 
-===Cab Signalling===
+===Signalisation de Cabine===
 
-====Conventional Railway Lines====
+====Lignes Ferroviaires Classiques====
 Cab signalling of type [https://wikipedia.org/wiki/Contr%C3%B4le_de_vitesse_par_balises Contrôle de Vitesse par Balises] (Speed control by beacons, KVB) or [https://wikipedia.org/wiki/European_Train_Control_System European Train Control System] (ETCS).
 
 The train is directed towards a cab signalling line. One or more boards of this type precede the entry.
@@ -394,10 +401,11 @@ The train is returning to a traditional lateral signalling line.
 *{{Tag|railway:signal:train_protection:function|exit}}
 
 
-====Highspeed Railway Lines====
+====Lignes Ferroviaires à Grandes Vitesses====
 Cab signalling of type [https://wikipedia.org/wiki/Transmission_Voie-Machine Transmission Voie-Machine] (TVM) or [https://wikipedia.org/wiki/European_Train_Control_System European Train Control System] (ETCS).
 
-=====Block Markers=====
+=====Repères=====
+
 [[File:Repère TGV.svg|frameless|60px]]
 [[File:Repère TGV (sens pair).svg|frameless|60px]] 
 
@@ -405,7 +413,7 @@ Cab signalling of type [https://wikipedia.org/wiki/Transmission_Voie-Machine Tra
 *{{Tag|railway:signal:train_protection:form|sign}}
 *{{Tag|railway:signal:train_protection:function|block}}
 
-=====Shunting Markers=====
+=====Jalon de Manœuvre=====
 A shunting marker or '''Jalon de Manœuvre''' is placed at a point where certain train movements are executed. These movements may include reversing, shunting, or departing trains from a work site. The white chevron points to the track involved.
 
 [[File:Jalon Manoeuvre.svg|frameless|85px]]
@@ -414,7 +422,8 @@ A shunting marker or '''Jalon de Manœuvre''' is placed at a point where certain
 *{{Tag|railway:signal:shunting:form|sign}}
 
 
-===Wrong Ways===
+===Contresens===
+
 These signs are used on double-track sections equipped with wrong-way installations or '''Installations de contresens''' (ICS).
 
 The '''Tableau d'Entrée de Contresens''' (TECS) indicates or confirms to the driver that the train is directed in the wrong way.
@@ -434,9 +443,9 @@ The '''Tableau de Sortie de Contresens''' (TSCS) indicates to the driver that th
 *{{Tag|railway:signal:wrong_route:function|exit}}
 
 
-===Stations and Facilities===
+===Gares et Établissements===
 
-====Announcements====
+====Annonces====
 
 This type of sign indicates the distance to the next facility.
 
@@ -463,7 +472,7 @@ This sign marks the approach to a facility, other than a station, where points m
 Note: the last couple of signs are specific to single tracks with simplified signalling, known as '''Voie Unique à Signalisation Simplifiée''' (VUSS).
 
 
-====Stops====
+====Arrêts====
 
 [[File:Pancarte Arrêt A.svg|frameless|60px]]
 
@@ -502,7 +511,7 @@ The <span id="StopMarker">'''Jalon d'Arrêt'''</span> (Stop Marker) is similar t
 *{{Tag|railway:signal:stop|FR:JALON_ARRET}}
 *{{Tag|railway:signal:stop:form|sign}}
 
-====Passenger Stops====
+====Arrêts Voyageurs====
 Signs used in certain facilities to mark the stopping point for passenger trains.
 
 Stopping point for the front of the train (Tête de Train), regardless of the number of vehicles in the train.
@@ -561,9 +570,9 @@ Stopping point for TGVs. The number indicates the number of rakes: 1=single unit
 *{{Tag|railway:signal:stop:for||{{TagValue|railway:signal:stop:for|single_unit}};{{TagValue|railway:signal:stop:for|multiple_unit}}}}
 
 
-====Train Departure====
+====Départ des Trains====
 
-=====Departure Request=====
+=====Demande de Départ=====
 
 Some [[#Carré|Carré]] signals are equipped with a '''Demande de Départ''' (DD) plate. The driver waiting for departure must, one minute before the scheduled departure time or if they notice the corresponding Carré signal has opened, request departure authorization by telephone.
 
@@ -571,7 +580,7 @@ Some [[#Carré|Carré]] signals are equipped with a '''Demande de Départ''' (DD
 
 *{{Tag|railway:signal:main:plate:departure|request}}
 
-=====Departure Authorization=====
+=====Autorisation de Départ=====
 
 At the exit of certain tracks, departure authorization may be given to the driver by means of a flashing half-white, half-green '''Signal Lumineux de Départ''' (SLD).
 
@@ -586,11 +595,11 @@ Alternatively, departure authorization may be given simply by the opening of the
 
 *{{Tag|railway:signal:main:plate:departure|yes}}
 
-===Service Tracks and Shunting===
+===Voies de Service et Manœuvres===
 
 Some yards or groups of converging tracks have dedicated exit signalling.
 
-====Upward-pointing Chevrons====
+====Chevrons pointe en haut====
 
 Upward-pointing chevrons indicate either an exit from a junction of converging tracks or, in some stations, the point beyond which trains must not proceed when a stop is required.
 
@@ -629,14 +638,14 @@ A '''Signal Lumineux de Manœuvre''' (SLM) is installed in some facilities to fa
 *{{Tag|railway:signal:shunting:form|light}}
 *{{Tag|railway:signal:shunting:states||({{TagValue|railway:signal:shunting:states|FR:PUSH}}/{{TagValue|railway:signal:shunting:states|FR:PULL}}/{{TagValue|railway:signal:shunting:states|FR:STOP}})}}
 
-===Electrified Railway Lines===
+===Lignes Ferroviaires Électrifiées===
 
-====Neutral Zones====
+====Zones Neutres====
 A neutral zone (or '''zone de sectionnement''') is a grounded catenary zone, isolated on both sides, used to separate portions of track either powered by different substations or phases, or when switching voltages from 1500V DC to 25kV AC and vice versa, or to accommodate different voltages and frequencies in cross-border areas.
 
 The main circuit breaker must be opened while the train passes through this zone, which it traverses using its own kinetic energy (marche sur l'erre).
 
-=====Neutral Zone Announcement=====
+=====Annonce de Zone Neutre=====
 The distant signal announces a neutral zone at the specified distance in meters.
 
 [[File:Schéma de signalisation ferroviaire Pancarte "Sectionnement".svg|frameless|85px]] 
@@ -646,7 +655,7 @@ The distant signal announces a neutral zone at the specified distance in meters.
 *{{Tag|railway:signal:electricity:type|power_off_advance}}
 *{{Tag|railway:signal:electricity:distance|}} (specified distance in meters)
 
-=====Start of Neutral Zone=====
+=====Début de Zone Neutre=====
 Execution signal.
 
 [[File:Couper Courant.svg|frameless|60px]]
@@ -656,7 +665,7 @@ Execution signal.
 * {{Tag|railway:signal:electricity:type|power_off}}
 *{{Tag|railway:signal:electricity:function|entry}}
 
-=====End of Neutral Zone=====
+=====Fin de Zone Neutre=====
 Signals indicating the end of the neutral zone.
 
 [[File:Fin Coupez Courant.svg|frameless|60px]]
@@ -679,9 +688,9 @@ End of the neutral zone for reversible trains or trains with multiple pantograph
 *{{Tag|railway:signal:electricity:frequency|}}
 
 
-====Pantographs====
+====Pantographes====
 
-=====Pantograph Down Announcement=====
+=====Signal à distance "Baissez Panto"=====
 
 Distant '''Pantograph Down''' signal (signal à distance '''"Baissez panto"''').
 
@@ -700,7 +709,7 @@ This signal instructs the lowering of the train's pantograph(s) under specific c
 *{{Tag|railway:signal:electricity:form|sign}}
 *{{Tag|railway:signal:electricity:type|pantograph_down_advance}}
 
-=====Start of Pantograph Down=====
+=====Signal d'exécution "Baissez Panto"=====
 
 '''Pantograph Down''' execution signal (signal d'exécution '''"Baissez Panto"''').
 
@@ -712,7 +721,7 @@ This signal instructs the lowering of the train's pantograph(s) under specific c
 *{{Tag|railway:signal:electricity:type|pantograph_down}}
 *{{Tag|railway:signal:electricity:voltage|}} (optional)
 
-=====End of Pantograph Down=====
+=====Signal de Fin de Parcours "Baissez Panto"=====
 
 Signal indicating the end of the route with '''Pantograph Down''' (signal de fin de parcours '''"Baissez Panto"''' ).
 
@@ -724,7 +733,7 @@ Signal indicating the end of the route with '''Pantograph Down''' (signal de fin
 *{{Tag|railway:signal:electricity:type|pantograph_up}}
 *{{Tag|railway:signal:electricity:voltage|}} (optional)
 
-=====Dual-Mode Traffic=====
+=====Circulations Bimode=====
 Distant signal announcing traffic towards a non-electrified line. This sign accompanies the '''Baissez Panto''' (Pantograph Down) distant and execution signals when they apply only to dual-mode traffic. In this case, they are not followed by an [[#End of Pantograph Down|End of Pantograph Down]] signal.
 
 [[File:Pancarte BIMODE A.svg|frameless|85px]]
@@ -743,7 +752,7 @@ Distant signal announcing traffic coming from a non-electrified line for dual-mo
 *{{Tag|railway:signal:dual_mode:function|exit}}
 
 
-=====End of Catenaries=====
+=====Fin de Caténaires=====
 Beyond this sign, the line is no longer electrified and only thermal or dual-mode trains can continue.
 
 [[File:FIN CAT.svg|frameless|85px]]
@@ -753,21 +762,21 @@ Beyond this sign, the line is no longer electrified and only thermal or dual-mod
 *{{Tag|railway:signal:electricity:type|end_of_catenary}}
 *{{Tag|railway:signal:position|overhead}}
 
-====Stop Markers====
+====Jalon d'Arrêt====
 The '''Jalon d'arrêt à damier bleu et blanc''' (blue and white checkered Stop Marker), which only exists on service tracks, commands the stop of shunting movements of electric trains.
 
 [[File:Jalon d'arrêt E.svg|frameless|60px]]
 *{{Tag|railway:signal:electricity|FR:JALON_ARRET}}
 *{{Tag|railway:signal:electricity:form|sign}}
 
-====Frost Board====
+====Tableau Givre====
 [[File:Tableau GIVRE.svg|frameless|85px]]
 
 *{{Tag|railway:signal:electricity|FR:GIVRE}}
 *{{Tag|railway:signal:electricity:form|sign}}
 
 
-===Level Crossings===
+===Passages à Niveau===
 Level crossing announcement. <!-- TBD -->
 
 [[File:PN.svg|frameless|60px]] 
@@ -787,7 +796,7 @@ Level crossing announcement. <!-- TBD -->
 *{{Tag|railway:signal:crossing_info:caption|}} (optional; text written on the sign)
 
 
-===Whistle===
+===Sifflet===
 The '''S''' board indicates the locations where the driver must sound the horn, for example, approaching unguarded level crossings, or at the entrance of tunnels, or in areas with reduced visibility.
 
 [[File:Pancarte S.svg|frameless|60px]]
@@ -804,7 +813,7 @@ When a '''J''' plate is present below the '''S''' sign, the obligation to whistl
 *{{Tag|railway:signal:whistle:plate|FR:J}} <!-- TBD -->
 
 
-=== Miscellaneous Signs and Boards ===
+===Pancartes et Tableaux Divers===
 
 The '''G''' (Garage) board indicates that the train is directed towards a service track.
 
@@ -884,4 +893,4 @@ Zone with reduced loading gauge.
 *[https://ressources.data.sncf.com/explore/dataset/lexique-des-acronymes-sncf/information/ Lexique des acronymes] (SNCF)
 *[https://www.jonroma.net/media/rail/opdocs/world/france/S%201%20A%20I-%20Signalisation%20au%20sol.pdf Signalisation au sol] (SNCF, 2005, PDF)
 *[https://github.com/nicolaswurtz/signalisation-rfn-svg signalisation-rfn-svg] (Nicolas Wurtz, SVG)
-*[https://commons.wikimedia.org/wiki/Category:Diagrams_of_railway_signals_in_France Diagrams of railway signals in France] (Various authors, SVG+GIF)
+*[https://commons.wikimedia.org/wiki/Category:Diagrams_of_railway_signals_in_France Diagrams of railway signals in France] (Auteurs divers, SVG+GIF)
