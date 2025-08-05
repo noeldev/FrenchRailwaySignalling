@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Draft version -->
 <presets xmlns="https://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
+	icon="icons/SNCF_logo.png"
     version="1.0_2025-08-05"
     description="Presets for tagging French railway signalling"
     fr.description="Préréglages pour étiqueter la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
     fr.shortdescription="Signalisation Ferroviaire Française"
-	link="https://wiki.openstreetmap.org/wiki/FR:OpenRailwayMap/Tagging_in_France">
-
+	link="https://github.com/noeldev/FrenchRailwaySignalling">
+	
 	<group
 		name="French Railway Signalling"
 		fr.name="Signalisation Ferroviaire"
-		icon="SNCF_logo.png">
+		icon="icons/SNCF_logo.png">
 
 		<chunk id="common_tags">
 			<key key="railway" value="signal" />
@@ -32,12 +32,12 @@
 				values="forward,backward,both"
 				display_values="Forward,Backward,Bidirectional"
 				fr.display_values="Croissant,Décroissant,Bidirectionnel"
-				editable="false" />
+				editable="false" values_sort="false" />
 			<combo
 				key="railway:signal:position"
 				text="Position"
 				fr.text="Position"
-				editable="false" icon_size="24">
+				editable="false" values_sort="false">
 				<list_entry
 					value="left"
 					display_value="Left"
@@ -82,12 +82,12 @@
 						value="yes"
 						display_value="Half-white, Half-green"
 						fr.display_value="Mi-blanche, Mi-verte"
-						icon="DEPART.svg" icon_size="24"/>
+						icon="icons/DEPART.svg" icon_size="24"/>
 					<list_entry
 						value="request"
 						display_value="Departure Request"
 						fr.display_value="Demande de Départ"
-						icon="DD.svg" icon_size="24"/>
+						icon="icons/DD.svg" icon_size="24"/>
 				</combo>
 				<combo
 					key="railway:signal:main:plate:block"
@@ -98,12 +98,12 @@
 						value="FR:BM" display_value="BM"
 						short_description="Manual Block"
 						fr.short_description="Block Manuel"
-						icon="Block_BM.svg" icon_size="24"/>
+						icon="icons/Block_BM.svg" icon_size="24"/>
 					<list_entry
 						value="FR:PR" display_value="PR"
 						short_description="Automatic Block with Restricted Permissiveness"
 						fr.short_description="Block Automatique à Permissivité Restreinte"
-						icon="Block_PR.svg" icon_size="24"/>
+						icon="icons/Block_PR.svg" icon_size="24"/>
 				</combo>
 				<text
 					key="railway:signal:main:caption:block"
@@ -119,7 +119,7 @@
 		<group
 			name="Carré"
 			fr.name="Carré"
-			icon="C_Cible_C1.svg">
+			icon="icons/C_Cible_C1.svg">
 
 			<chunk id="carre_tags">
 				<key key="railway:signal:main" value="FR:CARRE" />
@@ -157,7 +157,7 @@
 			<item
 				name="Cible C"
 				fr.name="Cible C"
-				icon="C_Cible_C1.svg"
+				icon="icons/C_Cible_C1.svg"
 				type="node">
 				<label
 					text="Carré on C target"
@@ -185,7 +185,7 @@
 				name="Cible F"
 				fr.name="Cible F"
 				type="node"
-				icon="C_Cible_F1.svg">
+				icon="icons/C_Cible_F1.svg">
 				<label
 					text="Carré on F target"
 					fr.text="Carré sur cible F" />
@@ -212,7 +212,7 @@
 				name="Cible H"
 				fr.name="Cible H"
 				type="node"
-				icon="C_Cible_H1.svg">
+				icon="icons/C_Cible_H1.svg">
 				<label
 					text="Carré on H target"
 					fr.text="Carré sur cible H" />
@@ -248,7 +248,7 @@
 		<group
 			name="Carré violet"
 			fr.name="Carré violet"
-			icon="Cv_Cible_A2.svg">
+			icon="icons/Cv_Cible_A2.svg">
 
 			<chunk id="cv_tags">
 				<key key="railway:signal:main" value="FR:CV" />
@@ -269,7 +269,7 @@
 				name="Cible A"
 				fr.name="Cible A"
 				type="node"
-				icon="Cv_Cible_A2.svg">
+				icon="icons/Cv_Cible_A2.svg">
 				<label
 					text="Carré violet on A target"
 					fr.text="Carré violet sur cible A" />
@@ -286,7 +286,7 @@
 				name="Cible C"
 				fr.name="Cible C"
 				type="node"
-				icon="Cv_Cible_C2.svg">
+				icon="icons/Cv_Cible_C2.svg">
 				<label
 					text="Carré violet on C target"
 					fr.text="Carré violet sur cible C" />
@@ -303,7 +303,7 @@
 				name="Cible F"
 				fr.name="Cible F"
 				type="node"
-				icon="Cv_Cible_F2.svg">
+				icon="icons/Cv_Cible_F2.svg">
 				<label
 					text="Carré violet on F target"
 					fr.text="Carré violet sur cible F" />
@@ -331,7 +331,7 @@
 				name="Cible H"
 				fr.name="Cible H"
 				type="node"
-				icon="Cv_Cible_H2.svg">
+				icon="icons/Cv_Cible_H2.svg">
 				<label
 					text="Carré violet on H target"
 					fr.text="Carré violet sur cible H" />
@@ -362,7 +362,7 @@
 				name="Cible K"
 				fr.name="Cible K"
 				type="node"
-				icon="Cv_Cible_K2.svg">
+				icon="icons/Cv_Cible_K2.svg">
 				<label
 					text="Carré violet on K target"
 					fr.text="Carré violet sur cible K" />
@@ -395,7 +395,7 @@
 			name="Guidon d'Arrêt"
 			fr.name="Guidon d'Arrêt"
 			type="node"
-			icon="GA.svg">
+			icon="icons/GA.svg">
 			<label
 				text="Guidon d'Arrêt"
 				fr.text="Guidon d'Arrêt" />
@@ -418,7 +418,7 @@
 		<group
 			name="Sémaphore"
 			fr.name="Sémaphore"
-			icon="S_Cible_A3.svg">
+			icon="icons/S_Cible_A3.svg">
 
 			<chunk id="semaphore_tags">
 				<key key="railway:signal:main" value="FR:S"  />
@@ -436,19 +436,19 @@
 							display_value="F"
 							short_description="Franchissable"
 							fr.short_description="Franchissable"
-							icon="Ident_F.svg" icon_size="24"/>
+							icon="icons/Ident_F.svg" icon_size="24"/>
 						<list_entry
 							value="FR:BM"
 							display_value="BM"
 							short_description="Manual Block"
 							fr.short_description="Block Manuel"
-							icon="Ident_BM.svg" icon_size="24"/>
+							icon="icons/Ident_BM.svg" icon_size="24"/>
 						<list_entry
 							value="FR:PR"
 							display_value="PR"
 							short_description="Automatic Block with Restricted Permissiveness"
 							fr.short_description="Block Automatique à Permissivité Restreinte"
-							icon="Ident_PR.svg" icon_size="24"/>
+							icon="icons/Ident_PR.svg" icon_size="24"/>
 					</combo>
 					<text
 						key="railway:signal:main:caption:marker"
@@ -471,7 +471,7 @@
 				name="Cible A"
 				fr.name="Cible A"
 				type="node"
-				icon="S_Cible_A3.svg">
+				icon="icons/S_Cible_A3.svg">
 				<label
 					text="Sémaphore on A target"
 					fr.text="Sémaphore sur cible A" />
@@ -498,7 +498,7 @@
 				name="Cible F"
 				fr.name="Cible F"
 				type="node"
-				icon="S_Cible_F5.svg">
+				icon="icons/S_Cible_F5.svg">
 				<label
 					text="Sémaphore on F target"
 					fr.text="Sémaphore sur cible F" />
@@ -515,7 +515,7 @@
 				name="Cible K"
 				fr.name="Cible K"
 				type="node"
-				icon="S_Cible_K1.svg">
+				icon="icons/S_Cible_K1.svg">
 				<label
 					text="Sémaphore on K target"
 					fr.text="Sémaphore sur cible K" />
@@ -554,7 +554,7 @@
 			name="Disque"
 			fr.name="Disque"
 			type="node"
-			icon="D_Cible_R6.svg">
+			icon="icons/D_Cible_R6.svg">
 			<label text="Disque" />
 			<space />
 			<key key="railway:signal:distant" value="FR:D" />
@@ -586,7 +586,7 @@
 			name="Avertissement"
 			fr.name="Avertissement"
 			type="node"
-			icon="A_Cible_R6.svg">
+			icon="icons/A_Cible_R6.svg">
 			<label
 				text="Avertissement"
 				fr.text="Avertissement" />
@@ -620,7 +620,7 @@
 		<group
 			name="Speed Limits"
 			fr.name="Limitations de Vitesse"
-			icon="TIV-D_MOB.svg">
+			icon="icons/TIV-D_MOB.svg">
 
 			<chunk id="crocodile_tags">
 				<optional>
@@ -635,13 +635,13 @@
 			<group
 				name="Mobile Speed Indicators"
 				fr.name="TIV Mobiles"
-				icon="TIV-D_MOB.svg">
+				icon="icons/TIV-D_MOB.svg">
 
 				<item
 					name="Mobile TIV-D"
 					fr.name="TIV-D Mobile"
 					type="node"
-					icon="TIV-D_MOB.svg">
+					icon="icons/TIV-D_MOB.svg">
 					<label
 						text="Mobile TIV-D"
 						fr.text="TIV-D Mobile" />
@@ -658,12 +658,12 @@
 							value="sign"
 							display_value="Mechanical"
 							fr.display_value="Mécanique"
-							icon="TIV-D_MOB.svg" icon_size="24"/>
+							icon="icons/TIV-D_MOB.svg" icon_size="24"/>
 						<list_entry
 							value="light"
 							display_value="Luminous"
 							fr.display_value="Lumineux"
-							icon="TIV-D_MOB_Caisson.svg" icon_size="24"/>
+							icon="icons/TIV-D_MOB_Caisson.svg" icon_size="24"/>
 					</combo>
 					<combo
 						key="railway:signal:speed_limit_distant:speed"
@@ -681,7 +681,7 @@
 					name="Mobile TIV-R"
 					fr.name="TIV-R Mobile"
 					type="node"
-					icon="TIV-R_MOB.svg">
+					icon="icons/TIV-R_MOB.svg">
 					<label
 						text="Mobile TIV-R"
 						fr.text="TIV-R Mobile" />
@@ -699,12 +699,12 @@
 							value="sign"
 							display_value="Mechanical"
 							fr.display_value="Mécanique"
-							icon="TIV-R_MOB.svg" icon_size="24"/>
+							icon="icons/TIV-R_MOB.svg" icon_size="24"/>
 						<list_entry
 							value="light"
 							display_value="Luminous"
 							fr.display_value="Lumineux"
-							icon="TIV-R_MOB_Caisson.svg" icon_size="24"/>
+							icon="icons/TIV-R_MOB_Caisson.svg" icon_size="24"/>
 					</combo>
 					<combo
 						key="railway:signal:speed_limit_reminder:speed"
@@ -722,7 +722,7 @@
 			<group
 				name="Fixed Speed Indicators"
 				fr.name="TIV Fixes"
-				icon="TIV-D_FIXE.svg">
+				icon="icons/TIV-D_FIXE.svg">
 
 				<chunk id="speed_indicator_display_tags">
 					<combo
@@ -745,7 +745,7 @@
 					name="Ordinary-type TIV-D"
 					fr.name="TIV-D du Type Ordinaire"
 					type="node"
-					icon="TIV-D_FIXE.svg">
+					icon="icons/TIV-D_FIXE.svg">
 					<label
 						text="Fixed distant speed indicator of the ordinary type"
 						fr.text="TIV fixe à distance du type ordinaire" />
@@ -782,7 +782,7 @@
 
 				<item
 					name="Z Board" fr.name="Tableau Z"
-					type="node" icon="Z.svg">
+					type="node" icon="icons/Z.svg">
 					<label
 						text="Z board"
 						fr.text="Tableau Z" />
@@ -796,7 +796,7 @@
 
 				<item
 					name="R Board" fr.name="Tableau R"
-					type="node" icon="R.svg">
+					type="node" icon="icons/R.svg">
 					<label
 						text="R board"
 						fr.text="Tableau R" />
@@ -815,7 +815,7 @@
 					name="B-type TIV-D"
 					fr.name="TIV-D du Type B"
 					type="node"
-					icon="TIV-D_B_FIXE.svg">
+					icon="icons/TIV-D_B_FIXE.svg">
 					<label
 						text="B-type fixed distant speed indicator"
 						fr.text="TIV fixe à distance du type B" />
@@ -840,7 +840,7 @@
 					name="C-type TIV-D"
 					fr.name="TIV-D du Type C"
 					type="node"
-					icon="TIV-D_C_FIXE.svg">
+					icon="icons/TIV-D_C_FIXE.svg">
 					<label
 						text="C-type fixed distant speed indicator"
 						fr.text="TIV fixe à distance du type C" />
@@ -863,7 +863,7 @@
 
 			<item
 				name="P Board" fr.name="Tableau P"
-				type="node" icon="P.svg">
+				type="node" icon="icons/P.svg">
 				<label 
 					text="P Board (Speed Limit Announcement)" 
 					fr.text="Tableau P (Annonce de limitation de vitesse)" />
@@ -879,13 +879,13 @@
 			<group
 				name="Pentagonal Speed Indicators"
 				fr.name="TIV Pentagonaux"
-				icon="TIV_PENEXE.svg">
+				icon="icons/TIV_PENEXE.svg">
 
 				<item
 					name="Distant TIV board"
 					fr.name="TIV à Distance"
 					type="node"
-					icon="TIV_PENDIS.svg">
+					icon="icons/TIV_PENDIS.svg">
 					<label
 						text="Pentagonal distant speed indicator"
 						fr.text="TIV à distance de forme pentagonale" />
@@ -914,7 +914,7 @@
 					name="Execution TIV board"
 					fr.name="TIV d'Exécution"
 					type="node"
-					icon="TIV_PENEXE.svg">
+					icon="icons/TIV_PENEXE.svg">
 					<label
 						text="Pentagonal execution speed indicator"
 						fr.text="TIV d'exécution de forme pentagonale" />
@@ -937,7 +937,7 @@
 					name="White board"
 					fr.name="TIV de Reprise"
 					type="node"
-					icon="TIV_PENREP.svg">
+					icon="icons/TIV_PENREP.svg">
 					<label
 						text="Pentagonal resumption speed indicator"
 						fr.text="TIV de reprise de forme pentagonale" />
@@ -955,7 +955,7 @@
 			<item
 				name="Speed Marker" 
 				fr.name="Repère de Vitesse"
-				type="node" icon="REP_VITESSE.svg">
+				type="node" icon="icons/REP_VITESSE.svg">
 				<label
 					text="Speed Marker"
 					fr.text="Repère de Vitesse" />
@@ -966,7 +966,8 @@
 					key="railway:signal:speed_limit:function"
 					text="Transition"
 					fr.text="Transition"
-					editable="false">
+					editable="false"
+					values_sort="false">
 					<list_entry
 						value="entry"
 						display_value="Speed Limit Entry"
@@ -985,12 +986,12 @@
 		<group
 			name="Chevrons"
 			fr.name="Chevrons"
-			icon="CHEVRON_BAS.svg">
+			icon="icons/CHEVRON_BAS.svg">
 
 			<item
 				name="Downward-pointing Chevron"
 				fr.name="Chevron Pointe en Bas"
-				type="node" icon="CHEVRON_BAS.svg">
+				type="node" icon="icons/CHEVRON_BAS.svg">
 				<label
 					text="Downward-pointing chevron"
 					fr.text="Chevron pointe en bas" />
@@ -1005,7 +1006,7 @@
 			<item
 				name="Upward-pointing Chevron"
 				fr.name="Chevron Pointe en Haut"
-				type="node" icon="CHEVRON_HAUT.svg">
+				type="node" icon="icons/CHEVRON_HAUT.svg">
 				<label
 					text="Upward-pointing chevron"
 					fr.text="Chevron pointe en haut" />
@@ -1024,12 +1025,12 @@
 		<group
 			name="Route Indicators"
 			fr.name="Indicateurs de Direction"
-			icon="ID3.svg">
+			icon="icons/ID3.svg">
 
 			<item
 				name="ID" fr.name="ID"
 				type="node"
-				icon="ID3.svg">
+				icon="icons/ID3.svg">
 				<label
 					text="Route Indicator"
 					fr.text="Indicateur de Directions" />
@@ -1066,7 +1067,7 @@
 				name="TIDD"
 				fr.name="TIDD"
 				type="node"
-				icon="TIDD.svg">
+				icon="icons/TIDD.svg">
 				<label
 					text="Tableau Indicateur de Direction à Distance (TIDD)"
 					fr.text="Tableau Indicateur de Direction à Distance (TIDD)" />
@@ -1083,13 +1084,13 @@
 		<group
 			name="Branch lines"
 			fr.name="Embranchements"
-			icon="BIF.svg">
+			icon="icons/BIF.svg">
 
 			<item
 				name="BIF Board"
 				fr.name="Tableau BIF"
 				type="node"
-				icon="BIF.svg">
+				icon="icons/BIF.svg">
 				<label
 					text="BIF Board"
 					fr.text="Tableau BIF" />
@@ -1104,7 +1105,7 @@
 				name="Y Board"
 				fr.name="Tableau Y"
 				type="node"
-				icon="Y.svg">
+				icon="icons/Y.svg">
 				<label
 					text="Y Board"
 					fr.text="Tableau Y" />
@@ -1122,13 +1123,13 @@
 		<group
 			name="Cab Signalling"
 			fr.name="Signalisation en Cabine"
-			icon="CAB_R.svg">
+			icon="icons/CAB_R.svg">
 
 			<item
 				name="Distant Signal"
 				fr.name="Signal à Distance"
 				type="node"
-				icon="CAB_E.svg">
+				icon="icons/CAB_E.svg">
 				<!-- Entrée -->
 				<label
 					text="Advance signal for cabin signalling"
@@ -1144,7 +1145,7 @@
 				name="Entry Signal"
 				fr.name="Signal d'Entrée"
 				type="node"
-				icon="CAB_R.svg">
+				icon="icons/CAB_R.svg">
 				<!-- Rappel -->
 				<label
 					text="Cab signalling entry signal"
@@ -1161,7 +1162,7 @@
 				name="Exit Signal"
 				fr.name="Signal de Sortie"
 				type="node"
-				icon="CAB_S.svg">
+				icon="icons/CAB_S.svg">
 				<!-- Sortie	-->
 				<label
 					text="Cab signalling exit signal"
@@ -1180,7 +1181,7 @@
 				name="Block Marker"
 				fr.name="Repère de Canton"
 				type="node"
-				icon="REP_TVM.svg">
+				icon="icons/REP_TVM.svg">
 				<label
 					text="Block marker"
 					fr.text="Repère de canton" />
@@ -1197,14 +1198,14 @@
 						fr.display_value="TVM"
 						short_description="Transmission Voie-Machine (TVM)"
 						fr.short_description="Transmission Voie-Machine (TVM)"
-						icon="REP_TVM.svg" icon_size="24"/>
+						icon="icons/REP_TVM.svg" icon_size="24"/>
 					<list_entry
 						value="FR:REP_ETCS"
 						display_value="ETCS"
 						fr.display_value="ETCS"
 						short_description="European Train Control System (ETCS)"
 						fr.short_description="European Train Control System (ETCS)"
-						icon="REP_ETCS.svg" icon_size="24"/>
+						icon="icons/REP_ETCS.svg" icon_size="24"/>
 					<list_entry
 						value="FR:REP_ETSC;FR:REP_TVM"
 						display_value="Both ETCS and TVM"
@@ -1219,7 +1220,7 @@
 				name="Shunting Marker"
 				fr.name="Jalon de Manœuvre"
 				type="node"
-				icon="JAL_MAN.svg">
+				icon="icons/JAL_MAN.svg">
 				<label
 					text="Shunting marker"
 					fr.text="Jalon de manœuvre" />
@@ -1235,13 +1236,13 @@
 		<group
 			name="Wrong-direction Signalling"
 			fr.name="Contresens (IPCS)"
-			icon="TECS.svg">
+			icon="icons/TECS.svg">
 
 			<item
 				name="Entry Board"
 				fr.name="Tableau d'Entrée"
 				type="node"
-				icon="TECS.svg">
+				icon="icons/TECS.svg">
 				<label
 					text="Wrong-direction entry board"
 					fr.text="Tableau d'Entrée de Contresens" />
@@ -1257,7 +1258,7 @@
 				name="Exit Board"
 				fr.name="Tableau de Sortie"
 				type="node"
-				icon="TSCS.svg">
+				icon="icons/TSCS.svg">
 				<label
 					text="Wrong-direction exit board"
 					fr.text="Tableau de Sortie de Contresens" />
@@ -1274,7 +1275,7 @@
 		<group
 			name="Electrified Railway Lines"
 			fr.name="Lignes Électrifiées"
-			icon="CC_EXE.svg">
+			icon="icons/CC_EXE.svg">
 
 			<chunk id="electricity_form_tags">
 				<combo
@@ -1305,7 +1306,8 @@
 						values="1500,15000,25000"
 						display_values="1500 V (DC),15000 V (16.7 Hz),25000 V (50 Hz)"
 						default="25000"
-						editable="false"/>
+						editable="false"
+						values_sort="false"/>
 					<combo
 						key="railway:signal:electricity:frequency"
 						text="Frequency (Hz)"
@@ -1313,20 +1315,21 @@
 						values="0,16.7,50"
 						display_values="DC,16.7,50"
 						fr.display_values="Courant continu,16\,7,50"
-						default="50" editable="false" />
+						default="50" editable="false"
+						values_sort="false"/>
 				</optional>
 			</chunk>
 
 			<group
 				name="Neutral Section"
 				fr.name="Zone de Sectionnement"
-				icon="CC_EXE.svg">
+				icon="icons/CC_EXE.svg">
 
 				<item
 					name="Advance Sign"
 					fr.name="Pancarte à Distance"
 					type="node"
-					icon="SECT.svg">
+					icon="icons/SECT.svg">
 					<label
 						text="Advance sign for neutral section"
 						fr.text="Pancarte d'annonce d'une zone de sectionnement" />
@@ -1346,7 +1349,7 @@
 					name="Execution Signal"
 					fr.name="Signal d'Exécution"
 					type="node"
-					icon="CC_EXE.svg">
+					icon="icons/CC_EXE.svg">
 					<label
 						text="Neutral section execution signal"
 						fr.text="Signal d'exécution &quot;Coupez Courant&quot;" />
@@ -1364,7 +1367,7 @@
 					name="End Signal"
 					fr.name="Signal de Fin de Parcours"
 					type="node"
-					icon="CC_FIN.svg">
+					icon="icons/CC_FIN.svg">
 					<label
 						text="Neutral section end signal"
 						fr.text="Signal de fin de parcours &quot;Coupez Courant&quot;" />
@@ -1385,7 +1388,7 @@
 					name="REV Sign"
 					fr.name="Pancarte REV"
 					type="node"
-					icon="REV.svg">
+					icon="icons/REV.svg">
 					<label
 						text="REV sign (end of neutral section for reversible trains)"
 						fr.text="Pancarte REV" />
@@ -1404,13 +1407,13 @@
 			<group
 				name="Pantograph Down"
 				fr.name="Baissez Panto"
-				icon="BP_EXE.svg">
+				icon="icons/BP_EXE.svg">
 
 				<item
 					name="Advance Signal"
 					fr.name="Signal à Distance"
 					type="node"
-					icon="BP_DIS.svg">
+					icon="icons/BP_DIS.svg">
 					<label
 						text="Pantograph down advance signal"
 						fr.text="Signal à distance &quot;Baissez panto&quot;" />
@@ -1427,7 +1430,7 @@
 					name="Execution Signal"
 					fr.name="Signal d'Exécution"
 					type="node"
-					icon="BP_EXE.svg">
+					icon="icons/BP_EXE.svg">
 					<label
 						text="Pantograph down execution signal"
 						fr.text="Signal d'exécution &quot;Baissez panto&quot;" />
@@ -1446,7 +1449,7 @@
 					name="End Signal"
 					fr.name="Signal de Fin de Parcours"
 					type="node"
-					icon="BP_FIN.svg">
+					icon="icons/BP_FIN.svg">
 					<label
 						text="Pantograph down end signal"
 						fr.text="Signal de fin de parcours &quot;Baissez panto&quot;" />
@@ -1466,13 +1469,13 @@
 				<group
 					name="Dual-Mode Traffic"
 					fr.name="Circulations Bimode"
-					icon="BIMODE.svg">
+					icon="icons/BIMODE.svg">
 
 					<item
 						name="Entry Sign"
 						fr.name="Début de Parcours"
 						type="node"
-						icon="BIMODE_VERS.svg">
+						icon="icons/BIMODE_VERS.svg">
 						<label
 							text="Entering dual-mode operation zone"
 							fr.text="Pancarte Début de circulation bimode" />
@@ -1492,7 +1495,7 @@
 						name="Exit Sign"
 						fr.name="Fin de Parcours"
 						type="node"
-						icon="BIMODE.svg">
+						icon="icons/BIMODE.svg">
 						<label
 							text="Exiting dual-mode operation zone"
 							fr.text="Pancarte Fin de circulation bimode" />
@@ -1514,7 +1517,7 @@
 				name="End of Catenary"
 				fr.name="Fin de Caténaire"
 				type="node"
-				icon="FIN_CAT.svg">
+				icon="icons/FIN_CAT.svg">
 				<label
 					text="End of Catenary"
 					fr.text="Fin de Caténaire" />
@@ -1531,7 +1534,7 @@
 				name="Stop Marker"
 				fr.name="Jalon d'Arrêt"
 				type="node"
-				icon="JAL_ARRET_E.svg">
+				icon="icons/JAL_ARRET_E.svg">
 				<label
 					text="Blue and white checkered stop marker"
 					fr.text="Jalon d'arrêt à damier bleu et blanc" />
@@ -1548,13 +1551,13 @@
 		<group
 			name="Stations and Facilities"
 			fr.name="Gares et Établissements"
-			icon="GARE.svg">
+			icon="icons/GARE.svg">
 
 			<!-- VUSS -->
 			<item
 				name="Station Sign"
 				fr.name="Gare Sign"
-				type="node" icon="GARE.svg">
+				type="node" icon="icons/GARE.svg">
 				<label
 					text="Station Sign"
 					fr.text="Pancarte Gare" />
@@ -1568,7 +1571,7 @@
 			<group
 				name="Facilities"
 				fr.name="Établissements"
-				icon="LIMITE_ETS.svg">
+				icon="icons/LIMITE_ETS.svg">
 
 				<chunk id="facility_tags">
 					<reference ref="common_tags" />
@@ -1578,7 +1581,7 @@
 				<item
 					name="Approaching a Facility"
 					fr.name="Approche d'un Établissement"
-					type="node" icon="APPROCHE_ETS_A.svg">
+					type="node" icon="icons/APPROCHE_ETS_A.svg">
 					<label
 						text="Approaching a Facility"
 						fr.text="Approche d'un Établissement" />
@@ -1595,7 +1598,7 @@
 				<item
 					name="Approaching a Facility (VUSS)"
 					fr.name="Approche d'un Établissement (VUSS)"
-					type="node" icon="APPROCHE_ETS.svg">
+					type="node" icon="icons/APPROCHE_ETS.svg">
 					<label
 						text="Approaching a Facility"
 						fr.text="Approche d'un Établissement" />
@@ -1607,7 +1610,7 @@
 				<item
 					name="Facility Boundary"
 					fr.name="Limite d'un Établissement"
-					type="node" icon="LIMITE_ETS.svg">
+					type="node" icon="icons/LIMITE_ETS.svg">
 					<label
 						text="Facility boundary"
 						fr.text="Limite d'un établissement" />
@@ -1621,7 +1624,7 @@
 			<group
 				name="Stops"
 				fr.name="Arrêts"
-				icon="STOP_A.svg">
+				icon="icons/STOP_A.svg">
 
 				<chunk id="stop_tags">
 					<reference ref="common_tags" />
@@ -1631,7 +1634,7 @@
 				<item
 					name="Distant Arrêt Sign"
 					fr.name="Pancarte Arrêt à Distance"
-					type="node" icon="ARRET_A.svg">
+					type="node" icon="icons/ARRET_A.svg">
 					<label
 						text="Distant Arrêt Sign"
 						fr.text="Pancarte Arrêt à Distance" />
@@ -1648,7 +1651,7 @@
 				<item
 					name="Arrêt Sign"
 					fr.name="Pancarte Arrêt"
-					type="node" icon="ARRET.svg">
+					type="node" icon="icons/ARRET.svg">
 					<label
 						text="Arrêt Sign"
 						fr.text="Pancarte Arrêt" />
@@ -1660,7 +1663,7 @@
 				<item
 					name="ATC Sign"
 					fr.name="Pancarte ATC"
-					type="node" icon="ATC.svg">
+					type="node" icon="icons/ATC.svg">
 					<label
 						text="ATC Sign (Facility train stop)"
 						fr.text="Pancarte Arrêt des trains du chantier" />
@@ -1674,7 +1677,7 @@
 				<item
 					name="Distant STOP Sign"
 					fr.name="Pancarte STOP à Distance"
-					type="node" icon="STOP_A.svg">
+					type="node" icon="icons/STOP_A.svg">
 					<label
 						text="Distant STOP Sign"
 						fr.text="Pancarte STOP à Distance" />
@@ -1691,7 +1694,7 @@
 				<item
 					name="STOP Sign"
 					fr.name="Pancarte STOP"
-					type="node" icon="STOP.svg">
+					type="node" icon="icons/STOP.svg">
 					<label
 						text="STOP Sign"
 						fr.text="Pancarte STOP" />
@@ -1705,7 +1708,7 @@
 				<item
 					name="Stop Marker"
 					fr.name="Jalon d'Arrêt"
-					type="node" icon="JAL_ARRET.svg">
+					type="node" icon="icons/JAL_ARRET.svg">
 					<label
 						text="Red and white checkered Stop marker"
 						fr.text="Jalon d'arrêt à damier rouge et blanc" />
@@ -1719,14 +1722,14 @@
 			<group
 				name="Passenger Stops"
 				fr.name="Arrêts Voyageurs"
-				icon="ARRET_VOY_TT.svg">
+				icon="icons/ARRET_VOY_TT.svg">
 
 				<chunk id="passenger_stop_tags">
 					<reference ref="common_tags" />
 					<link wiki="OpenRailwayMap/Tagging_in_France#Passenger_stops" />
 				</chunk>
 
-				<item name="TT" type="node" icon="ARRET_VOY_TT.svg">
+				<item name="TT" type="node" icon="icons/ARRET_VOY_TT.svg">
 					<label text="Passenger Stop: Head of Train"
 							fr.text="Arrêt voyageurs : Tête de Train" />
 					<space />
@@ -1734,7 +1737,7 @@
 					<key key="railway:signal:stop" value="FR:ARRET_TT" />
 				</item>
 
-				<item name="TTL" type="node" icon="ARRET_VOY_TTL.svg">
+				<item name="TTL" type="node" icon="icons/ARRET_VOY_TTL.svg">
 					<label
 						text="Passenger Stop: Trains with locomotive"
 						fr.text="Arrêt voyageurs : Trains avec locomotive" />
@@ -1744,7 +1747,7 @@
 					<key key="railway:signal:stop:for" value="locomotive" />
 				</item>
 
-				<item name="TT EAS" type="node" icon="ARRET_VOY_TT_EAS.svg">
+				<item name="TT EAS" type="node" icon="icons/ARRET_VOY_TT_EAS.svg">
 					<label
 						text="Passenger Stop: Trains with EAS equipment"
 						fr.text="Arrêt voyageurs : Trains équipés EAS" />
@@ -1756,7 +1759,7 @@
 
 				<separator />
 
-				<item name="...V" type="node" icon="ARRET_VOY_12V.svg">
+				<item name="...V" type="node" icon="icons/ARRET_VOY_12V.svg">
 					<label
 						text="Passenger Stop: Trains of x vehicles"
 						fr.text="Arrêt voyageurs : Trains de x voitures" />
@@ -1772,7 +1775,7 @@
 
 				<separator />
 
-				<item name="TGV 1" type="node" icon="ARRET_VOY_TGV1.svg">
+				<item name="TGV 1" type="node" icon="icons/ARRET_VOY_TGV1.svg">
 					<label
 						text="Passenger Stop: HST single units"
 						fr.text="Arrêt voyageurs : TGV unités simples" />
@@ -1782,7 +1785,7 @@
 					<key key="railway:signal:stop:for" value="single_unit" />
 				</item>
 
-				<item name="TGV 2" type="node" icon="ARRET_VOY_TGV2.svg">
+				<item name="TGV 2" type="node" icon="icons/ARRET_VOY_TGV2.svg">
 					<label
 						text="Passenger Stop: HST multiple units"
 						fr.text="Arrêt voyageurs : TGV unités multiples" />
@@ -1792,7 +1795,7 @@
 					<key key="railway:signal:stop:for" value="multiple_unit" />
 				</item>
 
-				<item name="TGV 1-2" type="node" icon="ARRET_VOY_TGV1-2.svg">
+				<item name="TGV 1-2" type="node" icon="icons/ARRET_VOY_TGV1-2.svg">
 					<label
 						text="Passenger Stop: HST"
 						fr.text="Arrêt voyageurs : TGV" />
@@ -1808,7 +1811,7 @@
 				name="Signal Lumineux de Départ"
 				fr.name="Signal Lumineux de Départ"
 				type="node"
-				icon="DEPART.svg">
+				icon="icons/DEPART.svg">
 				<label
 					text="Signal Lumineux de Départ"
 					fr.text="Signal Lumineux de Départ" />
@@ -1825,13 +1828,13 @@
 		<group
 			name="Service Tracks and Shunting"
 			fr.name="Voies de Service et Manœuvres"
-			icon="TIP.svg">
+			icon="icons/TIP.svg">
 
 			<item
 				name="SLM"
 				fr.name="SLM"
 				type="node"
-				icon="SLM.svg">
+				icon="icons/SLM.svg">
 				<label
 					text="Signal Lumineux de Manœuvre (SLM)"
 					fr.text="Signal Lumineux de Manœuvre (SLM)" />
@@ -1847,7 +1850,7 @@
 				name="TLC"
 				fr.name="TLC"
 				type="node"
-				icon="TLC.svg">
+				icon="icons/TLC.svg">
 				<label
 					text="Tableau Lumineux de Correspondance (TLC)"
 					fr.text="Tableau Lumineux de Correspondance (TLC)" />
@@ -1863,7 +1866,7 @@
 				name="TIP"
 				fr.name="TIP"
 				type="node"
-				icon="TIP.svg">
+				icon="icons/TIP.svg">
 				<label
 					text="Tableau Indicateur de Provenance (TIP)"
 					fr.text="Tableau Indicateur de Provenance (TIP)" />
@@ -1879,7 +1882,7 @@
 			<group
 				name="Other Boards"
 				fr.name="Autres Tableaux"
-				icon="DEPOT.svg">
+				icon="icons/DEPOT.svg">
 
 				<chunk id="shunting_board_tags">
 					<reference ref="common_tags" />
@@ -1889,7 +1892,7 @@
 				<item
 					name="G Board"
 					fr.name="Tableau G"
-					type="node" icon="G.svg">
+					type="node" icon="icons/G.svg">
 					<label
 						text="G Board (to Service Track)"
 						fr.text="Tableau G" />
@@ -1902,7 +1905,7 @@
 					name="D Board"
 					fr.name="Tableau D"
 					type="node" 
-					icon="DEPOT.svg">
+					icon="icons/DEPOT.svg">
 					<label
 						text="D Board (to Depot)"
 						fr.text="Tableau D" />
@@ -1915,7 +1918,7 @@
 					name="LGR Sign"
 					fr.name="Pancarte LGR"
 					type="node"
-					icon="LGR.svg">
+					icon="icons/LGR.svg">
 					<label
 						text="LGR Sign (Garage Limit by Reversal)"
 						fr.text="Pancarte LGR" />
@@ -1928,7 +1931,7 @@
 					name="LM Board"
 					fr.name="Tableau LM"
 					type="node"
-					icon="LM.svg">
+					icon="icons/LM.svg">
 					<label
 						text="LM Board (Limit of Shunting Movements)"
 						fr.text="Tableau LM" />
@@ -1941,7 +1944,7 @@
 					name="MV Board"
 					fr.name="Tableau MV"
 					type="node"
-					icon="MV.svg">
+					icon="icons/MV.svg">
 					<label
 						text="MV Board (Proceed on Sight)"
 						fr.text="Tableau MV" />
@@ -1954,7 +1957,7 @@
 					name="Imp Board"
 					fr.name="Tableau Imp"
 					type="node"
-					icon="Imp.svg">
+					icon="icons/Imp.svg">
 					<label
 						text="Imp Board (Dead-end Track)"
 						fr.text="Tableau Imp" />
@@ -1967,7 +1970,7 @@
 					name="SAS Sign"
 					fr.name="Pancarte SAS"
 					type="node"
-					icon="SAS.svg">
+					icon="icons/SAS.svg">
 					<label
 						text="SAS Sign (Short Shunting Track)"
 						fr.text="Pancarte SAS" />
@@ -1983,7 +1986,7 @@
 					name="Buffer-Stop"
 					fr.name="Heurtoir"
 					type="node"
-					icon="HEURTOIR_A.svg">
+					icon="icons/HEURTOIR_A.svg">
 					<label
 						text="Buffer-Stop Board"
 						fr.text="Tableau &quot;Heurtoir À&quot;" />
@@ -2007,7 +2010,7 @@
 		<group
 			name="Level Crossings"
 			fr.name="Passages à Niveau"
-			icon="PN.svg">
+			icon="icons/PN.svg">
 
 			<chunk id="level_crossing_tags">
 				<reference ref="common_tags" />
@@ -2017,7 +2020,7 @@
 			<item
 				name="Level Crossing Announcement"
 				fr.name="Approche d'un PN non gardé"
-				type="node" icon="PN_A.svg">
+				type="node" icon="icons/PN_A.svg">
 				<label
 					text="Approach of an unguarded level crossing"
 					fr.text="Approche d’un passage à niveau non gardé" />
@@ -2034,7 +2037,7 @@
 			<item
 				name="Level Crossing Ahead"
 				fr.name="Pancarte PN"
-				type="node" icon="PN.svg">
+				type="node" icon="icons/PN.svg">
 				<label
 					text="PN Sign (Level Crossing Ahead)"
 					fr.text="Pancarte PN" />
@@ -2062,7 +2065,7 @@
 			name="Whistle"
 			fr.name="Pancarte S"
 			type="node"
-			icon="SIFFLER.svg">
+			icon="icons/SIFFLER.svg">
 			<label
 				text="S Sign (Whistle)"
 				fr.text="Pancarte S" />
@@ -2089,7 +2092,7 @@
 			name="Reduced Gauge Structure"
 			fr.name="Gabarit Réduit"
 			type="node"
-			icon="Gabarit.svg">
+			icon="icons/Gabarit.svg">
 			<label
 				text="Reduced Gauge Structure"
 				fr.text="Ouvrage d'art à gabarit réduit" />
