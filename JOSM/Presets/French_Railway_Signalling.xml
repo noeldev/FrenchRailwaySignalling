@@ -2082,7 +2082,7 @@
 			name="Reduced Gauge Structure"
 			fr.name="Gabarit Réduit"
 			type="node"
-			icon="icons/Gabarit.svg">
+			icon="icons/GABARIT.svg">
 			<label
 				text="Reduced Gauge Structure"
 				fr.text="Ouvrage d'art à gabarit réduit" />
