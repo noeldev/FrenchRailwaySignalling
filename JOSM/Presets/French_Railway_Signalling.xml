@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<presets xmlns="https://josm.openstreetmap.de/tagging-preset-1.0"
+<presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
     version="1.0_2025-08-05"
@@ -61,18 +61,9 @@
 			</combo>
 		</chunk>
 
-		<chunk id="deactivated_tags">
-			<check key="railway:signal:main:deactivated"
-				   text="Deactivated"
-				   fr.text="Désactivé"
-				   disable_off="true"/>
-		</chunk>
-
 		<chunk id="carre_plate_tags">
 			<key key="railway:signal:main:plate" value="FR:NF" />
-			<optional
-				text="Plates"
-				fr.text="Plaques">
+			<optional text="Plates">
 				<combo
 					key="railway:signal:main:plate:departure"
 					text="Departure Plate"
@@ -125,9 +116,7 @@
 				<key key="railway:signal:main" value="FR:CARRE" />
 				<reference ref="carre_plate_tags" />
 
-				<optional
-					text="Special Characteristics"
-					fr.text="Caractéristiques Particulières">
+				<optional text="Special Characteristics">
 
 					<checkgroup columns="3">
 						<check
@@ -145,8 +134,11 @@
 							text="Dwarf"
 							fr.text="Taille Réduite"
 							value_on="dwarf" disable_off="true"/>
-
-						<reference ref="deactivated_tags" />
+						<check
+							key="railway:signal:main:deactivated"
+							text="Deactivated"
+							fr.text="Désactivé"
+							disable_off="true"/>
 					</checkgroup>
 
 				</optional>
@@ -254,11 +246,12 @@
 				<key key="railway:signal:main" value="FR:CV" />
 				<reference ref="carre_plate_tags" />
 
-				<optional
-					text="Special Characteristics"
-					fr.text="Caractéristiques Particulières">
-
-					<reference ref="deactivated_tags" />
+				<optional text="Special Characteristics">
+					<check
+						key="railway:signal:main:deactivated"
+						text="Deactivated"
+						fr.text="Désactivé"
+						disable_off="true"/>
 				</optional>
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Carré_violet" />
@@ -373,9 +366,7 @@
 				<key key="railway:signal:main:states" value="FR:CV;FR:M;FR:(M)" />
 
 				<reference ref="common_tags" />
-				<optional
-					text="Special Characteristics"
-					fr.text="Caractéristiques Particulières">
+				<optional text="Special Characteristics">
 
 					<checkgroup columns="3">
 						<check
@@ -384,7 +375,11 @@
 							fr.text="Au Sol"
 							value_on="ground" disable_off="true"/>
 
-						<reference ref="deactivated_tags" />
+						<check
+							key="railway:signal:main:deactivated"
+							text="Deactivated"
+							fr.text="Désactivé"
+							disable_off="true"/>
 					</checkgroup>
 				</optional>
 			</item>
@@ -423,8 +418,7 @@
 			<chunk id="semaphore_tags">
 				<key key="railway:signal:main" value="FR:S"  />
 
-				<optional
-					text="Plates" fr.text="Plaques">
+				<optional text="Plates">
 
 					<combo
 						key="railway:signal:main:plate"
@@ -456,11 +450,12 @@
 						fr.text="Intitulé du Repérage" />
 				</optional>
 
-				<optional
-					text="Special Characteristics"
-					fr.text="Caractéristiques Particulières">
-
-					<reference ref="deactivated_tags" />
+				<optional text="Special Characteristics">
+					<check
+						key="railway:signal:main:deactivated"
+						text="Deactivated"
+						fr.text="Désactivé"
+						disable_off="true"/>
 				</optional>
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Sémaphore" />
@@ -531,17 +526,14 @@
 		<separator />
 
 		<chunk id="distant_tags">		
-			<optional
-				text="Plates" fr.text="Plaques">
+			<optional text="Plates">
 				
 				<text
 					key="railway:signal:distant:caption:marker"
 					text="Marker Text"
 					fr.text="Intitulé du Repérage" />
 			</optional>
-			<optional
-				text="Special Characteristics"
-				fr.text="Caractéristiques Particulières">
+			<optional text="Special Characteristics">
 
 				<check key="railway:signal:distant:deactivated"
 					text="Deactivated"
@@ -1295,9 +1287,7 @@
 			</chunk>
 
 			<chunk id="traction_supply_tags">
-				<optional
-					text="Traction Supply"
-					fr.text="Alimentation de Traction">
+				<optional text="Traction Supply">
 
 					<combo
 						key="railway:signal:electricity:voltage"
