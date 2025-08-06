@@ -1,0 +1,70 @@
+name: Generate French Railway Signalling Presets Archive
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    paths:
+      - 'JOSM/Presets/**'  # Vérifiez bien la casse !
+    branches: [ "main" ]
+  pull_request:
+    paths:
+      - 'JOSM/Presets/**'    
+    branches: [ "main" ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  # This workflow contains a single job called "generate-archive"
+  generate-archive:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        # Required to push changes
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    # Verify the directory exists
+    - name: Verify JOSM/Presets directory exists
+      run: |
+        if [ ! -d "JOSM/Presets" ]; then
+          echo "Error: JOSM/Presets directory not found!"
+          echo "Available directories:"
+          find . -type d -name "*osm*" -o -name "*reset*" | head -10
+          exit 1
+        fi
+        
+    # Create the presets archive
+    - name: Create presets archive
+      run: |
+        cd JOSM/Presets
+        zip -r ../../French_Railway_Signalling_presets.zip . -x "*.git*" "*.DS_Store*" "*.tmp*"
+        cd ../..
+        
+    # Check if the archive changed (handle first run)
+    - name: Check if archive changed
+      id: check_changes
+      run: |
+        if [ ! -f "French_Railway_Signalling_presets.zip" ]; then
+          echo "Archive doesn't exist yet, will create it"
+          echo "changed=true" >> $GITHUB_OUTPUT
+        elif git diff --quiet French_Railway_Signalling_presets.zip 2>/dev/null; then
+          echo "Archive unchanged"
+          echo "changed=false" >> $GITHUB_OUTPUT
+        else
+          echo "Archive changed"
+          echo "changed=true" >> $GITHUB_OUTPUT
+        fi
+  
+    # Commit and push the new archive if it changed
+    - name: Commit and push updated archive
+      if: steps.check_changes.outputs.changed == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add French_Railway_Signalling_presets.zip
+        git commit -m "Auto-update French Railway Signalling presets archive [skip ci]"
+        git push
