@@ -233,14 +233,14 @@ Optional tags:
 * {{Tag|railway:signal:speed_limit_distant:speed|}} (speed as displayed on the signal, e.g. 80)
 
 
-The '''Z''' board is the execution signal indicating the start of the section to be traveled at limited speed.
+The '''Z''' sign is the execution signal indicating the start of the section to be traveled at limited speed.
 
 [[File:Tableau Z.svg|frameless|60px]]
 
 * {{Tag|railway:signal:speed_limit|FR:Z}}
 * {{Tag|railway:signal:speed_limit:function|entry}}
 
-The '''R''' board indicates the end of the section where the speed limit is required and the return to normal speed ('''Reprise de vitesse''').
+The '''R''' sign indicates the end of the section where the speed limit is required and the return to normal speed ('''Reprise de vitesse''').
 
 [[File:Tableau R.svg|frameless|60px]]
 
@@ -279,6 +279,7 @@ The P board announces a distant speed indicator (TIV-D) for lines equipped with 
 [[File:FR_Tableau_P.svg|frameless|60px]]
 
 * {{Tag|railway:signal:speed_limit_distant|FR:P}}
+* {{Tag|railway:crocodile|yes}}
 
 
 ==== Pentagonal speed indicators ====
@@ -653,7 +654,7 @@ The '''LGR''' (Limite pour Garage par Refoulement) board. <!-- TBD -->
 
 * {{Tag|railway:signal:shunting|FR:MV}}
 
-The '''IMP''' (Impasse) board indicates that the train is directed towards a dead-end track. <!-- TBD -->.
+The '''Imp''' (Impasse) board indicates that the train is directed towards a dead-end track. <!-- TBD -->.
 
 [[File:Tableau Imp.svg|frameless|60px]]  
 
@@ -663,7 +664,7 @@ The '''Heurtoir à xxx mètres''' board announces a buffer stop at the specified
 
 [[File:Heurtoir 500m.svg|frameless|60px]]
 
-* {{Tag|railway:signal:shunting|FR:HEURTOIR_A}}
+* {{Tag|railway:signal:shunting|FR:HEURTOIR}}
 * {{Tag|railway:signal:shunting:type|buffer_stop}}
 * {{Tag|railway:signal:shunting:distance|}} (specified distance in meters)
 
