@@ -1,23 +1,23 @@
 # French Railway Signalling
 
-A set of templates and Lua modules that help document French railway signalling on the [OpenRailwayMap wiki](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France).
-
-This repository serves as a backup of the pages authored on the OSM Wiki related to French railway tagging and signalling conventions. It ensures long-term preservation of the documentation and makes it easier to track changes over time.
+This repository serves as a **backup** of the pages, Lua modules, and templates I authored for the [OpenRailwayMap wiki](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France), focusing on **French railway signalling**. It ensures long-term preservation of the documentation in case of unexpected deletions or unauthorized edits on the wiki platform.
 
 ## JOSM Presets
 
-This repository also contains JOSM presets specifically tailored to French railway infrastructure. These presets are designed to reflect the current revision of the wiki and are continuously updated to remain in sync with it.
+The repository also includes **JOSM presets** specifically designed for mapping French railway signalling. These presets are aligned with the latest version of the wiki documentation and are actively maintained to remain up to date.
 
-⚠️ **Work in progress** — presets and documentation are actively maintained and subject to improvement.
+## Download the Presets
 
-## Contents
+⬇️ [French_Railway_Signalling_presets.zip](https://raw.githubusercontent.com/noeldev/FrenchRailwaySignalling/main/French_Railway_Signalling_presets.zip)
 
-- Backup of wiki pages
-- Custom JOSM preset file with contextual tagging options
-- Supporting Lua modules and templates for structured content
+This archive contains the latest preset XML files along with the required icon assets (SVG and PNG).
 
-## Related links
+## Notes
 
-- 🌐 [Main Wiki Page (English)](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
+- All icons (SVG/PNG) are either original creations or adapted from files on Wikimedia Commons (with attribution where applicable), or from [Nicolas Wurtz's signalisation-rfn-svg project](https://github.com/nicolaswurtz/signalisation-rfn-svg).
+- This project is a **work in progress**. Both the presets and the associated documentation are continuously improved. Contributions and feedback are welcome.
+
+## Related Links
+
+- 🌐 [Main Wiki Page – Tagging in France (EN)](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
 - 🗺️ [OpenRailwayMap](https://www.openrailwaymap.org)
-
