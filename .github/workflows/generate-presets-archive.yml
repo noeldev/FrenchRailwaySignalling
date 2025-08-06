@@ -35,6 +35,7 @@ jobs:
     # Create the presets archive
     - name: Create presets archive
       run: |
+        rm -f French_Railway_Signalling_presets.zip
         cd JOSM/Presets
         zip -r ../../French_Railway_Signalling_presets.zip . -x "*.git*" "*.DS_Store*" "*.tmp*"
         cd ../..
