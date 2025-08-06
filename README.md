@@ -1,6 +1,6 @@
 # French Railway Signalling
 
-This repository serves as a **backup** of the pages, Lua modules, and templates I authored for the [OpenRailwayMap wiki](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France), focusing on **French railway signalling**. It ensures long-term preservation of the documentation in case of unexpected deletions or unauthorized edits on the wiki platform.
+This repository serves as a **backup** of the pages, Lua modules, and templates I authored for the [OpenRailwayMap wiki](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France), focusing on **French railway signalling**. It ensures long-term preservation of the documentation in case of unexpected deletions or inappropriate edits on the wiki platform.
 
 ## JOSM Presets
 
