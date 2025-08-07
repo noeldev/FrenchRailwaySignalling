@@ -8,3 +8,5 @@ tools/WikiBackup/obj/
 *.user
 *.suo
 /.github/workflows/backup-wiki-main.yml
+/.vs
+/tools/WikiBackup/.vs/WikiBackup
