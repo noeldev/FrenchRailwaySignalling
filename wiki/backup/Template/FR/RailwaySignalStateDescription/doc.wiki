@@ -1,0 +1,31 @@
+﻿{{!--
+Wiki page: Template:FR:RailwaySignalStateDescription/doc
+Last edited: 2024-07-08 03:03:55 UTC
+Last editor: Noeld
+Last edit comment: Edits.
+Backup date: 2025-08-09 02:16:18 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalStateDescription/doc
+--}}
+
+{{Documentation subpage}}
+<!-- PLEASE ADD CATEGORIES AT THE BOTTOM OF THIS PAGE -->
+__NOTOC__
+== Usage ==
+
+=== Notes ===
+
+== Syntax ==
+<code><nowiki></nowiki></code>
+
+== Parameters ==
+
+== Examples ==
+* <code><nowiki></nowiki></code> rendered :
+
+== See also ==
+* {{t|FR:RailwaySignalState}}
+
+<includeonly>
+<!-- CATEGORIES HERE, THANKS -->
+[[Category:Templates using TemplateData]]
+</includeonly>

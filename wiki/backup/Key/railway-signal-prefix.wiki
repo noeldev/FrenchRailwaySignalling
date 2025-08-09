@@ -1,0 +1,10 @@
+﻿{{!--
+Wiki page: Key:railway:signal:prefix
+Last edited: 2024-11-12 19:54:49 UTC
+Last editor: Chris2map
+Last edit comment: Chris2map moved page [[Key:railway:signal:prefix]] to [[Key:railway:signal:*]]: asterisk as prefix wildcard
+Backup date: 2025-08-09 02:16:17 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/Key:railway:signal:prefix
+--}}
+
+#REDIRECT [[Key:railway:signal:*]]

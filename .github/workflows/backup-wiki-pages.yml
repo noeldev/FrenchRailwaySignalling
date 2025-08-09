@@ -1,0 +1,67 @@
+name: Backup Wiki Pages
+
+on:
+  # Manual trigger only - user can choose category
+  workflow_dispatch:
+    inputs:
+      category:
+        description: 'Category to backup'
+        required: false
+        default: 'main'
+        type: choice
+        options:
+        - main
+        - openrailwaymap
+        - keys
+        - tags
+        - templates
+        - modules
+        - french
+        - all
+
+permissions:
+  contents: write
+
+jobs:
+  backup-wiki-pages:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore tools/WikiBackup/WikiBackup.csproj
+        
+    - name: Build project
+      run: dotnet build tools/WikiBackup/WikiBackup.csproj --configuration Release --no-restore
+        
+    - name: Run wiki backup
+      run: dotnet run --project tools/WikiBackup/WikiBackup.csproj --configuration Release -- ${{ inputs.category || 'main' }}
+        
+    - name: Check for changes
+      id: check_changes
+      run: |
+        git add wiki/backup/
+        if git diff --cached --quiet; then
+          echo "No changes detected"
+          echo "changed=false" >> $GITHUB_OUTPUT
+        else
+          echo "Changes detected"
+          echo "changed=true" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Commit wiki backup
+      if: steps.check_changes.outputs.changed == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Backup wiki pages: ${{ inputs.category || 'main' }} [skip ci]"
+        git push

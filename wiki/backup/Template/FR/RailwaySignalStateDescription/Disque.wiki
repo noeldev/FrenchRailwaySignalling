@@ -1,0 +1,17 @@
+﻿{{!--
+Wiki page: Template:FR:RailwaySignalStateDescription/Disque
+Last edited: 2024-07-04 03:35:50 UTC
+Last editor: Noeld
+Last edit comment: Edits.
+Backup date: 2025-08-09 02:16:18 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalStateDescription/Disque
+--}}
+
+{{Template:FR:RailwaySignalStateDescription
+|fullname=Disque
+|state=D
+|description=
+Two steady lights, one yellow (left) and one red (right), horizontally aligned.
+|action=
+A closed '''Disque''' signal instructs the driver to proceed at sight ('''Marche à Vue''') as soon as possible or to make a stop before the first set of points (switch or crossing) protected by the disc.
+}}

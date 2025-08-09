@@ -4,30 +4,53 @@ This repository serves as a **backup** of the pages, Lua modules, and templates 
 
 ## JOSM Presets
 
-The repository also includes **JOSM presets** specifically designed for mapping French railway signalling. These presets are aligned with the current revision of the wiki documentation and are actively maintained to remain up to date.
+The repository includes **JOSM presets** specifically designed for mapping French railway signalling. These presets are aligned with the current revision of the wiki documentation.
 
 ### Installation
 
-The recommended way to use the presets is to install them directly from within the [JOSM](https://josm.openstreetmap.de) application:
+**Recommended method** - Install directly from JOSM:
 
-1. Go to **Presets** → **Presets Preferences** → **Tagging Presets**.
-2. Search for **French Railway Signalling** in the **Available Presets** search box.
-3. Select the matching preset.
-4. Click the right-pointing arrow to add it to **Active Presets**.
-5. Click OK.
+1. Go to **Presets** → **Presets Preferences** → **Tagging Presets**
+2. Search for **French Railway Signalling** in the **Available Presets** search box
+3. Select the matching preset and click the right-pointing arrow to add it to **Active Presets**
+4. Click **OK**
 
-Alternatively, you can download and install the presets manually:
+**Alternative method** - Manual installation:
 
 ⬇️ [Download the ZIP archive](https://raw.githubusercontent.com/noeldev/FrenchRailwaySignalling/main/French_Railway_Signalling_presets.zip)
 
 This archive contains the latest preset XML files along with the required icon assets (SVG and PNG).
 
-## Notes
+## Repository Structure
 
-- All icons (SVG/PNG) are either original creations or adaptations of files from Wikimedia Commons, or from [Nicolas Wurtz’s signalisation-rfn-svg project](https://github.com/nicolaswurtz/signalisation-rfn-svg).
-- This project is a **work in progress**. Both the presets and the associated documentation are continuously improved.
+```
+FrenchRailwaySignalling/
+├── .github/workflows/    # GitHub Actions workflows
+│   ├── generate-presets-archive.yml    # Auto-generates preset archive
+│   └── backup-wiki-all.yml             # Manual backup of wiki pages
+├── presets/              # JOSM preset files and assets
+│   ├── French_Railway_Signalling.xml
+│   ├── icons/            # SVG and PNG icons
+│   └── font/             # SNCF font used by some icons
+├── tools/
+│   └── WikiBackup/       # C# wiki backup tool
+├── wiki/
+│   ├── backup/           # Auto-generated wiki backups
+│   └── draft/            # Initial content
+└── French_Railway_Signalling_presets.zip  # Auto-generated preset archive
+```
+
+## Status
+
+🚧 **Work in Progress**
 
 ## Related Links
 
 - 🌐 [Main Wiki Page – Tagging in France (EN)](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
 - 🗺️ [OpenRailwayMap](https://www.openrailwaymap.app)
+
+## License
+
+- **Wiki Content**: Available under the same license as OpenStreetMap wiki content
+- **JOSM Presets**: MIT License
+- **Icons**: Original creations or adaptations from [Wikimedia Commons](https://commons.wikimedia.org) and [Nicolas Wurtz's signalisation-rfn-svg project](https://github.com/nicolaswurtz/signalisation-rfn-svg)

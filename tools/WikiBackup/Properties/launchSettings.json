@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WikiBackup": {
+      "commandName": "Project",
+      "commandLineArgs": "main"
+    }
+  }
+}

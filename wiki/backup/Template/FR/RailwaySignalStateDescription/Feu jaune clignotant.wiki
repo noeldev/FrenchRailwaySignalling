@@ -1,0 +1,19 @@
+﻿{{!--
+Wiki page: Template:FR:RailwaySignalStateDescription/Feu jaune clignotant
+Last edited: 2024-07-04 02:28:44 UTC
+Last editor: Noeld
+Last edit comment: Edits.
+Backup date: 2025-08-09 02:16:18 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalStateDescription/Feu_jaune_clignotant
+--}}
+
+{{Template:FR:RailwaySignalStateDescription
+|fullname=Feu jaune clignotant
+|state=(A)
+|description=
+One flashing yellow light.
+
+A preannouncement signal ('''Préavertissement''') precedes an '''Avertissement''' signal ({{TagValue|railway:signal:main:states|FR:A}}) placed at a reduced distance from the announced signal; this distance may be only 500m.
+|action=
+The driver must be able to stop his train before the stop signal announced at a reduced distance by the following '''Avertissement''' signal.
+}}

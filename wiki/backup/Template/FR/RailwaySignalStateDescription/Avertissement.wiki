@@ -1,0 +1,17 @@
+﻿{{!--
+Wiki page: Template:FR:RailwaySignalStateDescription/Avertissement
+Last edited: 2024-07-02 01:04:53 UTC
+Last editor: Noeld
+Last edit comment: Created.
+Backup date: 2025-08-09 02:16:18 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalStateDescription/Avertissement
+--}}
+
+{{Template:FR:RailwaySignalStateDescription
+|fullname=Avertissement
+|state=A
+|description=
+TBD.
+|action=
+TBD.
+}}

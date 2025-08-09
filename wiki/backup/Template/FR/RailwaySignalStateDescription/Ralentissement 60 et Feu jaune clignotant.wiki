@@ -1,0 +1,17 @@
+﻿{{!--
+Wiki page: Template:FR:RailwaySignalStateDescription/Ralentissement 60 et Feu jaune clignotant
+Last edited: 2024-07-02 01:10:18 UTC
+Last editor: Noeld
+Last edit comment: Created.
+Backup date: 2025-08-09 02:16:18 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalStateDescription/Ralentissement_60_et_Feu_jaune_clignotant
+--}}
+
+{{Template:FR:RailwaySignalStateDescription
+|fullname=Ralentissement 60 et Feu jaune clignotant
+|state=(R)+(A)
+|description=
+TBD.
+|action=
+TBD.
+}}

@@ -1,0 +1,19 @@
+﻿{{!--
+Wiki page: Template:FR:RailwaySignalStateDescription/Carré
+Last edited: 2024-07-02 00:11:57 UTC
+Last editor: Noeld
+Last edit comment: Created.
+Backup date: 2025-08-09 02:16:18 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalStateDescription/Carré
+--}}
+
+{{Template:FR:RailwaySignalStateDescription
+|fullname=Carré
+|state=C
+|description=
+Two steady red lights, either arranged vertically or horizontally.
+
+Signals that can display this state, also known as '''Carré''' signals, are equipped with both a clearing light ('''œilleton''') and an '''Nf''' (''Non franchissable'') plate. The clearing light is always lit except when the Carré state is displayed.
+|action=
+Absolute Stop.
+}}

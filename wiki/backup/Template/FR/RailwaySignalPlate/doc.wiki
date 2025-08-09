@@ -1,0 +1,123 @@
+﻿{{!--
+Wiki page: Template:FR:RailwaySignalPlate/doc
+Last edited: 2024-07-11 03:33:34 UTC
+Last editor: Noeld
+Last edit comment: Edits.
+Backup date: 2025-08-09 02:16:18 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalPlate/doc
+--}}
+
+{{Documentation subpage}}
+<!-- PLEASE ADD CATEGORIES AT THE BOTTOM OF THIS PAGE -->
+__NOTOC__
+
+Ce template est utilisé pour documenter les plaques qui identifient les principaux signaux lumineux ferroviaires français.
+
+== Exemples ==
+ <code><nowiki>
+{{Template:FR:RailwaySignalPlate
+|category=distant
+|signal=A
+|plate=A
+|image_file=Plaque A.svg
+|description=Cette plaque identifie un avertissement de BAPR.
+}}
+
+{{Template:FR:RailwaySignalPlate
+|signal=CARRE
+|plate=PR
+|caption=PR vers xxx
+|image_file=Plaque PR vers xxx.svg
+|description=Cette plaque identifie le mode de cantonnement '''BAPR''' pour le ou les cantons en aval du signal.
+}}
+</nowiki></code>
+
+== Paramètres ==
+<templatedata>
+{
+	"description": "Description d'une plaque d'identification d'un signal ferroviaire lumineux.",
+	"format": "block",
+	"params": {
+		"category": {
+			"label": "Catégorie",
+			"description": "Catégorie du signal muni de la plaque.",
+			"type": "line",
+			"suggestedvalues": [
+				"main",
+				"distant",
+				"shunting"
+			],
+			"default": "main"
+		},
+		"image_file": {
+			"label": "Nom du fichier image",
+			"description": "Nom du fichier de l'image qui représente la plaque.",
+			"type": "line",
+			"required": true
+		},
+		"image_width": {
+			"label": "Largeur de l'image",
+			"description": "Largeur de l'image à l'écran en pixels (px).",
+			"example": "60px",
+			"type": "line",
+			"default": "40px"
+		},
+		"plate": {
+			"label": "Plaque",
+			"description": "Attribut de la plaque.",
+			"type": "line",
+			"suggestedvalues": [
+				"NF",
+				"F",
+				"PR",
+				"BM",
+				"D",
+				"A"
+			],
+			"required": true
+		},
+		"description": {
+			"label": "Description",
+			"description": "Description du rôle de la plaque.",
+			"type": "string",
+			"required": true
+		},
+		"caption": {
+			"label": "Inscription",
+			"example": "PR vers xxx",
+			"type": "line",
+			"description": "Inscription sur la plaque."
+		},
+		"signal": {
+			"label": "Signal",
+			"description": "Type de signal",
+			"example": "CARRE",
+			"type": "line",
+			"suggestedvalues": [
+				"CARRE",
+				"S",
+				"D",
+				"A"
+			],
+			"required": true
+		}
+	},
+	"paramOrder": [
+		"category",
+		"signal",
+		"plate",
+		"caption",
+		"description",
+		"image_file",
+		"image_width"
+	]
+}
+</templatedata>
+
+== Voir aussi ==
+* [[OpenRailwayMap/Tagging in France]]
+
+<includeonly>
+<!-- CATEGORIES HERE, THANKS -->
+[[Category:Templates using TemplateData]]
+</includeonly>

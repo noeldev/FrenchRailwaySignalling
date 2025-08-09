@@ -1,0 +1,17 @@
+﻿{{!--
+Wiki page: Template:FR:RailwaySignalStateDescription/Feu vert clignotant
+Last edited: 2024-07-02 01:16:16 UTC
+Last editor: Noeld
+Last edit comment: Created.
+Backup date: 2025-08-09 02:16:18 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalStateDescription/Feu_vert_clignotant
+--}}
+
+{{Template:FR:RailwaySignalStateDescription
+|fullname=Feu vert clignotant
+|state=(VL)
+|description=
+TBD.
+|action=
+TBD.
+}}

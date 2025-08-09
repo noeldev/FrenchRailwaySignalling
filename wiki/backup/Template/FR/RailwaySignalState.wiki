@@ -1,0 +1,26 @@
+﻿{{!--
+Wiki page: Template:FR:RailwaySignalState
+Last edited: 2024-10-25 01:39:29 UTC
+Last editor: Noeld
+Last edit comment: Edits.
+Backup date: 2025-08-09 02:16:18 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalState
+--}}
+
+<includeonly>
+{{#invoke:FR:RailwaySignalState|render}}
+
+== See also ==
+
+* [[OpenRailwayMap/Tagging_in_France|Tagging in France]]
+
+== Sources ==
+
+* [https://ressources.data.sncf.com/explore/dataset/signalisation-permanente Signalisation Permanente] (SNCF)
+* [https://www.jonroma.net/media/rail/opdocs/world/france/S%201%20A%20I-%20Signalisation%20au%20sol.pdf Signalisation au sol] (SNCF, 2005, PDF)
+</includeonly>
+<noinclude>
+{{Documentation}}
+<!-- CATEGORIES HERE, THANKS -->
+[[Category:FR:Modèles|RailwaySignalState]]
+</noinclude>

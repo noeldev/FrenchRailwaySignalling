@@ -1,0 +1,38 @@
+﻿{{!--
+Wiki page: Template:FR:RailwaySignalShape
+Last edited: 2024-08-02 01:05:11 UTC
+Last editor: Noeld
+Last edit comment: Added a link to the Tagging page.
+Backup date: 2025-08-09 02:16:18 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalShape
+--}}
+
+<includeonly>
+< [[OpenRailwayMap/Tagging in France]]
+
+== Signal Specifications ==
+
+<div style="display: flex; align-items: flex-start; margin-top: 20px;">
+  <div>
+{{#invoke:FR:RailwaySignalShape|generateTable}}
+  </div>
+  <div style="margin-left: 20px;">
+{{#invoke:FR:RailwaySignalShape|generateImage}}
+  </div>
+</div>
+
+== Signal Tags ==
+
+<div style="margin-top: 20px; margin-bottom: 20px;">
+{{#invoke:FR:RailwaySignalShape|generateTags}}
+</div>
+
+== Sources ==
+
+* '''Référentiel IN 0544''' (SNCF)
+</includeonly>
+<noinclude>
+{{Documentation}}
+<!-- CATEGORIES HERE, THANKS -->
+[[Category:FR:Modèles|RailwaySignalShape]]
+</noinclude>

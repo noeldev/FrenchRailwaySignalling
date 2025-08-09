@@ -1,1 +1,0 @@
-The {{Tag|railway:signal:distant:states|}} tags with '''FR'''-prefixed values are currently used by a few sample signals and should see wider adoption when the French railway company releases updated open data. --~~~~

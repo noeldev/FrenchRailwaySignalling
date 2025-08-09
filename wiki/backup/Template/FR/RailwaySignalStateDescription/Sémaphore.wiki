@@ -1,0 +1,19 @@
+﻿{{!--
+Wiki page: Template:FR:RailwaySignalStateDescription/Sémaphore
+Last edited: 2024-07-02 00:51:12 UTC
+Last editor: Noeld
+Last edit comment: Edits.
+Backup date: 2025-08-09 02:16:19 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalStateDescription/Sémaphore
+--}}
+
+{{Template:FR:RailwaySignalStateDescription
+|fullname=Sémaphore
+|state=S
+|description=
+One steady red light.
+|action=
+The train driver must stop before the signal. However:
+* A closed semaphore can be passed without stopping during shunting operations, upon the order of the shunting supervisor.
+* In automatic block signalling ([https://fr.wikipedia.org/wiki/Block%20automatique%20lumineux BAL] or [https://fr.wikipedia.org/wiki/Block_automatique_%C3%A0_permissivit%C3%A9_restreinte BAPR]), the driver of maintenance trains is permitted to pass closed semaphores without stopping, proceeding on sight ('''marche à vue''') at a speed not exceeding 15 km/h.
+}}

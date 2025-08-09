@@ -2,11 +2,11 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
+/.vs/
+
 # C# build outputs
-tools/WikiBackup/bin/
-tools/WikiBackup/obj/
 *.user
 *.suo
-/.github/workflows/backup-wiki-main.yml
-/.vs
-/tools/WikiBackup/.vs/WikiBackup
+/tools/WikiBackup/.vs/
+/tools/WikiBackup/bin/
+/tools/WikiBackup/obj/

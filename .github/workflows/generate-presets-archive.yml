@@ -5,11 +5,11 @@ on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     paths:
-      - 'JOSM/Presets/**'
+      - 'presets/**'
     branches: [ "main" ]
   pull_request:
     paths:
-      - 'JOSM/Presets/**'    
+      - 'presets/**'    
     branches: [ "main" ]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -18,6 +18,10 @@ on:
 permissions:
   contents: write
   actions: read
+
+# Global environment variables
+env:
+  ARCHIVE_NAME: French_Railway_Signalling_presets.zip
 
 jobs:
   # This workflow contains a single job called "generate-archive"
@@ -35,19 +39,19 @@ jobs:
     # Create the presets archive
     - name: Create presets archive
       run: |
-        rm -f French_Railway_Signalling_presets.zip
-        cd JOSM/Presets
-        zip -r ../../French_Railway_Signalling_presets.zip . -x "*.git*" "*.DS_Store*" "*.tmp*"
-        cd ../..
+        rm -f ${{ env.ARCHIVE_NAME }}
+        cd presets
+        zip -r ../${{ env.ARCHIVE_NAME }} . -x "*.git*" "*.DS_Store*" "*.tmp*"
+        cd ..
         
     # Check if the archive changed (handle first run)
     - name: Check if archive changed
       id: check_changes
       run: |
-        if [ ! -f "French_Railway_Signalling_presets.zip" ]; then
+        if [ ! -f "${{ env.ARCHIVE_NAME }}" ]; then
           echo "Archive doesn't exist yet, will create it"
           echo "changed=true" >> $GITHUB_OUTPUT
-        elif git diff --quiet French_Railway_Signalling_presets.zip 2>/dev/null; then
+        elif git diff --quiet ${{ env.ARCHIVE_NAME }} 2>/dev/null; then
           echo "Archive unchanged"
           echo "changed=false" >> $GITHUB_OUTPUT
         else
@@ -61,6 +65,6 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add French_Railway_Signalling_presets.zip
+        git add ${{ env.ARCHIVE_NAME }}
         git commit -m "Auto-update French Railway Signalling presets archive [skip ci]"
         git push

@@ -1,0 +1,27 @@
+﻿{{!--
+Wiki page: Tag:railway:signal:distant:states=FR:A
+Last edited: 2024-10-20 01:38:41 UTC
+Last editor: Noeld
+Last edit comment: 
+Backup date: 2025-08-09 02:16:17 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/Tag:railway:signal:distant:states=FR:A
+--}}
+
+{{ValueDescription
+| key           = railway:signal:distant:states
+| value         = FR:A
+| image         = 
+| description   = 
+| group         = 
+| onNode        = 
+| onWay         = 
+| onArea        = 
+| onRelation    = 
+| requires      = 
+| implies       = 
+| combination   = 
+| seeAlso       = 
+| status        = 
+| statuslink    = 
+}}
+{{Template:FR:RailwaySignalState|state=A|category=distant}}

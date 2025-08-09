@@ -1,0 +1,160 @@
+﻿{{!--
+Wiki page: OpenRailwayMap/Tagging_in_France/Shapes
+Last edited: 2025-04-15 22:56:27 UTC
+Last editor: Kjon
+Last edit comment: added [[Category:OpenRailwayMap]] using [[Wiki:HotCat|HotCat]]
+Backup date: 2025-08-09 02:16:17 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France/Shapes
+--}}
+
+The primary railway light signals in France are based on four main shapes of chassis ('''châssis-écrans''') with two or more lights, displaying different possible [[OpenRailwayMap/Tagging in France/States|states]] ('''aspects''') on a black face ('''cible''') with a thin white border. These ''châssis-écrans'' and their variations are shown below. Unused light locations are covered, and the parasols are not installed.
+
+== Châssis-Écrans ==
+
+=== Type "A" ===
+
+[[File:Chassis Type A.svg|frameless|60px]]
+
+* {{Tag|railway:signal:main:shape|FR:A}}
+
+{| class="wikitable"
+|+
+|Description
+|3 lights 
+|-
+|Dimensions
+| 1060 x 600 mm 
+|}
+
+===Type "C"===
+
+[[File:Chassis Type C.svg|frameless|60px]]
+
+* {{Tag|railway:signal:main:shape|FR:C}}
+
+{| class="wikitable"
+|+
+|Description
+|5 lights
+|-
+| Dimensions
+|1500 x 600 mm
+|}
+
+===Type "F"===
+
+[[File:Chassis Type F.svg|frameless|120px]]
+
+* {{Tag|railway:signal:main:shape|FR:F}}
+
+{| class="wikitable"
+|+
+|Description
+|6 + 1 lights
+|-
+|Dimensions
+|1720 x 1200 mm
+|}
+
+===Type "H"===
+
+[[File:Chassis Type H.svg|frameless|120px]]
+
+* {{Tag|railway:signal:main:shape|FR:H}}
+
+{| class="wikitable"
+|+
+|Description
+|6 + 3 lights
+|-
+|Dimensions
+|2020 x 1200 mm
+|}
+
+===Type "K"===
+
+[[File:Chassis Type K.svg|frameless|46px]]
+
+This two-light signal may be installed vertically on a mast or horizontally on the ground.
+
+* {{Tag|railway:signal:shunting:shape|FR:K}}
+
+{| class="wikitable"
+|+
+|Description
+|2 lights
+|-
+|Dimensions
+|665 x 460 mm
+|}
+
+===Type "R"===
+
+[[File:Chassis Type R.svg|frameless|122px]]
+
+* {{Tag|railway:signal:distant:shape|FR:R}}
+
+{| class="wikitable"
+|+
+|Description
+|6 lights
+|-
+|Dimensions
+|1270 x 1220 mm
+|}
+
+===Type "ID3"===
+
+[[File:Chassis Type ID2 ID3.svg|frameless|130px]]
+
+3-direction indicator.
+
+* {{Tag|railway:signal:distant:shape|FR:ID3}}
+
+{| class="wikitable"
+|+
+|Description
+|3 lights
+|-
+|Dimensions
+|600 x 1300 mm
+|}
+
+===Type "ID4"===
+[[File:Chassis Type ID4.svg|frameless|165px]]
+
+4-direction indicator.
+
+* {{Tag|railway:signal:distant:shape|FR:ID4}}
+
+{| class="wikitable"
+|+
+|Description
+|4 lights
+|-
+|Dimensions
+|600 x 1650 mm
+|}
+
+===Type "ID5"===
+[[File:Chassis Type ID5.svg|frameless|200px]]
+
+5-direction indicator.
+
+* {{Tag|railway:signal:distant:shape|FR:ID5}}
+
+{| class="wikitable"
+|+
+|Description
+|5 lights
+|-
+|Dimensions
+|600 x 2000 mm
+|}
+
+==Sources==
+[https://ressources.data.sncf.com/explore/dataset/images-des-feux-de-circulation-ferroviaire-en-france Images des feux de circulation ferroviaire en France]
+
+[http://www.groupe-pierman.com/nos-produits/equipements-ferroviaires/chassis-ecrans-signalisation-ferroviaire-passive-3/ Châssis écrans (Signalisation ferroviaire passive)]
+
+[[Category:OpenRailwayMap]]

@@ -1,0 +1,53 @@
+﻿{{!--
+Wiki page: OpenRailwayMap/Tagging_in_France/Plates
+Last edited: 2025-04-14 20:10:40 UTC
+Last editor: Kjon
+Last edit comment: added [[Category:OpenRailwayMap]] using [[Wiki:HotCat|HotCat]]
+Backup date: 2025-08-09 02:16:17 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France/Plates
+--}}
+
+== Identification Plates ==
+
+When encountering a signal displaying a steady red light, the driver must determine whether it is a [[OpenRailwayMap/Tagging_in_France#Sémaphore|Sémaphore]] or a [[OpenRailwayMap/Tagging_in_France#Carré|Carré]] with an extinguished light.
+
+Likewise, when encountering an extinguished signal, the driver must determine the most imperative state that could be indicated by this signal.
+
+For this purpose, the signals are equipped with an '''identification plate''' and optionally a clearing light.
+
+Following the most imperative state that a signal can present, the corresponding identification plate may bear one of the following inscriptions in white letters on a black background:
+
+{| class="wikitable"
+!Inscription
+!Description
+|-
+|{{TagValue|railway:signal:main:plates|FR:NF}}
+|'''Carré''' signal (''Non franchissable'').
+|-
+|{{TagValue|railway:signal:main:plates|FR:F}}
+|'''Sémaphore''' that can be passed (''Franchissable'') at the driver's initiative under the conditions provided in the [https://fr.wikipedia.org/wiki/Block%20automatique%20lumineux BAL] or of a [[Tag:railway:signal:main:states=FR:(S)|Flashing red light]].
+|-
+|{{TagValue|railway:signal:main:plates|FR:PR}}
+|'''Sémaphore''' controlling the entry to a [https://fr.wikipedia.org/wiki/Block_automatique_%C3%A0_permissivit%C3%A9_restreinte BAPR] block.
+|-
+|{{TagValue|railway:signal:main:plates|FR:BM}}
+|'''Sémaphore''' controlling the entry to a [https://fr.wikipedia.org/wiki/Block%20manuel BM] block.
+|}
+
+
+== Cantonment Plates ==
+
+[[OpenRailwayMap/Tagging_in_France#Carré|Carré signals]], which can open onto block sections other than BAL or service tracks, are also equipped with a cantonment plate ('''Plaque de cantonnement''') in addition to the [[#Identification Plates|identification plate]] ({{TagValue|railway:signal:main:plates|FR:NF}}). The inscriptions are written in black letters on a white background.
+
+{| class="wikitable"
+!Inscription
+!Description
+|-
+|{{TagValue|railway:signal:main:plates|FR:PR}}
+|[https://fr.wikipedia.org/wiki/Block_automatique_%C3%A0_permissivit%C3%A9_restreinte BAPR] vers xxx  <!-- TBD -->
+|-
+|{{TagValue|railway:signal:main:plates|FR:BM}}
+|[https://fr.wikipedia.org/wiki/Block%20manuel BM] vers xxx  <!-- TBD -->
+|}
+
+[[Category:OpenRailwayMap]]

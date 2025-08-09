@@ -1,0 +1,27 @@
+﻿{{!--
+Wiki page: Tag:railway:signal:distant:states=FR:VL
+Last edited: 2024-10-20 01:42:34 UTC
+Last editor: Noeld
+Last edit comment: 
+Backup date: 2025-08-09 02:16:17 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/Tag:railway:signal:distant:states=FR:VL
+--}}
+
+{{ValueDescription
+| key           = railway:signal:distant:states
+| value         = FR:VL
+| image         = 
+| description   = 
+| group         = 
+| onNode        = 
+| onWay         = 
+| onArea        = 
+| onRelation    = 
+| requires      = 
+| implies       = 
+| combination   = 
+| seeAlso       = 
+| status        = 
+| statuslink    = 
+}}
+{{Template:FR:RailwaySignalState|state=VL|category=distant}}
