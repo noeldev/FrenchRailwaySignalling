@@ -27,7 +27,7 @@ This archive contains the latest preset XML files along with the required icon a
 FrenchRailwaySignalling/
 ├── .github/workflows/    # GitHub Actions workflows
 │   ├── generate-presets-archive.yml    # Auto-generates preset archive
-│   └── backup-wiki-all.yml             # Manual backup of wiki pages
+│   └── backup-wiki-pages.yml           # Manual backup of wiki pages
 ├── presets/              # JOSM preset files and assets
 │   ├── French_Railway_Signalling.xml
 │   ├── icons/            # SVG and PNG icons
