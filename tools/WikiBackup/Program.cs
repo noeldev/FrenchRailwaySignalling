@@ -59,7 +59,7 @@ class Program
     private static IConfiguration LoadConfiguration()
     {
         return new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
+            .SetBasePath(AppContext.BaseDirectory)
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .Build();
     }
