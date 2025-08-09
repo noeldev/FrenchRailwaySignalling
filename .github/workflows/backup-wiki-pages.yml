@@ -43,9 +43,6 @@ jobs:
     - name: Build project
       run: dotnet build tools/WikiBackup/WikiBackup.csproj --configuration Release --no-restore
 
-    - name: List output directory
-      run: ls -la tools/WikiBackup/bin/Release/net8.0/
-        
     - name: Run wiki backup
       run: dotnet run --project tools/WikiBackup/WikiBackup.csproj --configuration Release -- ${{ inputs.category || 'main' }}
         

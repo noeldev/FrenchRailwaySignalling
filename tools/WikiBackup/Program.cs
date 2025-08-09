@@ -218,12 +218,18 @@ class Program
             var backupDate = DateHelper.GetFormattedUtcNow();
 
             var contentBuilder = new StringBuilder();
+
+            // Using blank lines instead of trailing spaces
+            // to ensure consistent Markdown rendering on GitHub.
             contentBuilder.Append($"""
             # OSM Wiki Pages Backup
 
             **Backup generated:** {backupDate}
+
             **Category:** {context.Category}
+
             **Total pages:** {results.TotalCount}
+
             **Successfully backed up:** {results.SuccessCount}
 
             """);
