@@ -219,17 +219,12 @@ class Program
 
             var contentBuilder = new StringBuilder();
 
-            // Using blank lines instead of trailing spaces
-            // to ensure consistent Markdown rendering on GitHub.
             contentBuilder.Append($"""
             # OSM Wiki Pages Backup
 
-            **Backup generated:** {backupDate}
-
-            **Category:** {context.Category}
-
-            **Total pages:** {results.TotalCount}
-
+            **Backup generated:** {backupDate}<br>
+            **Category:** {context.Category}<br>
+            **Total pages:** {results.TotalCount}<br>
             **Successfully backed up:** {results.SuccessCount}
 
             """);
