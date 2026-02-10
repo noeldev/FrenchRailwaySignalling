@@ -28,21 +28,11 @@ jobs:
           zip -r ../${{ env.ARCHIVE_NAME }} . -x "*.git*" "*.DS_Store*" "*.tmp*"
           cd ..
 
-      - name: Delete existing 'latest' tag if it exists
-        run: |
-          git tag -d latest 2>/dev/null || true
-          git push origin :refs/tags/latest 2>/dev/null || true
-
-      - name: Create 'latest' tag
-        run: |
-          git tag latest
-          git push origin latest
-
-      - name: Create or update GitHub Release
-        uses: softprops/action-gh-release@v2
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
         with:
-          tag_name: latest
-          name: Latest Presets
+          tag_name: ${{ github.sha }}
+          name: "French Railway Signalling Presets"
           files: ${{ env.ARCHIVE_NAME }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          draft: false
+          prerelease: false
