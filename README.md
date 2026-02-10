@@ -17,7 +17,7 @@ The repository includes **JOSM presets** specifically designed for mapping Frenc
 
 **Alternative method** - Manual installation:
 
-⬇️ [Download the ZIP archive](https://raw.githubusercontent.com/noeldev/FrenchRailwaySignalling/main/French_Railway_Signalling_presets.zip)
+⬇️ [Download the ZIP archive](https://github.com/noeldev/FrenchRailwaySignalling/releases/latest/download/French_Railway_Signalling_presets.zip)
 
 This archive contains the latest preset XML files along with the required icon assets (SVG and PNG).
 
