@@ -1,5 +1,12 @@
 # French Railway Signalling
 
+[![Build and Deploy Presets](https://github.com/noeldev/FrenchRailwaySignalling/actions/workflows/build-and-deploy-presets.yml/badge.svg)](https://github.com/noeldev/FrenchRailwaySignalling/actions/workflows/build-and-deploy-presets.yml)
+[![OpenStreetMap](https://img.shields.io/badge/OpenStreetMap-wiki-7ebc6f?logo=openstreetmap)](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
+[![JOSM Presets](https://img.shields.io/badge/JOSM-Presets-blue)](https://josm.openstreetmap.de/wiki/Presets)
+[![XML](https://img.shields.io/badge/XML-validated-success)](https://github.com/noeldev/FrenchRailwaySignalling/blob/main/presets/French_Railway_Signalling.xml)
+[![C#](https://img.shields.io/badge/C%23-8.0-purple.svg)](https://docs.microsoft.com/en-us/dotnet/csharp/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 This repository serves as a **backup** of the pages, Lua modules, and templates I authored for the [OpenRailwayMap wiki](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France), focusing on **French railway signalling**. It ensures long-term preservation of the documentation in case of unexpected deletions or inappropriate edits on the wiki platform.
 
 ## JOSM Presets
@@ -10,14 +17,14 @@ The repository includes **JOSM presets** specifically designed for mapping Frenc
 
 **Recommended method** - Install directly from JOSM:
 
-1. Go to **Presets** → **Presets Preferences** → **Tagging Presets**
+1. Go to **Presets** → **Presets preferences...**
 2. Search for **French Railway Signalling** in the **Available Presets** search box
 3. Select the matching preset and click the right-pointing arrow to add it to **Active Presets**
 4. Click **OK**
 
 **Alternative method** - Manual installation:
 
-⬇️ [Download the ZIP archive](https://github.com/noeldev/FrenchRailwaySignalling/releases/latest/download/French_Railway_Signalling_presets.zip)
+⬇️ [Download the ZIP archive](https://noeldev.github.io/FrenchRailwaySignalling/French_Railway_Signalling_presets.zip)
 
 This archive contains the latest preset XML files along with the required icon assets (SVG and PNG).
 
@@ -25,9 +32,12 @@ This archive contains the latest preset XML files along with the required icon a
 
 ```
 FrenchRailwaySignalling/
-├── .github/workflows/    # GitHub Actions workflows
-│   ├── generate-presets-archive.yml    # Auto-generates preset archive
-│   └── backup-wiki-pages.yml           # Manual backup of wiki pages
+├── .github/
+│   ├── pages/            # GitHub Pages static files
+│   │   └── index.html    # Landing page
+│   └── workflows/        # GitHub Actions workflows
+│       ├── backup-wiki-pages.yml         # Manual backup of wiki pages
+│       └── build-and-deploy-presets.yml  # Build and deploy presets
 ├── presets/              # JOSM preset files and assets
 │   ├── French_Railway_Signalling.xml
 │   ├── icons/            # SVG and PNG icons

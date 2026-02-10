@@ -1,25 +1,35 @@
-name: Generate French Railway Signalling Presets Archive
+name: Build and Deploy Presets to GitHub Pages
 
 on:
   push:
     paths:
       - 'presets/**'
+      - '.github/pages/index.html'
     branches: [ "main" ]
   workflow_dispatch:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 env:
   ARCHIVE_NAME: French_Railway_Signalling_presets.zip
+  PRESET_FILE: presets/French_Railway_Signalling.xml
 
 jobs:
-  build-and-release:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Validate XML syntax
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxml2-utils
+          xmllint --noout ${{ env.PRESET_FILE }}
 
       - name: Create presets archive
         run: |
@@ -28,21 +38,25 @@ jobs:
           zip -r ../${{ env.ARCHIVE_NAME }} . -x "*.git*" "*.DS_Store*" "*.tmp*"
           cd ..
 
-      - name: Delete existing 'latest' tag if it exists
+      - name: Prepare GitHub Pages content
         run: |
-          git tag -d latest 2>/dev/null || true
-          git push origin :refs/tags/latest 2>/dev/null || true
+          mkdir -p public
+          cp ${{ env.ARCHIVE_NAME }} public/
+          cp .github/pages/index.html public/
 
-      - name: Create 'latest' tag
-        run: |
-          git tag latest
-          git push origin latest
-
-      - name: Create or update GitHub Release
-        uses: softprops/action-gh-release@v2
+      - name: Upload artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v3
         with:
-          tag_name: latest
-          name: Latest Presets
-          files: ${{ env.ARCHIVE_NAME }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
