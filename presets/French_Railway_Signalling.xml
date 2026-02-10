@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.2_2025-08-09"
+    version="1.3_2026-02-09"
     description="Presets for tagging French railway signalling"
     fr.description="Préréglages pour étiqueter la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -114,6 +114,7 @@
 
 			<chunk id="carre_tags">
 				<key key="railway:signal:main" value="FR:CARRE" />
+				<key key="railway:signal:main:form" value="light" />
 				<reference ref="carre_plate_tags" />
 
 				<optional text="Special Characteristics">
@@ -244,6 +245,7 @@
 
 			<chunk id="cv_tags">
 				<key key="railway:signal:main" value="FR:CV" />
+				<key key="railway:signal:main:form" value="light" />
 				<reference ref="carre_plate_tags" />
 
 				<optional text="Special Characteristics">
@@ -396,6 +398,7 @@
 				fr.text="Guidon d'arrêt" />
 			<space />
 			<key key="railway:signal:main" value="FR:GA" />
+			<key key="railway:signal:main:form" value="light" />
 
 			<reference ref="common_tags" />
 			<optional>
@@ -417,6 +420,7 @@
 
 			<chunk id="semaphore_tags">
 				<key key="railway:signal:main" value="FR:S"  />
+				<key key="railway:signal:main:form" value="light" />
 
 				<optional text="Plates">
 
@@ -550,6 +554,7 @@
 			<label text="Disque" />
 			<space />
 			<key key="railway:signal:distant" value="FR:D" />
+			<key key="railway:signal:distant:form" value="light" />
 			<reference ref="common_tags" />
 			<combo
 				key="railway:signal:distant:states"
@@ -584,6 +589,7 @@
 				fr.text="Avertissement" />
 			<space />
 			<key key="railway:signal:distant" value="FR:A" />
+			<key key="railway:signal:distant:form" value="light" />
 			<reference ref="common_tags" />
 			<combo
 				key="railway:signal:distant:states"
@@ -714,7 +720,18 @@
 				fr.name="TIV Fixes"
 				icon="icons/TIV-D_FIXE.svg">
 
-				<chunk id="speed_indicator_display_tags">
+				<item
+					name="Ordinary-type TIV-D"
+					fr.name="TIV-D du Type Ordinaire"
+					type="node"
+					icon="icons/TIV-D_FIXE.svg">
+					<label
+						text="Fixed distant speed indicator of the ordinary type"
+						fr.text="TIV fixe à distance du type ordinaire" />
+					<space />
+					<key key="railway:signal:speed_limit_distant" value="FR:TIV-D_FIXE" />
+
+					<reference ref="common_tags" />
 					<combo
 						key="railway:signal:speed_limit_distant:form"
 						text="Display Type"
@@ -729,21 +746,6 @@
 							display_value="Lit at night"
 							fr.display_value="Éclairé la nuit" />
 					</combo>
-				</chunk>
-
-				<item
-					name="Ordinary-type TIV-D"
-					fr.name="TIV-D du Type Ordinaire"
-					type="node"
-					icon="icons/TIV-D_FIXE.svg">
-					<label
-						text="Fixed distant speed indicator of the ordinary type"
-						fr.text="TIV fixe à distance du type ordinaire" />
-					<space />
-					<key key="railway:signal:speed_limit_distant" value="FR:TIV-D_FIXE" />
-
-					<reference ref="common_tags" />
-					<reference ref="speed_indicator_display_tags" />
 					<combo
 						key="railway:signal:speed_limit_distant:shape"
 						text="Signal Shape" 
@@ -779,6 +781,7 @@
 						fr.text="Pancarte Z" />
 					<space />
 					<key key="railway:signal:speed_limit" value="FR:Z" />
+					<key key="railway:signal:speed_limit:form" value="sign" />
 					<key key="railway:signal:speed_limit:function" value="entry" />
 					<reference ref="common_tags" />
 
@@ -793,6 +796,7 @@
 						fr.text="Tableau R" />
 					<space />
 					<key key="railway:signal:speed_limit" value="FR:R" />
+					<key key="railway:signal:speed_limit:form" value="sign" />
 					<key key="railway:signal:speed_limit:function" value="exit" />
 					<key key="railway:signal:speed_limit:speed" value="none" />
 					<reference ref="common_tags" />
@@ -813,9 +817,9 @@
 					<space />
 					<key key="railway:signal:speed_limit_distant" value="FR:TIV-D_B_FIXE" />
 					<key key="railway:signal:speed_limit_distant:type" value="FR:B" />
+					<key key="railway:signal:speed_limit_distant:form" value="sign" />
 
 					<reference ref="common_tags" />
-					<reference ref="speed_indicator_display_tags" />
 					<combo
 						key="railway:signal:speed_limit_distant:speed"
 						text="Speed limit (km/h)"
@@ -837,6 +841,7 @@
 					<space />
 					<key key="railway:signal:speed_limit_distant" value="FR:TIV-D_C_FIXE" />
 					<key key="railway:signal:speed_limit_distant:type" value="FR:C" />
+					<key key="railway:signal:speed_limit_distant:form" value="sign" />
 					<reference ref="common_tags" />
 					<combo
 						key="railway:signal:speed_limit_distant:speed"
@@ -860,6 +865,7 @@
 					fr.text="Tableau P (Annonce de limitation de vitesse)" />
 				<space />
 				<key key="railway:signal:speed_limit_distant" value="FR:P" />
+				<key key="railway:signal:speed_limit_distant:form" value="sign" />
 				<key key="railway:crocodile" value="yes" />
 				<reference ref="common_tags" />
 
@@ -883,6 +889,7 @@
 						fr.text="TIV à distance de forme pentagonale" />
 					<space />
 					<key key="railway:signal:speed_limit_distant" value="FR:TIV_PENDIS" />
+					<key key="railway:signal:speed_limit_distant:form" value="sign" />
 					<reference ref="common_tags" />
 					<combo
 						key="railway:signal:speed_limit_distant:speed"
@@ -911,6 +918,7 @@
 						fr.text="TIV d'exécution de forme pentagonale" />
 					<space />
 					<key key="railway:signal:speed_limit" value="FR:TIV_PENEXE" />
+					<key key="railway:signal:speed_limit:form" value="sign" />
 					<key key="railway:signal:speed_limit:function" value="entry" />
 					<reference ref="common_tags" />
 					<combo
@@ -933,6 +941,7 @@
 						fr.text="TIV de reprise de forme pentagonale" />
 					<space />
 					<key key="railway:signal:speed_limit" value="FR:TIV_PENREP" />
+					<key key="railway:signal:speed_limit:form" value="sign" />
 					<key key="railway:signal:speed_limit:function" value="exit" />
 					<key key="railway:signal:speed_limit:speed" value="none" />
 					<reference ref="common_tags" />
@@ -951,6 +960,7 @@
 					fr.text="Repère de Vitesse" />
 				<space />
 				<key key="railway:signal:speed_limit" value="FR:REP_VITESSE" />
+				<key key="railway:signal:speed_limit:form" value="sign" />
 				<reference ref="common_tags" />
 				<combo
 					key="railway:signal:speed_limit:function"
@@ -989,6 +999,7 @@
 				<space />
 				<key key="railway:signal:speed_limit" value="FR:CHEVRON_BAS" />
 				<key key="railway:signal:speed_limit:type" value="downwards" />
+				<key key="railway:signal:speed_limit:form" value="sign" />
 				<reference ref="common_tags" />
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Chevrons" />
@@ -1005,6 +1016,7 @@
 				<space />
 				<key key="railway:signal:shunting" value="FR:CHEVRON_HAUT" />
 				<key key="railway:signal:shunting:type" value="upwards" />
+				<key key="railway:signal:shunting:form" value="sign" />
 				<reference ref="common_tags" />
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Upward-pointing_chevrons" />
@@ -1028,6 +1040,7 @@
 					fr.text="Indicateur de Directions" />
 				<space />
 				<key key="railway:signal:route" value="FR:ID" />
+				<key key="railway:signal:route:form" value="light" />
 				<reference ref="common_tags" />
 				<combo
 					key="railway:signal:route:states"
@@ -1065,6 +1078,7 @@
 					fr.text="Tableau Indicateur de Direction à Distance (TIDD)" />
 				<space />
 				<key key="railway:signal:route_distant" value="FR:TIDD" />
+				<key key="railway:signal:route_distant:form" value="light" />
 				<key key="railway:signal:route_distant:states" value="off;left;right" />
 				<reference ref="common_tags" />
 
@@ -1088,6 +1102,7 @@
 					fr.text="Tableau BIF" />
 				<space />
 				<key key="railway:signal:route_distant" value="FR:BIF" />
+				<key key="railway:signal:route_distant:form" value="sign" />
 				<reference ref="common_tags" />
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Branch_lines" />
@@ -1103,6 +1118,7 @@
 					fr.text="Tableau Y" />
 				<space />
 				<key key="railway:signal:route_distant" value="FR:Y" />
+				<key key="railway:signal:route_distant:form" value="sign" />
 				<reference ref="common_tags" />
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Branch_lines" />
@@ -1127,6 +1143,7 @@
 					fr.text="Annonce d'une ligne à signalisation de cabine" />
 				<space />
 				<key key="railway:signal:train_protection" value="FR:CAB_E" />
+				<key key="railway:signal:train_protection:form" value="sign" />
 				<reference ref="common_tags" />
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#CAB_boards" />
@@ -1142,6 +1159,7 @@
 					fr.text="Entrée d'une ligne à signalisation de cabine" />
 				<space />
 				<key key="railway:signal:train_protection" value="FR:CAB_R" />
+				<key key="railway:signal:train_protection:form" value="sign" />
 				<key key="railway:signal:train_protection:function" value="entry" />
 				<reference ref="common_tags" />
 
@@ -1158,6 +1176,7 @@
 					fr.text="Sortie d'une ligne à signalisation de cabine" />
 				<space />
 				<key key="railway:signal:train_protection" value="FR:CAB_S" />
+				<key key="railway:signal:train_protection:form" value="sign" />
 				<key key="railway:signal:train_protection:function" value="exit" />
 				<reference ref="common_tags" />
 
@@ -1200,6 +1219,7 @@
 						display_value="Both ETCS and TVM"
 						fr.display_value="ETCS et TVM" icon_size="16"/>
 				</combo>
+				<key key="railway:signal:train_protection:form" value="sign" />
 				<key key="railway:signal:train_protection:function" value="Block marker" />
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Block markers" />
@@ -1215,6 +1235,7 @@
 					fr.text="Jalon de manœuvre" />
 				<space />
 				<key key="railway:signal:shunting" value="FR:JAL_MAN" />
+				<key key="railway:signal:shunting:form" value="sign" />
 				<reference ref="common_tags" />
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_markers" />
@@ -1236,8 +1257,9 @@
 					text="Wrong-direction entry board"
 					fr.text="Tableau d'Entrée de Contresens" />
 				<space />
-				<key key="railway:signal:train_protection" value="FR:TECS" />
-				<key key="railway:signal:train_protection:function" value="entry" />
+				<key key="railway:signal:wrong_road" value="FR:TECS" />
+				<key key="railway:signal:wrong_road:form" value="light" />
+				<key key="railway:signal:wrong_road:function" value="entry" />
 				<reference ref="common_tags" />
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Wrong-direction_signalling" />
@@ -1252,8 +1274,9 @@
 					text="Wrong-direction exit board"
 					fr.text="Tableau de Sortie de Contresens" />
 				<space />
-				<key key="railway:signal:train_protection" value="FR:TSCS" />
-				<key key="railway:signal:train_protection:function" value="exit" />
+				<key key="railway:signal:wrong_road" value="FR:TSCS" />
+				<key key="railway:signal:wrong_road:form" value="light" />
+				<key key="railway:signal:wrong_road:function" value="exit" />
 				<reference ref="common_tags" />
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Wrong-direction_signalling" />
@@ -1320,6 +1343,7 @@
 					<space />
 					<key key="railway:signal:electricity" value="FR:SECT" />
 					<key key="railway:signal:electricity:type" value="power_off_advance" />
+					<key key="railway:signal:electricity:form" value="sign" />
 					<reference ref="common_tags" />
 					<text
 						key="railway:signal:electricity:caption"
@@ -1379,6 +1403,7 @@
 					<space />
 					<key key="railway:signal:electricity" value="FR:REV" />
 					<key key="railway:signal:electricity:type" value="power_on" />
+					<key key="railway:signal:electricity:form" value="sign" />
 					<key key="railway:signal:electricity:function" value="exit" />
 					<reference ref="common_tags" />
 					<reference ref="traction_supply_tags" />
@@ -1469,6 +1494,7 @@
 						<text key="railway:signal:dual_mode:caption"
 							  text="Sign Text"
 							  fr.text="Intitulé de la Pancarte"/>
+						<key key="railway:signal:dual_mode:form" value="sign" />
 						<key key="railway:signal:dual_mode:function" value="entry" />
 
 						<link wiki="OpenRailwayMap/Tagging_in_France#Dual-mode_traffic" />
@@ -1484,6 +1510,7 @@
 							fr.text="Pancarte Fin de circulation bimode" />
 						<space />
 						<key key="railway:signal:dual_mode" value="FR:BIMODE" />
+						<key key="railway:signal:dual_mode:form" value="sign" />
 						<key key="railway:signal:dual_mode:function" value="exit" />
 						<reference ref="common_tags" />
 
@@ -1507,6 +1534,7 @@
 				<space />
 				<key key="railway:signal:electricity" value="FR:FIN_CAT" />
 				<key key="railway:signal:electricity:type" value="end_of_catenary" />
+				<key key="railway:signal:electricity:form" value="sign" />
 				<key key="railway:signal:position" value="overhead" />
 				<reference ref="common_tags" />
 
@@ -1523,6 +1551,7 @@
 					fr.text="Jalon d'arrêt à damier bleu et blanc" />
 				<space />
 				<key key="railway:signal:electricity" value="FR:JAL_ARRET_E" />
+				<key key="railway:signal:electricity:form" value="sign" />
 				<reference ref="common_tags" />
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Stop_markers" />
@@ -1546,6 +1575,7 @@
 					fr.text="Pancarte Gare" />
 				<space />
 				<key key="railway:signal:station_distant" value="FR:GARE" />
+				<key key="railway:signal:station_distant:form" value="sign" />
 				<reference ref="common_tags" />
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Stations" />
@@ -1571,6 +1601,7 @@
 					<space />
 					<reference ref="facility_tags" />
 					<key key="railway:signal:station_distant" value="FR:APPROCHE_ETS_A" />
+					<key key="railway:signal:station_distant:form" value="sign" />
 					<text 
 						key="railway:signal:station_distant:caption"
 						text="Sign Text"
@@ -1589,6 +1620,7 @@
 					<space />
 					<reference ref="facility_tags" />
 					<key key="railway:signal:station_distant" value="FR:APPROCHE_ETS" />
+					<key key="railway:signal:station_distant:form" value="sign" />
 				</item>
 
 				<item
@@ -1602,6 +1634,7 @@
 					<space />
 					<reference ref="facility_tags" />
 					<key key="railway:signal:station" value="FR:LIMITE_ETS" />
+					<key key="railway:signal:station:form" value="sign" />
 				</item>
 
 			</group>
@@ -1613,6 +1646,7 @@
 
 				<chunk id="stop_tags">
 					<reference ref="common_tags" />
+					<key key="railway:signal:stop:form" value="sign" />
 					<link wiki="OpenRailwayMap/Tagging_in_France#Stops" />
 				</chunk>
 
@@ -1700,7 +1734,7 @@
 						fr.text="Jalon d'arrêt à damier rouge et blanc" />
 					<space />
 					<reference ref="stop_tags" />
-					<key key="railway:signal:shunting" value="FR:JAL_ARRET" />
+					<key key="railway:signal:stop" value="FR:JAL_ARRET" />
 				</item>
 
 			</group>
@@ -1712,6 +1746,7 @@
 
 				<chunk id="passenger_stop_tags">
 					<reference ref="common_tags" />
+					<key key="railway:signal:stop:form" value="sign" />
 					<link wiki="OpenRailwayMap/Tagging_in_France#Passenger_stops" />
 				</chunk>
 
@@ -1850,6 +1885,7 @@
 					fr.text="Signal Lumineux de Manœuvre (SLM)" />
 				<space />
 				<key key="railway:signal:shunting" value="FR:SLM" />
+				<key key="railway:signal:shunting:form" value="light" />
 				<key key="railway:signal:shunting:states" value="push;pull;stop" />
 				<reference ref="common_tags" />
 
@@ -1866,6 +1902,7 @@
 					fr.text="Tableau Lumineux de Correspondance (TLC)" />
 				<space />
 				<key key="railway:signal:shunting" value="FR:TLC" />
+				<key key="railway:signal:shunting:form" value="light" />
 				<key key="railway:signal:shunting:states" value="FR:T;FR:(T);FR:SLD;FR:MARKER" />
 				<reference ref="common_tags" />
 
@@ -1882,6 +1919,7 @@
 					fr.text="Tableau Indicateur de Provenance (TIP)" />
 				<space />
 				<key key="railway:signal:shunting" value="FR:TIP" />
+				<key key="railway:signal:shunting:form" value="light" />
 				<reference ref="common_tags" />
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Tableau Indicateur_de_Provenance" />
@@ -1896,6 +1934,7 @@
 
 				<chunk id="shunting_board_tags">
 					<reference ref="common_tags" />
+					<key key="railway:signal:shunting:form" value="sign" />
 					<link wiki="OpenRailwayMap/Tagging_in_France#Other_shunting_boards" />
 				</chunk>
 
@@ -2036,6 +2075,7 @@
 				<space />
 				<reference ref="level_crossing_tags" />
 				<key key="railway:signal:crossing_hint" value="FR:PN_A" />
+				<key key="railway:signal:crossing_hint:form" value="sign" />
 				<text
 					key="railway:signal:crossing_hint:caption"
 					text="Sign Text"
@@ -2052,6 +2092,7 @@
 				<space />
 				<reference ref="level_crossing_tags" />
 				<key key="railway:signal:crossing_info" value="FR:PN" />
+				<key key="railway:signal:crossing_info:form" value="sign" />
 				<text
 					key="railway:signal:crossing_info:caption"
 					text="Sign Text"
@@ -2079,6 +2120,7 @@
 			<space />
 			<key key="railway:signal:whistle" value="FR:SIFFLER" />
 			<reference ref="common_tags" />
+			<key key="railway:signal:whistle:form" value="sign" />
 			<optional>
 				<check
 					key="railway:signal:whistle:plate"
@@ -2106,6 +2148,7 @@
 			<space />
 			<reference ref="misc_board_tags" />
 			<key key="railway:signal:main" value="FR:GABARIT" />
+			<key key="railway:signal:main:form" value="sign" />
 		</item>
 
 	</group>
