@@ -57,8 +57,8 @@ jobs:
           echo "Changes detected"
           echo "changed=true" >> $GITHUB_OUTPUT
         fi
-        
-    - name: Commit wiki backup
+
+    - name: Commit and push wiki backup
       if: steps.check_changes.outputs.changed == 'true'
       run: |
         git config --local user.email "action@github.com"
