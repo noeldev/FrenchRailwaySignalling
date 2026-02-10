@@ -1,4 +1,4 @@
-name: Generate French Railway Signalling Presets Archive
+name: Publish French Railway Signalling Presets to GitHub Pages
 
 on:
   push:
@@ -9,12 +9,14 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 env:
   ARCHIVE_NAME: French_Railway_Signalling_presets.zip
 
 jobs:
-  build-and-release:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,11 +30,24 @@ jobs:
           zip -r ../${{ env.ARCHIVE_NAME }} . -x "*.git*" "*.DS_Store*" "*.tmp*"
           cd ..
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+      - name: Prepare GitHub Pages content
+        run: |
+          mkdir -p public
+          cp ${{ env.ARCHIVE_NAME }} public/
+
+      - name: Upload artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v3
         with:
-          tag_name: ${{ github.sha }}
-          name: "French Railway Signalling Presets"
-          files: ${{ env.ARCHIVE_NAME }}
-          draft: false
-          prerelease: false
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
