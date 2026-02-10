@@ -1,10 +1,10 @@
 # French Railway Signalling
 
-[![Build and Deploy Presets](https://github.com/noeldev/FrenchRailwaySignalling/actions/workflows/build-and-deploy-presets.yml/badge.svg)](https://github.com/noeldev/FrenchRailwaySignalling/actions/workflows/build-and-deploy-presets.yml)
+[![Build & Deploy](https://github.com/noeldev/FrenchRailwaySignalling/actions/workflows/build-and-deploy-presets.yml/badge.svg)](https://github.com/noeldev/FrenchRailwaySignalling/actions/workflows/build-and-deploy-presets.yml)
 [![OpenStreetMap](https://img.shields.io/badge/OpenStreetMap-wiki-7ebc6f?logo=openstreetmap)](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
 [![JOSM Presets](https://img.shields.io/badge/JOSM-Presets-blue)](https://josm.openstreetmap.de/wiki/Presets)
 [![XML](https://img.shields.io/badge/XML-validated-success)](https://github.com/noeldev/FrenchRailwaySignalling/blob/main/presets/French_Railway_Signalling.xml)
-[![C#](https://img.shields.io/badge/C%23-8.0-purple.svg)](https://docs.microsoft.com/en-us/dotnet/csharp/)
+[![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This repository serves as a **backup** of the pages, Lua modules, and templates I authored for the [OpenRailwayMap wiki](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France), focusing on **French railway signalling**. It ensures long-term preservation of the documentation in case of unexpected deletions or inappropriate edits on the wiki platform.
