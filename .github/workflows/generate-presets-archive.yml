@@ -14,6 +14,7 @@ permissions:
 
 env:
   ARCHIVE_NAME: French_Railway_Signalling_presets.zip
+  PRESET_FILE: presets/French_Railway_Signalling.xml
 
 jobs:
   build:
@@ -22,6 +23,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Validate XML syntax
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxml2-utils
+          xmllint --noout ${{ env.PRESET_FILE }}
 
       - name: Create presets archive
         run: |
