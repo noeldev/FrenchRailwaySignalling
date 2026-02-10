@@ -1,8 +1,8 @@
 # French Railway Signalling
 
-[![Build & Deploy](https://github.com/noeldev/FrenchRailwaySignalling/actions/workflows/build-and-deploy-presets.yml/badge.svg)](https://github.com/noeldev/FrenchRailwaySignalling/actions/workflows/build-and-deploy-presets.yml)
 [![OpenStreetMap](https://img.shields.io/badge/OpenStreetMap-wiki-7ebc6f?logo=openstreetmap)](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
 [![JOSM Presets](https://img.shields.io/badge/JOSM-Presets-blue)](https://josm.openstreetmap.de/wiki/Presets)
+[![Build & Deploy](https://github.com/noeldev/FrenchRailwaySignalling/actions/workflows/build-and-deploy-presets.yml/badge.svg)](https://github.com/noeldev/FrenchRailwaySignalling/actions/workflows/build-and-deploy-presets.yml)
 [![XML](https://img.shields.io/badge/XML-validated-success)](https://github.com/noeldev/FrenchRailwaySignalling/blob/main/presets/French_Railway_Signalling.xml)
 [![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -44,10 +44,9 @@ FrenchRailwaySignalling/
 │   └── font/             # SNCF font used by some icons
 ├── tools/
 │   └── WikiBackup/       # C# wiki backup tool
-├── wiki/
-│   ├── backup/           # Auto-generated wiki backups
-│   └── draft/            # Initial content
-└── French_Railway_Signalling_presets.zip  # Auto-generated preset archive
+└── wiki/
+    ├── backup/           # Auto-generated wiki backups
+    └── draft/            # Initial content
 ```
 
 ## Status
