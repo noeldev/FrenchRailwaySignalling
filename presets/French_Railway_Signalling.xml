@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.3_2026-02-09"
+    version="1.3_2026-02-10"
     description="Presets for tagging French railway signalling"
     fr.description="Préréglages pour étiqueter la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
