@@ -1,6 +1,6 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2025-08-09 04:33:20 UTC<br>
+**Backup generated:** 2026-02-10 19:48:00 UTC<br>
 **Category:** main<br>
 **Total pages:** 1<br>
 **Successfully backed up:** 1
@@ -10,9 +10,9 @@
 
 - **File:** [OpenRailwayMap/Tagging_in_France.wiki](OpenRailwayMap/Tagging_in_France.wiki)
 - **Wiki URL:** [OpenRailwayMap/Tagging_in_France](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
-- **Last edited:** 2025-08-06 02:28:26 UTC
+- **Last edited:** 2026-02-09 22:35:05 UTC
 - **Last editor:** Noeld
-- **Edit comment:** Edits
+- **Edit comment:** /* CAB boards */
 
 ## About
 
