@@ -2,13 +2,13 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.3_2026-02-10"
+    version="1.4_2026-02-15"
     description="Presets for tagging French railway signalling"
     fr.description="Préréglages pour étiqueter la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
     fr.shortdescription="Signalisation Ferroviaire Française"
 	link="https://github.com/noeldev/FrenchRailwaySignalling">
-	
+
 	<group
 		name="French Railway Signalling"
 		fr.name="Signalisation Ferroviaire"
@@ -63,7 +63,9 @@
 
 		<chunk id="carre_plate_tags">
 			<key key="railway:signal:main:plate" value="FR:NF" />
-			<optional text="Plates">
+			<optional 
+				text="Plates &amp; Text"
+				fr.text="Plaques et Textes">
 				<combo
 					key="railway:signal:main:plate:departure"
 					text="Departure Plate"
@@ -110,7 +112,7 @@
 		<group
 			name="Carré"
 			fr.name="Carré"
-			icon="icons/C_Cible_C1.svg">
+			icon="icons/C_C-C.svg">
 
 			<chunk id="carre_tags">
 				<key key="railway:signal:main" value="FR:CARRE" />
@@ -125,6 +127,11 @@
 							text="No Clearing Light"
 							fr.text="Œilleton absent"
 							value_off="" value_on="no" disable_off="true"/>
+						<check
+							key="railway:crocodile"
+							text="Crocodile"
+							fr.text="Crocodile"
+							default="on" disable_off="true" />
 						<check
 							key="railway:signal:main:short_route"
 							text="Yellow Stripe"
@@ -148,91 +155,146 @@
 			</chunk>
 
 			<item
-				name="Cible C"
+				name="C-type head"
 				fr.name="Cible C"
-				icon="icons/C_Cible_C1.svg"
+				icon="icons/C_C-C.svg"
 				type="node">
 				<label
-					text="Carré on C target"
-					fr.text="Carré sur cible C" />
+					text="Carré (C-type head)"
+					fr.text="Carré (Cible C)" />
 				<space />
 				<key key="railway:signal:main:shape" value="FR:C" />
 				<reference ref="common_tags" />
-				<combo
+				<multiselect
 					key="railway:signal:main:states"
-					text="Target" fr.text="Cible"
-					editable="false">
+					text="Lights"
+					fr.text="Feux"
+					delimiter=";"
+					default="FR:C;FR:S;FR:A;FR:VL"
+					editable="false"
+					values_sort="false"
+					rows="5">
 					<list_entry
-						value="FR:C;FR:S;FR:(S);FR:M;FR:(M);FR:A;FR:(A);FR:VL;FR:(VL)"
-						display_value="C1 (5 lights)"
-						fr.display_value="C1 (5 feux)" />
+						value="FR:C"
+						display_value="Stop (C)"
+					fr.display_value="Carré" />
 					<list_entry
-						value="FR:C;FR:S;FR:(S);FR:A;FR:(A);FR:VL;FR:(VL)"
-						display_value="C3 (4 lights)"
-						fr.display_value="C3 (4 feux)" />
-				</combo>
+						value="FR:S"
+						display_value="Stop and proceed (S)"
+						fr.display_value="Sémaphore" />
+					<list_entry
+						value="FR:M"
+						display_value="Shunting (White light)"
+						fr.display_value="Marche en Manœuvre (Feu blanc)" />
+					<list_entry
+						value="FR:A"
+						display_value="Caution (A)"
+						fr.display_value="Avertissement" />
+					<list_entry
+						value="FR:VL"
+						display_value="Clear (Green light)"
+						fr.display_value="Voie Libre (Feu vert)" />
+				</multiselect>
 				<reference ref="carre_tags" />
 			</item>
 
 			<item
-				name="Cible F"
+				name="F-type head"
 				fr.name="Cible F"
 				type="node"
-				icon="icons/C_Cible_F1.svg">
+				icon="icons/C_F-C.svg">
 				<label
-					text="Carré on F target"
-					fr.text="Carré sur cible F" />
+					text="Carré (F-type head)"
+					fr.text="Carré (Cible F)" />
 				<space />
 				<key key="railway:signal:main:shape" value="FR:F" />
 				<reference ref="common_tags" />
-				<combo
+				<multiselect
 					key="railway:signal:main:states"
-					text="Target" fr.text="Cible"
-					editable="false">
+					text="Lights"
+					fr.text="Feux"
+					delimiter=";"
+					default="FR:C;FR:S;FR:A;FR:R;FR:VL"
+					editable="false"
+					values_sort="false"
+					rows="5">
 					<list_entry
-						value="FR:C;FR:S;FR:(S);FR:M;FR:(M);FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)"
-						display_value="F1 (7 lights)"
-						fr.display_value="F1 (7 feux)" />
+						value="FR:C"
+						display_value="Stop (C)"
+						fr.display_value="Carré" />
 					<list_entry
-						value="FR:C;FR:S;FR:(S);FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)"
-						display_value="F3 (6 lights)"
-						fr.display_value="F3 (6 feux)" />
-				</combo>
+						value="FR:S"
+						display_value="Stop and proceed (S)"
+						fr.display_value="Sémaphore" />
+					<list_entry
+						value="FR:M"
+						display_value="Shunting (White light)"
+						fr.display_value="Marche en Manœuvre (Feu blanc)" />
+					<list_entry
+						value="FR:A"
+						display_value="Caution (A)"
+						fr.display_value="Avertissement" />
+					<list_entry
+						value="FR:R"
+						display_value="Reduce speed (R)"
+						fr.display_value="Ralentissement" />
+					<list_entry
+						value="FR:VL"
+						display_value="Clear (Green light)"
+						fr.display_value="Voie Libre (Feu vert)" />
+				</multiselect>
 				<reference ref="carre_tags" />
 			</item>
 
 			<item
-				name="Cible H"
+				name="H-type head"
 				fr.name="Cible H"
 				type="node"
-				icon="icons/C_Cible_H1.svg">
+				icon="icons/C_H-C.svg">
 				<label
-					text="Carré on H target"
-					fr.text="Carré sur cible H" />
+					text="Carré (H-type head)"
+					fr.text="Carré (Cible H)" />
 				<space />
 				<key key="railway:signal:main:shape" value="FR:H" />
 				<reference ref="common_tags" />
-				<combo
+				<multiselect
 					key="railway:signal:main:states"
-					text="Target" fr.text="Cible"
-					editable="false">
+					text="Lights"
+					fr.text="Feux"
+					delimiter=";"
+					default="FR:C;FR:S;FR:RR;FR:A;FR:R;FR:VL"
+					editable="false"
+					values_sort="false"
+					rows="5">
 					<list_entry
-						value="FR:C;FR:S;FR:(S);FR:M;FR:(M);FR:RR;FR:RR+A;FR:RR+(A);FR:(RR);FR:(RR)+A;FR:(RR)+(A);FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)"
-						display_value="H1 (9 lights)"
-						fr.display_value="H1 (9 feux)" />
+						value="FR:C"
+						display_value="Stop (C)"
+						fr.display_value="Carré" />
 					<list_entry
-						value="FR:C;FR:S;FR:(S);FR:RR;FR:RR+A;FR:RR+(A);FR:(RR);FR:(RR)+A;FR:(RR)+(A);FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)"
-						display_value="H3 (8 lights)"
-						fr.display_value="H3 (8 feux)" />
+						value="FR:S"
+						display_value="Stop and proceed (S)"
+						fr.display_value="Sémaphore" />
 					<list_entry
-						value="FR:C;FR:S;FR:(S);FR:M;FR:(M);FR:RR;FR:RR+A;FR:RR+(A);FR:(RR);FR:(RR)+A;FR:(RR)+(A);FR:A;FR:(A);FR:VL;FR:(VL)"
-						display_value="H4 (7 lights)"
-						fr.display_value="H4 (7 feux)" />
+						value="FR:M"
+						display_value="Shunting (White light)"
+						fr.display_value="Marche en Manœuvre (Feu blanc)" />
 					<list_entry
-						value="FR:C;FR:S;FR:(S);FR:RR;FR:RR+A;FR:RR+(A);FR:(RR);FR:(RR)+A;FR:(RR)+(A);FR:A;FR:(A);FR:VL;FR:(VL)"
-						display_value="H6 (6 lights)"
-						fr.display_value="H6 (6 feux)" />
-				</combo>
+						value="FR:RR"
+						display_value="Speed reminder (RR)"
+						fr.display_value="Rappel de Ralentissement" />
+					<list_entry
+						value="FR:A"
+						display_value="Caution (A)"
+						fr.display_value="Avertissement" />
+					<list_entry
+						value="FR:R"
+						display_value="Reduce speed (R)"
+						fr.display_value="Ralentissement" />
+					<list_entry
+						value="FR:VL"
+						display_value="Clear (Green light)"
+						fr.display_value="Voie Libre (Feu vert)" />
+				</multiselect>
 				<reference ref="carre_tags" />
 			</item>
 
@@ -241,7 +303,7 @@
 		<group
 			name="Carré violet"
 			fr.name="Carré violet"
-			icon="icons/Cv_Cible_A2.svg">
+			icon="icons/Cv_A-Cv.svg">
 
 			<chunk id="cv_tags">
 				<key key="railway:signal:main" value="FR:CV" />
@@ -259,113 +321,178 @@
 				<link wiki="OpenRailwayMap/Tagging_in_France#Carré_violet" />
 			</chunk>
 
-			<!-- Cible A2 (2 feux) -->
 			<item
-				name="Cible A"
+				name="A-type head"
 				fr.name="Cible A"
 				type="node"
-				icon="icons/Cv_Cible_A2.svg">
+				icon="icons/Cv_A-Cv.svg">
 				<label
-					text="Carré violet on A target"
-					fr.text="Carré violet sur cible A" />
+					text="Carré violet (A-type head)"
+					fr.text="Carré violet (cible A)" />
 				<space />
 				<key key="railway:signal:main:shape" value="FR:A" />
-				<key key="railway:signal:main:states"
-                    value="FR:CV;FR:M;FR:(M)" />
+				<key key="railway:signal:main:states" value="FR:CV;FR:M" />
 				<reference ref="common_tags" />
 				<reference ref="cv_tags" />
 			</item>
 
-			<!-- Cible C2 (5 feux) -->
 			<item
-				name="Cible C"
+				name="C-type head"
 				fr.name="Cible C"
 				type="node"
-				icon="icons/Cv_Cible_C2.svg">
+				icon="icons/Cv_C-Cv.svg">
 				<label
-					text="Carré violet on C target"
-					fr.text="Carré violet sur cible C" />
+					text="Carré violet (C-type head)"
+					fr.text="Carré violet (Cible C)" />
 				<space />
 				<key key="railway:signal:main:shape" value="FR:C" />
-				<key key="railway:signal:main:states"
-                    value="FR:CV;FR:S;FR:(S);FR:M;FR:(M);FR:A;FR:(A);FR:VL;FR:(VL)" />
 				<reference ref="common_tags" />
+				<multiselect
+					key="railway:signal:main:states"
+					text="Lights"
+					fr.text="Feux"
+					delimiter=";"
+					default="FR:CV;FR:S;FR:M;FR:A;FR:VL"
+					editable="false"
+					values_sort="false"
+					rows="5">
+					<list_entry
+						value="FR:CV"
+						display_value="Shunt stop (Cv)"
+						fr.display_value="Carré violet" />
+					<list_entry
+						value="FR:S"
+						display_value="Stop and proceed (S)"
+						fr.display_value="Sémaphore" />
+					<list_entry
+						value="FR:M"
+						display_value="Shunting (White light)"
+						fr.display_value="Marche en Manœuvre (Feu blanc)" />
+					<list_entry
+						value="FR:A"
+						display_value="Caution (A)"
+						fr.display_value="Avertissement" />
+					<list_entry
+						value="FR:VL"
+						display_value="Clear (Green light)"
+						fr.display_value="Voie Libre (Feu vert)" />
+				</multiselect>
 				<reference ref="cv_tags" />
 			</item>
 
-			<!-- Cibles F2, F4 -->
 			<item
-				name="Cible F"
+				name="F-type head"
 				fr.name="Cible F"
 				type="node"
-				icon="icons/Cv_Cible_F2.svg">
+				icon="icons/Cv_F-Cv.svg">
 				<label
-					text="Carré violet on F target"
-					fr.text="Carré violet sur cible F" />
+					text="Carré violet (F-type head)"
+					fr.text="Carré violet (Cible F)" />
 				<space />
 				<key key="railway:signal:main:shape" value="FR:F" />
 				<reference ref="common_tags" />
-				<combo
+				<multiselect
 					key="railway:signal:main:states"
-					text="Target" fr.text="Cible"
-					editable="false">
+					text="Lights"
+					fr.text="Feux"
+					delimiter=";"
+					default="FR:CV;FR:S;FR:M;FR:A;FR:R;FR:VL"
+					editable="false"
+					values_sort="false"
+					rows="5">
 					<list_entry
-						value="FR:CV;FR:S;FR:(S);FR:M;FR:(M);FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)"
-						display_value="F2 (7 lights)"
-						fr.display_value="F2 (7 feux)" />
+						value="FR:CV"
+						display_value="Shunt stop (Cv)"
+						fr.display_value="Carré violet" />
 					<list_entry
-						value="FR:CV;FR:S;FR:(S);FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)"
-						display_value="F4 (6 lights)"
-						fr.display_value="F4 (6 feux)" />
-				</combo>
+						value="FR:S"
+						display_value="Stop and proceed (S)"
+						fr.display_value="Sémaphore" />
+					<list_entry
+						value="FR:M"
+						display_value="Shunting (White light)"
+						fr.display_value="Marche en Manœuvre (Feu blanc)" />
+					<list_entry
+						value="FR:A"
+						display_value="Caution (A)"
+						fr.display_value="Avertissement" />
+					<list_entry
+						value="FR:R"
+						display_value="Reduce speed (R)"
+						fr.display_value="Ralentissement" />
+					<list_entry
+						value="FR:VL"
+						display_value="Clear (Green light)"
+						fr.display_value="Voie Libre (Feu vert)" />
+				</multiselect>
 				<reference ref="cv_tags" />
 			</item>
 
-			<!-- Cibles H2, H5, H7 -->
 			<item
-				name="Cible H"
+				name="H-type head"
 				fr.name="Cible H"
 				type="node"
-				icon="icons/Cv_Cible_H2.svg">
+				icon="icons/Cv_H-Cv.svg">
 				<label
-					text="Carré violet on H target"
-					fr.text="Carré violet sur cible H" />
+					text="Carré violet (H-type head)"
+					fr.text="Carré violet (Cible H)" />
 				<space />
 				<key key="railway:signal:main:shape" value="FR:H" />
 				<reference ref="common_tags" />
-				<combo
+				<multiselect
 					key="railway:signal:main:states"
-					text="Target" fr.text="Cible"
-					editable="false">
+					text="Lights"
+					fr.text="Feux"
+					delimiter=";"
+					default="FR:CV;FR:S;FR:M;FR:RR;FR:A;FR:R;FR:VL"
+					editable="false"
+					values_sort="false"
+					rows="5">
 					<list_entry
-						value="FR:CV;FR:S;FR:(S);FR:M;FR:(M);FR:RR;FR:RR+A;FR:RR+(A);FR:(RR);FR:(RR)+A;FR:(RR)+(A);FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)"
-						display_value="H2 (9 feux)"
-						fr.display_value="H2 (9 feux)" />
+						value="FR:CV"
+						display_value="Shunt stop (Cv)"
+						fr.display_value="Carré violet" />
 					<list_entry
-						value="FR:CV;FR:S;FR:(S);FR:M;FR:(M);FR:RR;FR:RR+A;FR:RR+(A);FR:(RR);FR:(RR)+A;FR:(RR)+(A);FR:A;FR:(A);FR:VL;FR:(VL)"
-						display_value="H5 (7 lights)"
-						fr.display_value="H5 (7 feux)" />
+						value="FR:S"
+						display_value="Stop and proceed (S)"
+						fr.display_value="Sémaphore" />
 					<list_entry
-						value="FR:CV;FR:S;FR:(S);FR:RR;FR:RR+A;FR:RR+(A);FR:(RR);FR:(RR)+A;FR:(RR)+(A);FR:A;FR:(A);FR:VL;FR:(VL)"
-						display_value="H7 (6 lights)"
-						fr.display_value="H7 (6 feux)" />
-				</combo>
+						value="FR:M"
+						display_value="Shunting (White light)"
+						fr.display_value="Marche en Manœuvre (Feu blanc)" />
+					<list_entry
+						value="FR:RR"
+						display_value="Speed reminder (RR)"
+						fr.display_value="Rappel de Ralentissement" />
+					<list_entry
+						value="FR:A"
+						display_value="Caution (A)"
+						fr.display_value="Avertissement" />
+					<list_entry
+						value="FR:R"
+						display_value="Reduce speed (R)"
+						fr.display_value="Ralentissement" />
+					<list_entry
+						value="FR:VL"
+						display_value="Clear (Green light)"
+						fr.display_value="Voie Libre (Feu vert)" />
+				</multiselect>
 				<reference ref="cv_tags" />
 			</item>
 
 			<item
-				name="Cible K"
+				name="K-type head"
 				fr.name="Cible K"
 				type="node"
-				icon="icons/Cv_Cible_K2.svg">
+				icon="icons/Cv_K-Cv.svg">
 				<label
-					text="Carré violet on K target"
-					fr.text="Carré violet sur cible K" />
+					text="Carré violet (K-type head)"
+					fr.text="Carré violet (Cible K)" />
 				<space />
 				<key key="railway:signal:main" value="FR:CV" />
 				<key key="railway:signal:main:plate" value="FR:NF" />
 				<key key="railway:signal:main:shape" value="FR:K" />
-				<key key="railway:signal:main:states" value="FR:CV;FR:M;FR:(M)" />
+				<key key="railway:signal:main:states" value="FR:CV;FR:M" />
 
 				<reference ref="common_tags" />
 				<optional text="Special Characteristics">
@@ -392,10 +519,10 @@
 			name="Guidon d'Arrêt"
 			fr.name="Guidon d'Arrêt"
 			type="node"
-			icon="icons/Guidon d'arrêt.svg">
+			icon="icons/GA.svg">
 			<label
-				text="Guidon d'arrêt"
-				fr.text="Guidon d'arrêt" />
+				text="Guidon d'Arrêt"
+				fr.text="Guidon d'Arrêt" />
 			<space />
 			<key key="railway:signal:main" value="FR:GA" />
 			<key key="railway:signal:main:form" value="light" />
@@ -407,7 +534,7 @@
 					text="Marker Text"
 					fr.text="Intitulé du Repérage" />
 			</optional>
-			
+
 			<link wiki="OpenRailwayMap/Tagging_in_France#Guidon_d'arrêt" />
 		</item>
 
@@ -416,7 +543,7 @@
 		<group
 			name="Sémaphore"
 			fr.name="Sémaphore"
-			icon="icons/S_Cible_A3.svg">
+			icon="icons/S_C-S.svg">
 
 			<chunk id="semaphore_tags">
 				<key key="railway:signal:main" value="FR:S"  />
@@ -465,62 +592,151 @@
 				<link wiki="OpenRailwayMap/Tagging_in_France#Sémaphore" />
 			</chunk>
 
-			<!-- Cibles A1, A3 -->
 			<item
-				name="Cible A"
+				name="A-type head"
 				fr.name="Cible A"
 				type="node"
-				icon="icons/S_Cible_A3.svg">
+				icon="icons/S_A-S.svg">
 				<label
-					text="Sémaphore on A target"
-					fr.text="Sémaphore sur cible A" />
+					text="Sémaphore (A-type head)"
+					fr.text="Sémaphore (Cible A)" />
 				<space />
 				<key key="railway:signal:main:shape" value="FR:A" />
 				<reference ref="common_tags" />
-				<combo 
-					key="railway:signal:main:states"
-					text="Target" fr.text="Cible"
-					editable="false">
-					<list_entry
-						value="FR:S;FR:(S);FR:A;FR:(A);FR:VL;FR:(VL)"
-						display_value="A1 (3 lights)"
-						fr.display_value="A1 (3 feux)" />
-					<list_entry
-						value="FR:S;FR:(S);FR:VL;FR:(VL)"
-						display_value="A3 (2 lights)"
-						fr.display_value="A3 (2 feux)" />
-				</combo>
 				<reference ref="semaphore_tags" />
 			</item>
 
 			<item
-				name="Cible F"
+				name="C-type head"
+				fr.name="Cible C"
+				icon="icons/S_C-S.svg"
+				type="node">
+				<label
+					text="Sémaphore (C-type head)"
+					fr.text="Sémaphore (Cible C)" />
+				<space />
+				<key key="railway:signal:main:shape" value="FR:C" />
+				<reference ref="common_tags" />
+				<multiselect
+					key="railway:signal:main:states"
+					text="Lights"
+					fr.text="Feux"
+					delimiter=";"
+					default="FR:S;FR:A;FR:VL"
+					editable="false"
+					values_sort="false"
+					rows="5">
+					<list_entry
+						value="FR:S"
+						display_value="Stop and proceed (S)"
+						fr.display_value="Sémaphore" />
+					<list_entry
+						value="FR:A"
+						display_value="Caution (A)"
+						fr.display_value="Avertissement" />
+					<list_entry
+						value="FR:VL"
+						display_value="Clear (Green light)"
+						fr.display_value="Voie Libre (Feu vert)" />
+				</multiselect>
+				<reference ref="semaphore_tags" />
+			</item>
+
+			<item
+				name="F-type head"
 				fr.name="Cible F"
 				type="node"
-				icon="icons/S_Cible_F5.svg">
+				icon="icons/S_F-S.svg">
 				<label
-					text="Sémaphore on F target"
-					fr.text="Sémaphore sur cible F" />
+					text="Sémaphore (F-type head)"
+					fr.text="Sémaphore (Cible F)" />
 				<space />
 				<key key="railway:signal:main:shape" value="FR:F" />
-				<key key="railway:signal:main:states"
-                    value="FR:S;FR:(S);FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)" />
 				<reference ref="common_tags" />
+				<multiselect
+					key="railway:signal:main:states"
+					text="Lights"
+					fr.text="Feux"
+					delimiter=";"
+					default="FR:S;FR:A;FR:R;FR:VL"
+					editable="false"
+					values_sort="false"
+					rows="5">
+					<list_entry
+						value="FR:S"
+						display_value="Stop and proceed (S)"
+						fr.display_value="Sémaphore" />
+					<list_entry
+						value="FR:A"
+						display_value="Caution (A)"
+						fr.display_value="Avertissement" />
+					<list_entry
+						value="FR:R"
+						display_value="Reduce speed (R)"
+						fr.display_value="Ralentissement" />
+					<list_entry
+						value="FR:VL"
+						display_value="Clear (Green light)"
+						fr.display_value="Voie Libre (Feu vert)" />
+				</multiselect>
 				<reference ref="semaphore_tags" />
 			</item>
 
-			<!-- K1 (2 feux) -->
 			<item
-				name="Cible K"
+				name="H-type head"
+				fr.name="Cible H"
+				type="node"
+				icon="icons/S_H-S.svg">
+				<label
+					text="Sémaphore (H-type head)"
+					fr.text="Sémaphore (Cible H)" />
+				<space />
+				<key key="railway:signal:main:shape" value="FR:H" />
+				<reference ref="common_tags" />
+				<multiselect
+					key="railway:signal:main:states"
+					text="Lights"
+					fr.text="Feux"
+					delimiter=";"
+					default="FR:S;FR:RR;FR:A;FR:R;FR:VL"
+					editable="false"
+					values_sort="false"
+					rows="5">
+					<list_entry
+						value="FR:S"
+						display_value="Stop and proceed (S)"
+						fr.display_value="Sémaphore" />
+					<list_entry
+						value="FR:RR"
+						display_value="Speed reminder (RR)"
+						fr.display_value="Rappel de Ralentissement" />
+					<list_entry
+						value="FR:A"
+						display_value="Caution (A)"
+						fr.display_value="Avertissement" />
+					<list_entry
+						value="FR:R"
+						display_value="Reduce speed (R)"
+						fr.display_value="Ralentissement" />
+					<list_entry
+						value="FR:VL"
+						display_value="Clear (Green light)"
+						fr.display_value="Voie Libre (Feu vert)" />
+				</multiselect>
+				<reference ref="semaphore_tags" />
+			</item>
+
+			<item
+				name="K-type head"
 				fr.name="Cible K"
 				type="node"
-				icon="icons/S_Cible_K1.svg">
+				icon="icons/S_K-S.svg">
 				<label
-					text="Sémaphore on K target"
-					fr.text="Sémaphore sur cible K" />
+					text="Sémaphore (K-type head)"
+					fr.text="Sémaphore (Cible K)" />
 				<space />
 				<key key="railway:signal:main:shape" value="FR:K" />
-				<key key="railway:signal:main:states" value="FR:S;FR:(S);FR:VL" />
+				<key key="railway:signal:main:states" value="FR:S;FR:VL" />
 				<reference ref="common_tags" />
 				<reference ref="semaphore_tags" />
 			</item>
@@ -529,9 +745,8 @@
 
 		<separator />
 
-		<chunk id="distant_tags">		
+		<chunk id="distant_tags">
 			<optional text="Plates">
-				
 				<text
 					key="railway:signal:distant:caption:marker"
 					text="Marker Text"
@@ -550,30 +765,40 @@
 			name="Disque"
 			fr.name="Disque"
 			type="node"
-			icon="icons/D_Cible_R6.svg">
-			<label text="Disque" />
+			icon="icons/D-D.svg">
+			<label
+				text="Disque"
+				fr.text="Disque" />
 			<space />
 			<key key="railway:signal:distant" value="FR:D" />
 			<key key="railway:signal:distant:form" value="light" />
 			<reference ref="common_tags" />
-			<combo
+			<multiselect
 				key="railway:signal:distant:states"
-				text="Target"
-				fr.text="Cible"
-				editable="false">
+				text="Lights"
+				fr.text="Feux"
+				delimiter=";"
+				default="FR:D;FR:A;FR:R;FR:VL"
+				editable="false"
+				values_sort="false"
+				rows="5">
 				<list_entry
-					value="FR:D;FR:VL;FR:(VL)"
-					display_value="R3 (3 lights)"
-					fr.display_value="R3 (3 feux)" />
+					value="FR:D"
+					display_value="Stop and Proceed (D)"
+					fr.display_value="Disque" />
 				<list_entry
-					value="FR:D;FR:A;FR:(A);FR:VL;FR:(VL)"
-					display_value="R5 (4 lights)"
-					fr.display_value="R5 (4 feux)" />
+					value="FR:A"
+					display_value="Caution (A)"
+					fr.display_value="Avertissement" />
 				<list_entry
-					value="FR:D;FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)"
-					display_value="R6 (6 lights)"
-					fr.display_value="R6 (6 feux)" />
-			</combo>
+					value="FR:R"
+					display_value="Reduce speed (R)"
+					fr.display_value="Ralentissement" />
+				<list_entry
+					value="FR:VL"
+					display_value="Clear (Green light)"
+					fr.display_value="Voie Libre (Feu vert)" />
+			</multiselect>
 			<reference ref="distant_tags" />
 
 			<link wiki="OpenRailwayMap/Tagging_in_France#Disque" />
@@ -583,7 +808,7 @@
 			name="Avertissement"
 			fr.name="Avertissement"
 			type="node"
-			icon="icons/A_Cible_R6.svg">
+			icon="icons/A-A.svg">
 			<label
 				text="Avertissement"
 				fr.text="Avertissement" />
@@ -591,23 +816,28 @@
 			<key key="railway:signal:distant" value="FR:A" />
 			<key key="railway:signal:distant:form" value="light" />
 			<reference ref="common_tags" />
-			<combo
+			<multiselect
 				key="railway:signal:distant:states"
-				text="Target" fr.text="Cible"
-				editable="false">
+				text="Lights"
+				fr.text="Feux"
+				delimiter=";"
+				default="FR:A;FR:R;FR:VL"
+				editable="false"
+				values_sort="false"
+				rows="5">
 				<list_entry
-					value="FR:A;FR:(A);FR:VL"
-					display_value="R1 (2 lights)"
-					fr.display_value="R1 (2 feux)" />
+					value="FR:A"
+					display_value="Caution (A)"
+					fr.display_value="Avertissement" />
 				<list_entry
-					value="FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A)"
-					display_value="R2 (3 lights)"
-					fr.display_value="R2 (3 feux)" />
+					value="FR:R"
+					display_value="Reduce speed (R)"
+					fr.display_value="Ralentissement" />
 				<list_entry
-					value="FR:A;FR:(A);FR:R;FR:R+A;FR:R+(A);FR:(R);FR:(R)+A;FR:(R)+(A);FR:VL;FR:(VL)"
-					display_value="R4 (4 lights)"
-					fr.display_value="R4 (4 feux)" />
-			</combo>
+					value="FR:VL"
+					display_value="Clear (Green light)"
+					fr.display_value="Voie Libre (Feu vert)" />
+			</multiselect>
 			<reference ref="distant_tags" />
 
 			<link wiki="OpenRailwayMap/Tagging_in_France#Avertissement" />
@@ -748,7 +978,7 @@
 					</combo>
 					<combo
 						key="railway:signal:speed_limit_distant:shape"
-						text="Signal Shape" 
+						text="Signal Shape"
 						fr.text="Forme Géométrique"
 						editable="false">
 						<list_entry
@@ -772,9 +1002,9 @@
 				</item>
 
 				<item
-					name="Z Sign" 
+					name="Z Sign"
 					fr.name="Pancarte Z"
-					type="node" 
+					type="node"
 					icon="icons/Pancarte Z.svg">
 					<label
 						text="Z Sign"
@@ -853,15 +1083,47 @@
 					<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_distant_TIV_board_(C_type)" />
 				</item>
 
+				<separator />
+
+				<item
+					name="Speed Marker"
+					fr.name="Repère de Vitesse"
+					type="node" icon="icons/Pancarte Km.svg">
+					<label
+						text="Speed Marker"
+						fr.text="Repère de Vitesse" />
+					<space />
+					<key key="railway:signal:speed_limit" value="FR:REP_VITESSE" />
+					<key key="railway:signal:speed_limit:form" value="sign" />
+					<reference ref="common_tags" />
+					<combo
+						key="railway:signal:speed_limit:function"
+						text="Signal Function"
+						fr.text="Fonction du signal"
+						editable="false"
+						values_sort="false">
+						<list_entry
+							value="entry"
+							display_value="Entry Signal"
+							fr.display_value="Début de Parcours" />
+						<list_entry
+							value="exit"
+							display_value="Exit Signal"
+							fr.display_value="Fin de Parcours" />
+					</combo>
+
+					<link wiki="OpenRailwayMap/Tagging_in_France#Speed_marker_(Km_sign)" />
+				</item>
+
 			</group>
 
 			<item
-				name="P Board" 
+				name="P Board"
 				fr.name="Tableau P"
-				type="node" 
+				type="node"
 				icon="icons/Tableau P.svg">
-				<label 
-					text="P Board (Speed Limit Announcement)" 
+				<label
+					text="P Board (Speed Limit Announcement)"
 					fr.text="Tableau P (Annonce de limitation de vitesse)" />
 				<space />
 				<key key="railway:signal:speed_limit_distant" value="FR:P" />
@@ -904,7 +1166,7 @@
 							fr.text="Pour certaines séries de locomotives"
 							value_on="FR:L" disable_off="true" />
 					</optional>
-					
+
 					<link wiki="OpenRailwayMap/Tagging_in_France#Pentagonal_distant_TIV_board" />
 				</item>
 
@@ -927,7 +1189,7 @@
 						fr.text="Vitesse Limite (km/h)"
 						values="30,40,50,60,80,100,120,160,180,200,220"
 						editable="false"/>
-					
+
 					<link wiki="OpenRailwayMap/Tagging_in_France#Pentagonal_execution_TIV_board" />
 				</item>
 
@@ -950,37 +1212,6 @@
 				</item>
 
 			</group>
-
-			<item
-				name="Speed Marker" 
-				fr.name="Repère de Vitesse"
-				type="node" icon="icons/Pancarte Km.svg">
-				<label
-					text="Speed Marker"
-					fr.text="Repère de Vitesse" />
-				<space />
-				<key key="railway:signal:speed_limit" value="FR:REP_VITESSE" />
-				<key key="railway:signal:speed_limit:form" value="sign" />
-				<reference ref="common_tags" />
-				<combo
-					key="railway:signal:speed_limit:function"
-					text="Signal Function"
-					fr.text="Fonction du signal"
-					editable="false"
-					values_sort="false">
-					<list_entry
-						value="entry"
-						display_value="Entry Signal"
-						fr.display_value="Début de Parcours" />
-					<list_entry
-						value="exit"
-						display_value="Exit Signal"
-						fr.display_value="Fin de Parcours" />
-				</combo>
-
-				<link wiki="OpenRailwayMap/Tagging_in_France#Speed_marker_(Km_sign)" />
-			</item>
-
 		</group>
 
 		<group
@@ -991,7 +1222,7 @@
 			<item
 				name="Downward-pointing Chevron"
 				fr.name="Chevron Pointe en Bas"
-				type="node" 
+				type="node"
 				icon="icons/Chevron pointe en bas.svg">
 				<label
 					text="Downward-pointing chevron"
@@ -1008,7 +1239,7 @@
 			<item
 				name="Upward-pointing Chevron"
 				fr.name="Chevron Pointe en Haut"
-				type="node" 
+				type="node"
 				icon="icons/Chevron pointe en haut.svg">
 				<label
 					text="Upward-pointing chevron"
@@ -1029,12 +1260,12 @@
 		<group
 			name="Route Indicators"
 			fr.name="Indicateurs de Direction"
-			icon="icons/Indicateur 3 directions.svg">
+			icon="icons/ID3.svg">
 
 			<item
 				name="ID" fr.name="ID"
 				type="node"
-				icon="icons/Indicateur 3 directions.svg">
+				icon="icons/ID3.svg">
 				<label
 					text="Route Indicator"
 					fr.text="Indicateur de Directions" />
@@ -1048,19 +1279,19 @@
 					fr.text="Nombre de Directions"
 					editable="false">
 					<list_entry
-						value="FR:D1;FR:D2"
+						value="FR:ID1;FR:ID2"
 						display_value="2 Directions"
 						fr.display_value="2 Directions" />
 					<list_entry
-						value="FR:D1;FR:D2;FR:D3"
+						value="FR:ID1;FR:ID2;FR:ID3"
 						display_value="3 Directions"
 						fr.display_value="3 Directions" />
 					<list_entry
-						value="FR:D1;FR:D2;FR:D3;FR:D4"
+						value="FR:ID1;FR:ID2;FR:ID3;FR:ID4"
 						display_value="4 Directions"
 						fr.display_value="4 Directions" />
 					<list_entry
-						value="FR:D1;FR:D2;FR:D3;FR:D4;FR:D5"
+						value="FR:ID1;FR:ID2;FR:ID3;FR:ID4;FR:ID5"
 						display_value="5 Directions"
 						fr.display_value="5 Directions" />
 				</combo>
@@ -1602,7 +1833,7 @@
 					<reference ref="facility_tags" />
 					<key key="railway:signal:station_distant" value="FR:APPROCHE_ETS_A" />
 					<key key="railway:signal:station_distant:form" value="sign" />
-					<text 
+					<text
 						key="railway:signal:station_distant:caption"
 						text="Sign Text"
 						fr.text="Intitulé de la pancarte" />
@@ -1612,7 +1843,7 @@
 				<item
 					name="Approaching a Facility (VUSS)"
 					fr.name="Approche d'un Établissement (VUSS)"
-					type="node" 
+					type="node"
 					icon="icons/APPROCHE_ETS.svg">
 					<label
 						text="Approaching a Facility"
@@ -1626,7 +1857,7 @@
 				<item
 					name="Facility Boundary"
 					fr.name="Limite d'un Établissement"
-					type="node" 
+					type="node"
 					icon="icons/Limite d'établissement.svg">
 					<label
 						text="Facility boundary"
@@ -1653,7 +1884,7 @@
 				<item
 					name="Advance sign for Arrêt"
 					fr.name="Pancarte à Distance Arrêt"
-					type="node" 
+					type="node"
 					icon="icons/Pancarte à distance Arrêt.svg">
 					<label
 						text="Advance sign for &quot;Arrêt&quot;"
@@ -1697,7 +1928,7 @@
 				<item
 					name="Advance sign for STOP"
 					fr.name="Pancarte à Distance STOP"
-					type="node" 
+					type="node"
 					icon="icons/Pancarte à distance STOP.svg">
 					<label
 						text="Advance sign for &quot;STOP&quot;"
@@ -1750,11 +1981,11 @@
 					<link wiki="OpenRailwayMap/Tagging_in_France#Passenger_stops" />
 				</chunk>
 
-				<item 
-					name="TT" 
-					type="node" 
+				<item
+					name="TT"
+					type="node"
 					icon="icons/Pancarte TT.svg">
-					<label 
+					<label
 						text="Passenger Stop: Head of Train"
 						fr.text="Arrêt voyageurs : Tête de Train" />
 					<space />
@@ -1762,9 +1993,9 @@
 					<key key="railway:signal:stop" value="FR:ARRET_TT" />
 				</item>
 
-				<item 
-					name="TTL" 
-					type="node" 
+				<item
+					name="TTL"
+					type="node"
 					icon="icons/Pancarte TTL.svg">
 					<label
 						text="Passenger Stop: Trains with locomotive"
@@ -1775,9 +2006,9 @@
 					<key key="railway:signal:stop:for" value="locomotive" />
 				</item>
 
-				<item 
-					name="TT EAS" 
-					type="node" 
+				<item
+					name="TT EAS"
+					type="node"
 					icon="icons/Pancarte TT EAS.svg">
 					<label
 						text="Passenger Stop: Trains with EAS equipment"
@@ -1790,9 +2021,9 @@
 
 				<separator />
 
-				<item 
-					name="...V" 
-					type="node" 
+				<item
+					name="...V"
+					type="node"
 					 icon="icons/Pancarte 12V.svg">
 					<label
 						text="Passenger Stop: Trains of x vehicles"
@@ -1801,7 +2032,7 @@
 					<reference ref="passenger_stop_tags" />
 					<key key="railway:signal:stop" value="FR:ARRET_V" />
 					<key key="railway:signal:stop:for" value="vehicles" />
-					<text 
+					<text
 						key="railway:signal:stop:caption"
 						text="Number of vehicles"
 						fr.text="Nombre de voitures"
@@ -1810,9 +2041,9 @@
 
 				<separator />
 
-				<item 
-					name="TGV 1" 
-					type="node" 
+				<item
+					name="TGV 1"
+					type="node"
 					icon="icons/Pancarte TGV 1.svg">
 					<label
 						text="Passenger Stop: HST single units"
@@ -1823,9 +2054,9 @@
 					<key key="railway:signal:stop:for" value="single_unit" />
 				</item>
 
-				<item 
-					name="TGV 2" 
-					type="node" 
+				<item
+					name="TGV 2"
+					type="node"
 					icon="icons/Pancarte TGV 2.svg">
 					<label
 						text="Passenger Stop: HST multiple units"
@@ -1836,11 +2067,11 @@
 					<key key="railway:signal:stop:for" value="multiple_unit" />
 				</item>
 
-				<item 
-					name="TGV 1-2" 
-					type="node" 
+				<item
+					name="TGV 1-2"
+					type="node"
 					icon="icons/Pancarte TGV 1-2.svg">
-					
+
 					<label
 						text="Passenger Stop: HST"
 						fr.text="Arrêt voyageurs : TGV" />
@@ -1892,7 +2123,7 @@
 				<link wiki="OpenRailwayMap/Tagging_in_France#Signal_Lumineux_de_Manœuvre" />
 			</item>
 
-			<item 
+			<item
 				name="TLC"
 				fr.name="TLC"
 				type="node"
@@ -1909,7 +2140,7 @@
 				<link wiki="OpenRailwayMap/Tagging_in_France#Tableau Lumineux_de_Correspondance" />
 			</item>
 
-			<item 
+			<item
 				name="TIP"
 				fr.name="TIP"
 				type="node"
@@ -1953,7 +2184,7 @@
 				<item
 					name="D Board"
 					fr.name="Tableau D"
-					type="node" 
+					type="node"
 					icon="icons/Tableau D.svg">
 					<label
 						text="D Board (to Depot)"
