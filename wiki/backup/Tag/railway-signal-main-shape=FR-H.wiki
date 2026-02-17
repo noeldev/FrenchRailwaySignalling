@@ -1,0 +1,10 @@
+﻿{{!--
+Wiki page: Tag:railway:signal:main:shape=FR:H
+Last edited: 2024-06-26 23:08:43 UTC
+Last editor: Noeld
+Last edit comment: Use template.
+Backup date: 2026-02-17 01:04:26 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:shape=FR:H
+--}}
+
+{{Template:FR:RailwaySignalShape|shape=H}}

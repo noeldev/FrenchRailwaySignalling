@@ -1,15 +1,15 @@
 ﻿{{!--
-Wiki page: Tag:railway:signal:distant:states=FR:VL
-Last edited: 2024-10-19 23:42:34 UTC
+Wiki page: Tag:railway:signal:distant:states=FR:D
+Last edited: 2024-10-19 23:38:10 UTC
 Last editor: Noeld
-Last edit comment: 
+Last edit comment: Edits
 Backup date: 2026-02-17 01:04:25 UTC
-Source URL: https://wiki.openstreetmap.org/wiki/Tag:railway:signal:distant:states=FR:VL
+Source URL: https://wiki.openstreetmap.org/wiki/Tag:railway:signal:distant:states=FR:D
 --}}
 
 {{ValueDescription
 | key           = railway:signal:distant:states
-| value         = FR:VL
+| value         = FR:D
 | image         = 
 | description   = 
 | group         = 
@@ -24,4 +24,4 @@ Source URL: https://wiki.openstreetmap.org/wiki/Tag:railway:signal:distant:state
 | status        = 
 | statuslink    = 
 }}
-{{Template:FR:RailwaySignalState|state=VL|category=distant}}
+{{Template:FR:RailwaySignalState|state=D|category=distant}}
