@@ -1,152 +1,58 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2026-02-17 01:04:26 UTC<br>
-**Category:** tags<br>
-**Total pages:** 18<br>
-**Successfully backed up:** 18
-## Successfully Backed Up Pages (18)
+**Backup generated:** 2026-02-17 22:46:05 UTC<br>
+**Category:** openrailwaymap<br>
+**Total pages:** 6<br>
+**Successfully backed up:** 6
+## Successfully Backed Up Pages (6)
 
-### Tag:railway:signal:distant:shape=FR:R
+### OpenRailwayMap/Tagging_in_France
 
-- **File:** [Tag/railway-signal-distant-shape=FR-R.wiki](Tag/railway-signal-distant-shape=FR-R.wiki)
-- **Wiki URL:** [Tag:railway:signal:distant:shape=FR:R](https://wiki.openstreetmap.org/wiki/Tag:railway:signal:distant:shape=FR:R)
-- **Last edited:** 2026-02-16 03:05:46 UTC
+- **File:** [OpenRailwayMap/Tagging_in_France.wiki](OpenRailwayMap/Tagging_in_France.wiki)
+- **Wiki URL:** [OpenRailwayMap/Tagging_in_France](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
+- **Last edited:** 2026-02-17 20:11:45 UTC
 - **Last editor:** Noeld
-- **Edit comment:** Category "distant" is implicit for signals with R-type head (shape tag)
+- **Edit comment:** Replaced "Announcement" with "Caution" (Avertissement)
 
-### Tag:railway:signal:distant:states=FR:A
+### OpenRailwayMap/Tagging_in_France/Plates
 
-- **File:** [Tag/railway-signal-distant-states=FR-A.wiki](Tag/railway-signal-distant-states=FR-A.wiki)
-- **Wiki URL:** [Tag:railway:signal:distant:states=FR:A](https://wiki.openstreetmap.org/wiki/Tag:railway:signal:distant:states=FR:A)
-- **Last edited:** 2024-10-19 23:38:41 UTC
+- **File:** [OpenRailwayMap/Tagging_in_France/Plates.wiki](OpenRailwayMap/Tagging_in_France/Plates.wiki)
+- **Wiki URL:** [OpenRailwayMap/Tagging_in_France/Plates](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France/Plates)
+- **Last edited:** 2025-04-14 18:10:40 UTC
+- **Last editor:** Kjon
+- **Edit comment:** added [[Category:OpenRailwayMap]] using [[Wiki:HotCat|HotCat]]
+
+### OpenRailwayMap/Tagging_in_France/Plates (Distant)
+
+- **File:** [OpenRailwayMap/Tagging_in_France/Plates (Distant).wiki](OpenRailwayMap/Tagging_in_France/Plates (Distant).wiki)
+- **Wiki URL:** [OpenRailwayMap/Tagging_in_France/Plates (Distant)](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France/Plates_(Distant))
+- **Last edited:** 2025-04-14 18:10:54 UTC
+- **Last editor:** Kjon
+- **Edit comment:** added [[Category:OpenRailwayMap]] using [[Wiki:HotCat|HotCat]]
+
+### OpenRailwayMap/Tagging_in_France/Shapes
+
+- **File:** [OpenRailwayMap/Tagging_in_France/Shapes.wiki](OpenRailwayMap/Tagging_in_France/Shapes.wiki)
+- **Wiki URL:** [OpenRailwayMap/Tagging_in_France/Shapes](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France/Shapes)
+- **Last edited:** 2026-02-17 21:37:08 UTC
 - **Last editor:** Noeld
+- **Edit comment:** Updated file names for SNCF signal heads
 
-### Tag:railway:signal:distant:states=FR:D
+### OpenRailwayMap/Tagging_in_France/States
 
-- **File:** [Tag/railway-signal-distant-states=FR-D.wiki](Tag/railway-signal-distant-states=FR-D.wiki)
-- **Wiki URL:** [Tag:railway:signal:distant:states=FR:D](https://wiki.openstreetmap.org/wiki/Tag:railway:signal:distant:states=FR:D)
-- **Last edited:** 2024-10-19 23:38:10 UTC
+- **File:** [OpenRailwayMap/Tagging_in_France/States.wiki](OpenRailwayMap/Tagging_in_France/States.wiki)
+- **Wiki URL:** [OpenRailwayMap/Tagging_in_France/States](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France/States)
+- **Last edited:** 2024-10-24 23:05:04 UTC
 - **Last editor:** Noeld
-- **Edit comment:** Edits
+- **Edit comment:** Redirection
 
-### Tag:railway:signal:distant:states=FR:R
+### OpenRailwayMap/Tagging_in_France/States (Distant)
 
-- **File:** [Tag/railway-signal-distant-states=FR-R.wiki](Tag/railway-signal-distant-states=FR-R.wiki)
-- **Wiki URL:** [Tag:railway:signal:distant:states=FR:R](https://wiki.openstreetmap.org/wiki/Tag:railway:signal:distant:states=FR:R)
-- **Last edited:** 2024-10-19 23:22:38 UTC
+- **File:** [OpenRailwayMap/Tagging_in_France/States (Distant).wiki](OpenRailwayMap/Tagging_in_France/States (Distant).wiki)
+- **Wiki URL:** [OpenRailwayMap/Tagging_in_France/States (Distant)](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France/States_(Distant))
+- **Last edited:** 2024-10-24 23:14:47 UTC
 - **Last editor:** Noeld
-- **Edit comment:** Edits.
-
-### Tag:railway:signal:distant:states=FR:VL
-
-- **File:** [Tag/railway-signal-distant-states=FR-VL.wiki](Tag/railway-signal-distant-states=FR-VL.wiki)
-- **Wiki URL:** [Tag:railway:signal:distant:states=FR:VL](https://wiki.openstreetmap.org/wiki/Tag:railway:signal:distant:states=FR:VL)
-- **Last edited:** 2024-10-19 23:42:34 UTC
-- **Last editor:** Noeld
-
-### Tag:railway:signal:main:shape=FR:A
-
-- **File:** [Tag/railway-signal-main-shape=FR-A.wiki](Tag/railway-signal-main-shape=FR-A.wiki)
-- **Wiki URL:** [Tag:railway:signal:main:shape=FR:A](https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:shape=FR:A)
-- **Last edited:** 2024-06-26 02:05:25 UTC
-- **Last editor:** Noeld
-- **Edit comment:** Use template instead of redirection.
-
-### Tag:railway:signal:main:shape=FR:C
-
-- **File:** [Tag/railway-signal-main-shape=FR-C.wiki](Tag/railway-signal-main-shape=FR-C.wiki)
-- **Wiki URL:** [Tag:railway:signal:main:shape=FR:C](https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:shape=FR:C)
-- **Last edited:** 2024-06-26 23:09:57 UTC
-- **Last editor:** Noeld
-- **Edit comment:** Use template.
-
-### Tag:railway:signal:main:shape=FR:F
-
-- **File:** [Tag/railway-signal-main-shape=FR-F.wiki](Tag/railway-signal-main-shape=FR-F.wiki)
-- **Wiki URL:** [Tag:railway:signal:main:shape=FR:F](https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:shape=FR:F)
-- **Last edited:** 2024-06-26 02:03:35 UTC
-- **Last editor:** Noeld
-- **Edit comment:** Use template instead of redirection.
-
-### Tag:railway:signal:main:shape=FR:H
-
-- **File:** [Tag/railway-signal-main-shape=FR-H.wiki](Tag/railway-signal-main-shape=FR-H.wiki)
-- **Wiki URL:** [Tag:railway:signal:main:shape=FR:H](https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:shape=FR:H)
-- **Last edited:** 2024-06-26 23:08:43 UTC
-- **Last editor:** Noeld
-- **Edit comment:** Use template.
-
-### Tag:railway:signal:main:shape=FR:K
-
-- **File:** [Tag/railway-signal-main-shape=FR-K.wiki](Tag/railway-signal-main-shape=FR-K.wiki)
-- **Wiki URL:** [Tag:railway:signal:main:shape=FR:K](https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:shape=FR:K)
-- **Last edited:** 2024-06-26 23:05:30 UTC
-- **Last editor:** Noeld
-- **Edit comment:** Created.
-
-### Tag:railway:signal:main:states=FR:A
-
-- **File:** [Tag/railway-signal-main-states=FR-A.wiki](Tag/railway-signal-main-states=FR-A.wiki)
-- **Wiki URL:** [Tag:railway:signal:main:states=FR:A](https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:states=FR:A)
-- **Last edited:** 2024-06-16 01:43:58 UTC
-- **Last editor:** Noeld
-- **Edit comment:** Created.
-
-### Tag:railway:signal:main:states=FR:C
-
-- **File:** [Tag/railway-signal-main-states=FR-C.wiki](Tag/railway-signal-main-states=FR-C.wiki)
-- **Wiki URL:** [Tag:railway:signal:main:states=FR:C](https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:states=FR:C)
-- **Last edited:** 2024-06-16 01:38:49 UTC
-- **Last editor:** Noeld
-- **Edit comment:** Updated inline syntax.
-
-### Tag:railway:signal:main:states=FR:CV
-
-- **File:** [Tag/railway-signal-main-states=FR-CV.wiki](Tag/railway-signal-main-states=FR-CV.wiki)
-- **Wiki URL:** [Tag:railway:signal:main:states=FR:CV](https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:states=FR:CV)
-- **Last edited:** 2024-06-16 01:48:13 UTC
-- **Last editor:** Noeld
-- **Edit comment:** Created.
-
-### Tag:railway:signal:main:states=FR:M
-
-- **File:** [Tag/railway-signal-main-states=FR-M.wiki](Tag/railway-signal-main-states=FR-M.wiki)
-- **Wiki URL:** [Tag:railway:signal:main:states=FR:M](https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:states=FR:M)
-- **Last edited:** 2024-06-16 01:49:52 UTC
-- **Last editor:** Noeld
-- **Edit comment:** Created.
-
-### Tag:railway:signal:main:states=FR:R
-
-- **File:** [Tag/railway-signal-main-states=FR-R.wiki](Tag/railway-signal-main-states=FR-R.wiki)
-- **Wiki URL:** [Tag:railway:signal:main:states=FR:R](https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:states=FR:R)
-- **Last edited:** 2024-06-16 01:50:10 UTC
-- **Last editor:** Noeld
-- **Edit comment:** Created.
-
-### Tag:railway:signal:main:states=FR:RR
-
-- **File:** [Tag/railway-signal-main-states=FR-RR.wiki](Tag/railway-signal-main-states=FR-RR.wiki)
-- **Wiki URL:** [Tag:railway:signal:main:states=FR:RR](https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:states=FR:RR)
-- **Last edited:** 2024-06-16 01:51:32 UTC
-- **Last editor:** Noeld
-- **Edit comment:** Created.
-
-### Tag:railway:signal:main:states=FR:S
-
-- **File:** [Tag/railway-signal-main-states=FR-S.wiki](Tag/railway-signal-main-states=FR-S.wiki)
-- **Wiki URL:** [Tag:railway:signal:main:states=FR:S](https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:states=FR:S)
-- **Last edited:** 2024-06-16 01:42:34 UTC
-- **Last editor:** Noeld
-- **Edit comment:** Created.
-
-### Tag:railway:signal:main:states=FR:VL
-
-- **File:** [Tag/railway-signal-main-states=FR-VL.wiki](Tag/railway-signal-main-states=FR-VL.wiki)
-- **Wiki URL:** [Tag:railway:signal:main:states=FR:VL](https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:states=FR:VL)
-- **Last edited:** 2024-06-16 01:39:10 UTC
-- **Last editor:** Noeld
-- **Edit comment:** Updated inline syntax.
+- **Edit comment:** Redirection
 
 ## About
 
