@@ -313,7 +313,7 @@ class Program
           keys           - All Key: namespace pages
           tags           - All Tag: namespace pages
           templates      - All Template: namespace pages
-          modules        - All Module: namespace pages (Lua scripts)
+          modules        - All Module: namespace pages (Lua scripts and their templates)
           french         - French railway signalling pages and localized content
           all            - All pages (complete backup)
 

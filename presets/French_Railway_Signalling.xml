@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.4_2026-02-15"
+    version="1.5_2026-02-17"
     description="Presets for tagging French railway signalling"
     fr.description="Préréglages pour étiqueter la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -119,19 +119,16 @@
 				<key key="railway:signal:main:form" value="light" />
 				<reference ref="carre_plate_tags" />
 
-				<optional text="Special Characteristics">
+				<optional 
+					text="Special characteristics"
+					fr.text="Caractéristiques particulières">
 
 					<checkgroup columns="3">
 						<check
 							key="railway:signal:main:clearing_light"
 							text="No Clearing Light"
-							fr.text="Œilleton absent"
+							fr.text="Sans Œilleton"
 							value_off="" value_on="no" disable_off="true"/>
-						<check
-							key="railway:crocodile"
-							text="Crocodile"
-							fr.text="Crocodile"
-							default="on" disable_off="true" />
 						<check
 							key="railway:signal:main:short_route"
 							text="Yellow Stripe"
@@ -149,6 +146,13 @@
 							disable_off="true"/>
 					</checkgroup>
 
+					<item_separator />
+
+					<check
+						key="railway:crocodile"
+						text="No Crocodile"
+						fr.text="Sans Crocodile"
+						value_off="" value_on="no" disable_off="true"/>
 				</optional>
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Carré" />
@@ -752,12 +756,22 @@
 					text="Marker Text"
 					fr.text="Intitulé du Repérage" />
 			</optional>
-			<optional text="Special Characteristics">
+			<optional
+				text="Special characteristics"
+				fr.text="Caractéristiques particulières">
 
-				<check key="railway:signal:distant:deactivated"
-					text="Deactivated"
-					fr.text="Annulé"
-					disable_off="true"/>
+				<checkgroup columns="3">
+					<check key="railway:signal:distant:deactivated"
+						text="Deactivated"
+						fr.text="Annulé"
+						disable_off="true"/>
+
+					<check
+						key="railway:crocodile"
+						text="No Crocodile"
+						fr.text="Sans Crocodile"
+						value_off="" value_on="no" disable_off="true"/>
+				</checkgroup>
 			</optional>
 		</chunk>
 
@@ -854,9 +868,9 @@
 				<optional>
 					<check
 						key="railway:crocodile"
-						text="Crocodile"
-						fr.text="Crocodile"
-						default="on" disable_off="true" />
+						text="No Crocodile"
+						fr.text="Sans Crocodile"
+						value_off="" value_on="no" disable_off="true"/>
 				</optional>
 			</chunk>
 
