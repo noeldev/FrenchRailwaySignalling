@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: Module:FR:RailwaySignalShape
-Last edited: 2024-07-07 03:47:14 UTC
+Last edited: 2026-02-16 19:24:30 UTC
 Last editor: Noeld
-Last edit comment: Updated code.
-Backup date: 2025-08-09 02:16:17 UTC
+Last edit comment: Updated SVG filename format and renamed getNumSignalHeads to getNumHeadLayouts to better reflect layout logic
+Backup date: 2026-02-17 00:40:16 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/Module:FR:RailwaySignalShape
 --}}
 
@@ -13,6 +13,7 @@ local p = {}
 local shapeInfo = {
     A = {
         imageWidth = 90,
+        category = "main",
         lightMap = {
             { group = {
         		{ pattern = "x-x", color = "Green" },
@@ -36,6 +37,7 @@ local shapeInfo = {
     },
     C = {
         imageWidth = 90,
+        category = "main",
         lightMap = {
             { group = {
 	            { pattern = "-x-", color = "Purple" },
@@ -60,6 +62,7 @@ local shapeInfo = {
     },
     F = {
         imageWidth = 180,
+        category = "main",
         lightMap = {
             { pattern = "xxxxx", color = "Yellow" },
             { group = {
@@ -87,6 +90,7 @@ local shapeInfo = {
     },
     H = {
         imageWidth = 180,
+        category = "main",
         lightMap = {
             { pattern = "xxxxxxx", color = "Yellow" },
             { group = {
@@ -118,6 +122,7 @@ local shapeInfo = {
     },
     R = {
         imageWidth = 180,
+        category = "distant",
         lightMap = {
             { group = {
         		{ pattern = "-x-x-x", color = "Yellow" },
@@ -149,6 +154,7 @@ local shapeInfo = {
     },
     K = {
         imageWidth = 69,
+        category = "main",
         lightMap = {
             { group = {
             	{ pattern = "x-", color = "Green" },
@@ -178,27 +184,24 @@ local stateInfo = {
 }
 
 -- Helper function to generate the row content based on the pattern
-local function generatePattern(pattern, target)
+local function generatePattern(pattern)
     local row = {}
-    local index = target and tonumber(target:match("%d+")) or nil  -- Extract the number if target is provided
-    local i = 1
     for c in pattern:gmatch(".") do
     	if c == "x" then
-          	table.insert(row, i == index and "||'''✓'''" or "||✓")
+          	table.insert(row, "||✓")
         else
         	table.insert(row, "|| ")
         end
-        i = i + 1
     end
     return table.concat(row)
 end
 
-local function generateLightRow(color, pattern, target)
-	return (color or "Cover") .. generatePattern(pattern, target)
+local function generateLightRow(color, pattern)
+	return (color or "Cover") .. generatePattern(pattern)
 end
 
 -- Generate the light rows
-local function generateLightRows(info, target)
+local function generateLightRows(info)
     local result = {}
     local lightMap = info.lightMap
     local light = #lightMap -- "light" will count in reverse order
@@ -208,7 +211,7 @@ local function generateLightRows(info, target)
     for _, item in ipairs(lightMap) do
         if item.group then
             for i, groupItem in ipairs(item.group) do
-                local row = generateLightRow(groupItem.color, groupItem.pattern, target)
+                local row = generateLightRow(groupItem.color, groupItem.pattern)
                 if i == 1 then
                     if light ~= #lightMap then
                         table.insert(result, "|- " .. groupStyle)
@@ -230,7 +233,7 @@ local function generateLightRows(info, target)
             else
                 table.insert(result, "|-")
             end
-            table.insert(result, "|" .. generateLightRow(item.color, item.pattern, target))
+            table.insert(result, "|" .. generateLightRow(item.color, item.pattern))
             table.insert(result, "!" .. light)
         end
         light = light - 1
@@ -239,7 +242,7 @@ local function generateLightRows(info, target)
 end
 
 -- Generate the state rows
-local function generateStateRows(info, target, frame, statesKey)
+local function generateStateRows(info, frame, statesKey)
     local result = {}
     local stateMap = info.stateMap
     for _, item in ipairs(stateMap) do
@@ -248,14 +251,14 @@ local function generateStateRows(info, target, frame, statesKey)
             table.insert(stateTags, frame:expandTemplate{ title = "TagValue", args = { statesKey, "FR:" .. state } })
         end
         table.insert(result, "|-")
-        table.insert(result, "|" .. table.concat(stateTags, " or ") .. generatePattern(item.pattern, target))
+        table.insert(result, "|" .. table.concat(stateTags, " or ") .. generatePattern(item.pattern))
         table.insert(result, "!")
     end
     return result
 end
 
--- Function to get the number of targets for the shape
-local function getNumTargets(info)
+-- Function to get the number of head layouts for the shape
+local function getNumHeadLayouts(info)
     return #(info.stateMap[1].pattern)
 end
 
@@ -263,54 +266,35 @@ end
 function p.generateTable(frame)
     local args = frame:getParent().args
     local shape = args.shape or "C"  -- Default to "C" if no shape is provided
-    local category = args.category or "main"
-    local target = args.target
-
-    local function validateTarget()
-        local pattern = "^" .. shape
-        return string.match(target, pattern) ~= nil
-    end
-
-	if target and not validateTarget() then
-		return "Type and shape mismatch."
-	end
 
     local info = shapeInfo[shape]
 	if not info then
         return "Shape not found."
 	end
 
-	local numTargets = getNumTargets(info)
+	local numHeadLayouts = getNumHeadLayouts(info)
     local result = {}
 
     -- Generate lights header
     table.insert(result, "{| class=\"wikitable\" style=\"margin-top: 0;\"")
-    table.insert(result, "! scope=\"colgroup\" colspan=\"" .. (numTargets + 1) .. "\" |Lights||#")
+    table.insert(result, "! scope=\"colgroup\" colspan=\"" .. (numHeadLayouts + 1) .. "\" |Lights||#")
 
     -- Generate light rows
-    local lightRows = generateLightRows(info, target)
+    local lightRows = generateLightRows(info)
 	for _, row in ipairs(lightRows) do
         table.insert(result, row)
 	end
 
     -- Generate states header
     table.insert(result, "|-")
-    table.insert(result, "!scope=\"colgroup\" colspan=\"" .. (numTargets + 2) .. "\"|<span id=\"States\">States</span>")
+    table.insert(result, "!scope=\"colgroup\" colspan=\"" .. (numHeadLayouts + 2) .. "\"|<span id=\"States\">States</span>")
 
     -- Generate state rows
-   	local statesKey = "railway:signal:" .. category .. ":states"
-   	local statesRows = generateStateRows(info, target, frame, statesKey)
+   	local statesKey = "railway:signal:" .. info.category .. ":states"
+   	local statesRows = generateStateRows(info, frame, statesKey)
 	for _, row in ipairs(statesRows) do
         table.insert(result, row)
     end
-
-    -- Add the bottom row
-    local bottomRow = { "!style=\"text-align:right;\"|'''" .. shape .. "'''||" }
-    for i = 1, numTargets do
-        table.insert(bottomRow, i .. "||")
-    end
-    table.insert(result, "|-")
-    table.insert(result, table.concat(bottomRow))
 
     -- End of table
     table.insert(result, "|}")
@@ -326,22 +310,21 @@ function p.generateImage(frame)
 	if not info then
         return "Image not available."
 	end
-    return "[[File:Numbering Type " .. shape .. ".svg|frameless|" .. info.imageWidth .. "px]]"
+    return "[[File:SNCF " .. shape .. "-type head layout.svg|frameless|" .. info.imageWidth .. "px]]"
 end
 
 -- Function to generate the tags
 function p.generateTags(frame)
     local args = frame:getParent().args
     local shape = args.shape or "C"
-    local category = args.category or "main"
-    local target = args.target
     local info = shapeInfo[shape]
 	if not info then
         return "Shape not found."
 	end
 
+	local category = info.category
 	local signalKey = "railway:signal:" .. category
-	local numTargets = getNumTargets(info)
+	local numHeadLayouts = getNumHeadLayouts(info)
     local result = {}
 
 	-- Function to generate a tag with optional value and option
@@ -361,9 +344,8 @@ function p.generateTags(frame)
         local seenSignals = {}
         local seenPlates = {}
 
-        for i = 1, numTargets do
-            local key = shape .. i
-            local state = states[key]
+        for headLayoutIndex = 1, numHeadLayouts do
+            local state = states[headLayoutIndex]
             local signal = stateInfo[state].signal
             if signal and not seenSignals[signal] then
                 seenSignals[signal] = true
@@ -391,14 +373,13 @@ function p.generateTags(frame)
             local index = 1
             for char in mapEntry.pattern:gmatch(".") do
                 if char == 'x' then
-                    local key = shape .. index
-                    if not states[key] then
+                    if not states[index] then
                         local state = mapEntry.states[1];
-                        states[key] = state
+                        states[index] = state
 
-                        -- Return states as soon as all targets are collected
+                        -- Return states as soon as all head layouts are collected
                         count = count + 1
-                        if count == numTargets then
+                        if count == numHeadLayouts then
                             return states
                         end
                     end
@@ -412,47 +393,23 @@ function p.generateTags(frame)
     -- Insert signal tags
     local states = getStates()
 
-    if target and states[target] then
-        -- Target type was provided and found
-        local state = states[target]
-        local plateValue = generateTagValue(signalKey .. ":plates", "FR:" .. stateInfo[state].plate)
-        table.insert(result, generateTag(signalKey, "FR:" .. stateInfo[state].signal))
-        table.insert(result, generateTag(signalKey .. ":plates",  plateValue .. ";*"))
-    else
-		-- Lists supported signals and related plates, avoiding duplicates
-		local signalList, plateList = enumSignalsAndPlates(states)
-        table.insert(result, generateTag(signalKey, "", "(" .. table.concat(signalList, "/") .. ")"))
-    	if #plateList > 1 then
-        	table.insert(result, generateTag(signalKey .. ":plates", "(" .. table.concat(plateList, "/") .. ")"))
-        elseif #plateList == 1 then
-        	table.insert(result, generateTag(signalKey .. ":plates", plateList[1] .. ";*"))
-        else
-        	table.insert(result, "no plates available")
-        end
+	-- Lists supported signals and related plates, avoiding duplicates
+	local signalList, plateList = enumSignalsAndPlates(states)
+    table.insert(result, generateTag(signalKey, "", "(" .. table.concat(signalList, "/") .. ")"))
+   	if #plateList > 1 then
+       	table.insert(result, generateTag(signalKey .. ":plates", "(" .. table.concat(plateList, "/") .. ")"))
+    elseif #plateList == 1 then
+       	table.insert(result, generateTag(signalKey .. ":plates", plateList[1] .. ";*"))
     end
 
 	-- Insert form tag
    	table.insert(result, generateTag(signalKey .. ":form", "light"))
 
-	-- Insert shape tag
-   	table.insert(result, generateTag(signalKey .. ":shape", "FR:" .. shape))
-
-	-- Insert type tag(s)
-	local typeKey = signalKey .. ":type";
-
-    if target then
-    	-- Target type was provided
-    	table.insert(result, generateTag(typeKey, "FR:" .. target))
-    else
-    	-- Lists supported target types
-    	local typeList = {}
-        for i = 1, numTargets do
-        	local type = shape .. i
-	        table.insert(typeList, generateTagValue(typeKey, "FR:" .. type))
-        end
-
-		table.insert(result, generateTag(typeKey, "", "(" .. table.concat(typeList, "/") .. ")"))
-    end
+	-- For R-type signals (distant), do not insert shape tag as it's implicit
+	-- Shape must appear before states as it determines which lights can be present
+	if shape ~= "R" then
+		table.insert(result, generateTag(signalKey .. ":shape", "FR:" .. shape))
+	end
 
 	-- Insert states tag with wildcard
 	table.insert(result, generateTag(signalKey .. ":states") .. " (→ [[#States|possible states]])")

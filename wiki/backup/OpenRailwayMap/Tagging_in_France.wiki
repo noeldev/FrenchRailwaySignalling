@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-02-09 22:35:05 UTC
+Last edited: 2026-02-14 23:39:50 UTC
 Last editor: Noeld
-Last edit comment: /* CAB boards */
-Backup date: 2026-02-10 19:48:00 UTC
+Last edit comment: /* Carré */ Caution (avertissement) instead of announcement
+Backup date: 2026-02-17 00:39:32 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -28,7 +28,7 @@ An absolute stop signal for normal train operations, typically found on main lin
 
 The signal may also be equipped with a marker plate ({{TagKey|railway:signal:main:caption:marker}} tag) and/or a block plate ({{TagKey|railway:signal:main:plate:block}} and {{TagKey|railway:signal:main:caption:block}} tags) indicating the block system downstream of the signal. The inscriptions on these plates are written in black letters on a white background.
 
-In some stations, the entrance [[#Carré|Carré signal]] may be topped with a luminous <span id="BJ">yellow stripe</span> ('''Bande jaune'''). This stripe is lit in addition to the [[Tag:railway:signal:main:states=FR:A|announcement]] ('''Avertissement''') light. It instructs the driver to be prepared to stop at the platform within a short distance, either due to the presence of vehicles or the closure of an intermediate stop signal.
+In some stations, the entrance [[#Carré|Carré signal]] may be topped with a luminous <span id="BJ">yellow stripe</span> ('''Bande jaune'''). This stripe is lit in addition to the [[Tag:railway:signal:main:states=FR:A|Caution]] ('''Avertissement''') light. It instructs the driver to be prepared to stop at the platform within a short distance, either due to the presence of vehicles or the closure of an intermediate stop signal.
 
 <!-- [[File:Bande Jaune.svg|frameless|85px]] -->
 [[File:Carre_C_BAL.svg|frameless|60px]]
@@ -63,6 +63,7 @@ An absolute stop signal, similar to the [[#Carré|Carré signal]], specifically 
 
 Like the Carré signal, this signal may be equipped with a marker plate and/or a block plate with inscriptions in black letters on a white background.
 
+[[File:CV_C_BAL.svg|frameless|60px]]
 [[File:CV_A_BAL.svg|frameless|60px]]
 [[File:CV Sol.svg|frameless|60px]]
 
@@ -70,7 +71,7 @@ The signal is tagged as follows:
 
 * {{Tag|railway:signal:main|FR:CV}}
 * {{Tag|railway:signal:main:form|light}}
-* {{Tag|railway:signal:main:shape||({{TagValue|railway:signal:main:shape|FR:A}}/{{TagValue|railway:signal:main:shape|FR:C}}/{{TagValue|railway:signal:main:shape|FR:F}}/{{TagValue|railway:signal:main:shape|FR:H}})}}
+* {{Tag|railway:signal:main:shape||({{TagValue|railway:signal:main:shape|FR:A}}/{{TagValue|railway:signal:main:shape|FR:C}}/{{TagValue|railway:signal:main:shape|FR:F}}/{{TagValue|railway:signal:main:shape|FR:H}}/{{TagValue|railway:signal:main:shape|FR:K}})}}
 * {{Tag|railway:signal:main:states|}} (→ [[FR:Key:railway:signal:main:states|available states]], separated by <code>;</code>)
 
 Optional tags:
@@ -94,13 +95,14 @@ A stop signal that can be passed under certain conditions. The signal may displa
 * '''PR''' (indicating a block of [https://fr.wikipedia.org/wiki/Block_automatique_%C3%A0_permissivit%C3%A9_restreinte Block Automatique à Permissivité Restreinte])
 The actual inscription is specified with the {{TagKey|railway:signal:main:plate}} tag.
 
+[[File:Semaphore_F_BAL_F.svg|frameless|60px]]
 [[File:Semaphore_A_BAL_F.svg|frameless|60px]]
 
 The signal is tagged as follows:
 
 * {{Tag|railway:signal:main|FR:S}}
 * {{Tag|railway:signal:main:form|light}}
-* {{Tag|railway:signal:main:shape||({{TagValue|railway:signal:main:shape|FR:A}}/{{TagValue|railway:signal:main:shape|FR:F}})}}
+* {{Tag|railway:signal:main:shape||({{TagValue|railway:signal:main:shape|FR:A}}/{{TagValue|railway:signal:main:shape|FR:C}}/{{TagValue|railway:signal:main:shape|FR:F}}/{{TagValue|railway:signal:main:shape|FR:H}}/{{TagValue|railway:signal:main:shape|FR:K}})}}
 * {{Tag|railway:signal:main:states|}} (→ [[FR:Key:railway:signal:main:states|available states]], separated by <code>;</code>)
 
 Optional tags:
@@ -109,7 +111,6 @@ Optional tags:
 * {{Tag|railway:signal:main:caption:marker|}} (marker plate text)
 * {{Tag|railway:signal:main:plate||
 ({{TagValue|railway:signal:main:plate|FR:F}}/{{TagValue|railway:signal:main:plate|FR:PR}}/{{TagValue|railway:signal:main:plate|FR:BM}})}} (identification plate)
-
 
 ==== Guidon d'arrêt ====
 
@@ -263,7 +264,7 @@ The '''R''' sign indicates the end of the section where the speed limit is requi
 
 * {{Tag|railway:signal:speed_limit|FR:R}}
 * {{Tag|railway:signal:speed_limit:form|sign}}
-* * {{Tag|railway:signal:speed_limit:function|exit}}
+* {{Tag|railway:signal:speed_limit:function|exit}}
 * {{Tag|railway:signal:speed_limit:speed|none}}
 
 ===== Fixed distant TIV board (B type) =====
