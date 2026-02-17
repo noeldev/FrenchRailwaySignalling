@@ -19,6 +19,12 @@ on:
         - french
         - all
 
+# Prevents multiple backup jobs from running at the exact same time.
+# Subsequent triggers will be queued, ensuring they don't fight over git pushes.
+concurrency:
+  group: wiki-backup-${{ github.ref }}
+  cancel-in-progress: false 
+
 permissions:
   contents: write
 
@@ -31,6 +37,8 @@ jobs:
       uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+        # Fetch-depth 0 ensures we have the full history for a cleaner rebase
+        fetch-depth: 0
         
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
@@ -52,11 +60,13 @@ jobs:
       run: dotnet build tools/WikiBackup/WikiBackup.csproj --configuration Release --no-restore
 
     - name: Run wiki backup
+      # The category matches the keys defined in your appsettings.json
       run: dotnet run --project tools/WikiBackup/WikiBackup.csproj --configuration Release -- ${{ inputs.category || 'main' }}
         
     - name: Check for changes
       id: check_changes
       run: |
+        # Focus on the specific backup directory defined in settings
         git add wiki/backup/
         if git diff --cached --quiet; then
           echo "No changes detected"
@@ -71,5 +81,17 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
+        
+        # 1. Stage all changes (including the generated README.md)
+        git add .
         git commit -m "Backup wiki pages: ${{ inputs.category || 'main' }} [skip ci]"
-        git push
+        
+        # 2. Fetch the latest changes from origin
+        git fetch origin main
+        
+        # 3. Rebase local changes on top of remote changes.
+        # -X theirs ensures our new README.md and .wiki files take priority
+        git rebase -X theirs origin/main
+        
+        # 4. Push to the main branch
+        git push origin main
