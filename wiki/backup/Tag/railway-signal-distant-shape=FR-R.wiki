@@ -3,7 +3,7 @@ Wiki page: Tag:railway:signal:distant:shape=FR:R
 Last edited: 2026-02-16 03:05:46 UTC
 Last editor: Noeld
 Last edit comment: Category "distant" is implicit for signals with R-type head (shape tag)
-Backup date: 2026-02-17 01:04:25 UTC
+Backup date: 2026-02-17 22:46:59 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/Tag:railway:signal:distant:shape=FR:R
 --}}
 

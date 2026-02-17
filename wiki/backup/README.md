@@ -1,10 +1,10 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2026-02-17 22:46:05 UTC<br>
-**Category:** openrailwaymap<br>
-**Total pages:** 6<br>
-**Successfully backed up:** 6
-## Successfully Backed Up Pages (6)
+**Backup generated:** 2026-02-17 22:47:00 UTC<br>
+**Category:** tags<br>
+**Total pages:** 18<br>
+**Successfully backed up:** 18
+## Successfully Backed Up Pages (18)
 
 ### OpenRailwayMap/Tagging_in_France
 

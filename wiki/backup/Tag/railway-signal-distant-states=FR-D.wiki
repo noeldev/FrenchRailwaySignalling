@@ -3,7 +3,7 @@ Wiki page: Tag:railway:signal:distant:states=FR:D
 Last edited: 2024-10-19 23:38:10 UTC
 Last editor: Noeld
 Last edit comment: Edits
-Backup date: 2026-02-17 01:04:25 UTC
+Backup date: 2026-02-17 22:46:59 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/Tag:railway:signal:distant:states=FR:D
 --}}
 

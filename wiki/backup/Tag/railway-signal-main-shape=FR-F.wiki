@@ -3,7 +3,7 @@ Wiki page: Tag:railway:signal:main:shape=FR:F
 Last edited: 2024-06-26 02:03:35 UTC
 Last editor: Noeld
 Last edit comment: Use template instead of redirection.
-Backup date: 2026-02-17 01:04:26 UTC
+Backup date: 2026-02-17 22:47:00 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:shape=FR:F
 --}}
 
