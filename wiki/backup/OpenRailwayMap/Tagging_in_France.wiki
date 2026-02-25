@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-02-14 23:39:50 UTC
+Last edited: 2026-02-17 20:11:45 UTC
 Last editor: Noeld
-Last edit comment: /* Carré */ Caution (avertissement) instead of announcement
-Backup date: 2026-02-17 00:39:32 UTC
+Last edit comment: Replaced "Announcement" with "Caution" (Avertissement)
+Backup date: 2026-02-17 22:46:05 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -127,7 +127,7 @@ A stop signal that requires the driver to come to a complete stop before the sig
 
 ==== Disque ====
 
-A '''Disque''' (Disk) signal instructs the driver to proceed at sight ('''Marche à Vue''') as soon as possible or to stop before the first set of points (switch or crossing) protected by the disk. It is equipped with an identification plate bearing the inscription '''D''' in black letters on a white background.
+A '''Disque''' signal instructs the driver to proceed at sight ('''Marche à Vue''') as soon as possible or to stop before the first set of points (switch or crossing) protected by the disk. It is equipped with an identification plate bearing the inscription '''D''' in black letters on a white background.
 
 [[File:Disque_BAPR_BM.svg|frameless|60px]]
 
@@ -139,7 +139,7 @@ A '''Disque''' (Disk) signal instructs the driver to proceed at sight ('''Marche
 
 ==== Avertissement ====
 
-An '''Avertissement''' (Announcement) signal indicates the approach to a closed [[#Sémaphore|sémaphore]] of [https://fr.wikipedia.org/wiki/Block_automatique_%C3%A0_permissivit%C3%A9_restreinte Block Automatique à Permissivité Restreinte] (BAPR). It is equipped with an identification plate bearing the inscription '''A''' in black letters on a white background.
+An '''Avertissement''' (Caution) signal indicates the approach to a closed [[#Sémaphore|sémaphore]] of [https://fr.wikipedia.org/wiki/Block_automatique_%C3%A0_permissivit%C3%A9_restreinte Block Automatique à Permissivité Restreinte] (BAPR). It is equipped with an identification plate bearing the inscription '''A''' in black letters on a white background.
 
 [[File:Av_R_BAPR_BM.svg|frameless|60px]]
 

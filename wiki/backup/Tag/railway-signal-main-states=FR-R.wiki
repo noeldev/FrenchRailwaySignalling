@@ -1,0 +1,10 @@
+﻿{{!--
+Wiki page: Tag:railway:signal:main:states=FR:R
+Last edited: 2024-06-16 01:50:10 UTC
+Last editor: Noeld
+Last edit comment: Created.
+Backup date: 2026-02-17 22:47:00 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:states=FR:R
+--}}
+
+{{Template:FR:RailwaySignalState|state=R}}

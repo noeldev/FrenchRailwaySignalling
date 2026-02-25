@@ -1,58 +1,58 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2026-02-17 00:40:16 UTC<br>
-**Category:** modules<br>
-**Total pages:** 6<br>
-**Successfully backed up:** 6
-## Successfully Backed Up Pages (6)
+**Backup generated:** 2026-02-17 22:47:00 UTC<br>
+**Category:** tags<br>
+**Total pages:** 18<br>
+**Successfully backed up:** 18
+## Successfully Backed Up Pages (18)
 
-### Module:FR:RailwaySignalShape
+### OpenRailwayMap/Tagging_in_France
 
-- **File:** [Module/FR/RailwaySignalShape.wiki](Module/FR/RailwaySignalShape.wiki)
-- **Wiki URL:** [Module:FR:RailwaySignalShape](https://wiki.openstreetmap.org/wiki/Module:FR:RailwaySignalShape)
-- **Last edited:** 2026-02-16 19:24:30 UTC
+- **File:** [OpenRailwayMap/Tagging_in_France.wiki](OpenRailwayMap/Tagging_in_France.wiki)
+- **Wiki URL:** [OpenRailwayMap/Tagging_in_France](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
+- **Last edited:** 2026-02-17 20:11:45 UTC
 - **Last editor:** Noeld
-- **Edit comment:** Updated SVG filename format and renamed getNumSignalHeads to getNumHeadLayouts to better reflect layout logic
+- **Edit comment:** Replaced "Announcement" with "Caution" (Avertissement)
 
-### Module:FR:RailwaySignalState
+### OpenRailwayMap/Tagging_in_France/Plates
 
-- **File:** [Module/FR/RailwaySignalState.wiki](Module/FR/RailwaySignalState.wiki)
-- **Wiki URL:** [Module:FR:RailwaySignalState](https://wiki.openstreetmap.org/wiki/Module:FR:RailwaySignalState)
-- **Last edited:** 2024-07-06 22:12:00 UTC
+- **File:** [OpenRailwayMap/Tagging_in_France/Plates.wiki](OpenRailwayMap/Tagging_in_France/Plates.wiki)
+- **Wiki URL:** [OpenRailwayMap/Tagging_in_France/Plates](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France/Plates)
+- **Last edited:** 2025-04-14 18:10:40 UTC
+- **Last editor:** Kjon
+- **Edit comment:** added [[Category:OpenRailwayMap]] using [[Wiki:HotCat|HotCat]]
+
+### OpenRailwayMap/Tagging_in_France/Plates (Distant)
+
+- **File:** [OpenRailwayMap/Tagging_in_France/Plates (Distant).wiki](OpenRailwayMap/Tagging_in_France/Plates (Distant).wiki)
+- **Wiki URL:** [OpenRailwayMap/Tagging_in_France/Plates (Distant)](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France/Plates_(Distant))
+- **Last edited:** 2025-04-14 18:10:54 UTC
+- **Last editor:** Kjon
+- **Edit comment:** added [[Category:OpenRailwayMap]] using [[Wiki:HotCat|HotCat]]
+
+### OpenRailwayMap/Tagging_in_France/Shapes
+
+- **File:** [OpenRailwayMap/Tagging_in_France/Shapes.wiki](OpenRailwayMap/Tagging_in_France/Shapes.wiki)
+- **Wiki URL:** [OpenRailwayMap/Tagging_in_France/Shapes](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France/Shapes)
+- **Last edited:** 2026-02-17 21:37:08 UTC
 - **Last editor:** Noeld
-- **Edit comment:** Fixed prefix.
+- **Edit comment:** Updated file names for SNCF signal heads
 
-### Template:FR:RailwaySignalShape
+### OpenRailwayMap/Tagging_in_France/States
 
-- **File:** [Template/FR/RailwaySignalShape.wiki](Template/FR/RailwaySignalShape.wiki)
-- **Wiki URL:** [Template:FR:RailwaySignalShape](https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalShape)
-- **Last edited:** 2024-08-01 23:05:11 UTC
+- **File:** [OpenRailwayMap/Tagging_in_France/States.wiki](OpenRailwayMap/Tagging_in_France/States.wiki)
+- **Wiki URL:** [OpenRailwayMap/Tagging_in_France/States](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France/States)
+- **Last edited:** 2024-10-24 23:05:04 UTC
 - **Last editor:** Noeld
-- **Edit comment:** Added a link to the Tagging page.
+- **Edit comment:** Redirection
 
-### Template:FR:RailwaySignalShape/doc
+### OpenRailwayMap/Tagging_in_France/States (Distant)
 
-- **File:** [Template/FR/RailwaySignalShape/doc.wiki](Template/FR/RailwaySignalShape/doc.wiki)
-- **Wiki URL:** [Template:FR:RailwaySignalShape/doc](https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalShape/doc)
-- **Last edited:** 2026-02-16 04:29:05 UTC
+- **File:** [OpenRailwayMap/Tagging_in_France/States (Distant).wiki](OpenRailwayMap/Tagging_in_France/States (Distant).wiki)
+- **Wiki URL:** [OpenRailwayMap/Tagging_in_France/States (Distant)](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France/States_(Distant))
+- **Last edited:** 2024-10-24 23:14:47 UTC
 - **Last editor:** Noeld
-- **Edit comment:** /* Exemples */ Updated.
-
-### Template:FR:RailwaySignalState
-
-- **File:** [Template/FR/RailwaySignalState.wiki](Template/FR/RailwaySignalState.wiki)
-- **Wiki URL:** [Template:FR:RailwaySignalState](https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalState)
-- **Last edited:** 2024-10-24 23:39:29 UTC
-- **Last editor:** Noeld
-- **Edit comment:** Edits.
-
-### Template:FR:RailwaySignalState/doc
-
-- **File:** [Template/FR/RailwaySignalState/doc.wiki](Template/FR/RailwaySignalState/doc.wiki)
-- **Wiki URL:** [Template:FR:RailwaySignalState/doc](https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalState/doc)
-- **Last edited:** 2024-07-17 16:07:12 UTC
-- **Last editor:** Noeld
-- **Edit comment:** Edits.
+- **Edit comment:** Redirection
 
 ## About
 
