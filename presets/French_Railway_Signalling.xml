@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.7_2026-02-25"
+    version="1.8_2026-02-26"
     description="Presets for tagging French railway signalling"
     fr.description="Préréglages pour étiqueter la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -2694,7 +2694,7 @@
 				name="Markers"
 				fr.name="Repères"
 				type="node"
-				icon="icons/signs/TVM_stop_marker.svg">
+				icon="icons/signs/TVM_block_marker.svg">
 				<label
 					text="Markers"
 					fr.text="Repères" />
