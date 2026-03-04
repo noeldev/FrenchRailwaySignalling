@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-02-17 20:11:45 UTC
+Last edited: 2026-02-26 03:46:34 UTC
 Last editor: Noeld
-Last edit comment: Replaced "Announcement" with "Caution" (Avertissement)
-Backup date: 2026-02-17 22:46:05 UTC
+Last edit comment: /* TVM stop marker */ Fix: TVM markers are block markers
+Backup date: 2026-02-26 03:47:58 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -11,13 +11,21 @@ Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 
 == Signalling ==
 
-All railway signals have the following tags:
+This section describes the tagging scheme specific to French railway signalling, based on the international [https://wiki.openstreetmap.org/wiki/Tag:railway%3Dsignal railway signal tagging model].
 
-* {{Tag|ref|}}: unique signal identifier
+All railway signals must include the following tags:
+
 * {{Tag|railway|signal}}
-* {{Tag|railway:signal:direction||({{TagValue|railway:signal:direction|forward}}/{{TagValue|railway:signal:direction|backward}}/{{TagValue|railway:signal:direction|both}})}} according to the direction of the way.
-* {{Tag|railway:signal:position||({{TagValue|railway:signal:position|left}}/{{TagValue|railway:signal:position|right}}/{{TagValue|railway:signal:position|bridge}}/{{TagValue|railway:signal:position|overhead}}/{{TagValue|railway:signal:position|in_track}})}}
-* {{Tag|railway:position:exact||365.913}} where 365.913 is an example. Position of the signal according to the direction of the way. This is the Kilometric point (PK) of the signal installation relative to the start of the line.
+* {{Tag|railway:signal:direction||({{TagValue|railway:signal:direction|forward}}/{{TagValue|railway:signal:direction|backward}}/{{TagValue|railway:signal:direction|both}})}} Direction of the signal relative to the direction of the way.
+* {{Tag|railway:signal:position||({{TagValue|railway:signal:position|left}}/{{TagValue|railway:signal:position|right}}/{{TagValue|railway:signal:position|bridge}}/{{TagValue|railway:signal:position|catenary_mast}}/{{TagValue|railway:signal:position|ground}}/{{TagValue|railway:signal:position|in_track}}/{{TagValue|railway:signal:position|overhead}})}} Lateral or vertical position of the signal relative to the track.
+* {{Tag|railway:position:exact||365.913}} where ''365.913'' is an example. Position of the signal along the track. This corresponds to the kilometric point (PK) of the signal installation, measured from the beginning of the line.
+
+* {{TagKey|railway:signal:main}}''':ref'''=123456 where '''main''' is an example of one of the [https://wiki.openstreetmap.org/wiki/Tag:railway%3Dsignal#List_of_signal_categories signal categories] and ''123456'' is an example of an '''idreseau''' identifier provided by SNCF Réseau. One identifier is used per category and per physical signal, board, or sign at the node.
+
+
+Optional tags:
+
+* {{Tag|ref|}}: identifier shown on the marker plate ('''plaque de repérage''') when present.
 
 
 === Main signals ===
@@ -26,7 +34,7 @@ All railway signals have the following tags:
 
 An absolute stop signal for normal train operations, typically found on main lines or at stations. The signal displays two steady red lights, arranged either vertically or horizontally. It is equipped with a clearing light (referred to as an '''œilleton''' in French), which is illuminated in all states except when the signal is closed (i.e. displaying the {{TagValue|railway:signal:main:states|FR:C}} state). The signal also features an identification plate bearing the inscription '''Nf''' in white letters on a black background.
 
-The signal may also be equipped with a marker plate ({{TagKey|railway:signal:main:caption:marker}} tag) and/or a block plate ({{TagKey|railway:signal:main:plate:block}} and {{TagKey|railway:signal:main:caption:block}} tags) indicating the block system downstream of the signal. The inscriptions on these plates are written in black letters on a white background.
+The signal may also be equipped with a marker plate ({{TagKey|ref}} tag) and/or a block plate ({{TagKey|railway:signal:main:plate:block}} and {{TagKey|railway:signal:main:caption:block}} tags) indicating the block system downstream of the signal. The inscriptions on these plates are written in black letters on a white background.
 
 In some stations, the entrance [[#Carré|Carré signal]] may be topped with a luminous <span id="BJ">yellow stripe</span> ('''Bande jaune'''). This stripe is lit in addition to the [[Tag:railway:signal:main:states=FR:A|Caution]] ('''Avertissement''') light. It instructs the driver to be prepared to stop at the platform within a short distance, either due to the presence of vehicles or the closure of an intermediate stop signal.
 
@@ -49,8 +57,6 @@ Optional tags:
 * {{Tag|railway:signal:main:short_route|yes}} (if topped with a luminous [[#BJ|yellow stripe]])
 
 '''Plates and captions'''
-<!-- Plaque de repérage e.g. "C 123" (N°) or "300.6 VA" (PK) -->
-* {{Tag|railway:signal:main:caption:marker|}} (marker plate text)
 <!-- Plaque de cantonnement --> 
 * {{Tag|railway:signal:main:plate:block||({{TagValue|railway:signal:main:plate:block|FR:BM}}/{{TagValue|railway:signal:main:plate:block|FR:PR}})}} (block system plate)
 * {{Tag|railway:signal:main:caption:block|}} (block system plate text)
@@ -74,15 +80,10 @@ The signal is tagged as follows:
 * {{Tag|railway:signal:main:shape||({{TagValue|railway:signal:main:shape|FR:A}}/{{TagValue|railway:signal:main:shape|FR:C}}/{{TagValue|railway:signal:main:shape|FR:F}}/{{TagValue|railway:signal:main:shape|FR:H}}/{{TagValue|railway:signal:main:shape|FR:K}})}}
 * {{Tag|railway:signal:main:states|}} (→ [[FR:Key:railway:signal:main:states|available states]], separated by <code>;</code>)
 
+
 Optional tags:
 
-'''Identification and features'''
-<!-- or extend railway:signal:position? -->
-* {{Tag|railway:signal:location|ground}} (if installed at ground level)
-
 '''Plates and captions'''
-<!-- Plaque de repérage e.g. "Cv 123" (N°) or "300.6VA" (PK) -->
-* {{Tag|railway:signal:main:caption:marker|}} (marker plate text)
 <!-- Plaque de Cantonnement -->
 * {{Tag|railway:signal:main:plate:block||({{TagValue|railway:signal:main:plate:block|FR:BM}}/{{TagValue|railway:signal:main:plate:block|FR:PR}})}} (block system plate)
 * {{Tag|railway:signal:main:caption:block|}} (block plate text)
@@ -107,8 +108,6 @@ The signal is tagged as follows:
 
 Optional tags:
 
-<!-- Plaque de repérage e.g. "300.6 VA" (PK) -->
-* {{Tag|railway:signal:main:caption:marker|}} (marker plate text)
 * {{Tag|railway:signal:main:plate||
 ({{TagValue|railway:signal:main:plate|FR:F}}/{{TagValue|railway:signal:main:plate|FR:PR}}/{{TagValue|railway:signal:main:plate|FR:BM}})}} (identification plate)
 
@@ -120,21 +119,19 @@ A stop signal that requires the driver to come to a complete stop before the sig
 
 * {{Tag|railway:signal:main|FR:GA}}
 * {{Tag|railway:signal:main:form|light}}
-* {{Tag|railway:signal:main:caption:marker|}} (optional: marker plate text)
 
 
 === Distant signals ===
 
 ==== Disque ====
 
-A '''Disque''' signal instructs the driver to proceed at sight ('''Marche à Vue''') as soon as possible or to stop before the first set of points (switch or crossing) protected by the disk. It is equipped with an identification plate bearing the inscription '''D''' in black letters on a white background.
+A '''Disque''' signal instructs the driver to proceed at sight ('''Marche à Vue''') as soon as possible or to stop before the first set of points (switch or crossing) protected by the signal. It is equipped with an identification plate bearing the inscription '''D''' in black letters on a white background.
 
 [[File:Disque_BAPR_BM.svg|frameless|60px]]
 
 * {{Tag|railway:signal:distant|FR:D}}
 * {{Tag|railway:signal:distant:form|light}}
 * {{Tag|railway:signal:distant:states|}} (→ [[FR:Key:railway:signal:distant:states|available states]], separated by <code>;</code>)
-* {{Tag|railway:signal:distant:caption:marker|}} (optional: marker plate text)
 
 
 ==== Avertissement ====
@@ -146,7 +143,6 @@ An '''Avertissement''' (Caution) signal indicates the approach to a closed [[#S�
 * {{Tag|railway:signal:distant|FR:A}}
 * {{Tag|railway:signal:distant:form|light}}
 * {{Tag|railway:signal:distant:states|}} (→ [[FR:Key:railway:signal:distant:states|available states]], separated by <code>;</code>)
-* {{Tag|railway:signal:distant:caption:marker|}} (optional: marker plate text)
 
 
 === Disabled signal ===
@@ -425,16 +421,20 @@ The train is returning to a traditional lateral signalling line.
 * {{Tag|railway:signal:train_protection:form|sign}}
 * {{Tag|railway:signal:train_protection:function|exit}}
 
-===== Block markers =====
+===== Markers =====
 
 ====== TVM block marker ======
 
 [[File:Repère TGV.svg|frameless|60px]]
-<!-- [[File:Repère TGV (sens pair).svg|frameless|60px]] -->
 
 * {{Tag|railway:signal:train_protection|FR:REP_TVM}}
 * {{Tag|railway:signal:train_protection:form|sign}}
 * {{Tag|railway:signal:train_protection:function|block_marker}}
+* {{Tag|railway:signal:train_protection:plate||({{TagValue|railway:signal:train_protection:plate|FR:F}}/{{TagValue|railway:signal:train_protection:plate|FR:NF}})}} (identification plate)
+
+Optional tags:
+
+* {{Tag|railway:signal:train_protection:short_route|yes}} (if topped with a luminous yellow stripe)
 
 ====== ETCS stop marker ======
 
@@ -444,10 +444,7 @@ The train is returning to a traditional lateral signalling line.
 * {{Tag|railway:signal:train_protection:form|sign}}
 * {{Tag|railway:signal:train_protection:function|stop_marker}}
 
-If both signs are located at the same position, use the following tagging scheme:
-* {{Tag|railway:signal:train_protection||{{TagValue|railway:signal:train_protection|FR:REP_ETCS}};{{TagValue|railway:signal:train_protection|FR:REP_TVM}}}}
-* {{Tag|railway:signal:train_protection:form|sign}}
-* {{Tag|railway:signal:train_protection:function|stop_marker}}
+'''Note:''' a proposal exists to replace national ETCS tagging schemes with a unified European [https://wiki.openstreetmap.org/wiki/Proposal:Unified_ETCS_Signals_(railway)#ETCS_stop_marker ETCS stop marker] scheme.
 
 ===== Shunting markers =====
 
@@ -980,5 +977,6 @@ Section with reduced loading gauge.
 *[https://www.jonroma.net/media/rail/opdocs/world/france/S%201%20A%20I-%20Signalisation%20au%20sol.pdf Signalisation au sol] (SNCF, 2005, PDF)
 *[https://github.com/nicolaswurtz/signalisation-rfn-svg signalisation-rfn-svg] (Nicolas Wurtz, SVG)
 *[https://commons.wikimedia.org/wiki/Category:Diagrams_of_railway_signals_in_France Diagrams of railway signals in France] (Various authors, SVG+GIF)
+
 
 {{Railway signals}}
