@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.8_2026-02-26"
+    version="1.9_2026-03-04"
     description="Presets for tagging French railway signalling"
     fr.description="Préréglages pour étiqueter la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -325,7 +325,7 @@
 			<reference ref="shunting_tags" />
 		</chunk>
 
-		<!-- Shunting signals carrying a marker plate (JAL_MAN).
+		<!-- Shunting signals carrying a marker plate (shunting=marker).
 		     Provides: form=sign + common_tags + ref (marker text) + :ref (network ID). -->
 		<chunk id="shunting_marker_tags">
 			<key key="railway:signal:shunting:form" value="sign" />
@@ -2405,7 +2405,6 @@
 				<space />
 				<key key="railway:signal:speed_limit_distant" value="FR:P" />
 				<key key="railway:signal:speed_limit_distant:form" value="sign" />
-				<key key="railway:crocodile" value="yes" />
 				<reference ref="speed_limit_distant_id_tags" />
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Speed_limit_announcement_(P_board)" />
@@ -2505,7 +2504,7 @@
 					text="Downward-pointing chevron"
 					fr.text="Chevron pointe en bas" />
 				<space />
-				<key key="railway:signal:speed_limit" value="FR:CHEVRON_BAS" />
+				<key key="railway:signal:speed_limit" value="FR:CHEVRON" />
 				<key key="railway:signal:speed_limit:type" value="downwards" />
 				<reference ref="speed_limit_tags" />
 
@@ -2521,7 +2520,7 @@
 					text="Upward-pointing chevron"
 					fr.text="Chevron pointe en haut" />
 				<space />
-				<key key="railway:signal:shunting" value="FR:CHEVRON_HAUT" />
+				<key key="railway:signal:shunting" value="FR:CHEVRON" />
 				<key key="railway:signal:shunting:type" value="upwards" />
 				<reference ref="shunting_sign_tags" />
 
@@ -2737,7 +2736,7 @@
 					text="Shunting marker"
 					fr.text="Jalon de manœuvre" />
 				<space />
-				<key key="railway:signal:shunting" value="FR:JAL_MAN" />
+				<key key="railway:signal:shunting" value="FR:JALON" />
 				<reference ref="shunting_marker_tags" />
 			</item>
 
@@ -3018,7 +3017,8 @@
 					text="Blue and white checkered stop marker"
 					fr.text="Jalon d'arrêt à damier bleu et blanc" />
 				<space />
-				<key key="railway:signal:electricity" value="FR:JAL_ARRET_E" />
+				<key key="railway:signal:electricity" value="FR:JALON" />
+				<key key="railway:signal:electricity:type" value="stop_marker" />
 				<reference ref="electricity_sign_tags" />
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Stop_markers" />
@@ -3376,7 +3376,8 @@
 						text="Red and white checkered Stop marker"
 						fr.text="Jalon d'arrêt à damier rouge et blanc" />
 					<space />
-					<key key="railway:signal:stop" value="FR:JAL_ARRET" />
+					<key key="railway:signal:stop" value="FR:JALON" />
+					<key key="railway:signal:stop:type" value="stop_marker" />
 					<reference ref="stop_tags" />
 				</item>
 
