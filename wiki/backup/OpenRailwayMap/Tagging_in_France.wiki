@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-02-26 03:46:34 UTC
+Last edited: 2026-03-04 05:05:09 UTC
 Last editor: Noeld
-Last edit comment: /* TVM stop marker */ Fix: TVM markers are block markers
-Backup date: 2026-02-26 03:47:58 UTC
+Last edit comment: Unified tagging scheme for stop and shunting markers; simplified chevron tagging structure.
+Backup date: 2026-03-08 21:20:37 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -182,7 +182,6 @@ The signal is tagged as follows:
 * {{Tag|railway:signal:speed_limit_distant:form||
 ({{TagValue|railway:signal:speed_limit_distant:form|sign}}/{{TagValue|railway:signal:speed_limit_distant:form|light}})}} (sign=mechanical; light=luminous))
 * {{Tag|railway:signal:speed_limit_distant:states||{{TagValue|railway:signal:speed_limit_distant:states|open}};{{TagValue|railway:signal:speed_limit_distant:states|closed}}}}
-* {{Tag|railway:crocodile|yes}} (if equipped with a crocodile)
 
 Optional tags:
 
@@ -217,7 +216,7 @@ If necessary, the location of the point (or the first point in the case of succe
 
 [[File:Chevron bas.svg|frameless|60px]] 
 
-* {{Tag|railway:signal:speed_limit|FR:CHEVRON_BAS}}
+* {{Tag|railway:signal:speed_limit|FR:CHEVRON}}
 * {{Tag|railway:signal:speed_limit:type|downwards}} (optional, '''downwards''' by default)
 * {{Tag|railway:signal:speed_limit:form|sign}}
 
@@ -238,7 +237,6 @@ The signal is tagged as follows:
 * {{Tag|railway:signal:speed_limit_distant|FR:TIV-D_FIXE}}
 * {{Tag|railway:signal:speed_limit_distant:form||
 ({{TagValue|railway:signal:speed_limit_distant:form|sign}}/{{TagValue|railway:signal:speed_limit_distant:form|light}})}} (sign=reflectorized; light=lit at night)
-* {{Tag|railway:crocodile|yes}} (if equipped with a crocodile)
 
 Optional tags:
 
@@ -297,7 +295,6 @@ The P board announces a distant speed indicator (TIV-D) for lines equipped with 
 
 * {{Tag|railway:signal:speed_limit_distant|FR:P}}
 * {{Tag|railway:signal:speed_limit_distant:form|sign}}
-* {{Tag|railway:crocodile|yes}}
 
 
 ==== Pentagonal speed indicators ====
@@ -452,7 +449,7 @@ A shunting marker or '''Jalon de Manœuvre''' is placed at a point where certain
 
 [[File:Jalon Manoeuvre.svg|frameless|85px]]
 
-* {{Tag|railway:signal:shunting|FR:JAL_MAN}}
+* {{Tag|railway:signal:shunting|FR:JALON}}
 * {{Tag|railway:signal:shunting:form|sign}}
 
 
@@ -550,7 +547,8 @@ The <span id="StopMarker">'''Jalon d'arrêt à damier rouge et blanc'''</span> (
 
 [[File:Jalon d'arret.svg|frameless|40px]]
 
-* {{Tag|railway:signal:stop|FR:JAL_ARRET}}
+* {{Tag|railway:signal:stop|FR:JALON}}
+* {{Tag|railway:signal:stop:type|stop_marker}}
 * {{Tag|railway:signal:stop:form|sign}}
 
 ==== Passenger stops ====
@@ -675,7 +673,8 @@ Upward-pointing chevrons indicate either an exit from a junction of converging t
 
 [[File:Chevron haut.svg|frameless|60px]]
 
-* {{Tag|railway:signal:shunting|FR:CHEVRON_HAUT}}
+* {{Tag|railway:signal:shunting|FR:CHEVRON}}
+* {{Tag|railway:signal:shuting:type|upwards}}
 * {{Tag|railway:signal:shunting:form|sign}}
 
 The '''G''' (Garage) board indicates that the train is directed towards a service track.
@@ -895,7 +894,8 @@ Beyond this sign, the line is no longer electrified and only thermal or dual-mod
 The '''Jalon d'arrêt à damier bleu et blanc''' (blue and white checkered stop marker) is used exclusively on service tracks. It commands the stop of shunting movements for electric traction trains. This reflectorized sign has the same meaning as the [[#StopMarker|Jalon d'arrêt à damier rouge et blanc]], but applies only to electric trains.
 
 [[File:Jalon d'arrêt E.svg|frameless|60px]]
-* {{Tag|railway:signal:electricity|FR:JAL_ARRET_E}}
+* {{Tag|railway:signal:electricity|FR:JALON}}
+* {{Tag|railway:signal:electricity:type|stop_marker}}
 * {{Tag|railway:signal:electricity:form|sign}}
 
 ==== Frost board ====

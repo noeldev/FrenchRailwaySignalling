@@ -1,6 +1,6 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2026-02-26 03:47:58 UTC<br>
+**Backup generated:** 2026-03-08 21:20:37 UTC<br>
 **Category:** main<br>
 **Total pages:** 1<br>
 **Successfully backed up:** 1
@@ -10,9 +10,9 @@
 
 - **File:** [OpenRailwayMap/Tagging_in_France.wiki](OpenRailwayMap/Tagging_in_France.wiki)
 - **Wiki URL:** [OpenRailwayMap/Tagging_in_France](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
-- **Last edited:** 2026-02-26 03:46:34 UTC
+- **Last edited:** 2026-03-04 05:05:09 UTC
 - **Last editor:** Noeld
-- **Edit comment:** /* TVM stop marker */ Fix: TVM markers are block markers
+- **Edit comment:** Unified tagging scheme for stop and shunting markers; simplified chevron tagging structure.
 
 ## About
 
