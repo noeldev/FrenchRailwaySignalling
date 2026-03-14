@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.9_2026-03-04"
+    version="1.10_2026-03-14"
     description="Presets for tagging French railway signalling"
     fr.description="Préréglages pour étiqueter la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -2361,23 +2361,9 @@
 						text="Speed Marker"
 						fr.text="Repère de Vitesse" />
 					<space />
-					<key key="railway:signal:speed_limit" value="FR:REP_VITESSE" />
+					<key key="railway:signal:speed_limit" value="FR:KM" />
+					<key key="railway:signal:speed_limit:type" value="speed_marker" />
 					<reference ref="speed_limit_tags" />
-					<combo
-						key="railway:signal:speed_limit:function"
-						text="Signal Function"
-						fr.text="Fonction du signal"
-						editable="false"
-						values_sort="false">
-						<list_entry
-							value="entry"
-							display_value="Entry Signal"
-							fr.display_value="Début de Parcours" />
-						<list_entry
-							value="exit"
-							display_value="Exit Signal"
-							fr.display_value="Fin de Parcours" />
-					</combo>
 
 					<item_separator />
 
@@ -2698,6 +2684,7 @@
 					text="Markers"
 					fr.text="Repères" />
 				<space />
+				<key key="railway:signal:train_protection" value="FR:TVM" />
 				<key key="railway:signal:train_protection:function" value="block_marker" />
 				<reference ref="train_protection_marker_tags" />
 				<combo
@@ -2987,8 +2974,6 @@
 
 			</group>
 
-
-
 			<separator />
 
 			<item
@@ -3170,7 +3155,7 @@
 							text="D Board (to Depot)"
 							fr.text="Tableau D" />
 						<space />
-						<key key="railway:signal:shunting" value="FR:Tableau D" />
+						<key key="railway:signal:shunting" value="FR:D" />
 						<reference ref="shunting_sign_tags" />
 					</item>
 
