@@ -22,11 +22,14 @@ on:
 # Prevents multiple backup jobs from running at the exact same time.
 # Subsequent triggers will be queued, ensuring they don't fight over git pushes.
 concurrency:
-  group: wiki-backup-${{ github.ref }}
-  cancel-in-progress: false 
+  group: wiki-backup
+  cancel-in-progress: false
 
 permissions:
   contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   backup-wiki-pages:
@@ -44,20 +47,13 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '8.0.x'
+        cache: true
         
-    - name: Cache .NET packages
-      uses: actions/cache@v4
-      with:
-        path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-nuget-
-
     - name: Restore dependencies
       run: dotnet restore tools/WikiBackup/WikiBackup.csproj
         
     - name: Build project
-      run: dotnet build tools/WikiBackup/WikiBackup.csproj --configuration Release --no-restore
+      run: dotnet build tools/WikiBackup/WikiBackup.csproj -c Release --no-restore
 
     - name: Run wiki backup
       # The category matches the keys defined in your appsettings.json
@@ -67,13 +63,12 @@ jobs:
       id: check_changes
       run: |
         # Focus on the specific backup directory defined in settings
-        git add wiki/backup/
-        if git diff --cached --quiet; then
-          echo "No changes detected"
-          echo "changed=false" >> $GITHUB_OUTPUT
-        else
+        if [[ -n "$(git status --porcelain wiki/backup)" ]]; then
           echo "Changes detected"
           echo "changed=true" >> $GITHUB_OUTPUT
+        else
+          echo "No changes detected"
+          echo "changed=false" >> $GITHUB_OUTPUT
         fi
 
     - name: Commit and push wiki backup
@@ -83,15 +78,11 @@ jobs:
         git config --local user.name "GitHub Action"
         
         # 1. Stage all changes (including the generated README.md)
-        git add .
-        git commit -m "Backup wiki pages: ${{ inputs.category || 'main' }} [skip ci]"
+        git add wiki/backup
+        git commit --no-verify -m "Backup wiki pages: ${{ inputs.category || 'main' }} [skip ci]" || exit 0
         
-        # 2. Fetch the latest changes from origin
-        git fetch origin main
+        # 2. Pull the latest changes from origin
+        git pull --rebase origin main        
         
-        # 3. Rebase local changes on top of remote changes.
-        # -X theirs ensures our new README.md and .wiki files take priority
-        git rebase -X theirs origin/main
-        
-        # 4. Push to the main branch
+        # 3. Push to the main branch
         git push origin main
