@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-03-04 05:05:09 UTC
+Last edited: 2026-03-14 00:16:17 UTC
 Last editor: Noeld
-Last edit comment: Unified tagging scheme for stop and shunting markers; simplified chevron tagging structure.
-Backup date: 2026-03-08 21:20:37 UTC
+Last edit comment: Simplify marker type names (e.g. TVM, ETCS)
+Backup date: 2026-03-14 00:20:12 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -341,10 +341,9 @@ A speed marker or '''Repère de Vitesse''' is used in conjunction with TIVs to i
 
 [[File:FR_Pancarte_Km.svg|frameless|60px]]
 
-* {{Tag|railway:signal:speed_limit|FR:REP_VITESSE}}
+* {{Tag|railway:signal:speed_limit|FR:KM}}
 * {{Tag|railway:signal:speed_limit:form|sign}}
-* {{Tag|railway:signal:speed_limit:function||({{TagValue|railway:signal:speed_limit:function|entry}}/{{TagValue|railway:signal:speed_limit:function|exit}})}}
-
+* {{Tag|railway:signal:speed_limit:type||{{TagValue|railway:signal:speed_limit:type|speed_marker}}}}
 
 === Route indicators ===
 
@@ -424,7 +423,7 @@ The train is returning to a traditional lateral signalling line.
 
 [[File:Repère TGV.svg|frameless|60px]]
 
-* {{Tag|railway:signal:train_protection|FR:REP_TVM}}
+* {{Tag|railway:signal:train_protection|FR:TVM}}
 * {{Tag|railway:signal:train_protection:form|sign}}
 * {{Tag|railway:signal:train_protection:function|block_marker}}
 * {{Tag|railway:signal:train_protection:plate||({{TagValue|railway:signal:train_protection:plate|FR:F}}/{{TagValue|railway:signal:train_protection:plate|FR:NF}})}} (identification plate)
@@ -437,7 +436,7 @@ Optional tags:
 
 [[File:Wskaźnik_W_ETCS_10_-_prawo.svg|alt=Arrow Stop Marker|frameless|60x60px]]
 
-* {{Tag|railway:signal:train_protection|FR:REP_ETCS}}
+* {{Tag|railway:signal:train_protection|FR:ETCS}}
 * {{Tag|railway:signal:train_protection:form|sign}}
 * {{Tag|railway:signal:train_protection:function|stop_marker}}
 
@@ -684,11 +683,11 @@ The '''G''' (Garage) board indicates that the train is directed towards a servic
 * {{Tag|railway:signal:shunting|FR:G}}
 * {{Tag|railway:signal:shunting:form|sign}}
 
-The '''D''' (Depot) board indicates that the train is directed towards depot tracks. <!-- TBD -->
+The '''D''' (Depot) board indicates that the train is directed towards depot tracks.
 
 [[File:Tableau D.svg|frameless|60px]]
 
-* {{Tag|railway:signal:shunting|FR:DEPOT}}
+* {{Tag|railway:signal:shunting|FR:D}}
 * {{Tag|railway:signal:shunting:form|sign}}
 
 The '''LGR''' (Limite pour Garage par Refoulement) board. <!-- TBD -->
