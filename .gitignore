@@ -10,3 +10,6 @@
 /tools/WikiBackup/.vs/
 /tools/WikiBackup/bin/
 /tools/WikiBackup/obj/
+
+# Backup
+/presets/backup/
