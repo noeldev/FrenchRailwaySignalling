@@ -16,7 +16,6 @@ permissions:
 env:
   ARCHIVE_NAME: French_Railway_Signalling_presets.zip
   PRESET_FILE: presets/French_Railway_Signalling.xml
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
@@ -24,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Validate XML syntax
         run: |
@@ -46,7 +45,7 @@ jobs:
           cp .github/pages/index.html public/
 
       - name: Upload artifact for GitHub Pages
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: public
 
