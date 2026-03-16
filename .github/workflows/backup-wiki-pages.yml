@@ -48,7 +48,8 @@ jobs:
       with:
         dotnet-version: '8.0.x'
         cache: true
-        
+        cache-dependency-path: tools/WikiBackup/WikiBackup.csproj
+
     - name: Restore dependencies
       run: dotnet restore tools/WikiBackup/WikiBackup.csproj
         
