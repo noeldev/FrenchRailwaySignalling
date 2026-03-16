@@ -1,6 +1,6 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2026-03-14 00:20:12 UTC<br>
+**Backup generated:** 2026-03-16 23:19:37 UTC<br>
 **Category:** main<br>
 **Total pages:** 1<br>
 **Successfully backed up:** 1
@@ -10,9 +10,9 @@
 
 - **File:** [OpenRailwayMap/Tagging_in_France.wiki](OpenRailwayMap/Tagging_in_France.wiki)
 - **Wiki URL:** [OpenRailwayMap/Tagging_in_France](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
-- **Last edited:** 2026-03-14 00:16:17 UTC
+- **Last edited:** 2026-03-16 22:11:46 UTC
 - **Last editor:** Noeld
-- **Edit comment:** Simplify marker type names (e.g. TVM, ETCS)
+- **Edit comment:** Remove unused :states; Add :form to SLD, {{WIP}} warning.
 
 ## About
 

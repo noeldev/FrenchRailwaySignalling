@@ -1,13 +1,14 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-03-14 00:16:17 UTC
+Last edited: 2026-03-16 22:11:46 UTC
 Last editor: Noeld
-Last edit comment: Simplify marker type names (e.g. TVM, ETCS)
-Backup date: 2026-03-14 00:20:12 UTC
+Last edit comment: Remove unused :states; Add :form to SLD, {{WIP}} warning.
+Backup date: 2026-03-16 23:19:36 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
 {{languages}}
+{{WIP}}
 
 == Signalling ==
 
@@ -20,13 +21,15 @@ All railway signals must include the following tags:
 * {{Tag|railway:signal:position||({{TagValue|railway:signal:position|left}}/{{TagValue|railway:signal:position|right}}/{{TagValue|railway:signal:position|bridge}}/{{TagValue|railway:signal:position|catenary_mast}}/{{TagValue|railway:signal:position|ground}}/{{TagValue|railway:signal:position|in_track}}/{{TagValue|railway:signal:position|overhead}})}} Lateral or vertical position of the signal relative to the track.
 * {{Tag|railway:position:exact||365.913}} where ''365.913'' is an example. Position of the signal along the track. This corresponds to the kilometric point (PK) of the signal installation, measured from the beginning of the line.
 
-* {{TagKey|railway:signal:main}}''':ref'''=123456 where '''main''' is an example of one of the [https://wiki.openstreetmap.org/wiki/Tag:railway%3Dsignal#List_of_signal_categories signal categories] and ''123456'' is an example of an '''idreseau''' identifier provided by SNCF Réseau. One identifier is used per category and per physical signal, board, or sign at the node.
+* {{TagKey|railway:signal:main}}''':ref'''=123456 where '''main''' is an example of one of the [https://wiki.openstreetmap.org/wiki/Tag:railway%3Dsignal#List_of_signal_categories signal categories] and ''123456'' is an example of an '''idreseau''' identifier provided by [https://www.sncf-reseau.com/ SNCF Réseau]. One identifier is used per category and per physical signal, board, or sign at the node.
 
 
 Optional tags:
 
 * {{Tag|ref|}}: identifier shown on the marker plate ('''plaque de repérage''') when present.
 
+=== ETCS Signals ===
+See [[Proposal:Unified_ETCS_Signals_(railway)]], an approved proposal.
 
 === Main signals ===
 
@@ -120,6 +123,16 @@ A stop signal that requires the driver to come to a complete stop before the sig
 * {{Tag|railway:signal:main|FR:GA}}
 * {{Tag|railway:signal:main:form|light}}
 
+==== Tableau Lumineux de Correspondance ====
+
+A '''Tableau Lumineux de Correspondance''' (TLC) for converging tracks is a signal installed to the left of the track it addresses and is normally off. At any given time, it can display one of the following:
+# A white letter '''T''', either ''fixed'' if the group signal is open or ''flashing'', if the group signal is closed.
+# The [[#Signal Lumineux de Départ|Signal Lumineux de Départ]] if applicable.
+# A red and white checkerboard, which has the same meaning as the [[#StopMarker|Jalon d'Arrêt]] and is used instead of the [[#Chevron|Chevron]].
+
+* {{Tag|railway:signal:main|FR:TLC}}
+* {{Tag|railway:signal:main:form|light}}
+
 
 === Distant signals ===
 
@@ -180,8 +193,7 @@ The signal is tagged as follows:
 
 * {{Tag|railway:signal:speed_limit_distant|FR:TIV-D_MOB}}
 * {{Tag|railway:signal:speed_limit_distant:form||
-({{TagValue|railway:signal:speed_limit_distant:form|sign}}/{{TagValue|railway:signal:speed_limit_distant:form|light}})}} (sign=mechanical; light=luminous))
-* {{Tag|railway:signal:speed_limit_distant:states||{{TagValue|railway:signal:speed_limit_distant:states|open}};{{TagValue|railway:signal:speed_limit_distant:states|closed}}}}
+({{TagValue|railway:signal:speed_limit_distant:form|sign}}/{{TagValue|railway:signal:speed_limit_distant:form|light}})}} (sign=mechanical; light=luminous box))
 
 Optional tags:
 
@@ -204,7 +216,6 @@ The signal is tagged as follows:
 * {{Tag|railway:signal:speed_limit_reminder|FR:TIV-R_MOB}}
 * {{Tag|railway:signal:speed_limit_reminder:form||
 ({{TagValue|railway:signal:speed_limit_reminder:form|sign}}/{{TagValue|railway:signal:speed_limit_reminder:form|light}})}} (sign=mechanical; light=luminous))
-* {{Tag|railway:signal:speed_limit_reminder:states||{{TagValue|railway:signal:speed_limit_reminder:states|open}};{{TagValue|railway:signal:speed_limit_reminder:states|closed}}}}
 
 Optional tags:
 
@@ -309,8 +320,10 @@ A distant upward-pointing pentagonal speed indicator (TIV-D) announces a special
 
 * {{Tag|railway:signal:speed_limit_distant|FR:TIV_PENDIS}}
 * {{Tag|railway:signal:speed_limit_distant:form|sign}}
-* {{Tag|railway:signal:speed_limit_distant:plate|FR:L}} <!-- TBD --> (optional)
 * {{Tag|railway:signal:speed_limit_distant:speed|}}
+
+Optional tags:
+* {{Tag|railway:signal:speed_limit_distant:plate|FR:L}}
 
 ===== Pentagonal execution TIV board =====
 
@@ -368,7 +381,6 @@ The '''Tableau Indicateur de Direction à Distance''' (TIDD) indicates the posit
 
 * {{Tag|railway:signal:route_distant|FR:TIDD}}
 * {{Tag|railway:signal:route_distant:form|light}}
-* {{Tag|railway:signal:route_distant:states||{{TagValue|railway:signal:route_distant:states|off}};{{TagValue|railway:signal:route_distant:states|left}};{{TagValue|railway:signal:route_distant:states|right}}}}
 
 ==== Branch lines ====
 
@@ -431,16 +443,6 @@ The train is returning to a traditional lateral signalling line.
 Optional tags:
 
 * {{Tag|railway:signal:train_protection:short_route|yes}} (if topped with a luminous yellow stripe)
-
-====== ETCS stop marker ======
-
-[[File:Wskaźnik_W_ETCS_10_-_prawo.svg|alt=Arrow Stop Marker|frameless|60x60px]]
-
-* {{Tag|railway:signal:train_protection|FR:ETCS}}
-* {{Tag|railway:signal:train_protection:form|sign}}
-* {{Tag|railway:signal:train_protection:function|stop_marker}}
-
-'''Note:''' a proposal exists to replace national ETCS tagging schemes with a unified European [https://wiki.openstreetmap.org/wiki/Proposal:Unified_ETCS_Signals_(railway)#ETCS_stop_marker ETCS stop marker] scheme.
 
 ===== Shunting markers =====
 
@@ -621,9 +623,8 @@ Some [[#Carré|Carré]] signals are equipped with a '''Demande de Départ''' (DD
 
 At the exit of certain tracks, departure authorization may be given to the driver by means of a flashing half-white, half-green '''Signal Lumineux de Départ''' (SLD).
 
-<!-- TBD -->
 * {{Tag|railway:signal:departure|FR:SLD}} 
-* {{Tag|railway:signal:departure:states||{{TagValue|railway:signal:departure:states|on}};{{TagValue|railway:signal:departure:states|off}}}}
+* {{Tag|railway:signal:departure:form|light}}
 
 Alternatively, departure authorization may be given simply by the opening of the corresponding [[#Carré|Carré]] signal; these Carré signals are identified by a half-white, half-green plate.
 
@@ -635,18 +636,6 @@ Alternatively, departure authorization may be given simply by the opening of the
 === Service tracks and shunting ===
 
 Some yards or groups of converging tracks have dedicated exit signalling.
-
-==== Tableau Lumineux de Correspondance ====
-
-A '''Tableau Lumineux de Correspondance''' (TLC) for converging tracks is a signal installed at ground level to the left of the track it addresses and is normally off. At any given time, it can display one of the following:
-# A white letter '''T''', either ''fixed'' if the group signal is open or ''flashing'', if the group signal is closed.
-# The [[#Signal Lumineux de Départ|Signal Lumineux de Départ]] if applicable.
-# A red and white checkerboard, which has the same meaning as the [[#StopMarker|Jalon d'Arrêt]] and is used instead of the [[#Chevron|Chevron]].
-
-<!-- TBD -->
-* {{Tag|railway:signal:shunting|FR:TLC}}
-* {{Tag|railway:signal:shunting:form|light}}
-* {{Tag|railway:signal:shunting:states||{{TagValue|railway:signal:shunting:states|FR:T}};{{TagValue|railway:signal:shunting:states|FR:(T)}};{{TagValue|railway:signal:shunting:states|FR:SLD}};{{TagValue|railway:signal:shunting:states|FR:MARKER}}}}
 
 ==== Tableau Indicateur de Provenance ====
 
@@ -664,7 +653,6 @@ A '''Signal Lumineux de Manœuvre''' (SLM) is installed in some facilities to fa
 
 * {{Tag|railway:signal:shunting|FR:SLM}}
 * {{Tag|railway:signal:shunting:form|light}}
-* {{Tag|railway:signal:shunting:states||{{TagValue|railway:signal:shunting:states|push}};{{TagValue|railway:signal:shunting:states|pull}};{{TagValue|railway:signal:shunting:states|stop}}}}
 
 ==== Other shunting boards ====
 
