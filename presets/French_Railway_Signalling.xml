@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.10_2026-03-14"
+    version="1.11_2026-03-16"
     description="Presets for tagging French railway signalling"
     fr.description="Préréglages pour étiqueter la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -1859,6 +1859,23 @@
 				<link wiki="OpenRailwayMap/Tagging_in_France#Guidon_d'arrêt" />
 			</item>
 
+			<!-- TLC -->
+
+			<item
+				name="TLC"
+				fr.name="TLC"
+				type="node"
+				icon="icons/boards/TLC.svg">
+				<label
+					text="Tableau Lumineux de Correspondance (TLC)"
+					fr.text="Tableau Lumineux de Correspondance (TLC)" />
+				<space />
+				<key key="railway:signal:main" value="FR:TLC" />
+				<reference ref="main_signal_tags" />
+
+				<link wiki="OpenRailwayMap/Tagging_in_France#Tableau Lumineux_de_Correspondance" />
+			</item>
+
 		</group>
 
 		<!-- DISQUE & AVERTISSEMENT -->
@@ -2108,7 +2125,6 @@
 						fr.text="TIV-D Mobile" />
 					<space />
 					<key key="railway:signal:speed_limit_distant" value="FR:TIV-D_MOB" />
-					<key key="railway:signal:speed_limit_distant:states" value="open;closed" />
 					<reference ref="speed_limit_distant_id_tags" />
 					<combo
 						key="railway:signal:speed_limit_distant:form"
@@ -2147,7 +2163,6 @@
 						fr.text="TIV-R Mobile" />
 					<space />
 					<key key="railway:signal:speed_limit_reminder" value="FR:TIV-R_MOB" />
-					<key key="railway:signal:speed_limit_reminder:states" value="open;closed" />
 					<reference ref="speed_limit_reminder_id_tags" />
 					<combo
 						key="railway:signal:speed_limit_reminder:form"
@@ -2570,7 +2585,6 @@
 					fr.text="Tableau Indicateur de Direction à Distance (TIDD)" />
 				<space />
 				<key key="railway:signal:route_distant" value="FR:TIDD" />
-				<key key="railway:signal:route_distant:states" value="off;left;right" />
 				<reference ref="route_distant_light_tags" />
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Tableau Indicateur_de_Direction_à_Distance" />
@@ -3089,26 +3103,9 @@
 						fr.text="Signal Lumineux de Manœuvre (SLM)" />
 					<space />
 					<key key="railway:signal:shunting" value="FR:SLM" />
-					<key key="railway:signal:shunting:states" value="push;pull;stop" />
 					<reference ref="shunting_light_tags" />
 
 					<link wiki="OpenRailwayMap/Tagging_in_France#Signal_Lumineux_de_Manœuvre" />
-				</item>
-
-				<item
-					name="TLC"
-					fr.name="TLC"
-					type="node"
-					icon="icons/boards/TLC.svg">
-					<label
-						text="Tableau Lumineux de Correspondance (TLC)"
-						fr.text="Tableau Lumineux de Correspondance (TLC)" />
-					<space />
-					<key key="railway:signal:shunting" value="FR:TLC" />
-					<key key="railway:signal:shunting:states" value="FR:T;FR:(T);FR:SLD;FR:MARKER" />
-					<reference ref="shunting_light_tags" />
-
-					<link wiki="OpenRailwayMap/Tagging_in_France#Tableau Lumineux_de_Correspondance" />
 				</item>
 
 				<item
@@ -3486,7 +3483,6 @@
 				<space />
 				<key key="railway:signal:departure" value="FR:SLD" />
 				<key key="railway:signal:departure:form" value="light" />
-				<key key="railway:signal:departure:states" value="on;off" />
 				<reference ref="departure_id_tags" />
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Train_departure" />
