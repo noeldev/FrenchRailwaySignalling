@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.11_2026-03-16"
+    version="1.11_2026-03-22"
     description="Presets for tagging French railway signalling"
     fr.description="Préréglages pour étiqueter la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -28,9 +28,9 @@
 				key="railway:signal:direction"
 				text="Direction"
 				fr.text="Sens "
-				values="forward,backward,both"
-				display_values="Forward,Backward,Bidirectional"
-				fr.display_values="Croissant,Décroissant,Bidirectionnel"
+				values="forward,backward"
+				display_values="Forward,Backward"
+				fr.display_values="Croissant,Décroissant"
 				editable="false" values_sort="false" />
 			<combo
 				key="railway:signal:position"
@@ -1859,6 +1859,8 @@
 				<link wiki="OpenRailwayMap/Tagging_in_France#Guidon_d'arrêt" />
 			</item>
 
+			<separator  />
+
 			<!-- TLC -->
 
 			<item
@@ -2108,18 +2110,18 @@
 		<group
 			name="Speed Limits"
 			fr.name="Limitations de Vitesse"
-			icon="icons/boards/TIV-D_MOB.svg">
+			icon="icons/boards/distant_mobile_speed_limit.svg">
 
 			<group
 				name="Mobile Speed Indicators"
 				fr.name="TIV Mobiles"
-				icon="icons/boards/TIV-D_MOB.svg">
+				icon="icons/boards/distant_mobile_speed_limit.svg">
 
 				<item
 					name="Mobile TIV-D"
 					fr.name="TIV-D Mobile"
 					type="node"
-					icon="icons/boards/TIV-D_MOB.svg">
+					icon="icons/boards/distant_mobile_speed_limit.svg">
 					<label
 						text="Mobile TIV-D"
 						fr.text="TIV-D Mobile" />
@@ -2135,12 +2137,12 @@
 							value="sign"
 							display_value="Mechanical"
 							fr.display_value="Mécanique"
-							icon="icons/boards/TIV-D_MOB.svg" icon_size="16"/>
+							icon="icons/boards/distant_mobile_speed_limit.svg" icon_size="16"/>
 						<list_entry
 							value="light"
 							display_value="Luminous"
 							fr.display_value="Lumineux"
-							icon="icons/boards/TIV-D_MOB_box.svg" icon_size="16"/>
+							icon="icons/boards/distant_mobile_speed_limit_box.svg" icon_size="16"/>
 					</combo>
 					<combo
 						key="railway:signal:speed_limit_distant:speed"
@@ -2157,7 +2159,7 @@
 					name="Mobile TIV-R"
 					fr.name="TIV-R Mobile"
 					type="node"
-					icon="icons/boards/TIV-R_MOB.svg">
+					icon="icons/boards/speed_limit_reminder.svg">
 					<label
 						text="Mobile TIV-R"
 						fr.text="TIV-R Mobile" />
@@ -2173,12 +2175,12 @@
 							value="sign"
 							display_value="Mechanical"
 							fr.display_value="Mécanique"
-							icon="icons/boards/TIV-R_MOB.svg" icon_size="16"/>
+							icon="icons/boards/speed_limit_reminder.svg" icon_size="16"/>
 						<list_entry
 							value="light"
 							display_value="Luminous"
 							fr.display_value="Lumineux"
-							icon="icons/boards/TIV-R_MOB_box.svg" icon_size="16"/>
+							icon="icons/boards/speed_limit_reminder_box.svg" icon_size="16"/>
 					</combo>
 					<combo
 						key="railway:signal:speed_limit_reminder:speed"
@@ -2199,13 +2201,13 @@
 			<group
 				name="Fixed Speed Indicators"
 				fr.name="TIV Fixes"
-				icon="icons/boards/TIV-D_FIXE.svg">
+				icon="icons/boards/distant_speed_limit.svg">
 
 				<item
 					name="Ordinary-type TIV-D"
 					fr.name="TIV-D du Type Ordinaire"
 					type="node"
-					icon="icons/boards/TIV-D_FIXE.svg">
+					icon="icons/boards/distant_speed_limit.svg">
 					<label
 						text="Fixed distant speed indicator of the ordinary type"
 						fr.text="TIV fixe à distance du type ordinaire" />
@@ -2296,7 +2298,6 @@
 					<space />
 					<key key="railway:signal:speed_limit" value="FR:R" />
 					<key key="railway:signal:speed_limit:function" value="exit" />
-					<key key="railway:signal:speed_limit:speed" value="none" />
 					<reference ref="speed_limit_tags" />
 
 					<item_separator />
@@ -2317,7 +2318,7 @@
 					name="B-type TIV-D"
 					fr.name="TIV-D du Type B"
 					type="node"
-					icon="icons/boards/TIV-D_B_FIXE.svg">
+					icon="icons/boards/B-type_distant_speed_limit.svg">
 					<label
 						text="B-type fixed distant speed indicator"
 						fr.text="TIV fixe à distance du type B" />
@@ -2344,7 +2345,7 @@
 					name="C-type TIV-D"
 					fr.name="TIV-D du Type C"
 					type="node"
-					icon="icons/boards/TIV-D_C_FIXE.svg">
+					icon="icons/boards/C-type_distant_speed_limit.svg">
 					<label
 						text="C-type fixed distant speed indicator"
 						fr.text="TIV fixe à distance du type C" />
@@ -2371,7 +2372,7 @@
 				<item
 					name="Speed Marker"
 					fr.name="Repère de Vitesse"
-					type="node" icon="icons/signs/Km.svg">
+					type="node" icon="icons/signs/speed_marker.svg">
 					<label
 						text="Speed Marker"
 						fr.text="Repère de Vitesse" />
@@ -2416,19 +2417,20 @@
 			<group
 				name="Pentagonal Speed Indicators"
 				fr.name="TIV Pentagonaux"
-				icon="icons/boards/TIV_PENEXE.svg">
+				icon="icons/boards/pentagonal_speed_limit.svg">
 
 				<item
 					name="Distant TIV board"
 					fr.name="TIV à Distance"
 					type="node"
-					icon="icons/boards/TIV_PENDIS.svg">
+					icon="icons/boards/distant_pentagonal_speed_limit.svg">
 					<label
 						text="Pentagonal distant speed indicator"
 						fr.text="TIV à distance de forme pentagonale" />
 					<space />
-					<key key="railway:signal:speed_limit_distant" value="FR:TIV_PENDIS" />
+					<key key="railway:signal:speed_limit_distant" value="FR:TIV-D" />
 					<key key="railway:signal:speed_limit_distant:form" value="sign" />
+					<key key="railway:signal:speed_limit_distant:shape" value="pentagon" />
 					<reference ref="speed_limit_distant_id_tags" />
 					<combo
 						key="railway:signal:speed_limit_distant:speed"
@@ -2451,12 +2453,13 @@
 					name="Execution TIV board"
 					fr.name="TIV d'Exécution"
 					type="node"
-					icon="icons/boards/TIV_PENEXE.svg">
+					icon="icons/boards/pentagonal_speed_limit.svg">
 					<label
 						text="Pentagonal execution speed indicator"
 						fr.text="TIV d'exécution de forme pentagonale" />
 					<space />
-					<key key="railway:signal:speed_limit" value="FR:TIV_PENEXE" />
+					<key key="railway:signal:speed_limit" value="FR:TIV" />
+					<key key="railway:signal:speed_limit:shape" value="pentagon" />
 					<key key="railway:signal:speed_limit:function" value="entry" />
 					<reference ref="speed_limit_tags" />
 					<combo
@@ -2473,14 +2476,14 @@
 					name="White board"
 					fr.name="TIV de Reprise"
 					type="node"
-					icon="icons/boards/TIV_PENREP.svg">
+					icon="icons/boards/pentagonal_white_board.svg">
 					<label
 						text="Pentagonal resumption speed indicator"
 						fr.text="TIV de reprise de forme pentagonale" />
 					<space />
-					<key key="railway:signal:speed_limit" value="FR:TIV_PENREP" />
+					<key key="railway:signal:speed_limit" value="FR:TIV" />
+					<key key="railway:signal:speed_limit:shape" value="pentagon" />
 					<key key="railway:signal:speed_limit:function" value="exit" />
-					<key key="railway:signal:speed_limit:speed" value="none" />
 					<reference ref="speed_limit_tags" />
 
 					<link wiki="OpenRailwayMap/Tagging_in_France#Pentagonal_white_board" />
@@ -2494,13 +2497,13 @@
 		<group
 			name="Chevrons"
 			fr.name="Chevrons"
-			icon="icons/signs/Chevron_down.svg">
+			icon="icons/signs/chevron_down.svg">
 
 			<item
 				name="Downward-pointing Chevron"
 				fr.name="Chevron Pointe en Bas"
 				type="node"
-				icon="icons/signs/Chevron_down.svg">
+				icon="icons/signs/chevron_down.svg">
 				<label
 					text="Downward-pointing chevron"
 					fr.text="Chevron pointe en bas" />
@@ -2516,7 +2519,7 @@
 				name="Upward-pointing Chevron"
 				fr.name="Chevron Pointe en Haut"
 				type="node"
-				icon="icons/signs/Chevron_up.svg">
+				icon="icons/signs/chevron_up.svg">
 				<label
 					text="Upward-pointing chevron"
 					fr.text="Chevron pointe en haut" />
@@ -2638,13 +2641,13 @@
 		<group
 			name="Cab Signalling"
 			fr.name="Signalisation en Cabine"
-			icon="icons/boards/CAB_R.svg">
+			icon="icons/boards/cab_signalling_entry.svg">
 
 			<item
 				name="Distant Signal"
 				fr.name="Signal à Distance"
 				type="node"
-				icon="icons/boards/CAB_E.svg">
+				icon="icons/boards/cab_signalling_advance.svg">
 				<label
 					text="Advance signal for cabin signalling"
 					fr.text="Annonce d'une ligne à signalisation de cabine" />
@@ -2659,7 +2662,7 @@
 				name="Entry Signal"
 				fr.name="Signal d'Entrée"
 				type="node"
-				icon="icons/boards/CAB_R.svg">
+				icon="icons/boards/cab_signalling_entry.svg">
 				<label
 					text="Cab signalling entry signal"
 					fr.text="Entrée d'une ligne à signalisation de cabine" />
@@ -2675,7 +2678,7 @@
 				name="Exit Signal"
 				fr.name="Signal de Sortie"
 				type="node"
-				icon="icons/boards/CAB_S.svg">
+				icon="icons/boards/cab_signalling_exit.svg">
 				<label
 					text="Cab signalling exit signal"
 					fr.text="Sortie d'une ligne à signalisation de cabine" />
@@ -2732,7 +2735,7 @@
 				name="Shunting Marker"
 				fr.name="Jalon de Manœuvre"
 				type="node"
-				icon="icons/signs/JAL_MAN.svg">
+				icon="icons/signs/shunting_marker.svg">
 				<label
 					text="Shunting marker"
 					fr.text="Jalon de manœuvre" />
@@ -2789,18 +2792,18 @@
 		<group
 			name="Electrified Railway Lines"
 			fr.name="Lignes Électrifiées"
-			icon="icons/signs/CC_EXE.svg">
+			icon="icons/signs/power_off.svg">
 
 			<group
 				name="Neutral Section"
 				fr.name="Zone de Sectionnement"
-				icon="icons/signs/CC_EXE.svg">
+				icon="icons/signs/power_off.svg">
 
 				<item
 					name="Advance Sign"
 					fr.name="Pancarte à Distance"
 					type="node"
-					icon="icons/signs/SECT.svg">
+					icon="icons/signs/neutral_section_ahead.svg">
 					<label
 						text="Advance sign for neutral section"
 						fr.text="Pancarte d'annonce d'une zone de sectionnement" />
@@ -2820,12 +2823,12 @@
 					name="Execution Signal"
 					fr.name="Signal d'Exécution"
 					type="node"
-					icon="icons/signs/CC_EXE.svg">
+					icon="icons/signs/power_off.svg">
 					<label
 						text="Neutral section execution signal"
 						fr.text="Signal d'exécution &quot;Coupez Courant&quot;" />
 					<space />
-					<key key="railway:signal:electricity" value="FR:CC_EXE" />
+					<key key="railway:signal:electricity" value="FR:CC" />
 					<key key="railway:signal:electricity:type" value="power_off" />
 					<key key="railway:signal:electricity:function" value="entry" />
 					<reference ref="electricity_base_tags" />
@@ -2837,12 +2840,12 @@
 					name="End Signal"
 					fr.name="Signal de Fin de Parcours"
 					type="node"
-					icon="icons/signs/CC_FIN.svg">
+					icon="icons/signs/power_on.svg">
 					<label
 						text="Neutral section end signal"
 						fr.text="Signal de fin de parcours &quot;Coupez Courant&quot;" />
 					<space />
-					<key key="railway:signal:electricity" value="FR:CC_FIN" />
+					<key key="railway:signal:electricity" value="FR:CC" />
 					<key key="railway:signal:electricity:type" value="power_on" />
 					<key key="railway:signal:electricity:function" value="exit" />
 					<reference ref="electricity_base_tags" />
@@ -2876,18 +2879,18 @@
 			<group
 				name="Pantograph Down"
 				fr.name="Baissez Panto"
-				icon="icons/signs/BP_EXE.svg">
+				icon="icons/signs/pantograph_down.svg">
 
 				<item
 					name="Advance Signal"
 					fr.name="Signal à Distance"
 					type="node"
-					icon="icons/signs/BP_DIS.svg">
+					icon="icons/signs/pantograph_down_advance.svg">
 					<label
 						text="Pantograph down advance signal"
 						fr.text="Signal à distance &quot;Baissez panto&quot;" />
 					<space />
-					<key key="railway:signal:electricity" value="FR:BP_DIS" />
+					<key key="railway:signal:electricity" value="FR:BP" />
 					<key key="railway:signal:electricity:type" value="pantograph_down_advance" />
 					<reference ref="electricity_base_tags" />
 
@@ -2902,12 +2905,12 @@
 					name="Execution Signal"
 					fr.name="Signal d'Exécution"
 					type="node"
-					icon="icons/signs/BP_EXE.svg">
+					icon="icons/signs/pantograph_down.svg">
 					<label
 						text="Pantograph down execution signal"
 						fr.text="Signal d'exécution &quot;Baissez panto&quot;" />
 					<space />
-					<key key="railway:signal:electricity" value="FR:BP_EXE" />
+					<key key="railway:signal:electricity" value="FR:BP" />
 					<key key="railway:signal:electricity:type" value="pantograph_down" />
 					<key key="railway:signal:electricity:function" value="entry" />
 					<reference ref="electricity_base_tags" />
@@ -2924,12 +2927,12 @@
 					name="End Signal"
 					fr.name="Signal de Fin de Parcours"
 					type="node"
-					icon="icons/signs/BP_FIN.svg">
+					icon="icons/signs/pantograph_up.svg">
 					<label
 						text="Pantograph down end signal"
 						fr.text="Signal de fin de parcours &quot;Baissez panto&quot;" />
 					<space />
-					<key key="railway:signal:electricity" value="FR:BP_FIN" />
+					<key key="railway:signal:electricity" value="FR:BP" />
 					<key key="railway:signal:electricity:type" value="pantograph_up" />
 					<key key="railway:signal:electricity:function" value="exit" />
 					<reference ref="electricity_base_tags" />
@@ -2949,13 +2952,13 @@
 			<group
 				name="Dual-Mode Traffic"
 				fr.name="Circulations Bimodes"
-				icon="icons/signs/BIMODE.svg">
+				icon="icons/signs/dual_mode.svg">
 
 				<item
 					name="Dual-Mode Entry Sign"
 					fr.name="Début de Parcours BIMODE"
 					type="node"
-					icon="icons/signs/BIMODE_VERS.svg">
+					icon="icons/signs/dual_mode_to.svg">
 					<label
 						text="Entering dual-mode operation zone"
 						fr.text="Pancarte Début de circulation bimode" />
@@ -2974,10 +2977,10 @@
 					name="Dual-Mode Exit Sign"
 					fr.name="Fin de Parcours BIMODE"
 					type="node"
-					icon="icons/signs/BIMODE.svg">
+					icon="icons/signs/dual_mode.svg">
 					<label
 						text="Exiting dual-mode operation zone"
-						fr.text="Pancarte Fin de circulation bimode" />
+						fr.text="Pancarte Fin de parcours BIMODE" />
 					<space />
 					<key key="railway:signal:dual_mode" value="FR:BIMODE" />
 					<key key="railway:signal:dual_mode:function" value="exit" />
@@ -2994,12 +2997,12 @@
 				name="End of Catenary"
 				fr.name="Fin de Caténaire"
 				type="node"
-				icon="icons/signs/FIN_CAT.svg">
+				icon="icons/signs/end_of_catenary.svg">
 				<label
 					text="End of Catenary"
 					fr.text="Fin de Caténaire" />
 				<space />
-				<key key="railway:signal:electricity" value="FR:FIN_CAT" />
+				<key key="railway:signal:electricity" value="FR:CAT" />
 				<key key="railway:signal:electricity:type" value="end_of_catenary" />
 				<key key="railway:signal:position" value="overhead" />
 				<reference ref="electricity_sign_tags" />
@@ -3011,7 +3014,7 @@
 				name="Stop Marker"
 				fr.name="Jalon d'Arrêt"
 				type="node"
-				icon="icons/signs/JAL_ARRET_E.svg">
+				icon="icons/signs/blue_stop_marker.svg">
 				<label
 					text="Blue and white checkered stop marker"
 					fr.text="Jalon d'arrêt à damier bleu et blanc" />
@@ -3031,23 +3034,23 @@
 		<group
 			name="Stations, Yards and Facilities"
 			fr.name="Gares, Triages et Établissements"
-			icon="icons/signs/GARE.svg">
+			icon="icons/signs/station.svg">
 
 			<group
 				name="Facilities"
 				fr.name="Établissements"
-				icon="icons/signs/LIMITE_ETS.svg">
+				icon="icons/signs/facility_limits.svg">
 
 				<item
 					name="Approaching a Facility"
 					fr.name="Approche d'un Établissement"
 					type="node"
-					icon="icons/signs/APPROCHE_ETS_A.svg">
+					icon="icons/signs/facility_ahead.svg">
 					<label
 						text="Approaching a Facility"
 						fr.text="Approche d'un Établissement" />
 					<space />
-					<key key="railway:signal:station_distant" value="FR:APPROCHE_ETS_A" />
+					<key key="railway:signal:station_distant" value="FR:ETS_A" />
 					<reference ref="station_distant_sign_tags" />
 					<reference ref="facility_tags" />
 					<text
@@ -3061,12 +3064,12 @@
 					name="Approaching a Facility (VUSS)"
 					fr.name="Approche d'un Établissement (VUSS)"
 					type="node"
-					icon="icons/signs/APPROCHE_ETS.svg">
+					icon="icons/signs/facility.svg">
 					<label
 						text="Approaching a Facility"
 						fr.text="Approche d'un Établissement" />
 					<space />
-					<key key="railway:signal:station_distant" value="FR:APPROCHE_ETS" />
+					<key key="railway:signal:station_distant" value="FR:ETS" />
 					<reference ref="station_distant_sign_tags" />
 					<reference ref="facility_tags" />
 				</item>
@@ -3075,7 +3078,7 @@
 					name="Facility Boundary"
 					fr.name="Limite d'un Établissement"
 					type="node"
-					icon="icons/signs/LIMITE_ETS.svg">
+					icon="icons/signs/facility_limits.svg">
 					<label
 						text="Facility boundary"
 						fr.text="Limite d'un établissement" />
@@ -3149,7 +3152,7 @@
 						type="node"
 						icon="icons/boards/D.svg">
 						<label
-							text="D Board (to Depot)"
+							text="D Board (Depot ahead)"
 							fr.text="Tableau D" />
 						<space />
 						<key key="railway:signal:shunting" value="FR:D" />
@@ -3199,7 +3202,8 @@
 						name="Imp Sign"
 						fr.name="Pancarte Imp"
 						type="node"
-						icon="icons/signs/Imp.svg">
+						icon="icons/signs/dead-end_track.svg">
+						
 						<label
 							text="Imp Sign (Dead-end Track)"
 							fr.text="Pancarte Imp" />
@@ -3228,7 +3232,7 @@
 						name="Buffer-Stop Sign"
 						fr.name="Pancarte Heurtoir"
 						type="node"
-						icon="icons/signs/Heurtoir_A.svg">
+						icon="icons/signs/buffer_stop.svg">
 						<label
 							text="Buffer-Stop Sign"
 							fr.text="Pancarte Heurtoir" />
@@ -3252,7 +3256,7 @@
 			<item
 				name="Station Sign"
 				fr.name="Pancarte Gare"
-				type="node" icon="icons/signs/GARE.svg">
+				type="node" icon="icons/signs/station.svg">
 				<label
 					text="Station Sign"
 					fr.text="Pancarte Gare" />
@@ -3266,13 +3270,13 @@
 			<group
 				name="Stops"
 				fr.name="Arrêts"
-				icon="icons/signs/STOP_A.svg">
+				icon="icons/signs/stop_ahead.svg">
 
 				<item
 					name="Advance sign for Arrêt"
 					fr.name="Pancarte à Distance Arrêt"
 					type="node"
-					icon="icons/signs/ARRET_A.svg">
+					icon="icons/signs/ARRET_ahead.svg">
 					<label
 						text="Advance sign for &quot;Arrêt&quot;"
 						fr.text="Pancarte à distance &quot;Arrêt ...m&quot;" />
@@ -3321,7 +3325,7 @@
 					name="Advance sign for STOP"
 					fr.name="Pancarte à Distance STOP"
 					type="node"
-					icon="icons/signs/STOP_A.svg">
+					icon="icons/signs/stop_ahead.svg">
 					<label
 						text="Advance sign for &quot;STOP&quot;"
 						fr.text="Pancarte à distance STOP" />
@@ -3338,7 +3342,7 @@
 					name="STOP Sign"
 					fr.name="Pancarte STOP"
 					type="node"
-					icon="icons/signs/STOP.svg">
+					icon="icons/signs/stop.svg">
 					<label
 						text="STOP Sign"
 						fr.text="Pancarte STOP" />
@@ -3353,7 +3357,7 @@
 					name="Stop Marker"
 					fr.name="Jalon d'Arrêt"
 					type="node"
-					icon="icons/signs/JAL_ARRET.svg">
+					icon="icons/signs/stop_marker.svg">
 					<label
 						text="Red and white checkered Stop marker"
 						fr.text="Jalon d'arrêt à damier rouge et blanc" />
@@ -3472,6 +3476,8 @@
 
 			</group>
 
+			<separator  />
+
 			<item
 				name="Signal Lumineux de Départ"
 				fr.name="Signal Lumineux de Départ"
@@ -3497,12 +3503,12 @@
 		<group
 			name="Level Crossings"
 			fr.name="Passages à Niveau"
-			icon="icons/signs/PN.svg">
+			icon="icons/signs/level_crossing.svg">
 
 			<item
 				name="Level Crossing Announcement"
 				fr.name="Approche d'un PN non gardé"
-				type="node" icon="icons/signs/PN_A.svg">
+				type="node" icon="icons/signs/level_crossing_ahead.svg">
 				<label
 					text="Approach of an unguarded level crossing"
 					fr.text="Approche d'un passage à niveau non gardé" />
@@ -3520,7 +3526,7 @@
 				name="Level Crossing Ahead"
 				fr.name="Pancarte PN"
 				type="node"
-				icon="icons/signs/PN.svg">
+				icon="icons/signs/level_crossing.svg">
 				<label
 					text="PN Sign (Level Crossing Ahead)"
 					fr.text="Pancarte PN" />
@@ -3550,7 +3556,7 @@
 			name="Reduced Gauge Structure"
 			fr.name="Gabarit Réduit"
 			type="node"
-			icon="icons/signs/GABARIT.svg">
+			icon="icons/signs/loading_gauge.svg">
 			<label
 				text="Reduced Gauge Structure"
 				fr.text="Ouvrage d'art à gabarit réduit" />
