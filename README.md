@@ -57,6 +57,7 @@ FrenchRailwaySignalling/
 
 - 🌐 [Main Wiki Page – Tagging in France (EN)](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
 - 🗺️ [OpenRailwayMap](https://www.openrailwaymap.app)
+- 🚦 [SNCF Signalisation Permanente](https://sncf-sigmap.netlify.app) – interactive map of French railway signalling based on SNCF open data
 
 ## License
 
