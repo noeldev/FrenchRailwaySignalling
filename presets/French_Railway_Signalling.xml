@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.14_2026-04-23"
+    version="1.15_2026-04-29"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -17,7 +17,7 @@
 		<key key="source" value="SNCF - 03/2022" />
 		<text
 			key="railway:position:exact"
-			text="PK (e.g. 100.325)"
+			text="Milepost (e.g. 100.325)"
 			fr.text="PK (ex. : 100.325)" length="7"/>
 		<combo
 			key="railway:signal:direction"
@@ -195,9 +195,16 @@
 	<chunk id="cat_electricity_base">
 		<reference ref="base_common" />
 		<text key="railway:signal:electricity:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-		<combo key="railway:signal:electricity:form" text="Display Type" fr.text="Type d'Affichage" editable="false">
-			<list_entry value="sign" display_value="Mechanical" fr.display_value="Mécanique"/>
-			<list_entry value="light" display_value="Luminous" fr.display_value="Lumineux"/>
+		<combo key="railway:signal:electricity:form"
+			   text="Signal Presentation"
+			   fr.text="Mode de Présentation"
+			   editable="false">
+			<list_entry value="sign"
+						display_value="Mechanical"
+						fr.display_value="Mécanique"/>
+			<list_entry value="light"
+						display_value="Luminous"
+						fr.display_value="Lumineux"/>
 		</combo>
 	</chunk>
 
@@ -240,6 +247,26 @@
 	<chunk id="cat_shunting_light">
 		<reference ref="cat_shunting_base" />
 		<key key="railway:signal:shunting:form" value="light" />
+	</chunk>
+
+	<!-- Shunting signals with selectable form (sign/light) -->
+	<chunk id="cat_shunting_with_form">
+		<reference ref="cat_shunting_base" />
+		<combo
+			key="railway:signal:shunting:form"
+			text="Signal presentation"
+			fr.text="Mode de présentation"
+			default="sign"
+			editable="false">
+			<list_entry
+				value="sign"
+				display_value="Mechanical"
+				fr.display_value="Mécanique"/>
+			<list_entry
+				value="light"
+				display_value="Luminous"
+				fr.display_value="Lumineux"/>
+		</combo>
 	</chunk>
 
 	<!-- Shunting marker (Jalon de manœuvre) -->
@@ -2103,8 +2130,8 @@
 					<reference ref="cat_speed_limit_distant" />
 					<combo
 						key="railway:signal:speed_limit_distant:form"
-						text="Signal Form"
-						fr.text="Forme du Signal"
+						text="Signal presentation"
+						fr.text="Mode de présentation"
 						editable="false" icon_size="16">
 						<list_entry
 							value="sign"
@@ -2142,8 +2169,8 @@
 					<reference ref="cat_speed_limit_reminder" />
 					<combo
 						key="railway:signal:speed_limit_reminder:form"
-						text="Display Type"
-						fr.text="Type d'Affichage"
+						text="Signal presentation"
+						fr.text="Mode de présentation"
 						editable="false" icon_size="16">
 						<list_entry
 							value="sign"
@@ -2197,11 +2224,11 @@
 						editable="false">
 						<list_entry
 							value="sign"
-							display_value="Reflectorized"
-							fr.display_value="Réflectorisé" />
+							display_value="Reflectorized/Unlit"
+							fr.display_value="Réflectorisé/Non éclairé" />
 						<list_entry
 							value="light"
-							display_value="Lit at night"
+							display_value="Illuminated at night"
 							fr.display_value="Éclairé la nuit" />
 					</combo>
 					<combo
@@ -2385,6 +2412,20 @@
 				<space />
 				<key key="railway:signal:speed_limit_distant" value="FR:P" />
 				<reference ref="cat_speed_limit_distant" />
+				<combo
+					key="railway:signal:speed_limit_distant:form"
+					text="Signal presentation"
+					fr.text="Mode de présentation"
+					editable="false">
+					<list_entry
+						value="sign"
+						display_value="Mechanical"
+						fr.display_value="Mécanique"/>
+					<list_entry
+						value="light"
+						display_value="Luminous"
+						fr.display_value="Lumineux"/>
+				</combo>
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Speed_limit_announcement_(P_board)" />
 			</item>
@@ -3180,20 +3221,6 @@
 					fr.name="Autres Tableaux"
 					icon="icons/boards/D.svg">
 
-					<!-- G -->
-					<item
-						name="G Board"
-						fr.name="Tableau G"
-						type="node"
-						icon="icons/boards/G.svg">
-						<label
-							text="G Board (to Service Track)"
-							fr.text="Tableau G" />
-						<space />
-						<key key="railway:signal:shunting" value="FR:G" />
-						<reference ref="cat_shunting_sign" />
-					</item>
-
 					<!-- D -->
 					<item
 						name="D Board"
@@ -3205,6 +3232,35 @@
 							fr.text="Tableau D" />
 						<space />
 						<key key="railway:signal:shunting" value="FR:D" />
+						<reference ref="cat_shunting_with_form" />
+					</item>
+
+					<!-- G -->
+					<item
+						name="G Board"
+						fr.name="Tableau G"
+						type="node"
+						icon="icons/boards/G.svg">
+						<label
+							text="G Board (to Service Track)"
+							fr.text="Tableau G" />
+						<space />
+						<key key="railway:signal:shunting" value="FR:G" />
+						<reference ref="cat_shunting_with_form" />
+					</item>
+
+					<!-- IMP -->
+					<item
+						name="Imp Sign"
+						fr.name="Pancarte Imp"
+						type="node"
+						icon="icons/signs/dead-end_track.svg">
+
+						<label
+							text="Imp Sign (Dead-end Track)"
+							fr.text="Pancarte Imp" />
+						<space />
+						<key key="railway:signal:shunting" value="FR:IMP" />
 						<reference ref="cat_shunting_sign" />
 					</item>
 
@@ -3250,21 +3306,6 @@
 						<reference ref="cat_shunting_sign" />
 					</item>
 
-					<!-- IMP -->
-					<item
-						name="Imp Sign"
-						fr.name="Pancarte Imp"
-						type="node"
-						icon="icons/signs/dead-end_track.svg">
-
-						<label
-							text="Imp Sign (Dead-end Track)"
-							fr.text="Pancarte Imp" />
-						<space />
-						<key key="railway:signal:shunting" value="FR:IMP" />
-						<reference ref="cat_shunting_sign" />
-					</item>
-
 					<!-- SAS -->
 					<item
 						name="SAS Sign"
@@ -3292,7 +3333,7 @@
 							text="Buffer-Stop Sign"
 							fr.text="Pancarte Heurtoir" />
 						<space />
-						<key key="railway:signal:shunting" value="FR:HEURTOIR" />
+						<key key="railway:signal:shunting" value="FR:HEURTOIR_A" />
 						<key key="railway:signal:shunting:type" value="buffer_stop" />
 						<reference ref="cat_shunting_sign" />
 						<text
@@ -3343,7 +3384,20 @@
 					<space />
 					<key key="railway:signal:stop" value="FR:ARRET" />
 					<reference ref="cat_stop" />
-
+					<combo
+							key="railway:signal:stop:orientation"
+							text="Signal Orientation"
+							fr.text="Disposition du signal"
+							editable="false">
+						<list_entry
+							value="vertical"
+							display_value="Vertical"
+							fr.display_value="Vertical"/>
+						<list_entry
+							value="horizontal"
+							display_value="Horizontal"
+							fr.display_value="Horizontal"/>
+					</combo>
 					<item_separator />
 
 					<preset_link preset_name="D Board" text=""/>
