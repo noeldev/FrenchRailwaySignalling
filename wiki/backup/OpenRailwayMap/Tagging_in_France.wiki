@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-04-23 23:29:45 UTC
+Last edited: 2026-04-28 03:08:00 UTC
 Last editor: Noeld
-Last edit comment: Fixed typos. P boards can be either mechanical or luminous.
-Backup date: 2026-04-24 22:00:46 UTC
+Last edit comment: /* Stops */ add disposition tag for ARRÊT sign
+Backup date: 2026-04-28 22:24:23 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -299,8 +299,7 @@ The P board announces a distant speed indicator (TIV-D) for lines equipped with 
 
 * {{Tag|railway:signal:speed_limit_distant|FR:P}}
 * {{Tag|railway:signal:speed_limit_distant:form||
-({{TagValue|railway:signal:speed_limit_distant:form|sign}}/{{TagValue|speed_limit_distant:form|light}})}} (sign=mechanical; light=luminous)
-
+({{TagValue|railway:signal:speed_limit_distant:form|sign}}/{{TagValue|railway:signal:speed_limit_distant:form|light}})}} (sign=mechanical; light=luminous)
 
 ==== Pentagonal speed indicators ====
 
@@ -518,6 +517,7 @@ The boundary of certain facilities are marked by the diamond-shaped sign below:
 
 * {{Tag|railway:signal:stop|FR:ARRET}}
 * {{Tag|railway:signal:stop:form|sign}}
+* {{Tag|railway:signal:stop:disposition||({{TagValue|railway:signal:stop:disposition|horizontal}}/{{TagValue|railway:signal:stop:disposition|vertical}})}}
 
 <!-- TBD -->
 
@@ -662,18 +662,36 @@ Upward-pointing chevrons indicate either an exit from a junction of converging t
 * {{Tag|railway:signal:shuting:type|upwards}}
 * {{Tag|railway:signal:shunting:form|sign}}
 
-The '''G''' (Garage) board indicates that the train is directed towards a service track.
-
-[[File:Tableau G.svg|frameless|60px]]
-
-* {{Tag|railway:signal:shunting|FR:G}}
-* {{Tag|railway:signal:shunting:form|sign}}
-
 The '''D''' (Depot) board indicates that the train is directed towards depot tracks.
 
 [[File:Tableau D.svg|frameless|60px]]
 
 * {{Tag|railway:signal:shunting|FR:D}}
+* {{Tag|railway:signal:shunting:form||
+({{TagValue|railway:signal:shunting:form|sign}}/{{TagValue|railway:signal:shunting:form|light}})}} (sign=mechanical; light=luminous)
+
+The '''G''' (Garage) board indicates that the train is directed towards a service track.
+
+[[File:Tableau G.svg|frameless|60px]]
+
+* {{Tag|railway:signal:shunting|FR:G}}
+* {{Tag|railway:signal:shunting:form||
+({{TagValue|railway:signal:shunting:form|sign}}/{{TagValue|railway:signal:shunting:form|light}})}} (sign=mechanical; light=luminous)
+
+The '''Heurtoir à xxx mètres''' board announces a buffer stop at the specified distance.
+
+[[File:Heurtoir 500m.svg|frameless|60px]]
+
+* {{Tag|railway:signal:shunting|FR:HEURTOIR_A}}
+* {{Tag|railway:signal:shunting:type|buffer_stop}}
+* {{Tag|railway:signal:shunting:form|sign}}
+* {{Tag|railway:signal:shunting:caption|*}} (e.g. "Heurtoir à 500m")
+
+The '''Imp''' (Impasse) board indicates that the train is directed towards a dead-end track.
+
+[[File:Tableau Imp.svg|frameless|60px]]  
+
+* {{Tag|railway:signal:shunting|FR:IMP}} 
 * {{Tag|railway:signal:shunting:form|sign}}
 
 The '''LGR''' (Limite pour Garage par Refoulement) board. <!-- TBD -->
@@ -694,22 +712,6 @@ The '''LGR''' (Limite pour Garage par Refoulement) board. <!-- TBD -->
 
 * {{Tag|railway:signal:shunting|FR:MV}}
 * {{Tag|railway:signal:shunting:form|sign}}
-
-The '''Imp''' (Impasse) board indicates that the train is directed towards a dead-end track. <!-- TBD -->.
-
-[[File:Tableau Imp.svg|frameless|60px]]  
-
-* {{Tag|railway:signal:shunting|FR:IMP}} 
-* {{Tag|railway:signal:shunting:form|sign}}
-
-The '''Heurtoir à xxx mètres''' board announces a buffer stop at the specified distance.
-
-[[File:Heurtoir 500m.svg|frameless|60px]]
-
-* {{Tag|railway:signal:shunting|FR:HEURTOIR}}
-* {{Tag|railway:signal:shunting:type|buffer_stop}}
-* {{Tag|railway:signal:shunting:form|sign}}
-* {{Tag|railway:signal:shunting:distance|}} (specified distance in meters)
 
 The '''SAS''' board indicates that the train is directed towards a generally very short section of track (sas) with [[#Carré|Carré]] signals at each end.
 

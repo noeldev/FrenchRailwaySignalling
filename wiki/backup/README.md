@@ -1,6 +1,6 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2026-04-24 22:00:46 UTC<br>
+**Backup generated:** 2026-04-28 22:24:23 UTC<br>
 **Category:** main<br>
 **Total pages:** 1<br>
 **Successfully backed up:** 1
@@ -10,9 +10,9 @@
 
 - **File:** [OpenRailwayMap/Tagging_in_France.wiki](OpenRailwayMap/Tagging_in_France.wiki)
 - **Wiki URL:** [OpenRailwayMap/Tagging_in_France](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
-- **Last edited:** 2026-04-23 23:29:45 UTC
+- **Last edited:** 2026-04-28 03:08:00 UTC
 - **Last editor:** Noeld
-- **Edit comment:** Fixed typos. P boards can be either mechanical or luminous.
+- **Edit comment:** /* Stops */ add disposition tag for ARRÊT sign
 
 ## About
 
