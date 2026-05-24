@@ -62,5 +62,5 @@ FrenchRailwaySignalling/
 ## License
 
 - **Wiki Content**: Available under the same license as OpenStreetMap wiki content
-- **JOSM Presets**: MIT License
+- **JOSM Presets**: AGPL-3.0
 - **Icons**: Original creations or adaptations from [Wikimedia Commons](https://commons.wikimedia.org) and [Nicolas Wurtz's signalisation-rfn-svg project](https://github.com/nicolaswurtz/signalisation-rfn-svg)

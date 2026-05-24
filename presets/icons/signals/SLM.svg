@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500"
+   height="750"
+   viewBox="0 0 500 750.00003"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="SLM.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.0546"
+     inkscape:cx="55.471269"
+     inkscape:cy="316.23364"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1"
+     labelstyle="default"
+     inkscape:clip-to-page="false" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Mast">
+    <g
+       inkscape:label="Parts"
+       inkscape:groupmode="layer"
+       id="layer1"
+       transform="translate(561.59464,303.10465)">
+      <rect
+         style="fill:#999999;fill-opacity:1;stroke:none;stroke-width:1.12067;stroke-dasharray:none"
+         id="rect19"
+         width="70"
+         height="450"
+         x="-346.59464"
+         y="-3.10465"
+         inkscape:label="Main" />
+      <g
+         id="g33"
+         inkscape:label="Top">
+        <path
+           id="rect17"
+           style="fill:#999999;fill-opacity:1;stroke:none;stroke-width:0.574895;stroke-dasharray:none"
+           d="m -501.59464,-83.10465 v 35 h 65 l 90,45 h 70 l 90,-45 h 65 v -35 z"
+           inkscape:label="Main" />
+        <rect
+           style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:5.64674;stroke-dasharray:none"
+           id="rect27"
+           width="2"
+           height="31"
+           x="-438.59464"
+           y="-79.104652"
+           inkscape:label="Left" />
+        <rect
+           style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:5.64674;stroke-dasharray:none"
+           id="rect27-7"
+           width="2"
+           height="31"
+           x="-186.59464"
+           y="-79.104652"
+           inkscape:label="Right" />
+        <rect
+           style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:4.89898;stroke-dasharray:none"
+           id="rect23"
+           width="70"
+           height="2"
+           x="-346.59464"
+           y="-3.10465"
+           inkscape:label="Bottom" />
+        <rect
+           style="fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:2;stroke-dasharray:none"
+           id="rect22"
+           width="380"
+           height="4"
+           x="-501.59464"
+           y="-83.104652"
+           inkscape:label="Top" />
+      </g>
+      <g
+         id="g32"
+         inkscape:label="Bottom">
+        <path
+           id="rect17-9"
+           style="fill:#999999;fill-opacity:1;stroke:none;stroke-width:0.61086;stroke-dasharray:none"
+           d="m -346.59464,216.89535 v 35 45 h 70 l 90,-45 h 65 v -35 z"
+           inkscape:label="Main" />
+        <rect
+           style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:4.89898;stroke-dasharray:none"
+           id="rect24"
+           width="70"
+           height="2"
+           x="-346.59464"
+           y="296.89536"
+           inkscape:label="Bottom" />
+        <rect
+           style="fill:#666666;fill-opacity:1;stroke:none;stroke-width:5.64674;stroke-dasharray:none"
+           id="rect27-7-9"
+           width="2"
+           height="31"
+           x="-186.59464"
+           y="220.89536"
+           inkscape:label="Right" />
+        <rect
+           style="fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:1.63299;stroke-dasharray:none"
+           id="rect22-3"
+           width="225"
+           height="4"
+           x="-346.59464"
+           y="216.89536"
+           inkscape:label="Top" />
+      </g>
+    </g>
+  </g>
+  <g
+     id="g27"
+     inkscape:label="Plate"
+     transform="translate(561.59464,303.10465)">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.54103;stroke-dasharray:none"
+       id="rect8"
+       width="98.781708"
+       height="118.05083"
+       x="-360.9855"
+       y="317.87"
+       inkscape:label="Plate" />
+    <path
+       id="rect9"
+       style="stroke-width:10.7495"
+       inkscape:label="Figure"
+       d="m -319.59464,336.89535 v 5 h 3 v 70 h -3 v 5 h 16 v -5 h -3 v -70 h 3 v -5 h -3 -10 z" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Lights">
+    <g
+       id="g31"
+       inkscape:label="Top">
+      <g
+         id="g28"
+         transform="translate(561.59464,303.10465)"
+         inkscape:label="Left">
+        <rect
+           style="fill:none;fill-opacity:1;stroke:#333333;stroke-width:6;stroke-dasharray:none"
+           id="rect5-2"
+           width="114.04111"
+           height="114.04111"
+           x="-518.61517"
+           y="-200.1252"
+           inkscape:label="Support" />
+        <g
+           id="g11"
+           transform="matrix(1.25,0,0,1.25,-624.09464,-390.60465)"
+           inkscape:label="Light">
+          <circle
+             style="fill:#000000;stroke:none;stroke-width:5"
+             id="circle10"
+             cx="130"
+             cy="150"
+             r="80"
+             inkscape:label="Head" />
+          <circle
+             style="fill:#def9f9;fill-opacity:1;stroke:none;stroke-width:5"
+             id="circle11"
+             cx="-461.59464"
+             cy="-203.10464"
+             r="35"
+             transform="matrix(0.8,0,0,0.8,499.27571,312.48372)"
+             inkscape:label="Lamp" />
+        </g>
+      </g>
+      <g
+         id="g29"
+         transform="translate(561.59464,303.10465)"
+         inkscape:label="Right">
+        <rect
+           style="fill:none;fill-opacity:1;stroke:#333333;stroke-width:6;stroke-dasharray:none"
+           id="rect5-2-6"
+           width="114.04111"
+           height="114.04111"
+           x="-218.61519"
+           y="-200.1252"
+           inkscape:label="Support" />
+        <g
+           id="g14"
+           transform="matrix(1.25,0,0,1.25,-324.09463,-390.60465)"
+           inkscape:label="Light">
+          <circle
+             style="fill:#000000;stroke:none;stroke-width:5"
+             id="circle13"
+             cx="130"
+             cy="150"
+             r="80"
+             inkscape:label="Head" />
+          <circle
+             style="fill:#def9f9;fill-opacity:1;stroke:none;stroke-width:5"
+             id="circle14"
+             cx="-161.59464"
+             cy="-203.10464"
+             r="35"
+             transform="matrix(0.8,0,0,0.8,259.2757,312.48372)"
+             inkscape:label="Lamp" />
+        </g>
+      </g>
+    </g>
+    <rect
+       style="fill:none;fill-opacity:1;stroke:#333333;stroke-width:6;stroke-dasharray:none"
+       id="rect5-2-6-1"
+       width="114.04111"
+       height="114.04111"
+       x="-218.6152"
+       y="99.874794"
+       transform="translate(561.59464,303.10465)"
+       inkscape:label="Support" />
+    <g
+       id="g30"
+       transform="translate(561.59464,303.10465)"
+       inkscape:label="Bottom">
+      <g
+         id="g16"
+         transform="matrix(1.25,0,0,1.25,-324.09465,-90.60465)"
+         inkscape:label="Light">
+        <circle
+           style="fill:#000000;stroke:none;stroke-width:5"
+           id="circle15"
+           cx="130"
+           cy="150"
+           r="80"
+           inkscape:label="Head" />
+        <circle
+           style="fill:#def9f9;fill-opacity:1;stroke:none;stroke-width:5"
+           id="circle16"
+           cx="-161.59464"
+           cy="96.895355"
+           r="35"
+           transform="matrix(0.8,0,0,0.8,259.27572,72.48372)"
+           inkscape:label="Lamp" />
+      </g>
+    </g>
+  </g>
+</svg>
