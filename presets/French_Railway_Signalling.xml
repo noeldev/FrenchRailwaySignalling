@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.17_2026-06-06"
+    version="1.18_2026-06-07"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -3014,7 +3014,7 @@
 				name="TVM Marker"
 				fr.name="Repère TVM"
 				type="node"
-				icon="icons/signs/TVM_block_marker.svg">
+				icon="icons/signs/TVM_stop_marker.svg">
 				<label
 					text="TVM stop marker"
 					fr.text="Repère TVM" />
@@ -3557,17 +3557,17 @@
 				<link wiki="OpenRailwayMap/Tagging_in_France#Stations" />
 			</item>
 
-			<!-- SIGNALS ON THE RIGHT -->
+			<!-- BILATERAL EXIT SIGNALS (VU) -->
 			<item
-				name="Signals on the Right"
-				fr.name="Signaux Implantés à Droite"
+				name="Bilateral Exit Signals"
+				fr.name="Signaux de Sortie Bilatéraux"
 				type="node"
-				icon="icons/signs/SID.svg">
+				icon="icons/signs/bilateral_exit_signals.svg">
 				<label
-					text="Marker for right-hand signal placement"
-					fr.text="Repère pour signaux implantés à droite" />
+					text="Bilateral Exit Signals Reminder"
+					fr.text="Rappel de signaux de sorties bilatéraux" />
 				<space />
-				<key key="railway:signal:station" value="FR:SID" />
+				<key key="railway:signal:station" value="FR:bilateral_exit_signals" />
 				<reference ref="cat_station" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Stations" />
 			</item>
@@ -3578,19 +3578,19 @@
 			<group
 				name="Facilities"
 				fr.name="Établissements"
-				icon="icons/signs/Limite_ETS.svg">
+				icon="icons/signs/facility_boundary.svg">
 
 				<!-- APPROACH -->
 				<item
 					name="Approaching a Facility"
 					fr.name="Approche d'un Établissement"
 					type="node"
-					icon="icons/signs/ETS_A.svg">
+					icon="icons/signs/facility_approach.svg">
 					<label
 						text="Approaching a Facility"
 						fr.text="Approche d'un Établissement" />
 					<space />
-					<key key="railway:signal:station_distant" value="FR:ETS_A" />
+					<key key="railway:signal:station_distant" value="FR:facility_approach" />
 					<reference ref="cat_station_distant" />
 					<reference ref="facility_link" />
 					<text
@@ -3601,15 +3601,15 @@
 
 				<!-- APPROACH (VUSS) -->
 				<item
-					name="Approaching a Facility (VUSS)"
+					name="Approaching a Facility (Simplified Signalling)"
 					fr.name="Approche d'un Établissement (VUSS)"
 					type="node"
-					icon="icons/signs/ETS.svg">
+					icon="icons/signs/facility_approach_simplified.svg">
 					<label
-						text="Approaching a Facility"
-						fr.text="Approche d'un Établissement" />
+						text="Approaching a Facility (Simplified signalling)"
+						fr.text="Approche d'un Établissement sur VUSS" />
 					<space />
-					<key key="railway:signal:station_distant" value="FR:ETS" />
+					<key key="railway:signal:station_distant" value="FR:facility_approach_simplified" />
 					<reference ref="cat_station_distant" />
 					<reference ref="facility_link" />
 				</item>
@@ -3619,12 +3619,12 @@
 					name="Facility Boundary"
 					fr.name="Limite d'un Établissement"
 					type="node"
-					icon="icons/signs/LIMITE_ETS.svg">
+					icon="icons/signs/facility_boundary.svg">
 					<label
 						text="Facility boundary"
 						fr.text="Limite d'un établissement" />
 					<space />
-					<key key="railway:signal:station" value="FR:Limites" />
+					<key key="railway:signal:station" value="FR:facility_boundary" />
 					<reference ref="cat_station" />
 					<reference ref="facility_link" />
 				</item>
@@ -4068,6 +4068,7 @@
 						fr.text="Arrêt voyageurs : tête de train" />
 					<space />
 					<key key="railway:signal:stop:classic" value="FR:TT" />
+					<key key="railway:signal:stop:classic:for" value="head_of_train" />
 					<reference ref="cat_classic_passenger_stop" />
 				</item>
 
@@ -4081,6 +4082,7 @@
 						fr.text="Arrêt voyageurs pour trains équipés EAS" />
 					<space />
 					<key key="railway:signal:stop:classic" value="FR:TT_EAS" />
+					<key key="railway:signal:stop:classic:for" value="driver_only" />
 					<reference ref="cat_classic_passenger_stop" />
 				</item>
 
@@ -4104,12 +4106,12 @@
 				<item
 					name="...V"
 					type="node"
-					icon="icons/signs/12V.svg">
+					icon="icons/signs/vehicle_number.svg">
 					<label
 						text="Passenger stop for trains up to x vehicles"
 						fr.text="Arrêt voyageurs pour trains jusqu'à x voitures" />
 					<space />
-					<key key="railway:signal:stop:classic" value="FR:NB_V" />
+					<key key="railway:signal:stop:classic" value="FR:vehicle_number" />
 					<key key="railway:signal:stop:classic:for" value="vehicles" />
 					<reference ref="cat_classic_passenger_stop" />
 					<optional>
