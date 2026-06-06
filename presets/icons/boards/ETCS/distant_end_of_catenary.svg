@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <g stroke="#fff" stroke-width="50" paint-order="markers fill stroke">
+    <path fill="#fff" stroke="none" d="M0 0h1027.07v1000H0z"/>
+    <path fill="none" stroke="#1169fb" stroke-linecap="square" stroke-miterlimit="2" d="m500 275.62 224.38 224.38-224.38 224.38-224.38-224.38z"/>
+    <path fill="none" stroke="#1169fb" stroke-linecap="square" stroke-miterlimit="2.2" stroke-width="50" d="m500 135.36 364.64 364.64L500 864.64 135.36 500z"/>
+  </g>
+</svg>
