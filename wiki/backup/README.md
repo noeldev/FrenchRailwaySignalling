@@ -1,6 +1,6 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2026-06-05 23:35:10 UTC<br>
+**Backup generated:** 2026-06-09 05:43:40 UTC<br>
 **Category:** main<br>
 **Total pages:** 1<br>
 **Successfully backed up:** 1
@@ -10,9 +10,9 @@
 
 - **File:** [OpenRailwayMap/Tagging_in_France.wiki](OpenRailwayMap/Tagging_in_France.wiki)
 - **Wiki URL:** [OpenRailwayMap/Tagging_in_France](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
-- **Last edited:** 2026-06-05 22:50:49 UTC
+- **Last edited:** 2026-06-09 05:28:33 UTC
 - **Last editor:** Noeld
-- **Edit comment:** /* Reporting Plate */ some tag improvements
+- **Edit comment:** /* Carré (dwarf) */ add arrangement tag
 
 ## About
 
