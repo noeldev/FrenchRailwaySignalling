@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.18_2026-06-07"
+    version="1.19_2026-06-11"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -13,8 +13,8 @@
 
 	<!-- Common tags applied to every railway signal node -->
 	<chunk id="base_common">
-		<key key="railway" value="signal" />
 		<key key="source" value="SNCF - 03/2022" />
+		<key key="railway" value="signal" />
 		<text
 			key="railway:position:exact"
 			text="Milepost (e.g. 100.325)"
@@ -73,14 +73,14 @@
 		<reference ref="base_common" />
 		<text
 			key="ref"
-			text="Marker Text"
+			text="Marker Legend"
 			fr.text="Libellé du Repérage" />
 	</chunk>
 
 	<!-- 2. CATEGORY BASE CHUNKS -->
 
-	<!-- Main signals (form=light) -->
-	<chunk id="cat_main">
+	<!-- Stop signals (form=light) -->
+	<chunk id="cat_stop_signals">
 		<reference ref="base_with_plate" />
 		<key key="railway:signal:main:form" value="light" />
 		<text
@@ -89,23 +89,28 @@
 			fr.text="Identifiant Réseau" length="7" />
 	</chunk>
 
-	<!-- Mechanical Carré signals -->
-	<chunk id="cat_mechanical_carre">
+	<!-- Mechanical stop signals (form=sign) -->
+	<chunk id="cat_mechanical_stop_signals">
 		<reference ref="base_with_plate" />
 		<key key="railway:signal:main:form" value="sign" />
 		<text
 			key="railway:signal:main:ref"
 			text="Network ID"
 			fr.text="Identifiant Réseau" length="7" />
+	</chunk>
+	
+	<!-- Mechanical Carré signals -->
+	<chunk id="cat_mechanical_carre">
+		<reference ref="cat_mechanical_stop_signals" />
 		<reference ref="carre_plates" />
 	</chunk>
 
-	<!-- Mechanical main signals -->
-	<chunk id="cat_mechanical_main">
+	<!-- Mechanical speed limit signals -->
+	<chunk id="cat_mechanical_speed_limit">
 		<reference ref="base_common" />
-		<key key="railway:signal:main:form" value="sign" />
+		<key key="railway:signal:speed_limit:form" value="sign" />
 		<text
-			key="railway:signal:main:ref"
+			key="railway:signal:speed_limit:ref"
 			text="Network ID"
 			fr.text="Identifiant Réseau" length="7" />
 	</chunk>
@@ -365,7 +370,7 @@
 			fr.text="Plaques">
 			<combo
 				key="railway:signal:main:plate"
-				text="Block Plate"
+				text="Block Identification Plate"
 				fr.text="Plaque de Cantonnement"
 				editable="false" icon_size="16">
 				<list_entry
@@ -386,8 +391,10 @@
 		</optional>
 	</chunk>
 
-	<!-- Optional Carré features -->
-	<chunk id="optional_carre_features">
+	<!-- Carré-specific tags -->
+	<chunk id="carre_tags">
+		<key key="railway:signal:main" value="FR:C" />
+		<reference ref="carre_plates" />
 		<optional
 			text="Special characteristics"
 			fr.text="Caractéristiques particulières">
@@ -398,34 +405,17 @@
 					fr.text="Sans Œilleton"
 					value_off="" value_on="no" disable_off="true"/>
 				<check
-					key="railway:signal:main:short_route"
-					text="Yellow Stripe"
-					fr.text="Bande Jaune"
-					disable_off="true"/>
-				<check
-					key="railway:signal:main:height"
-					text="Dwarf"
-					fr.text="Taille Réduite"
-					value_on="dwarf" disable_off="true"/>
+					key="railway:crocodile"
+					text="No Crocodile"
+					fr.text="Sans Crocodile"
+					value_off="" value_on="no" disable_off="true"/>
 				<check
 					key="railway:signal:main:deactivated"
 					text="Deactivated"
 					fr.text="Désactivé"
 					disable_off="true"/>
-				<check
-					key="railway:crocodile"
-					text="No Crocodile"
-					fr.text="Sans Crocodile"
-					value_off="" value_on="no" disable_off="true"/>
 			</checkgroup>
 		</optional>
-	</chunk>
-
-	<!-- Carré-specific tags -->
-	<chunk id="carre_tags">
-		<key key="railway:signal:main" value="FR:C" />
-		<reference ref="carre_plates" />
-		<reference ref="optional_carre_features" />
 
 		<item_separator />
 
@@ -434,16 +424,17 @@
 		<preset_link preset_name="Z Sign" text=""/>
 
 		<space />
-
 		<preset_link preset_name="ID" text=""/>
 		<preset_link preset_name="TIDD" text=""/>
 		<preset_link preset_name="TLD" text=""/>
 
 		<space />
-
 		<preset_link preset_name="Departure Request Plate" text=""/>
 		<preset_link preset_name="Half-White, Half-Green Plate" text=""/>
 		<preset_link preset_name="Signal Lumineux de Départ" text=""/>
+
+		<space />
+		<preset_link preset_name="Yellow Light Band" text=""/>
 
 		<link wiki="OpenRailwayMap/Tagging_in_France#Carré" />
 	</chunk>
@@ -481,7 +472,7 @@
 
 	<!-- Semaphore-specific tags -->
 	<chunk id="semaphore_tags">
-		<key key="railway:signal:main" value="FR:S"  />
+		<key key="railway:signal:main" value="FR:S" />
 		<optional text="Plates">
 			<combo
 				key="railway:signal:main:plate"
@@ -505,7 +496,6 @@
 					icon="icons/plates/ID_PR.svg" icon_size="16"/>
 			</combo>
 		</optional>
-
 		<optional
 			text="Special Characteristics"
 			fr.text="Caractéristiques particulières">
@@ -535,15 +525,15 @@
 			text="Special characteristics"
 			fr.text="Caractéristiques particulières">
 			<checkgroup columns="3">
-				<check key="railway:signal:distant:deactivated"
-					text="Deactivated"
-					fr.text="Annulé"
-					disable_off="true"/>
 				<check
 					key="railway:crocodile"
 					text="No Crocodile"
 					fr.text="Sans Crocodile"
 					value_off="" value_on="no" disable_off="true"/>
+				<check key="railway:signal:distant:deactivated"
+					text="Deactivated"
+					fr.text="Annulé"
+					disable_off="true"/>
 			</checkgroup>
 		</optional>
 	</chunk>
@@ -555,10 +545,10 @@
 		fr.name="Signalisation Ferroviaire"
 		icon="icons/SNCF_logo.png">
 
-		<!-- MAIN SIGNALS -->
+		<!-- STOP SIGNALS -->
 		<group
-			name="Main Signals"
-			fr.name="Signaux Principaux"
+			name="Stop Signals"
+			fr.name="Signaux d'Arrêt"
 			icon="icons/signals/C-C.svg">
 
 			<!-- CARRÉ -->
@@ -578,7 +568,7 @@
 						fr.text="Carré (Cible C)" />
 					<space />
 					<key key="railway:signal:main:shape" value="FR:C" />
-					<reference ref="cat_main" />
+					<reference ref="cat_stop_signals" />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -657,7 +647,7 @@
 						fr.text="Carré (Cible F)" />
 					<space />
 					<key key="railway:signal:main:shape" value="FR:F" />
-					<reference ref="cat_main" />
+					<reference ref="cat_stop_signals" />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -772,7 +762,7 @@
 						fr.text="Carré (Cible H)" />
 					<space />
 					<key key="railway:signal:main:shape" value="FR:H" />
-					<reference ref="cat_main" />
+					<reference ref="cat_stop_signals" />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -912,6 +902,40 @@
 					<reference ref="carre_tags" />
 				</item>
 
+				<item
+					name="Dwarf Carré"
+					fr.name="Carré nain"
+					type="node"
+					icon="icons/signals/dwarf_H_C.svg">
+					<label
+						text="Dwarf light Carré signal"
+						fr.text="Carré lumineux de taille réduite" />
+					<space />
+					<key key="railway:signal:main" value="FR:C" />
+					<key key="railway:signal:main:height" value="dwarf" />
+					<key key="railway:signal:main:states" value="FR:C;FR:VL" />
+					<reference ref="cat_stop_signals" />
+					<combo
+							key="railway:signal:main:arrangement"
+							text="Signal Arrangement"
+							fr.text="Disposition du signal"
+							editable="false" icon_size="16">
+						<list_entry
+							value="vertical"
+							display_value="Vertical"
+							fr.display_value="Vertical"
+							icon="icons/signals/dwarf_V_C.svg"
+							icon_size="16"/>
+						<list_entry
+							value="horizontal"
+							display_value="Horizontal"
+							fr.display_value="Horizontal"
+							icon="icons/signals/dwarf_H_C.svg"
+							icon_size="16"/>
+					</combo>
+					<link wiki="OpenRailwayMap/Tagging_in_France#Carré_(dwarf)" />
+				</item>
+
 				<separator />
 
 				<!-- CARRÉ A -->
@@ -926,12 +950,15 @@
 					<space />
 					<key key="railway:signal:distant" value="FR:CARRE_A" />
 					<key key="railway:signal:distant:form" value="sign" />
-					<reference ref="base_with_plate" />
+					<reference ref="base_common" />
 					<text
 						key="railway:signal:distant:ref"
 						text="Network ID"
 						fr.text="Identifiant Réseau" length="7" />
-					<reference ref="optional_distant_features" />
+					<text
+						key="railway:signal:distant:caption"
+						text="Sign Legend"
+						fr.text="Libellé de la pancarte" />
 				</item>
 
 			</group>
@@ -953,7 +980,7 @@
 						fr.text="Carré violet (cible A)" />
 					<space />
 					<key key="railway:signal:main:shape" value="FR:A" />
-					<reference ref="cat_main" />
+					<reference ref="cat_stop_signals" />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -996,7 +1023,7 @@
 						fr.text="Carré violet (Cible C)" />
 					<space />
 					<key key="railway:signal:main:shape" value="FR:C" />
-					<reference ref="cat_main" />
+					<reference ref="cat_stop_signals" />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1075,7 +1102,7 @@
 						fr.text="Carré violet (Cible F)" />
 					<space />
 					<key key="railway:signal:main:shape" value="FR:F" />
-					<reference ref="cat_main" />
+					<reference ref="cat_stop_signals" />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1190,7 +1217,7 @@
 						fr.text="Carré violet (Cible H)" />
 					<space />
 					<key key="railway:signal:main:shape" value="FR:H" />
-					<reference ref="cat_main" />
+					<reference ref="cat_stop_signals" />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1342,7 +1369,7 @@
 					<space />
 					<key key="railway:signal:main" value="FR:CV" />
 					<key key="railway:signal:main:shape" value="FR:K" />
-					<reference ref="cat_main" />
+					<reference ref="cat_stop_signals" />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1401,7 +1428,7 @@
 						fr.text="Sémaphore (Cible A)" />
 					<space />
 					<key key="railway:signal:main:shape" value="FR:A" />
-					<reference ref="cat_main" />
+					<reference ref="cat_stop_signals" />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1462,7 +1489,7 @@
 						fr.text="Sémaphore (Cible C)" />
 					<space />
 					<key key="railway:signal:main:shape" value="FR:C" />
-					<reference ref="cat_main" />
+					<reference ref="cat_stop_signals" />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1535,7 +1562,7 @@
 						fr.text="Sémaphore (Cible F)" />
 					<space />
 					<key key="railway:signal:main:shape" value="FR:F" />
-					<reference ref="cat_main" />
+					<reference ref="cat_stop_signals" />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1644,7 +1671,7 @@
 						fr.text="Sémaphore (Cible H)" />
 					<space />
 					<key key="railway:signal:main:shape" value="FR:H" />
-					<reference ref="cat_main" />
+					<reference ref="cat_stop_signals" />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1789,7 +1816,7 @@
 						fr.text="Sémaphore (Cible K)" />
 					<space />
 					<key key="railway:signal:main:shape" value="FR:K" />
-					<reference ref="cat_main" />
+					<reference ref="cat_stop_signals" />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1840,8 +1867,26 @@
 					fr.text="Guidon d'Arrêt" />
 				<space />
 				<key key="railway:signal:main" value="FR:GA" />
-				<reference ref="cat_main" />
+				<reference ref="cat_stop_signals" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Guidon_d'arrêt" />
+			</item>
+
+			<separator />
+
+			<!-- YELLOW LIGHT BAND -->
+			<item
+				name="Yellow Light Band"
+				fr.name="Bande Jaune Lumineuse"
+				type="node"
+				icon="icons/signals/yellow_light_band.svg">
+				<label
+					text="Horizontal yellow light band"
+					fr.text="Bande jaune lumineuse horizontale" />
+				<space />
+				<key key="railway:signal:short_route" value="FR:yellow_band" />
+				<key key="railway:signal:short_route:form" value="light" />
+				<reference ref="base_common" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Yellow_light_band" />
 			</item>
 
 		</group>
@@ -2067,7 +2112,13 @@
 				<space />
 				<key key="railway:signal:main" value="FR:C" />
 				<reference ref="cat_mechanical_carre" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Carré_(Mechanical)" />
+
+				<item_separator />
+
+				<preset_link preset_name="Reminder 30" text=""/>
+				<preset_link preset_name="Caution" text=""/>
+
+				<link wiki="OpenRailwayMap/Tagging_in_France#Carré_(mechanical)" />
 			</item>
 
 			<!-- CARRÉ VIOLET -->
@@ -2082,7 +2133,22 @@
 				<space />
 				<key key="railway:signal:main" value="FR:CV" />
 				<reference ref="cat_mechanical_carre" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Carré_violet_(Mechanical)" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Carré_violet_(mechanical)" />
+			</item>
+
+			<!-- SÉMAPHORE-->
+			<item
+				name="Semaphore"
+				fr.name="Sémaphore"
+				type="node"
+				icon="icons/signals/S.svg">
+				<label
+					text="Mechanical Semaphore"
+					fr.text="Sémaphore mécanique" />
+				<space />
+				<key key="railway:signal:main" value="FR:S" />
+				<reference ref="cat_mechanical_stop_signals" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Sémaphore_(mechanical)" />
 			</item>
 
 			<separator />
@@ -2097,9 +2163,9 @@
 					text="Slow 30"
 					fr.text="Ralentissement 30" />
 				<space />
-				<key key="railway:signal:main" value="FR:R30" />
-				<reference ref="cat_mechanical_main" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Ralentissement_30_(Mechanical)" />
+				<key key="railway:signal:speed_limit" value="FR:R30" />
+				<reference ref="cat_mechanical_speed_limit" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Ralentissement_30" />
 			</item>
 
 			<!-- REMINDER 30 -->
@@ -2112,10 +2178,9 @@
 					text="Reminder 30"
 					fr.text="Rappel de Ralentissement 30" />
 				<space />
-				<key key="railway:signal:main" value="FR:RR30" />
-				<key key="railway:signal:main:form" value="sign" />
-				<reference ref="cat_mechanical_main" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Rappel_30_(Mechanical)" />
+				<key key="railway:signal:speed_limit" value="FR:RR30" />
+				<reference ref="cat_mechanical_speed_limit" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Rappel_30" />
 			</item>
 
 			<separator />
@@ -2133,7 +2198,7 @@
 				<key key="railway:signal:distant" value="FR:D" />
 				<key key="railway:signal:distant:form" value="sign" />
 				<reference ref="cat_mechanical_distant" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Disque_(Mechanical)" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Disque_(mechanical)" />
 			</item>
 
 			<!-- CAUTION -->
@@ -2149,7 +2214,7 @@
 				<key key="railway:signal:distant" value="FR:A" />
 				<key key="railway:signal:distant:form" value="sign" />
 				<reference ref="cat_mechanical_distant" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Avertissement_(Mechanical)" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Avertissement_(mechanical)" />
 			</item>
 
 		</group>
@@ -2161,8 +2226,8 @@
 			type="node"
 			icon="icons/boxes/double.svg">
 			<label
-                text="Combined light box"
-                fr.text="Caisson lumineux regroupé" />
+                text="Light box"
+                fr.text="Caisson lumineux" />
 			<space />
 			<key key="railway:signal:combined" value="FR:light_box" />
 			<key key="railway:signal:combined:form" value="light" />
@@ -2246,12 +2311,12 @@
 							value="sign"
 							display_value="Board"
 							fr.display_value="Tableau"
-							icon="icons/boards/TIV-D_MOB.svg" icon_size="16"/>
+							icon="icons/boards/TIV-D_mobile.svg" icon_size="16"/>
 						<list_entry
 							value="light"
 							display_value="Light box"
 							fr.display_value="Caisson lumineux"
-							icon="icons/boxes/TIV-D_MOB.svg" icon_size="16"/>
+							icon="icons/boxes/TIV-D_mobile.svg" icon_size="16"/>
 					</combo>
 					<combo
                         key="railway:signal:speed_limit_distant:switchable:speed"
@@ -2273,12 +2338,12 @@
 						text="Switchable TIV-R"
 						fr.text="TIV-R Mobile" />
 					<space />
-					<key key="railway:signal:speed_limit_reminder" value="FR:speed_indicator" />
-					<key key="railway:signal:speed_limit_reminder:switchable" value="FR:TIV-R" />
+					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
+					<key key="railway:signal:speed_limit:switchable" value="FR:TIV-R" />
 					<reference ref="base_common" />
-					<text key="railway:signal:speed_limit_reminder:switchable:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+					<text key="railway:signal:speed_limit:switchable:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
 					<combo
-                        key="railway:signal:speed_limit_reminder:switchable:form"
+                        key="railway:signal:speed_limit:switchable:form"
 						text="Signal presentation"
 						fr.text="Présentation du signal"
 						editable="false" icon_size="16">
@@ -2294,14 +2359,14 @@
 							icon="icons/boxes/TIV-R.svg" icon_size="16"/>
 					</combo>
 					<combo
-                        key="railway:signal:speed_limit_reminder:switchable:speed"
+                        key="railway:signal:speed_limit:switchable:speed"
 						text="Speed Limit (km/h)"
 						fr.text="Vitesse Limite (km/h)"
 						values="30,40,50,60,70,80,90,100,110,120,130,140,150,160,180,200,220"
 						editable="false"/>
 					<item_separator />
 					<preset_link preset_name="Downward-pointing Chevron" text=""/>
-					<link wiki="OpenRailwayMap/Tagging_in_France#Switchable_reminder_TIV_board" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#Switchable_TIV_board" />
 				</item>
 
 			</group>
@@ -2692,7 +2757,6 @@
 					fr.text="Chevron pointe en bas" />
 				<space />
 				<key key="railway:signal:minor" value="FR:chevron" />
-				<key key="railway:signal:minor:type" value="down" />
 				<key key="railway:signal:minor:form" value="sign" />
 				<reference ref="cat_minor" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Chevron_pointe_en_bas" />
@@ -3042,16 +3106,15 @@
 				</combo>
 				<optional>
 					<check
-						key="railway:signal:train_protection:main:short_route"
-						text="Yellow Stripe"
-						fr.text="Bande Jaune"
-						disable_off="true"/>
-					<check
 						key="railway:signal:train_protection:main:passing_light"
                         text="White passing light"
 						fr.text="Feu blanc de franchissement"
 						disable_off="true"/>
 				</optional>
+
+				<space />
+				<preset_link preset_name="Yellow Light Band" text=""/>
+				
 				<link wiki="OpenRailwayMap/Tagging_in_France#TVM_stop_marker" />
 			</item>
 
@@ -3069,6 +3132,13 @@
 				<key key="railway:signal:shunting:form" value="sign" />
 				<reference ref="base_with_plate" />
 				<text key="railway:signal:shunting:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+				<optional>
+					<check
+						key="railway:signal:shunting:passing_light"
+                        text="White passing light"
+						fr.text="Feu blanc de franchissement"
+						disable_off="true"/>
+				</optional>
 				<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_marker" />
 			</item>
 
@@ -3815,7 +3885,6 @@
 						<space />
 						<key key="railway:signal:shunting_route" value="FR:destination" />
 						<key key="railway:signal:shunting_route:headshunt" value="FR:SAS" />
-						<key key="railway:signal:shunting_route:headshunt:short_route" value="yes" />
 						<reference ref="base_common" />
 						<text key="railway:signal:shunting_route:headshunt:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
 						<combo
@@ -4241,7 +4310,7 @@
 					<space />
 					<key key="railway:signal:departure" value="FR:DD" />
 					<key key="railway:signal:departure:type" value="request" />
-					<key key="railway:signal:departure:form" value="plate" />
+					<key key="railway:signal:departure:form" value="sign" />
 					<reference ref="cat_departure" />
 				</item>
 
