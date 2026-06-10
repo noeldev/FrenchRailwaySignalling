@@ -66,7 +66,7 @@ jobs:
         run: dotnet run --project ${{ env.TAGINFO_PROJECT }} --configuration Release --no-build --no-restore -- ${{ env.PRESET_FILE }} public/taginfo.json taginfo.md
 
       - name: Upload taginfo log
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: taginfo-log
           path: taginfo.md
@@ -86,4 +86,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
