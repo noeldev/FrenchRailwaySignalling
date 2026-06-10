@@ -5,7 +5,7 @@
 [![Build & Deploy](https://github.com/noeldev/FrenchRailwaySignalling/actions/workflows/build-and-deploy-presets.yml/badge.svg)](https://github.com/noeldev/FrenchRailwaySignalling/actions/workflows/build-and-deploy-presets.yml)
 [![XML](https://img.shields.io/badge/XML-✓-blueviolet)](https://github.com/noeldev/FrenchRailwaySignalling/blob/main/presets/French_Railway_Signalling.xml)
 [![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: GPL-3.0](https://img.shields.io/badge/License-GPL%203.0-yellow.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 This repository serves as a **backup** of the pages, Lua modules, and templates I authored for the [OpenRailwayMap wiki](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France), focusing on **French railway signalling**. It ensures long-term preservation of the documentation in case of unexpected deletions or inappropriate edits on the wiki platform.
 
@@ -28,6 +28,10 @@ The repository includes **JOSM presets** specifically designed for mapping Frenc
 
 This archive contains the latest preset XML files along with the required icon assets (SVG and PNG).
 
+### taginfo project
+
+A [taginfo project file](https://wiki.openstreetmap.org/wiki/Taginfo/Projects) is generated from the presets by the `TagInfoGen` tool and published at [`taginfo.json`](https://noeldev.github.io/FrenchRailwaySignalling/taginfo.json). It lets the French signalling tags, with their descriptions and icons, appear on [taginfo](https://taginfo.openstreetmap.org/). The presets are the single source of truth, so the file is regenerated automatically on every deployment and never needs manual editing.
+
 ## Repository Structure
 
 ```
@@ -37,12 +41,13 @@ FrenchRailwaySignalling/
 │   │   └── index.html    # Landing page
 │   └── workflows/        # GitHub Actions workflows
 │       ├── backup-wiki-pages.yml         # Manual backup of wiki pages
-│       └── build-and-deploy-presets.yml  # Build and deploy presets
+│       └── build-and-deploy-presets.yml  # Build and deploy presets (+ taginfo.json)
 ├── presets/              # JOSM preset files and assets
 │   ├── French_Railway_Signalling.xml
 │   ├── icons/            # SVG and PNG icons
 │   └── font/             # SNCF font used by some icons
 ├── tools/
+│   ├── TagInfoGen/       # C# taginfo project file generator
 │   └── WikiBackup/       # C# wiki backup tool
 └── wiki/
     ├── backup/           # Auto-generated wiki backups
@@ -63,4 +68,5 @@ FrenchRailwaySignalling/
 
 - **Wiki Content**: Available under the same license as OpenStreetMap wiki content
 - **JOSM Presets**: GPL-3.0
+- **Tools** (`TagInfoGen`, `WikiBackup`): GPL-3.0
 - **Icons**: Original creations or adaptations from [Wikimedia Commons](https://commons.wikimedia.org) and [Nicolas Wurtz's signalisation-rfn-svg project](https://github.com/nicolaswurtz/signalisation-rfn-svg)

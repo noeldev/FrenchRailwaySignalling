@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+// Copyright (C) 2026 Noël Danjou
+
 using System.Text.Json;
 
 namespace WikiBackup.Models;

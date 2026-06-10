@@ -7,9 +7,16 @@
 # C# build outputs
 *.user
 *.suo
+/tools/TagInfoGen/.vs/
+/tools/TagInfoGen/bin/
+/tools/TagInfoGen/obj/
 /tools/WikiBackup/.vs/
 /tools/WikiBackup/bin/
 /tools/WikiBackup/obj/
+
+# Taginfo
+/taginfo.json
+/taginfo.md
 
 # Backup
 /presets/backup/

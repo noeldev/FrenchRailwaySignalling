@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'presets/**'
+      - 'tools/TagInfoGen/**'   # taginfo: regenerate when the generator changes
       - '.github/pages/index.html'
     branches: [ "main" ]
   workflow_dispatch:
@@ -16,6 +17,7 @@ permissions:
 env:
   ARCHIVE_NAME: French_Railway_Signalling_presets.zip
   PRESET_FILE: presets/French_Railway_Signalling.xml
+  TAGINFO_PROJECT: tools/TagInfoGen/TagInfoGen.csproj
 
 jobs:
   build:
@@ -43,6 +45,31 @@ jobs:
           mkdir -p public
           cp ${{ env.ARCHIVE_NAME }} public/
           cp .github/pages/index.html public/
+
+      # --- taginfo: build the generator and emit taginfo.json into public/ ---
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '8.0.x'
+          cache: true
+          cache-dependency-path: ${{ env.TAGINFO_PROJECT }}
+
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.TAGINFO_PROJECT }}
+
+      - name: Build project
+        run: dotnet build ${{ env.TAGINFO_PROJECT }} -c Release --no-restore
+
+      - name: Generate taginfo.json
+        # Writes taginfo.json into public/ (published with the Pages content);
+        # the taginfo.md log stays at the repo root.
+        run: dotnet run --project ${{ env.TAGINFO_PROJECT }} --configuration Release --no-build --no-restore -- ${{ env.PRESET_FILE }} public/taginfo.json taginfo.md
+
+      - name: Upload taginfo log
+        uses: actions/upload-artifact@v4
+        with:
+          name: taginfo-log
+          path: taginfo.md
 
       - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v4
