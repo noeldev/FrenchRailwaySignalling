@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-06-09 05:28:33 UTC
+Last edited: 2026-06-09 22:47:04 UTC
 Last editor: Noeld
-Last edit comment: /* Carré (dwarf) */ add arrangement tag
-Backup date: 2026-06-09 05:43:40 UTC
+Last edit comment: Unify "Block System Identification Plate" (Plaque de Cantonnement) and rewrite some sentences in description
+Backup date: 2026-06-11 00:29:02 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -34,9 +34,9 @@ Optional tags:
 
 ====Carré====
 
-An absolute stop signal for normal train operations, typically found on main lines or at stations. The signal displays two steady red lights, arranged either vertically or horizontally. It is equipped with a clearing light (referred to as an '''œilleton''' in French), which is illuminated in all states except when the signal is closed (i.e. displaying the {{TagValue|railway:signal:main:states|FR:C}} state). The signal also features an identification plate bearing the inscription '''Nf''' in white letters on a black background.
+An absolute stop signal for normal train operations, typically found on main lines or at stations. The signal displays two steady red lights, arranged either vertically or horizontally. It is equipped with a clearing light (French: '''œilleton'''), which is illuminated in all states except when the signal is closed (i.e. displaying the {{TagValue|railway:signal:main:states|FR:C}} state). The signal also features an ''identification plate'' (French: '''Plaque d'Identification''') bearing the inscription '''Nf''' in white letters on a black background.
 
-The signal may also be equipped with a marker plate and/or a block plate indicating the block system downstream of the signal. The inscriptions on these plates are written in black letters on a white background.
+The signal may also be equipped with a ''marker plate'' (French: '''Plaque de Repérage''') and/or a ''block system identification plate'' (French: '''plaque de cantonnement''') indicating the ''block system'' beyond the signal. The inscriptions on these plates are written in black letters on a white background.
 
 [[File:Carre_C_BAL.svg|60px]]
 
@@ -52,8 +52,8 @@ Optional tags:
 
 '''Plates'''
 <!-- Plaque de cantonnement --> 
-* {{Tag|railway:signal:main:plate||({{TagValue|railway:signal:main:plate|FR:BM}}/{{TagValue|railway:signal:main:plate|FR:PR}})}} (block system plate)
-* {{Tag|railway:signal:main:plate:caption|}} (text as shown on the block system plate)
+* {{Tag|railway:signal:main:plate||({{TagValue|railway:signal:main:plate|FR:BM}}/{{TagValue|railway:signal:main:plate|FR:PR}})}} (block system identification plate)
+* {{Tag|railway:signal:main:plate:caption|}} (text as shown on the ''block system identification plate'')
 
 =====Carré (dwarf)=====
 
@@ -102,8 +102,8 @@ Like the Carré signal, this signal may be equipped with a marker plate and/or a
 Optional tags:
 
 <!-- Plaque de Cantonnement -->
-* {{Tag|railway:signal:main:plate||({{TagValue|railway:signal:main:plate|FR:BM}}/{{TagValue|railway:signal:main:plate|FR:PR}})}} (block system plate)
-* {{Tag|railway:signal:main:plate:caption|}} (text as shown on the block system plate)
+* {{Tag|railway:signal:main:plate||({{TagValue|railway:signal:main:plate|FR:BM}}/{{TagValue|railway:signal:main:plate|FR:PR}})}} (block system identification plate)
+* {{Tag|railway:signal:main:plate:caption|}} (text as shown on the ''block system identification plate'')
 
 =====Carré violet (mechanical)=====
 
