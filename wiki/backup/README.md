@@ -1,6 +1,6 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2026-06-11 00:29:02 UTC<br>
+**Backup generated:** 2026-06-11 21:38:01 UTC<br>
 **Category:** main<br>
 **Total pages:** 1<br>
 **Successfully backed up:** 1
@@ -10,9 +10,9 @@
 
 - **File:** [OpenRailwayMap/Tagging_in_France.wiki](OpenRailwayMap/Tagging_in_France.wiki)
 - **Wiki URL:** [OpenRailwayMap/Tagging_in_France](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
-- **Last edited:** 2026-06-09 22:47:04 UTC
+- **Last edited:** 2026-06-11 05:44:33 UTC
 - **Last editor:** Noeld
-- **Edit comment:** Unify "Block System Identification Plate" (Plaque de Cantonnement) and rewrite some sentences in description
+- **Edit comment:** minor edits
 
 ## About
 

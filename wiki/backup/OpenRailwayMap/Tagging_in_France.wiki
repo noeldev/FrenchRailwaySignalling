@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-06-09 22:47:04 UTC
+Last edited: 2026-06-11 05:44:33 UTC
 Last editor: Noeld
-Last edit comment: Unify "Block System Identification Plate" (Plaque de Cantonnement) and rewrite some sentences in description
-Backup date: 2026-06-11 00:29:02 UTC
+Last edit comment: minor edits
+Backup date: 2026-06-11 21:38:01 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -130,8 +130,7 @@ The actual inscription is specified with the {{TagKey|railway:signal:main:plate}
 * {{Tag|railway:signal:main:states|}} (→ [[FR:Key:railway:signal:main:states|available states]], separated by <code>;</code>)
 
 Optional tags:
-* {{Tag|railway:signal:main:plate||
-({{TagValue|railway:signal:main:plate|FR:F}}/{{TagValue|railway:signal:main:plate|FR:PR}}/{{TagValue|railway:signal:main:plate|FR:BM}})}} (identification plate)
+* {{Tag|railway:signal:main:plate||({{TagValue|railway:signal:main:plate|FR:F}}/{{TagValue|railway:signal:main:plate|FR:PR}}/{{TagValue|railway:signal:main:plate|FR:BM}})}} (identification plate)
 
 =====Sémaphore (mechanical)=====
 
@@ -917,7 +916,7 @@ The '''Heurtoir à xxx mètres''' board announces a buffer stop at the specified
 * {{Tag|railway:signal:shunting_route|FR:destination}}
 * {{Tag|railway:signal:shunting_route:buffer_stop|FR:Heurtoir}}
 * {{Tag|railway:signal:shunting_route:buffer_stop:form|sign}}
-* {{Tag|railway:signal:shunting_route:buffer_stop:caption|*}} (text as show on the sign, e.g. "Heurtoir à 500m")
+* {{Tag|railway:signal:shunting_route:buffer_stop:caption|}} (text as show on the sign, e.g. "Heurtoir à 500m")
 
 
 The '''Imp''' (Impasse) board indicates that the train is directed towards a dead-end track.
