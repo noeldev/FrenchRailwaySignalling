@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-06-11 05:44:33 UTC
+Last edited: 2026-06-12 23:57:22 UTC
 Last editor: Noeld
-Last edit comment: minor edits
-Backup date: 2026-06-11 21:38:01 UTC
+Last edit comment: /* Fixed C-type TIV-D */ remove useless type property
+Backup date: 2026-06-13 05:52:34 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -65,7 +65,7 @@ Optional tags:
 * {{Tag|railway:signal:main:states||}} (→ [[FR:Key:railway:signal:main:states|available states]], separated by <code>;</code>)
 
 Optional tags:
-* {{Tag|railway:signal:distant:arrangement||({{TagValue|railway:signal:distant:arrangement|horizontal}}/{{TagValue|railway:signal:distant:arrangement|vertical}})}} (signal arrangement, horizontal by default)
+* {{Tag|railway:signal:main:arrangement|vertical}} (''horizontal'' by default)
 
 =====Carré (mechanical)=====
 
@@ -291,14 +291,11 @@ In some cases, particularly at diverging exits from certain station tracks, a 30
 * {{Tag|railway:signal:minor|FR:chevron}}
 * {{Tag|railway:signal:minor:form|sign}}
 
-Optional tags:
-* {{Tag|railway:signal:minor:type|down}} ('''down''' by default)
-
 ====Fixed speed indicators====
 
 =====Fixed Ordinary-type TIV-D=====
 
-Fixed distant speed indicators of the ordinary type ('''TIV fixes à distance du type ordinaire''') are square-shaped when indicating a speed reduction of less than 40 km/h, and diamond-shaped otherwise.
+Fixed distant speed indicators of the ordinary type (French: '''TIV fixes à distance du type ordinaire''') are square-shaped when indicating a speed reduction of less than 40 km/h, and diamond-shaped otherwise. Diamond-shaped indicators are equipped with a crocodile.
 
 {| class="wikitable" style="text-align:center"
 ! Square !! Diamond-shape
@@ -306,13 +303,16 @@ Fixed distant speed indicators of the ordinary type ('''TIV fixes à distance du
 | [[File:TIV_Distance_80.svg|60px]] || [[File:TIV_Distance_Crocodile_40.svg|60px]]
 |}
 
+Common tags:
+
 * {{Tag|railway:signal:speed_limit_distant|FR:speed_indicator}}
 * {{Tag|railway:signal:speed_limit_distant:fixed|FR:TIV-D}}
 * {{Tag|railway:signal:speed_limit_distant:fixed:form|sign}}
 * {{Tag|railway:signal:speed_limit_distant:fixed:speed|}} (speed as displayed on the signal, e.g. 80)
 
-Optional tags:
-* {{Tag|railway:signal:speed_limit_distant:fixed:shape|diamond}} (default is ''square'')
+Additional tag for diamond-shaped indicators only:
+
+* {{Tag|railway:crocodile|yes}}
 
 
 The '''Z''' sign is the execution signal indicating the start of the section to be traveled at limited speed.
@@ -340,7 +340,6 @@ B-type fixed distant speed indicators ('''TIV fixes à distance du type B''') ap
 
 * {{Tag|railway:signal:speed_limit_distant|FR:speed_indicator}}
 * {{Tag|railway:signal:speed_limit_distant:fast|FR:TIV-D}}
-* {{Tag|railway:signal:speed_limit_distant:fast:type|FR:B}}
 * {{Tag|railway:signal:speed_limit_distant:fast:form|sign}}
 * {{Tag|railway:signal:speed_limit_distant:fast:speed|}}
 
@@ -356,7 +355,6 @@ If the speed limit differs between pendular trains and other self-propelled trai
 
 * {{Tag|railway:signal:speed_limit_distant|FR:speed_indicator}}
 * {{Tag|railway:signal:speed_limit_distant:railcar|FR:TIV-D}}
-* {{Tag|railway:signal:speed_limit_distant:railcar:type|FR:C}}
 * {{Tag|railway:signal:speed_limit_distant:railcar:form|sign}}
 * {{Tag|railway:signal:speed_limit_distant:railcar:speed|}} (separated by <code>;</code> if more than one speed limit has to be specified)
 
@@ -382,7 +380,6 @@ A distant upward-pointing pentagonal speed indicator (TIV-D) announces a special
 * {{Tag|railway:signal:speed_limit_distant|FR:speed_indicator}}
 * {{Tag|railway:signal:speed_limit_distant:freight|FR:TIV-D}}
 * {{Tag|railway:signal:speed_limit_distant:freight:form|sign}}
-* {{Tag|railway:signal:speed_limit_distant:freight:shape|pentagon}}
 * {{Tag|railway:signal:speed_limit_distant:freight:speed|}}
 
 ======L plate======
@@ -406,7 +403,6 @@ A downward-pointing pentagonal TIV, with a white digit on a black background, ma
 * {{Tag|railway:signal:speed_limit|FR:speed_indicator}}
 * {{Tag|railway:signal:speed_limit:freight|FR:TIV-E}}
 * {{Tag|railway:signal:speed_limit:freight:form|sign}}
-* {{Tag|railway:signal:speed_limit:freight:shape|pentagon}}
 * {{Tag|railway:signal:speed_limit:freight:function|entry}} 
 * {{Tag|railway:signal:speed_limit:freight:speed|}}
 
@@ -419,7 +415,6 @@ A downward-pointing pentagonal white board ('''Tableau blanc''' in French) witho
 * {{Tag|railway:signal:speed_limit|FR:speed_indicator}}
 * {{Tag|railway:signal:speed_limit:freight|FR:white_board}}
 * {{Tag|railway:signal:speed_limit:freight:form|sign}}
-* {{Tag|railway:signal:speed_limit:freight:shape|pentagon}}
 * {{Tag|railway:signal:speed_limit:freight:function|exit}}
 
 ====Speed marker (Km sign)====
@@ -775,10 +770,12 @@ If a signal is equipped with a telephone that is not located in its immediate vi
 |}
 
 * {{Tag|railway:signal:departure|FR:reporting}}
-* {{Tag|railway:signal:departure:type||({{TagValue|railway:signal:departure:type|standard}}/{{TagValue|railway:signal:departure:type|delayed}}/{{TagValue|railway:signal:departure:type|exempt}})}} (''standard'' is the optional default value)
 * {{Tag|railway:signal:departure:form|sign}}
 
 Optional tags:
+
+- Alternative types:
+* {{Tag|railway:signal:departure:type||({{TagValue|railway:signal:departure:type|delayed}}/{{TagValue|railway:signal:departure:type|exempt}})}}
 
 - If the plate is equipped with a telephone call indicator (French: '''Voyant d'Appel Téléphonique'''):
 * {{Tag|railway:signal:departure:phone:indicator|yes}}
@@ -793,7 +790,6 @@ Some [[#Carré|Carré]] signals are equipped with a '''Demande de Départ''' (DD
 [[File:Plaque_DD.svg|60px]]
 
 * {{Tag|railway:signal:departure|FR:DD}}
-* {{Tag|railway:signal:departure:type|request}}
 * {{Tag|railway:signal:departure:form|sign}}
 
 =====Departure authorization=====
@@ -803,7 +799,6 @@ On certain tracks, authorization for departure may be given to the driver by a f
 [[File:SLD_box.gif|60px]]
 
 * {{Tag|railway:signal:departure|FR:SLD}} 
-* {{Tag|railway:signal:departure:type|await}}
 * {{Tag|railway:signal:departure:form|light}}
 
 
@@ -812,7 +807,6 @@ Alternatively, departure authorization may be given simply by the opening of the
 [[File:Plaque_mi-blanche_mi-verte.svg|60px]]
 
 * {{Tag|railway:signal:departure|FR:departure_marker}}
-* {{Tag|railway:signal:departure:type|allow}}
 * {{Tag|railway:signal:departure:form|sign}}
 
 =====Répétiteur Lumineux d'Itinéraire=====
@@ -836,7 +830,7 @@ Upward-pointing chevrons indicate either an exit from a junction of converging t
 [[File:Chevron_haut.svg|60px]]
 
 * {{Tag|railway:signal:minor|FR:chevron}}
-* {{Tag|railway:signal:minor:type|up}}
+* {{Tag|railway:signal:minor:type|up}} (''down'' by default)
 * {{Tag|railway:signal:minor:form|sign}}
 
 ====Tableau Lumineux de Correspondance====
@@ -1152,7 +1146,7 @@ This sign indicates the ''operating mode'' of the level crossing:
 
 Optional tags:
 * {{Tag|railway:signal:crossing_info:caption|}} (text as show on the sign)
-* {{Tag|railway:signal:crossing_info:automatic|no}} (indicates a manual level crossing — default is automatic)
+* {{Tag|railway:signal:crossing_info:automatic|no}} (''automatic'' by default)
 
 ====Conditional crossing====
 
