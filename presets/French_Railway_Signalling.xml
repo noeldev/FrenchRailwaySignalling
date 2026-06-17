@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.20_2026-06-13"
+    version="1.22_2026-06-17"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -107,7 +107,7 @@
 			text="Network ID"
 			fr.text="Identifiant Réseau" length="7" />
 	</chunk>
-	
+
 	<!-- Mechanical Carré signals -->
 	<chunk id="cat_mechanical_carre">
 		<reference ref="cat_mechanical_stop_signals" />
@@ -121,13 +121,6 @@
 		<key key="railway:signal:speed_limit_distant:fixed:form" value="sign" />
 		<reference ref="base_with_plate" />
 		<text key="railway:signal:speed_limit_distant:fixed:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-		<combo
-			key="railway:signal:speed_limit_distant:fixed:speed"
-			text="Speed Limit (km/h)"
-			fr.text="Vitesse Maximale (km/h)"
-			values="10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,160"
-			editable="false"/>
-		<item_separator />
 		<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_TIV-D_(Ordinary_type)" />
 	</chunk>
 
@@ -321,9 +314,11 @@
 	<chunk id="cat_reporting">
 		<reference ref="base_common" />
 		<text key="railway:signal:departure:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-		<optional
-			text="Telephone call indicator (VAT)"
-			fr.text="Voyant d'Appel Téléphonique (VAT)">
+		<optional text="">
+			<label
+				text="Telephone call indicator (VAT)"
+				fr.text="Voyant d'Appel Téléphonique (VAT)" />
+			<space />
 			<check
 				key="railway:signal:departure:phone:indicator"
 				text="Equipped with VAT"
@@ -368,7 +363,11 @@
 
 	<!-- Traction supply (voltage/frequency) optional info -->
 	<chunk id="optional_traction_supply">
-		<optional text="Traction Supply">
+		<optional text="">
+			<label
+				text="Traction Supply"
+				fr.text="Alimentation traction" />
+			<space />
 			<combo
 				key="railway:signal:electricity:voltage"
 				text="Voltage (V)"
@@ -388,11 +387,27 @@
 		</optional>
 	</chunk>
 
+	<!-- Optional main disabled state -->
+	<chunk id="optional_deactivated_only">
+		<optional text="">
+			<label 
+				text="Special characteristics" 
+				fr.text="Caractéristiques particulières" />
+			<space />
+			<check key="railway:signal:main:deactivated" 
+				   text="Deactivated" 
+				   fr.text="Désactivé" 
+				   disable_off="true"/>
+		</optional>
+	</chunk>		
+
 	<!-- Common plates for Carré / Carré violet -->
 	<chunk id="carre_plates">
-		<optional
-			text="Plates"
-			fr.text="Plaques">
+		<optional text="">
+			<label
+				text="Plates"
+				fr.text="Plaques" />
+			<space />
 			<combo
 				key="railway:signal:main:plate"
 				text="Block Identification Plate"
@@ -420,9 +435,11 @@
 	<chunk id="carre_tags">
 		<key key="railway:signal:main" value="FR:C" />
 		<reference ref="carre_plates" />
-		<optional
-			text="Special characteristics"
-			fr.text="Caractéristiques particulières">
+		<optional text="">
+			<label
+				text="Special characteristics"
+				fr.text="Caractéristiques particulières" />
+			<space />
 			<checkgroup columns="3">
 				<check
 					key="railway:signal:main:clearing_light"
@@ -469,14 +486,7 @@
 	<chunk id="cv_tags">
 		<key key="railway:signal:main" value="FR:CV" />
 		<reference ref="carre_plates" />
-
-		<optional text="Special Characteristics">
-			<check
-				key="railway:signal:main:deactivated"
-				text="Deactivated"
-				fr.text="Désactivé"
-				disable_off="true"/>
-		</optional>
+		<reference ref="optional_deactivated_only" />
 
 		<item_separator />
 
@@ -500,7 +510,11 @@
 	<!-- Semaphore-specific tags -->
 	<chunk id="semaphore_tags">
 		<key key="railway:signal:main" value="FR:S" />
-		<optional text="Plates">
+		<optional text="">
+			<label
+				text="Plates"
+				fr.text="Plaques" />
+			<space />
 			<combo
 				key="railway:signal:main:plate"
 				text="Identification Plate"
@@ -523,15 +537,7 @@
 					icon="icons/plates/ID_PR.svg" icon_size="16"/>
 			</combo>
 		</optional>
-		<optional
-			text="Special Characteristics"
-			fr.text="Caractéristiques particulières">
-			<check
-				key="railway:signal:main:deactivated"
-				text="Deactivated"
-				fr.text="Désactivé"
-				disable_off="true"/>
-		</optional>
+		<reference ref="optional_deactivated_only" />
 
 		<item_separator />
 
@@ -546,15 +552,17 @@
 
 	<!-- Optional distant features -->
 	<chunk id="optional_distant_features">
-		<optional
-			text="Special characteristics"
-			fr.text="Caractéristiques particulières">
+		<optional text="">
+			<label
+				text="Special characteristics"
+				fr.text="Caractéristiques particulières" />
+			<space />
 			<checkgroup columns="3">
 				<check
 					key="railway:crocodile"
-					text="Crocodile"
-					fr.text="Crocodile"
-					default="on"/>
+					text="No Crocodile"
+					fr.text="Sans Crocodile"
+					value_off="" value_on="no" disable_off="true"/>
 				<check key="railway:signal:distant:deactivated"
 					text="Deactivated"
 					fr.text="Annulé"
@@ -594,6 +602,7 @@
 					<space />
 					<key key="railway:signal:main:shape" value="FR:C" />
 					<reference ref="cat_stop_signals" />
+					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -673,6 +682,7 @@
 					<space />
 					<key key="railway:signal:main:shape" value="FR:F" />
 					<reference ref="cat_stop_signals" />
+					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -788,6 +798,7 @@
 					<space />
 					<key key="railway:signal:main:shape" value="FR:H" />
 					<reference ref="cat_stop_signals" />
+					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1008,6 +1019,7 @@
 					<space />
 					<key key="railway:signal:main:shape" value="FR:A" />
 					<reference ref="cat_stop_signals" />
+					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1051,6 +1063,7 @@
 					<space />
 					<key key="railway:signal:main:shape" value="FR:C" />
 					<reference ref="cat_stop_signals" />
+					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1130,6 +1143,7 @@
 					<space />
 					<key key="railway:signal:main:shape" value="FR:F" />
 					<reference ref="cat_stop_signals" />
+					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1245,6 +1259,7 @@
 					<space />
 					<key key="railway:signal:main:shape" value="FR:H" />
 					<reference ref="cat_stop_signals" />
+					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1397,6 +1412,7 @@
 					<key key="railway:signal:main" value="FR:CV" />
 					<key key="railway:signal:main:shape" value="FR:K" />
 					<reference ref="cat_stop_signals" />
+					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1425,15 +1441,7 @@
 							fr.short_description="Feu blanc clignotant"
 							icon="icons/signals/K-M" icon_size="20"/>
 					</multiselect>
-					<optional
-						text="Special Characteristics"
-						fr.text="Caractéristiques particulières">
-						<check
-							key="railway:signal:main:deactivated"
-							text="Deactivated"
-							fr.text="Désactivé"
-							disable_off="true"/>
-					</optional>
+					<reference ref="optional_deactivated_only" />
 				</item>
 
 			</group>
@@ -1456,6 +1464,7 @@
 					<space />
 					<key key="railway:signal:main:shape" value="FR:A" />
 					<reference ref="cat_stop_signals" />
+					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1517,6 +1526,7 @@
 					<space />
 					<key key="railway:signal:main:shape" value="FR:C" />
 					<reference ref="cat_stop_signals" />
+					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1590,6 +1600,7 @@
 					<space />
 					<key key="railway:signal:main:shape" value="FR:F" />
 					<reference ref="cat_stop_signals" />
+					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1699,6 +1710,7 @@
 					<space />
 					<key key="railway:signal:main:shape" value="FR:H" />
 					<reference ref="cat_stop_signals" />
+					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1844,6 +1856,7 @@
 					<space />
 					<key key="railway:signal:main:shape" value="FR:K" />
 					<reference ref="cat_stop_signals" />
+					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
@@ -1936,6 +1949,7 @@
 				<space />
 				<key key="railway:signal:distant" value="FR:D" />
 				<reference ref="cat_distant" />
+				<space />
 				<multiselect
 					key="railway:signal:distant:states"
 					text="Aspects"
@@ -2034,6 +2048,7 @@
 				<space />
 				<key key="railway:signal:distant" value="FR:A" />
 				<reference ref="cat_distant" />
+				<space />
 				<multiselect
 					key="railway:signal:distant:states"
 					text="Aspects"
@@ -2349,7 +2364,7 @@
                         key="railway:signal:speed_limit_distant:switchable:speed"
 						text="Speed Limit (km/h)"
 						fr.text="Vitesse Maximale (km/h)"
-						values="10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160"
+						values="60,70,80,90,100,110,120,130,140,150,160"
 						editable="false"/>
 					<link wiki="OpenRailwayMap/Tagging_in_France#Switchable_TIV-D" />
 				</item>
@@ -2388,7 +2403,7 @@
                         key="railway:signal:speed_limit:switchable:speed"
 						text="Speed Limit (km/h)"
 						fr.text="Vitesse Maximale (km/h)"
-						values="10,20,30,40,50,60,70,80,90,100,110,120,130,140,150,160"
+						values="30,40,60,70,80,90,100,110,120,130,140,150,160"
 						editable="false"/>
 					<item_separator />
 					<preset_link preset_name="Downward-pointing Chevron" text=""/>
@@ -2415,6 +2430,13 @@
 					<space />
 					<key key="railway:crocodile" value="yes" />
 					<reference ref="cat_ordinary_speed_indicator" />
+					<combo
+						key="railway:signal:speed_limit_distant:fixed:speed"
+						text="Speed Limit (km/h)"
+						fr.text="Vitesse Maximale (km/h)"
+						values="10,20,30,35,40,50,60,70,80,85,90,95,100,105,110,115,120"
+						editable="false"/>
+					<item_separator />
 					<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
 					<reference ref="cat_ordinary_speed_indicator_presets" />
 				</item>
@@ -2431,6 +2453,13 @@
 					<space />
 					<key key="railway:crocodile" match="none" />
 					<reference ref="cat_ordinary_speed_indicator" />
+					<combo
+						key="railway:signal:speed_limit_distant:fixed:speed"
+						text="Speed Limit (km/h)"
+						fr.text="Vitesse Maximale (km/h)"
+						values="10,20,30,40,50,60,70,80,85,90,95,100,105,110,115,120,125,130,135,140"
+						editable="false"/>
+					<item_separator />
 					<preset_link preset_name="Ordinary-type TIV-D (diamond)" text=""/>
 					<reference ref="cat_ordinary_speed_indicator_presets" />
 				</item>
@@ -2454,7 +2483,7 @@
 						key="railway:signal:speed_limit_distant:fast:speed"
 						text="Speed Limit (km/h)"
 						fr.text="Vitesse Maximale (km/h)"
-						values="30,40,50,60,70,80,90,100,110,120,130,140,150,160"
+						values="40,50,60,70,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,160,165,170,175,180,185,190,195,200,205,210,220"
 						editable="false"/>
 
 					<item_separator />
@@ -2487,7 +2516,7 @@
 						key="railway:signal:speed_limit_distant:railcar:speed"
 						text="Speed Limit (km/h)"
 						fr.text="Vitesse Maximale (km/h)"
-						values="30,40,50,60,70,80,90,100,110,120,130,140,150,160"
+						values="40,50,60,70,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,160,165,170,175,180,185,190,195,200,205,210,220"
 						editable="false"/>
 
 					<item_separator />
@@ -3111,7 +3140,11 @@
 						fr.display_value="Repère d'espacement"
 						icon="icons/plates/ID_F.svg" icon_size="16"/>
 				</combo>
-				<optional>
+				<optional text="">
+					<label
+						text="Additional features"
+						fr.text="Caractéristiques complémentaires" />
+					<space />
 					<check
 						key="railway:signal:train_protection:main:passing_light"
                         text="White passing light"
@@ -3121,7 +3154,7 @@
 
 				<space />
 				<preset_link preset_name="Yellow Light Band" text=""/>
-				
+
 				<link wiki="OpenRailwayMap/Tagging_in_France#TVM_stop_marker" />
 			</item>
 
@@ -3139,7 +3172,11 @@
 				<key key="railway:signal:shunting:form" value="sign" />
 				<reference ref="base_with_plate" />
 				<text key="railway:signal:shunting:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-				<optional>
+				<optional text="">
+					<label
+						text="Additional features"
+						fr.text="Caractéristiques complémentaires" />
+					<space />
 					<check
 						key="railway:signal:shunting:passing_light"
                         text="White passing light"
@@ -4174,13 +4211,11 @@
 					<key key="railway:signal:stop:classic" value="FR:vehicle_number" />
 					<key key="railway:signal:stop:classic:for" value="vehicles" />
 					<reference ref="cat_classic_passenger_stop" />
-					<optional>
-						<text
-							key="railway:signal:stop:classic:caption"
-							text="Sign Legend"
-							fr.text="Libellé de la pancarte"
-							length="2" />
-					</optional>
+					<space />
+					<text
+						key="railway:signal:stop:classic:caption"
+						text="Sign Legend"
+						fr.text="Libellé de la pancarte"/>
 				</item>
 
 				<separator />
@@ -4420,7 +4455,11 @@
 					key="railway:signal:crossing_info:caption"
 					text="Sign Legend"
 					fr.text="Libellé de la Pancarte" />
-				<optional>
+				<optional text="">
+					<label
+						text="Special characteristics"
+						fr.text="Caractéristiques particulières" />
+					<space />
 					<check
 						key="railway:signal:crossing_info:automatic"
 						text="Manual"
@@ -4501,7 +4540,11 @@
 			<key key="railway:signal:whistle:form" value="sign" />
 			<reference ref="base_common" />
 			<text key="railway:signal:whistle:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-			<optional>
+			<optional text="">
+				<label
+					text="Additional features"
+					fr.text="Caractéristiques complémentaires" />
+				<space />
 				<check
 					key="railway:signal:whistle:plate"
 					text="Mandatory during daylight only (from 07:00 to 20:00)"
