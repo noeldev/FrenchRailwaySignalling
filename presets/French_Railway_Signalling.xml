@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.22_2026-06-17"
+    version="1.23_2026-06-19"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -11,8 +11,22 @@
 
 	<!-- 1. BASE CHUNKS (inheritance) -->
 
+	<!-- Chunk to delete obsolete keys from older versions -->
+	<chunk id="delete_obsolete_keys">
+		<key key="railway:signal:speed_limit_reminder" match="none" />
+		<key key="railway:signal:speed_limit_reminder:form" match="none" />
+		<key key="railway:signal:speed_limit_reminder:ref" match="none" />
+		<key key="railway:signal:speed_limit_reminder:speed" match="none" />
+		<key key="railway:signal:speed_limit_distant:shape" match="none" />
+		<key key="railway:signal:speed_limit_distant:speed" match="none" />
+		<key key="railway:signal:speed_limit_distant:form" match="none" />
+		<key key="railway:signal:speed_limit_distant:ref" match="none" />
+		<key key="railway:signal:stop:disposition" match="none" />
+	</chunk>
+	
 	<!-- Common tags applied to every railway signal node -->
 	<chunk id="base_common">
+		<reference ref="delete_obsolete_keys" />
 		<key key="source" value="SNCF - 03/2022" />
 		<key key="railway" value="signal" />
 		<text
