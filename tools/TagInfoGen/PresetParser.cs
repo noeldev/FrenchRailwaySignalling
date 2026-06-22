@@ -12,7 +12,12 @@ namespace TagInfoGen;
 //   - flatten transparent containers (<optional>, <checkgroup>),
 //   - emit one tag entry per fixed <key>, <text>, <check> and per <combo> /
 //     <multiselect> value (both comma lists and <list_entry> children),
-//   - de-duplicate and sort the result.
+//   - emit entries from chunks that no item references, treating them as
+//     taginfo-only declarations (added after the items, so they only contribute
+//     values not already declared),
+//   - de-duplicate and sort the result; when several declarations give the same
+//     key/value different icons, state aspect keys (...:states) keep the first
+//     icon and every other key drops the icon (the value alone is not a visual).
 //
 // Icons are not discriminated: a fixed key carrying a signal-identity value
 // (FR:* or ETCS:*) takes the item icon and name, every list value keeps the icon
@@ -25,6 +30,8 @@ internal sealed class PresetParser
     private const string FrenchValuePrefix = "FR:";
     private const string EtcsValuePrefix = "ETCS:";
     private const string DefaultObjectType = "node";
+    private const string DefaultItemName = "Signal";
+    private const string StatesKeySuffix = ":states";
 
     private readonly string _baseUrl;
     private readonly bool _useFrench;
@@ -46,6 +53,17 @@ internal sealed class PresetParser
         foreach (var item in Descendants(document, "item"))
         {
             ProcessItem(item, collected);
+        }
+
+        // Chunks not referenced by any item are treated as taginfo-only
+        // declarations. They are processed after the items, so existing (more
+        // specific) entries win de-duplication and only key/value pairs not
+        // already declared are added. This lets a signal declare extra aspects
+        // and icons for taginfo without showing an unused control in the JOSM
+        // editor (where the same value, e.g. an aspect, can only carry one icon).
+        foreach (var chunk in UnreferencedChunks(document))
+        {
+            EmitFrom(chunk.Elements(), [DefaultObjectType], DefaultItemName, null, collected);
         }
 
         return Deduplicate(collected);
@@ -73,10 +91,24 @@ internal sealed class PresetParser
         var objectTypes = ReadObjectTypes(item);
         // The <label> is the full descriptive title; the item name is the menu
         // entry and is often abbreviated, so the label is preferred.
-        var itemName = ItemLabel(item) ?? Localized(item, "name") ?? "Signal";
+        var itemName = ItemLabel(item) ?? Localized(item, "name") ?? DefaultItemName;
         var itemIconUrl = IconResolver.Resolve(_baseUrl, item.Attribute("icon")?.Value);
 
-        foreach (var element in Flatten(item.Elements(), new HashSet<string>(StringComparer.Ordinal)))
+        EmitFrom(item.Elements(), objectTypes, itemName, itemIconUrl, output);
+    }
+
+    // Emits tag entries from a sequence of elements (the children of an <item>
+    // or of a declaration <chunk>). The item name and icon are only used by
+    // fixed keys carrying a signal-identity value; declaration chunks rely on
+    // their <list_entry> descriptions and icons instead.
+    private void EmitFrom(
+        IEnumerable<XElement> elements,
+        IReadOnlyList<string> objectTypes,
+        string itemName,
+        string? itemIconUrl,
+        List<TagInfoTag> output)
+    {
+        foreach (var element in Flatten(elements, new HashSet<string>(StringComparer.Ordinal)))
         {
             switch (element.Name.LocalName)
             {
@@ -98,6 +130,28 @@ internal sealed class PresetParser
                     break;
             }
         }
+    }
+
+    // Chunks that no <reference> points to. They never reach an item, so they
+    // are emitted on their own as taginfo-only declarations.
+    private static IEnumerable<XElement> UnreferencedChunks(XDocument document)
+    {
+        var referenced = new HashSet<string>(StringComparer.Ordinal);
+
+        foreach (var reference in Descendants(document, "reference"))
+        {
+            var id = reference.Attribute("ref")?.Value;
+            if (!string.IsNullOrEmpty(id))
+            {
+                referenced.Add(id);
+            }
+        }
+
+        return Descendants(document, "chunk").Where(chunk =>
+        {
+            var id = chunk.Attribute("id")?.Value;
+            return !string.IsNullOrEmpty(id) && !referenced.Contains(id);
+        });
     }
 
     // The localized text of the item's first <label> child, if any.
@@ -290,26 +344,55 @@ internal sealed class PresetParser
 
     // Merges duplicate entries (same key/value/object_types), keeping the richest
     // description and icon, then sorts by key and value for a stable output.
+    // Merges duplicate entries (same key/value/object_types). The description is
+    // the first non-empty one seen. taginfo allows a single icon per entry, so
+    // conflicting icons are reconciled: state aspect keys (...:states) keep the
+    // first icon, while any other key drops the icon entirely, since the value
+    // alone does not pin a visual (the sign is told apart by another key/type).
+    // The result is sorted by key then value for a stable output.
     private static IReadOnlyList<TagInfoTag> Deduplicate(IEnumerable<TagInfoTag> tags) // CA1859
     {
         var merged = new Dictionary<string, TagInfoTag>(StringComparer.Ordinal);
+        var iconDropped = new HashSet<string>(StringComparer.Ordinal);
 
         foreach (var tag in tags)
         {
-            if (merged.TryGetValue(tag.DedupKey, out var existing))
-            {
-                existing.Description ??= tag.Description;
-                existing.IconUrl ??= tag.IconUrl;
-            }
-            else
+            if (!merged.TryGetValue(tag.DedupKey, out var existing))
             {
                 merged[tag.DedupKey] = tag;
+                continue;
+            }
+
+            existing.Description ??= tag.Description;
+
+            if (iconDropped.Contains(tag.DedupKey))
+            {
+                continue;
+            }
+
+            if (existing.IconUrl is null)
+            {
+                existing.IconUrl = tag.IconUrl;
+            }
+            else if (tag.IconUrl is not null
+                && !string.Equals(existing.IconUrl, tag.IconUrl, StringComparison.Ordinal)
+                && !KeepsFirstIconOnConflict(existing.Key))
+            {
+                existing.IconUrl = null;
+                iconDropped.Add(tag.DedupKey);
             }
         }
 
         return [.. merged.Values
             .OrderBy(t => t.Key, StringComparer.Ordinal)
             .ThenBy(t => t.Value ?? string.Empty, StringComparer.Ordinal)];
+    }
+
+    // State aspect keys (railway:signal:*:states) keep the first declared icon
+    // when several disagree; every other key drops the icon on conflict.
+    private static bool KeepsFirstIconOnConflict(string key)
+    {
+        return key.EndsWith(StatesKeySuffix, StringComparison.Ordinal);
     }
 
     private IReadOnlyList<string> ReadObjectTypes(XElement item) // CA1859
