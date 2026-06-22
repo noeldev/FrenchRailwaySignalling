@@ -2,17 +2,12 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs/
-
 # C# build outputs
 *.user
 *.suo
-/tools/TagInfoGen/.vs/
-/tools/TagInfoGen/bin/
-/tools/TagInfoGen/obj/
-/tools/WikiBackup/.vs/
-/tools/WikiBackup/bin/
-/tools/WikiBackup/obj/
+**/.vs/
+**/bin/
+**/obj/
 
 # Taginfo
 /taginfo.json
