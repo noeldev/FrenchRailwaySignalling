@@ -7,11 +7,11 @@
   <g fill="#404040">
     <circle cx="160" cy="160" r="80"/>
     <circle cx="540" cy="160" r="80"/>
-    <circle cx="540" cy="385" r="80"/>
+    <circle cx="160" cy="385" r="80"/>
   </g>
 
-  <g fill="#00ff00">
-    <circle cx="160" cy="385" r="80"/>
+  <g fill="#ffff00">
+    <circle cx="540" cy="385" r="80"/>
   </g>
   
 </g></svg>

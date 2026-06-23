@@ -7,10 +7,10 @@
   <g fill="#404040">
     <circle cx="160" cy="160" r="80"/>
     <circle cx="160" cy="540" r="80"/>
+    <circle cx="385" cy="160" r="80"/>
   </g>
   
   <g fill="red">
-    <circle cx="385" cy="160" r="80"/>
     <circle cx="385" cy="540" r="80"/>
   </g>
 </g></svg>

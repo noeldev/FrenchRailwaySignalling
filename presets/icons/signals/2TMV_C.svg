@@ -5,13 +5,14 @@
   <rect width="670" height="515" x="15" y="15" rx="145" ry="145" fill="none" stroke="#ffffff" stroke-width="24"/>
   
   <g fill="#404040">
-    <circle cx="160" cy="160" r="80"/>
-    <circle cx="540" cy="160" r="80"/>
-    <circle cx="540" cy="385" r="80"/>
-  </g>
-
-  <g fill="#00ff00">
     <circle cx="160" cy="385" r="80"/>
+    <circle cx="540" cy="385" r="80"/>
+    <circle cx="350" cy="272.5" r="90"/>
   </g>
   
+  <g fill="red">
+    <circle cx="160" cy="160" r="80"/>
+    <circle cx="540" cy="160" r="80"/>
+  </g>
+ 
 </g></svg>
