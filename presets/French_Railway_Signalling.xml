@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.23_2026-06-19"
+    version="1.24_2026-06-23"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -107,9 +107,66 @@
 	<chunk id="cat_dwarf_carre_signal">
 		<key key="railway:signal:main" value="FR:C" />
 		<key key="railway:signal:main:height" value="dwarf" />
-		<key key="railway:signal:main:states" value="FR:C;FR:VL" />
+		<key key="railway:signal:main:function" match="none" />
 		<reference ref="cat_stop_signals" />
 		<link wiki="OpenRailwayMap/Tagging_in_France#Carré_(dwarf)" />
+	</chunk>
+
+	<!-- Unused 2TMV chunk -->
+	<!-- Declare states and icons for taginfo.json -->
+	<chunk id="cat_intermediate_signal">
+		<multiselect
+			key="railway:signal:main:states"
+			text="Aspects"
+			fr.text="Aspects"
+			delimiter=";"
+			default="FR:C;FR:(S);FR:X;FR:A;FR:VL"
+			editable="false"
+			values_sort="false"
+			rows="5">
+			<list_entry
+				value="FR:C"
+				display_value="C"
+				short_description="Stop aspect"
+				fr.short_description="Carré"
+				icon="icons/signals/2TMV_C.svg" icon_size="24"/>
+			<list_entry
+				value="FR:S"
+				display_value="S"
+				short_description="Stop and proceed aspect"
+				fr.short_description="Sémaphore"
+				icon="icons/signals/2TMV_S.svg" icon_size="24"/>
+			<list_entry
+				value="FR:(S)"
+				display_value="(S)"
+				short_description="Flashing red light"
+				fr.short_description="Feu rouge clignotant"
+				icon="icons/signals/2TMV_S.svg" icon_size="24"/>
+			<list_entry
+				value="FR:X"
+				display_value="X"
+				short_description="Illuminated white cross"
+				fr.short_description="Croix blanche lumineuse"
+				icon="icons/signals/2TMV_X.svg" icon_size="24"/>
+			<list_entry
+				value="FR:A"
+				display_value="A"
+				short_description="Caution aspect"
+				fr.short_description="Avertissement"
+				icon="icons/signals/2TMV_A.svg" icon_size="24"/>
+			<list_entry
+				value="FR:(A)"
+				display_value="(A)"
+				short_description="Advance caution aspect"
+				fr.short_description="Feu jaune clignotant"
+				icon="icons/signals/2TMV_A.svg" icon_size="24"/>
+			<list_entry
+				value="FR:VL"
+				display_value="VL"
+				short_description="Clear aspect"
+				fr.short_description="Feu vert"
+				icon="icons/signals/2TMV_VL.svg" icon_size="24"/>
+		</multiselect>
 	</chunk>
 
 	<!-- Mechanical stop signals (form=sign) -->
@@ -631,55 +688,55 @@
 							display_value="C"
 							short_description="Stop aspect"
 							fr.short_description="Carré"
-							icon="icons/signals/C-C" icon_size="20"/>
+							icon="icons/signals/C-C.svg" icon_size="24"/>
 						<list_entry
 							value="FR:S"
 							display_value="S"
 							short_description="Stop and proceed aspect"
 							fr.short_description="Sémaphore"
-							icon="icons/signals/C-S" icon_size="20"/>
+							icon="icons/signals/C-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(S)"
 							display_value="(S)"
 							short_description="Flashing red light"
 							fr.short_description="Feu rouge clignotant"
-							icon="icons/signals/C-S" icon_size="20"/>
+							icon="icons/signals/C-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:M"
 							display_value="M"
 							short_description="Shunting aspect"
 							fr.short_description="Feu blanc"
-							icon="icons/signals/C-M" icon_size="20"/>
+							icon="icons/signals/C-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(M)"
 							display_value="(M)"
 							short_description="Flashing white light"
 							fr.short_description="Feu blanc clignotant"
-							icon="icons/signals/C-M" icon_size="20"/>
+							icon="icons/signals/C-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:A"
 							display_value="A"
 							short_description="Caution aspect"
 							fr.short_description="Avertissement"
-							icon="icons/signals/C-A" icon_size="20"/>
+							icon="icons/signals/C-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(A)"
 							display_value="(A)"
 							short_description="Advance caution aspect"
 							fr.short_description="Feu jaune clignotant"
-							icon="icons/signals/C-A" icon_size="20"/>
+							icon="icons/signals/C-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:VL"
 							display_value="VL"
 							short_description="Clear aspect"
 							fr.short_description="Feu vert"
-							icon="icons/signals/C-VL" icon_size="20"/>
+							icon="icons/signals/C-VL.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(VL)"
 							display_value="(VL)"
 							short_description="Flashing green light"
 							fr.short_description="Feu vert clignotant"
-							icon="icons/signals/C-VL" icon_size="20"/>
+							icon="icons/signals/C-VL.svg" icon_size="24"/>
 					</multiselect>
 					<reference ref="carre_tags" />
 				</item>
@@ -711,91 +768,91 @@
 							display_value="C"
 							short_description="Stop aspect"
 							fr.short_description="Carré"
-							icon="icons/signals/F-C" icon_size="20"/>
+							icon="icons/signals/F-C.svg" icon_size="24"/>
 						<list_entry
 							value="FR:S"
 							display_value="S"
 							short_description="Stop and proceed aspect"
 							fr.short_description="Sémaphore"
-							icon="icons/signals/F-S" icon_size="20"/>
+							icon="icons/signals/F-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(S)"
 							display_value="(S)"
 							short_description="Flashing red light"
 							fr.short_description="Feu rouge clignotant"
-							icon="icons/signals/F-S" icon_size="20"/>
+							icon="icons/signals/F-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:M"
 							display_value="M"
 							short_description="Shunting aspect"
 							fr.short_description="Feu blanc"
-							icon="icons/signals/F-M" icon_size="20"/>
+							icon="icons/signals/F-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(M)"
 							display_value="(M)"
 							short_description="Flashing white light"
 							fr.short_description="Feu blanc clignotant"
-							icon="icons/signals/F-M" icon_size="20"/>
+							icon="icons/signals/F-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:A"
 							display_value="A"
 							short_description="Caution aspect"
 							fr.short_description="Avertissement"
-							icon="icons/signals/F-A" icon_size="20"/>
+							icon="icons/signals/F-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(A)"
 							display_value="(A)"
 							short_description="Advance caution aspect"
 							fr.short_description="Feu jaune clignotant"
-							icon="icons/signals/F-A" icon_size="20"/>
+							icon="icons/signals/F-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:R"
 							display_value="R"
 							short_description="30 km/h speed restriction"
 							fr.short_description="Ralentissement 30"
-							icon="icons/signals/F-R" icon_size="20"/>
+							icon="icons/signals/F-R.svg" icon_size="24"/>
 						<list_entry
 							value="FR:R+A"
 							display_value="R+A"
 							short_description="30 km/h speed restriction and caution aspect"
 							fr.short_description="Ralentissement 30 et Avertissement"
-							icon="icons/signals/F-R-A" icon_size="20"/>
+							icon="icons/signals/F-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:R+(A)"
 							display_value="R+(A)"
 							short_description="30 km/h speed restriction and advance caution aspect"
 							fr.short_description="Ralentissement 30 et feu jaune clignotant"
-							icon="icons/signals/F-R-A" icon_size="20"/>
+							icon="icons/signals/F-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)"
 							display_value="(R)"
 							short_description="60 km/h speed restriction"
 							fr.short_description="Ralentissement 60"
-							icon="icons/signals/F-R" icon_size="20"/>
+							icon="icons/signals/F-R.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)+A"
 							display_value="(R)+A"
 							short_description="60 km/h speed restriction and caution aspect"
 							fr.short_description="Ralentissement 60 et Avertissement"
-							icon="icons/signals/F-R-A" icon_size="20"/>
+							icon="icons/signals/F-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)+(A)"
 							display_value="(R)+(A)"
 							short_description="60 km/h speed restriction and advance caution aspect"
 							fr.short_description="Ralentissement 60 et feu jaune clignotant"
-							icon="icons/signals/F-R-A" icon_size="20"/>
+							icon="icons/signals/F-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:VL"
 							display_value="VL"
 							short_description="Clear aspect"
 							fr.short_description="Feu vert"
-							icon="icons/signals/F-VL" icon_size="20"/>
+							icon="icons/signals/F-VL.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(VL)"
 							display_value="(VL)"
 							short_description="Flashing green light"
 							fr.short_description="Feu vert clignotant"
-							icon="icons/signals/F-VL" icon_size="20"/>
+							icon="icons/signals/F-VL.svg" icon_size="24"/>
 					</multiselect>
 					<reference ref="carre_tags" />
 				</item>
@@ -827,127 +884,127 @@
 							display_value="C"
 							short_description="Stop aspect"
 							fr.short_description="Carré"
-							icon="icons/signals/H-C" icon_size="20"/>
+							icon="icons/signals/H-C.svg" icon_size="24"/>
 						<list_entry
 							value="FR:S"
 							display_value="S"
 							short_description="Stop and proceed aspect"
 							fr.short_description="Sémaphore"
-							icon="icons/signals/H-S" icon_size="20"/>
+							icon="icons/signals/H-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(S)"
 							display_value="(S)"
 							short_description="Flashing red light"
 							fr.short_description="Feu rouge clignotant"
-							icon="icons/signals/H-S" icon_size="20"/>
+							icon="icons/signals/H-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:M"
 							display_value="M"
 							short_description="Shunting aspect"
 							fr.short_description="Feu blanc"
-							icon="icons/signals/H-M" icon_size="20"/>
+							icon="icons/signals/H-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(M)"
 							display_value="(M)"
 							short_description="Flashing white light"
 							fr.short_description="Feu blanc clignotant"
-							icon="icons/signals/H-M" icon_size="20"/>
+							icon="icons/signals/H-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:RR"
 							display_value="RR"
 							short_description="30 km/h speed reminder"
 							fr.short_description="Rappel 30"
-							icon="icons/signals/H-RR" icon_size="20"/>
+							icon="icons/signals/H-RR.svg" icon_size="24"/>
 						<list_entry
 							value="FR:RR+A"
 							display_value="RR+A"
 							short_description="30 km/h speed reminder and caution aspect"
 							fr.short_description="Rappel 30 et Avertissement"
-							icon="icons/signals/H-RR-A" icon_size="20"/>
+							icon="icons/signals/H-RR-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:RR+(A)"
 							display_value="RR+(A)"
 							short_description="30 km/h speed reminder and advance caution aspect"
 							fr.short_description="Rappel 30 et feu jaune clignotant"
-							icon="icons/signals/H-RR-A" icon_size="20"/>
+							icon="icons/signals/H-RR-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(RR)"
 							display_value="(RR)"
 							short_description="60 km/h speed reminder"
 							fr.short_description="Rappel 60"
-							icon="icons/signals/H-RR" icon_size="20"/>
+							icon="icons/signals/H-RR.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(RR)+A"
 							display_value="(RR)+A"
 							short_description="60 km/h speed reminder and caution aspect"
 							fr.short_description="Rappel 60 et Avertissement"
-							icon="icons/signals/H-RR-A" icon_size="20"/>
+							icon="icons/signals/H-RR-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(RR)+(A)"
 							display_value="(RR)+(A)"
 							short_description="60 km/h speed reminder and advance caution aspect"
 							fr.short_description="Rappel 60 et feu jaune clignotant"
-							icon="icons/signals/H-RR-A" icon_size="20"/>
+							icon="icons/signals/H-RR-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:A"
 							display_value="A"
 							short_description="Caution aspect"
 							fr.short_description="Avertissement"
-							icon="icons/signals/H-A" icon_size="20"/>
+							icon="icons/signals/H-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(A)"
 							display_value="(A)"
 							short_description="Advance caution aspect"
 							fr.short_description="Feu jaune clignotant"
-							icon="icons/signals/H-A" icon_size="20"/>
+							icon="icons/signals/H-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:R"
 							display_value="R"
 							short_description="30 km/h speed restriction"
 							fr.short_description="Ralentissement 30"
-							icon="icons/signals/H-R" icon_size="20"/>
+							icon="icons/signals/H-R.svg" icon_size="24"/>
 						<list_entry
 							value="FR:R+A"
 							display_value="R+A"
 							short_description="30 km/h speed restriction and caution aspect"
 							fr.short_description="Ralentissement 30 et Avertissement"
-							icon="icons/signals/H-R-A" icon_size="20"/>
+							icon="icons/signals/H-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:R+(A)"
 							display_value="R+(A)"
 							short_description="30 km/h speed restriction and advance caution aspect"
 							fr.short_description="Ralentissement 30 et feu jaune clignotant"
-							icon="icons/signals/H-R-A" icon_size="20"/>
+							icon="icons/signals/H-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)"
 							display_value="(R)"
 							short_description="60 km/h speed restriction"
 							fr.short_description="Ralentissement 60"
-							icon="icons/signals/H-R" icon_size="20"/>
+							icon="icons/signals/H-R.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)+A"
 							display_value="(R)+A"
 							short_description="60 km/h speed restriction and caution aspect"
 							fr.short_description="Ralentissement 60 et Avertissement"
-							icon="icons/signals/H-R-A" icon_size="20"/>
+							icon="icons/signals/H-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)+(A)"
 							display_value="(R)+(A)"
 							short_description="60 km/h speed restriction and advance caution aspect"
 							fr.short_description="Ralentissement 60 et feu jaune clignotant"
-							icon="icons/signals/H-R-A" icon_size="20"/>
+							icon="icons/signals/H-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:VL"
 							display_value="VL"
 							short_description="Clear aspect"
 							fr.short_description="Feu vert"
-							icon="icons/signals/H-VL" icon_size="20"/>
+							icon="icons/signals/H-VL.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(VL)"
 							display_value="(VL)"
 							short_description="Flashing green light"
 							fr.short_description="Feu vert clignotant"
-							icon="icons/signals/H-VL" icon_size="20"/>
+							icon="icons/signals/H-VL.svg" icon_size="24"/>
 					</multiselect>
 					<reference ref="carre_tags" />
 				</item>
@@ -967,6 +1024,53 @@
 					<space />
 					<key key="railway:signal:main:arrangement" match="none" />
 					<reference ref="cat_dwarf_carre_signal" />
+					<space />
+					<multiselect
+						key="railway:signal:main:states"
+						text="Aspects"
+						fr.text="Aspects"
+						delimiter=";"
+						default="FR:C;FR:S;FR:A;FR:VL"
+						editable="false"
+						values_sort="false"
+						rows="5">
+						<list_entry
+							value="FR:C"
+							display_value="C"
+							short_description="Stop aspect"
+							fr.short_description="Carré"
+							icon="icons/signals/dwarf_H_C.svg" icon_size="24"/>
+						<list_entry
+							value="FR:S"
+							display_value="S"
+							short_description="Stop and proceed aspect"
+							fr.short_description="Sémaphore"
+							icon="icons/signals/dwarf_H_S.svg" icon_size="24"/>
+						<list_entry
+							value="FR:(S)"
+							display_value="(S)"
+							short_description="Flashing red light"
+							fr.short_description="Feu rouge clignotant"
+							icon="icons/signals/dwarf_H_S.svg" icon_size="24"/>
+						<list_entry
+							value="FR:A"
+							display_value="A"
+							short_description="Caution aspect"
+							fr.short_description="Avertissement"
+							icon="icons/signals/dwarf_H_A.svg" icon_size="24"/>
+						<list_entry
+							value="FR:(A)"
+							display_value="(A)"
+							short_description="Advance caution aspect"
+							fr.short_description="Feu jaune clignotant"
+							icon="icons/signals/dwarf_H_A.svg" icon_size="24"/>
+						<list_entry
+							value="FR:VL"
+							display_value="VL"
+							short_description="Clear aspect"
+							fr.short_description="Feu vert"
+							icon="icons/signals/dwarf_H_VL.svg" icon_size="24"/>
+					</multiselect>
 
 					<item_separator />
 					<preset_link preset_name="Dwarf Carré (Vertical)" text=""/>
@@ -983,6 +1087,53 @@
 					<space />
 					<key key="railway:signal:main:arrangement" value="vertical" />
 					<reference ref="cat_dwarf_carre_signal" />
+					<space />
+					<multiselect
+						key="railway:signal:main:states"
+						text="Aspects"
+						fr.text="Aspects"
+						delimiter=";"
+						default="FR:C;FR:S;FR:A;FR:VL"
+						editable="false"
+						values_sort="false"
+						rows="5">
+						<list_entry
+							value="FR:C"
+							display_value="C"
+							short_description="Stop aspect"
+							fr.short_description="Carré"
+							icon="icons/signals/dwarf_V_C.svg" icon_size="24"/>
+						<list_entry
+							value="FR:S"
+							display_value="S"
+							short_description="Stop and proceed aspect"
+							fr.short_description="Sémaphore"
+							icon="icons/signals/dwarf_V_S.svg" icon_size="24"/>
+						<list_entry
+							value="FR:(S)"
+							display_value="(S)"
+							short_description="Flashing red light"
+							fr.short_description="Feu rouge clignotant"
+							icon="icons/signals/dwarf_V_S.svg" icon_size="24"/>
+						<list_entry
+							value="FR:A"
+							display_value="A"
+							short_description="Caution aspect"
+							fr.short_description="Avertissement"
+							icon="icons/signals/dwarf_V_A.svg" icon_size="24"/>
+						<list_entry
+							value="FR:(A)"
+							display_value="(A)"
+							short_description="Advance caution aspect"
+							fr.short_description="Feu jaune clignotant"
+							icon="icons/signals/dwarf_V_A.svg" icon_size="24"/>
+						<list_entry
+							value="FR:VL"
+							display_value="VL"
+							short_description="Clear aspect"
+							fr.short_description="Feu vert"
+							icon="icons/signals/dwarf_V_VL.svg" icon_size="24"/>
+					</multiselect>
 
 					<item_separator />
 					<preset_link preset_name="Dwarf Carré (Horizontal)" text=""/>
@@ -1048,19 +1199,19 @@
 							display_value="CV"
 							short_description="Shunt stop"
 							fr.short_description="Carré violet"
-							icon="icons/signals/A-Cv" icon_size="20"/>
+							icon="icons/signals/A-Cv.svg" icon_size="24"/>
 						<list_entry
 							value="FR:M"
 							display_value="M"
 							short_description="Shunting aspect"
 							fr.short_description="Feu blanc"
-							icon="icons/signals/A-M" icon_size="20"/>
+							icon="icons/signals/A-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(M)"
 							display_value="(M)"
 							short_description="Flashing white light"
 							fr.short_description="Feu blanc clignotant"
-							icon="icons/signals/A-M" icon_size="20"/>
+							icon="icons/signals/A-M.svg" icon_size="24"/>
 					</multiselect>
 					<reference ref="cv_tags" />
 				</item>
@@ -1092,55 +1243,55 @@
 							display_value="CV"
 							short_description="Shunt stop"
 							fr.short_description="Carré violet"
-							icon="icons/signals/C-Cv" icon_size="20"/>
+							icon="icons/signals/C-Cv.svg" icon_size="24"/>
 						<list_entry
 							value="FR:S"
 							display_value="S"
 							short_description="Stop and proceed aspect"
 							fr.short_description="Sémaphore"
-							icon="icons/signals/C-S" icon_size="20"/>
+							icon="icons/signals/C-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(S)"
 							display_value="(S)"
 							short_description="Flashing red light"
 							fr.short_description="Feu rouge clignotant"
-							icon="icons/signals/C-S" icon_size="20"/>
+							icon="icons/signals/C-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:M"
 							display_value="M"
 							short_description="Shunting aspect"
 							fr.short_description="Feu blanc"
-							icon="icons/signals/C-M" icon_size="20"/>
+							icon="icons/signals/C-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(M)"
 							display_value="(M)"
 							short_description="Flashing white light"
 							fr.short_description="Feu blanc clignotant"
-							icon="icons/signals/C-M" icon_size="20"/>
+							icon="icons/signals/C-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:A"
 							display_value="A"
 							short_description="Caution aspect"
 							fr.short_description="Avertissement"
-							icon="icons/signals/C-A" icon_size="20"/>
+							icon="icons/signals/C-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(A)"
 							display_value="(A)"
 							short_description="Advance caution aspect"
 							fr.short_description="Feu jaune clignotant"
-							icon="icons/signals/C-A" icon_size="20"/>
+							icon="icons/signals/C-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:VL"
 							display_value="VL"
 							short_description="Clear aspect"
 							fr.short_description="Feu vert"
-							icon="icons/signals/C-VL" icon_size="20"/>
+							icon="icons/signals/C-VL.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(VL)"
 							display_value="(VL)"
 							short_description="Flashing green light"
 							fr.short_description="Feu vert clignotant"
-							icon="icons/signals/C-VL" icon_size="20"/>
+							icon="icons/signals/C-VL.svg" icon_size="24"/>
 					</multiselect>
 					<reference ref="cv_tags" />
 				</item>
@@ -1172,91 +1323,91 @@
 							display_value="CV"
 							short_description="Shunt stop"
 							fr.short_description="Carré violet"
-							icon="icons/signals/F-Cv" icon_size="20"/>
+							icon="icons/signals/F-Cv.svg" icon_size="24"/>
 						<list_entry
 							value="FR:S"
 							display_value="S"
 							short_description="Stop and proceed aspect"
 							fr.short_description="Sémaphore"
-							icon="icons/signals/F-S" icon_size="20"/>
+							icon="icons/signals/F-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(S)"
 							display_value="(S)"
 							short_description="Flashing red light"
 							fr.short_description="Feu rouge clignotant"
-							icon="icons/signals/F-S" icon_size="20"/>
+							icon="icons/signals/F-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:M"
 							display_value="M"
 							short_description="Shunting aspect"
 							fr.short_description="Feu blanc"
-							icon="icons/signals/F-M" icon_size="20"/>
+							icon="icons/signals/F-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(M)"
 							display_value="(M)"
 							short_description="Flashing white light"
 							fr.short_description="Feu blanc clignotant"
-							icon="icons/signals/F-M" icon_size="20"/>
+							icon="icons/signals/F-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:A"
 							display_value="A"
 							short_description="Caution aspect"
 							fr.short_description="Avertissement"
-							icon="icons/signals/F-A" icon_size="20"/>
+							icon="icons/signals/F-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(A)"
 							display_value="(A)"
 							short_description="Advance caution aspect"
 							fr.short_description="Feu jaune clignotant"
-							icon="icons/signals/F-A" icon_size="20"/>
+							icon="icons/signals/F-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:R"
 							display_value="R"
 							short_description="30 km/h speed restriction"
 							fr.short_description="Ralentissement 30"
-							icon="icons/signals/F-R" icon_size="20"/>
+							icon="icons/signals/F-R.svg" icon_size="24"/>
 						<list_entry
 							value="FR:R+A"
 							display_value="R+A"
 							short_description="30 km/h speed restriction and caution aspect"
 							fr.short_description="Ralentissement 30 et Avertissement"
-							icon="icons/signals/F-R-A" icon_size="20"/>
+							icon="icons/signals/F-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:R+(A)"
 							display_value="R+(A)"
 							short_description="30 km/h speed restriction and advance caution aspect"
 							fr.short_description="Ralentissement 30 et feu jaune clignotant"
-							icon="icons/signals/F-R-A" icon_size="20"/>
+							icon="icons/signals/F-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)"
 							display_value="(R)"
 							short_description="60 km/h speed restriction"
 							fr.short_description="Ralentissement 60"
-							icon="icons/signals/F-R" icon_size="20"/>
+							icon="icons/signals/F-R.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)+A"
 							display_value="(R)+A"
 							short_description="60 km/h speed restriction and caution aspect"
 							fr.short_description="Ralentissement 60 et Avertissement"
-							icon="icons/signals/F-R-A" icon_size="20"/>
+							icon="icons/signals/F-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)+(A)"
 							display_value="(R)+(A)"
 							short_description="60 km/h speed restriction and advance caution aspect"
 							fr.short_description="Ralentissement 60 et feu jaune clignotant"
-							icon="icons/signals/F-R-A" icon_size="20"/>
+							icon="icons/signals/F-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:VL"
 							display_value="VL"
 							short_description="Clear aspect"
 							fr.short_description="Feu vert"
-							icon="icons/signals/F-VL" icon_size="20"/>
+							icon="icons/signals/F-VL.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(VL)"
 							display_value="(VL)"
 							short_description="Flashing green light"
 							fr.short_description="Feu vert clignotant"
-							icon="icons/signals/F-VL" icon_size="20"/>
+							icon="icons/signals/F-VL.svg" icon_size="24"/>
 					</multiselect>
 					<reference ref="cv_tags" />
 				</item>
@@ -1288,127 +1439,127 @@
 							display_value="CV"
 							short_description="Shunt stop"
 							fr.short_description="Carré violet"
-							icon="icons/signals/H-Cv" icon_size="20"/>
+							icon="icons/signals/H-Cv.svg" icon_size="24"/>
 						<list_entry
 							value="FR:S"
 							display_value="S"
 							short_description="Stop and proceed aspect"
 							fr.short_description="Sémaphore"
-							icon="icons/signals/H-S" icon_size="20"/>
+							icon="icons/signals/H-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(S)"
 							display_value="(S)"
 							short_description="Flashing red light"
 							fr.short_description="Feu rouge clignotant"
-							icon="icons/signals/H-S" icon_size="20"/>
+							icon="icons/signals/H-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:M"
 							display_value="M"
 							short_description="Shunting aspect"
 							fr.short_description="Feu blanc"
-							icon="icons/signals/H-M" icon_size="20"/>
+							icon="icons/signals/H-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(M)"
 							display_value="(M)"
 							short_description="Flashing white light"
 							fr.short_description="Feu blanc clignotant"
-							icon="icons/signals/H-M" icon_size="20"/>
+							icon="icons/signals/H-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:RR"
 							display_value="RR"
 							short_description="30 km/h speed reminder"
 							fr.short_description="Rappel 30"
-							icon="icons/signals/H-RR" icon_size="20"/>
+							icon="icons/signals/H-RR.svg" icon_size="24"/>
 						<list_entry
 							value="FR:RR+A"
 							display_value="RR+A"
 							short_description="30 km/h speed reminder and caution aspect"
 							fr.short_description="Rappel 30 et Avertissement"
-							icon="icons/signals/H-RR-A" icon_size="20"/>
+							icon="icons/signals/H-RR-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:RR+(A)"
 							display_value="RR+(A)"
 							short_description="30 km/h speed reminder and advance caution aspect"
 							fr.short_description="Rappel 30 et feu jaune clignotant"
-							icon="icons/signals/H-RR-A" icon_size="20"/>
+							icon="icons/signals/H-RR-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(RR)"
 							display_value="(RR)"
 							short_description="60 km/h speed reminder"
 							fr.short_description="Rappel 60"
-							icon="icons/signals/H-RR" icon_size="20"/>
+							icon="icons/signals/H-RR.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(RR)+A"
 							display_value="(RR)+A"
 							short_description="60 km/h speed reminder and caution aspect"
 							fr.short_description="Rappel 60 et Avertissement"
-							icon="icons/signals/H-RR-A" icon_size="20"/>
+							icon="icons/signals/H-RR-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(RR)+(A)"
 							display_value="(RR)+(A)"
 							short_description="60 km/h speed reminder and advance caution aspect"
 							fr.short_description="Rappel 60 et feu jaune clignotant"
-							icon="icons/signals/H-RR-A" icon_size="20"/>
+							icon="icons/signals/H-RR-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:A"
 							display_value="A"
 							short_description="Caution aspect"
 							fr.short_description="Avertissement"
-							icon="icons/signals/H-A" icon_size="20"/>
+							icon="icons/signals/H-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(A)"
 							display_value="(A)"
 							short_description="Advance caution aspect"
 							fr.short_description="Feu jaune clignotant"
-							icon="icons/signals/H-A" icon_size="20"/>
+							icon="icons/signals/H-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:R"
 							display_value="R"
 							short_description="30 km/h speed restriction"
 							fr.short_description="Ralentissement 30"
-							icon="icons/signals/H-R" icon_size="20"/>
+							icon="icons/signals/H-R.svg" icon_size="24"/>
 						<list_entry
 							value="FR:R+A"
 							display_value="R+A"
 							short_description="30 km/h speed restriction and caution aspect"
 							fr.short_description="Ralentissement 30 et Avertissement"
-							icon="icons/signals/H-R-A" icon_size="20"/>
+							icon="icons/signals/H-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:R+(A)"
 							display_value="R+(A)"
 							short_description="30 km/h speed restriction and advance caution aspect"
 							fr.short_description="Ralentissement 30 et feu jaune clignotant"
-							icon="icons/signals/H-R-A" icon_size="20"/>
+							icon="icons/signals/H-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)"
 							display_value="(R)"
 							short_description="60 km/h speed restriction"
 							fr.short_description="Ralentissement 60"
-							icon="icons/signals/H-R" icon_size="20"/>
+							icon="icons/signals/H-R.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)+A"
 							display_value="(R)+A"
 							short_description="60 km/h speed restriction and caution aspect"
 							fr.short_description="Ralentissement 60 et Avertissement"
-							icon="icons/signals/H-R-A" icon_size="20"/>
+							icon="icons/signals/H-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)+(A)"
 							display_value="(R)+(A)"
 							short_description="60 km/h speed restriction and advance caution aspect"
 							fr.short_description="Ralentissement 60 et feu jaune clignotant"
-							icon="icons/signals/H-R-A" icon_size="20"/>
+							icon="icons/signals/H-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:VL"
 							display_value="VL"
 							short_description="Clear aspect"
 							fr.short_description="Feu vert"
-							icon="icons/signals/H-VL" icon_size="20"/>
+							icon="icons/signals/H-VL.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(VL)"
 							display_value="(VL)"
 							short_description="Flashing green light"
 							fr.short_description="Feu vert clignotant"
-							icon="icons/signals/H-VL" icon_size="20"/>
+							icon="icons/signals/H-VL.svg" icon_size="24"/>
 					</multiselect>
 					<reference ref="cv_tags" />
 				</item>
@@ -1441,19 +1592,19 @@
 							display_value="CV"
 							short_description="Shunt stop"
 							fr.short_description="Carré violet"
-							icon="icons/signals/K-Cv" icon_size="20"/>
+							icon="icons/signals/K-Cv.svg" icon_size="24"/>
 						<list_entry
 							value="FR:M"
 							display_value="M"
 							short_description="Shunting aspect"
 							fr.short_description="Feu blanc"
-							icon="icons/signals/K-M" icon_size="20"/>
+							icon="icons/signals/K-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(M)"
 							display_value="(M)"
 							short_description="Flashing white light"
 							fr.short_description="Feu blanc clignotant"
-							icon="icons/signals/K-M" icon_size="20"/>
+							icon="icons/signals/K-M.svg" icon_size="24"/>
 					</multiselect>
 					<reference ref="optional_deactivated_only" />
 				</item>
@@ -1493,37 +1644,37 @@
 							display_value="S"
 							short_description="Stop and proceed aspect"
 							fr.short_description="Sémaphore"
-							icon="icons/signals/A-S" icon_size="20"/>
+							icon="icons/signals/A-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(S)"
 							display_value="(S)"
 							short_description="Flashing red light"
 							fr.short_description="Feu rouge clignotant"
-							icon="icons/signals/A-S" icon_size="20"/>
+							icon="icons/signals/A-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:A"
 							display_value="A"
 							short_description="Caution aspect"
 							fr.short_description="Avertissement"
-							icon="icons/signals/A-A" icon_size="20"/>
+							icon="icons/signals/A-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(A)"
 							display_value="(A)"
 							short_description="Advance caution aspect"
 							fr.short_description="Feu jaune clignotant"
-							icon="icons/signals/A-A" icon_size="20"/>
+							icon="icons/signals/A-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:VL"
 							display_value="VL"
 							short_description="Clear aspect"
 							fr.short_description="Feu vert"
-							icon="icons/signals/A-VL" icon_size="20"/>
+							icon="icons/signals/A-VL.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(VL)"
 							display_value="(VL)"
 							short_description="Flashing green light"
 							fr.short_description="Feu vert clignotant"
-							icon="icons/signals/A-VL" icon_size="20"/>
+							icon="icons/signals/A-VL.svg" icon_size="24"/>
 					</multiselect>
 					<reference ref="semaphore_tags" />
 				</item>
@@ -1555,49 +1706,49 @@
 							display_value="S"
 							short_description="Stop and proceed aspect"
 							fr.short_description="Sémaphore"
-							icon="icons/signals/C-S" icon_size="20"/>
+							icon="icons/signals/C-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(S)"
 							display_value="(S)"
 							short_description="Flashing red light"
 							fr.short_description="Feu rouge clignotant"
-							icon="icons/signals/C-S" icon_size="20"/>
+							icon="icons/signals/C-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:M"
 							display_value="M"
 							short_description="Shunting aspect"
 							fr.short_description="Feu blanc"
-							icon="icons/signals/C-M" icon_size="20"/>
+							icon="icons/signals/C-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(M)"
 							display_value="(M)"
 							short_description="Flashing white light"
 							fr.short_description="Feu blanc clignotant"
-							icon="icons/signals/C-M" icon_size="20"/>
+							icon="icons/signals/C-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:A"
 							display_value="A"
 							short_description="Caution aspect"
 							fr.short_description="Avertissement"
-							icon="icons/signals/C-A" icon_size="20"/>
+							icon="icons/signals/C-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(A)"
 							display_value="(A)"
 							short_description="Advance caution aspect"
 							fr.short_description="Feu jaune clignotant"
-							icon="icons/signals/C-A" icon_size="20"/>
+							icon="icons/signals/C-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:VL"
 							display_value="VL"
 							short_description="Clear aspect"
 							fr.short_description="Feu vert"
-							icon="icons/signals/C-VL" icon_size="20"/>
+							icon="icons/signals/C-VL.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(VL)"
 							display_value="(VL)"
 							short_description="Flashing green light"
 							fr.short_description="Feu vert clignotant"
-							icon="icons/signals/C-VL" icon_size="20"/>
+							icon="icons/signals/C-VL.svg" icon_size="24"/>
 					</multiselect>
 					<reference ref="semaphore_tags" />
 				</item>
@@ -1629,85 +1780,85 @@
 							display_value="S"
 							short_description="Stop and proceed aspect"
 							fr.short_description="Sémaphore"
-							icon="icons/signals/F-S" icon_size="20"/>
+							icon="icons/signals/F-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(S)"
 							display_value="(S)"
 							short_description="Flashing red light"
 							fr.short_description="Feu rouge clignotant"
-							icon="icons/signals/F-S" icon_size="20"/>
+							icon="icons/signals/F-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:M"
 							display_value="M"
 							short_description="Shunting aspect"
 							fr.short_description="Feu blanc"
-							icon="icons/signals/F-M" icon_size="20"/>
+							icon="icons/signals/F-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(M)"
 							display_value="(M)"
 							short_description="Flashing white light"
 							fr.short_description="Feu blanc clignotant"
-							icon="icons/signals/F-M" icon_size="20"/>
+							icon="icons/signals/F-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:A"
 							display_value="A"
 							short_description="Caution aspect"
 							fr.short_description="Avertissement"
-							icon="icons/signals/F-A" icon_size="20"/>
+							icon="icons/signals/F-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(A)"
 							display_value="(A)"
 							short_description="Advance caution aspect"
 							fr.short_description="Feu jaune clignotant"
-							icon="icons/signals/F-A" icon_size="20"/>
+							icon="icons/signals/F-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:R"
 							display_value="R"
 							short_description="30 km/h speed restriction"
 							fr.short_description="Ralentissement 30"
-							icon="icons/signals/F-R" icon_size="20"/>
+							icon="icons/signals/F-R.svg" icon_size="24"/>
 						<list_entry
 							value="FR:R+A"
 							display_value="R+A"
 							short_description="30 km/h speed restriction and caution aspect"
 							fr.short_description="Ralentissement 30 et Avertissement"
-							icon="icons/signals/F-R-A" icon_size="20"/>
+							icon="icons/signals/F-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:R+(A)"
 							display_value="R+(A)"
 							short_description="30 km/h speed restriction and advance caution aspect"
 							fr.short_description="Ralentissement 30 et feu jaune clignotant"
-							icon="icons/signals/F-R-A" icon_size="20"/>
+							icon="icons/signals/F-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)"
 							display_value="(R)"
 							short_description="60 km/h speed restriction"
 							fr.short_description="Ralentissement 60"
-							icon="icons/signals/F-R" icon_size="20"/>
+							icon="icons/signals/F-R.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)+A"
 							display_value="(R)+A"
 							short_description="60 km/h speed restriction and caution aspect"
 							fr.short_description="Ralentissement 60 et Avertissement"
-							icon="icons/signals/F-R-A" icon_size="20"/>
+							icon="icons/signals/F-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)+(A)"
 							display_value="(R)+(A)"
 							short_description="60 km/h speed restriction and advance caution aspect"
 							fr.short_description="Ralentissement 60 et feu jaune clignotant"
-							icon="icons/signals/F-R-A" icon_size="20"/>
+							icon="icons/signals/F-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:VL"
 							display_value="VL"
 							short_description="Clear aspect"
 							fr.short_description="Feu vert"
-							icon="icons/signals/F-VL" icon_size="20"/>
+							icon="icons/signals/F-VL.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(VL)"
 							display_value="(VL)"
 							short_description="Flashing green light"
 							fr.short_description="Feu vert clignotant"
-							icon="icons/signals/F-VL" icon_size="20"/>
+							icon="icons/signals/F-VL.svg" icon_size="24"/>
 					</multiselect>
 					<reference ref="semaphore_tags" />
 				</item>
@@ -1739,121 +1890,121 @@
 							display_value="S"
 							short_description="Stop and proceed aspect"
 							fr.short_description="Sémaphore"
-							icon="icons/signals/H-S" icon_size="20"/>
+							icon="icons/signals/H-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(S)"
 							display_value="(S)"
 							short_description="Flashing red light"
 							fr.short_description="Feu rouge clignotant"
-							icon="icons/signals/H-S" icon_size="20"/>
+							icon="icons/signals/H-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:M"
 							display_value="M"
 							short_description="Shunting aspect"
 							fr.short_description="Feu blanc"
-							icon="icons/signals/H-M" icon_size="20"/>
+							icon="icons/signals/H-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(M)"
 							display_value="(M)"
 							short_description="Flashing white light"
 							fr.short_description="Feu blanc clignotant"
-							icon="icons/signals/H-M" icon_size="20"/>
+							icon="icons/signals/H-M.svg" icon_size="24"/>
 						<list_entry
 							value="FR:RR"
 							display_value="RR"
 							short_description="30 km/h speed reminder"
 							fr.short_description="Rappel 30"
-							icon="icons/signals/H-RR" icon_size="20"/>
+							icon="icons/signals/H-RR.svg" icon_size="24"/>
 						<list_entry
 							value="FR:RR+A"
 							display_value="RR+A"
 							short_description="30 km/h speed reminder and caution aspect"
 							fr.short_description="Rappel 30 et Avertissement"
-							icon="icons/signals/H-RR-A" icon_size="20"/>
+							icon="icons/signals/H-RR-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:RR+(A)"
 							display_value="RR+(A)"
 							short_description="30 km/h speed reminder and advance caution aspect"
 							fr.short_description="Rappel 30 et feu jaune clignotant"
-							icon="icons/signals/H-RR-A" icon_size="20"/>
+							icon="icons/signals/H-RR-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(RR)"
 							display_value="(RR)"
 							short_description="60 km/h speed reminder"
 							fr.short_description="Rappel 60"
-							icon="icons/signals/H-RR" icon_size="20"/>
+							icon="icons/signals/H-RR.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(RR)+A"
 							display_value="(RR)+A"
 							short_description="60 km/h speed reminder and caution aspect"
 							fr.short_description="Rappel 60 et Avertissement"
-							icon="icons/signals/H-RR-A" icon_size="20"/>
+							icon="icons/signals/H-RR-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(RR)+(A)"
 							display_value="(RR)+(A)"
 							short_description="60 km/h speed reminder and advance caution aspect"
 							fr.short_description="Rappel 60 et feu jaune clignotant"
-							icon="icons/signals/H-RR-A" icon_size="20"/>
+							icon="icons/signals/H-RR-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:A"
 							display_value="A"
 							short_description="Caution aspect"
 							fr.short_description="Avertissement"
-							icon="icons/signals/H-A" icon_size="20"/>
+							icon="icons/signals/H-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(A)"
 							display_value="(A)"
 							short_description="Advance caution aspect"
 							fr.short_description="Feu jaune clignotant"
-							icon="icons/signals/H-A" icon_size="20"/>
+							icon="icons/signals/H-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:R"
 							display_value="R"
 							short_description="30 km/h speed restriction"
 							fr.short_description="Ralentissement 30"
-							icon="icons/signals/H-R" icon_size="20"/>
+							icon="icons/signals/H-R.svg" icon_size="24"/>
 						<list_entry
 							value="FR:R+A"
 							display_value="R+A"
 							short_description="30 km/h speed restriction and caution aspect"
 							fr.short_description="Ralentissement 30 et Avertissement"
-							icon="icons/signals/H-R-A" icon_size="20"/>
+							icon="icons/signals/H-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:R+(A)"
 							display_value="R+(A)"
 							short_description="30 km/h speed restriction and advance caution aspect"
 							fr.short_description="Ralentissement 30 et feu jaune clignotant"
-							icon="icons/signals/H-R-A" icon_size="20"/>
+							icon="icons/signals/H-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)"
 							display_value="(R)"
 							short_description="60 km/h speed restriction"
 							fr.short_description="Ralentissement 60"
-							icon="icons/signals/H-R" icon_size="20"/>
+							icon="icons/signals/H-R.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)+A"
 							display_value="(R)+A"
 							short_description="60 km/h speed restriction and caution aspect"
 							fr.short_description="Ralentissement 60 et Avertissement"
-							icon="icons/signals/H-R-A" icon_size="20"/>
+							icon="icons/signals/H-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)+(A)"
 							display_value="(R)+(A)"
 							short_description="60 km/h speed restriction and advance caution aspect"
 							fr.short_description="Ralentissement 60 et feu jaune clignotant"
-							icon="icons/signals/H-R-A" icon_size="20"/>
+							icon="icons/signals/H-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:VL"
 							display_value="VL"
 							short_description="Clear aspect"
 							fr.short_description="Feu vert"
-							icon="icons/signals/H-VL" icon_size="20"/>
+							icon="icons/signals/H-VL.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(VL)"
 							display_value="(VL)"
 							short_description="Flashing green light"
 							fr.short_description="Feu vert clignotant"
-							icon="icons/signals/H-VL" icon_size="20"/>
+							icon="icons/signals/H-VL.svg" icon_size="24"/>
 					</multiselect>
 					<reference ref="semaphore_tags" />
 				</item>
@@ -1885,25 +2036,25 @@
 							display_value="S"
 							short_description="Stop and proceed aspect"
 							fr.short_description="Sémaphore"
-							icon="icons/signals/K-S" icon_size="20"/>
+							icon="icons/signals/K-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(S)"
 							display_value="(S)"
 							short_description="Flashing red light"
 							fr.short_description="Feu rouge clignotant"
-							icon="icons/signals/K-S" icon_size="20"/>
+							icon="icons/signals/K-S.svg" icon_size="24"/>
 						<list_entry
 							value="FR:VL"
 							display_value="VL"
 							short_description="Clear aspect"
 							fr.short_description="Feu vert"
-							icon="icons/signals/K-VL" icon_size="20"/>
+							icon="icons/signals/K-VL.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(VL)"
 							display_value="(VL)"
 							short_description="Flashing green light"
 							fr.short_description="Feu vert clignotant"
-							icon="icons/signals/K-VL" icon_size="20"/>
+							icon="icons/signals/K-VL.svg" icon_size="24"/>
 					</multiselect>
 					<reference ref="semaphore_tags" />
 				</item>
@@ -1927,22 +2078,39 @@
 
 			<separator />
 
-			<!-- YELLOW LIGHT BAND -->
+			<!-- ILLUMINATED YELLOW BAND -->
 			<item
-				name="Yellow Light Band"
+				name="Illuminated Yellow Band"
 				fr.name="Bande Jaune Lumineuse"
 				type="node"
 				icon="icons/signals/yellow_light_band.svg">
 				<label
-					text="Horizontal yellow light band"
+					text="Illuminated horizontal yellow band"
 					fr.text="Bande jaune lumineuse horizontale" />
 				<space />
 				<key key="railway:signal:short_route" value="FR:yellow_band" />
 				<key key="railway:signal:short_route:form" value="light" />
 				<reference ref="base_common" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Yellow_light_band" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Yellow_band" />
 			</item>
 
+			<!-- 2TMV -->
+			<item
+				name="Intermediate signal (2TMV)"
+				fr.name="Signal intermédiaire (2TMV)"
+				type="node"
+				icon="icons/signals/2TMV_X.svg">
+				<label
+					text="Mid-platform signal (2 trains on a same track)"
+					fr.text="Signal de milieu de quai (2 trains sur une même voie)" />
+				<space />
+				<key key="railway:signal:main" value="FR:C" />
+				<key key="railway:signal:main:function" value="intermediate" />
+				<key key="railway:signal:main:states" value="FR:C;FR:(S);FR:X;FR:A;FR:VL" />
+				<key key="railway:signal:main:height" match="none" />
+				<reference ref="cat_stop_signals" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Signal_de_milieu_de_quai_(2TMV)" />
+			</item>
 		</group>
 
 		<!-- DISTANT SIGNALS -->
@@ -1978,67 +2146,67 @@
 						display_value="D"
 						short_description="Delayed stop aspect"
 						fr.short_description="Disque"
-						icon="icons/signals/R-D" icon_size="20"/>
+						icon="icons/signals/R-D.svg" icon_size="24"/>
 					<list_entry
 						value="FR:A"
 						display_value="A"
 						short_description="Caution aspect"
 						fr.short_description="Avertissement"
-						icon="icons/signals/R-A" icon_size="20"/>
+						icon="icons/signals/R-A.svg" icon_size="24"/>
 					<list_entry
 						value="FR:(A)"
 						display_value="(A)"
 						short_description="Advance caution aspect"
 						fr.short_description="Feu jaune clignotant"
-						icon="icons/signals/R-A" icon_size="20"/>
+						icon="icons/signals/R-A.svg" icon_size="24"/>
 					<list_entry
 						value="FR:R"
 						display_value="R"
 						short_description="30 km/h speed restriction"
 						fr.short_description="Ralentissement 30"
-						icon="icons/signals/R-R" icon_size="20"/>
+						icon="icons/signals/R-R.svg" icon_size="24"/>
 					<list_entry
 						value="FR:R+A"
 						display_value="R+A"
 						short_description="30 km/h speed restriction and caution aspect"
 						fr.short_description="Ralentissement 30 et Avertissement"
-						icon="icons/signals/R-R-A" icon_size="20"/>
+						icon="icons/signals/R-R-A.svg" icon_size="24"/>
 					<list_entry
 						value="FR:R+(A)"
 						display_value="R+(A)"
 						short_description="30 km/h speed restriction and advance caution aspect"
 						fr.short_description="Ralentissement 30 et feu jaune clignotant"
-						icon="icons/signals/R-R-A" icon_size="20"/>
+						icon="icons/signals/R-R-A.svg" icon_size="24"/>
 					<list_entry
 						value="FR:(R)"
 						display_value="(R)"
 						short_description="60 km/h speed restriction"
 						fr.short_description="Ralentissement 60"
-						icon="icons/signals/R-R" icon_size="20"/>
+						icon="icons/signals/R-R.svg" icon_size="24"/>
 					<list_entry
 						value="FR:(R)+A"
 						display_value="(R)+A"
 						short_description="60 km/h speed restriction and caution aspect"
 						fr.short_description="Ralentissement 60 et Avertissement"
-						icon="icons/signals/R-R-A" icon_size="20"/>
+						icon="icons/signals/R-R-A.svg" icon_size="24"/>
 					<list_entry
 						value="FR:(R)+(A)"
 						display_value="(R)+(A)"
 						short_description="60 km/h speed restriction and advance caution aspect"
 						fr.short_description="Ralentissement 60 et feu jaune clignotant"
-						icon="icons/signals/R-R-A" icon_size="20"/>
+						icon="icons/signals/R-R-A.svg" icon_size="24"/>
 					<list_entry
 						value="FR:VL"
 						display_value="VL"
 						short_description="Clear aspect"
 						fr.short_description="Feu vert"
-						icon="icons/signals/R-VL" icon_size="20"/>
+						icon="icons/signals/R-VL.svg" icon_size="24"/>
 					<list_entry
 						value="FR:(VL)"
 						display_value="(VL)"
 						short_description="Flashing green light"
 						fr.short_description="Feu vert clignotant"
-						icon="icons/signals/R-VL" icon_size="20"/>
+						icon="icons/signals/R-VL.svg" icon_size="24"/>
 				</multiselect>
 				<reference ref="optional_distant_features" />
 
@@ -2077,61 +2245,61 @@
 						display_value="A"
 						short_description="Caution aspect"
 						fr.short_description="Avertissement"
-						icon="icons/signals/R-A" icon_size="20"/>
+						icon="icons/signals/R-A.svg" icon_size="24"/>
 					<list_entry
 						value="FR:(A)"
 						display_value="(A)"
 						short_description="Advance caution aspect"
 						fr.short_description="Feu jaune clignotant"
-						icon="icons/signals/R-A" icon_size="20"/>
+						icon="icons/signals/R-A.svg" icon_size="24"/>
 					<list_entry
 						value="FR:R"
 						display_value="R"
 						short_description="30 km/h speed restriction"
 						fr.short_description="Ralentissement 30"
-						icon="icons/signals/R-R" icon_size="20"/>
+						icon="icons/signals/R-R.svg" icon_size="24"/>
 					<list_entry
 						value="FR:R+A"
 						display_value="R+A"
 						short_description="30 km/h speed restriction and caution aspect"
 						fr.short_description="Ralentissement 30 et Avertissement"
-						icon="icons/signals/R-R-A" icon_size="20"/>
+						icon="icons/signals/R-R-A.svg" icon_size="24"/>
 					<list_entry
 						value="FR:R+(A)"
 						display_value="R+(A)"
 						short_description="30 km/h speed restriction and advance caution aspect"
 						fr.short_description="Ralentissement 30 et feu jaune clignotant"
-						icon="icons/signals/R-R-A" icon_size="20"/>
+						icon="icons/signals/R-R-A.svg" icon_size="24"/>
 					<list_entry
 						value="FR:(R)"
 						display_value="(R)"
 						short_description="60 km/h speed restriction"
 						fr.short_description="Ralentissement 60"
-						icon="icons/signals/R-R" icon_size="20"/>
+						icon="icons/signals/R-R.svg" icon_size="24"/>
 					<list_entry
 						value="FR:(R)+A"
 						display_value="(R)+A"
 						short_description="60 km/h speed restriction and caution aspect"
 						fr.short_description="Ralentissement 60 et Avertissement"
-						icon="icons/signals/R-R-A" icon_size="20"/>
+						icon="icons/signals/R-R-A.svg" icon_size="24"/>
 					<list_entry
 						value="FR:(R)+(A)"
 						display_value="(R)+(A)"
 						short_description="60 km/h speed restriction and advance caution aspect"
 						fr.short_description="Ralentissement 60 et feu jaune clignotant"
-						icon="icons/signals/R-R-A" icon_size="20"/>
+						icon="icons/signals/R-R-A.svg" icon_size="24"/>
 					<list_entry
 						value="FR:VL"
 						display_value="VL"
 						short_description="Clear aspect"
 						fr.short_description="Feu vert"
-						icon="icons/signals/R-VL" icon_size="20"/>
+						icon="icons/signals/R-VL.svg" icon_size="24"/>
 					<list_entry
 						value="FR:(VL)"
 						display_value="(VL)"
 						short_description="Flashing green light"
 						fr.short_description="Feu vert clignotant"
-						icon="icons/signals/R-VL" icon_size="20"/>
+						icon="icons/signals/R-VL.svg" icon_size="24"/>
 				</multiselect>
 				<reference ref="optional_distant_features" />
 
