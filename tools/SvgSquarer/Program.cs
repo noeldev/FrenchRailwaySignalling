@@ -13,28 +13,25 @@ internal static class Program
 
     private static int Main(string[] args)
     {
-        if (HasFlag(args, "--help") || HasFlag(args, "-h"))
+        var options = CommandLineOptions.Parse(args);
+
+        if (options.ShowHelp)
         {
             PrintUsage();
             return ExitSuccess;
         }
 
-        var dryRun = HasFlag(args, "--dry-run");
-        var verbose = HasFlag(args, "--verbose");
-        var root = GetRootDirectory(args);
-        var outputPath = GetOutputDirectory(args);
-
-        if (!Directory.Exists(root))
+        if (!Directory.Exists(options.Root))
         {
-            Console.Error.WriteLine($"error: directory not found: {Path.GetFullPath(root)}");
+            Console.Error.WriteLine($"error: directory not found: {Path.GetFullPath(options.Root)}");
             return ExitUsageError;
         }
 
-        if (!dryRun && outputPath != null)
+        if (!options.DryRun && options.OutputPath != null)
         {
             try
             {
-                Directory.CreateDirectory(outputPath);
+                Directory.CreateDirectory(options.OutputPath);
             }
             catch (Exception ex)
             {
@@ -47,24 +44,24 @@ internal static class Program
         var alreadySquare = 0;
         var warnings = 0;
 
-        foreach (var path in Directory.EnumerateFiles(root, SvgPattern, SearchOption.AllDirectories))
+        foreach (var path in Directory.EnumerateFiles(options.Root, SvgPattern, SearchOption.AllDirectories))
         {
-            var relative = Path.GetRelativePath(root, path);
-            var targetPath = outputPath != null ? Path.Combine(outputPath, relative) : path;
+            var relative = Path.GetRelativePath(options.Root, path);
+            var targetPath = options.OutputPath != null ? Path.Combine(options.OutputPath, relative) : path;
 
-            var result = SvgFileProcessor.Process(path, targetPath, dryRun);
+            var result = SvgFileProcessor.Process(path, targetPath, options.DryRun);
 
             switch (result.Status)
             {
                 case ProcessStatus.Squared:
                     squared++;
-                    string roundedNote = result.Rounded ? " [rounded, off-center by <= 0.5]" : string.Empty;
+                    var roundedNote = result.Rounded ? " [rounded, off-center by <= 0.5]" : string.Empty;
                     Console.WriteLine($"[squared] {relative}: {result.Detail}{roundedNote}");
                     break;
 
                 case ProcessStatus.AlreadySquare:
                     alreadySquare++;
-                    if (verbose)
+                    if (options.Verbose)
                     {
                         Console.WriteLine($"[skip]    {relative}: already square ({result.Detail})");
                     }
@@ -78,50 +75,12 @@ internal static class Program
             }
         }
 
-        var mode = dryRun ? " (dry-run, no files written)" : string.Empty;
+        var mode = options.DryRun ? " (dry-run, no files written)" : string.Empty;
 
         Console.WriteLine();
         Console.WriteLine($"Done{mode}. Squared: {squared}, already square: {alreadySquare}, warnings: {warnings}.");
 
         return warnings > 0 ? ExitWarnings : ExitSuccess;
-    }
-
-    private static string GetRootDirectory(string[] args)
-    {
-        for (var i = 0; i < args.Length; i++)
-        {
-            if (string.Equals(args[i], "--output", StringComparison.Ordinal) ||
-                string.Equals(args[i], "-o", StringComparison.Ordinal))
-            {
-                i++; // Skip output path argument
-                continue;
-            }
-
-            if (!args[i].StartsWith('-'))
-            {
-                return args[i];
-            }
-        }
-
-        return Directory.GetCurrentDirectory();
-    }
-
-    private static string? GetOutputDirectory(string[] args)
-    {
-        for (int i = 0; i < args.Length - 1; i++)
-        {
-            if (string.Equals(args[i], "--output", StringComparison.Ordinal) ||
-                string.Equals(args[i], "-o", StringComparison.Ordinal))
-            {
-                return args[i + 1];
-            }
-        }
-        return null;
-    }
-
-    private static bool HasFlag(string[] args, string flag)
-    {
-        return Array.Exists(args, arg => string.Equals(arg, flag, StringComparison.Ordinal));
     }
 
     private static void PrintUsage()

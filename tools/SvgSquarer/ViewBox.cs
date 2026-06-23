@@ -9,7 +9,7 @@ namespace SvgSquarer;
 internal readonly struct ViewBox(double minX, double minY, double width, double height)
 {
     private const double Epsilon = 1e-9;
-    private static readonly char[] Separators = { ' ', '\t', '\r', '\n', ',' };
+    private static readonly char[] Separators = [' ', '\t', '\r', '\n', ','];
 
     public double MinX { get; } = minX;
     public double MinY { get; } = minY;
@@ -19,6 +19,9 @@ internal readonly struct ViewBox(double minX, double minY, double width, double 
     public bool IsValid => Width > Epsilon && Height > Epsilon;
 
     public bool IsSquare => Math.Abs(Width - Height) <= Epsilon;
+
+    // True when the origin is already at 0 0 (no min-x / min-y offset).
+    public bool IsAtOrigin => Math.Abs(MinX) <= Epsilon && Math.Abs(MinY) <= Epsilon;
 
     // Parses a "min-x min-y width height" value. Accepts whitespace or comma
     // separators and any numeric format.
@@ -46,9 +49,9 @@ internal readonly struct ViewBox(double minX, double minY, double width, double 
     }
 
     // Returns a square viewBox of side max(width, height) with the original
-    // content centered at 0 0. "rounded" reports whether integer rounding 
-    // shifted the content off perfect center (at most 0.5).
-    public ViewBox ToSquaredCentered(out double tx, out double ty, out bool rounded)
+    // content centered at 0 0, the translation to apply, and whether integer
+    // rounding shifted the content off perfect center (by at most 0.5).
+    public (ViewBox Square, double Tx, double Ty, bool Rounded) ToSquaredCentered()
     {
         var exactSide = Math.Max(Width, Height);
         var side = (int)Math.Ceiling(exactSide - Epsilon);
@@ -59,18 +62,18 @@ internal readonly struct ViewBox(double minX, double minY, double width, double 
         var offsetX = (int)Math.Round(exactOffsetX, MidpointRounding.AwayFromZero);
         var offsetY = (int)Math.Round(exactOffsetY, MidpointRounding.AwayFromZero);
 
-        // Calcul de la translation pour amener l'origine à 0 0 et centrer le contenu
-        tx = offsetX - MinX;
-        ty = offsetY - MinY;
+        // Translation that moves the origin to 0 0 and centers the content.
+        var tx = offsetX - MinX;
+        var ty = offsetY - MinY;
 
-        rounded =
+        var rounded =
             Math.Abs(side - exactSide) > Epsilon ||
             Math.Abs(exactOffsetX - offsetX) > Epsilon ||
             Math.Abs(exactOffsetY - offsetY) > Epsilon ||
             Math.Abs(MinX - Math.Round(MinX)) > Epsilon ||
             Math.Abs(MinY - Math.Round(MinY)) > Epsilon;
 
-        return new ViewBox(0, 0, side, side);
+        return (new ViewBox(0, 0, side, side), tx, ty, rounded);
     }
 
     // Formats the viewBox as an attribute value, emitting whole numbers as
