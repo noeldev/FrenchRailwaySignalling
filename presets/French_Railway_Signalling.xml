@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.24_2026-06-23"
+    version="1.25_2026-07-23"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -13,17 +13,18 @@
 
 	<!-- Chunk to delete obsolete keys from older versions -->
 	<chunk id="delete_obsolete_keys">
+		<key key="railway:signal:main:plate" match="none" />
+		<key key="railway:signal:main:plate:caption" match="none" />
 		<key key="railway:signal:speed_limit_reminder" match="none" />
 		<key key="railway:signal:speed_limit_reminder:form" match="none" />
 		<key key="railway:signal:speed_limit_reminder:ref" match="none" />
 		<key key="railway:signal:speed_limit_reminder:speed" match="none" />
 		<key key="railway:signal:speed_limit_distant:shape" match="none" />
 		<key key="railway:signal:speed_limit_distant:speed" match="none" />
-		<key key="railway:signal:speed_limit_distant:form" match="none" />
-		<key key="railway:signal:speed_limit_distant:ref" match="none" />
 		<key key="railway:signal:stop:disposition" match="none" />
+		<key key="railway:signal:shunting_route:buffer_stop:caption" match="none" />
 	</chunk>
-	
+
 	<!-- Common tags applied to every railway signal node -->
 	<chunk id="base_common">
 		<reference ref="delete_obsolete_keys" />
@@ -36,16 +37,28 @@
 		<combo
 			key="railway:signal:direction"
 			text="Direction"
-			fr.text="Sens "
-			values="forward,backward,both"
-			display_values="Forward,Backward,Bidirectional"
-			fr.display_values="Croissant,Décroissant,Bidirectionnel"
-			editable="false" values_sort="false" />
+			fr.text="Sens"
+			editable="false"
+			values_sort="false">
+			<list_entry
+				value="forward"
+				display_value="Forward"
+				fr.display_value="Croissant" />
+			<list_entry
+				value="backward"
+				display_value="Backward"
+				fr.display_value="Décroissant" />
+			<list_entry
+				value="both"
+				display_value="Bidirectional"
+				fr.display_value="Bidirectionnel" />
+		</combo>
 		<combo
 			key="railway:signal:position"
 			text="Position"
 			fr.text="Position"
-			editable="false" values_sort="false">
+			editable="false"
+			values_sort="false">
 			<list_entry
 				value="left"
 				display_value="Left"
@@ -87,7 +100,7 @@
 		<reference ref="base_common" />
 		<text
 			key="ref"
-			text="Marker Legend"
+			text="Marker caption"
 			fr.text="Libellé du Repérage" />
 	</chunk>
 
@@ -192,7 +205,7 @@
 		<key key="railway:signal:speed_limit_distant:fixed:form" value="sign" />
 		<reference ref="base_with_plate" />
 		<text key="railway:signal:speed_limit_distant:fixed:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-		<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_TIV-D_(Ordinary_type)" />
+		<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_Ordinary-type_TIV-D" />
 	</chunk>
 
 	<chunk id="cat_ordinary_speed_indicator_presets">
@@ -230,6 +243,17 @@
 			fr.text="Identifiant Réseau" length="7" />
 	</chunk>
 
+	<!-- Mirlitons (distant distance boards; form=sign) -->
+	<chunk id="cat_mirliton">
+		<reference ref="base_common" />
+		<key key="railway:signal:distant" value="FR:mirliton" />
+		<key key="railway:signal:distant:form" value="sign" />
+		<text
+			key="railway:signal:distant:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau" length="7" />
+	</chunk>
+
 	<!-- Distant signals (form=light) -->
 	<chunk id="cat_distant">
 		<reference ref="base_with_plate" />
@@ -241,6 +265,31 @@
 	<chunk id="cat_route_distant">
 		<reference ref="base_common" />
 		<text key="railway:signal:route_distant:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+	</chunk>
+
+	<!-- Track information signs (form=sign) -->
+	<chunk id="cat_route_info">
+		<reference ref="base_common" />
+		<key key="railway:signal:route_info:form" value="sign" />
+		<text key="railway:signal:route_info:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+	</chunk>
+
+	<!-- Radio network marker (form: sign) -->
+	<chunk id="cat_radio_mode">
+		<key key="railway:signal:radio" value="FR:marker" />
+		<key key="railway:signal:radio:mode:type" value="mode_transition" />
+		<key key="railway:signal:radio:mode:form" value="sign" />
+		<reference ref="base_common" />
+		<text key="railway:signal:radio:mode:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<link wiki="OpenRailwayMap/Tagging_in_France#Network_marker" />
+	</chunk>
+
+	<!-- Train protection distant (CAB advance board; form=sign) -->
+	<chunk id="cat_train_protection_distant">
+		<reference ref="base_common" />
+		<key key="railway:signal:train_protection_distant:form" value="sign" />
+		<text key="railway:signal:train_protection_distant:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<link wiki="OpenRailwayMap/Tagging_in_France#CAB_boards" />
 	</chunk>
 
 	<!-- Train protection (form=sign) -->
@@ -262,31 +311,32 @@
 	<chunk id="cat_electricity_with_form">
 		<reference ref="base_common" />
 		<text key="railway:signal:electricity:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-		<combo key="railway:signal:electricity:form"
-			   text="Signal presentation"
-			   fr.text="Présentation du signal"
-			   editable="false" icon_size="16">
+		<combo
+			key="railway:signal:electricity:form"
+			text="Signal presentation"
+			fr.text="Présentation du signal"
+			editable="false">
 			<list_entry
 				value="sign"
 				display_value="Board"
 				fr.display_value="Tableau"
 				icon="icons/boards/empty.svg"
-				icon_size="16"/>
+				icon_size="24"/>
 			<list_entry
 				value="light"
 				display_value="Light box"
 				fr.display_value="Caisson lumineux"
 				icon="icons/boxes/single.svg"
-				icon_size="16"/>
+				icon_size="24"/>
 		</combo>
 	</chunk>
 
-	<!-- Dual‑mode traffic (form=sign) -->
-	<chunk id="cat_dual_mode">
+	<!-- Bimode (form=sign) -->
+	<chunk id="cat_bimode">
 		<reference ref="base_common" />
-		<key key="railway:signal:dual_mode:form" value="sign" />
-		<text key="railway:signal:dual_mode:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-		<link wiki="OpenRailwayMap/Tagging_in_France#Dual-mode_traffic" />
+		<key key="railway:signal:bimode:form" value="sign" />
+		<text key="railway:signal:bimode:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<link wiki="OpenRailwayMap/Tagging_in_France#Bimode_operation" />
 	</chunk>
 
 	<!-- ETCS main marker (form=sign) -->
@@ -296,12 +346,13 @@
 		<key key="railway:signal:train_protection:main:form" value="sign" />
 		<text
 			key="railway:signal:train_protection:main:caption"
-			text="Plate Legend"
+			text="Plate caption"
 			fr.text="Libellé de la plaque" />
 		<combo
 			name="Marker Function"
 			fr.name="Fonction du repère"
-			key="railway:signal:train_protection:main:function">
+			key="railway:signal:train_protection:main:function"
+			editable="false">
 			<list_entry
 				value="entry"
 				display_value="Entry"
@@ -346,7 +397,14 @@
 		<link wiki="OpenRailwayMap/Tagging_in_France#Stops" />
 	</chunk>
 
-	<!-- Passenger stop signs -->
+	<!-- ARRÊT signs restricted to a movement type (no arrangement variant) -->
+	<chunk id="arret_for_tags">
+		<key key="railway:signal:stop" value="FR:ARRET" />
+		<key key="railway:signal:stop:arrangement" match="none" />
+		<reference ref="cat_stop" />
+	</chunk>
+	
+	<!-- Passenger stop signs -->	
 	<chunk id="cat_passenger_stop">
 		<reference ref="base_common" />
 		<key key="railway:signal:stop" value="FR:passenger_stop" />
@@ -381,6 +439,14 @@
 		<text key="railway:signal:station_distant:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
 	</chunk>
 
+	<!-- Rolling stock washing facility signs (form=sign) -->
+	<chunk id="cat_washing_facility">
+		<reference ref="base_common" />
+		<key key="railway:signal:servicing:form" value="sign" />
+		<text key="railway:signal:servicing:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<link wiki="OpenRailwayMap/Tagging_in_France#Rolling_stock_washing_facility" />
+	</chunk>
+
 	<!-- Reporting plates -->
 	<chunk id="cat_reporting">
 		<reference ref="base_common" />
@@ -400,21 +466,19 @@
 				key="railway:signal:departure:phone:direction"
 				text="Telephone direction"
 				fr.text="Direction du téléphone"
-				editable="false"
-				default=""
-				icon_size="16">
+				editable="false">
 				<list_entry
 					value="left"
 					display_value="To the left"
 					fr.display_value="Vers la gauche"
 					icon="icons/plates/phone_location_left.svg"
-					icon_size="16"/>
+					icon_size="24"/>
 				<list_entry
 					value="right"
 					display_value="To the right"
 					fr.display_value="Vers la droite"
 					icon="icons/plates/phone_location_right.svg"
-					icon_size="16"/>
+					icon_size="24"/>
 			</combo>
 		</optional>
 		<link wiki="OpenRailwayMap/Tagging_in_France#Reporting_Plate" />
@@ -425,6 +489,44 @@
 		<reference ref="base_common" />
 		<text key="railway:signal:departure:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
 		<link wiki="OpenRailwayMap/Tagging_in_France#Train_departure" />
+	</chunk>
+
+	<!-- Level crossing advance boards (form=sign) -->
+	<chunk id="cat_crossing_hint">
+		<reference ref="base_common" />
+		<key key="railway:signal:crossing_hint" value="FR:PN" />
+		<key key="railway:signal:crossing_hint:form" value="sign" />
+		<text key="railway:signal:crossing_hint:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:crossing_hint:number"
+			text="Crossing number"
+			fr.text="Numéro du PN" />
+		<text
+			key="railway:signal:crossing_hint:distance"
+			text="Distance (m)"
+			fr.text="Distance (m)" length="4" />
+		<link wiki="OpenRailwayMap/Tagging_in_France#Level_crossing_announcement" />
+	</chunk>
+
+	<!-- Level crossing identification boards (form=sign) -->
+	<chunk id="cat_crossing_info">
+		<reference ref="base_common" />
+		<key key="railway:signal:crossing_info" value="FR:PN" />
+		<key key="railway:signal:crossing_info:form" value="sign" />
+		<text key="railway:signal:crossing_info:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:crossing_info:number"
+			text="Crossing number"
+			fr.text="Numéro du PN" />
+		<link wiki="OpenRailwayMap/Tagging_in_France#Level_crossing_ahead" />
+	</chunk>
+
+	<!-- Snowplow signals (form=sign) -->
+	<chunk id="cat_snowplow">
+		<reference ref="base_common" />
+		<key key="railway:signal:snowplow:form" value="sign" />
+		<text key="railway:signal:snowplow:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<link wiki="OpenRailwayMap/Tagging_in_France#Snowplow" />
 	</chunk>
 
 	<!-- Facilities wiki link -->
@@ -461,16 +563,16 @@
 	<!-- Optional main disabled state -->
 	<chunk id="optional_deactivated_only">
 		<optional text="">
-			<label 
-				text="Special characteristics" 
+			<label
+				text="Special characteristics"
 				fr.text="Caractéristiques particulières" />
 			<space />
-			<check key="railway:signal:main:deactivated" 
-				   text="Deactivated" 
-				   fr.text="Désactivé" 
+			<check key="railway:signal:main:deactivated"
+				   text="Deactivated"
+				   fr.text="Désactivé"
 				   disable_off="true"/>
 		</optional>
-	</chunk>		
+	</chunk>
 
 	<!-- Common plates for Carré / Carré violet -->
 	<chunk id="carre_plates">
@@ -480,24 +582,24 @@
 				fr.text="Plaques" />
 			<space />
 			<combo
-				key="railway:signal:main:plate"
+				key="railway:signal:main:type"
 				text="Block Identification Plate"
 				fr.text="Plaque de Cantonnement"
-				editable="false" icon_size="16">
+				editable="false">
 				<list_entry
 					value="FR:BM"
 					display_value="BM"
 					fr.display_value="BM"
-					icon="icons/plates/BM.svg" icon_size="16"/>
+					icon="icons/plates/BM.svg" icon_size="24"/>
 				<list_entry
 					value="FR:PR"
 					display_value="BAPR"
 					fr.display_value="BAPR"
-					icon="icons/plates/PR.svg" icon_size="16"/>
+					icon="icons/plates/PR.svg" icon_size="24"/>
 			</combo>
 			<text
-				key="railway:signal:main:plate:caption"
-				text="Plate Legend"
+				key="railway:signal:main:caption"
+				text="Plate caption"
 				fr.text="Libellé de la plaque" />
 		</optional>
 	</chunk>
@@ -548,7 +650,7 @@
 		<preset_link preset_name="Signal Lumineux de Départ" text=""/>
 
 		<space />
-		<preset_link preset_name="Yellow Light Band" text=""/>
+		<preset_link preset_name="Illuminated Yellow Band" text=""/>
 
 		<link wiki="OpenRailwayMap/Tagging_in_France#Carré" />
 	</chunk>
@@ -587,25 +689,25 @@
 				fr.text="Plaques" />
 			<space />
 			<combo
-				key="railway:signal:main:plate"
+				key="railway:signal:main:type"
 				text="Identification Plate"
 				fr.text="Plaque d'Identification"
-				editable="false" icon_size="16">
+				editable="false">
 				<list_entry
 					value="FR:F"
 					display_value="F"
 					fr.display_value="F"
-					icon="icons/plates/ID_F.svg" icon_size="16"/>
+					icon="icons/plates/ID_F.svg" icon_size="24"/>
 				<list_entry
 					value="FR:BM"
 					display_value="BM"
 					fr.display_value="BM"
-					icon="icons/plates/ID_BM.svg" icon_size="16"/>
+					icon="icons/plates/ID_BM.svg" icon_size="24"/>
 				<list_entry
 					value="FR:PR"
 					display_value="BAPR"
 					fr.display_value="BAPR"
-					icon="icons/plates/ID_PR.svg" icon_size="16"/>
+					icon="icons/plates/ID_PR.svg" icon_size="24"/>
 			</combo>
 		</optional>
 		<reference ref="optional_deactivated_only" />
@@ -1013,17 +1115,33 @@
 
 				<!-- DWARF CARRÉ -->
 				<item
-					name="Dwarf Carré (Horizontal)"
-					fr.name="Carré nain (Horizontal)"
+					name="Dwarf Carré"
+					fr.name="Carré nain"
 					type="node"
-					icon="icons/signals/dwarf_H_C.svg"
-					match_expression="-&quot;railway:signal:main:arrangement&quot;=*">
+					icon="icons/signals/dwarf_H_C.svg">
 					<label
-						text="Dwarf light Carré signal (Horizontal arrangement)"
-						fr.text="Carré lumineux de taille réduite (Disposition horizontale)" />
+						text="Dwarf light Carré signal"
+						fr.text="Carré lumineux de taille réduite" />
 					<space />
-					<key key="railway:signal:main:arrangement" match="none" />
 					<reference ref="cat_dwarf_carre_signal" />
+					<combo
+						key="railway:signal:main:arrangement"
+						text="Signal Arrangement"
+						fr.text="Disposition du Signal"
+						editable="false">
+						<list_entry
+							value=""
+							display_value="Horizontal"
+							fr.display_value="Horizontal"
+							icon="icons/signals/dwarf_H_C.svg"
+							icon_size="24"/>
+						<list_entry
+							value="vertical"
+							display_value="Vertical"
+							fr.display_value="Vertical"
+							icon="icons/signals/dwarf_V_C.svg"
+							icon_size="24"/>
+					</combo>
 					<space />
 					<multiselect
 						key="railway:signal:main:states"
@@ -1071,97 +1189,6 @@
 							fr.short_description="Feu vert"
 							icon="icons/signals/dwarf_H_VL.svg" icon_size="24"/>
 					</multiselect>
-
-					<item_separator />
-					<preset_link preset_name="Dwarf Carré (Vertical)" text=""/>
-				</item>
-
-				<item
-					name="Dwarf Carré (Vertical)"
-					fr.name="Carré nain (Vertical)"
-					type="node"
-					icon="icons/signals/dwarf_V_C.svg">
-					<label
-						text="Dwarf light Carré signal (Vertical arrangement)"
-						fr.text="Carré lumineux de taille réduite (Disposition verticale)" />
-					<space />
-					<key key="railway:signal:main:arrangement" value="vertical" />
-					<reference ref="cat_dwarf_carre_signal" />
-					<space />
-					<multiselect
-						key="railway:signal:main:states"
-						text="Aspects"
-						fr.text="Aspects"
-						delimiter=";"
-						default="FR:C;FR:S;FR:A;FR:VL"
-						editable="false"
-						values_sort="false"
-						rows="5">
-						<list_entry
-							value="FR:C"
-							display_value="C"
-							short_description="Stop aspect"
-							fr.short_description="Carré"
-							icon="icons/signals/dwarf_V_C.svg" icon_size="24"/>
-						<list_entry
-							value="FR:S"
-							display_value="S"
-							short_description="Stop and proceed aspect"
-							fr.short_description="Sémaphore"
-							icon="icons/signals/dwarf_V_S.svg" icon_size="24"/>
-						<list_entry
-							value="FR:(S)"
-							display_value="(S)"
-							short_description="Flashing red light"
-							fr.short_description="Feu rouge clignotant"
-							icon="icons/signals/dwarf_V_S.svg" icon_size="24"/>
-						<list_entry
-							value="FR:A"
-							display_value="A"
-							short_description="Caution aspect"
-							fr.short_description="Avertissement"
-							icon="icons/signals/dwarf_V_A.svg" icon_size="24"/>
-						<list_entry
-							value="FR:(A)"
-							display_value="(A)"
-							short_description="Advance caution aspect"
-							fr.short_description="Feu jaune clignotant"
-							icon="icons/signals/dwarf_V_A.svg" icon_size="24"/>
-						<list_entry
-							value="FR:VL"
-							display_value="VL"
-							short_description="Clear aspect"
-							fr.short_description="Feu vert"
-							icon="icons/signals/dwarf_V_VL.svg" icon_size="24"/>
-					</multiselect>
-
-					<item_separator />
-					<preset_link preset_name="Dwarf Carré (Horizontal)" text=""/>
-				</item>
-
-				<separator />
-
-				<!-- CARRÉ A -->
-				<item
-					name="CARRÉ ...m"
-					fr.name="CARRÉ ...m"
-					type="node"
-					icon="icons/signs/CARRE_A.svg">
-					<label
-						text="Advance sign &quot;CARRÉ ...m&quot;"
-						fr.text="Pancarte à distance &quot;CARRÉ ...m&quot;" />
-					<space />
-					<key key="railway:signal:distant" value="FR:CARRE_A" />
-					<key key="railway:signal:distant:form" value="sign" />
-					<reference ref="base_common" />
-					<text
-						key="railway:signal:distant:ref"
-						text="Network ID"
-						fr.text="Identifiant Réseau" length="7" />
-					<text
-						key="railway:signal:distant:caption"
-						text="Sign Legend"
-						fr.text="Libellé de la pancarte" />
 				</item>
 
 			</group>
@@ -2096,8 +2123,8 @@
 
 			<!-- 2TMV -->
 			<item
-				name="Intermediate signal (2TMV)"
-				fr.name="Signal intermédiaire (2TMV)"
+				name="Intermediate Signal (2TMV)"
+				fr.name="Signal Intermédiaire (2TMV)"
 				type="node"
 				icon="icons/signals/2TMV_X.svg">
 				<label
@@ -2111,6 +2138,66 @@
 				<reference ref="cat_stop_signals" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Signal_de_milieu_de_quai_(2TMV)" />
 			</item>
+
+			<separator />
+
+			<!-- LIGHT BOX -->
+			<item
+				name="Light Box"
+				fr.name="Caisson Lumineux"
+				type="node"
+				icon="icons/boxes/double.svg">
+				<label
+					text="Light box"
+					fr.text="Caisson lumineux" />
+				<space />
+				<key key="railway:signal:combined" value="FR:light_box" />
+				<key key="railway:signal:combined:form" value="light" />
+				<key key="railway:signal:combined:shape" value="double" />
+				<reference ref="base_common" />
+				<text
+					key="railway:signal:combined:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau" length="7" />
+				<combo
+					key="railway:signal:combined:left"
+					text="Left Cell"
+					fr.text="Case de gauche"
+					editable="false">
+					<list_entry value="FR:D"
+								display_value="Depot"
+								fr.display_value="Dépôt"
+								icon="icons/boxes/D.svg" icon_size="24"/>
+					<list_entry value="FR:G"
+								display_value="Garage"
+								fr.display_value="Garage"
+								icon="icons/boxes/G.svg" icon_size="24"/>
+					<list_entry value="FR:TECS"
+								display_value="Wrong-road entry"
+								fr.display_value="Entrée de ContreSens"
+								icon="icons/boxes/TECS.svg" icon_size="24"/>
+				</combo>
+				<combo
+					key="railway:signal:combined:right"
+					text="Right Cell"
+					fr.text="Case de droite"
+					editable="false">
+					<list_entry value="FR:D"
+								display_value="Depot"
+								fr.display_value="Dépôt"
+								icon="icons/boxes/D.svg" icon_size="24"/>
+					<list_entry value="FR:TECS"
+								display_value="Wrong-road entry"
+								fr.display_value="Entrée de ContreSens"
+								icon="icons/boxes/TECS.svg" icon_size="24"/>
+					<list_entry value="FR:TSCS"
+								display_value="Wrong-road exit"
+								fr.display_value="Sortie de ContreSens"
+								icon="icons/boxes/TSCS.svg" icon_size="24"/>
+				</combo>
+				<link wiki="OpenRailwayMap/Tagging_in_France#Combined_signals" />
+			</item>
+
 		</group>
 
 		<!-- DISTANT SIGNALS -->
@@ -2212,8 +2299,7 @@
 
 				<item_separator />
 
-				<preset_link preset_name="Distant TIV Board" text=""/>
-				<preset_link preset_name="Y Board" text=""/>
+				<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Disque" />
 			</item>
@@ -2420,7 +2506,6 @@
 					fr.text="Disque mécanique" />
 				<space />
 				<key key="railway:signal:distant" value="FR:D" />
-				<key key="railway:signal:distant:form" value="sign" />
 				<reference ref="cat_mechanical_distant" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Disque_(mechanical)" />
 			</item>
@@ -2436,67 +2521,1379 @@
 					fr.text="Avertissement mécanique" />
 				<space />
 				<key key="railway:signal:distant" value="FR:A" />
-				<key key="railway:signal:distant:form" value="sign" />
 				<reference ref="cat_mechanical_distant" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Avertissement_(mechanical)" />
 			</item>
 
 		</group>
 
-		<!-- LIGHT BOX -->
+		<separator />
+
+		<!-- BORDER SIGNALS (CH) -->
+		<group
+			name="Border Signals (CH)"
+			fr.name="Signaux Frontaliers (CH)"
+			icon="icons/signals/CH/528.svg">
+
+			<item
+				name="Main Signal"
+				fr.name="Signal Principal"
+				icon="icons/signals/CH/524.svg"
+				type="node">
+				<label
+					text="Main signal (Switzerland)"
+					fr.text="Signal principal (Suisse)" />
+				<space />
+				<key key="railway:signal:main" value="CH-FDV:l" />
+				<reference ref="cat_stop_signals" />
+				<space />
+				<multiselect
+					key="railway:signal:main:states"
+					text="Aspects"
+					fr.text="Aspects"
+					delimiter=";"
+					default="CH-FDV:524;CH-FDV:530;CH-FDV:542;CH-FDV:545"
+					editable="false"
+					values_sort="false"
+					rows="5">
+					<list_entry
+						value="CH-FDV:524"
+						display_value="Halt"
+						short_description="Stop"
+						fr.display_value="Arrêt"
+						icon="icons/signals/CH/524.svg" icon_size="24"/>
+					<list_entry
+						value="CH-FDV:530"
+						display_value="	Freie Fahrt"
+						short_description="Clear"
+						fr.display_value="Voie libre"
+						icon="icons/signals/CH/530.svg" icon_size="24"/>
+					<list_entry
+						value="CH-FDV:542"
+						display_value="Freie Fahrt, 40 km/h"
+						short_description="Speed restriction 40"
+						fr.display_value="Ralentissement 40"
+						icon="icons/signals/CH/542.svg" icon_size="24"/>
+					<list_entry
+						value="CH-FDV:545"
+						display_value="Freie Fahrt, 60 km/h"
+						short_description="Speed restriction 60"
+						fr.display_value="Ralentissement 60"
+						icon="icons/signals/CH/545.svg" icon_size="24"/>
+				</multiselect>
+				<combo
+					key="railway:signal:main:function"
+					text="Function"
+					fr.text="Fonction"
+					editable="false">
+					<list_entry
+						value="entry"
+						display_value="Entry signal"
+						fr.display_value="Signal d'entrée" />
+					<list_entry
+						value="exit"
+						display_value="Exit signal"
+						fr.display_value="Signal de sortie" />
+					<list_entry
+						value="intermediate"
+						display_value="Intermediate signal"
+						fr.display_value="Signal intermédiaire" />
+					<list_entry
+						value="block"
+						display_value="Semaphore"
+						fr.display_value="Sémaphore" />
+				</combo>
+				<link wiki="DE:OpenRailwayMap/Tagging_in_Switzerland#Hauptsignal_System_L_ohne_Vorsignalfunktion" />
+			</item>
+
+			<item
+				name="Distant Signal"
+				fr.name="Signal Distant"
+				type="node"
+				icon="icons/signals/CH/528.svg">
+				<label
+					text="Distant signal (Switzerland)"
+					fr.text="Signal distant (Suisse)" />
+				<space />
+				<key key="railway:signal:distant" value="CH-FDV:l" />
+				<reference ref="cat_distant" />
+				<space />
+				<multiselect
+					key="railway:signal:distant:states"
+					text="Aspects"
+					fr.text="Aspects"
+					delimiter=";"
+					default="CH-FDV:519;CH-FDV:528;CH-FDV:534;CH-FDV:536"
+					editable="false"
+					values_sort="false"
+					rows="5">
+					<list_entry
+						value="CH-FDV:519"
+						display_value="Warnung"
+						short_description="Caution"
+						fr.short_description="Avertissement"
+						icon="icons/signals/CH/519.svg" icon_size="24"/>
+					<list_entry
+						value="CH-FDV:528"
+						display_value="Freie Fahrt"
+						short_description="Advance clear"
+						fr.short_description="Annonce de voie libre"
+						icon="icons/signals/CH/528.svg" icon_size="24"/>
+					<list_entry
+						value="CH-FDV:534"
+						display_value="Freie Fahrt, 40 km/h"
+						short_description="Advance speed restriction 40 km/h"
+						fr.short_description="Annonce de vitesse 40 km/h"
+						icon="icons/signals/CH/534.svg" icon_size="24"/>
+					<list_entry
+						value="CH-FDV:536"
+						display_value="Freie Fahrt, 60 km/h"
+						short_description="Advance speed restriction 60 km/h"
+						fr.short_description="Annonce de vitesse 60 km/h"
+						icon="icons/signals/CH/536.svg" icon_size="24"/>
+				</multiselect>
+				<link wiki="DE:OpenRailwayMap/Tagging_in_Switzerland#Vorsignal_System_L" />
+			</item>
+
+			<item
+				name="Evacuation Signal"
+				fr.name="Signal d'Évacuation"
+				type="node"
+				icon="icons/signals/CH/308.svg">
+				<label
+					text="Evacuation signal (Switzerland)"
+					fr.text="Signal d'évacuation (Suisse)" />
+				<space />
+				<key key="railway:signal:shunting" value="CH-FDV:308" />
+				<key key="railway:signal:shunting:form" value="light" />
+				<key key="railway:signal:shunting:states" value="CH-FDV:308;CH-FDV:310" />
+				<reference ref="base_common" />
+			</item>
+
+			<item
+				name="Shunting Stop Board"
+				fr.name="Pancarte de Fin de Manœuvre"
+				type="node"
+				icon="icons/signs/CH/304.svg">
+				<label
+					text="Shunting Stop Board (Switzerland)"
+					fr.text="Pancarte de Fin de Manœuvre (Suisse)" />
+				<space />
+				<key key="railway:signal:shunting" value="CH-FDV:304" />
+				<key key="railway:signal:shunting:form" value="sign" />
+				<reference ref="base_common" />
+			</item>
+
+			<item
+				name="Track Indicator"
+				fr.name="Indicateur de Voie"
+				type="node"
+				icon="icons/signs/CH/561.svg">
+				<label
+					text="Group signal stop board with departure track indicator (Switzerland)"
+					fr.text="Panneau d'arrêt de signal de groupe avec indication de voie de départ (Suisse)" />
+				<space />
+				<key key="railway:signal:stop" value="CH-FDV:560" />
+				<key key="railway:signal:stop:form" value="sign" />
+				<key key="railway:signal:assignment" value="CH-FDV:561" />
+				<key key="railway:signal:assignment:form" value="sign" />
+				<reference ref="base_common" />
+				<space/>
+				<text
+					key="railway:signal:assignment:caption"
+					text="Track number"
+					fr.text="Numéro de voie"
+					length="2"/>
+			</item>
+		</group>
+
+		<separator />
+
+		<!-- INSTRUCTION BOARDS -->
 		<item
-            name="Light Box"
-            fr.name="Caisson Lumineux"
+			name="Instruction Board"
+			fr.name="Pancarte de Consigne"
 			type="node"
-			icon="icons/boxes/double.svg">
+			icon="icons/signs/instruction_board.svg">
 			<label
-                text="Light box"
-                fr.text="Caisson lumineux" />
+				text="Board displaying an operational instruction"
+				fr.text="Pancarte affichant une consigne d'exploitation" />
 			<space />
-			<key key="railway:signal:combined" value="FR:light_box" />
-			<key key="railway:signal:combined:form" value="light" />
-			<key key="railway:signal:combined:shape" value="double" />
-			<reference ref="base_common" />
+			<key key="railway:signal:minor" value="FR:instruction_board" />
+			<key key="railway:signal:minor:form" value="sign" />
+			<reference ref="cat_minor" />
+			<space />
 			<text
-				key="railway:signal:combined:ref"
-				text="Network ID"
-				fr.text="Identifiant Réseau" length="7" />
-			<combo key="railway:signal:combined:left"
-				   text="Left Cell"
-				   fr.text="Case de gauche"
-				   editable="false" icon_size="16">
-				<list_entry value="FR:D"
-							display_value="Depot"
-							fr.display_value="Dépôt"
-							icon="icons/boxes/D.svg" icon_size="16"/>
-				<list_entry value="FR:G"
-							display_value="Garage"
-							fr.display_value="Garage"
-							icon="icons/boxes/G.svg" icon_size="16"/>
-				<list_entry value="FR:TECS"
-							display_value="Wrong-road entry"
-							fr.display_value="Entrée de ContreSens"
-							icon="icons/boxes/TECS.svg" icon_size="16"/>
-			</combo>
-			<combo key="railway:signal:combined:right"
-				   text="Right Cell"
-				   fr.text="Case de droite"
-				   editable="false" icon_size="16">
-				<list_entry value="FR:D"
-							display_value="Depot"
-							fr.display_value="Dépôt"
-							icon="icons/boxes/D.svg" icon_size="16"/>
-				<list_entry value="FR:TECS"
-							display_value="Wrong-road entry"
-							fr.display_value="Entrée de ContreSens"
-							icon="icons/boxes/TECS.svg" icon_size="16"/>
-				<list_entry value="FR:TSCS"
-							display_value="Wrong-road exit"
-							fr.display_value="Sortie de ContreSens"
-							icon="icons/boxes/TSCS.svg" icon_size="16"/>
-			</combo>
-			<link wiki="OpenRailwayMap/Tagging_in_France#Combined_signals" />
+				key="railway:signal:minor:caption"
+				text="Board caption"
+				fr.text="Libellé de la pancarte" />
+			<link wiki="OpenRailwayMap/Tagging_in_France#Instruction_board" />
 		</item>
+
+		<!-- SIGNAL POSITION INDICATORS -->
+		<group
+			name="Signal Position Indicators"
+			fr.name="Position des Signaux"
+			icon="icons/signs/signals_on_right.svg">
+
+			<!-- RIGHT -->
+			<item
+				name="Signals on Right"
+				fr.name="Signaux à Droite"
+				type="node"
+				icon="icons/signs/signals_on_right.svg">
+				<label
+					text="Trackside signals installed on the right-hand side"
+					fr.text="Signaux implantés à droite de la voie" />
+				<space />
+				<key key="railway:signal:minor" value="FR:signals_on_right" />
+				<key key="railway:signal:minor:form" value="sign" />
+				<reference ref="cat_minor" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Signals_on_right_sign" />
+			</item>
+
+			<!-- LEFT -->
+			<item
+				name="Signals on Left"
+				fr.name="Signaux à Gauche"
+				type="node"
+				icon="icons/signs/signals_on_left.svg">
+				<label
+					text="Trackside signals installed on the left-hand side"
+					fr.text="Signaux implantés à gauche de la voie" />
+				<space />
+				<key key="railway:signal:minor" value="FR:signals_on_left" />
+				<key key="railway:signal:minor:form" value="sign" />
+				<reference ref="cat_minor" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Signals_on_left_sign" />
+			</item>
+
+		</group>
+
+		<!-- MIRLITONS -->
+		<group
+			name="Mirlitons"
+			fr.name="Mirlitons"
+			icon="icons/signs/mirliton_III.svg">
+
+			<!-- I -->
+			<item
+				name="Mirliton I"
+				fr.name="Mirliton I"
+				type="node"
+				icon="icons/signs/mirliton_I.svg">
+				<label
+					text="Mirliton I (100 m)"
+					fr.text="Mirliton I (100 m)" />
+				<space />
+				<key key="railway:signal:distant:type" value="I" />
+				<reference ref="cat_mirliton" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Mirlitons" />
+			</item>
+
+			<!-- II -->
+			<item
+				name="Mirliton II"
+				fr.name="Mirliton II"
+				type="node"
+				icon="icons/signs/mirliton_II.svg">
+				<label
+					text="Mirliton II (200 m)"
+					fr.text="Mirliton II (200 m)" />
+				<space />
+				<key key="railway:signal:distant:type" value="II" />
+				<reference ref="cat_mirliton" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Mirlitons" />
+			</item>
+
+			<!-- III -->
+			<item
+				name="Mirliton III"
+				fr.name="Mirliton III"
+				type="node"
+				icon="icons/signs/mirliton_III.svg">
+				<label
+					text="Mirliton III (300 m)"
+					fr.text="Mirliton III (300 m)" />
+				<space />
+				<key key="railway:signal:distant:type" value="III" />
+				<reference ref="cat_mirliton" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Mirlitons" />
+			</item>
+
+		</group>
+
+		<separator />
+
+		<!-- DISTANT STOP SIGNS -->
+		<group
+			name="Distant Stop Signs"
+			fr.name="Pancartes d'arrêt à Distance"
+			icon="icons/signs/distant_stop.svg">
+
+			<!-- ARRÊT ...m -->
+			<item
+				name="ARRÊT ...m"
+				fr.name="ARRÊT ...m"
+				type="node"
+				icon="icons/signs/distant_arret.svg">
+				<label
+					text="Advance sign &quot;ARRÊT ...m&quot;"
+					fr.text="Pancarte à distance &quot;ARRÊT ...m&quot;" />
+				<space />
+				<key key="railway:signal:stop_distant" value="FR:ARRET" />
+				<reference ref="cat_stop_distant" />
+				<text
+					key="railway:signal:stop_distant:distance"
+					text="Distance (m)"
+					fr.text="Distance (m)" length="4" />
+			</item>
+
+			<!-- ARRÊT pour Desserte à ...m -->
+			<item
+				name="ARRÊT pour Desserte à ...m"
+				fr.name="ARRÊT pour Desserte à ...m"
+				type="node"
+				icon="icons/signs/distant_stop_industrial_siding.svg">
+				<label
+					text="Advance sign &quot;ARRÊT pour Desserte à ...m&quot;"
+					fr.text="Pancarte à distance &quot;ARRÊT pour Desserte à ...m&quot;" />
+				<space />
+				<key key="railway:signal:stop_distant" value="FR:ARRET" />
+				<key key="railway:signal:stop_distant:for" value="industrial_siding" />
+				<reference ref="cat_stop_distant" />
+				<text
+					key="railway:signal:stop_distant:distance"
+					text="Distance (m)"
+					fr.text="Distance (m)" length="4" />
+			</item>
+
+			<!-- STOP ...m -->
+			<item
+				name="STOP ...m"
+				fr.name="STOP ...m"
+				type="node"
+				icon="icons/signs/distant_stop.svg">
+				<label
+					text="Advance sign &quot;STOP ...m&quot;"
+					fr.text="Pancarte à distance &quot;STOP ...m&quot;" />
+				<space />
+				<key key="railway:signal:stop_distant" value="FR:STOP" />
+				<reference ref="cat_stop_distant" />
+				<text
+					key="railway:signal:stop_distant:distance"
+					text="Distance (m)"
+					fr.text="Distance (m)" length="4" />
+			</item>
+
+			<separator />
+
+			<!-- CARRÉ ...m -->
+			<item
+				name="CARRÉ ...m"
+				fr.name="CARRÉ ...m"
+				type="node"
+				icon="icons/signs/distant_carre.svg">
+				<label
+					text="Advance sign &quot;CARRÉ ...m&quot;"
+					fr.text="Pancarte à distance &quot;CARRÉ ...m&quot;" />
+				<space />
+				<key key="railway:signal:distant" value="FR:CARRE" />
+				<key key="railway:signal:distant:form" value="sign" />
+				<reference ref="base_common" />
+				<text
+					key="railway:signal:distant:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau" length="7" />
+				<text
+					key="railway:signal:distant:distance"
+					text="Distance (m)"
+					fr.text="Distance (m)" length="4" />
+			</item>
+
+			<!-- GA ...m -->
+			<item
+				name="GA ...m"
+				fr.name="GA ...m"
+				type="node"
+				icon="icons/signs/GA_distant.svg">
+				<label
+					text="Advance sign &quot;GA ...m&quot;"
+					fr.text="Pancarte à distance &quot;GA ...m&quot;" />
+				<space />
+				<key key="railway:signal:distant" value="FR:GA" />
+				<key key="railway:signal:distant:form" value="sign" />
+				<reference ref="base_common" />
+				<text
+					key="railway:signal:distant:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau" length="7" />
+				<text
+					key="railway:signal:distant:distance"
+					text="Distance (m)"
+					fr.text="Distance (m)" length="4" />
+			</item>
+
+		</group>
+
+		<!-- STOPS -->
+		<group
+			name="Stops"
+			fr.name="Arrêts"
+			icon="icons/signs/ARRET.svg">
+
+			<!-- ARRÊT -->
+			<group
+				name="ARRÊT Signs"
+				fr.name="Pancartes ARRÊT"
+				icon="icons/signs/ARRET.svg">
+
+				<item
+					name="ARRÊT Sign"
+					fr.name="Pancarte ARRÊT"
+					type="node"
+					icon="icons/signs/ARRET.svg"
+					match_expression="-&quot;railway:signal:stop:for&quot;=*">
+					<label
+						text="ARRÊT sign"
+						fr.text="Pancarte ARRÊT" />
+					<space />
+					<key key="railway:signal:stop" value="FR:ARRET" />
+					<key key="railway:signal:stop:for" match="none" />
+					<reference ref="cat_stop" />
+					<space />
+					<combo
+						key="railway:signal:stop:arrangement"
+						text="Sign Arrangement"
+						fr.text="Disposition de la Pancarte"
+						editable="false">
+						<list_entry
+							value=""
+							display_value="Horizontal"
+							fr.display_value="Horizontal"
+							icon="icons/signs/ARRET.svg"
+							icon_size="24"/>
+						<list_entry
+							value="vertical"
+							display_value="Vertical"
+							fr.display_value="Vertical"
+							icon="icons/signs/vertical_ARRET.svg"
+							icon_size="24"/>
+					</combo>
+				</item>
+
+				<separator />
+
+				<item
+					name="Arrêt des Machines"
+					fr.name="Arrêt des Machines"
+					type="node"
+					icon="icons/signs/stop_locomotives.svg">
+					<label
+						text="ARRÊT sign for locomotives"
+						fr.text="Pancarte Arrêt des Machines" />
+					<space />
+					<reference ref="arret_for_tags" />
+					<key key="railway:signal:stop:for" value="locomotives" />
+				</item>
+
+				<item
+					name="Arrêt des Manœuvres"
+					fr.name="Arrêt des Manœuvres"
+					type="node"
+					icon="icons/signs/stop_shunting.svg">
+					<label
+						text="ARRÊT sign for shunting movements"
+						fr.text="Pancarte Arrêt des Manœuvres" />
+					<space />
+					<reference ref="arret_for_tags" />
+					<key key="railway:signal:stop:for" value="shunting" />
+				</item>
+
+				<item
+					name="Arrêt Mouvements Rentrant au Dépôt"
+					fr.name="Arrêt Mouvements Rentrant au Dépôt"
+					type="node"
+					icon="icons/signs/stop_depot_movements.svg">
+					<label
+						text="ARRÊT sign for depot movements"
+						fr.text="Pancarte Arrêt Mouvements Rentrant au Dépôt" />
+					<space />
+					<reference ref="arret_for_tags" />
+					<key key="railway:signal:stop:for" value="depot_movements" />
+				</item>
+
+				<item
+					name="Arrêt pour Desserte"
+					fr.name="Arrêt pour Desserte"
+					type="node"
+					icon="icons/signs/stop_industrial_siding.svg">
+					<label
+						text="ARRÊT sign for industrial sidings"
+						fr.text="Pancarte Arrêt pour Desserte" />
+					<space />
+					<reference ref="arret_for_tags" />
+					<key key="railway:signal:stop:for" value="industrial_siding" />
+				</item>
+
+				<item
+					name="Arrêt pour Refoulement"
+					fr.name="Arrêt pour Refoulement"
+					type="node"
+					icon="icons/signs/stop_pushing.svg">
+					<label
+						text="ARRÊT sign for pushing movements"
+						fr.text="Pancarte Arrêt pour Refoulement" />
+					<space />
+					<reference ref="arret_for_tags" />
+					<key key="railway:signal:stop:for" value="pushing" />
+				</item>
+
+				<item
+					name="Arrêt des Trains du Chantier"
+					fr.name="Arrêt des Trains du Chantier"
+					type="node"
+					icon="icons/signs/stop_atc.svg">
+					<label
+						text="ARRÊT sign for worksite trains"
+						fr.text="Pancarte Arrêt des Trains du Chantier" />
+					<space />
+					<reference ref="arret_for_tags" />
+					<key key="railway:signal:stop:for" value="worksite_trains" />
+				</item>
+
+			</group>
+
+			<!-- STOP -->
+			<item
+				name="STOP Sign"
+				fr.name="Pancarte STOP"
+				type="node"
+				icon="icons/signs/STOP.svg">
+				<label
+					text="STOP Sign"
+					fr.text="Pancarte STOP" />
+				<space />
+				<key key="railway:signal:stop" value="FR:STOP" />
+				<reference ref="cat_stop" />
+				<space />
+				<combo
+					key="railway:signal:stop:arrangement"
+					text="Sign Arrangement"
+					fr.text="Disposition de la Pancarte"
+					editable="false">
+					<list_entry
+						value=""
+						display_value="Horizontal"
+						fr.display_value="Horizontal"
+						icon="icons/signs/STOP.svg"
+						icon_size="24"/>
+					<list_entry
+						value="vertical"
+						display_value="Vertical"
+						fr.display_value="Vertical"
+						icon="icons/signs/vertical_STOP.svg"
+						icon_size="24"/>
+				</combo>
+			</item>
+
+			<separator />
+
+			<!-- STOP MARKER (white and red) -->
+			<item
+				name="Stop Marker"
+				fr.name="Jalon d'Arrêt"
+				type="node"
+				icon="icons/signs/stop_marker.svg">
+				<label
+					text="Red and white checkered stop marker"
+					fr.text="Jalon d'arrêt à damier rouge et blanc" />
+				<space />
+				<key key="railway:signal:stop" value="FR:marker" />
+				<key key="railway:signal:stop:type" value="stop_marker" />
+				<reference ref="cat_stop" />
+			</item>
+
+		</group>
+
+		<!-- PASSENGER STOPS -->
+		<group
+			name="Passenger Stops"
+			fr.name="Arrêts Voyageurs"
+			icon="icons/signs/TT.svg">
+
+			<!-- TT -->
+			<item
+				name="TT"
+				type="node"
+				icon="icons/signs/TT.svg">
+				<label
+					text="Passenger stop: head of train"
+					fr.text="Arrêt voyageurs : tête de train" />
+				<space />
+				<key key="railway:signal:stop:classic" value="FR:TT" />
+				<key key="railway:signal:stop:classic:for" value="head_of_train" />
+				<reference ref="cat_classic_passenger_stop" />
+			</item>
+
+			<!-- TT EAS -->
+			<item
+				name="TT EAS"
+				type="node"
+				icon="icons/signs/TT_EAS.svg">
+				<label
+					text="Passenger stop for trains equipped for driver-only operations"
+					fr.text="Arrêt voyageurs pour trains équipés EAS" />
+				<space />
+				<key key="railway:signal:stop:classic" value="FR:TT_EAS" />
+				<key key="railway:signal:stop:classic:for" value="driver_only" />
+				<reference ref="cat_classic_passenger_stop" />
+			</item>
+
+			<!-- TTL -->
+			<item
+				name="TTL"
+				type="node"
+				icon="icons/signs/TTL.svg">
+				<label
+					text="Passenger stop for trains with locomotive"
+					fr.text="Arrêt voyageurs pour trains avec locomotive" />
+				<space />
+				<key key="railway:signal:stop:classic" value="FR:TTL" />
+				<key key="railway:signal:stop:classic:for" value="locomotive" />
+				<reference ref="cat_classic_passenger_stop" />
+			</item>
+
+			<separator />
+
+			<!-- # VEHICLES -->
+			<item
+				name="...V"
+				type="node"
+				icon="icons/signs/vehicle_number.svg">
+				<label
+					text="Passenger stop for trains up to x vehicles"
+					fr.text="Arrêt voyageurs pour trains jusqu'à x voitures" />
+				<space />
+				<key key="railway:signal:stop:classic" value="FR:vehicle_number" />
+				<key key="railway:signal:stop:classic:for" value="vehicles" />
+				<reference ref="cat_classic_passenger_stop" />
+				<space />
+				<multiselect
+					key="railway:signal:stop:classic:number"
+					text="Number of vehicles"
+					fr.text="Nombre de voitures"
+					delimiter=";"
+					editable="false"
+					values_sort="false"
+					values="3V;4V;5V;6V;8V;10V;12V"/>
+			</item>
+
+			<!-- TRAIN LENGTH -->
+			<item
+				name="L ..."
+				type="node"
+				icon="icons/signs/L110.svg">
+				<label
+					text="Passenger stop for self-propelled units of a given length"
+					fr.text="Arrêt voyageurs pour automoteurs d'une longueur donnée" />
+				<space />
+				<key key="railway:signal:stop:classic" value="FR:train_length" />
+				<key key="railway:signal:stop:classic:for" value="railcar" />
+				<reference ref="cat_classic_passenger_stop" />
+				<space />
+				<combo
+					key="railway:signal:stop:classic:length"
+					text="Train length (m)"
+					fr.text="Longueur du train (m)"
+					editable="false"
+					values_sort="false"
+					values="75,110,150,220" />
+			</item>
+
+			<separator />
+
+			<!-- TGV 1 (US) -->
+			<item
+				name="TGV 1"
+				type="node"
+				icon="icons/signs/TGV_1.svg">
+				<label
+					text="Passenger stop for single-unit TGVs"
+					fr.text="Arrêt voyageurs pour TGV en unités simples" />
+				<space />
+				<key key="railway:signal:stop:highspeed" value="FR:TGV1" />
+				<key key="railway:signal:stop:highspeed:for" value="single_unit" />
+				<reference ref="cat_highspeed_passenger_stop" />
+			</item>
+
+			<!-- TGV 2 (UM) -->
+			<item
+				name="TGV 2"
+				type="node"
+				icon="icons/signs/TGV_2.svg">
+				<label
+					text="Passenger stop for multiple-unit TGVs"
+					fr.text="Arrêt voyageurs pour les TGV en unités multiples" />
+				<space />
+				<key key="railway:signal:stop:highspeed" value="FR:TGV2" />
+				<key key="railway:signal:stop:highspeed:for" value="multiple_unit" />
+				<reference ref="cat_highspeed_passenger_stop" />
+			</item>
+
+			<!-- TGV 1-2 -->
+			<item
+				name="TGV 1-2"
+				type="node"
+				icon="icons/signs/TGV_1-2.svg"
+				match_expression="-&quot;railway:signal:stop:highspeed:for&quot;=*">
+				<label
+					text="Passenger Stop for TGVs"
+					fr.text="Arrêt voyageurs pour les TGV" />
+				<space />
+				<key key="railway:signal:stop:highspeed" value="FR:TGV1-2" />
+				<key key="railway:signal:stop:highspeed:for" match="none" />
+				<reference ref="cat_highspeed_passenger_stop" />
+			</item>
+
+		</group>
+
+		<!-- STATIONS AND FACILITIES -->
+		<group
+			name="Stations and Facilities"
+			fr.name="Gares et Établissements"
+			icon="icons/signs/GARE.svg">
+
+			<!-- TODO: POSTE -->
+			<item
+				name="POSTE Sign"
+				fr.name="Pancarte POSTE"
+				type="node" icon="icons/signs/POSTE.svg">
+				<label
+					text="POSTE Sign"
+					fr.text="Pancarte POSTE" />
+				<space />
+				<key key="railway:signal:station_distant" value="FR:POSTE" />
+				<reference ref="cat_station_distant" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Facilities" />
+			</item>
+
+			<!-- STATION (VUSS) -->
+			<item
+				name="GARE Sign"
+				fr.name="Pancarte GARE"
+				type="node" icon="icons/signs/GARE.svg">
+				<label
+					text="GARE Sign"
+					fr.text="Pancarte GARE" />
+				<space />
+				<key key="railway:signal:station_distant" value="FR:GARE" />
+				<reference ref="cat_station_distant" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Stations" />
+			</item>
+
+			<!-- BILATERAL EXIT SIGNALS (VU) -->
+			<item
+				name="Bilateral Exit Signals"
+				fr.name="Signaux de Sortie Bilatéraux"
+				type="node"
+				icon="icons/signs/bilateral_exit_signals.svg">
+				<label
+					text="Bilateral Exit Signals Reminder"
+					fr.text="Rappel de signaux de sorties bilatéraux" />
+				<space />
+				<key key="railway:signal:station" value="FR:bilateral_exit_signals" />
+				<reference ref="cat_station" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Stations" />
+			</item>
+
+			<separator />
+
+			<!-- FACILITIES -->
+			<group
+				name="Facilities"
+				fr.name="Établissements"
+				icon="icons/signs/facility_boundary.svg">
+
+				<!-- APPROACH -->
+				<item
+					name="Approaching a Facility"
+					fr.name="Approche d'un Établissement"
+					type="node"
+					icon="icons/signs/facility_approach.svg">
+					<label
+						text="Approaching a Facility"
+						fr.text="Approche d'un Établissement" />
+					<space />
+					<key key="railway:signal:station_distant" value="FR:facility_approach" />
+					<reference ref="cat_station_distant" />
+					<reference ref="facility_link" />
+					<text
+						key="railway:signal:station_distant:caption"
+						text="Sign caption"
+						fr.text="Libellé de la pancarte" />
+				</item>
+
+				<!-- APPROACH (VUSS) -->
+				<item
+					name="Approaching a Facility (Simplified Signalling)"
+					fr.name="Approche d'un Établissement (VUSS)"
+					type="node"
+					icon="icons/signs/facility_approach_simplified.svg">
+					<label
+						text="Approaching a Facility (Simplified signalling)"
+						fr.text="Approche d'un Établissement sur VUSS" />
+					<space />
+					<key key="railway:signal:station_distant" value="FR:facility_approach_simplified" />
+					<reference ref="cat_station_distant" />
+					<reference ref="facility_link" />
+				</item>
+
+				<!-- BOUNDARY -->
+				<item
+					name="Facility Boundary"
+					fr.name="Limite d'un Établissement"
+					type="node"
+					icon="icons/signs/facility_boundary.svg">
+					<label
+						text="Facility boundary"
+						fr.text="Limite d'un établissement" />
+					<space />
+					<key key="railway:signal:station" value="FR:facility_boundary" />
+					<reference ref="cat_station" />
+					<reference ref="facility_link" />
+				</item>
+			</group>
+
+			<!-- WASHING FACILITY -->
+			<group
+				name="Washing Facility"
+				fr.name="Installation de Lavage"
+				icon="icons/signs/washing_facility.svg">
+
+				<!-- ADVANCE -->
+				<item
+					name="Advance Sign"
+					fr.name="Pancarte à Distance"
+					type="node"
+					icon="icons/signs/washing_facility_advance.svg">
+					<label
+						text="Advance sign &quot;Lavage à ...m&quot;"
+						fr.text="Pancarte à distance &quot;Lavage à ...m&quot;" />
+					<space />
+					<key key="railway:signal:servicing" value="FR:washing_facility_advance" />
+					<reference ref="cat_washing_facility" />
+					<text
+						key="railway:signal:servicing:distance"
+						text="Distance (m)"
+						fr.text="Distance (m)" length="4" />
+					<space />
+					<combo
+						key="railway:signal:servicing:height"
+						text="Sign Size"
+						fr.text="Taille de la Pancarte"
+						editable="false">
+						<list_entry
+							value=""
+							display_value="Normal"
+							fr.display_value="Normale"
+							icon="icons/signs/washing_facility_advance.svg"
+							icon_size="24"/>
+						<list_entry
+							value="small"
+							display_value="Small"
+							fr.display_value="Réduite"
+							icon="icons/signs/washer_small_distant.svg"
+							icon_size="24"/>
+					</combo>
+				</item>
+
+				<!-- FACILITY -->
+				<item
+					name="Washing Facility"
+					fr.name="Installation de Lavage"
+					type="node"
+					icon="icons/signs/washing_facility.svg">
+					<label
+						text="Washing Facility"
+						fr.text="Installation de Lavage" />
+					<space />
+					<key key="railway:signal:servicing" value="FR:L" />
+					<key key="railway:signal:servicing:type" value="washing_facility" />
+					<reference ref="cat_washing_facility" />
+				</item>
+
+				<!-- SPEED LIMIT -->
+				<item
+					name="Speed Limit"
+					fr.name="Vitesse Maximale"
+					type="node"
+					icon="icons/signs/washer_speed_limit.svg">
+					<label
+						text="Washing facility speed limit"
+						fr.text="Vitesse maximale de l'installation de lavage" />
+					<space />
+					<key key="railway:signal:speed_limit" value="FR:washing_facility" />
+					<key key="railway:signal:speed_limit:form" value="sign" />
+					<reference ref="base_common" />
+					<combo
+						key="railway:signal:speed_limit:speed"
+						text="Speed Limit (km/h)"
+						fr.text="Vitesse Maximale (km/h)"
+						values="1,2,3,4,5"
+						editable="false"/>
+					<link wiki="OpenRailwayMap/Tagging_in_France#Rolling_stock_washing_facility" />
+				</item>
+			</group>
+
+			<separator />
+
+			<!-- CONVERGING TRACKS -->
+			<group
+				name="Converging Tracks"
+				fr.name="Voies convergentes"
+				icon="icons/boxes/TIP.svg">
+
+				<!-- TIP -->
+				<!-- May be associated with Carré group signals and SLD -->
+				<item
+					name="TIP"
+					fr.name="TIP"
+					type="node"
+					icon="icons/boxes/TIP.svg">
+					<label
+						text="Tableau Indicateur de Provenance (TIP)"
+						fr.text="Tableau Indicateur de Provenance (TIP)" />
+					<space />
+					<key key="railway:signal:minor" value="FR:TIP" />
+					<key key="railway:signal:minor:form" value="light" />
+					<reference ref="cat_minor" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#Tableau_Indicateur_de_Provenance" />
+				</item>
+
+				<!-- TLC -->
+				<item
+					name="TLC"
+					fr.name="TLC"
+					type="node"
+					icon="icons/boxes/TLC.svg">
+					<label
+						text="Tableau Lumineux de Correspondance (TLC)"
+						fr.text="Tableau Lumineux de Correspondance (TLC)" />
+					<space />
+					<key key="railway:signal:minor" value="FR:TLC" />
+					<key key="railway:signal:minor:form" value="light" />
+					<reference ref="cat_minor" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#Tableau_Lumineux_de_Correspondance" />
+				</item>
+
+			</group>
+
+			<!-- SERVICE TRACKS AND SHUNTING -->
+			<group
+				name="Service Tracks and Shunting"
+				fr.name="Voies de Service et Manœuvres"
+				icon="icons/boards/D.svg">
+
+				<!-- SLM -->
+				<item
+					name="SLM"
+					fr.name="SLM"
+					type="node"
+					icon="icons/signals/SLM.svg">
+					<label
+						text="Signal Lumineux de Manœuvre (SLM)"
+						fr.text="Signal Lumineux de Manœuvre (SLM)" />
+					<space />
+					<key key="railway:signal:shunting" value="FR:SLM" />
+					<key key="railway:signal:shunting:form" value="light" />
+					<reference ref="cat_shunting_base" />
+					<combo
+						key="ref"
+						text="Marker caption"
+						fr.text="Libellé du Repérage"
+						values="I,II,III,IV,V" 
+						editable="false"
+						values_sort="false"/>
+					<link wiki="OpenRailwayMap/Tagging_in_France#Signal_Lumineux_de_Manœuvre" />
+				</item>
+
+				<separator />
+
+				<!-- SHUNTING BOARDS -->
+				<group
+                    name="Shunting Boards"
+                    fr.name="Tableaux de Manœuvre"
+					icon="icons/boards/D.svg">
+
+					<!-- D Board -->
+					<item
+						name="D Board"
+						fr.name="Tableau D"
+						type="node"
+						icon="icons/boards/D.svg">
+						<label
+							text="D Board"
+							fr.text="Tableau D" />
+						<space />
+						<key key="railway:signal:shunting_route" value="FR:destination" />
+						<key key="railway:signal:shunting_route:depot" value="FR:D" />
+						<reference ref="base_common" />
+						<text key="railway:signal:shunting_route:depot:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+						<combo
+							key="railway:signal:shunting_route:depot:form"
+							text="Signal presentation"
+							fr.text="Présentation du signal"
+							default="sign"
+							editable="false">
+							<list_entry
+								value="sign"
+								display_value="Board"
+								fr.display_value="Tableau"
+								icon="icons/boards/empty.svg" icon_size="24"/>
+							<list_entry
+								value="light"
+								display_value="Light box"
+								fr.display_value="Caisson lumineux"
+								icon="icons/boxes/single.svg" icon_size="24"/>
+						</combo>
+						<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_boards" />
+					</item>
+
+					<!-- G Board -->
+					<item
+						name="G Board"
+						fr.name="Tableau G"
+						type="node"
+						icon="icons/boards/G.svg">
+						<label
+							text="G Board"
+							fr.text="Tableau G" />
+						<space />
+						<key key="railway:signal:shunting_route" value="FR:destination" />
+						<key key="railway:signal:shunting_route:stabling" value="FR:G" />
+						<reference ref="base_common" />
+						<text key="railway:signal:shunting_route:stabling:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+						<combo
+							key="railway:signal:shunting_route:stabling:form"
+							text="Signal presentation"
+							fr.text="Présentation du signal"
+							default="sign"
+							editable="false">
+							<list_entry
+								value="sign"
+								display_value="Board"
+								fr.display_value="Tableau"
+								icon="icons/boards/empty.svg" icon_size="24"/>
+							<list_entry
+								value="light"
+								display_value="Light box"
+								fr.display_value="Caisson lumineux"
+								icon="icons/boxes/single.svg" icon_size="24"/>
+						</combo>
+						<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_boards" />
+					</item>
+
+					<!-- Imp Board -->
+					<item
+						name="Imp Board"
+						fr.name="Tableau Imp"
+						type="node"
+						icon="icons/boards/Imp.svg">
+						<label
+							text="Imp Board"
+							fr.text="Tableau Imp" />
+						<space />
+						<key key="railway:signal:shunting_route" value="FR:destination" />
+						<key key="railway:signal:shunting_route:dead_end" value="FR:Imp" />
+						<reference ref="base_common" />
+						<text key="railway:signal:shunting_route:dead_end:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+						<combo
+							key="railway:signal:shunting_route:dead_end:form"
+							text="Signal presentation"
+							fr.text="Présentation du signal"
+							default="sign"
+							editable="false">
+							<list_entry
+								value="sign"
+								display_value="Board"
+								fr.display_value="Tableau"
+								icon="icons/boards/empty.svg" icon_size="24"/>
+							<list_entry
+								value="light"
+								display_value="Light box"
+								fr.display_value="Caisson lumineux"
+								icon="icons/boxes/single.svg" icon_size="24"/>
+						</combo>
+						<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_boards" />
+					</item>
+
+					<!-- SAS Board -->
+					<item
+						name="SAS Board"
+						fr.name="Tableau SAS"
+						type="node"
+						icon="icons/boards/SAS.svg">
+						<label
+							text="SAS Board"
+							fr.text="Tableau SAS" />
+						<space />
+						<key key="railway:signal:shunting_route" value="FR:destination" />
+						<key key="railway:signal:shunting_route:short_block" value="FR:SAS" />
+						<reference ref="base_common" />
+						<text key="railway:signal:shunting_route:short_block:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+						<combo
+							key="railway:signal:shunting_route:short_block:form"
+							text="Signal presentation"
+							fr.text="Présentation du signal"
+							default="sign"
+							editable="false">
+							<list_entry
+								value="sign"
+								display_value="Board"
+								fr.display_value="Tableau"
+								icon="icons/boards/empty.svg" icon_size="24"/>
+							<list_entry
+								value="light"
+								display_value="Light box"
+								fr.display_value="Caisson lumineux"
+								icon="icons/boxes/single.svg" icon_size="24"/>
+						</combo>
+						<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_boards" />
+					</item>
+
+					<!-- Buffer-Stop Board -->
+					<item
+						name="Buffer-Stop Board"
+						fr.name="Tableau Heurtoir"
+						type="node"
+						icon="icons/boards/buffer_stop.svg">
+						<label
+							text="Buffer-Stop Board"
+							fr.text="Tableau Heurtoir" />
+						<space />
+						<key key="railway:signal:shunting_route" value="FR:destination" />
+						<key key="railway:signal:shunting_route:buffer_stop" value="FR:Heurtoir" />
+						<key key="railway:signal:shunting_route:buffer_stop:form" value="sign" />
+						<reference ref="base_common" />
+						<text key="railway:signal:shunting_route:buffer_stop:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+						<text
+							key="railway:signal:shunting_route:buffer_stop:distance"
+							text="Distance (m)"
+							fr.text="Distance (m)" length="4" />
+						<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_boards" />
+					</item>
+				</group>
+
+				<!-- SHUNTING SIGNS -->
+				<group
+                    name="Shunting Signs"
+                    fr.name="Pancartes de Manœuvre"
+					icon="icons/signs/LM.svg">
+
+					<!-- H -->
+					<item
+						name="H Sign"
+						fr.name="Pancarte H"
+						type="node"
+						icon="icons/signs/H.svg">
+						<label
+							text="H Sign"
+							fr.text="Pancarte H" />
+						<space />
+						<key key="railway:signal:shunting" value="FR:H" />
+						<reference ref="cat_shunting_sign" />
+					</item>
+
+					<!-- LGR -->
+					<item
+						name="LGR Sign"
+						fr.name="Pancarte LGR"
+						type="node"
+						icon="icons/signs/LGR.svg">
+						<label
+							text="LGR Sign"
+							fr.text="Pancarte LGR" />
+						<space />
+						<key key="railway:signal:shunting" value="FR:LGR" />
+						<reference ref="cat_shunting_sign" />
+					</item>
+
+					<!-- LM -->
+					<item
+						name="LM Sign"
+						fr.name="Pancarte LM"
+						type="node"
+						icon="icons/signs/LM.svg">
+						<label
+							text="LM Sign"
+							fr.text="Pancarte LM" />
+						<space />
+						<key key="railway:signal:shunting" value="FR:LM" />
+						<reference ref="cat_shunting_sign" />
+					</item>
+
+					<!-- MV -->
+					<item
+						name="MV Sign"
+						fr.name="Pancarte MV"
+						type="node"
+						icon="icons/signs/MV.svg">
+						<label
+							text="MV Sign"
+							fr.text="Pancarte MV" />
+						<space />
+						<key key="railway:signal:shunting" value="FR:MV" />
+						<reference ref="cat_shunting_sign" />
+					</item>
+
+				</group>
+
+			</group>
+
+			<separator />
+
+			<!-- DEPARTURES -->
+			<group
+				name="Departures"
+				fr.name="Départ"
+				icon="icons/boxes/SLD.svg">
+
+				<!-- REPORTING PLATES -->
+				<group
+					name="Reporting Plates"
+					fr.name="Plaques de Reconnaissance"
+					icon="icons/plates/reporting.svg">
+
+					<item
+						name="Reporting"
+						fr.name="Reconnaissance"
+						type="node"
+						icon="icons/plates/reporting.svg"
+						match_expression="-&quot;railway:signal:departure:type&quot;=*">
+						<label
+							text="Reporting Plate"
+							fr.text="Plaque de Reconnaissance" />
+						<space />
+						<key key="railway:signal:departure" value="FR:reporting" />
+						<key key="railway:signal:departure:type" match="none"/>
+						<key key="railway:signal:departure:form" value="sign" />
+						<reference ref="cat_reporting" />
+
+						<item_separator />
+						<preset_link preset_name="Delayed Reporting" text=""/>
+						<preset_link preset_name="Reporting Exemption" text=""/>
+					</item>
+
+					<item
+						name="Delayed Reporting"
+						fr.name="Reconnaissance Différée"
+						type="node"
+						icon="icons/plates/delayed_reporting.svg">
+						<label
+							text="Delayed Reporting Plate"
+							fr.text="Plaque de Reconnaissance Différée" />
+						<space />
+						<key key="railway:signal:departure" value="FR:reporting" />
+						<key key="railway:signal:departure:type" value="delayed" />
+						<key key="railway:signal:departure:form" value="sign" />
+						<reference ref="cat_reporting" />
+
+						<item_separator />
+						<preset_link preset_name="Reporting" text=""/>
+						<preset_link preset_name="Reporting Exemption" text=""/>
+					</item>
+
+					<item
+						name="Reporting Exemption"
+						fr.name="Dispense de Reconnaissance"
+						type="node"
+						icon="icons/plates/reporting_exemption.svg">
+						<label
+							text="Reporting Exemption Plate"
+							fr.text="Plaque de Dispense de Reconnaissance" />
+						<space />
+						<key key="railway:signal:departure" value="FR:reporting" />
+						<key key="railway:signal:departure:type" value="exempt" />
+						<key key="railway:signal:departure:form" value="sign" />
+						<reference ref="cat_reporting" />
+
+						<item_separator />
+						<preset_link preset_name="Reporting" text=""/>
+						<preset_link preset_name="Delayed Reporting" text=""/>
+					</item>
+				</group>
+
+				<separator />
+
+				<!-- DD -->
+				<item
+					name="Departure Request Plate"
+					fr.name="Plaque de Demande de Départ"
+					type="node"
+					icon="icons/plates/DD.svg">
+					<label
+						text="Departure Request Plate"
+						fr.text="Plaque de Demande de Départ" />
+					<space />
+					<key key="railway:signal:departure" value="FR:DD" />
+					<key key="railway:signal:departure:form" value="sign" />
+					<reference ref="cat_departure" />
+				</item>
+
+				<!-- Half-White Half-Green Plate -->
+				<item
+					name="Half-White, Half-Green Plate"
+					fr.name="Plaque Mi-Blanche, Mi-Verte"
+					type="node"
+					icon="icons/plates/departure_marker.svg">
+					<label
+						text="Half-White, Half-Green Plate"
+						fr.text="Plaque Mi-Blanche, Mi-Verte" />
+					<space />
+					<key key="railway:signal:departure" value="FR:departure_marker" />
+					<key key="railway:signal:departure:form" value="sign" />
+					<reference ref="cat_departure" />
+				</item>
+
+				<!-- SLD -->
+				<item
+					name="Signal Lumineux de Départ"
+					fr.name="Signal Lumineux de Départ"
+					type="node"
+					icon="icons/boxes/SLD.svg">
+					<label
+						text="Signal Lumineux de Départ"
+						fr.text="Signal Lumineux de Départ" />
+					<space />
+					<key key="railway:signal:departure" value="FR:SLD" />
+					<key key="railway:signal:departure:form" value="light" />
+					<reference ref="cat_departure" />
+				</item>
+
+				<separator />
+
+				<!-- RLI -->
+				<item
+					name="Route Light Repeater"
+					fr.name="Répétiteur Lumineux d'Itinéraire"
+					type="node"
+					icon="icons/boxes/RLI.svg">
+					<label
+						text="Route Light Repeater"
+						fr.text="Répétiteur Lumineux d'Itinéraire (RLI)" />
+					<space />
+					<key key="railway:signal:departure" value="FR:RLI" />
+					<key key="railway:signal:departure:form" value="light" />
+					<reference ref="cat_departure" />
+					<text
+						key="railway:signal:departure:caption"
+						text="Board caption"
+						fr.text="Libellé du tableau" />
+				</item>
+			</group>
+
+		</group>
 
 		<separator />
 
@@ -2530,17 +3927,17 @@
                         key="railway:signal:speed_limit_distant:switchable:form"
 						text="Signal presentation"
 						fr.text="Présentation du signal"
-						editable="false" icon_size="16">
+						editable="false">
 						<list_entry
 							value="sign"
 							display_value="Board"
 							fr.display_value="Tableau"
-							icon="icons/boards/TIV-D_mobile.svg" icon_size="16"/>
+							icon="icons/boards/TIV-D_mobile.svg" icon_size="24"/>
 						<list_entry
 							value="light"
 							display_value="Light box"
 							fr.display_value="Caisson lumineux"
-							icon="icons/boxes/TIV-D_mobile.svg" icon_size="16"/>
+							icon="icons/boxes/TIV-D_mobile.svg" icon_size="24"/>
 					</combo>
 					<combo
                         key="railway:signal:speed_limit_distant:switchable:speed"
@@ -2569,17 +3966,17 @@
                         key="railway:signal:speed_limit:switchable:form"
 						text="Signal presentation"
 						fr.text="Présentation du signal"
-						editable="false" icon_size="16">
+						editable="false">
 						<list_entry
 							value="sign"
 							display_value="Board"
 							fr.display_value="Tableau"
-							icon="icons/boards/TIV-R.svg" icon_size="16"/>
+							icon="icons/boards/TIV-R.svg" icon_size="24"/>
 						<list_entry
 							value="light"
 							display_value="Light box"
 							fr.display_value="Caisson lumineux"
-							icon="icons/boxes/TIV-R.svg" icon_size="16"/>
+							icon="icons/boxes/TIV-R.svg" icon_size="24"/>
 					</combo>
 					<combo
                         key="railway:signal:speed_limit:switchable:speed"
@@ -2589,7 +3986,7 @@
 						editable="false"/>
 					<item_separator />
 					<preset_link preset_name="Downward-pointing Chevron" text=""/>
-					<link wiki="OpenRailwayMap/Tagging_in_France#Switchable_TIV_board" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#Switchable_TIV-R" />
 				</item>
 
 			</group>
@@ -2676,7 +4073,7 @@
 					<preset_link preset_name="Z Sign" text=""/>
 					<preset_link preset_name="R Sign" text=""/>
 
-					<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_TIV-D_(B_type)" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_B-type_TIV-D" />
 				</item>
 
 				<!-- C-TYPE TIV-D -->
@@ -2709,7 +4106,7 @@
 					<preset_link preset_name="Z Sign" text=""/>
 					<preset_link preset_name="R Sign" text=""/>
 
-					<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_TIV-D_(C_type)" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_C-type_TIV-D" />
 				</item>
 
 				<separator />
@@ -2725,11 +4122,12 @@
 						fr.text="Pancarte Z" />
 					<space />
 					<key key="railway:signal:speed_limit" value="FR:marker" />
-					<key key="railway:signal:speed_limit:entry" value="FR:Z" />
-					<key key="railway:signal:speed_limit:entry:form" value="sign" />
+					<key key="railway:signal:speed_limit:main" value="FR:Z" />
+					<key key="railway:signal:speed_limit:main:form" value="sign" />
+					<key key="railway:signal:speed_limit:main:function" value="entry" />
 					<reference ref="base_common" />
 					<text
-						key="railway:signal:speed_limit:entry:ref"
+						key="railway:signal:speed_limit:main:ref"
 						text="Network ID"
 						fr.text="Identifiant Réseau" length="7" />
 
@@ -2741,7 +4139,7 @@
 					<preset_link preset_name="C-type TIV-D" text=""/>
 					<preset_link preset_name="Speed Marker" text=""/>
 
-					<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_TIV-D_(Ordinary_type)" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_Ordinary-type_TIV-D" />
 				</item>
 
 				<!-- R SIGN -->
@@ -2755,11 +4153,12 @@
 						fr.text="Pancarte R" />
 					<space />
 					<key key="railway:signal:speed_limit" value="FR:marker" />
-					<key key="railway:signal:speed_limit:exit" value="FR:R" />
-					<key key="railway:signal:speed_limit:exit:form" value="sign" />
+					<key key="railway:signal:speed_limit:main" value="FR:R" />
+					<key key="railway:signal:speed_limit:main:form" value="sign" />
+					<key key="railway:signal:speed_limit:main:function" value="exit" />
 					<reference ref="base_common" />
 					<text
-						key="railway:signal:speed_limit:exit:ref"
+						key="railway:signal:speed_limit:main:ref"
 						text="Network ID"
 						fr.text="Identifiant Réseau" length="7" />
 
@@ -2771,7 +4170,7 @@
 					<preset_link preset_name="C-type TIV-D" text=""/>
 					<preset_link preset_name="Speed Marker" text=""/>
 
-					<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_TIV-D_(Ordinary_type)" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_Ordinary-type_TIV-D" />
 				</item>
 
 				<!-- SPEED MARKER -->
@@ -2815,18 +4214,24 @@
 					fr.text="Tableau P" />
 				<space />
 				<key key="railway:signal:speed_limit_distant" value="FR:P" />
-				<combo key="railway:signal:speed_limit_distant:form"
-					   text="Signal presentation"
-					   fr.text="Présentation du signal"
-					   editable="false" icon_size="16">
+				<reference ref="base_common" />
+				<text
+					key="railway:signal:speed_limit_distant:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau" length="7" />
+				<combo
+					key="railway:signal:speed_limit_distant:form"
+					text="Signal presentation"
+					fr.text="Présentation du signal"
+					editable="false">
 					<list_entry value="sign"
 								display_value="Board"
 								fr.display_value="Tableau"
-								icon="icons/boards/P.svg" icon_size="16"/>
+								icon="icons/boards/P.svg" icon_size="24"/>
 					<list_entry value="light"
 								display_value="Light box"
 								fr.display_value="Caisson lumineux"
-								icon="icons/boxes/single.svg" icon_size="16"/>
+								icon="icons/boxes/P.svg" icon_size="24"/>
 				</combo>
 				<link wiki="OpenRailwayMap/Tagging_in_France#Speed_limit_announcement_(P_board)" />
 			</item>
@@ -3003,7 +4408,7 @@
 
 		</group>
 
-		<separator  />
+		<separator />
 
 		<!-- ROUTE INDICATORS -->
 		<group
@@ -3080,48 +4485,83 @@
 				<key key="railway:signal:route_distant:form" value="light" />
 				<reference ref="cat_route_distant" />
 				<combo
-						key="railway:signal:route_distant:shape"
-						text="Box Type"
-						fr.text="Type de caisson"
-						editable="false" icon_size="16">
+					key="railway:signal:route_distant:shape"
+					text="Box Type"
+					fr.text="Type de caisson"
+					editable="false">
 					<list_entry
 						value="wide"
 						display_value="Wide"
 						fr.display_value="Large"
-					    icon="icons/boxes/TLD_wide_box.svg" icon_size="16"/>
+					    icon="icons/boxes/TLD_wide_box.svg" icon_size="24"/>
 					<list_entry
 						value="double"
 						display_value="Double"
 						fr.display_value="Double"
-					    icon="icons/boxes/TLD_double_box.svg" icon_size="16"/>
+					    icon="icons/boxes/TLD_double_box.svg" icon_size="24"/>
 				</combo>
 				<text
 					key="railway:signal:route_distant:caption"
-					text="Board Legend"
+					text="Board caption"
 					fr.text="Libellé du tableau" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Tableau_Lumineux_de_Direction" />
 			</item>
 
 			<separator />
 
-			<!-- TRACK NAME-->
+			<!-- TRACK DIRECTION -->
+			<item
+				name="Track Direction Sign"
+				fr.name="Pancarte Direction de Voie"
+				type="node"
+				icon="icons/signs/track_direction.svg">
+				<label
+					text="Track direction sign"
+					fr.text="Pancarte indiquant la direction de la voie" />
+				<space />
+				<key key="railway:signal:route_info" value="FR:track_direction" />
+				<reference ref="cat_route_info" />
+				<space />
+				<combo
+					key="railway:signal:route_info:arrangement"
+					text="Sign Arrangement"
+					fr.text="Disposition de la Pancarte"
+					editable="false">
+					<list_entry
+						value=""
+						display_value="Horizontal"
+						fr.display_value="Horizontal"
+						icon="icons/signs/track_direction.svg" icon_size="24"/>
+					<list_entry
+						value="vertical"
+						display_value="Vertical"
+						fr.display_value="Vertical"
+						icon="icons/signs/vertical_track_direction.svg" icon_size="24"/>
+				</combo>
+				<text
+					key="railway:signal:route_info:town"
+					text="Destination town"
+					fr.text="Ville de destination" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Track_direction_sign" />
+			</item>
+
+			<!-- TRACK NAME -->
 			<item
 				name="Track Indicator Sign"
-				fr.name="Pancarte indiquant la Voie"
+				fr.name="Pancarte Nom de Voie"
 				type="node"
 				icon="icons/signs/track_name.svg">
 				<label
-					text="Track Indicator Sign"
+					text="Track indicator sign"
 					fr.text="Pancarte indiquant le nom de la voie" />
 				<space />
 				<key key="railway:signal:route_info" value="FR:track_name" />
-				<key key="railway:signal:route_info:form" value="sign" />
-				<reference ref="base_common" />
+				<reference ref="cat_route_info" />
+				<space />
 				<text
 					key="railway:signal:route_info:caption"
-					text="Sign Legend"
+					text="Sign caption"
 					fr.text="Libellé de la pancarte" />
-				<text key="railway:signal:route_info:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Track_indicator_sign" />
 			</item>
 
@@ -3150,17 +4590,17 @@
 					key="railway:signal:wrong_road:entry:form"
 					text="Signal presentation"
 					fr.text="Présentation du signal"
-					editable="false" icon_size="16">
+					editable="false">
 					<list_entry
 						value="sign"
 						display_value="Board"
 						fr.display_value="Tableau"
-						icon="icons/boards/TECS.svg" icon_size="16"/>
+						icon="icons/boards/TECS.svg" icon_size="24"/>
 					<list_entry
 						value="light"
 						display_value="Light box"
 						fr.display_value="Caisson lumineux"
-						icon="icons/boxes/TECS.svg" icon_size="16"/>
+						icon="icons/boxes/TECS.svg" icon_size="24"/>
 				</combo>
 			</item>
 
@@ -3181,17 +4621,17 @@
 					key="railway:signal:wrong_road:exit:form"
 					text="Signal presentation"
 					fr.text="Présentation du signal"
-					editable="false" icon_size="16">
+					editable="false">
 					<list_entry
 						value="sign"
 						display_value="Board"
 						fr.display_value="Tableau"
-						icon="icons/boards/TSCS.svg" icon_size="16"/>
+						icon="icons/boards/TSCS.svg" icon_size="24"/>
 					<list_entry
 						value="light"
 						display_value="Light box"
 						fr.display_value="Caisson lumineux"
-						icon="icons/boxes/TSCS.svg" icon_size="16"/>
+						icon="icons/boxes/TSCS.svg" icon_size="24"/>
 				</combo>
 			</item>
 
@@ -3239,135 +4679,493 @@
 
 		<separator />
 
-		<!-- CAB SIGNALLING -->
+		<!-- GROUND-TO-TRAIN RADIO -->
 		<group
-			name="Cab Signalling"
-			fr.name="Signalisation en Cabine"
-			icon="icons/boards/cab_signalling_entry.svg">
+			name="Ground-to-train Radio"
+			fr.name="Radio Sol-train"
+			icon="icons/boards/GSM-R_F.svg">
 
-			<!-- DISTANT -->
+			<!-- GSM-R NETWORK MARKER -->
 			<item
-				name="Distant Signal"
-				fr.name="Signal à Distance"
+				name="GSM-R Network Marker"
+				fr.name="Repère de Réseau GSM-R"
 				type="node"
-				icon="icons/boards/cab_signalling_advance.svg">
+				icon="icons/boards/GSM-R_F.svg">
 				<label
-					text="Advance signal for cab signalling"
-					fr.text="Annonce d'une ligne à signalisation de cabine" />
+					text="GSM-R network marker"
+					fr.text="Repère de réseau GSM-R" />
 				<space />
-				<key key="railway:signal:train_protection" value="FR:cab_signalling_advance" />
-				<reference ref="cat_train_protection" />
+				<key key="railway:signal:radio:mode" value="FR:GSM-R" />
+				<reference ref="cat_radio_mode" />
 			</item>
 
-			<!-- ENTRY -->
+			<!-- RST NETWORK MARKER -->
 			<item
-				name="Entry Signal"
-				fr.name="Signal d'Entrée"
+				name="RST Network Marker"
+				fr.name="Repère Radio Sol-train"
 				type="node"
-				icon="icons/boards/cab_signalling_entry.svg">
+				icon="icons/boards/RST.svg">
 				<label
-					text="Cab signalling entry signal"
-					fr.text="Entrée d'une ligne à signalisation de cabine" />
+					text="RST (Ground-to-train) network marker"
+					fr.text="Repère de réseau radio sol-train" />
 				<space />
-				<key key="railway:signal:train_protection" value="FR:cab_signalling_entry" />
-				<key key="railway:signal:train_protection:function" value="entry" />
-				<reference ref="cat_train_protection" />
-			</item>
-
-			<!-- EXIT -->
-			<item
-				name="Exit Signal"
-				fr.name="Signal de Sortie"
-				type="node"
-				icon="icons/boards/cab_signalling_exit.svg">
-				<label
-					text="Cab signalling exit signal"
-					fr.text="Sortie d'une ligne à signalisation de cabine" />
-				<space />
-				<key key="railway:signal:train_protection" value="FR:cab_signalling_exit" />
-				<key key="railway:signal:train_protection:function" value="exit" />
-				<reference ref="cat_train_protection" />
+				<key key="railway:signal:radio:mode" value="FR:RST" />
+				<reference ref="cat_radio_mode" />
 			</item>
 
 			<separator />
 
-			<!-- TVM STOP MARKER -->
+			<!-- CHANNEL TRANSITION BOARD -->
 			<item
-				name="TVM Marker"
-				fr.name="Repère TVM"
+				name="Change Radio Channel Board"
+				fr.name="Pancarte de Changement de Canal"
 				type="node"
+				icon="icons/boards/channel.svg">
+				<label
+					text="Change radio channel board"
+					fr.text="Pancarte de changement de canal radio" />
+				<space />
+				<key key="railway:signal:radio" value="FR:marker" />
+				<key key="railway:signal:radio:channel" value="FR:channel" />
+				<key key="railway:signal:radio:channel:type" value="channel_transition" />
+				<key key="railway:signal:radio:channel:form" value="sign" />
+				<reference ref="base_common" />
+				<text key="railway:signal:radio:channel:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+				<space />
+				<text
+					key="railway:signal:radio:channel:number"
+					text="National channel"
+					fr.text="Canal national" />
+				<text
+					key="railway:signal:radio:channel:uic_number"
+					text="UIC channel"
+					fr.text="Canal UIC" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Channel_board" />
+			</item>
+
+		</group>
+
+		<!-- CAB SIGNALLING -->
+		<group
+			name="Cab Signalling"
+			fr.name="Signalisation en Cabine"
+			icon="icons/signs/TVM_stop_marker.svg">
+
+			<group
+				name="CAB boards"
+				fr.name="Tableaux CAB"
+				icon="icons/boards/cab_signalling_entry.svg">
+
+				<!-- DISTANT -->
+				<item
+					name="Distant Signal"
+					fr.name="Signal à Distance"
+					type="node"
+					icon="icons/boards/cab_signalling_advance.svg">
+					<label
+						text="Advance signal for cab signalling"
+						fr.text="Annonce d'une ligne à signalisation de cabine" />
+					<space />
+					<key key="railway:signal:train_protection_distant" value="FR:CAB" />
+					<reference ref="cat_train_protection_distant" />
+				</item>
+
+				<!-- ENTRY -->
+				<item
+					name="Entry Signal"
+					fr.name="Signal d'Entrée"
+					type="node"
+					icon="icons/boards/cab_signalling_entry.svg">
+					<label
+						text="Cab signalling entry signal"
+						fr.text="Entrée d'une ligne à signalisation de cabine" />
+					<space />
+					<key key="railway:signal:train_protection" value="FR:CAB" />
+					<key key="railway:signal:train_protection:function" value="entry" />
+					<reference ref="cat_train_protection" />
+				</item>
+
+				<!-- EXIT -->
+				<item
+					name="Exit Signal"
+					fr.name="Signal de Sortie"
+					type="node"
+					icon="icons/boards/cab_signalling_exit.svg">
+					<label
+						text="Cab signalling exit signal"
+						fr.text="Sortie d'une ligne à signalisation de cabine" />
+					<space />
+					<key key="railway:signal:train_protection" value="FR:/CAB" />
+					<key key="railway:signal:train_protection:function" value="exit" />
+					<reference ref="cat_train_protection" />
+				</item>
+			</group>
+
+			<!-- TVM MARKERS -->
+			<group
+				name="TVM Markers"
+				fr.name="Repères TVM"
 				icon="icons/signs/TVM_stop_marker.svg">
-				<label
-					text="TVM stop marker"
-					fr.text="Repère TVM" />
-				<space />
-				<key key="railway:signal:train_protection" value="FR:marker" />
-				<key key="railway:signal:train_protection:main" value="stop_marker" />
-				<key key="railway:signal:train_protection:main:form" value="sign" />
-				<reference ref="base_with_plate" />
-				<text key="railway:signal:train_protection:main:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-				<combo
-					key="railway:signal:train_protection:main:plate"
-					text="Identification plate"
-					fr.text="Plaque d’identification"
-					editable="false" icon_size="16">
-					<list_entry
-						value="FR:NF"
-						display_value="Protection marker"
-						fr.display_value="Repère de protection"
-						icon="icons/plates/ID_NF.svg" icon_size="16"/>
-					<list_entry
-						value="FR:F"
-						display_value="Spacing marker"
-						fr.display_value="Repère d'espacement"
-						icon="icons/plates/ID_F.svg" icon_size="16"/>
-				</combo>
-				<optional text="">
+
+				<!-- TVM STOP MARKER -->
+				<item
+					name="Stop Marker"
+					fr.name="Repère d'Arrêt"
+					type="node"
+					icon="icons/signs/TVM_stop_marker.svg">
 					<label
-						text="Additional features"
-						fr.text="Caractéristiques complémentaires" />
+						text="TVM stop marker"
+						fr.text="Repère d'arrêt TVM" />
 					<space />
-					<check
-						key="railway:signal:train_protection:main:passing_light"
-                        text="White passing light"
-						fr.text="Feu blanc de franchissement"
-						disable_off="true"/>
-				</optional>
+					<key key="railway:signal:train_protection" value="FR:marker" />
+					<key key="railway:signal:train_protection:main" value="stop_marker" />
+					<key key="railway:signal:train_protection:main:form" value="sign" />
+					<reference ref="base_with_plate" />
+					<text key="railway:signal:train_protection:main:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+					<combo
+						key="railway:signal:train_protection:main:type"
+						text="Identification plate"
+						fr.text="Plaque d’identification"
+						editable="false">
+						<list_entry
+							value="FR:NF"
+							display_value="Protection marker"
+							fr.display_value="Repère de protection"
+							icon="icons/plates/ID_NF.svg" icon_size="24"/>
+						<list_entry
+							value="FR:F"
+							display_value="Spacing marker"
+							fr.display_value="Repère d'espacement"
+							icon="icons/plates/ID_F.svg" icon_size="24"/>
+					</combo>
+					<optional text="">
+						<label
+							text="Additional features"
+							fr.text="Caractéristiques complémentaires" />
+						<space />
+						<check
+							key="railway:signal:train_protection:main:passing_light"
+							text="White passing light"
+							fr.text="Feu blanc de franchissement"
+							disable_off="true"/>
+					</optional>
 
-				<space />
-				<preset_link preset_name="Yellow Light Band" text=""/>
+					<space />
+					<preset_link preset_name="Illuminated Yellow Band" text=""/>
 
-				<link wiki="OpenRailwayMap/Tagging_in_France#TVM_stop_marker" />
-			</item>
+					<space />
+					<preset_link preset_name="Transition Marker" text=""/>
 
-			<!-- SHUNTING MARKER -->
+					<link wiki="OpenRailwayMap/Tagging_in_France#TVM_stop_marker" />
+				</item>
+
+				<!-- TVM TRANSITION MARKER -->
+				<item
+					name="Transition Marker"
+					fr.name="Repère de Transition"
+					type="node"
+					icon="icons/boards/TVM430_transition.svg">
+					<label
+						text="TVM transition marker"
+						fr.text="Repère de transition TVM" />
+					<space />
+					<key key="railway:signal:train_protection" value="FR:marker" />
+					<key key="railway:signal:train_protection:system_change" value="FR:type_transition" />
+					<key key="railway:signal:train_protection:system_change:form" value="sign" />
+					<reference ref="base_common" />
+					<text key="railway:signal:train_protection:system_change:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+					<space />
+					<combo
+						key="railway:signal:train_protection:system_change:type"
+						text="Transition type"
+						fr.text="Type de transition"
+						editable="false">
+						<list_entry value="300"
+									display_value="TVM 300"
+									icon="icons/boards/TVM300_transition.svg" icon_size="24"/>
+						<list_entry value="430"
+									display_value="TVM 430"
+									icon="icons/boards/TVM430_transition.svg" icon_size="24"/>
+					</combo>
+					<text
+						key="railway:signal:train_protection:system_change:caption"
+						text="Sign caption"
+						fr.text="Libellé de la pancarte" />
+
+					<link wiki="OpenRailwayMap/Tagging_in_France#TVM_transition_marker" />
+				</item>
+
+				<separator />
+
+				<!-- SHUNTING MARKER -->
+				<item
+					name="Shunting Marker"
+					fr.name="Jalon de Manœuvre"
+					type="node"
+					icon="icons/signs/shunting_marker.svg">
+					<label
+						text="Shunting marker"
+						fr.text="Jalon de manœuvre" />
+					<space />
+					<key key="railway:signal:shunting" value="FR:marker" />
+					<key key="railway:signal:shunting:form" value="sign" />
+					<reference ref="base_with_plate" />
+					<text key="railway:signal:shunting:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+					<optional text="">
+						<label
+							text="Additional features"
+							fr.text="Caractéristiques complémentaires" />
+						<space />
+						<check
+							key="railway:signal:shunting:passing_light"
+							text="White passing light"
+							fr.text="Feu blanc de franchissement"
+							disable_off="true"/>
+					</optional>
+					<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_marker" />
+				</item>
+			</group>
+
+			<separator />
+
+			<!-- Cancellation signal (SACEM) -->
 			<item
-				name="Shunting Marker"
-				fr.name="Jalon de Manœuvre"
+				name="Cancellation signal (RATP)"
+				fr.name="Signal d'annulation (RATP)"
 				type="node"
-				icon="icons/signs/shunting_marker.svg">
+				icon="icons/boxes/illuminated_cross.svg">
 				<label
-					text="Shunting marker"
-					fr.text="Jalon de manœuvre" />
+					text="Cancellation signal (SACEM)"
+					fr.text="Signal d'annulation (SACEM)" />
 				<space />
-				<key key="railway:signal:shunting" value="FR:marker" />
-				<key key="railway:signal:shunting:form" value="sign" />
-				<reference ref="base_with_plate" />
-				<text key="railway:signal:shunting:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-				<optional text="">
-					<label
-						text="Additional features"
-						fr.text="Caractéristiques complémentaires" />
-					<space />
-					<check
-						key="railway:signal:shunting:passing_light"
-                        text="White passing light"
-						fr.text="Feu blanc de franchissement"
-						disable_off="true"/>
-				</optional>
-				<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_marker" />
+				<key key="railway:signal:train_protection" value="FR:X" />
+				<key key="railway:signal:train_protection:form" value="light" />
+				<reference ref="base_common" />
+				<text key="railway:signal:train_protection:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Cancellation_signal_(RATP)" />
 			</item>
 
+		</group>
+
+		<!-- European Train Control System (ETCS) -->
+		<group
+			name="ETCS Markers"
+			fr.name="Repères ETCS"
+			icon="icons/boards/ETCS/stop_marker.svg">
+
+			<group
+				name="Markers"
+				fr.name="Repères"
+				icon="icons/boards/ETCS/stop_marker.svg">
+
+				<!-- TRANSITION MARKER -->
+				<item
+					name="Transition Marker"
+					fr.name="Repère de Transition"
+					type="node"
+					icon="icons/boards/ETCS/transition_marker.svg">
+					<label
+						text="Transition marker"
+						fr.text="Repère de transition" />
+					<space />
+					<reference ref="base_common" />
+					<key key="railway:signal:train_protection" value="ETCS:marker" />
+					<key key="railway:signal:train_protection:system_change" value="ETCS:level_transition" />
+					<key key="railway:signal:train_protection:system_change:form" value="sign" />
+					<link wiki="OpenRailwayMap/ETCS_Markers#ETCS_transition_marker" />
+				</item>
+
+				<!-- STOP MARKER -->
+				<item
+					name="Stop Marker"
+					fr.name="Jalon d'Arrêt"
+					type="node"
+					icon="icons/boards/ETCS/stop_marker.svg">
+					<label
+						text="Stop marker"
+						fr.text="Jalon d'arrêt" />
+					<space />
+					<key key="railway:signal:train_protection:main" value="ETCS:stop_marker" />
+					<reference ref="cat_etcs_main_marker" />
+					<link wiki="OpenRailwayMap/ETCS_Markers#ETCS_stop_marker" />
+				</item>
+
+				<!-- LOCATION MARKER -->
+				<item
+					name="Location Marker"
+					fr.name="Repère de Localisation"
+					type="node"
+					icon="icons/boards/ETCS/location_marker.svg">
+					<label
+						text="Location marker"
+						fr.text="Repère de localisation" />
+					<space />
+					<key key="railway:signal:train_protection:main" value="ETCS:location_marker" />
+					<reference ref="cat_etcs_main_marker" />
+					<link wiki="OpenRailwayMap/ETCS_Markers#ETCS_location_marker" />
+				</item>
+
+			</group>
+
+			<separator />
+
+			<!-- NEUTRAL SECTION -->
+			<group
+				name="Neutral Section"
+				fr.name="Zone de Sectionnement"
+				icon="icons/boards/ETCS/neutral_section.svg">
+
+				<!-- DISTANT -->
+				<item
+					name="Distant Neutral Section"
+					fr.name="Zone de Sectionnement à Distance"
+					type="node"
+					icon="icons/boards/ETCS/distant_neutral_section.svg">
+					<label
+						text="Distant begin of neutral section"
+						fr.text="Zone de Sectionnement à Distance" />
+					<space />
+					<key key="railway:signal:electricity" value="ETCS:power_off_advance" />
+					<key key="railway:signal:electricity:type" value="power_off_advance" />
+					<key key="railway:signal:electricity:form" value="sign" />
+					<reference ref="base_common" />
+					<link wiki="OpenRailwayMap/ETCS_Markers#Distant_begin_of_neutral_section" />
+				</item>
+
+				<!-- BEGIN -->
+				<item
+					name="Begin of Neutral Section"
+					fr.name="Début de Zone de Sectionnement"
+					type="node"
+					icon="icons/boards/ETCS/neutral_section.svg">
+					<label
+						text="Begin of neutral section"
+						fr.text="Début de zone de sectionnement" />
+					<space />
+					<key key="railway:signal:electricity" value="ETCS:power_off" />
+					<key key="railway:signal:electricity:type" value="power_off" />
+					<key key="railway:signal:electricity:form" value="sign" />
+					<reference ref="base_common" />
+					<link wiki="OpenRailwayMap/ETCS_Markers#Begin_of_neutral_section" />
+				</item>
+
+				<!-- END -->
+				<item
+					name="End of Neutral section"
+					fr.name="Fin de Zone de Sectionnement"
+					type="node"
+					icon="icons/boards/ETCS/end_of_neutral_section.svg">
+					<label
+						text="End of Neutral section"
+						fr.text="Fin de zone de sectionnement" />
+					<space />
+					<key key="railway:signal:electricity" value="ETCS:power_on" />
+					<key key="railway:signal:electricity:type" value="power_on" />
+					<key key="railway:signal:electricity:form" value="sign" />
+					<reference ref="base_common" />
+					<link wiki="OpenRailwayMap/ETCS_Markers#End_of_neutral_section" />
+				</item>
+
+			</group>
+
+			<!-- LOWER PANTOGRAPH -->
+			<group
+				name="Lower Pantograph"
+				fr.name="Baissez Pantographe"
+				icon="icons/boards/ETCS/distant_lower_pantograph.svg">
+
+				<!-- ADVANCE-->
+				<item
+					name="Distant Lower Pantograph"
+					fr.name="Baissez Panto à Distance"
+					type="node"
+					icon="icons/boards/ETCS/distant_lower_pantograph.svg">
+					<label
+						text="Distant lower pantograph"
+						fr.text="Signal à distance &quot;Baissez panto&quot;" />
+					<space />
+					<key key="railway:signal:electricity" value="ETCS:pantograph_down_advance" />
+					<key key="railway:signal:electricity:type" value="pantograph_down_advance" />
+					<key key="railway:signal:electricity:form" value="sign" />
+					<reference ref="base_common" />
+					<link wiki="OpenRailwayMap/ETCS_Markers#Distant_Lower_pantograph" />
+				</item>
+
+				<!-- BEGIN -->
+				<item
+					name="Lower Pantograph"
+					fr.name="Baissez Panto"
+					type="node"
+					icon="icons/boards/ETCS/lower_pantograph.svg">
+					<label
+						text="Lower Pantograph"
+						fr.text="Signal d'exécution &quot;Baissez panto&quot;" />
+					<space />
+					<key key="railway:signal:electricity" value="ETCS:pantograph_down" />
+					<key key="railway:signal:electricity:type" value="pantograph_down" />
+					<key key="railway:signal:electricity:form" value="sign" />
+					<reference ref="base_common" />
+					<link wiki="OpenRailwayMap/ETCS_Markers#Lower_pantograph" />
+				</item>
+
+				<!-- END -->
+				<item
+					name="Raise Pantograph"
+					fr.name="Fin de Parcours"
+					type="node"
+					icon="icons/boards/ETCS/raise_pantograph.svg">
+					<label
+						text="Raise Pantograph"
+						fr.text="Signal de fin de parcours" />
+					<space />
+					<key key="railway:signal:electricity" value="ETCS:pantograph_up" />
+					<key key="railway:signal:electricity:type" value="pantograph_up" />
+					<key key="railway:signal:electricity:form" value="sign" />
+					<reference ref="base_common" />
+					<link wiki="OpenRailwayMap/ETCS_Markers#Raise_pantograph" />
+				</item>
+
+			</group>
+
+			<group
+				name="End of Catenary"
+				fr.name="Fin de Caténaire"
+				icon="icons/boards/ETCS/end_of_catenary.svg">
+
+				<!-- DISTANT END OF CATENARY -->
+				<item
+					name="Distant End of Catenary"
+					fr.name="Fin de Caténaire à distance"
+					type="node"
+					icon="icons/boards/ETCS/distant_end_of_catenary.svg">
+					<label
+						text="Distant End of Catenary"
+						fr.text="Fin de Caténaire à distance" />
+					<space />
+					<key key="railway:signal:electricity" value="ETCS:end_of_catenary_advance" />
+					<key key="railway:signal:electricity:type" value="end_of_catenary_advance" />
+					<key key="railway:signal:electricity:form" value="sign" />
+					<reference ref="base_common" />
+					<link wiki="OpenRailwayMap/ETCS_Markers#Distant_end_of_catenary" />
+				</item>
+
+				<!-- END OF CATENARY -->
+				<item
+					name="End of Catenary"
+					fr.name="Fin de Caténaire"
+					type="node"
+					icon="icons/boards/ETCS/end_of_catenary.svg">
+					<label
+						text="End of Catenary"
+						fr.text="Fin de Caténaire" />
+					<space />
+					<key key="railway:signal:electricity" value="ETCS:end_of_catenary" />
+					<key key="railway:signal:electricity:type" value="end_of_catenary" />
+					<key key="railway:signal:electricity:form" value="sign" />
+					<reference ref="base_common" />
+					<link wiki="OpenRailwayMap/ETCS_Markers#End_of_catenary" />
+				</item>
+			</group>
 		</group>
 
 		<!-- ELECTRIFIED RAILWAY LINES -->
@@ -3382,7 +5180,7 @@
 				fr.name="Signaux &quot;Coupez Courant&quot;"
 				icon="icons/boards/power_off.svg">
 
-				<!-- DISTANT -->
+				<!-- DISTANT (SECt à ...m) -->
 				<item
 					name="Power-off Advance Signal"
 					fr.name="Signal à Distance"
@@ -3396,9 +5194,9 @@
 					<key key="railway:signal:electricity:type" value="power_off_advance" />
 					<reference ref="cat_electricity_with_form" />
 					<text
-						key="railway:signal:electricity:caption"
-						text="Sign Legend"
-						fr.text="Libellé de la pancarte" />
+						key="railway:signal:electricity:distance"
+						text="Distance (m)"
+						fr.text="Distance (m)" length="4" />
 					<link wiki="OpenRailwayMap/Tagging_in_France#Power-off_advance_signal" />
 				</item>
 
@@ -3480,7 +5278,7 @@
 
 					<item_separator />
 
-					<preset_link preset_name="Dual-Mode Entry Sign" text=""/>
+					<preset_link preset_name="Bimode Entry Sign" text=""/>
 
 					<link wiki="OpenRailwayMap/Tagging_in_France#Pantograph_down_advance_signal" />
 				</item>
@@ -3502,7 +5300,7 @@
 
 					<item_separator />
 
-					<preset_link preset_name="Dual-Mode Entry Sign" text=""/>
+					<preset_link preset_name="Bimode Entry Sign" text=""/>
 
 					<link wiki="OpenRailwayMap/Tagging_in_France#Pantograph_down_signal" />
 				</item>
@@ -3524,9 +5322,9 @@
 
 					<item_separator />
 
-					<preset_link preset_name="Dual-Mode Exit Sign" text=""/>
+					<preset_link preset_name="Bimode Exit Sign" text=""/>
 
-					<link wiki="OpenRailwayMap/Tagging_in_France#Pantograph_down_end_signal" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#Pantograph_up_signal" />
 				</item>
 
 			</group>
@@ -3546,7 +5344,6 @@
 				<key key="railway:signal:electricity" value="FR:end_of_catenary" />
 				<key key="railway:signal:electricity:type" value="end_of_catenary" />
 				<key key="railway:signal:electricity:form" value="sign" />
-				<key key="railway:signal:position" value="overhead" />
 				<reference ref="base_common" />
 				<link wiki="https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France#End_of_catenary" />
 			</item>
@@ -3568,1027 +5365,47 @@
 
 			<separator />
 
-			<!-- DUAL-MODE TRAFFIC -->
+			<!-- BIMODE OPERATION -->
 			<group
-				name="Dual-Mode Traffic"
-				fr.name="Circulations Bimodes"
-				icon="icons/signs/BIMODE.svg">
+				name="Bimode Operation"
+				fr.name="Parcours Bimode"
+				icon="icons/signs/bimode_entry.svg">
 
 				<!-- ENTRY -->
 				<item
-					name="Dual-Mode Entry Sign"
+					name="Bimode Entry Sign"
 					fr.name="Début de Parcours BIMODE"
 					type="node"
-					icon="icons/signs/BIMODE_A.svg">
+					icon="icons/signs/bimode_entry.svg">
 					<label
-						text="Entering dual-mode operation zone"
+						text="Entering bimode operation zone"
 						fr.text="Pancarte Début de circulation bimode" />
 					<space />
-					<key key="railway:signal:dual_mode" value="FR:BIMODE_A" />
-					<reference ref="cat_dual_mode" />
-					<text key="railway:signal:dual_mode:caption"
-						  text="Sign Legend"
-						  fr.text="Libellé de la Pancarte"/>
+					<key key="railway:signal:bimode" value="FR:BIMODE" />
+					<key key="railway:signal:bimode:function" value="entry" />
+					<reference ref="cat_bimode" />
+					<text 
+						key="railway:signal:bimode:town"
+						text="Destination town"
+						fr.text="Ville de destination"/>
 				</item>
 
 				<!-- EXIT -->
 				<item
-					name="Dual-Mode Exit Sign"
+					name="Bimode Exit Sign"
 					fr.name="Fin de Parcours BIMODE"
 					type="node"
-					icon="icons/signs/BIMODE.svg">
+					icon="icons/signs/bimode_exit.svg">
 					<label
-						text="Exiting dual-mode operation zone"
+						text="Exiting bimode operation zone"
 						fr.text="Pancarte Fin de parcours BIMODE" />
 					<space />
-					<key key="railway:signal:dual_mode" value="FR:BIMODE" />
-					<reference ref="cat_dual_mode" />
+					<key key="railway:signal:bimode" value="FR:BIMODE" />
+					<key key="railway:signal:bimode:function" value="exit" />
+					<reference ref="cat_bimode" />
 				</item>
 
 			</group>
-		</group>
-
-		<!-- ETCS MARKERS -->
-		<group
-			name="ETCS Markers"
-			fr.name="Repères ETCS"
-			icon="icons/boards/ETCS/stop_marker.svg">
-
-			<group
-				name="Markers"
-				fr.name="Repères"
-				icon="icons/boards/ETCS/stop_marker.svg">
-
-				<!-- TRANSITION MARKER -->
-				<item
-					name="Transition Marker"
-					fr.name="Transition Marker"
-					type="node"
-					icon="icons/boards/ETCS/transition_marker.svg">
-					<label
-						text="Transition marker"
-						fr.text="Transition Marker" />
-					<space />
-					<reference ref="base_common" />
-					<key key="railway:signal:train_protection:system_change" value="ETCS:level_transition" />
-					<key key="railway:signal:train_protection" value="ETCS:marker" />
-					<key key="railway:signal:train_protection:system_change:form" value="sign" />
-					<link wiki="OpenRailwayMap/ETCS_Markers#ETCS_transition_marker" />
-				</item>
-
-				<!-- STOP MARKER -->
-				<item
-					name="Stop Marker"
-					fr.name="Stop Marker"
-					type="node"
-					icon="icons/boards/ETCS/stop_marker.svg">
-					<label
-						text="Stop marker"
-						fr.text="Jalon d'arrêt" />
-					<space />
-					<key key="railway:signal:train_protection:main" value="ETCS:stop_marker" />
-					<reference ref="cat_etcs_main_marker" />
-					<link wiki="OpenRailwayMap/ETCS_Markers#ETCS_stop_marker" />
-				</item>
-
-				<!-- LOCATION MARKER -->
-				<item
-					name="Location Marker"
-					fr.name="Location Marker"
-					type="node"
-					icon="icons/boards/ETCS/location_marker.svg">
-					<label
-						text="Location marker"
-						fr.text="Location Marker" />
-					<space />
-					<key key="railway:signal:train_protection:main" value="ETCS:location_marker" />
-					<reference ref="cat_etcs_main_marker" />
-					<link wiki="OpenRailwayMap/ETCS_Markers#ETCS_location_marker" />
-				</item>
-
-			</group>
-
-			<separator />
-
-			<!-- NEUTRAL SECTION -->
-			<group
-				name="Neutral Section"
-				fr.name="Zone de Sectionnement"
-				icon="icons/boards/ETCS/neutral_section.svg">
-
-				<!-- DISTANT -->
-				<item
-					name="Distant Neutral Section"
-					fr.name="Zone de Sectionnement à Distance"
-					type="node"
-					icon="icons/boards/ETCS/distant_neutral_section.svg">
-					<label
-						text="Distant begin of neutral section"
-						fr.text="Zone de Sectionnement à Distance" />
-					<space />
-					<key key="railway:signal:electricity" value="ETCS:power_off_advance" />
-					<key key="railway:signal:electricity:type" value="power_off_advance" />
-					<key key="railway:signal:electricity:form" value="sign" />
-					<reference ref="base_common" />
-					<link wiki="OpenRailwayMap/ETCS_Markers#Distant_begin_of_neutral_section" />
-				</item>
-
-				<!-- BEGIN -->
-				<item
-					name="Begin of Neutral Section"
-					fr.name="Début de Zone de Sectionnement"
-					type="node"
-					icon="icons/boards/ETCS/neutral_section.svg">
-					<label
-						text="Begin of neutral section"
-						fr.text="Début de zone de sectionnement" />
-					<space />
-					<key key="railway:signal:electricity" value="ETCS:power_off" />
-					<key key="railway:signal:electricity:type" value="power_off" />
-					<key key="railway:signal:electricity:form" value="sign" />
-					<reference ref="base_common" />
-					<link wiki="OpenRailwayMap/ETCS_Markers#Begin_of_neutral_section" />
-				</item>
-
-				<!-- END -->
-				<item
-					name="End of Neutral section"
-					fr.name="Fin de Zone de Sectionnement"
-					type="node"
-					icon="icons/boards/ETCS/end_of_neutral_section.svg">
-					<label
-						text="End of Neutral section"
-						fr.text="Fin de zone de sectionnement" />
-					<space />
-					<key key="railway:signal:electricity" value="ETCS:power_on" />
-					<key key="railway:signal:electricity:type" value="power_on" />
-					<key key="railway:signal:electricity:form" value="sign" />
-					<reference ref="base_common" />
-					<link wiki="OpenRailwayMap/ETCS_Markers#End_of_neutral_section" />
-				</item>
-
-			</group>
-
-			<!-- LOWER PANTOGRAPH -->
-			<group
-				name="Lower Pantograph"
-				fr.name="Baissez Pantographe"
-				icon="icons/boards/ETCS/distant_lower_pantograph.svg">
-
-				<!-- ADVANCE-->
-				<item
-					name="Distant Lower Pantograph"
-					fr.name="Distant Lower Pantograph"
-					type="node"
-					icon="icons/boards/ETCS/distant_lower_pantograph.svg">
-					<label
-						text="Distant lower pantograph"
-						fr.text="Distant lower pantograph" />
-					<space />
-					<key key="railway:signal:electricity" value="ETCS:pantograph_down_advance" />
-					<key key="railway:signal:electricity:type" value="pantograph_down_advance" />
-					<key key="railway:signal:electricity:form" value="sign" />
-					<reference ref="base_common" />
-					<link wiki="OpenRailwayMap/ETCS_Markers#Distant_Lower_pantograph" />
-				</item>
-
-				<!-- BEGIN -->
-				<item
-					name="Lower Pantograph"
-					fr.name="Lower Pantograph"
-					type="node"
-					icon="icons/boards/ETCS/lower_pantograph.svg">
-					<label
-						text="Lower Pantograph"
-						fr.text="Lower Pantograph" />
-					<space />
-					<key key="railway:signal:electricity" value="ETCS:pantograph_down" />
-					<key key="railway:signal:electricity:type" value="pantograph_down" />
-					<key key="railway:signal:electricity:form" value="sign" />
-					<reference ref="base_common" />
-					<link wiki="OpenRailwayMap/ETCS_Markers#Lower_pantograph" />
-				</item>
-
-				<!-- END -->
-				<item
-					name="Raise Pantograph"
-					fr.name="Raise Pantograph"
-					type="node"
-					icon="icons/boards/ETCS/raise_pantograph.svg">
-					<label
-						text="Raise Pantograph"
-						fr.text="Raise Pantograph" />
-					<space />
-					<key key="railway:signal:electricity" value="ETCS:pantograph_up" />
-					<key key="railway:signal:electricity:type" value="pantograph_up" />
-					<key key="railway:signal:electricity:form" value="sign" />
-					<reference ref="base_common" />
-					<link wiki="OpenRailwayMap/ETCS_Markers#Raise_pantograph" />
-				</item>
-
-			</group>
-
-			<group
-				name="End of Catenary"
-				fr.name="Fin de Caténaire"
-				icon="icons/boards/ETCS/end_of_catenary.svg">
-
-				<!-- DISTANT END OF CATENARY -->
-				<item
-					name="Distant End of Catenary"
-					fr.name="Fin de Caténaire à distance"
-					type="node"
-					icon="icons/boards/ETCS/distant_end_of_catenary.svg">
-					<label
-						text="Distant End of Catenary"
-						fr.text="Fin de Caténaire à distance" />
-					<space />
-					<key key="railway:signal:electricity" value="ETCS:end_of_catenary_advance" />
-					<key key="railway:signal:electricity:type" value="end_of_catenary_advance" />
-					<key key="railway:signal:position" value="overhead" />
-					<key key="railway:signal:electricity:form" value="sign" />
-					<reference ref="base_common" />
-					<link wiki="OpenRailwayMap/ETCS_Markers#Distant_end_of_catenary" />
-				</item>
-
-				<!-- END OF CATENARY -->
-				<item
-					name="End of Catenary"
-					fr.name="Fin de Caténaire"
-					type="node"
-					icon="icons/boards/ETCS/end_of_catenary.svg">
-					<label
-						text="End of Catenary"
-						fr.text="Fin de Caténaire" />
-					<space />
-					<key key="railway:signal:electricity" value="ETCS:end_of_catenary" />
-					<key key="railway:signal:electricity:type" value="end_of_catenary" />
-					<key key="railway:signal:electricity:form" value="sign" />
-					<key key="railway:signal:position" value="overhead" />
-					<reference ref="base_common" />
-					<link wiki="OpenRailwayMap/ETCS_Markers#End_of_catenary" />
-				</item>
-			</group>
-		</group>
-
-		<separator />
-
-		<!-- STATIONS AND FACILITIES -->
-		<group
-			name="Stations and Facilities"
-			fr.name="Gares et Établissements"
-			icon="icons/signs/GARE.svg">
-
-			<!-- STATION (VUSS) -->
-			<item
-				name="Station Sign"
-				fr.name="Pancarte GARE"
-				type="node" icon="icons/signs/GARE.svg">
-				<label
-					text="Station Sign"
-					fr.text="Pancarte GARE" />
-				<space />
-				<key key="railway:signal:station_distant" value="FR:GARE" />
-				<reference ref="cat_station_distant" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Stations" />
-			</item>
-
-			<!-- BILATERAL EXIT SIGNALS (VU) -->
-			<item
-				name="Bilateral Exit Signals"
-				fr.name="Signaux de Sortie Bilatéraux"
-				type="node"
-				icon="icons/signs/bilateral_exit_signals.svg">
-				<label
-					text="Bilateral Exit Signals Reminder"
-					fr.text="Rappel de signaux de sorties bilatéraux" />
-				<space />
-				<key key="railway:signal:station" value="FR:bilateral_exit_signals" />
-				<reference ref="cat_station" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Stations" />
-			</item>
-
-			<separator />
-
-			<!-- FACILITIES -->
-			<group
-				name="Facilities"
-				fr.name="Établissements"
-				icon="icons/signs/facility_boundary.svg">
-
-				<!-- APPROACH -->
-				<item
-					name="Approaching a Facility"
-					fr.name="Approche d'un Établissement"
-					type="node"
-					icon="icons/signs/facility_approach.svg">
-					<label
-						text="Approaching a Facility"
-						fr.text="Approche d'un Établissement" />
-					<space />
-					<key key="railway:signal:station_distant" value="FR:facility_approach" />
-					<reference ref="cat_station_distant" />
-					<reference ref="facility_link" />
-					<text
-						key="railway:signal:station_distant:caption"
-						text="Sign Legend"
-						fr.text="Libellé de la pancarte" />
-				</item>
-
-				<!-- APPROACH (VUSS) -->
-				<item
-					name="Approaching a Facility (Simplified Signalling)"
-					fr.name="Approche d'un Établissement (VUSS)"
-					type="node"
-					icon="icons/signs/facility_approach_simplified.svg">
-					<label
-						text="Approaching a Facility (Simplified signalling)"
-						fr.text="Approche d'un Établissement sur VUSS" />
-					<space />
-					<key key="railway:signal:station_distant" value="FR:facility_approach_simplified" />
-					<reference ref="cat_station_distant" />
-					<reference ref="facility_link" />
-				</item>
-
-				<!-- BOUNDARY -->
-				<item
-					name="Facility Boundary"
-					fr.name="Limite d'un Établissement"
-					type="node"
-					icon="icons/signs/facility_boundary.svg">
-					<label
-						text="Facility boundary"
-						fr.text="Limite d'un établissement" />
-					<space />
-					<key key="railway:signal:station" value="FR:facility_boundary" />
-					<reference ref="cat_station" />
-					<reference ref="facility_link" />
-				</item>
-			</group>
-
-			<!-- CONVERGING TRACKS -->
-			<group
-				name="Converging Tracks"
-				fr.name="Voies convergentes"
-				icon="icons/boxes/TIP.svg">
-
-				<!-- TIP -->
-				<!-- May be associated with Carré group signals and SLD -->
-				<item
-					name="TIP"
-					fr.name="TIP"
-					type="node"
-					icon="icons/boxes/TIP.svg">
-					<label
-						text="Tableau Indicateur de Provenance (TIP)"
-						fr.text="Tableau Indicateur de Provenance (TIP)" />
-					<space />
-					<key key="railway:signal:minor" value="FR:TIP" />
-					<key key="railway:signal:minor:form" value="light" />
-					<reference ref="cat_minor" />
-					<link wiki="OpenRailwayMap/Tagging_in_France#Tableau_Indicateur_de_Provenance" />
-				</item>
-
-				<!-- TLC -->
-				<item
-					name="TLC"
-					fr.name="TLC"
-					type="node"
-					icon="icons/boxes/TLC.svg">
-					<label
-						text="Tableau Lumineux de Correspondance (TLC)"
-						fr.text="Tableau Lumineux de Correspondance (TLC)" />
-					<space />
-					<key key="railway:signal:minor" value="FR:TLC" />
-					<key key="railway:signal:minor:form" value="light" />
-					<reference ref="cat_minor" />
-					<link wiki="OpenRailwayMap/Tagging_in_France#Tableau_Lumineux_de_Correspondance" />
-				</item>
-
-			</group>
-
-			<!-- SERVICE TRACKS AND SHUNTING -->
-			<group
-				name="Service Tracks and Shunting"
-				fr.name="Voies de Service et Manœuvres"
-				icon="icons/boards/D.svg">
-
-				<!-- SLM -->
-				<item
-					name="SLM"
-					fr.name="SLM"
-					type="node"
-					icon="icons/signals/SLM.svg">
-					<label
-						text="Signal Lumineux de Manœuvre (SLM)"
-						fr.text="Signal Lumineux de Manœuvre (SLM)" />
-					<space />
-					<key key="railway:signal:shunting" value="FR:SLM" />
-					<key key="railway:signal:shunting:form" value="light" />
-					<reference ref="cat_shunting_base" />
-					<link wiki="OpenRailwayMap/Tagging_in_France#Signal_Lumineux_de_Manœuvre" />
-				</item>
-
-				<separator />
-
-				<!-- SHUNTING BOARDS -->
-				<group
-                    name="Shunting Boards"
-                    fr.name="Tableaux de Manœuvre"
-					icon="icons/boards/D.svg">
-
-					<!-- D Board -->
-					<item
-						name="D Board"
-						fr.name="Tableau D"
-						type="node"
-						icon="icons/boards/D.svg">
-						<label
-							text="D Board"
-							fr.text="Tableau D" />
-						<space />
-						<key key="railway:signal:shunting_route" value="FR:destination" />
-						<key key="railway:signal:shunting_route:depot" value="FR:D" />
-						<reference ref="base_common" />
-						<text key="railway:signal:shunting_route:depot:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-						<combo
-							key="railway:signal:shunting_route:depot:form"
-							text="Signal presentation"
-							fr.text="Présentation du signal"
-							default="sign"
-							editable="false" icon_size="16">
-							<list_entry
-								value="sign"
-								display_value="Board"
-								fr.display_value="Tableau"
-								icon="icons/boards/empty.svg" icon_size="16"/>
-							<list_entry
-								value="light"
-								display_value="Light box"
-								fr.display_value="Caisson lumineux"
-								icon="icons/boxes/single.svg" icon_size="16"/>
-						</combo>
-						<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_boards" />
-					</item>
-
-					<!-- G Board -->
-					<item
-						name="G Board"
-						fr.name="Tableau G"
-						type="node"
-						icon="icons/boards/G.svg">
-						<label
-							text="G Board"
-							fr.text="Tableau G" />
-						<space />
-						<key key="railway:signal:shunting_route" value="FR:destination" />
-						<key key="railway:signal:shunting_route:stabling" value="FR:G" />
-						<reference ref="base_common" />
-						<text key="railway:signal:shunting_route:stabling:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-						<combo
-							key="railway:signal:shunting_route:stabling:form"
-							text="Signal presentation"
-							fr.text="Présentation du signal"
-							default="sign"
-							editable="false" icon_size="16">
-							<list_entry
-								value="sign"
-								display_value="Board"
-								fr.display_value="Tableau"
-								icon="icons/boards/empty.svg" icon_size="16"/>
-							<list_entry
-								value="light"
-								display_value="Light box"
-								fr.display_value="Caisson lumineux"
-								icon="icons/boxes/single.svg" icon_size="16"/>
-						</combo>
-						<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_boards" />
-					</item>
-
-					<!-- Imp Board -->
-					<item
-						name="Imp Board"
-						fr.name="Tableau Imp"
-						type="node"
-						icon="icons/boards/Imp.svg">
-						<label
-							text="Imp Board"
-							fr.text="Tableau Imp" />
-						<space />
-						<key key="railway:signal:shunting_route" value="FR:destination" />
-						<key key="railway:signal:shunting_route:dead_end" value="FR:Imp" />
-						<reference ref="base_common" />
-						<text key="railway:signal:shunting_route:dead_end:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-						<combo
-							key="railway:signal:shunting_route:dead_end:form"
-							text="Signal presentation"
-							fr.text="Présentation du signal"
-							default="sign"
-							editable="false" icon_size="16">
-							<list_entry
-								value="sign"
-								display_value="Board"
-								fr.display_value="Tableau"
-								icon="icons/boards/empty.svg" icon_size="16"/>
-							<list_entry
-								value="light"
-								display_value="Light box"
-								fr.display_value="Caisson lumineux"
-								icon="icons/boxes/single.svg" icon_size="16"/>
-						</combo>
-						<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_boards" />
-					</item>
-
-					<!-- SAS Board -->
-					<item
-						name="SAS Board"
-						fr.name="Tableau SAS"
-						type="node"
-						icon="icons/boards/SAS.svg">
-						<label
-							text="SAS Board"
-							fr.text="Tableau SAS" />
-						<space />
-						<key key="railway:signal:shunting_route" value="FR:destination" />
-						<key key="railway:signal:shunting_route:headshunt" value="FR:SAS" />
-						<reference ref="base_common" />
-						<text key="railway:signal:shunting_route:headshunt:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-						<combo
-							key="railway:signal:shunting_route:headshunt:form"
-							text="Signal presentation"
-							fr.text="Présentation du signal"
-							default="sign"
-							editable="false" icon_size="16">
-							<list_entry
-								value="sign"
-								display_value="Board"
-								fr.display_value="Tableau"
-								icon="icons/boards/empty.svg" icon_size="16"/>
-							<list_entry
-								value="light"
-								display_value="Light box"
-								fr.display_value="Caisson lumineux"
-								icon="icons/boxes/single.svg" icon_size="16"/>
-						</combo>
-						<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_boards" />
-					</item>
-
-					<!-- Buffer-Stop Board -->
-					<item
-						name="Buffer-Stop Board"
-						fr.name="Tableau Heurtoir"
-						type="node"
-						icon="icons/boards/buffer_stop.svg">
-						<label
-							text="Buffer-Stop Board"
-							fr.text="Tableau Heurtoir" />
-						<space />
-						<key key="railway:signal:shunting_route" value="FR:destination" />
-						<key key="railway:signal:shunting_route:buffer_stop" value="FR:Heurtoir" />
-						<key key="railway:signal:shunting_route:buffer_stop:form" value="sign" />
-						<reference ref="base_common" />
-						<text key="railway:signal:shunting_route:buffer_stop:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-						<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_boards" />
-						<text
-                            key="railway:signal:shunting_route:caption"
-							text="Sign Legend"
-							fr.text="Libellé de la Pancarte" />
-					</item>
-				</group>
-
-				<!-- SHUNTING SIGNS -->
-				<group
-                    name="Shunting Signs"
-                    fr.name="Pancartes de Manœuvre"
-					icon="icons/signs/LM.svg">
-
-					<!-- LGR -->
-					<item
-						name="LGR Sign"
-						fr.name="Pancarte LGR"
-						type="node"
-						icon="icons/signs/LGR.svg">
-						<label
-							text="LGR Sign"
-							fr.text="Pancarte LGR" />
-						<space />
-						<key key="railway:signal:shunting" value="FR:LGR" />
-						<reference ref="cat_shunting_sign" />
-					</item>
-
-					<!-- LM -->
-					<item
-						name="LM Sign"
-						fr.name="Pancarte LM"
-						type="node"
-						icon="icons/signs/LM.svg">
-						<label
-							text="LM Sign"
-							fr.text="Pancarte LM" />
-						<space />
-						<key key="railway:signal:shunting" value="FR:LM" />
-						<reference ref="cat_shunting_sign" />
-					</item>
-
-					<!-- MV -->
-					<item
-						name="MV Sign"
-						fr.name="Pancarte MV"
-						type="node"
-						icon="icons/signs/MV.svg">
-						<label
-							text="MV Sign"
-							fr.text="Pancarte MV" />
-						<space />
-						<key key="railway:signal:shunting" value="FR:MV" />
-						<reference ref="cat_shunting_sign" />
-					</item>
-
-				</group>
-
-			</group>
-
-			<separator />
-
-			<!-- STOPS -->
-			<group
-				name="Stops"
-				fr.name="Arrêts"
-				icon="icons/signs/STOP_A.svg">
-
-				<!-- ARRÊT ...m -->
-				<item
-					name="ARRÊT ...m"
-					fr.name="ARRÊT ...m"
-					type="node"
-					icon="icons/signs/ARRET_A.svg">
-					<label
-						text="Advance sign &quot;ARRÊT ...m&quot;"
-						fr.text="Pancarte à distance &quot;ARRÊT ...m&quot;" />
-					<space />
-					<key key="railway:signal:stop_distant" value="FR:ARRET_A" />
-					<reference ref="cat_stop_distant" />
-					<text
-						key="railway:signal:stop_distant:caption"
-						text="Sign Legend"
-						fr.text="Libellé de la pancarte" />
-				</item>
-
-				<!-- ARRÊT -->
-				<item
-					name="ARRÊT Sign"
-					fr.name="Pancarte ARRÊT"
-					type="node"
-					icon="icons/signs/ARRET.svg">
-					<label
-						text="ARRÊT sign"
-						fr.text="Pancarte ARRÊT" />
-					<space />
-					<key key="railway:signal:stop" value="FR:ARRET" />
-					<reference ref="cat_stop" />
-					<combo
-							key="railway:signal:stop:arrangement"
-							text="Signal Arrangement"
-							fr.text="Disposition du signal"
-							editable="false">
-						<list_entry
-							value="vertical"
-							display_value="Vertical"
-							fr.display_value="Vertical"/>
-						<list_entry
-							value="horizontal"
-							display_value="Horizontal"
-							fr.display_value="Horizontal"/>
-					</combo>
-					<item_separator />
-					<preset_link preset_name="D Board" text=""/>
-				</item>
-
-				<!-- ATC -->
-				<item
-					name="ATC Sign"
-					fr.name="Pancarte ATC"
-					type="node"
-					icon="icons/signs/ATC.svg">
-					<label
-						text="Stop sign for work trains"
-						fr.text="Pancarte Arrêt des trains du chantier" />
-					<space />
-					<key key="railway:signal:stop" value="FR:ATC" />
-					<reference ref="cat_stop" />
-				</item>
-
-				<separator />
-
-				<!-- STOP ...m -->
-				<item
-					name="STOP ...m"
-					fr.name="STOP ...m"
-					type="node"
-					icon="icons/signs/STOP_A.svg">
-					<label
-						text="Advance sign &quot;STOP ...m&quot;"
-						fr.text="Pancarte à distance &quot;STOP ...m&quot;" />
-					<space />
-					<key key="railway:signal:stop_distant" value="FR:STOP_A" />
-					<reference ref="cat_stop_distant" />
-					<text
-						key="railway:signal:stop_distant:caption"
-						text="Sign Legend"
-						fr.text="Libellé de la pancarte" />
-				</item>
-
-				<!-- STOP -->
-				<item
-					name="STOP Sign"
-					fr.name="Pancarte STOP"
-					type="node"
-					icon="icons/signs/STOP.svg">
-					<label
-						text="STOP Sign"
-						fr.text="Pancarte STOP" />
-					<space />
-					<key key="railway:signal:stop" value="FR:STOP" />
-					<reference ref="cat_stop" />
-				</item>
-
-				<separator />
-
-				<!-- STOP MARKER (white and red) -->
-				<item
-					name="Stop Marker"
-					fr.name="Jalon d'Arrêt"
-					type="node"
-					icon="icons/signs/stop_marker.svg">
-					<label
-                        text="Red and white checkered stop marker"
-						fr.text="Jalon d'arrêt à damier rouge et blanc" />
-					<space />
-					<key key="railway:signal:stop" value="FR:marker" />
-					<key key="railway:signal:stop:type" value="stop_marker" />
-					<reference ref="cat_stop" />
-				</item>
-
-			</group>
-
-			<!-- PASSENGER STOPS -->
-			<group
-				name="Passenger Stops"
-				fr.name="Arrêts Voyageurs"
-				icon="icons/signs/TT.svg">
-
-				<!-- TT -->
-				<item
-					name="TT"
-					type="node"
-					icon="icons/signs/TT.svg">
-					<label
-						text="Passenger stop: head of train"
-						fr.text="Arrêt voyageurs : tête de train" />
-					<space />
-					<key key="railway:signal:stop:classic" value="FR:TT" />
-					<key key="railway:signal:stop:classic:for" value="head_of_train" />
-					<reference ref="cat_classic_passenger_stop" />
-				</item>
-
-				<!-- TT EAS -->
-				<item
-					name="TT EAS"
-					type="node"
-					icon="icons/signs/TT_EAS.svg">
-					<label
-						text="Passenger stop for trains equipped for driver-only operations"
-						fr.text="Arrêt voyageurs pour trains équipés EAS" />
-					<space />
-					<key key="railway:signal:stop:classic" value="FR:TT_EAS" />
-					<key key="railway:signal:stop:classic:for" value="driver_only" />
-					<reference ref="cat_classic_passenger_stop" />
-				</item>
-
-				<!-- TTL -->
-				<item
-					name="TTL"
-					type="node"
-					icon="icons/signs/TTL.svg">
-					<label
-						text="Passenger stop for trains with locomotive"
-						fr.text="Arrêt voyageurs pour trains avec locomotive" />
-					<space />
-					<key key="railway:signal:stop:classic" value="FR:TTL" />
-					<key key="railway:signal:stop:classic:for" value="locomotive" />
-					<reference ref="cat_classic_passenger_stop" />
-				</item>
-
-				<separator />
-
-				<!-- # VEHICLES (NB_V) -->
-				<item
-					name="...V"
-					type="node"
-					icon="icons/signs/vehicle_number.svg">
-					<label
-						text="Passenger stop for trains up to x vehicles"
-						fr.text="Arrêt voyageurs pour trains jusqu'à x voitures" />
-					<space />
-					<key key="railway:signal:stop:classic" value="FR:vehicle_number" />
-					<key key="railway:signal:stop:classic:for" value="vehicles" />
-					<reference ref="cat_classic_passenger_stop" />
-					<space />
-					<text
-						key="railway:signal:stop:classic:caption"
-						text="Sign Legend"
-						fr.text="Libellé de la pancarte"/>
-				</item>
-
-				<separator />
-
-				<!-- TGV 1 (US) -->
-				<item
-					name="TGV 1"
-					type="node"
-					icon="icons/signs/TGV_1.svg">
-					<label
-						text="Passenger stop for single-unit TGVs"
-						fr.text="Arrêt voyageurs pour TGV en unités simples" />
-					<space />
-					<key key="railway:signal:stop:highspeed" value="FR:TGV1" />
-					<key key="railway:signal:stop:highspeed:for" value="single_unit" />
-					<reference ref="cat_highspeed_passenger_stop" />
-				</item>
-
-				<!-- TGV 2 (UM) -->
-				<item
-					name="TGV 2"
-					type="node"
-					icon="icons/signs/TGV_2.svg">
-					<label
-						text="Passenger stop for multiple-unit TGVs"
-						fr.text="Arrêt voyageurs pour les TGV en unités multiples" />
-					<space />
-					<key key="railway:signal:stop:highspeed" value="FR:TGV2" />
-					<key key="railway:signal:stop:highspeed:for" value="multiple_unit" />
-					<reference ref="cat_highspeed_passenger_stop" />
-				</item>
-
-				<!-- TGV 1-2 -->
-				<item
-					name="TGV 1-2"
-					type="node"
-					icon="icons/signs/TGV_1-2.svg"
-					match_expression="-&quot;railway:signal:stop:highspeed:for&quot;=*">
-					<label
-						text="Passenger Stop for TGVs"
-						fr.text="Arrêt voyageurs pour les TGV" />
-					<space />
-					<key key="railway:signal:stop:highspeed" value="FR:TGV1-2" />
-					<key key="railway:signal:stop:highspeed:for" match="none" />
-					<reference ref="cat_highspeed_passenger_stop" />
-				</item>
-
-			</group>
-
-			<separator  />
-
-			<!-- DEPARTURES -->
-			<group
-				name="Departures"
-				fr.name="Départ"
-				icon="icons/boxes/SLD.svg">
-
-				<!-- REPORTING PLATES -->
-				<group
-					name="Reporting Plates"
-					fr.name="Plaques de Reconnaissance"
-					icon="icons/plates/reporting.svg">
-
-					<item
-						name="Reporting"
-						fr.name="Reconnaissance"
-						type="node"
-						icon="icons/plates/reporting.svg"
-						match_expression="-&quot;railway:signal:departure:type&quot;=*">
-						<label
-							text="Reporting Plate"
-							fr.text="Plaque de Reconnaissance" />
-						<space />
-						<key key="railway:signal:departure" value="FR:reporting" />
-						<key key="railway:signal:departure:type" match="none"/>
-						<key key="railway:signal:departure:form" value="sign" />
-						<reference ref="cat_reporting" />
-
-						<item_separator />
-						<preset_link preset_name="Delayed Reporting" text=""/>
-						<preset_link preset_name="Reporting Exemption" text=""/>
-					</item>
-
-					<item
-						name="Delayed Reporting"
-						fr.name="Reconnaissance Différée"
-						type="node"
-						icon="icons/plates/delayed_reporting.svg">
-						<label
-							text="Delayed Reporting Plate"
-							fr.text="Plaque de Reconnaissance Différée" />
-						<space />
-						<key key="railway:signal:departure" value="FR:reporting" />
-						<key key="railway:signal:departure:type" value="delayed" />
-						<key key="railway:signal:departure:form" value="sign" />
-						<reference ref="cat_reporting" />
-
-						<item_separator />
-						<preset_link preset_name="Reporting" text=""/>
-						<preset_link preset_name="Reporting Exemption" text=""/>
-					</item>
-
-					<item
-						name="Reporting Exemption"
-						fr.name="Dispense de Reconnaissance"
-						type="node"
-						icon="icons/plates/reporting_exemption.svg">
-						<label
-							text="Reporting Exemption Plate"
-							fr.text="Plaque de Dispense de Reconnaissance" />
-						<space />
-						<key key="railway:signal:departure" value="FR:reporting" />
-						<key key="railway:signal:departure:type" value="exempt" />
-						<key key="railway:signal:departure:form" value="sign" />
-						<reference ref="cat_reporting" />
-
-						<item_separator />
-						<preset_link preset_name="Reporting" text=""/>
-						<preset_link preset_name="Delayed Reporting" text=""/>
-					</item>
-				</group>
-
-				<separator />
-
-				<!-- DD -->
-				<item
-					name="Departure Request Plate"
-					fr.name="Plaque de Demande de Départ"
-					type="node"
-					icon="icons/plates/DD.svg">
-					<label
-						text="Departure Request Plate"
-						fr.text="Plaque de Demande de Départ" />
-					<space />
-					<key key="railway:signal:departure" value="FR:DD" />
-					<key key="railway:signal:departure:form" value="sign" />
-					<reference ref="cat_departure" />
-				</item>
-
-				<!-- Half-White Half-Green Plate -->
-				<item
-					name="Half-White, Half-Green Plate"
-					fr.name="Plaque Mi-Blanche, Mi-Verte"
-					type="node"
-					icon="icons/plates/departure_marker.svg">
-					<label
-						text="Half-White, Half-Green Plate"
-						fr.text="Plaque Mi-Blanche, Mi-Verte" />
-					<space />
-					<key key="railway:signal:departure" value="FR:departure_marker" />
-					<key key="railway:signal:departure:form" value="sign" />
-					<reference ref="cat_departure" />
-				</item>
-
-				<!-- SLD -->
-				<item
-					name="Signal Lumineux de Départ"
-					fr.name="Signal Lumineux de Départ"
-					type="node"
-					icon="icons/boxes/SLD.svg">
-					<label
-						text="Signal Lumineux de Départ"
-						fr.text="Signal Lumineux de Départ" />
-					<space />
-					<key key="railway:signal:departure" value="FR:SLD" />
-					<key key="railway:signal:departure:form" value="light" />
-					<reference ref="cat_departure" />
-				</item>
-
-				<separator />
-
-				<!-- RLI -->
-				<item
-					name="Route Light Repeater"
-					fr.name="Répétiteur Lumineux d'Itinéraire"
-					type="node"
-					icon="icons/boxes/RLI.svg">
-					<label
-						text="Route Light Repeater"
-						fr.text="Répétiteur Lumineux d'Itinéraire (RLI)" />
-					<space />
-					<key key="railway:signal:departure" value="FR:RLI" />
-					<key key="railway:signal:departure:form" value="light" />
-					<reference ref="cat_departure" />
-					<text
-						key="railway:signal:departure:caption"
-						text="Board Legend"
-						fr.text="Libellé du tableau" />
-				</item>
-			</group>
-
 		</group>
 
 		<separator />
@@ -4597,116 +5414,183 @@
 		<group
 			name="Level Crossings"
 			fr.name="Passages à Niveau"
-			icon="icons/signs/PN.svg">
+			icon="icons/signs/crossing_info.svg">
 
 			<!-- ANNOUNCEMENT -->
 			<item
-				name="Level Crossing Announcement"
-				fr.name="Approche d'un PN non gardé"
-				type="node" icon="icons/signs/PN_A.svg">
+				name="PN Advance Sign"
+				fr.name="PN à Distance"
+				type="node"
+				icon="icons/signs/crossing_hint.svg"
+				match_expression="-&quot;railway:signal:crossing_hint:type&quot;=*">
 				<label
-					text="Approach of an unguarded level crossing"
-					fr.text="Approche d'un passage à niveau non gardé" />
+					text="PN advance sign"
+					fr.text="Pancarte PN d'annonce" />
 				<space />
-				<key key="railway:signal:crossing_hint" value="FR:PN_A" />
+				<key key="railway:signal:crossing_hint:type" match="none" />
+				<reference ref="cat_crossing_hint" />
+			</item>
+
+			<!-- ANNOUNCEMENT (RADIO) -->
+			<item
+				name="PN Advance Sign (Radio)"
+				fr.name="PN à Distance (Radio)"
+				type="node"
+				icon="icons/signs/crossing_hint_radio.svg">
+				<label
+					text="PN advance sign and Radio sign"
+					fr.text="Pancarte PN d'annonce et pancarte Radio" />
+				<space />
+				<key key="railway:signal:crossing_hint:type" value="radio_controlled" />
+				<reference ref="cat_crossing_hint" />
+			</item>
+
+			<separator />
+
+			<!-- AHEAD (AUTOMATIC) -->
+			<item
+				name="PN Sign"
+				fr.name="Pancarte PN"
+				type="node"
+				icon="icons/signs/crossing_info.svg"
+				match_expression="-&quot;railway:signal:crossing_info:automatic&quot;=*">
+				<label
+					text="Automatic level crossing sign"
+					fr.text="Pancarte PN à fonctionnement automatique" />
+				<space />
+				<key key="railway:signal:crossing_info:automatic" match="none" />
+				<reference ref="cat_crossing_info" />
+			</item>
+
+			<!-- AHEAD (MANUAL) -->
+			<item
+				name="PN Sign (Manual)"
+				fr.name="Pancarte PN (Manuel)"
+				type="node"
+				icon="icons/signs/crossing_info_manual.svg">
+				<label
+					text="Manually operated level crossing sign"
+					fr.text="Pancarte PN à fonctionnement manuel" />
+				<space />
+				<key key="railway:signal:crossing_info:automatic" value="no" />
+				<reference ref="cat_crossing_info" />
+			</item>
+
+			<separator />
+
+			<!-- Cde RADIO -->
+			<item
+				name="Radio Command"
+				fr.name="Commande Radio"
+				type="node"
+				icon="icons/signs/radio_command.svg">
+				<label
+                    text="Radio Command"
+                    fr.text="Commande Radio" />
+				<space />
+				<key key="railway:signal:crossing_hint" value="FR:radio_command" />
 				<key key="railway:signal:crossing_hint:form" value="sign" />
 				<reference ref="base_common" />
 				<text key="railway:signal:crossing_hint:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-				<text
-					key="railway:signal:crossing_hint:caption"
-					text="Sign Legend"
-					fr.text="Libellé de la Pancarte" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Level_crossing_announcement" />
-			</item>
-
-			<!-- AHEAD -->
-			<item
-				name="Level Crossing Ahead"
-				fr.name="Pancarte PN"
-				type="node"
-				icon="icons/signs/PN.svg">
-				<label
-					text="PN Sign"
-					fr.text="Pancarte PN" />
-				<space />
-				<key key="railway:signal:crossing_info" value="FR:PN" />
-				<key key="railway:signal:crossing_info:form" value="sign" />
-				<reference ref="base_common" />
-				<text key="railway:signal:crossing_info:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-				<text
-					key="railway:signal:crossing_info:caption"
-					text="Sign Legend"
-					fr.text="Libellé de la Pancarte" />
-				<optional text="">
-					<label
-						text="Special characteristics"
-						fr.text="Caractéristiques particulières" />
-					<space />
-					<check
-						key="railway:signal:crossing_info:automatic"
-						text="Manual"
-						fr.text="Manuel"
-						value_off="" value_on="no" disable_off="true"/>
-				</optional>
-				<link wiki="OpenRailwayMap/Tagging_in_France#Level_crossing_ahead" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Radio-controlled_level_crossing" />
 			</item>
 
 			<!-- CONDITIONAL CROSSING -->
 			<item
-				name="Conditional Crossing Signal"
-				fr.name="Signal de Franchissement Conditionnel"
+				name="Conditional Crossing"
+				fr.name="Franchissement Conditionnel"
 				type="node"
-				icon="icons/signals/SFC.svg">
+				icon="icons/signals/green_lights.svg">
 				<label
-                    text="Conditional Crossing Signal"
+                    text="Conditional crossing signal"
                     fr.text="Signal de Franchissement Conditionnel (SFC)" />
 				<space />
 				<key key="railway:signal:crossing" value="FR:SFC" />
 				<key key="railway:signal:crossing:form" value="light" />
 				<reference ref="base_common" />
-				<text key="railway:signal:crossing:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+				<text 
+					key="railway:signal:crossing:ref" 
+					text="Network ID" 
+					fr.text="Identifiant Réseau" length="7" />
+				<space />
 				<combo
 					key="railway:signal:crossing:arrangement"
 					text="Signal Arrangement"
-					fr.text="Disposition du signal"
+					fr.text="Disposition du Signal"
 					editable="false">
 					<list_entry
-						value="single"
-						display_value="Single light"
-						fr.display_value="Feu unique"/>
+						value=""
+						display_value="Horizontally arranged green lights"
+						fr.display_value="2 unités lumineuses horizontales"
+						icon="icons/signals/green_lights.svg"
+						icon_size="24"/>
 					<list_entry
 						value="vertical"
-						display_value="Two vertical lights"
-						fr.display_value="Deux feux verticaux"/>
-					<list_entry
-						value="horizontal"
-						display_value="Two horizontal lights"
-						fr.display_value="Deux feux horizontaux"/>
+						display_value="Vertically arranged green lights"
+						fr.display_value="2 unités lumineuses verticales"
+						icon="icons/signals/vertical_green_lights.svg"
+						icon_size="24"/>
 				</combo>
-				<link wiki="OpenRailwayMap/Tagging_in_France#Conditional_crossing" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Signal_de_Franchissement_Conditionnel" />
+			</item>
+		</group>
+
+		<!-- CLEARANCE -->
+		<group
+			name="Clearance"
+			fr.name="Gabarit"
+			icon="icons/signs/reduced_clearance.svg">
+
+			<item
+				name="Reduced Clearance"
+				fr.name="Gabarit Réduit"
+				type="node"
+				icon="icons/signs/reduced_clearance.svg">
+				<label
+					text="Reduced clearance"
+					fr.text="Ouvrage d'art à gabarit réduit" />
+				<space />
+				<key key="railway:signal:clearance" value="FR:reduced_clearance" />
+				<key key="railway:signal:clearance:form" value="sign" />
+				<reference ref="base_common" />
+				<text
+					key="railway:signal:clearance:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau" length="7" />
+
+				<item_separator />
+				<preset_link preset_name="Tunnels" text=""/>
+
+				<link wiki="OpenRailwayMap/Tagging_in_France#Clearance_signs" />
+			</item>
+
+			<item
+				name="Tunnels"
+				fr.name="Tunnels"
+				type="node"
+				icon="icons/signs/tunnel.svg">
+				<label
+					text="Sign indicating the number of tunnels ahead"
+					fr.text="Pancarte indiquant le nombre de tunnels à venir" />
+				<space />
+				<key key="railway:signal:structure" value="FR:tunnel" />
+				<key key="railway:signal:structure:type" value="tunnel" />
+				<key key="railway:signal:structure:form" value="sign" />
+				<reference ref="base_common" />
+				<text
+					key="railway:signal:structure:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau" length="7" />
+				<combo
+					key="railway:signal:structure:count"
+					text="Number of tunnels"
+					fr.text="Nombre de tunnels"
+					editable="false"
+					values="1,2,3,4" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Clearance_signs" />
 			</item>
 
 		</group>
-
-		<!-- MISCELLANEOUS -->
-		<item
-			name="Reduced Clearance"
-			fr.name="Gabarit Réduit"
-			type="node"
-			icon="icons/signs/reduced_clearance.svg">
-			<label
-				text="Reduced clearance"
-				fr.text="Ouvrage d'art à gabarit réduit" />
-			<space />
-			<key key="railway:signal:minor" value="FR:reduced_clearance" />
-			<key key="railway:signal:minor:form" value="sign" />
-			<reference ref="base_common" />
-			<text
-				key="railway:signal:minor:ref"
-				text="Network ID"
-				fr.text="Identifiant Réseau" length="7" />
-			<link wiki="OpenRailwayMap/Tagging_in_France#Miscellaneous_signs" />
-		</item>
 
 		<!-- WHISTLE -->
 		<item
@@ -4728,13 +5612,52 @@
 					fr.text="Caractéristiques complémentaires" />
 				<space />
 				<check
-					key="railway:signal:whistle:plate"
+					key="railway:signal:whistle:type"
 					text="Mandatory during daylight only (from 07:00 to 20:00)"
 					fr.text="Obligatoire de jour uniquement (de 07:00 à 20:00)"
 					value_on="FR:J" disable_off="true" />
 			</optional>
 			<link wiki="OpenRailwayMap/Tagging_in_France#Whistle" />
 		</item>
+
+		<separator />
+
+		<!-- SNOWPLOWS -->
+		<group
+			name="Snowplows"
+			fr.name="Chasse-neige"
+			icon="icons/signs/snowplow_up.svg">
+
+			<!-- LOWERING -->
+			<item
+				name="Snowplow Lowering Signal"
+				fr.name="Abaissez le Chasse-neige"
+				type="node"
+				icon="icons/signs/snowplow_down.svg">
+				<label
+					text="Snowplow lowering signal"
+					fr.text="Signal d'abaissement du chasse-neige" />
+				<space />
+				<key key="railway:signal:snowplow" value="FR:lower_equipment" />
+				<key key="railway:signal:snowplow:type" value="down" />
+				<reference ref="cat_snowplow" />
+			</item>
+
+			<!-- RAISING -->
+			<item
+				name="Snowplow Raising Signal"
+				fr.name="Relevez le Chasse-neige"
+				type="node"
+				icon="icons/signs/snowplow_up.svg">
+				<label
+					text="Snowplow raising signal"
+					fr.text="Signal de relevage du chasse-neige" />
+				<space />
+				<key key="railway:signal:snowplow" value="FR:raise_equipment" />
+				<key key="railway:signal:snowplow:type" value="up" />
+				<reference ref="cat_snowplow" />
+			</item>
+		</group>
 
 	</group>
 
