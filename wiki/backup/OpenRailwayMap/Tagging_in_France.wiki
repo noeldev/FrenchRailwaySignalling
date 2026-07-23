@@ -1,14 +1,15 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-06-12 23:57:22 UTC
+Last edited: 2026-07-23 03:52:49 UTC
 Last editor: Noeld
-Last edit comment: /* Fixed C-type TIV-D */ remove useless type property
-Backup date: 2026-06-13 05:52:34 UTC
+Last edit comment: /* Track indicator sign */ add track direction section
+Backup date: 2026-07-23 04:39:22 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
 {{languages}}
 {{WIP}}
+{{shortcut|ORM/FR}}
 
 This section describes the tagging scheme specific to French railway signalling, based on the [[Tag:railway%3Dsignal|international railway signal]] tagging model.
 
@@ -38,7 +39,9 @@ An absolute stop signal for normal train operations, typically found on main lin
 
 The signal may also be equipped with a ''marker plate'' (French: '''Plaque de Repérage''') and/or a ''block system identification plate'' (French: '''plaque de cantonnement''') indicating the ''block system'' beyond the signal. The inscriptions on these plates are written in black letters on a white background.
 
-[[File:Carre_C_BAL.svg|60px]]
+<gallery>
+File:Carre_C_BAL.svg|Carré aspect on a C-type signal head.
+</gallery>
 
 * {{Tag|railway:signal:main|FR:C}}
 * {{Tag|railway:signal:main:form|light}}
@@ -50,14 +53,15 @@ Optional tags:
 '''Features'''
 * {{Tag|railway:signal:main:clearing_light|no}} (if not equipped with a clearing light)
 
-'''Plates'''
-<!-- Plaque de cantonnement --> 
-* {{Tag|railway:signal:main:plate||({{TagValue|railway:signal:main:plate|FR:BM}}/{{TagValue|railway:signal:main:plate|FR:PR}})}} (block system identification plate)
-* {{Tag|railway:signal:main:plate:caption|}} (text as shown on the ''block system identification plate'')
+'''Block system identification plate'''
+* {{Tag|railway:signal:main:type||({{TagValue|railway:signal:main:type|FR:BM}}/{{TagValue|railway:signal:main:type|FR:PR}})}}
+* {{Tag|railway:signal:main:caption|}} (text displayed on the plate)
 
 =====Carré (dwarf)=====
 
-[[File:Signal_Carre_reduit.svg|60px]]
+<gallery>
+File:Signal_Carre_reduit.svg|Carré aspect on a dwarf [[#Carré|Carré]] signal.
+</gallery>
 
 * {{Tag|railway:signal:main|FR:C}}
 * {{Tag|railway:signal:main:form|light}}
@@ -67,22 +71,45 @@ Optional tags:
 Optional tags:
 * {{Tag|railway:signal:main:arrangement|vertical}} (''horizontal'' by default)
 
+===== Signal de milieu de quai (2TMV) =====
+
+<gallery>
+File:Signal de milieu de quai.svg|Illuminated white cross aspect on an intermediate signal
+</gallery>
+
+Also known as an ''intermediate signal'', this is a horizontal [[#Carré_(dwarf)|dwarf Carré]] signal used on platforms to manage two trains on the same track (French: '''2 Trains sur une Même Voie'''). It features a standard dwarf layout supplemented by a central light capable of displaying an ''illuminated white cross''. This system offers high operational flexibility, allowing two railcars to enter the platform sequentially (either from the same or opposite directions) to either depart independently or couple together.
+
+Depending on the operational scenario, the signal presents the following aspects:
+* '''Carré''': Closed to stop an incoming train at the middle of the platform. This aspect is announced by the upstream signal presenting a [[Tag:railway:signal:main:states=FR:A|Caution]] (''Avertissement'') aspect combined with a flashing [[#Yellow_band|illuminated horizontal yellow band]].
+* '''Illuminated White Cross''': Cancels the signal when a multiple-unit train enters and occupies the entire platform, or when an incoming single-unit is routed to stop at the end of the second half of the platform. In these cases, the upstream ''Caution'' signal is presented without the flashing ''illuminated yellow band''.
+* '''Caution''': Displayed when the station's exit signal is open (e.g., displaying a [[Tag:railway:signal:main:states=FR:RR|Rappel 30]]), ensuring the train does not exceed 30 km/h between the intermediate and exit signals.
+* '''Flashing Red''': Opens after an initial stop at the [[Tag:railway:signal:main:states=FR:C|Carré]] to authorize a low-speed (15 km/h max) entry and safe coupling onto a railcar already stationary at the second half of the platform.
+
+* {{Tag|railway:signal:main|FR:C}}
+* {{Tag|railway:signal:main:form|light}}
+* {{Tag|railway:signal:main:function|intermediate}}
+* {{Tag|railway:signal:main:states||({{TagValue|railway:signal:main:states|FR:C}}/{{TagValue|railway:signal:main:states|FR:(S)}}/{{TagValue|railway:signal:main:states|FR:X}}/{{TagValue|railway:signal:main:states|FR:A}}/{{TagValue|railway:signal:main:states|FR:VL}})}}
+
 =====Carré (mechanical)=====
 
-[[File:CarreMecanique.svg|40px]]
+<gallery>
+File:CarreMecanique.svg|Mechanical [[#Carré|Carré]] signal.
+</gallery>
 
 * {{Tag|railway:signal:main|FR:C}}
 * {{Tag|railway:signal:main:form|sign}}
 
-=====Carré announcement=====
+=====Carré distant sign=====
 
-[[File:Pancarte_à_distance_Carré.svg|40px]]
+<gallery>
+File:Pancarte_à_distance_Carré.svg|Carré distant sign
+</gallery>
 
-* {{Tag|railway:signal:distant|FR:CARRE_A}}
+* {{Tag|railway:signal:distant|FR:CARRE}}
 * {{Tag|railway:signal:distant:form|sign}}
 
 Optional tags:
-* {{Tag|railway:signal:distant:caption|}} (text as shown on the sign)
+* {{Tag|railway:signal:distant:distance|}} (distance shown on the sign, in meters)
 
 ====Carré violet====
 
@@ -90,9 +117,11 @@ An absolute stop signal, similar to the [[#Carré|Carré signal]], specifically 
 
 Like the Carré signal, this signal may be equipped with a marker plate and/or a block plate with inscriptions in black letters on a white background.
 
-[[File:CV_C_BAL.svg|60px]]
-[[File:CV_A_BAL.svg|60px]]
-[[File:CV_Sol.svg|60px]]
+<gallery>
+File:CV_C_BAL.svg|Cv aspect on a C-type signal head.
+File:CV_A_BAL.svg|Cv aspect on an A-type signal head.
+File:CV_Sol.svg|Cv aspect on a K-type signal head.
+</gallery>
 
 * {{Tag|railway:signal:main|FR:CV}}
 * {{Tag|railway:signal:main:form|light}}
@@ -101,13 +130,14 @@ Like the Carré signal, this signal may be equipped with a marker plate and/or a
 
 Optional tags:
 
-<!-- Plaque de Cantonnement -->
-* {{Tag|railway:signal:main:plate||({{TagValue|railway:signal:main:plate|FR:BM}}/{{TagValue|railway:signal:main:plate|FR:PR}})}} (block system identification plate)
-* {{Tag|railway:signal:main:plate:caption|}} (text as shown on the ''block system identification plate'')
+* {{Tag|railway:signal:main:type||({{TagValue|railway:signal:main:type|FR:BM}}/{{TagValue|railway:signal:main:type|FR:PR}})}} (block system identification plate)
+* {{Tag|railway:signal:main:caption|}} (text displayed on the ''block system identification plate'')
 
 =====Carré violet (mechanical)=====
 
-[[File:CarreVM.svg|40px]]
+<gallery>
+File:CarreVM.svg|Mechanical Carré violet.
+</gallery>
 
 * {{Tag|railway:signal:main|FR:CV}}
 * {{Tag|railway:signal:main:form|sign}}
@@ -119,42 +149,60 @@ A stop signal that can be passed under certain conditions. The signal may displa
 * '''BM''' (indicating a block of [https://fr.wikipedia.org/wiki/Block_manuel Block Manuel])
 * '''PR''' (indicating a block of [https://fr.wikipedia.org/wiki/Block_automatique_%C3%A0_permissivit%C3%A9_restreinte Block Automatique à Permissivité Restreinte])
 
-The actual inscription is specified with the {{TagKey|railway:signal:main:plate}} tag.
-
-[[File:Semaphore_F_BAL_F.svg|60px]]
-[[File:Semaphore_A_BAL_F.svg|60px]]
+<gallery>
+File:Semaphore_F_BAL_F.svg|S aspect on an F-type signal head.
+File:Semaphore_A_BAL_F.svg|S aspect on an A-type signal head.
+</gallery>
 
 * {{Tag|railway:signal:main|FR:S}}
 * {{Tag|railway:signal:main:form|light}}
 * {{Tag|railway:signal:main:shape||({{TagValue|railway:signal:main:shape|FR:A}}/{{TagValue|railway:signal:main:shape|FR:C}}/{{TagValue|railway:signal:main:shape|FR:F}}/{{TagValue|railway:signal:main:shape|FR:H}}/{{TagValue|railway:signal:main:shape|FR:K}})}}
 * {{Tag|railway:signal:main:states|}} (→ [[FR:Key:railway:signal:main:states|available states]], separated by <code>;</code>)
 
-Optional tags:
-* {{Tag|railway:signal:main:plate||({{TagValue|railway:signal:main:plate|FR:F}}/{{TagValue|railway:signal:main:plate|FR:PR}}/{{TagValue|railway:signal:main:plate|FR:BM}})}} (identification plate)
+Optional '''identification plate''':
+* {{Tag|railway:signal:main:type||({{TagValue|railway:signal:main:type|FR:F}}/{{TagValue|railway:signal:main:type|FR:PR}}/{{TagValue|railway:signal:main:type|FR:BM}})}}
 
 =====Sémaphore (mechanical)=====
 
-[[File:SemaphoreM.PNG|60px]]
+<gallery>
+File:SemaphoreM.PNG|Mechanical semaphore signal.
+</gallery>
 
 * {{Tag|railway:signal:main|FR:S}}
 * {{Tag|railway:signal:main:form|sign}}
 
 ====Guidon d'arrêt====
 
-A stop signal that requires the driver to come to a complete stop before the signal. When in the open position, the signal does not display any specific indication other than the red stripe being extinguished. It is equipped with an identification plate with the inscription '''GA''' and may also have a marker plate, both featuring inscriptions in black letters on a white background.
+A stop signal that requires the driver to come to a complete stop before the signal. When in the open position, the signal does not display any specific indication other than the red band being extinguished. It is equipped with an identification plate with the inscription '''GA''' and may also have a marker plate, both featuring inscriptions in black letters on a white background.
 
-[[File:Guidon_d'Arrêt.svg|60px]]
+<gallery>
+File:Guidon_d'Arrêt.svg|Guidon d'Arrêt.
+</gallery>
 
 * {{Tag|railway:signal:main|FR:GA}}
 * {{Tag|railway:signal:main:form|light}}
 
-====Yellow light band====
+=====GA distant sign=====
 
-In some stations, the entrance [[#Carré|Carré signal]] may be equipped with a horizontal yellow light band (French: '''Bande jaune lumineuse horizontale'''). This band is lit in addition to the [[Tag:railway:signal:main:states=FR:A|Caution]] ('''Avertissement''') light. It instructs the driver to be prepared to stop within a short distance, either due to the presence of vehicles or the closure of an intermediate stop signal. 
+<gallery>
+File:Pancarte_à_distance_GA.svg|GA distant sign
+</gallery>
+
+* {{Tag|railway:signal:distant|FR:GA}}
+* {{Tag|railway:signal:distant:form|sign}}
+
+Optional tags:
+* {{Tag|railway:signal:distant:distance|}} (distance shown on the sign, in meters)
+
+====Yellow band====
+
+In some stations, the entrance [[#Carré|Carré signal]] may be equipped with a ''horizontal illuminated yellow band'' (French: '''Bande jaune lumineuse horizontale'''). This band is lit in addition to the [[Tag:railway:signal:main:states=FR:A|Caution]] ('''Avertissement''') light. It instructs the driver to be prepared to stop within a short distance, either due to the presence of vehicles or the closure of an intermediate stop signal. 
 
 A [[#TVM_stop_marker|TVM stop marker]] may also be equipped with a yellow light band.
 
-[[File:Bande_Jaune.svg|60px]]
+<gallery>
+File:Bande_Jaune.svg|Yellow band.
+</gallery>
 
 * {{Tag|railway:signal:short_route|FR:yellow_band}}
 * {{Tag|railway:signal:short_route:form|light}}
@@ -165,7 +213,9 @@ A [[#TVM_stop_marker|TVM stop marker]] may also be equipped with a yellow light 
 
 A '''Disque''' signal instructs the driver to proceed at sight ('''Marche à Vue''') as soon as possible or to stop before the first set of points (switch or crossing) protected by the signal. It is equipped with an identification plate bearing the inscription '''D''' in black letters on a white background.
 
-[[File:Disque_BAPR_BM.svg|60px]]
+<gallery>
+File:Disque_BAPR_BM.svg|Luminous Disque signal.
+</gallery>
 
 * {{Tag|railway:signal:distant|FR:D}}
 * {{Tag|railway:signal:distant:form|light}}
@@ -173,7 +223,9 @@ A '''Disque''' signal instructs the driver to proceed at sight ('''Marche à Vue
 
 =====Disque (mechanical)=====
 
-[[File:DisqueMecanique.svg|40px]]
+<gallery>
+File:DisqueMecanique.svg|Mechanical Disque signal.
+</gallery>
 
 * {{Tag|railway:signal:distant|FR:D}}
 * {{Tag|railway:signal:distant:form|sign}}
@@ -182,7 +234,9 @@ A '''Disque''' signal instructs the driver to proceed at sight ('''Marche à Vue
 
 An '''Avertissement''' (Caution) signal indicates the approach to a closed [[#Sémaphore|sémaphore]] of [https://fr.wikipedia.org/wiki/Block_automatique_%C3%A0_permissivit%C3%A9_restreinte Block Automatique à Permissivité Restreinte] (BAPR). It is equipped with an identification plate bearing the inscription '''A''' in black letters on a white background.
 
-[[File:Av_R_BAPR_BM.svg|60px]]
+<gallery>
+File:Av_R_BAPR_BM.svg|Luminous Avertissement signal.
+</gallery>
 
 * {{Tag|railway:signal:distant|FR:A}}
 * {{Tag|railway:signal:distant:form|light}}
@@ -190,7 +244,9 @@ An '''Avertissement''' (Caution) signal indicates the approach to a closed [[#S�
 
 =====Avertissement (mechanical)=====
 
-[[File:AvertissementMecanique.svg|40px]]
+<gallery>
+File:AvertissementMecanique.svg|Mechanical Avertissement signal.
+</gallery>
 
 * {{Tag|railway:signal:distant|FR:A}}
 * {{Tag|railway:signal:distant:form|sign}}
@@ -199,18 +255,58 @@ An '''Avertissement''' (Caution) signal indicates the approach to a closed [[#S�
 
 Signals not currently in use (e.g. deactivated or out of service) are marked with a white Saint Andrew's cross.
 
-[[File:PermCancelled_H_BAL.svg|60px]]
+<gallery>
+File:PermCancelled_H_BAL.svg|Disabled H-type signal head
+</gallery>
 
 Use one of the following tags depending on the signal type (main or distant):
 
 * {{Tag|railway:signal:main:deactivated|yes}}
 * {{Tag|railway:signal:distant:deactivated|yes}}
 
+===Signal position indicators===
+Signs that inform the driver about the side on which trackside signals are installed after a signalling or signal placement transition, such as a change between left-hand and right-hand running or between cab signalling and lineside signalling.
+
+====Signals on right sign====
+This sign indicates that trackside signals are installed on the right-hand side of the track.
+
+<gallery>
+File:Pancarte Signaux à Droite.svg|Signals on right sign
+</gallery>
+
+* {{Tag|railway:signal:minor|FR:signals_on_right}}
+* {{Tag|railway:signal:minor:form|sign}}
+
+====Signals on left sign====
+This sign indicates that trackside signals are installed on the left-hand side of the track.
+
+<gallery>
+File:Pancarte Signaux à Gauche.svg|Signals on left sign
+</gallery>
+
+* {{Tag|railway:signal:minor|FR:signals_on_left}}
+* {{Tag|railway:signal:minor:form|sign}}
+
+===Mirlitons===
+''Mirlitons'' are non-illuminated boards used to mark the approach to signals with reduced visibility. Three boards are generally installed approximately 100 m apart from each other and from the signal, displaying three, two and one diagonal black bands respectively. In some cases, fewer boards may be used. Smaller versions may be installed directly on the ground when required.
+
+<gallery>
+File:SNCF Mirliton I.svg|Mirliton I
+File:SNCF Mirliton II.svg|Mirliton II
+File:SNCF Mirliton III.svg|Mirliton III
+</gallery>
+
+* {{Tag|railway:signal:distant|FR:mirliton}}
+* {{Tag|railway:signal:distant:type||({{TagValue|railway:signal:distant:type|I}}/{{TagValue|railway:signal:distant:type|II}}/{{TagValue|railway:signal:distant:type|III}})}}
+* {{Tag|railway:signal:distant:form|sign}}
+
 ===Combined signals===
 
 In some cases, [[#Shunting_boards|shunting]] and [[#Wrong-road_signalling|wrong-road]] boards may be installed together in a double light box.
 
-[[File:D_TECS_box.svg|60px]]
+<gallery>
+File:D_TECS_box.svg|Combined signals in a double light box.
+</gallery>
 
 * {{Tag|railway:signal:combined|FR:light_box}}
 * {{Tag|railway:signal:combined:form|light}}
@@ -228,7 +324,9 @@ Permanent speed restrictions are signaled:
 
 =====Ralentissement 30=====
 
-[[File:RalentissementM.svg|40px]]
+<gallery>
+File:RalentissementM.svg|Mechanical Ralentissement 30 signal.
+</gallery>
 
 * {{Tag|railway:signal:speed_limit|FR:R30}}
 * {{Tag|railway:signal:speed_limit:form|sign}}
@@ -237,7 +335,9 @@ Permanent speed restrictions are signaled:
 
 Rappel de ralentissement 30.
 
-[[File:RappelRalentissementM.svg|40px]]
+<gallery>
+File:RappelRalentissementM.svg|Mechanical Rappel 30 signal.
+</gallery>
 
 * {{Tag|railway:signal:speed_limit|FR:RR30}}
 * {{Tag|railway:signal:speed_limit:form|sign}}
@@ -250,12 +350,11 @@ These boards can be luminous or mechanical; when open, they present a continuous
 
 =====Switchable TIV-D=====
 
-{| class="wikitable" style="text-align:center"
-!Mechanical!!Luminous
-|-
-|[[File:TIV_D_MOB_100.svg|60px]]||[[File:TIV_Mobile_100.svg|60px]]
-[[File:TIV_Mobile_O.svg|60px]]
-|}
+<gallery>
+File:TIV_D_MOB_100.svg|Closed mechanical TIV-D
+File:TIV_Mobile_100.svg|Closed luminous TIV-D
+File:TIV_Mobile_O.svg|Open luminous TIV-D
+</gallery>
 
 * {{Tag|railway:signal:speed_limit_distant|FR:speed_indicator}}
 * {{Tag|railway:signal:speed_limit_distant:switchable|FR:TIV-D}}
@@ -267,12 +366,11 @@ These boards can be luminous or mechanical; when open, they present a continuous
 
 The '''TIV-R''' is always paired with the [[#Carré|Carré]] signal preceding the point.
 
-{| class="wikitable" style="text-align:center"
-!Mechanical!!Luminous
-|-
-| [[File:TIV_R_MOB_60.svg|60px]] || [[File:TIV_Rappel_Lumineux_60.svg|60px]]
-[[File:TIV_Rappel_Lumineux_O.svg|60px]]
-|}
+<gallery>
+File:TIV_R_MOB_60.svg|Closed mechanical TIV-R
+File:TIV_Rappel_Lumineux_60.svg|Closed luminous TIV-R
+TIV_Rappel_Lumineux_O.svg|Open luminous TIV-R
+</gallery>
 
 * {{Tag|railway:signal:speed_limit|FR:speed_indicator}}
 * {{Tag|railway:signal:speed_limit:switchable|FR:TIV-R}}
@@ -286,7 +384,9 @@ If necessary, the location of the point (or the first point in the case of succe
 
 In some cases, particularly at diverging exits from certain station tracks, a 30 km/h speed reminder may apply to a trailing point rather than to a facing point. In such cases, the location of the relevant point may instead be identified by an [[#Chevron_pointe_en_haut|upward-pointing chevron]] ('''Chevron pointe en haut''').
 
-[[File:Chevron_bas.svg|60px]] 
+<gallery>
+File:Chevron_bas.svg|Chevron pointe en bas
+</gallery>
 
 * {{Tag|railway:signal:minor|FR:chevron}}
 * {{Tag|railway:signal:minor:form|sign}}
@@ -297,11 +397,10 @@ In some cases, particularly at diverging exits from certain station tracks, a 30
 
 Fixed distant speed indicators of the ordinary type (French: '''TIV fixes à distance du type ordinaire''') are square-shaped when indicating a speed reduction of less than 40 km/h, and diamond-shaped otherwise. Diamond-shaped indicators are equipped with a crocodile.
 
-{| class="wikitable" style="text-align:center"
-! Square !! Diamond-shape
-|-
-| [[File:TIV_Distance_80.svg|60px]] || [[File:TIV_Distance_Crocodile_40.svg|60px]]
-|}
+<gallery>
+File:TIV_Distance_80.svg|Square TIV-D
+TIV_Distance_Crocodile_40.svg|Diamond-shaped TIV-D
+</gallery>
 
 Common tags:
 
@@ -317,26 +416,34 @@ Additional tag for diamond-shaped indicators only:
 
 The '''Z''' sign is the execution signal indicating the start of the section to be traveled at limited speed.
 
-[[File:Tableau_Z.svg|60px]]
+<gallery>
+File:Tableau_Z.svg|Z sign
+</gallery>
 
 * {{Tag|railway:signal:speed_limit|FR:marker}}
-* {{Tag|railway:signal:speed_limit:entry|FR:Z}}
-* {{Tag|railway:signal:speed_limit:entry:form|sign}}
+* {{Tag|railway:signal:speed_limit:main|FR:Z}}
+* {{Tag|railway:signal:speed_limit:main:form|sign}}
+* {{Tag|railway:signal:speed_limit:main:function|entry}}
 
 
 The '''R''' sign indicates the end of the section where the speed limit is required and the return to normal speed ('''Reprise de vitesse''').
 
-[[File:Tableau_R.svg|60px]]
+<gallery>
+File:Tableau_R.svg|R sign
+</gallery>
 
 * {{Tag|railway:signal:speed_limit|FR:marker}}
-* {{Tag|railway:signal:speed_limit:exit|FR:R}}
-* {{Tag|railway:signal:speed_limit:exit:form|sign}}
+* {{Tag|railway:signal:speed_limit:main|FR:R}}
+* {{Tag|railway:signal:speed_limit:main:form|sign}}
+* {{Tag|railway:signal:speed_limit:main:function|exit}}
 
 =====Fixed B-type TIV-D=====
 
 B-type fixed distant speed indicators ('''TIV fixes à distance du type B''') apply to trains authorized to travel at speeds greater than 140 km/h. When only a B-type indicator is present, the speed limit also applies to self-propelled trains (automoteurs).
 
-[[File:FR-TIV-type-B-160.svg|60px]]
+<gallery>
+File:FR-TIV-type-B-160.svg|Fixed B-type TIV-D
+</gallery>
 
 * {{Tag|railway:signal:speed_limit_distant|FR:speed_indicator}}
 * {{Tag|railway:signal:speed_limit_distant:fast|FR:TIV-D}}
@@ -347,7 +454,9 @@ B-type fixed distant speed indicators ('''TIV fixes à distance du type B''') ap
 
 C-type fixed distant speed indicators ('''TIV fixes à distance du type C''') specifically apply to railcars and self-propelled trains (autorails et automoteurs).
 
-[[File:FR_TIV-type-C-180.svg|60px]]
+<gallery>
+File:FR_TIV-type-C-180.svg|Fixed C-type TIV-D
+</gallery>
 
 When a B-type and a C-type fixed distant speed indicator are paired, the speed limit shown by the B-type indicator applies only to trains authorized to exceed 140 km/h. The C-type indicator serves as a reminder of the upstream speed limit for railcars and self-propelled trains.
 
@@ -362,7 +471,9 @@ If the speed limit differs between pendular trains and other self-propelled trai
 
 The P board announces a distant speed indicator (TIV-D) for lines equipped with pre-announcement signalling. This board applies only to trains running at speeds higher than 160 km/h and requires the train to pass the next TIV-D at a speed lower than 160 km/h. This sign is lit at night.
 
-[[File:FR_Tableau_P.svg|60px]]
+<gallery>
+File:FR_Tableau_P.svg|P board
+</gallery>
 
 * {{Tag|railway:signal:speed_limit_distant|FR:P}}
 * {{Tag|railway:signal:speed_limit_distant:form||({{TagValue|railway:signal:speed_limit_distant:form|sign}}/{{TagValue|railway:signal:speed_limit_distant:form|light}})}} (board/light box)
@@ -375,7 +486,9 @@ Pentagonal TIVs typically concern freight trains and possibly certain locomotive
 
 A distant upward-pointing pentagonal speed indicator (TIV-D) announces a special speed restriction. 
 
-[[File:TIV_Pentagonal_Distant.svg|60px]]
+<gallery>
+File:TIV_Pentagonal_Distant.svg|Pentagonal TIV-D
+</gallery>
 
 * {{Tag|railway:signal:speed_limit_distant|FR:speed_indicator}}
 * {{Tag|railway:signal:speed_limit_distant:freight|FR:TIV-D}}
@@ -386,7 +499,9 @@ A distant upward-pointing pentagonal speed indicator (TIV-D) announces a special
 
 When the restriction applies only to certain locomotive series, the pentagonal TIV-D is accompanied by an '''L''' plate placed below it.
 
-[[File:Plaque_L.svg|40px]]
+<gallery>
+File:Plaque_L.svg|L plate
+</gallery>
 
 * {{Tag|railway:signal:speed_limit_distant|FR:speed_indicator}}
 * {{Tag|railway:signal:speed_limit_distant:freight:condition|FR:L}}
@@ -398,7 +513,9 @@ When the restriction applies only to certain locomotive series, the pentagonal T
 
 A downward-pointing pentagonal TIV, with a white digit on a black background, marks the beginning of the speed-restricted section and indicates that the speed limit is now in effect.
 
-[[File:TIV_Pentagonal_Exécution.svg|60px]]
+<gallery>
+File:TIV_Pentagonal_Exécution.svg|Pentagonal TIV
+</gallery>
 
 * {{Tag|railway:signal:speed_limit|FR:speed_indicator}}
 * {{Tag|railway:signal:speed_limit:freight|FR:TIV-E}}
@@ -410,7 +527,9 @@ A downward-pointing pentagonal TIV, with a white digit on a black background, ma
 
 A downward-pointing pentagonal white board ('''Tableau blanc''' in French) without any markings indicates the end of the track section to be traversed at a limited speed.
 
-[[File:TIV_Pentagonal_Reprise.svg|60px]] 
+<gallery>
+File:TIV_Pentagonal_Reprise.svg|Pentagonal white board
+</gallery>
 
 * {{Tag|railway:signal:speed_limit|FR:speed_indicator}}
 * {{Tag|railway:signal:speed_limit:freight|FR:white_board}}
@@ -421,7 +540,9 @@ A downward-pointing pentagonal white board ('''Tableau blanc''' in French) witho
 
 A speed marker or '''Repère de Vitesse''' is used in conjunction with TIVs to indicate transition points of the speed limit when these do not coincide with notable landmarks.
 
-[[File:FR_Pancarte_Km.svg|60px]]
+<gallery>
+File:FR_Pancarte_Km.svg|Km sign
+</gallery>
 
 * {{Tag|railway:signal:speed_limit|FR:marker}}
 * {{Tag|railway:signal:speed_limit:transition|FR:Km}}
@@ -435,7 +556,9 @@ Routes are signaled with either an '''Indicateur de Direction''' (ID) or a '''Ta
 
 An '''Indicateur de Direction''' (ID) is typically grouped with the [[#Carré|Carré]] signal preceding the relevant facing point(s).
 
-[[File:Indicateur_de_Direction_(ID3).svg|60px]]
+<gallery>
+File:Indicateur_de_Direction_(ID3).svg|Indicateur de Direction
+</gallery>
 
 * {{Tag|railway:signal:route|FR:ID}}
 * {{Tag|railway:signal:route:form|light}}
@@ -445,8 +568,10 @@ An '''Indicateur de Direction''' (ID) is typically grouped with the [[#Carré|Ca
 
 The '''Tableau Indicateur de Direction à Distance''' (TIDD) indicates the position of the next point, either left or right unless the next signal displays a closed [[#Carré|Carré]] in which case, the TIDD is off.
 
-[[File:TIDD_gauche.svg|60px]]
-[[File:TIDD_droit.svg|60px]] 
+<gallery>
+File:TIDD_gauche.svg|TIDD (first direction aspect)
+File:TIDD_droit.svg|TIDD (second direction aspect)
+</gallery>
 
 * {{Tag|railway:signal:switch|FR:TIDD}}
 * {{Tag|railway:signal:switch:form|light}}
@@ -455,11 +580,10 @@ The '''Tableau Indicateur de Direction à Distance''' (TIDD) indicates the posit
 
 For some routes, a '''Tableau Lumineux de Direction''' (TLD) provides a more precise indication of the direction, in the form of a track number, an abbreviation, or a destination name.
 
-{| class="wikitable" style="text-align:center"
-! Wide box !! Double box
-|-
-| [[File:TLD_box.svg|120px]]|| [[File:TLD_V2_box.svg|60px]]
-|}
+<gallery>
+File:TLD_box.svg|Wide box
+File:TLD_V2_box.svg|Double box
+</gallery>
 
 * {{Tag|railway:signal:route_distant|FR:TLD}}
 * {{Tag|railway:signal:route_distant:form|light}}
@@ -468,21 +592,41 @@ For some routes, a '''Tableau Lumineux de Direction''' (TLD) provides a more pre
 Optional tags:
 * {{Tag|railway:signal:route_distant:caption|}}  (information shown when the signal is lit)
 
-====Track indicator sign====
+=====Track information=====
 
-[[File:Pancarte nom de voie.svg|60px]]
+======Track direction sign======
+
+<gallery>
+File:Pancarte NURIEUX.svg|Track direction sign (horizontal arrangement)
+File:Pancarte BETHUNE.svg|Track direction sign (vertical arrangement)
+</gallery>
+
+* {{Tag|railway:signal:route_info|FR:track_direction}}
+* {{Tag|railway:signal:route_info:form|sign}}
+
+Optional tags:
+* {{Tag|railway:signal:route_info:arrangement|vertical}} (horizontal by default)
+* {{Tag|railway:signal:route_info:town|}} (town displayed on the sign, e.g. Nurieux)
+
+======Track indicator sign======
+
+<gallery>
+File:Pancarte nom de voie.svg|Track indicator sign
+</gallery>
 
 * {{Tag|railway:signal:route_info|FR:track_name}}
 * {{Tag|railway:signal:route_info:form|sign}}
 
 Optional tags:
-* {{Tag|railway:signal:route_info:caption|}} (text as shown on the sign)
+* {{Tag|railway:signal:route_info:caption|}} (text displayed on the sign)
 
 ====Branch lines====
 
 The '''BIF''' board announces a trailing switch junction with multiple tracks.
 
-[[File:Tableau_BIF.svg|60px]]
+<gallery>
+File:Tableau_BIF.svg|BIF board
+</gallery>
 
 * {{Tag|railway:signal:route_distant|FR:BIF}}
 * {{Tag|railway:signal:route_distant:form|sign}}
@@ -490,7 +634,9 @@ The '''BIF''' board announces a trailing switch junction with multiple tracks.
 
 The '''Y''' board announces a facing switch junction.
 
-[[File:Tableau_Y.svg|60px]]
+<gallery>
+File:Tableau_Y.svg|Y board
+</gallery>
 
 * {{Tag|railway:signal:route_distant|FR:Y}}
 * {{Tag|railway:signal:route_distant:form|sign}}
@@ -501,11 +647,10 @@ These boards are used on double-track sections equipped with wrong-road signalli
 
 The wrong-road entry board or '''Tableau d'Entrée de ContreSens''' (TECS) indicates or confirms to the driver that the train is authorised to run in the opposite direction to normal traffic.
 
-{| class="wikitable" style="text-align:center"
-!Board (sign)!!Box (light)
-|-
-|[[File:Tableau_d'entrée_de_contresens_(TECS).svg|60px]]||[[File:TECS_box.svg|60px]]
-|}
+<gallery>
+File:Tableau_d'entrée_de_contresens_(TECS).svg|Board (sign)
+File:TECS_box.svg|Box (light)
+</gallery>
 
 * {{Tag|railway:signal:wrong_road|FR:transition}}
 * {{Tag|railway:signal:wrong_road:entry|FR:TECS}}
@@ -514,68 +659,122 @@ The wrong-road entry board or '''Tableau d'Entrée de ContreSens''' (TECS) indic
 
 The wrong-road exit board or '''Tableau de Sortie de ContreSens''' (TSCS) informs the driver that the train, currently running in the wrong road, is now directed back to the normal running direction.
 
-{| class="wikitable" style="text-align:center"
-!Board (sign)!!Box (light)
-|-
-|[[File:Tableau_de_sortie_de_contresens_(TSCS).svg|60px]]||[[File:TSCS_box.svg|60px]]
-|}
+<gallery>
+File:Tableau_de_sortie_de_contresens_(TSCS).svg|Board (sign)
+File:TSCS_box.svg|Box (light)
+</gallery>
 
 * {{Tag|railway:signal:wrong_road|FR:transition}}
 * {{Tag|railway:signal:wrong_road:exit|FR:TSCS}}
 * {{Tag|railway:signal:wrong_road:exit:form||({{TagValue|railway:signal:wrong_road:exit:form|sign}}/{{TagValue|railway:signal:wrong_road:exit:form|light}})}}
 
+===Ground-to-train radio===
+
+====Network marker====
+
+When a section of railway line is equipped with a radio system, a network marker marks the transition point to radio operation. It identifies the applicable national system by displaying the initial letter of the corresponding country or railway network.
+
+<gallery>
+File:GSM-R F.svg|GSM-R network marker
+File:Repère radio sol-train.svg|Ground-to-train radio marker
+</gallery>
+
+* {{Tag|railway:signal:radio|FR:marker}}
+* {{Tag|railway:signal:radio:mode||({{TagValue|railway:signal:radio:mode|FR:GSM-R}}/{{TagValue|railway:signal:radio:mode|FR:RST}})}}
+* {{Tag|railway:signal:radio:mode:type|mode_transition}}
+* {{Tag|railway:signal:radio:mode:form|sign}}
+
+====Channel board====
+
+On the French national railway network (RFN), a network marker indicating a transition to GSM-R may be accompanied by a board indicating the radio channel to select. Radio channel boards can also be displayed alone to indicate channel transitions.
+
+<gallery>
+File:GSM-R channel board.svg|GSM-R channel board
+File:GSM-R UIC channel board.svg|GSM-R UIC channel board
+</gallery>
+* {{Tag|railway:signal:radio|FR:marker}}
+* {{Tag|railway:signal:radio:channel|FR:channel}}
+* {{Tag|railway:signal:radio:channel:type|channel_transition}}
+* {{Tag|railway:signal:radio:channel:form|sign}}
+* {{Tag|railway:signal:radio:channel:number|}} (e.g. ''6'', ''23'')
+* {{Tag|railway:signal:radio:channel:uic_number|}} (e.g. ''45'')
+
 ===Cab signalling===
 
 To allow trains to run safely at speeds above 220 km/h, traditional lineside signals are replaced by in-cab signalling systems. These systems transmit movement authorities and speed instructions directly to the driver's cab.
 
-In France, the two main cab signalling systems are [https://wikipedia.org/wiki/Transmission_Voie-Machine Transmission Voie-Machine (TVM)] and [https://wikipedia.org/wiki/European_Train_Control_System the European Train Control System (ETCS)].
+In France, the two main cab signalling systems are [https://wikipedia.org/wiki/Transmission_Voie-Machine Transmission Voie-Machine (TVM)] and the [https://wikipedia.org/wiki/European_Train_Control_System European Train Control System (ETCS)].
 
 =====CAB boards=====
-
 The train is directed towards a cab signalling line. One or more boards of this type precede the entry.
 
-[[File:Signalisation_de_Cabine_Distant.svg|60px]] 
+<gallery>
+File:Signalisation_de_Cabine_Distant.svg|Cab signalling line advance board
+</gallery>
 
-* {{Tag|railway:signal:train_protection|FR:cab_signalling_advance}}
-* {{Tag|railway:signal:train_protection:form|sign}}
+* {{Tag|railway:signal:train_protection_distant|FR:CAB}}
+* {{Tag|railway:signal:train_protection_distant:form|sign}}
 
 
 The train enters a cab signalling line. This board is at the position of the last signal or immediately downstream of that signal.
 
-[[File:Signalisation_de_Cabine.svg|60px]]
+<gallery>
+File:Signalisation_de_Cabine.svg|Cab signalling line entry board
+</gallery>
 
-* {{Tag|railway:signal:train_protection|FR:cab_signalling_entry}}
+* {{Tag|railway:signal:train_protection|FR:CAB}}
 * {{Tag|railway:signal:train_protection:form|sign}}
 * {{Tag|railway:signal:train_protection:function|entry}}
 
 
 The train is returning to a traditional lateral signalling line.
 
-[[File:Fin_de_Signalisation_de_Cabine.svg|60px]]
+<gallery>
+File:Fin_de_Signalisation_de_Cabine.svg|Cab signalling line exit board
+</gallery>
 
-* {{Tag|railway:signal:train_protection|FR:cab_signalling_exit}}
+* {{Tag|railway:signal:train_protection|FR:/CAB}}
 * {{Tag|railway:signal:train_protection:form|sign}}
 * {{Tag|railway:signal:train_protection:function|exit}}
 
-=====Markers=====
+'''Note:''' prepend <code>/</code> to the type to specify the crossed-out variant of a sign/board identified by its displayed name or acronym (''function=exit'').
+
+=====TVM markers=====
 
 ======TVM stop marker======
 
-[[File:Repère_TGV.svg|60px]]
+<gallery>
+File:Repère_TGV.svg|TVM stop marker
+</gallery>
 
 * {{Tag|railway:signal:train_protection|FR:marker}}
 * {{Tag|railway:signal:train_protection:main|stop_marker}}
 * {{Tag|railway:signal:train_protection:main:form|sign}}
-* {{Tag|railway:signal:train_protection:main:plate||({{TagValue|railway:signal:train_protection:main:plate|FR:F}}/{{TagValue|railway:signal:train_protection:main:plate|FR:NF}})}} (identification plate)
+* {{Tag|railway:signal:train_protection:main:type||({{TagValue|railway:signal:train_protection:main:type|FR:F}}/{{TagValue|railway:signal:train_protection:main:type|FR:NF}})}} (identification plate)
 
 Optional tags:
 * {{Tag|railway:signal:train_protection:main:passing_light|yes}} (if '''Nf''' signal is equipped with a white passing light)
 
-======Shunting marker======
+======TVM transition marker======
+The boards indicate transitions between TVM systems or types of cab signalling. The numbers 300 or 430 indicate the downstream TVM system, while 1 or 2 indicate the track direction.
 
+<gallery>
+File:TVM300 transition board.svg|TVM300 transition board
+File:TVM430 transition board.svg|TVM430 transition board
+</gallery>
+
+* {{Tag|railway:signal:train_protection|FR:marker}}
+* {{Tag|railway:signal:train_protection:system_change|FR:type_transition}}
+* {{Tag|railway:signal:train_protection:system_change:form|sign}}
+* {{Tag|railway:signal:train_protection:system_change:type||({{TagValue|railway:signal:train_protection:system_change:type|300}}/{{TagValue|railway:signal:train_protection:system_change:type|430}})}} (TVM 300 / TVM 430)
+* {{Tag|railway:signal:train_protection:system_change:caption|}} (e.g. TVM 430 voie 2)
+
+======Shunting marker======
 A shunting marker (French: '''Jalon de Manœuvre''') is placed at a point where certain train movements are executed. These movements may include reversing, shunting, or departing trains from a work site. The white chevron points to the track involved.
 
-[[File:Jalon_Manoeuvre.svg|60px]]
+<gallery>
+File:Jalon_Manoeuvre.svg|Shunting marker
+</gallery>
 
 * {{Tag|railway:signal:shunting|FR:marker}}
 * {{Tag|railway:signal:shunting:form|sign}}
@@ -583,378 +782,19 @@ A shunting marker (French: '''Jalon de Manœuvre''') is placed at a point where 
 Optional tags:
 * {{Tag|railway:signal:shunting:passing_light|yes}} (if equipped with a white passing light)
 
-===Stations and facilities===
+=====Cancellation signal (RATP)=====
+The [https://wikipedia.org/wiki/Syst%C3%A8me_d%27aide_%C3%A0_la_conduite,%C3%A0_l%27exploitation_et%C3%A0_la_maintenance SACEM] (French: '''Système d'Aide à la Conduite, à l'Exploitation et à la Maintenance''') is a cab signalling system used on the [https://wikipedia.org/wiki/RER_A RER A] line in the Paris region. When SACEM is active, most lineside signal indications are cancelled and replaced by an illuminated Saint-Andrew's cross (X), with the exception of stop signals, the clearing light (''œilleton''), route indicators and partially occupied track indicators.
 
-====Stations====
+<gallery>
+File:Illuminated_cross_(SACEM).svg|SACEM cancellation signal
+</gallery>
 
-- The '''Gare''' sign indicates the approach to a facility where special regulations for stations apply. Typically, a [[#Chevron_pointe_en_bas|downward-pointing chevron]] placed in front of the entry point marks the entrance to the facility.
+* {{Tag|railway:signal:train_protection|FR:X}}
+* {{Tag|railway:signal:train_protection:form|light}}
 
-[[File:Pancarte_GARE.svg|60px]]
+===ETCS markers===
 
-* {{Tag|railway:signal:station_distant|FR:GARE}}
-* {{Tag|railway:signal:station_distant:form|sign}}
-
-
-- This marker is placed at the track entrance in certain stations on single-track lines to remind drivers that exit signals are exceptionally installed on both sides of the passing tracks.
-
-[[File:Repère SID.svg|60px]]
-
-* {{Tag|railway:signal:station|FR:bilateral_exit_signals}}
-* {{Tag|railway:signal:station:form|sign}}
-
-====Facilities====
-
-In this context, ''facility'' refers to any non-station railway site (French: ''établissement'') such as a depot, yard, or technical installation.
-
-- This sign marks the approach to certain railway facilities.
-
-[[File:Schéma_de_signalisation_ferroviaire_Pancarte_d'annonce.svg|120px]]
-
-* {{Tag|railway:signal:station_distant|FR:facility_approach}}
-* {{Tag|railway:signal:station_distant:form|sign}}
-
-Optional tags:
-* {{Tag|railway:signal:station_distant:caption|}} (text as show on the sign, e.g. ''Chailles à 200m'')
-
-
-- This sign marks the approach to a facility on ''single-track lines with simplified signalling'' (VUSS), indicating that the upcoming points must not be passed at a speed exceeding 30 km/h (40 km/h on certain lines).
-
-[[File:Approche_Etablissement.svg|60px]]
-
-* {{Tag|railway:signal:station_distant|FR:facility_approach_simplified}}
-* {{Tag|railway:signal:station_distant:form|sign}}
-
-
-- The boundary of certain facilities are marked by the diamond-shaped sign below:
-
-[[File:LIMITETS.svg|60px]]
-
-* {{Tag|railway:signal:station|FR:facility_boundary}}
-* {{Tag|railway:signal:station:form|sign}}
-
-
-====Stops====
-
-[[File:Pancarte_Arrêt_A.svg|60px]]
-
-* {{Tag|railway:signal:stop_distant|FR:ARRET_A}}
-* {{Tag|railway:signal:stop_distant:form|sign}}
-
-Optional tags:
-* {{Tag|railway:signal:stop_distant:caption|}} (text as shown on the sign)
-
-
-[[File:Pancarte_ARRET.svg|60px]]
-
-* {{Tag|railway:signal:stop|FR:ARRET}}
-* {{Tag|railway:signal:stop:form|sign}}
-* {{Tag|railway:signal:stop:arrangement||({{TagValue|railway:signal:stop:arrangement|horizontal}}/{{TagValue|railway:signal:stop:arrangement|vertical}})}}
-
-
-[[File:Pancarte_ATC.svg|60px]]
-
-* {{Tag|railway:signal:stop|FR:ATC}}
-* {{Tag|railway:signal:stop:form|sign}}
-
-
-[[File:Pancarte_STOP_A.svg|60px]]
-
-* {{Tag|railway:signal:stop_distant|FR:STOP_A}}
-* {{Tag|railway:signal:stop_distant:form|sign}}
-
-Optional tags:
-* {{Tag|railway:signal:stop_distant:caption|}} (text as shown on the sign)
-
-
-[[File:Pancarte_STOP.svg|60px]]
-
-* {{Tag|railway:signal:stop|FR:STOP}}
-* {{Tag|railway:signal:stop:form|sign}}
-
-
-- The <span id="StopMarker">'''Jalon d'arrêt à damier rouge et blanc'''</span> (red and white checkered stop marker) is similar to the [[#Carré|Carré]] signal; it commands a stop before the point where it is placed and cannot be crossed.
-
-[[File:Jalon_d'arret.svg|60px]]
-
-* {{Tag|railway:signal:stop|FR:marker}}
-* {{Tag|railway:signal:stop:type|stop_marker}}
-* {{Tag|railway:signal:stop:form|sign}}
-
-====Passenger stops====
-
-Signs used to mark the stopping point for passenger trains.
-
-- Stopping point for the front of the train (Tête de Train), regardless of the number of vehicles in the train.
-
-[[File:ARRET_VOY_TT.svg|60px]]  
-
-* {{Tag|railway:signal:stop|FR:passenger_stop}}
-* {{Tag|railway:signal:stop:classic|FR:TT}}
-* {{Tag|railway:signal:stop:classic:form|sign}}
-* {{Tag|railway:signal:stop:classic:for|head_of_train}}
-
-
-- Stopping point for trains equipped for driver-only operations, referred to as '''Équipé Agent Seul''' (EAS).
-
-[[File:ARRET_VOY_TT_EAS.svg|60px]]  
-
-* {{Tag|railway:signal:stop|FR:passenger_stop}}
-* {{Tag|railway:signal:stop:classic|FR:TT_EAS}}
-* {{Tag|railway:signal:stop:classic:form|sign}}
-* {{Tag|railway:signal:stop:classic:for|driver_only}}
-
-
-
-- Stopping point for the front of the train (Tête de Train), regardless of the number of vehicles in the train, including the locomotive.
-
-[[File:ARRET_VOY_TTL.svg|60px]]  
-
-* {{Tag|railway:signal:stop|FR:passenger_stop}}
-* {{Tag|railway:signal:stop:classic|FR:TTL}}
-* {{Tag|railway:signal:stop:classic:form|sign}}
-* {{Tag|railway:signal:stop:classic:for|locomotive}}
-
-
-- Stopping point for trains composed of the number of carriages indicated on the sign.
-
-[[File:ARRET_VOY_6V.svg|60px]]
-[[File:ARRET_VOY_12V.svg|60px]]
-
-* {{Tag|railway:signal:stop|FR:passenger_stop}}
-* {{Tag|railway:signal:stop:classic|FR:vehicle_number}}
-* {{Tag|railway:signal:stop:classic:form|sign}}
-* {{Tag|railway:signal:stop:classic:for|vehicles}}
-
-Optional tags:
-* {{Tag|railway:signal:stop:classic:caption|}} (text as shown on the sign, e.g. ''6V'', ''12V'')
-
-
-- Stopping point for TGVs. The number indicates the number of rakes: 1=single unit, 2=multiple units.
-
-[[File:ARRET_VOY_TGV1.svg|60px]]
-
-* {{Tag|railway:signal:stop|FR:passenger_stop}}
-* {{Tag|railway:signal:stop:highspeed|FR:TGV1}}
-* {{Tag|railway:signal:stop:highspeed:form|sign}}
-* {{Tag|railway:signal:stop:highspeed:for|single_unit}}
-
-
-[[File:ARRET_VOY_TGV2.svg|60px]]
-
-* {{Tag|railway:signal:stop|FR:passenger_stop}}
-* {{Tag|railway:signal:stop:highspeed|FR:TGV2}}
-* {{Tag|railway:signal:stop:highspeed:form|sign}}
-* {{Tag|railway:signal:stop:highspeed:for|multiple_unit}}
-
-
-[[File:ARRET_VOY_TGV1-2.svg|60px]]
-
-* {{Tag|railway:signal:stop|FR:passenger_stop}}
-* {{Tag|railway:signal:stop:highspeed|FR:TGV1-2}}
-* {{Tag|railway:signal:stop:highspeed:form|sign}}
-
-====Train departure====
-
-=====Reporting Plate=====
-
-In general, the driver of a train stopped by a [[#Carré|Carré]], a [[#Carré_violet|Carré violet]], or a [[#Guidon_d'arrêt|Guidon d'arrêt]] must report to the signaller if the signal does not clear immediately.
-
-If a signal is equipped with a telephone that is not located in its immediate vicinity, its location may be indicated by a reporting plate ('''Plaque de Reconnaissance''' in French).
-
-{| class="wikitable" style="text-align:center"
-!Default!!Delayed!!Exemption
-|-
-|[[File:Plaque de reconnaissance avec VAT.svg|60px]]
-||[[File:Plaque de reconnaissance différée avec VAT.svg|60px]]
-||[[File:Plaque de dispense de reconnaissance avec VAT.svg|60px]]
-|}
-
-* {{Tag|railway:signal:departure|FR:reporting}}
-* {{Tag|railway:signal:departure:form|sign}}
-
-Optional tags:
-
-- Alternative types:
-* {{Tag|railway:signal:departure:type||({{TagValue|railway:signal:departure:type|delayed}}/{{TagValue|railway:signal:departure:type|exempt}})}}
-
-- If the plate is equipped with a telephone call indicator (French: '''Voyant d'Appel Téléphonique'''):
-* {{Tag|railway:signal:departure:phone:indicator|yes}}
-
-- If an arrow indicates the direction to the telephone:
-* {{Tag|railway:signal:departure:phone:direction||({{TagValue|railway:signal:departure:phone:direction|left}}/{{TagValue|railway:signal:departure:phone:direction|right}})}}
-
-=====Departure request=====
-
-Some [[#Carré|Carré]] signals are equipped with a '''Demande de Départ''' (DD) plate. The driver waiting for departure must, one minute before the scheduled departure time or if they notice the corresponding Carré signal has opened, request departure authorization by telephone.
-
-[[File:Plaque_DD.svg|60px]]
-
-* {{Tag|railway:signal:departure|FR:DD}}
-* {{Tag|railway:signal:departure:form|sign}}
-
-=====Departure authorization=====
-
-On certain tracks, authorization for departure may be given to the driver by a flashing half-white, half-green '''Signal Lumineux de Départ''' (SLD), also known as a '''Signal Lumineux d'Autorisation de Mouvement'''.
-
-[[File:SLD_box.gif|60px]]
-
-* {{Tag|railway:signal:departure|FR:SLD}} 
-* {{Tag|railway:signal:departure:form|light}}
-
-
-Alternatively, departure authorization may be given simply by the opening of the corresponding [[#Carré|Carré]] signal; these Carré signals are identified by a half-white, half-green plate.
-
-[[File:Plaque_mi-blanche_mi-verte.svg|60px]]
-
-* {{Tag|railway:signal:departure|FR:departure_marker}}
-* {{Tag|railway:signal:departure:form|sign}}
-
-=====Répétiteur Lumineux d'Itinéraire=====
-
-A '''Répétiteur Lumineux d'Itinéraire''' (RLI), a route light repeater, is a board providing route information to the staff member responsible for train departure.
-
-[[File:RLI_box.svg|120px]]
-
-* {{Tag|railway:signal:departure|FR:RLI}}
-* {{Tag|railway:signal:departure:form|light}}
-
-Optional tags:
-* {{Tag|railway:signal:departure:caption|}} (text shown on the display)
-
-===Converging tracks===
-
-====Chevron pointe en haut====
-
-Upward-pointing chevrons indicate either an exit from a junction of converging tracks or, in some stations, the point beyond which trains must not proceed when a stop is required.
-
-[[File:Chevron_haut.svg|60px]]
-
-* {{Tag|railway:signal:minor|FR:chevron}}
-* {{Tag|railway:signal:minor:type|up}} (''down'' by default)
-* {{Tag|railway:signal:minor:form|sign}}
-
-====Tableau Lumineux de Correspondance====
-
-A '''Tableau Lumineux de Correspondance''' (TLC) for converging tracks is a signal installed to the left of the track it addresses and is normally off. At any given time, it can display one of the following:
-
-- A white letter '''T''', either ''fixed'' if the group signal is open or ''flashing'', if the group signal is closed.
-
-[[File:TLC-T.svg|70px]]
-
-- The [[#Signal Lumineux de Départ|Signal Lumineux de Départ]] if applicable.
-
-[[File:TLC-SLD.gif|70px]]
-
-- A red and white checkerboard, which has the same meaning as the [[#StopMarker|Jalon d'Arrêt]] and is used instead of the [[#Chevron_pointe_en_haut|chevron]].
-
-[[File:TLC-C.svg|70px]]
-
-
-* {{Tag|railway:signal:minor|FR:TLC}}
-* {{Tag|railway:signal:minor:form|light}}
-
-====Tableau Indicateur de Provenance====
-
-At the exit of some service track yards, a '''Tableau Indicateur de Provenance''' (TIP), a track indicator, complements the [[#Chevron_pointe_en_haut|chevron]]. It can display any of the numbers designating each of the tracks. When the TIP displays a number, the driver on the corresponding track is allowed to cross the chevron. When the group signal is closed, the driver can advance to an agreed point, usually in preparation for a reversing movement.
-
-[[File:TIP_box.svg|60px]]
-
-* {{Tag|railway:signal:minor|FR:TIP}}
-* {{Tag|railway:signal:minor:form|light}}
-
-===Service tracks and shunting===
-
-====Signal Lumineux de Manœuvre====
-
-A '''Signal Lumineux de Manœuvre''' (SLM) is installed in some installations to facilitate shunting operations on main tracks (for example, pushing a train into a siding) or on service tracks. It consists of three white lights, which are normally unlit. Several similar signals may be installed along the same track to mark the full extent of the shunting area.
-
-[[File:SLM_all.svg|60px]]
-
-* {{Tag|railway:signal:shunting|FR:SLM}}
-* {{Tag|railway:signal:shunting:form|light}}
-
-====Shunting boards====
-
-The '''D''' (Depot) board indicates that the train is directed towards depot tracks.
-
-{| class="wikitable" style="text-align:center"
-!Mechanical (sign)!!Luminous (light)
-|-
-|[[File:Tableau_D.svg|60px]]||[[File:Tableau_D_box.svg|60px]]
-|}
-
-* {{Tag|railway:signal:shunting_route|FR:destination}}
-* {{Tag|railway:signal:shunting_route:depot|FR:D}}
-* {{Tag|railway:signal:shunting_route:depot:form||
-({{TagValue|railway:signal:shunting_route:depot:form|sign}}/{{TagValue|railway:signal:shunting_route:depot:form|light}})}} (sign=mechanical; light=luminous)
-
-
-The '''G''' (Garage) board indicates that the train is directed towards a service track.
-
-{| class="wikitable" style="text-align:center"
-!Mechanical (sign)!!Luminous (light)
-|-
-|[[File:Tableau_G.svg|60px]]||[[File:Tableau_G_box.svg|60px]]
-|}
-
-* {{Tag|railway:signal:shunting_route|FR:destination}}
-* {{Tag|railway:signal:shunting_route:stabling|FR:G}}
-* {{Tag|railway:signal:shunting_route:stabling:form||
-({{TagValue|railway:signal:shunting_route:stabling:form|sign}}/{{TagValue|railway:signal:shunting_route:stabling:form|light}})}} (sign=mechanical; light=luminous)
-
-
-The '''Heurtoir à xxx mètres''' board announces a buffer stop at the specified distance.
-
-[[File:Heurtoir_500m.svg|60px]]
-
-* {{Tag|railway:signal:shunting_route|FR:destination}}
-* {{Tag|railway:signal:shunting_route:buffer_stop|FR:Heurtoir}}
-* {{Tag|railway:signal:shunting_route:buffer_stop:form|sign}}
-* {{Tag|railway:signal:shunting_route:buffer_stop:caption|}} (text as show on the sign, e.g. "Heurtoir à 500m")
-
-
-The '''Imp''' (Impasse) board indicates that the train is directed towards a dead-end track.
-
-[[File:Tableau_Imp.svg|60px]]  
-
-* {{Tag|railway:signal:shunting_route|FR:destination}}
-* {{Tag|railway:signal:shunting_route:dead_end|FR:Imp}} 
-* {{Tag|railway:signal:shunting_route:dead_end:form||
-({{TagValue|railway:signal:shunting_route:dead_end:form|sign}}/{{TagValue|railway:signal:shunting_route:dead_end:form|light}})}} (sign=mechanical; light=luminous)
-
-The '''SAS''' board indicates that the train is directed towards a generally very short section of track (sas) with [[#Carré|Carré]] signals at each end.
-
-[[File:Pancarte_SAS.svg|60px]] 
-
-* {{Tag|railway:signal:shunting_route|FR:destination}}
-* {{Tag|railway:signal:shunting_route:headshunt|FR:SAS}}
-* {{Tag|railway:signal:shunting_route:headshunt:form||
-({{TagValue|railway:signal:shunting_route:headshunt:form|sign}}/{{TagValue|railway:signal:shunting_route:headshunt:form|light}})}} (sign=mechanical; light=luminous)
-
-====Shunting signs====
-
-The '''LGR''' (Limite pour Garage par Refoulement) sign.
-
-[[File:Pancarte_LGR.svg|60px]]
-
-* {{Tag|railway:signal:shunting|FR:LGR}}
-* {{Tag|railway:signal:shunting:form|sign}}
-
-
-'''LM''' (Limite de Manœuvre) sign.
-
-[[File:Tableau_LM.svg|60px]] 
-
-* {{Tag|railway:signal:shunting|FR:LM}}
-* {{Tag|railway:signal:shunting:form|sign}}
-
-
-'''MV''' (Marche à Vue) sign.
-
-[[File:Pancarte_MV.svg|60px]]
-
-* {{Tag|railway:signal:shunting|FR:MV}}
-* {{Tag|railway:signal:shunting:form|sign}}
+See [[OpenRailwayMap/ETCS_Markers|ETCS markers]].
 
 ===Electrified railway lines===
 
@@ -966,20 +806,24 @@ A neutral section (French: ''zone de sectionnement'') is a grounded catenary sec
 
 The advance board indicates the presence of a neutral section ahead, located at the specified distance (in meters).
 
-[[File:Schéma_de_signalisation_ferroviaire_Pancarte_"Sectionnement".svg|60px]] 
+<gallery>
+File:Schéma_de_signalisation_ferroviaire_Pancarte_"Sectionnement".svg|Neutral section advance board
+</gallery>
 
 * {{Tag|railway:signal:electricity|FR:power_off_advance}}
 * {{Tag|railway:signal:electricity:type|power_off_advance}}
 * {{Tag|railway:signal:electricity:form|sign}}
 
 Optional tags:
-* {{Tag|railway:signal:electricity:caption|}} (text as shown on the sign)
+* {{Tag|railway:signal:electricity:distance|}} (distance shown on the sign, in meters)
 
 =====Power-off signal=====
 
 The power-off (French: ''Coupez courant'') board requires the main circuit breaker to be opened when passing through a neutral section, which it traverses using its own kinetic energy (''marche sur l'erre'').
 
-[[File:Couper_Courant.svg|60px]]
+<gallery>
+File:Couper_Courant.svg|Power-off signal
+</gallery>
 
 * {{Tag|railway:signal:electricity|FR:power_off}}
 * {{Tag|railway:signal:electricity:type|power_off}}
@@ -990,7 +834,9 @@ The power-off (French: ''Coupez courant'') board requires the main circuit break
 
 This board indicates the end of the neutral section.
 
-[[File:Fin_Coupez_Courant.svg|60px]]
+<gallery>
+File:Fin_Coupez_Courant.svg|Power-on signal
+</gallery>
 
 * {{Tag|railway:signal:electricity|FR:power_on}}
 * {{Tag|railway:signal:electricity:type|power_on}}
@@ -1005,7 +851,9 @@ Optional tags:
 
 This sign indicates the end of the neutral section for reversible trains or trains with multiple pantographs.
 
-[[File:Pancarte_REV.svg|60px]]
+<gallery>
+File:Pancarte_REV.svg|REV sign
+</gallery>
 
 * {{Tag|railway:signal:electricity|FR:REV}}
 * {{Tag|railway:signal:electricity:type|power_on}}
@@ -1027,8 +875,9 @@ The pantograph down (French: ''Baissez panto'') advance signal instructs the low
 * '''Cross-border Areas''': Needed when crossing borders where different electrical systems may be in operation.
 * '''Crossing Certain Structures''': Specific structures may require the pantograph to be lowered for safety or operational reasons.
 
-
-[[File:Baissez_Panto_distant.svg|60px]]
+<gallery>
+File:Baissez_Panto_distant.svg|Pantograph down advance signal
+</gallery>
 
 * {{Tag|railway:signal:electricity|FR:pantograph_down_advance}}
 * {{Tag|railway:signal:electricity:type|pantograph_down_advance}}
@@ -1039,7 +888,9 @@ The pantograph down (French: ''Baissez panto'') advance signal instructs the low
 
 This board indicates the point where pantographs must be lowered.
 
-[[File:Baisser_Panto.svg|60px]]
+<gallery>
+File:Baisser_Panto.svg|Pantograph down signal
+</gallery>
 
 * {{Tag|railway:signal:electricity|FR:pantograph_down}}
 * {{Tag|railway:signal:electricity:type|pantograph_down}}
@@ -1053,7 +904,9 @@ Optional tags:
 
 This board marks the end of the catenary section requiring pantographs to be lowered. Pantographs may be raised after passing the signal.
 
-[[File:Fin_Baisser_Panto.svg|60px]]
+<gallery>
+File:Fin_Baisser_Panto.svg|Pantograph up signal
+</gallery>
 
 * {{Tag|railway:signal:electricity|FR:pantograph_up}}
 * {{Tag|railway:signal:electricity:type|pantograph_up}}
@@ -1063,31 +916,39 @@ This board marks the end of the catenary section requiring pantographs to be low
 Optional tags:
 * {{Tag|railway:signal:electricity:voltage|}}
 
-====Dual-mode traffic====
+====Bimode operation====
 
-This distant sign announces traffic towards a non-electrified line. This sign accompanies the pantograph down (''Baissez panto'') distant and execution signals when they apply only to dual-mode traffic. In this case, they are not followed by a [[#Pantograph down end signal|Pantograph down end signal]].
+This distant sign announces the approach of a non-electrified section for bi-mode trains only. It accompanies the pantograph down (''Baissez panto'') distant and execution signals when these signals apply exclusively to bi-mode trains. In this case, they are not followed by a [[#Pantograph down end signal|Pantograph down end signal]].
 
-[[File:Pancarte_BIMODE_A.svg|60px]]
+<gallery>
+File:Pancarte_BIMODE_A.svg|Bi-mode operation entry board
+</gallery>
 
-* {{Tag|railway:signal:dual_mode|FR:BIMODE_A}}
-* {{Tag|railway:signal:dual_mode:form|sign}}
+* {{Tag|railway:signal:bimode|FR:BIMODE}}
+* {{Tag|railway:signal:bimode:form|sign}}
+* {{Tag|railway:signal:bimode:function|entry}}
 
 Optional tags:
-* {{Tag|railway:signal:dual_mode:caption|}} (text as shown on the sign)
+* {{Tag|railway:signal:bimode:town|}} (town displayed on the sign, e.g. ''Lyon'')
 
 
-This distant signal announces traffic coming from a non-electrified line for dual-mode trains only. This sign accompanies the [[#Pantograph down end signal|Pantograph down end signal]] when it applies only to dual-mode traffic. It is not preceded by the '''Baissez Panto''' (Pantograph Down) distant and execution signals. 
+This distant sign announces the exit from a non-electrified section for bi-mode trains only. This sign accompanies the [[#Pantograph down end signal|Pantograph down end signal]] when the signal applies exclusively to bi-mode trains. It is not preceded by the '''Baissez Panto''' (Pantograph Down) distant and execution signals.
 
-[[File:Pancarte_BIMODE.svg|60px]]
+<gallery>
+File:Pancarte_BIMODE.svg|Bi-mode operation exit board
+</gallery>
 
-* {{Tag|railway:signal:dual_mode|FR:BIMODE}} 
-* {{Tag|railway:signal:dual_mode:form|sign}}
+* {{Tag|railway:signal:bimode|FR:BIMODE}}
+* {{Tag|railway:signal:bimode:form|sign}}
+* {{Tag|railway:signal:bimode:function|exit}}
 
 ====End of catenary====
 
 Beyond this sign, the line is no longer electrified and only thermal or dual-mode trains can continue.
 
-[[File:FIN_CAT.svg|60px]]
+<gallery>
+File:FIN_CAT.svg|End of catenary
+</gallery>
 
 * {{Tag|railway:signal:electricity|FR:end_of_catenary}} 
 * {{Tag|railway:signal:electricity:type|end_of_catenary}}
@@ -1100,75 +961,682 @@ Beyond this sign, the line is no longer electrified and only thermal or dual-mod
 
 The second pantograph is lowered when another frost board in the off state is encountered, after verbal authorization, or when no icing conditions are observed.
 
-{| class="wikitable" style="text-align:center"
-!Board (sign)!!Box (light)
-|-
-|[[File:Tableau_GIVRE.svg|60px]]||[[File:Tableau_GIVRE_box.svg|60px]]
-|}
+<gallery>
+File:Tableau_GIVRE.svg|Frost board (sign)
+File:Tableau_GIVRE_box.svg|Frost box (light)
+</gallery>
 
 * {{Tag|railway:signal:electricity|FR:frost}}
 * {{Tag|railway:signal:electricity:form||({{TagValue|railway:signal:electricity:form|sign}}/{{TagValue|railway:signal:electricity:form|light}})}}
 
-===ETCS signals===
+===Stations and facilities===
 
-See [[OpenRailwayMap/ETCS_Markers|ETCS markers]].
+====Stations====
+
+- The '''Gare''' sign indicates the approach to a facility where special regulations for stations apply. Typically, a [[#Chevron_pointe_en_bas|downward-pointing chevron]] placed in front of the entry point marks the entrance to the facility.
+
+<gallery>
+File:Pancarte_GARE.svg|GARE sign
+</gallery>
+
+* {{Tag|railway:signal:station_distant|FR:GARE}}
+* {{Tag|railway:signal:station_distant:form|sign}}
+
+
+- This marker is placed at the track entrance in certain stations on single-track lines to remind drivers that exit signals are exceptionally installed on both sides of the passing tracks.
+
+<gallery>
+File:Repère SID.svg|Exit signals on both side of tracks.
+</gallery>
+
+* {{Tag|railway:signal:station|FR:bilateral_exit_signals}}
+* {{Tag|railway:signal:station:form|sign}}
+
+====Facilities====
+
+In this context, ''facility'' refers to any non-station railway site (French: ''établissement'') such as a depot, yard, or technical installation.
+
+- This sign marks the approach to certain railway facilities.
+
+<gallery>
+File:Schéma_de_signalisation_ferroviaire_Pancarte_d'annonce.svg|Approach marker for some facilities
+</gallery>
+
+* {{Tag|railway:signal:station_distant|FR:facility_approach}}
+* {{Tag|railway:signal:station_distant:form|sign}}
+
+Optional tags:
+* {{Tag|railway:signal:station_distant:town|}} (Town as show on the sign, e.g. ''Chailles'')
+* {{Tag|railway:signal:station_distant:distance|}} (distance shown on the sign, in meters, e.g. ''200'')
+
+
+- This sign marks the approach to a facility on ''single-track lines with simplified signalling'' (VUSS), indicating that the upcoming points must not be passed at a speed exceeding 30 km/h (40 km/h on certain lines).
+
+<gallery>
+File:Approche_Etablissement.svg|Facility approach
+</gallery>
+
+* {{Tag|railway:signal:station_distant|FR:facility_approach_simplified}}
+* {{Tag|railway:signal:station_distant:form|sign}}
+
+
+- The boundary of certain facilities are marked by the diamond-shaped sign below:
+
+<gallery>
+File:LIMITETS.svg|Facility boundary sign
+</gallery>
+
+* {{Tag|railway:signal:station|FR:facility_boundary}}
+* {{Tag|railway:signal:station:form|sign}}
+
+
+- POSTE sign
+
+<gallery>
+File:Pancarte POSTE.svg|POSTE sign
+</gallery>
+
+* {{Tag|railway:signal:station_distant|FR:POSTE}}
+* {{Tag|railway:signal:station_distant:form|sign}}
+TBD
+
+====Distant stops====
+
+[[#Stops|Stop signs]] may be preceded by their respective advance boards described below.
+
+<gallery>
+File:Pancarte Arrêt A.svg|Advance ARRÊT sign
+</gallery>
+
+* {{Tag|railway:signal:stop_distant|FR:ARRET}}
+* {{Tag|railway:signal:stop_distant:form|sign}}
+* {{Tag|railway:signal:stop_distant:distance|}} (distance shown on the sign, in meters, e.g. ''100'')
+
+<gallery>
+File:Pancarte Arrêt pour Desserte à 300m.svg|Advance ARRÊT sign for industrial sidings
+</gallery>
+
+* {{Tag|railway:signal:stop_distant|FR:ARRET}}
+* {{Tag|railway:signal:stop_distant:form|sign}}
+* {{Tag|railway:signal:stop_distant:for|industrial_siding}}
+* {{Tag|railway:signal:stop_distant:distance|}} (distance shown on the sign, in meters, e.g. ''300'')
+
+<gallery>
+File:Pancarte STOP A.svg|Advance STOP sign
+</gallery>
+
+* {{Tag|railway:signal:stop_distant|FR:STOP}}
+* {{Tag|railway:signal:stop_distant:form|sign}}
+* {{Tag|railway:signal:stop_distant:distance|}} (distance shown on the sign, in meters, e.g. ''100'')
+
+====Stops====
+
+- The driver must stop before the sign and wait for a verbal order before passing, if passing is required.
+
+<gallery>
+File:Pancarte ARRET.svg|ARRÊT sign (horizontal arrangement)
+File:Pancarte ARRET verticale.svg|ARRÊT sign (vertical arrangement)
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:ARRET}}
+* {{Tag|railway:signal:stop:form|sign}}
+
+Optional tags:
+* {{Tag|railway:signal:stop:arrangement|vertical}} (horizontal by default; only for '''ARRET''' sign without ''for'' property)
+* {{Tag|railway:signal:stop:for|}} (one of the values in the list below)
+
+<gallery>
+File:Pancarte ARRET.svg|''not used''
+File:Pancarte Arrêt des Machines.svg|locomotives
+File:Pancarte Arrêt des Manœuvres.svg|shunting
+File:Pancarte Arrêt Mouvements Rentrant au Dépôt.svg|depot_movements
+File:Pancarte Arrêt pour Desserte.svg|industrial_siding
+File:Pancarte Arrêt pour Refoulement.svg|pushing
+File:Pancarte ATC.svg|worksite_trains
+</gallery>
+
+- The driver must stop before the sign and may pass on their own initiative once stopped, if nothing prevents it.
+
+<gallery>
+File:Pancarte STOP.svg|STOP sign (horizontal arrangement)
+File:Pancarte STOP verticale.svg|STOP sign (vertical arrangement)
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:STOP}}
+* {{Tag|railway:signal:stop:form|sign}}
+
+Optional tags:
+* {{Tag|railway:signal:stop:arrangement|vertical}} (horizontal by default)
+
+
+- The <span id="StopMarker">'''Jalon d'arrêt à damier rouge et blanc'''</span> (red and white checkered stop marker) is similar to the [[#Carré|Carré]] signal; it commands an absolute stop before the point where it is placed and cannot be crossed.
+
+<gallery>
+File:Jalon d'arret.svg|Stop marker
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:marker}}
+* {{Tag|railway:signal:stop:type|stop_marker}}
+* {{Tag|railway:signal:stop:form|sign}}
+
+====Passenger stops====
+
+Signs used to mark the stopping point for passenger trains.
+
+Passenger stop signs are divided into two categories: those for [[#Passenger stops for conventional trains|conventional trains]] and those for [[#Passenger stops for high-speed trains|high-speed trains (TGV)]].
+
+=====Passenger stops for conventional trains=====
+
+- Stopping point for the front of the train (Tête de Train), regardless of the number of vehicles in the train.
+
+<gallery>
+File:ARRET_VOY_TT.svg|Passenger stop for the front of the train
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:passenger_stop}}
+* {{Tag|railway:signal:stop:classic|FR:TT}}
+* {{Tag|railway:signal:stop:classic:form|sign}}
+* {{Tag|railway:signal:stop:classic:for|head_of_train}}
+
+- Stopping point for trains equipped for driver-only operations, referred to as '''Équipé Agent Seul''' (EAS).
+
+<gallery>
+File:ARRET_VOY_TT_EAS.svg|Passenger stop for trains equipped with EAS
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:passenger_stop}}
+* {{Tag|railway:signal:stop:classic|FR:TT_EAS}}
+* {{Tag|railway:signal:stop:classic:form|sign}}
+* {{Tag|railway:signal:stop:classic:for|driver_only}}
+
+- Stopping point for the front of the train (Tête de Train), regardless of the number of vehicles in the train, including the locomotive.
+
+<gallery>
+File:ARRET_VOY_TTL.svg|Passenger stop for trains with a locomotive
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:passenger_stop}}
+* {{Tag|railway:signal:stop:classic|FR:TTL}}
+* {{Tag|railway:signal:stop:classic:form|sign}}
+* {{Tag|railway:signal:stop:classic:for|locomotive}}
+
+- Stopping point for trains composed of the number of carriages indicated on the sign.
+
+<gallery>
+File:ARRET_VOY_6V.svg|Passenger stop for 6-vehicle trains
+File:ARRET_VOY_12V.svg|Passenger stop for 12-vehicle trains
+File:ARRET VOY 8V 10V.svg|Passenger stop for trains with between 8 and 10 vehicles.
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:passenger_stop}}
+* {{Tag|railway:signal:stop:classic|FR:vehicle_number}}
+* {{Tag|railway:signal:stop:classic:form|sign}}
+* {{Tag|railway:signal:stop:classic:for|vehicles}}
+* {{Tag|railway:signal:stop:classic:number||({{TagValue|railway:signal:stop:classic:number|6V}}/{{TagValue|railway:signal:stop:classic:number|8V}}/{{TagValue|railway:signal:stop:classic:number|10V}}/{{TagValue|railway:signal:stop:classic:number|12V}})}} (one or two values, separated by a <code>;</code>, e.g. ''6V'', ''12V'' or ''8V;10V'')
+
+- Stopping point for self-propelled units of the specified length. 75m and 110m apply to single units while 110m and 220m apply to multiple units.
+
+<gallery>
+File:Pancarte L110.svg|Passenger stop for 110m-long self-propelled single railcar unit
+File:Pancarte L220.svg|Passenger stop for 220m-long self-propelled multiple railcar units
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:passenger_stop}}
+* {{Tag|railway:signal:stop:classic|FR:train_length}}
+* {{Tag|railway:signal:stop:classic:form|sign}}
+* {{Tag|railway:signal:stop:classic:for|railcar}}
+* {{Tag|railway:signal:stop:classic:length||(75/110/150/220)}} (train length in meters, e.g. ''110'' or ''220'')
+
+=====Passenger stops for high-speed trains=====
+
+- Stopping point for TGVs. The number indicates the number of rakes: 1=single unit, 2=multiple units.
+
+<gallery>
+File:ARRET_VOY_TGV1.svg|Passenger stop for single TGV unit.
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:passenger_stop}}
+* {{Tag|railway:signal:stop:highspeed|FR:TGV1}}
+* {{Tag|railway:signal:stop:highspeed:form|sign}}
+* {{Tag|railway:signal:stop:highspeed:for|single_unit}}
+
+<gallery>
+File:ARRET_VOY_TGV2.svg|Passenger stop for multiple TGV units
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:passenger_stop}}
+* {{Tag|railway:signal:stop:highspeed|FR:TGV2}}
+* {{Tag|railway:signal:stop:highspeed:form|sign}}
+* {{Tag|railway:signal:stop:highspeed:for|multiple_unit}}
+
+<gallery>
+File:ARRET_VOY_TGV1-2.svg|Passenger stop for TGV
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:passenger_stop}}
+* {{Tag|railway:signal:stop:highspeed|FR:TGV1-2}}
+* {{Tag|railway:signal:stop:highspeed:form|sign}}
+
+====Instruction board====
+Instruction boards (French: '''Pancarte de consigne''') display operational instructions for train drivers. They are generally used in conjunction with another board or signal.
+
+<gallery>
+File:Pancarte Tirez au Pied du Signal.svg|'''Tirez au Pied du Signal''' instruction board
+File:Pancarte Ne Franchir que sur Ordre du Poste 1+A.svg|'''Ne Franchir que sur Ordre du Poste 1+A''' instruction board
+</gallery>
+
+* {{Tag|railway:signal:minor|FR:instruction_board}}
+* {{Tag|railway:signal:minor:form|sign}}
+* {{Tag|railway:signal:minor:caption|}} (text displayed on the board)
+
+====Train departure====
+
+=====Reporting Plate=====
+
+In general, the driver of a train stopped by a [[#Carré|Carré]], a [[#Carré_violet|Carré violet]], or a [[#Guidon_d'arrêt|Guidon d'arrêt]] must report to the signaller if the signal does not clear immediately.
+
+If a signal is equipped with a telephone that is not located in its immediate vicinity, its location may be indicated by a reporting plate ('''Plaque de Reconnaissance''' in French).
+
+<gallery>
+File:Plaque de reconnaissance avec VAT.svg|Reporting plate
+File:Plaque de reconnaissance différée avec VAT.svg|Delayed reporting plate
+File:Plaque de dispense de reconnaissance avec VAT.svg|Reporting exemption plate
+</gallery>
+
+* {{Tag|railway:signal:departure|FR:reporting}}
+* {{Tag|railway:signal:departure:form|sign}}
+
+Optional tags:
+
+- Alternative types:
+* {{Tag|railway:signal:departure:type||({{TagValue|railway:signal:departure:type|delayed}}/{{TagValue|railway:signal:departure:type|exempt}})}}
+
+- If an arrow indicates the direction to the telephone:
+* {{Tag|railway:signal:departure:phone:direction||({{TagValue|railway:signal:departure:phone:direction|left}}/{{TagValue|railway:signal:departure:phone:direction|right}})}}
+
+- If the plate is equipped with a telephone call indicator (French: '''Voyant d'Appel Téléphonique''', also known as '''VAT'''):
+* {{Tag|railway:signal:departure:phone:indicator|yes}}
+
+Note: Telephone call indicators (VAT) are no longer installed on lines equipped with [[#Network marker|GSM-R]].
+
+=====Departure request=====
+
+Some [[#Carré|Carré]] signals are equipped with a '''Demande de Départ''' (DD) plate. The driver waiting for departure must, one minute before the scheduled departure time or if they notice the corresponding Carré signal has opened, request departure authorization by telephone.
+
+<gallery>
+File:Plaque_DD.svg|'''Demande de Départ''' (DD) plate
+</gallery>
+
+* {{Tag|railway:signal:departure|FR:DD}}
+* {{Tag|railway:signal:departure:form|sign}}
+
+=====Departure authorization=====
+
+On certain tracks, authorization for departure may be given to the driver by a flashing half-white, half-green '''Signal Lumineux de Départ''' (SLD), also known as a '''Signal Lumineux d'Autorisation de Mouvement'''.
+
+<gallery>
+File:SLD_box.gif|Signal Lumineux d'Autorisation de Mouvement
+</gallery>
+
+* {{Tag|railway:signal:departure|FR:SLD}} 
+* {{Tag|railway:signal:departure:form|light}}
+
+
+Alternatively, departure authorization may be given simply by the opening of the corresponding [[#Carré|Carré]] signal; these Carré signals are identified by a half-white, half-green plate.
+
+<gallery>
+File:Plaque_mi-blanche_mi-verte.svg|half-white, half-green plate
+</gallery>
+
+* {{Tag|railway:signal:departure|FR:departure_marker}}
+* {{Tag|railway:signal:departure:form|sign}}
+
+=====Répétiteur Lumineux d'Itinéraire=====
+
+A '''Répétiteur Lumineux d'Itinéraire''' (RLI), a route light repeater, is a board providing route information to the staff member responsible for train departure.
+
+<gallery>
+File:RLI_box.svg|Répétiteur Lumineux d'Itinéraire
+</gallery>
+
+* {{Tag|railway:signal:departure|FR:RLI}}
+* {{Tag|railway:signal:departure:form|light}}
+
+Optional tags:
+* {{Tag|railway:signal:departure:caption|}} (text shown on the display)
+
+===Converging tracks===
+
+====Chevron pointe en haut====
+
+Upward-pointing chevrons indicate either an exit from a junction of converging tracks or, in some stations, the point beyond which trains must not proceed when a stop is required.
+
+<gallery>
+File:Chevron_haut.svg|Chevron pointe en haut
+</gallery>
+
+* {{Tag|railway:signal:minor|FR:chevron}}
+* {{Tag|railway:signal:minor:type|up}} (''down'' by default)
+* {{Tag|railway:signal:minor:form|sign}}
+
+====Tableau Lumineux de Correspondance====
+
+A '''Tableau Lumineux de Correspondance''' (TLC) for converging tracks is a signal installed to the left of the track it addresses and is normally off. At any given time, it can display one of the following:
+
+- A white letter '''T''', either ''fixed'' if the group signal is open or ''flashing'', if the group signal is closed.
+
+- The [[#Signal Lumineux de Départ|Signal Lumineux de Départ]] if applicable.
+
+- A red and white checkerboard, which has the same meaning as the [[#StopMarker|Jalon d'Arrêt]] and is used instead of the [[#Chevron_pointe_en_haut|chevron]].
+
+<gallery>
+File:TLC-T.svg|The group signal is open
+File:TLC-T.gif|The group signal is closed
+File:TLC-SLD.gif|Signal Lumineux de Départ
+File:TLC-C.svg|Stop marker
+</gallery>
+
+* {{Tag|railway:signal:minor|FR:TLC}}
+* {{Tag|railway:signal:minor:form|light}}
+
+====Tableau Indicateur de Provenance====
+
+At the exit of some service track yards, a '''Tableau Indicateur de Provenance''' (TIP), a track indicator, complements the [[#Chevron_pointe_en_haut|chevron]]. It can display any of the numbers designating each of the tracks. When the TIP displays a number, the driver on the corresponding track is allowed to cross the chevron. When the group signal is closed, the driver can advance to an agreed point, usually in preparation for a reversing movement.
+
+<gallery>
+File:TIP_box.svg|Tableau Indicateur de Provenance
+</gallery>
+
+* {{Tag|railway:signal:minor|FR:TIP}}
+* {{Tag|railway:signal:minor:form|light}}
+
+===Service tracks and shunting===
+
+====Signal Lumineux de Manœuvre====
+
+A '''Signal Lumineux de Manœuvre''' (SLM) is installed in some installations to facilitate shunting operations on main tracks (for example, pushing a train into a siding) or on service tracks. It consists of three white lights, which are normally unlit.
+
+The SLM can display the following aspects:
+* '''Pull''' (''Tirez''): two white lights alternating on a vertical line.
+* '''Push back''' (''Refoulez''): two white lights alternating on a horizontal line.
+* '''Stop''' (''Arrêtez''): all lights extinguished.
+* '''Observe hand shunting signals''' (''Observez les signaux à main de manœuvre''): all three white lights lit simultaneously and steadily.
+
+Several similar signals may be installed along the same track to mark the full extent of the shunting area. In such cases, they are numbered with Roman numerals in descending order (e.g. III, II, I), with SLM I being the closest to the switch and identifying the terminal signal of the shunting area.
+
+Note: '''SLM''' are no longer installed on new installations due to the widespread availability of shunting radio, either permanently installed on shunting vehicles or provided as portable equipment on line locomotives.
+
+<gallery>
+File:SLM_pull.gif|'''Pull''' aspect
+File:SLM_push.gif|'''Push back''' aspect
+File:SLM stop.svg|'''Stop''' aspect
+File:SLM all.svg|'''Observe hand shunting signals''' aspect
+</gallery>
+
+* {{Tag|railway:signal:shunting|FR:SLM}}
+* {{Tag|railway:signal:shunting:form|light}}
+* {{Tag|ref||(I/II/III/IV/V)}} (marker plate with Roman numerals)
+
+====Shunting boards====
+
+The '''D''' (Depot) board indicates that the train is directed towards depot tracks.
+
+<gallery>
+File:Tableau_D.svg|Mechanical (sign)
+File:Tableau_D_box.svg|Luminous (light)
+</gallery>
+
+* {{Tag|railway:signal:shunting_route|FR:destination}}
+* {{Tag|railway:signal:shunting_route:depot|FR:D}}
+* {{Tag|railway:signal:shunting_route:depot:form||
+({{TagValue|railway:signal:shunting_route:depot:form|sign}}/{{TagValue|railway:signal:shunting_route:depot:form|light}})}}
+
+
+The '''G''' (Garage) board indicates that the train is directed towards a service track.
+
+<gallery>
+File:Tableau_G.svg|Mechanical (sign)
+File:Tableau_G_box.svg|Luminous (light)
+</gallery>
+
+* {{Tag|railway:signal:shunting_route|FR:destination}}
+* {{Tag|railway:signal:shunting_route:stabling|FR:G}}
+* {{Tag|railway:signal:shunting_route:stabling:form||
+({{TagValue|railway:signal:shunting_route:stabling:form|sign}}/{{TagValue|railway:signal:shunting_route:stabling:form|light}})}}
+
+
+The '''Heurtoir à xxx mètres''' board announces a buffer stop at the specified distance.
+
+<gallery>
+File:Heurtoir_500m.svg|Buffer stop advance sign
+</gallery>
+
+* {{Tag|railway:signal:shunting_route|FR:destination}}
+* {{Tag|railway:signal:shunting_route:buffer_stop|FR:Heurtoir}}
+* {{Tag|railway:signal:shunting_route:buffer_stop:form|sign}}
+* {{Tag|railway:signal:shunting_route:buffer_stop:distance|}} (distance in meters as show on the sign, e.g. ''500'')
+
+
+The '''Imp''' (Impasse) board indicates that the train is directed towards a dead-end track.
+
+<gallery>
+File:Tableau_Imp.svg|'''Imp''' board
+</gallery>
+
+* {{Tag|railway:signal:shunting_route|FR:destination}}
+* {{Tag|railway:signal:shunting_route:dead_end|FR:Imp}} 
+* {{Tag|railway:signal:shunting_route:dead_end:form||
+({{TagValue|railway:signal:shunting_route:dead_end:form|sign}}/{{TagValue|railway:signal:shunting_route:dead_end:form|light}})}} (sign=mechanical; light=luminous)
+
+The '''SAS''' board indicates the route leading to a very short track section (SAS) bounded by [[#Carré|Carré]] signals at both ends.
+
+<gallery>
+File:Pancarte_SAS.svg|'''SAS''' sign
+</gallery>
+
+* {{Tag|railway:signal:shunting_route|FR:destination}}
+* {{Tag|railway:signal:shunting_route:short_block|FR:SAS}}
+* {{Tag|railway:signal:shunting_route:short_block:form||
+({{TagValue|railway:signal:shunting_route:short_block:form|sign}}/{{TagValue|railway:signal:shunting_route:short_block:form|light}})}} (sign=mechanical; light=luminous)
+
+====Shunting signs====
+
+- The '''H sign''' (Heurtoir) marks the position of a buffer stop.
+
+<gallery>
+File:Pancarte H.svg|'''H''' sign
+</gallery>
+
+* {{Tag|railway:signal:shunting|FR:H}}
+* {{Tag|railway:signal:shunting:form|sign}}
+
+
+- The '''LGR sign''' (Limite pour Garage par Refoulement) marks the limit for shunting movements by pushing.
+
+<gallery>
+File:Pancarte_LGR.svg|'''LGR''' sign
+</gallery>
+
+* {{Tag|railway:signal:shunting|FR:LGR}}
+* {{Tag|railway:signal:shunting:form|sign}}
+
+
+- The '''LM sign''' (Limite de Manœuvre) marks the general limit for shunting movements.
+
+<gallery>
+File:Tableau_LM.svg|'''LM''' board
+</gallery>
+
+* {{Tag|railway:signal:shunting|FR:LM}}
+* {{Tag|railway:signal:shunting:form|sign}}
+
+
+- The '''MV sign''' (Marche à vue) authorizes shunting movements at restricted speed while being prepared to stop short of any obstruction.
+
+<gallery>
+File:Pancarte_MV.svg|'''MV''' sign
+</gallery>
+
+* {{Tag|railway:signal:shunting|FR:MV}}
+* {{Tag|railway:signal:shunting:form|sign}}
+
+
+- Limit signs indicate the general limit of shunting movements. (TBD: replace with [[#Instruction board|instruction boards]] using the caption tag?)
+
+<gallery>
+File:Pancarte Limite de Manœuvre (Texte).svg|'''Limite de Manœuvre''' board
+</gallery>
+
+* {{Tag|railway:signal:shunting|FR:limit}}
+* {{Tag|railway:signal:shunting:form|sign}}
+* {{Tag|railway:signal:shunting:for|}} (one of the values in the list below)
+
+
+<gallery>
+File:Pancarte Limite de Manœuvre (Texte).svg|''none''
+File:Pancarte Limite de Manœuvre par l'Embranché.svg|industrial_siding
+File:Pancarte Limite des Manœuvres TGV.svg|highspeed_train
+File:Pancarte Limite pour Dépotage.svg|unloading
+File:Limite de stationnement.svg|parking
+</gallery>
+
+===Servicing===
+Signs related to servicing facilities, such as rolling stock washing facilities.
+
+====Rolling stock washing facility====
+
+<gallery>
+File:Pancarte Lavage à 200m.svg|Washing facility advance sign
+File:Pancarte LAV 100m.svg|Washing facility advance sign (small)
+</gallery>
+
+* {{Tag|railway:signal:servicing|FR:washing_facility_advance}}
+* {{Tag|railway:signal:servicing:form|sign}}
+* {{Tag|railway:signal:servicing:distance|}}
+
+Optional tag:
+* {{Tag|railway:signal:servicing:height|small}}
+
+
+<gallery>
+File:Pancarte L.svg|Washing facility sign (L sign)
+</gallery>
+
+* {{Tag|railway:signal:servicing|FR:L}}
+* {{Tag|railway:signal:servicing:type|washing_facility}}
+* {{Tag|railway:signal:servicing:form|sign}}
+
+
+<gallery>
+File:Pancarte LAV 3km_h.svg|Washing facility speed limit
+</gallery>
+
+* {{Tag|railway:signal:speed_limit|FR:washing_facility}}
+* {{Tag|railway:signal:speed_limit:form|sign}}
+* {{Tag|railway:signal:speed_limit:speed|}}
 
 ===Level crossings===
 
+Most French level crossings are equipped with Automatic Light Signalling (SAL) (French: Signalisation Automatique Lumineuse et sonore), which warns road users using flashing red lights, audible alarms and, where fitted, barriers. 
+
+Depending on the installation, the warning sequence may be initiated automatically, manually by the train crew, or by a radio command transmitted by the train driver.
+
 ====Level crossing announcement====
 
-This sign informs the driver that they are approaching an unguarded level crossing where they must stop in accordance with specific operating instructions.
+This announcement sign informs the driver that they are approaching an unguarded level crossing where specific operating instructions apply.
 
-[[File:PN.svg|60px]] 
+<gallery>
+File:Pancarte PN d'Annonce.svg|Level crossing advance sign
+File:Pancarte PN d'Annonce avec Pancarte Radio.svg|Level crossing advance sign with ''Radio'' sign
+</gallery>
 
-* {{Tag|railway:signal:crossing_hint|FR:PN_A}}
+* {{Tag|railway:signal:crossing_hint|FR:PN}}
 * {{Tag|railway:signal:crossing_hint:form|sign}}
+* {{Tag|railway:signal:crossing_hint:number|}} (level crossing number e.g. ''46'')
+* {{Tag|railway:signal:crossing_hint:distance|}} (distance in meters e.g. ''300'')
 
-Optional tags:
-* {{Tag|railway:signal:crossing_hint:caption|}} (text as shown on the sign)
+When fitted with an additional ''Radio'' sign, it indicates that the approaching level crossing is operated by radio control. In this case, the following tag must also be specified:
+* {{Tag|railway:signal:crossing_hint:type|radio_controlled}}
+
+====Radio-controlled level crossing====
+
+This board, installed approximately 350 m before the level crossing, marks the location where the train driver must transmit a radio command that initiates the warning sequence.
+
+<gallery>
+File:Pancarte Cde Radio.svg|Radio command sign
+</gallery>
+
+* {{Tag|railway:signal:crossing_hint|FR:radio_command}}
+* {{Tag|railway:signal:crossing_hint:form|sign}}
 
 ====Level crossing ahead====
 
-This sign indicates the ''operating mode'' of the level crossing:
+This sign is placed immediately before the level crossing and identifies the crossing by its number. It also indicates how the crossing is operated.
 
-* '''Automatic mode''' (no white band): closure is triggered automatically when a section of track — starting about 20 meters <!-- cf. IN 1482 V1 --> before the crossing — is occupied.
+* '''Automatic mode''' (no white band): the warning sequence is initiated automatically by the approaching train.
 
-* '''Manual mode''' (white band): closure or operation is carried out by the train crew.
+* '''Manual mode''' (white band): the warning sequence must be initiated by the train crew according to operating instructions.
 
-{| class="wikitable" style="text-align:center"
-! Automatic mode !! Manual mode
-|-
-| [[File:Pancarte_PN.svg|60px]] || [[File:Pancarte_PN_avec_bandeau.svg|60px]]
-|}
+<gallery>
+File:Pancarte PN de Proximité.svg|Automatic level crossing sign
+File:Pancarte PN avec Bandeau Blanc.svg|Manually operated level crossing sign
+</gallery>
 
 * {{Tag|railway:signal:crossing_info|FR:PN}}
 * {{Tag|railway:signal:crossing_info:form|sign}}
+* {{Tag|railway:signal:crossing_info:number|}} (level crossing number as shown on the sign, e.g. ''44'' or ''116'')
 
-Optional tags:
-* {{Tag|railway:signal:crossing_info:caption|}} (text as show on the sign)
-* {{Tag|railway:signal:crossing_info:automatic|no}} (''automatic'' by default)
+If the level crossing is manually operated, the following tag must be specified:
+* {{Tag|railway:signal:crossing_info:automatic|no}} (''yes'' by default)
 
-====Conditional crossing====
+=====Signal de Franchissement Conditionnel=====
+Radio-controlled level crossings are additionally equipped with a '''Signal de Franchissement Conditionnel''' (SFC). This signal consists of one or two ''green lights'', arranged vertically or horizontally, and installed close to or above the level crossing sign.
 
-Level crossings equipped with automatic light and sound signalling (SAL) may also be fitted with a '''Signal lumineux longitudinal dit de "Franchissement Conditionnel"''' (SFC), a "conditional crossing" light signal. This signal consists of one or two green lights ("feux verts" in French) arranged vertically or horizontally.
+When illuminated, the SFC confirms that the level crossing has been activated successfully and is securely closed, authorizing the train to proceed without stopping at the ''PN'' sign. When unlit, it is equivalent to a stop indication.
 
-The SFC signal informs the train driver of the state of the level crossing, ensuring that, in case of system failure, the train can be stopped before the crossing. The level crossing may only be passed without stopping when the SFC signal is lit, confirming its normal closed state. An unlit SFC signal is equivalent to a stop indication.
-
-[[File:Feux_Verts.svg|60px]]
+<gallery>
+File:Feux Verts.svg|Vertically arranged green lights
+File:Feux Verts Horizontaux.svg|Horizontally arranged green lights
+</gallery>
 
 * {{Tag|railway:signal:crossing|FR:SFC}}
 * {{Tag|railway:signal:crossing:form|light}}
-* {{Tag|railway:signal:crossing:arrangement||({{TagValue|railway:signal:crossing:arrangement|single}}/{{TagValue|railway:signal:crossing:arrangement|horizontal}}/{{TagValue|railway:signal:crossing:arrangement|vertical}})}}
+
+Optional tags:
+* {{Tag|railway:signal:crossing:arrangement|vertical}} (horizontal by default)
+
+===Clearance signs===
+
+This sign marks the approach to a permanent reduced clearance.
+
+<gallery>
+File:Pancarte_Gabarit.svg|Reduced clearance sign
+</gallery>
+
+* {{Tag|railway:signal:clearance|FR:reduced_clearance}}
+* {{Tag|railway:signal:clearance:form|sign}}
+
+It may be grouped with a sign indicating the number of upcoming tunnels.
+
+<gallery>
+File:Pancarte Tunnel.svg|Tunnel sign
+</gallery>
+
+* {{Tag|railway:signal:structure|FR:tunnel}}
+* {{Tag|railway:signal:structure:type|tunnel}}
+* {{Tag|railway:signal:structure:form|sign}}
+
+Optional tags:
+* {{Tag|railway:signal:structure:count|}} (number of upcoming tunnels)
 
 ===Whistle===
 
 The '''S''' sign indicates locations where the driver must sound the horn, such as when approaching unguarded level crossings, entering tunnels, or passing through areas with reduced visibility.
 
-{| class="wikitable" style="text-align:center"
-! S sign !! S sign with J plate
-|-
-|[[File:Pancarte_S.svg|60px]]||[[File:Pancarte_S+J.svg|60px]]
-|}
+<gallery>
+File:Pancarte_S.svg|S sign
+File:Pancarte_S+J.svg|S sign with J plate
+</gallery>
 
 * {{Tag|railway:signal:whistle|FR:S}}
 * {{Tag|railway:signal:whistle:form|sign}}
@@ -1177,16 +1645,96 @@ Optional tags:
 
 When a '''J''' plate is present below the '''S''' sign, it indicates that the whistling obligation applies only during ''daytime'' (between 07:00 and 20:00).
 
-* {{Tag|railway:signal:whistle:plate|FR:J}}
+* {{Tag|railway:signal:whistle:type|FR:J}}
 
-===Miscellaneous signs===
+===Snowplow===
 
-This signal marks the approach to a permanent or temporary reduced clearance.
+- The '''snowplow lowering signal''' indicates the location where trains equipped with a snowplow must lower the snowplow.
 
-[[File:Pancarte_Gabarit.svg|60px]]
+<gallery>
+File:Triangle de Relevage (baisser).svg|Snowplow lowering signal
+</gallery>
 
-* {{Tag|railway:signal:minor|FR:reduced_clearance}}
-* {{Tag|railway:signal:minor:form|sign}}
+* {{Tag|railway:signal:snowplow|FR:lower_equipment}}
+* {{Tag|railway:signal:snowplow:form|sign}}
+* {{Tag|railway:signal:snowplow:type|down}}
+
+- The '''snowplow raising signal''' indicates the location where trains equipped with a snowplow must raise the snowplow to avoid striking obstructions.
+
+<gallery>
+File:Triangle de Relevage (relever).svg|Snowplow raising signal
+</gallery>
+
+* {{Tag|railway:signal:snowplow|FR:raise_equipment}}
+* {{Tag|railway:signal:snowplow:form|sign}}
+* {{Tag|railway:signal:snowplow:type|up}}
+
+===Border signals===
+Near the French–Swiss border, some railway signals belonging to the Swiss signalling system can be found on French territory while carrying SNCF Réseau identifiers. This section describes the main Swiss signals encountered in these border areas.
+
+For more information about Swiss railway signalling, please see [[DE:OpenRailwayMap/Tagging_in_Switzerland|Tagging in Switzerland]].
+
+====Main signal====
+
+Main signal without distant signal function (German: '''Hauptsignal ohne Vorsignalfunktion''')
+
+<gallery>
+File:524 Swiss main signal 4 lights.svg|Main signal
+</gallery>
+
+* {{Tag|railway:signal:main|CH-FDV:l}}
+* {{Tag|railway:signal:main:form|light}}
+* {{Tag|railway:signal:main:function||({{TagValue|railway:signal:main:function|entry}}/{{TagValue|railway:signal:main:function|exit}}/{{TagValue|railway:signal:main:function|intermediate}}/{{TagValue|railway:signal:main:function|block}})}}
+* {{Tag|railway:signal:main:states|({{TagValue|railway:signal:main:states|CH-FDV:524}};{{TagValue|railway:signal:main:states|CH-FDV:530}};{{TagValue|railway:signal:main:states|CH-FDV:542}};{{TagValue|railway:signal:main:states|CH-FDV:545}};{{TagValue|railway:signal:main:states|CH-FDV:547}};{{TagValue|railway:signal:main:states|CH-FDV:550}})}}
+
+====Distant signal====
+
+Distant signal (German: '''Vorsignal''')
+
+<gallery>
+File:519 Swiss distant signal 4 lights.svg|Distant signal
+</gallery>
+
+* {{Tag|railway:signal:distant|CH-FDV:l}}
+* {{Tag|railway:signal:distant:form|light}}
+* {{Tag|railway:signal:distant:states||({{TagValue|railway:signal:distant:states|CH-FDV:519}};{{TagValue|railway:signal:distant:states|CH-FDV:528}};{{TagValue|railway:signal:distant:states|CH-FDV:534}};{{TagValue|railway:signal:distant:states|CH-FDV:536}})}}
+
+====Group signal====
+
+Group signal stop board with departure track indicators (German: '''Gruppensignal-Halttafel mit Fahrbegrifftafeln''')
+
+<gallery>
+File:561 Swiss group signal indicator.svg|Group signal indicator
+</gallery>
+
+* {{Tag|railway:signal:stop|CH-FDV:560}}
+* {{Tag|railway:signal:stop:form|sign}}
+* {{Tag|railway:signal:assignment|CH-FDV:561}}
+* {{Tag|railway:signal:assignment:form|sign}}
+* {{Tag|railway:signal:assignment:caption|}}
+
+====Evacuation signal====
+
+Evacuation signal (German: '''Räumungssignal''')
+
+<gallery>
+File:Swiss_Signal_Shunting_Evacuation_Allowed_1.svg|Evacuation signal
+</gallery>
+
+* {{Tag|railway:signal:shunting|CH-FDV:308}}
+* {{Tag|railway:signal:shunting:form|light}}
+* {{Tag|railway:signal:shunting:states||({{TagValue|railway:signal:shunting:states|CH-FDV:308}};{{TagValue|railway:signal:shunting:states|CH-FDV:310}})}}
+
+====Shunting stop board====
+
+Shunting stop board (German: '''Rangierhalttafel''')
+
+<gallery>
+File:304 Swiss shunting stop board.svg|Shunting stop board
+</gallery>
+
+* {{Tag|railway:signal:shunting|CH-FDV:304}}
+* {{Tag|railway:signal:shunting:form|sign}}
 
 = Sources =
 
@@ -1194,11 +1742,13 @@ This signal marks the approach to a permanent or temporary reduced clearance.
 *[https://www.securite-ferroviaire.fr/sites/default/files/reglementations/pdf/2023-03/rfn-ig-se-01-00-num-012-v3.pdf Signalisation au sol et signalisation à main – Document d'exploitation] (SNCF Réseau, 2023, PDF)
 *[https://www.jonroma.net/media/rail/opdocs/world/france/S%201%20A%20I-%20Signalisation%20au%20sol.pdf Signalisation au sol] (SNCF, 2005, PDF)
 *[https://www.jonroma.net/media/rail/opdocs/world/france/S%201%20B%20I%E2%80%93%20Arre%CC%82t%20d%27un%20train%20par%20un%20signal.pdf Arrêt d’un train par un signal carré, un guidon d’arrêt ou un sémaphore fermé] (SNCF, 2005, PDF)
+* [https://docrail.fr/ DocRail]
 *[https://wikipedia.org/wiki/French_railway_signalling/ French railway signalling]
-*[https://ressources.data.sncf.com/explore/dataset/signalisation-permanente/information/ Signalisation permanente] (SNCF)
+* [https://fr.wikipedia.org/wiki/Syst%C3%A8me_d'aide_%C3%A0_la_conduite,_%C3%A0_l'exploitation_et_%C3%A0_la_maintenance Système d'aide à la conduite, à l'exploitation et à la maintenance (SACEM)]
 *[https://ressources.data.sncf.com/explore/dataset/lexique-des-acronymes-sncf/information/ Lexique des acronymes] (SNCF)
 *[https://github.com/nicolaswurtz/signalisation-rfn-svg signalisation-rfn-svg] (Nicolas Wurtz, SVG)
 *[https://commons.wikimedia.org/wiki/Category:Diagrams_of_railway_signals_in_France Diagrams of railway signals in France] (Various authors, SVG+GIF)
+*[https://commons.wikimedia.org/wiki/Category:Diagrams_of_railway_signs_in_France Diagrams of railway signs in France] (Various authors, SVG)
 
 
 {{Railway signals}}
