@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.25_2026-07-23"
+    version="1.26_2026-07-24"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -11,23 +11,8 @@
 
 	<!-- 1. BASE CHUNKS (inheritance) -->
 
-	<!-- Chunk to delete obsolete keys from older versions -->
-	<chunk id="delete_obsolete_keys">
-		<key key="railway:signal:main:plate" match="none" />
-		<key key="railway:signal:main:plate:caption" match="none" />
-		<key key="railway:signal:speed_limit_reminder" match="none" />
-		<key key="railway:signal:speed_limit_reminder:form" match="none" />
-		<key key="railway:signal:speed_limit_reminder:ref" match="none" />
-		<key key="railway:signal:speed_limit_reminder:speed" match="none" />
-		<key key="railway:signal:speed_limit_distant:shape" match="none" />
-		<key key="railway:signal:speed_limit_distant:speed" match="none" />
-		<key key="railway:signal:stop:disposition" match="none" />
-		<key key="railway:signal:shunting_route:buffer_stop:caption" match="none" />
-	</chunk>
-
 	<!-- Common tags applied to every railway signal node -->
 	<chunk id="base_common">
-		<reference ref="delete_obsolete_keys" />
 		<key key="source" value="SNCF - 03/2022" />
 		<key key="railway" value="signal" />
 		<text
@@ -125,7 +110,7 @@
 		<link wiki="OpenRailwayMap/Tagging_in_France#Carré_(dwarf)" />
 	</chunk>
 
-	<!-- Unused 2TMV chunk -->
+	<!-- 2TMV intermediate signal chunk -->
 	<!-- Declare states and icons for taginfo.json -->
 	<chunk id="cat_intermediate_signal">
 		<multiselect
@@ -224,14 +209,24 @@
 			fr.text="Identifiant Réseau" length="7" />
 	</chunk>
 
-	<!-- Mechanical distant signals (form=sign) -->
-	<chunk id="cat_mechanical_distant">
+	<!-- Distant signals, sign form -->
+	<chunk id="cat_distant_sign">
 		<reference ref="base_common" />
 		<key key="railway:signal:distant:form" value="sign" />
 		<text
 			key="railway:signal:distant:ref"
 			text="Network ID"
 			fr.text="Identifiant Réseau" length="7" />
+	</chunk>
+
+	<!-- Advance signs naming the stop signal ahead and its distance -->
+	<chunk id="cat_advance_sign">
+		<reference ref="cat_distant_sign" />
+		<space />
+		<text
+			key="railway:signal:distant:distance"
+			text="Distance (m)"
+			fr.text="Distance (m)" length="4" />
 	</chunk>
 
 	<!-- Minor signals (form varies) -->
@@ -245,13 +240,8 @@
 
 	<!-- Mirlitons (distant distance boards; form=sign) -->
 	<chunk id="cat_mirliton">
-		<reference ref="base_common" />
 		<key key="railway:signal:distant" value="FR:mirliton" />
-		<key key="railway:signal:distant:form" value="sign" />
-		<text
-			key="railway:signal:distant:ref"
-			text="Network ID"
-			fr.text="Identifiant Réseau" length="7" />
+		<reference ref="cat_distant_sign" />
 	</chunk>
 
 	<!-- Distant signals (form=light) -->
@@ -394,7 +384,12 @@
 		<reference ref="base_common" />
 		<key key="railway:signal:stop_distant:form" value="sign" />
 		<text key="railway:signal:stop_distant:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-		<link wiki="OpenRailwayMap/Tagging_in_France#Stops" />
+		<space />
+		<text
+			key="railway:signal:stop_distant:distance"
+			text="Distance (m)"
+			fr.text="Distance (m)" length="4" />
+		<link wiki="OpenRailwayMap/Tagging_in_France#Distant_stops" />
 	</chunk>
 
 	<!-- ARRÊT signs restricted to a movement type (no arrangement variant) -->
@@ -411,11 +406,11 @@
 		<link wiki="OpenRailwayMap/Tagging_in_France#Passenger_stops" />
 	</chunk>
 
-	<!-- Passenger stop signs (classic) -->
-	<chunk id="cat_classic_passenger_stop">
+	<!-- Passenger stop signs (conventional trains) -->
+	<chunk id="cat_conventional_passenger_stop">
 		<reference ref="cat_passenger_stop" />
-		<key key="railway:signal:stop:classic:form" value="sign" />
-		<text key="railway:signal:stop:classic:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<key key="railway:signal:stop:conventional:form" value="sign" />
+		<text key="railway:signal:stop:conventional:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
 	</chunk>
 
 	<!-- Passenger stop signs (highspeed) -->
@@ -1633,7 +1628,7 @@
 							fr.short_description="Feu blanc clignotant"
 							icon="icons/signals/K-M.svg" icon_size="24"/>
 					</multiselect>
-					<reference ref="optional_deactivated_only" />
+					<reference ref="cv_tags" />
 				</item>
 
 			</group>
@@ -2506,7 +2501,7 @@
 					fr.text="Disque mécanique" />
 				<space />
 				<key key="railway:signal:distant" value="FR:D" />
-				<reference ref="cat_mechanical_distant" />
+				<reference ref="cat_distant_sign" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Disque_(mechanical)" />
 			</item>
 
@@ -2521,7 +2516,7 @@
 					fr.text="Avertissement mécanique" />
 				<space />
 				<key key="railway:signal:distant" value="FR:A" />
-				<reference ref="cat_mechanical_distant" />
+				<reference ref="cat_distant_sign" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Avertissement_(mechanical)" />
 			</item>
 
@@ -2668,6 +2663,7 @@
 				<key key="railway:signal:shunting:form" value="light" />
 				<key key="railway:signal:shunting:states" value="CH-FDV:308;CH-FDV:310" />
 				<reference ref="base_common" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Evacuation_signal" />
 			</item>
 
 			<item
@@ -2682,6 +2678,7 @@
 				<key key="railway:signal:shunting" value="CH-FDV:304" />
 				<key key="railway:signal:shunting:form" value="sign" />
 				<reference ref="base_common" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_stop_board" />
 			</item>
 
 			<item
@@ -2705,6 +2702,7 @@
 					fr.text="Numéro de voie"
 					length="2"/>
 			</item>
+			<link wiki="OpenRailwayMap/Tagging_in_France#Group_signal" />
 		</group>
 
 		<separator />
@@ -2843,10 +2841,6 @@
 				<space />
 				<key key="railway:signal:stop_distant" value="FR:ARRET" />
 				<reference ref="cat_stop_distant" />
-				<text
-					key="railway:signal:stop_distant:distance"
-					text="Distance (m)"
-					fr.text="Distance (m)" length="4" />
 			</item>
 
 			<!-- ARRÊT pour Desserte à ...m -->
@@ -2862,10 +2856,6 @@
 				<key key="railway:signal:stop_distant" value="FR:ARRET" />
 				<key key="railway:signal:stop_distant:for" value="industrial_siding" />
 				<reference ref="cat_stop_distant" />
-				<text
-					key="railway:signal:stop_distant:distance"
-					text="Distance (m)"
-					fr.text="Distance (m)" length="4" />
 			</item>
 
 			<!-- STOP ...m -->
@@ -2880,10 +2870,6 @@
 				<space />
 				<key key="railway:signal:stop_distant" value="FR:STOP" />
 				<reference ref="cat_stop_distant" />
-				<text
-					key="railway:signal:stop_distant:distance"
-					text="Distance (m)"
-					fr.text="Distance (m)" length="4" />
 			</item>
 
 			<separator />
@@ -2899,16 +2885,8 @@
 					fr.text="Pancarte à distance &quot;CARRÉ ...m&quot;" />
 				<space />
 				<key key="railway:signal:distant" value="FR:CARRE" />
-				<key key="railway:signal:distant:form" value="sign" />
-				<reference ref="base_common" />
-				<text
-					key="railway:signal:distant:ref"
-					text="Network ID"
-					fr.text="Identifiant Réseau" length="7" />
-				<text
-					key="railway:signal:distant:distance"
-					text="Distance (m)"
-					fr.text="Distance (m)" length="4" />
+				<reference ref="cat_advance_sign" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Carré_distant_sign" />
 			</item>
 
 			<!-- GA ...m -->
@@ -2922,16 +2900,8 @@
 					fr.text="Pancarte à distance &quot;GA ...m&quot;" />
 				<space />
 				<key key="railway:signal:distant" value="FR:GA" />
-				<key key="railway:signal:distant:form" value="sign" />
-				<reference ref="base_common" />
-				<text
-					key="railway:signal:distant:ref"
-					text="Network ID"
-					fr.text="Identifiant Réseau" length="7" />
-				<text
-					key="railway:signal:distant:distance"
-					text="Distance (m)"
-					fr.text="Distance (m)" length="4" />
+				<reference ref="cat_advance_sign" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#GA_distant_sign" />
 			</item>
 
 		</group>
@@ -3131,9 +3101,9 @@
 					text="Passenger stop: head of train"
 					fr.text="Arrêt voyageurs : tête de train" />
 				<space />
-				<key key="railway:signal:stop:classic" value="FR:TT" />
-				<key key="railway:signal:stop:classic:for" value="head_of_train" />
-				<reference ref="cat_classic_passenger_stop" />
+				<key key="railway:signal:stop:conventional" value="FR:TT" />
+				<key key="railway:signal:stop:conventional:for" value="head_of_train" />
+				<reference ref="cat_conventional_passenger_stop" />
 			</item>
 
 			<!-- TT EAS -->
@@ -3145,9 +3115,9 @@
 					text="Passenger stop for trains equipped for driver-only operations"
 					fr.text="Arrêt voyageurs pour trains équipés EAS" />
 				<space />
-				<key key="railway:signal:stop:classic" value="FR:TT_EAS" />
-				<key key="railway:signal:stop:classic:for" value="driver_only" />
-				<reference ref="cat_classic_passenger_stop" />
+				<key key="railway:signal:stop:conventional" value="FR:TT_EAS" />
+				<key key="railway:signal:stop:conventional:for" value="driver_only" />
+				<reference ref="cat_conventional_passenger_stop" />
 			</item>
 
 			<!-- TTL -->
@@ -3159,9 +3129,9 @@
 					text="Passenger stop for trains with locomotive"
 					fr.text="Arrêt voyageurs pour trains avec locomotive" />
 				<space />
-				<key key="railway:signal:stop:classic" value="FR:TTL" />
-				<key key="railway:signal:stop:classic:for" value="locomotive" />
-				<reference ref="cat_classic_passenger_stop" />
+				<key key="railway:signal:stop:conventional" value="FR:TTL" />
+				<key key="railway:signal:stop:conventional:for" value="locomotive" />
+				<reference ref="cat_conventional_passenger_stop" />
 			</item>
 
 			<separator />
@@ -3175,12 +3145,12 @@
 					text="Passenger stop for trains up to x vehicles"
 					fr.text="Arrêt voyageurs pour trains jusqu'à x voitures" />
 				<space />
-				<key key="railway:signal:stop:classic" value="FR:vehicle_number" />
-				<key key="railway:signal:stop:classic:for" value="vehicles" />
-				<reference ref="cat_classic_passenger_stop" />
+				<key key="railway:signal:stop:conventional" value="FR:vehicle_number" />
+				<key key="railway:signal:stop:conventional:for" value="vehicles" />
+				<reference ref="cat_conventional_passenger_stop" />
 				<space />
 				<multiselect
-					key="railway:signal:stop:classic:number"
+					key="railway:signal:stop:conventional:number"
 					text="Number of vehicles"
 					fr.text="Nombre de voitures"
 					delimiter=";"
@@ -3198,12 +3168,12 @@
 					text="Passenger stop for self-propelled units of a given length"
 					fr.text="Arrêt voyageurs pour automoteurs d'une longueur donnée" />
 				<space />
-				<key key="railway:signal:stop:classic" value="FR:train_length" />
-				<key key="railway:signal:stop:classic:for" value="railcar" />
-				<reference ref="cat_classic_passenger_stop" />
+				<key key="railway:signal:stop:conventional" value="FR:train_length" />
+				<key key="railway:signal:stop:conventional:for" value="railcar" />
+				<reference ref="cat_conventional_passenger_stop" />
 				<space />
 				<combo
-					key="railway:signal:stop:classic:length"
+					key="railway:signal:stop:conventional:length"
 					text="Train length (m)"
 					fr.text="Longueur du train (m)"
 					editable="false"
@@ -3327,11 +3297,15 @@
 					<space />
 					<key key="railway:signal:station_distant" value="FR:facility_approach" />
 					<reference ref="cat_station_distant" />
-					<reference ref="facility_link" />
 					<text
-						key="railway:signal:station_distant:caption"
-						text="Sign caption"
-						fr.text="Libellé de la pancarte" />
+						key="railway:signal:station_distant:town"
+						text="Town"
+						fr.text="Ville" />
+					<text
+						key="railway:signal:station_distant:distance"
+						text="Distance (m)"
+						fr.text="Distance (m)" length="4" />
+					<reference ref="facility_link" />
 				</item>
 
 				<!-- APPROACH (VUSS) -->
@@ -4340,7 +4314,7 @@
 					<key key="railway:signal:speed_limit:freight" value="FR:white_board" />
 					<key key="railway:signal:speed_limit:freight:form" value="sign" />
 					<key key="railway:signal:speed_limit:freight:function" value="exit" />
-					<key key="railway:signal:speed_limit_distant:freight:speed" />
+					<key key="railway:signal:speed_limit:freight:speed" match="none" />
 					<reference ref="base_common" />
 					<text
 						key="railway:signal:speed_limit:freight:ref"
@@ -5345,7 +5319,7 @@
 				<key key="railway:signal:electricity:type" value="end_of_catenary" />
 				<key key="railway:signal:electricity:form" value="sign" />
 				<reference ref="base_common" />
-				<link wiki="https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France#End_of_catenary" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#End_of_catenary" />
 			</item>
 
 			<!-- FROST BOARD -->
@@ -5360,7 +5334,7 @@
 				<space />
 				<key key="railway:signal:electricity" value="FR:frost" />
 				<reference ref="cat_electricity_with_form" />
-				<link wiki="https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France#Frost_board" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Frost_board" />
 			</item>
 
 			<separator />
