@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.26_2026-07-24"
+    version="1.27_2026-07-27"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -219,8 +219,8 @@
 			fr.text="Identifiant Réseau" length="7" />
 	</chunk>
 
-	<!-- Advance signs naming the stop signal ahead and its distance -->
-	<chunk id="cat_advance_sign">
+	<!-- Distant signs naming the stop signal ahead and its distance -->
+	<chunk id="cat_distant_sign_with_distance">
 		<reference ref="cat_distant_sign" />
 		<space />
 		<text
@@ -371,15 +371,14 @@
 		<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_signs" />
 	</chunk>
 
-	<!-- Stop signals (form=sign) -->
+	<!-- Stop signals w/o links (form=sign) -->
 	<chunk id="cat_stop">
 		<reference ref="base_common" />
 		<key key="railway:signal:stop:form" value="sign" />
 		<text key="railway:signal:stop:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-		<link wiki="OpenRailwayMap/Tagging_in_France#Stops" />
 	</chunk>
 
-	<!-- Stop distant signals (advance signs for Arrêt/STOP) -->
+	<!-- Stop distant signals (distant signs for Arrêt/STOP) -->
 	<chunk id="cat_stop_distant">
 		<reference ref="base_common" />
 		<key key="railway:signal:stop_distant:form" value="sign" />
@@ -389,17 +388,17 @@
 			key="railway:signal:stop_distant:distance"
 			text="Distance (m)"
 			fr.text="Distance (m)" length="4" />
-		<link wiki="OpenRailwayMap/Tagging_in_France#Distant_stops" />
 	</chunk>
 
-	<!-- ARRÊT signs restricted to a movement type (no arrangement variant) -->
+	<!-- ARRÊT signs restricted to a movement type -->
 	<chunk id="arret_for_tags">
 		<key key="railway:signal:stop" value="FR:ARRET" />
 		<key key="railway:signal:stop:arrangement" match="none" />
 		<reference ref="cat_stop" />
+		<link wiki="OpenRailwayMap/Tagging_in_France#Arrêt_signs_for_specific_movements" />
 	</chunk>
-	
-	<!-- Passenger stop signs -->	
+
+	<!-- Passenger stop signs -->
 	<chunk id="cat_passenger_stop">
 		<reference ref="base_common" />
 		<key key="railway:signal:stop" value="FR:passenger_stop" />
@@ -434,12 +433,18 @@
 		<text key="railway:signal:station_distant:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
 	</chunk>
 
-	<!-- Rolling stock washing facility signs (form=sign) -->
-	<chunk id="cat_washing_facility">
+	<!-- Servicing distant signs (form=sign) -->
+	<chunk id="cat_servicing_distant">
+		<reference ref="base_common" />
+		<key key="railway:signal:servicing_distant:form" value="sign" />
+		<text key="railway:signal:servicing_distant:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+	</chunk>
+	
+	<!-- Servicing signs (form=sign) -->
+	<chunk id="cat_servicing">
 		<reference ref="base_common" />
 		<key key="railway:signal:servicing:form" value="sign" />
 		<text key="railway:signal:servicing:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
-		<link wiki="OpenRailwayMap/Tagging_in_France#Rolling_stock_washing_facility" />
 	</chunk>
 
 	<!-- Reporting plates -->
@@ -2421,7 +2426,6 @@
 				<item_separator />
 
 				<preset_link preset_name="Reminder 30" text=""/>
-				<preset_link preset_name="Caution" text=""/>
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Carré_(mechanical)" />
 			</item>
@@ -2836,11 +2840,12 @@
 				type="node"
 				icon="icons/signs/distant_arret.svg">
 				<label
-					text="Advance sign &quot;ARRÊT ...m&quot;"
+					text="&quot;ARRÊT ...m&quot; distant sign"
 					fr.text="Pancarte à distance &quot;ARRÊT ...m&quot;" />
 				<space />
 				<key key="railway:signal:stop_distant" value="FR:ARRET" />
 				<reference ref="cat_stop_distant" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#ARRET_distant_signs" />
 			</item>
 
 			<!-- ARRÊT pour Desserte à ...m -->
@@ -2850,12 +2855,13 @@
 				type="node"
 				icon="icons/signs/distant_stop_industrial_siding.svg">
 				<label
-					text="Advance sign &quot;ARRÊT pour Desserte à ...m&quot;"
+					text="&quot;ARRÊT pour Desserte à ...m&quot; distant sign"
 					fr.text="Pancarte à distance &quot;ARRÊT pour Desserte à ...m&quot;" />
 				<space />
 				<key key="railway:signal:stop_distant" value="FR:ARRET" />
 				<key key="railway:signal:stop_distant:for" value="industrial_siding" />
 				<reference ref="cat_stop_distant" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#ARRET_distant_signs" />
 			</item>
 
 			<!-- STOP ...m -->
@@ -2865,11 +2871,12 @@
 				type="node"
 				icon="icons/signs/distant_stop.svg">
 				<label
-					text="Advance sign &quot;STOP ...m&quot;"
+					text="&quot;STOP ...m&quot; distant sign"
 					fr.text="Pancarte à distance &quot;STOP ...m&quot;" />
 				<space />
 				<key key="railway:signal:stop_distant" value="FR:STOP" />
 				<reference ref="cat_stop_distant" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#STOP_distant_signs" />
 			</item>
 
 			<separator />
@@ -2879,14 +2886,36 @@
 				name="CARRÉ ...m"
 				fr.name="CARRÉ ...m"
 				type="node"
-				icon="icons/signs/distant_carre.svg">
+				icon="icons/signs/distant_carre.svg"
+				match_expression="-&quot;railway:signal:distant:for&quot;=*">
 				<label
-					text="Advance sign &quot;CARRÉ ...m&quot;"
+					text="&quot;CARRÉ ...m&quot; distant sign"
 					fr.text="Pancarte à distance &quot;CARRÉ ...m&quot;" />
 				<space />
 				<key key="railway:signal:distant" value="FR:CARRE" />
-				<reference ref="cat_advance_sign" />
+				<key key="railway:signal:distant:for" match="none" />
+				<reference ref="cat_distant_sign_with_distance" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Carré_distant_sign" />
+			</item>
+
+			<!-- Intermediate signal distant sign -->
+			<item
+				name="C... à droite à ...m"
+				fr.name="C... à droite à ...m"
+				type="node"
+				icon="icons/signs/distant_intermediate_signal.svg">
+				<label
+					text="&quot;C... à droite à ...m&quot; distant sign (2TMV)"
+					fr.text="Pancarte &quot;C... à droite à ...m&quot; (2TMV)" />
+				<space />
+				<key key="railway:signal:distant" value="FR:CARRE" />
+				<key key="railway:signal:distant:for" value="intermediate" />
+				<reference ref="cat_distant_sign_with_distance" />
+				<text
+					key="railway:signal:distant:caption"
+					text="Announced signal ID"
+					fr.text="Identifiant du signal annoncé" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Intermediate_signal_distant_signs" />
 			</item>
 
 			<!-- GA ...m -->
@@ -2894,13 +2923,13 @@
 				name="GA ...m"
 				fr.name="GA ...m"
 				type="node"
-				icon="icons/signs/GA_distant.svg">
+				icon="icons/signs/distant_GA.svg">
 				<label
-					text="Advance sign &quot;GA ...m&quot;"
+					text="&quot;GA ...m&quot; distant sign "
 					fr.text="Pancarte à distance &quot;GA ...m&quot;" />
 				<space />
 				<key key="railway:signal:distant" value="FR:GA" />
-				<reference ref="cat_advance_sign" />
+				<reference ref="cat_distant_sign_with_distance" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#GA_distant_sign" />
 			</item>
 
@@ -2950,6 +2979,46 @@
 							icon="icons/signs/vertical_ARRET.svg"
 							icon_size="24"/>
 					</combo>
+					<link wiki="OpenRailwayMap/Tagging_in_France#Arrêt_signs" />
+				</item>
+
+				<!-- High-speed trainset stopping point -->
+				<item
+					name="Arrêt for TGV and ETR"
+					fr.name="Arrêt pour TGV et ETR"
+					type="node"
+					icon="icons/signs/stop_highspeed.svg">
+					<label
+						text="Stop board for TGV and ETR trains"
+						fr.text="Pancarte Arrêt pour les TGV et ETR" />
+					<space />
+					<key key="railway:signal:stop" value="FR:ARRET" />
+					<key key="railway:signal:stop:for" value="highspeed" />
+					<reference ref="cat_stop" />
+					<space />
+					<multiselect
+						key="railway:signal:stop:trainset"
+						text="Trainset series"
+						fr.text="Séries de rames"
+						editable="false"
+						values_sort="false"
+						rows="5">
+						<list_entry value="TGV_A" display_value="TGV Atlantique (A)" fr.display_value="TGV Atlantique (A)" />
+						<list_entry value="TGV_R" display_value="TGV Réseau (R)" fr.display_value="TGV Réseau (R)" />
+						<list_entry value="TGV_SE" display_value="TGV Sud-Est (SE)" fr.display_value="TGV Sud-Est (SE)" />
+						<list_entry value="ETR" display_value="ETR" fr.display_value="ETR" />
+					</multiselect>
+					<combo
+						key="railway:signal:stop:composition"
+						text="Train composition"
+						fr.text="Composition"
+						editable="false"
+						values_sort="false">
+						<list_entry value="" display_value="All compositions" fr.display_value="Toutes compositions" />
+						<list_entry value="single_unit" display_value="Single unit (US)" fr.display_value="Unité simple (US)" />
+						<list_entry value="multiple_unit" display_value="Multiple unit (UM)" fr.display_value="Unité multiple (UM)" />
+					</combo>
+					<link wiki="OpenRailwayMap/Tagging_in_France#Arrêt_signs_for_high-speed_trains" />
 				</item>
 
 				<separator />
@@ -2961,7 +3030,7 @@
 					icon="icons/signs/stop_locomotives.svg">
 					<label
 						text="ARRÊT sign for locomotives"
-						fr.text="Pancarte Arrêt des Machines" />
+						fr.text="Pancarte ARRÊT des Machines" />
 					<space />
 					<reference ref="arret_for_tags" />
 					<key key="railway:signal:stop:for" value="locomotives" />
@@ -2974,7 +3043,7 @@
 					icon="icons/signs/stop_shunting.svg">
 					<label
 						text="ARRÊT sign for shunting movements"
-						fr.text="Pancarte Arrêt des Manœuvres" />
+						fr.text="Pancarte ARRÊT des Manœuvres" />
 					<space />
 					<reference ref="arret_for_tags" />
 					<key key="railway:signal:stop:for" value="shunting" />
@@ -2987,7 +3056,7 @@
 					icon="icons/signs/stop_depot_movements.svg">
 					<label
 						text="ARRÊT sign for depot movements"
-						fr.text="Pancarte Arrêt Mouvements Rentrant au Dépôt" />
+						fr.text="Pancarte ARRÊT Mouvements Rentrant au Dépôt" />
 					<space />
 					<reference ref="arret_for_tags" />
 					<key key="railway:signal:stop:for" value="depot_movements" />
@@ -3000,7 +3069,7 @@
 					icon="icons/signs/stop_industrial_siding.svg">
 					<label
 						text="ARRÊT sign for industrial sidings"
-						fr.text="Pancarte Arrêt pour Desserte" />
+						fr.text="Pancarte ARRÊT pour Desserte" />
 					<space />
 					<reference ref="arret_for_tags" />
 					<key key="railway:signal:stop:for" value="industrial_siding" />
@@ -3013,7 +3082,7 @@
 					icon="icons/signs/stop_pushing.svg">
 					<label
 						text="ARRÊT sign for pushing movements"
-						fr.text="Pancarte Arrêt pour Refoulement" />
+						fr.text="Pancarte ARRÊT pour Refoulement" />
 					<space />
 					<reference ref="arret_for_tags" />
 					<key key="railway:signal:stop:for" value="pushing" />
@@ -3026,7 +3095,7 @@
 					icon="icons/signs/stop_atc.svg">
 					<label
 						text="ARRÊT sign for worksite trains"
-						fr.text="Pancarte Arrêt des Trains du Chantier" />
+						fr.text="Pancarte ARRÊT des Trains du Chantier" />
 					<space />
 					<reference ref="arret_for_tags" />
 					<key key="railway:signal:stop:for" value="worksite_trains" />
@@ -3065,6 +3134,7 @@
 						icon="icons/signs/vertical_STOP.svg"
 						icon_size="24"/>
 				</combo>
+				<link wiki="OpenRailwayMap/Tagging_in_France#Stop_signs" />
 			</item>
 
 			<separator />
@@ -3076,12 +3146,13 @@
 				type="node"
 				icon="icons/signs/stop_marker.svg">
 				<label
-					text="Red and white checkered stop marker"
+					text="Red-and-white checkered stop marker"
 					fr.text="Jalon d'arrêt à damier rouge et blanc" />
 				<space />
 				<key key="railway:signal:stop" value="FR:marker" />
 				<key key="railway:signal:stop:type" value="stop_marker" />
 				<reference ref="cat_stop" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#StopMarker" />
 			</item>
 
 		</group>
@@ -3178,7 +3249,7 @@
 					fr.text="Longueur du train (m)"
 					editable="false"
 					values_sort="false"
-					values="75,110,150,220" />
+					values="75,110,120,150,220" />
 			</item>
 
 			<separator />
@@ -3345,25 +3416,25 @@
 				fr.name="Installation de Lavage"
 				icon="icons/signs/washing_facility.svg">
 
-				<!-- ADVANCE -->
+				<!-- ANNOUNCEMENT -->
 				<item
-					name="Advance Sign"
+					name="Distant Sign"
 					fr.name="Pancarte à Distance"
 					type="node"
-					icon="icons/signs/washing_facility_advance.svg">
+					icon="icons/signs/distant_washing_facility.svg">
 					<label
-						text="Advance sign &quot;Lavage à ...m&quot;"
+						text="&quot;Lavage à ...m&quot; distant sign"
 						fr.text="Pancarte à distance &quot;Lavage à ...m&quot;" />
 					<space />
-					<key key="railway:signal:servicing" value="FR:washing_facility_advance" />
-					<reference ref="cat_washing_facility" />
+					<key key="railway:signal:servicing_distant" value="FR:washing_facility" />
+					<reference ref="cat_servicing_distant" />
 					<text
-						key="railway:signal:servicing:distance"
+						key="railway:signal:servicing_distant:distance"
 						text="Distance (m)"
 						fr.text="Distance (m)" length="4" />
 					<space />
 					<combo
-						key="railway:signal:servicing:height"
+						key="railway:signal:servicing_distant:height"
 						text="Sign Size"
 						fr.text="Taille de la Pancarte"
 						editable="false">
@@ -3371,15 +3442,16 @@
 							value=""
 							display_value="Normal"
 							fr.display_value="Normale"
-							icon="icons/signs/washing_facility_advance.svg"
+							icon="icons/signs/distant_washing_facility.svg"
 							icon_size="24"/>
 						<list_entry
 							value="small"
 							display_value="Small"
 							fr.display_value="Réduite"
-							icon="icons/signs/washer_small_distant.svg"
+							icon="icons/signs/distant_washing_facility_small.svg"
 							icon_size="24"/>
 					</combo>
+					<link wiki="OpenRailwayMap/Tagging_in_France#Washing_facility_distant_signs" />
 				</item>
 
 				<!-- FACILITY -->
@@ -3394,7 +3466,8 @@
 					<space />
 					<key key="railway:signal:servicing" value="FR:L" />
 					<key key="railway:signal:servicing:type" value="washing_facility" />
-					<reference ref="cat_washing_facility" />
+					<reference ref="cat_servicing" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#Washing_facility_(L_sign)" />
 				</item>
 
 				<!-- SPEED LIMIT -->
@@ -3402,7 +3475,7 @@
 					name="Speed Limit"
 					fr.name="Vitesse Maximale"
 					type="node"
-					icon="icons/signs/washer_speed_limit.svg">
+					icon="icons/signs/washing_facility_speed_limit.svg">
 					<label
 						text="Washing facility speed limit"
 						fr.text="Vitesse maximale de l'installation de lavage" />
@@ -3416,7 +3489,7 @@
 						fr.text="Vitesse Maximale (km/h)"
 						values="1,2,3,4,5"
 						editable="false"/>
-					<link wiki="OpenRailwayMap/Tagging_in_France#Rolling_stock_washing_facility" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#Washing_facility_speed_limit" />
 				</item>
 			</group>
 
@@ -3486,7 +3559,7 @@
 						key="ref"
 						text="Marker caption"
 						fr.text="Libellé du Repérage"
-						values="I,II,III,IV,V" 
+						values="I,II,III,IV,V"
 						editable="false"
 						values_sort="false"/>
 					<link wiki="OpenRailwayMap/Tagging_in_France#Signal_Lumineux_de_Manœuvre" />
@@ -4516,7 +4589,7 @@
 					key="railway:signal:route_info:town"
 					text="Destination town"
 					fr.text="Ville de destination" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Track_direction_sign" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Track_direction_signs" />
 			</item>
 
 			<!-- TRACK NAME -->
@@ -4536,7 +4609,7 @@
 					key="railway:signal:route_info:caption"
 					text="Sign caption"
 					fr.text="Libellé de la pancarte" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Track_indicator_sign" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Track_indicator_signs" />
 			</item>
 
 		</group>
@@ -4689,14 +4762,14 @@
 
 			<separator />
 
-			<!-- CHANNEL TRANSITION BOARD -->
+			<!-- CHANNEL TRANSITION SIGN -->
 			<item
-				name="Change Radio Channel Board"
+				name="Change Radio Channel Sign"
 				fr.name="Pancarte de Changement de Canal"
 				type="node"
 				icon="icons/boards/channel.svg">
 				<label
-					text="Change radio channel board"
+					text="Radio channel change sign"
 					fr.text="Pancarte de changement de canal radio" />
 				<space />
 				<key key="railway:signal:radio" value="FR:marker" />
@@ -4714,7 +4787,7 @@
 					key="railway:signal:radio:channel:uic_number"
 					text="UIC channel"
 					fr.text="Canal UIC" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Channel_board" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Channel_signs" />
 			</item>
 
 		</group>
@@ -4824,11 +4897,9 @@
 							disable_off="true"/>
 					</optional>
 
-					<space />
-					<preset_link preset_name="Illuminated Yellow Band" text=""/>
+					<item_separator />
 
-					<space />
-					<preset_link preset_name="Transition Marker" text=""/>
+					<preset_link preset_name="Illuminated Yellow Band" text=""/>
 
 					<link wiki="OpenRailwayMap/Tagging_in_France#TVM_stop_marker" />
 				</item>
@@ -5358,7 +5429,7 @@
 					<key key="railway:signal:bimode" value="FR:BIMODE" />
 					<key key="railway:signal:bimode:function" value="entry" />
 					<reference ref="cat_bimode" />
-					<text 
+					<text
 						key="railway:signal:bimode:town"
 						text="Destination town"
 						fr.text="Ville de destination"/>
@@ -5392,13 +5463,13 @@
 
 			<!-- ANNOUNCEMENT -->
 			<item
-				name="PN Advance Sign"
+				name="PN Distant Sign"
 				fr.name="PN à Distance"
 				type="node"
 				icon="icons/signs/crossing_hint.svg"
 				match_expression="-&quot;railway:signal:crossing_hint:type&quot;=*">
 				<label
-					text="PN advance sign"
+					text="PN distant sign"
 					fr.text="Pancarte PN d'annonce" />
 				<space />
 				<key key="railway:signal:crossing_hint:type" match="none" />
@@ -5407,12 +5478,12 @@
 
 			<!-- ANNOUNCEMENT (RADIO) -->
 			<item
-				name="PN Advance Sign (Radio)"
+				name="PN Distant Sign (Radio)"
 				fr.name="PN à Distance (Radio)"
 				type="node"
 				icon="icons/signs/crossing_hint_radio.svg">
 				<label
-					text="PN advance sign and Radio sign"
+					text="PN distant sign and Radio sign"
 					fr.text="Pancarte PN d'annonce et pancarte Radio" />
 				<space />
 				<key key="railway:signal:crossing_hint:type" value="radio_controlled" />
@@ -5444,7 +5515,7 @@
 				icon="icons/signs/crossing_info_manual.svg">
 				<label
 					text="Manually operated level crossing sign"
-					fr.text="Pancarte PN à fonctionnement manuel" />
+					fr.text="Pancarte PN manuel" />
 				<space />
 				<key key="railway:signal:crossing_info:automatic" value="no" />
 				<reference ref="cat_crossing_info" />
@@ -5459,8 +5530,8 @@
 				type="node"
 				icon="icons/signs/radio_command.svg">
 				<label
-                    text="Radio Command"
-                    fr.text="Commande Radio" />
+                    text="Radio command sign"
+                    fr.text="Pancarte &quot;Commande Radio&quot;" />
 				<space />
 				<key key="railway:signal:crossing_hint" value="FR:radio_command" />
 				<key key="railway:signal:crossing_hint:form" value="sign" />
@@ -5482,9 +5553,9 @@
 				<key key="railway:signal:crossing" value="FR:SFC" />
 				<key key="railway:signal:crossing:form" value="light" />
 				<reference ref="base_common" />
-				<text 
-					key="railway:signal:crossing:ref" 
-					text="Network ID" 
+				<text
+					key="railway:signal:crossing:ref"
+					text="Network ID"
 					fr.text="Identifiant Réseau" length="7" />
 				<space />
 				<combo
@@ -5573,7 +5644,7 @@
 			type="node"
 			icon="icons/signs/S.svg">
 			<label
-				text="S Sign"
+				text="S sign"
 				fr.text="Pancarte S" />
 			<space />
 			<key key="railway:signal:whistle" value="FR:S" />
