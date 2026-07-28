@@ -1,6 +1,6 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2026-07-23 04:39:22 UTC<br>
+**Backup generated:** 2026-07-28 04:50:24 UTC<br>
 **Category:** main<br>
 **Total pages:** 1<br>
 **Successfully backed up:** 1
@@ -10,9 +10,9 @@
 
 - **File:** [OpenRailwayMap/Tagging_in_France.wiki](OpenRailwayMap/Tagging_in_France.wiki)
 - **Wiki URL:** [OpenRailwayMap/Tagging_in_France](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
-- **Last edited:** 2026-07-23 03:52:49 UTC
+- **Last edited:** 2026-07-28 04:47:23 UTC
 - **Last editor:** Noeld
-- **Edit comment:** /* Track indicator sign */ add track direction section
+- **Edit comment:** /* Level crossing announcement */ add note about Radio sign
 
 ## About
 

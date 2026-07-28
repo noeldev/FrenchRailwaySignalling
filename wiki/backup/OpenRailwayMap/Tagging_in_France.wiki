@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-07-23 03:52:49 UTC
+Last edited: 2026-07-28 04:47:23 UTC
 Last editor: Noeld
-Last edit comment: /* Track indicator sign */ add track direction section
-Backup date: 2026-07-23 04:39:22 UTC
+Last edit comment: /* Level crossing announcement */ add note about Radio sign
+Backup date: 2026-07-28 04:50:24 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -99,18 +99,6 @@ File:CarreMecanique.svg|Mechanical [[#Carré|Carré]] signal.
 * {{Tag|railway:signal:main|FR:C}}
 * {{Tag|railway:signal:main:form|sign}}
 
-=====Carré distant sign=====
-
-<gallery>
-File:Pancarte_à_distance_Carré.svg|Carré distant sign
-</gallery>
-
-* {{Tag|railway:signal:distant|FR:CARRE}}
-* {{Tag|railway:signal:distant:form|sign}}
-
-Optional tags:
-* {{Tag|railway:signal:distant:distance|}} (distance shown on the sign, in meters)
-
 ====Carré violet====
 
 An absolute stop signal, similar to the [[#Carré|Carré signal]], specifically used to control train movements during shunting operations, on service tracks, or during transitions of traffic to and from main lines. The signal displays a single steady purple light and is also equipped with an identification plate bearing the inscription '''Nf''' in white letters on a black background.
@@ -182,18 +170,6 @@ File:Guidon_d'Arrêt.svg|Guidon d'Arrêt.
 * {{Tag|railway:signal:main|FR:GA}}
 * {{Tag|railway:signal:main:form|light}}
 
-=====GA distant sign=====
-
-<gallery>
-File:Pancarte_à_distance_GA.svg|GA distant sign
-</gallery>
-
-* {{Tag|railway:signal:distant|FR:GA}}
-* {{Tag|railway:signal:distant:form|sign}}
-
-Optional tags:
-* {{Tag|railway:signal:distant:distance|}} (distance shown on the sign, in meters)
-
 ====Yellow band====
 
 In some stations, the entrance [[#Carré|Carré signal]] may be equipped with a ''horizontal illuminated yellow band'' (French: '''Bande jaune lumineuse horizontale'''). This band is lit in addition to the [[Tag:railway:signal:main:states=FR:A|Caution]] ('''Avertissement''') light. It instructs the driver to be prepared to stop within a short distance, either due to the presence of vehicles or the closure of an intermediate stop signal. 
@@ -263,6 +239,18 @@ Use one of the following tags depending on the signal type (main or distant):
 
 * {{Tag|railway:signal:main:deactivated|yes}}
 * {{Tag|railway:signal:distant:deactivated|yes}}
+
+===Instruction board===
+Instruction boards (French: '''Pancarte de consigne''') display operational instructions for train drivers. They are generally used in conjunction with another board or signal.
+
+<gallery>
+File:Pancarte Tirez au Pied du Signal.svg|'''Tirez au Pied du Signal''' instruction board
+File:Pancarte Ne Franchir que sur Ordre du Poste 1+A.svg|'''Ne Franchir que sur Ordre du Poste 1+A''' instruction board
+</gallery>
+
+* {{Tag|railway:signal:minor|FR:instruction_board}}
+* {{Tag|railway:signal:minor:form|sign}}
+* {{Tag|railway:signal:minor:caption|}} (text displayed on the board)
 
 ===Signal position indicators===
 Signs that inform the driver about the side on which trackside signals are installed after a signalling or signal placement transition, such as a change between left-hand and right-hand running or between cab signalling and lineside signalling.
@@ -594,7 +582,7 @@ Optional tags:
 
 =====Track information=====
 
-======Track direction sign======
+======Track direction signs======
 
 <gallery>
 File:Pancarte NURIEUX.svg|Track direction sign (horizontal arrangement)
@@ -606,9 +594,9 @@ File:Pancarte BETHUNE.svg|Track direction sign (vertical arrangement)
 
 Optional tags:
 * {{Tag|railway:signal:route_info:arrangement|vertical}} (horizontal by default)
-* {{Tag|railway:signal:route_info:town|}} (town displayed on the sign, e.g. Nurieux)
+* {{Tag|railway:signal:route_info:town|}} (town as shown on the sign, e.g. Nurieux)
 
-======Track indicator sign======
+======Track indicator signs======
 
 <gallery>
 File:Pancarte nom de voie.svg|Track indicator sign
@@ -684,19 +672,18 @@ File:Repère radio sol-train.svg|Ground-to-train radio marker
 * {{Tag|railway:signal:radio:mode:type|mode_transition}}
 * {{Tag|railway:signal:radio:mode:form|sign}}
 
-====Channel board====
-
-On the French national railway network (RFN), a network marker indicating a transition to GSM-R may be accompanied by a board indicating the radio channel to select. Radio channel boards can also be displayed alone to indicate channel transitions.
+====Channel signs====
+A network marker indicating a transition to GSM-R may be accompanied by a sign indicating the radio channel to select. Radio channel signs can also be displayed alone to indicate channel transitions.
 
 <gallery>
-File:GSM-R channel board.svg|GSM-R channel board
-File:GSM-R UIC channel board.svg|GSM-R UIC channel board
+File:GSM-R channel board.svg|GSM-R channel sign
+File:GSM-R UIC channel board.svg|GSM-R UIC channel sign
 </gallery>
 * {{Tag|railway:signal:radio|FR:marker}}
 * {{Tag|railway:signal:radio:channel|FR:channel}}
 * {{Tag|railway:signal:radio:channel:type|channel_transition}}
 * {{Tag|railway:signal:radio:channel:form|sign}}
-* {{Tag|railway:signal:radio:channel:number|}} (e.g. ''6'', ''23'')
+* {{Tag|railway:signal:radio:channel:number|}} (e.g. ''6'' or ''23'')
 * {{Tag|railway:signal:radio:channel:uic_number|}} (e.g. ''45'')
 
 ===Cab signalling===
@@ -969,6 +956,255 @@ File:Tableau_GIVRE_box.svg|Frost box (light)
 * {{Tag|railway:signal:electricity|FR:frost}}
 * {{Tag|railway:signal:electricity:form||({{TagValue|railway:signal:electricity:form|sign}}/{{TagValue|railway:signal:electricity:form|light}})}}
 
+===Distant stop signs===
+
+[[#Stop signals|Stop signals]] and [[#Stops|Stop signs]] may be preceded by their respective distant signs described below.
+
+====Carré distant signs====
+A distant sign announcing a [[#Carré|Carré]] signal.
+<gallery>
+File:Pancarte_à_distance_Carré.svg|Carré distant sign
+</gallery>
+
+* {{Tag|railway:signal:distant|FR:CARRE}}
+* {{Tag|railway:signal:distant:form|sign}}
+
+Optional tags:
+* {{Tag|railway:signal:distant:distance|}} (distance in meters as shown on the sign, e.g. ''500'')
+
+====Intermediate signal distant signs====
+A distant sign announcing an [[#Signal de milieu de quai (2TMV)|intermediate signal]] (2TMV) installed on the right-hand side of the track at platform mid-point. The sign carries the identification of the announced signal.
+
+<gallery>
+File:Pancarte à distance C881 à droite.svg|Intermediate signal distant sign
+</gallery>
+
+* {{Tag|railway:signal:distant|FR:CARRE}}
+* {{Tag|railway:signal:distant:form|sign}}
+* {{Tag|railway:signal:distant:for|intermediate}}
+* {{Tag|railway:signal:distant:caption|}} (identification of the announced signal, e.g. ''C881'')
+
+Optional tags:
+
+* {{Tag|railway:signal:distant:distance|}} (distance in meters as shown on the sign, e.g. ''100'')
+
+====GA distant signs====
+A distant sign announcing a [[#Guidon d'arrêt|Guidon d'Arrêt]] signal.
+<gallery>
+File:Pancarte_à_distance_GA.svg|GA distant sign
+</gallery>
+
+* {{Tag|railway:signal:distant|FR:GA}}
+* {{Tag|railway:signal:distant:form|sign}}
+
+Optional tags:
+* {{Tag|railway:signal:distant:distance|}} (distance in meters as shown on the sign, e.g. ''200'')
+
+====ARRÊT distant signs====
+A distant sign announcing an [[#Arrêt signs|ARRÊT]] sign.
+<gallery>
+File:Pancarte Arrêt A.svg|ARRÊT distant sign
+</gallery>
+
+* {{Tag|railway:signal:stop_distant|FR:ARRET}}
+* {{Tag|railway:signal:stop_distant:form|sign}}
+* {{Tag|railway:signal:stop_distant:distance|}} (distance shown on the sign, in meters, e.g. ''100'')
+
+====ARRÊT pour Desserte distant signs====
+A distant sign announcing an [[#Arrêt signs for specific movements|ARRÊT pour Desserte]] sign.
+<gallery>
+File:Pancarte Arrêt pour Desserte à 300m.svg|ARRÊT distant sign for industrial sidings
+</gallery>
+
+* {{Tag|railway:signal:stop_distant|FR:ARRET}}
+* {{Tag|railway:signal:stop_distant:form|sign}}
+* {{Tag|railway:signal:stop_distant:for|industrial_siding}}
+* {{Tag|railway:signal:stop_distant:distance|}} (distance in meters as shown on the sign, e.g. ''300'')
+
+====STOP distant signs====
+A distant sign announcing a [[#Stop signs|STOP]] sign.
+<gallery>
+File:Pancarte STOP A.svg|STOP distant sign
+</gallery>
+
+* {{Tag|railway:signal:stop_distant|FR:STOP}}
+* {{Tag|railway:signal:stop_distant:form|sign}}
+* {{Tag|railway:signal:stop_distant:distance|}} (distance shown on the sign, in meters, e.g. ''100'')
+
+===Stops===
+Stop signs require the driver to bring the train to a complete stop before the sign. The exact procedure for resuming movement depends on the sign type ([[#Arrêt signs|Arrêt]], [[#Stop signs|Stop]] or [[#StopMarker|marker]]).
+
+====Arrêt signs====
+The driver must stop before the sign and wait for a verbal order before passing, if passing is required.
+
+<gallery>
+File:Pancarte ARRET.svg|ARRÊT sign (horizontal arrangement)
+File:Pancarte ARRET verticale.svg|ARRÊT sign (vertical arrangement)
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:ARRET}}
+* {{Tag|railway:signal:stop:form|sign}}
+
+Optional tags:
+* {{Tag|railway:signal:stop:arrangement|vertical}} (horizontal by default)
+
+====Arrêt signs for high-speed trains====
+An [[#Arrêt signs|Arrêt]] sign marking the stopping point for high-speed trainsets. This is a regulatory stop (Arrêt) that requires verbal authorization, unlike the [[#Passenger stops|passenger stop]] markers described in a later section.
+
+The listed series indicate which trainsets the stop applies to; an optional composition restricts it to single or multiple units.
+
+<gallery>
+File:Pancarte ARRET TGV A et ETR.svg|Arrêt board for TGV A and ETR trainsets
+File:Pancarte ARRET TGV R et SE.svg|Arrêt board for TGV R and TGV SE trainsets
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:ARRET}}
+* {{Tag|railway:signal:stop:form|sign}}
+* {{Tag|railway:signal:stop:for|highspeed}}
+* {{Tag|railway:signal:stop:trainset||(TGV_A/TGV_R/TGV_SE/ETR)}} (one or more values separated by <code>;</code>)
+
+Optional tags:
+* {{Tag|railway:signal:stop:composition||(single_unit/multiple_unit)}} (omit for all compositions)
+
+====Arrêt signs for specific movements====
+Some [[#Arrêt signs|Arrêt]] signs are restricted to specific movements.
+
+* {{Tag|railway:signal:stop|FR:ARRET}}
+* {{Tag|railway:signal:stop:form|sign}}
+* {{Tag|railway:signal:stop:for|}} (one of the values in the list below)
+
+<gallery>
+File:Pancarte Arrêt des Machines.svg|locomotives
+File:Pancarte Arrêt des Manœuvres.svg|shunting
+File:Pancarte Arrêt Mouvements Rentrant au Dépôt.svg|depot_movements
+File:Pancarte Arrêt pour Desserte.svg|industrial_siding
+File:Pancarte Arrêt pour Refoulement.svg|pushing
+File:Pancarte ATC.svg|worksite_trains
+</gallery>
+
+====Stop signs====
+The driver must stop before the sign and may pass on their own initiative once stopped, if nothing prevents it.
+
+<gallery>
+File:Pancarte STOP.svg|STOP sign (horizontal arrangement)
+File:Pancarte STOP verticale.svg|STOP sign (vertical arrangement)
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:STOP}}
+* {{Tag|railway:signal:stop:form|sign}}
+
+Optional tags:
+* {{Tag|railway:signal:stop:arrangement|vertical}} (horizontal by default)
+
+====Red-and-white checkered stop marker====
+The <span id="StopMarker">'''Jalon d'arrêt à damier rouge et blanc'''</span> (red-and-white checkered stop marker) is similar to the [[#Carré|Carré]] signal; it commands an absolute stop before the point where it is placed and cannot be crossed.
+
+<gallery>
+File:Jalon d'arret.svg|Stop marker
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:marker}}
+* {{Tag|railway:signal:stop:type|stop_marker}}
+* {{Tag|railway:signal:stop:form|sign}}
+
+===Passenger stops===
+
+Signs used to mark the stopping point for passenger trains.
+
+Passenger stop signs are divided into two categories: those for [[#Passenger stops for conventional trains|conventional trains]] and those for [[#Passenger stops for high-speed trains|high-speed trains (TGV)]].
+
+====Passenger stops for conventional trains====
+
+- Stopping point for the front of the train (Tête de Train), regardless of the number of vehicles in the train.
+
+<gallery>
+File:ARRET_VOY_TT.svg|Passenger stop for the front of the train
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:passenger_stop}}
+* {{Tag|railway:signal:stop:conventional|FR:TT}}
+* {{Tag|railway:signal:stop:conventional:form|sign}}
+* {{Tag|railway:signal:stop:conventional:for|head_of_train}}
+
+- Stopping point for trains equipped for driver-only operations, referred to as '''Équipé Agent Seul''' (EAS).
+
+<gallery>
+File:ARRET_VOY_TT_EAS.svg|Passenger stop for trains equipped with EAS
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:passenger_stop}}
+* {{Tag|railway:signal:stop:conventional|FR:TT_EAS}}
+* {{Tag|railway:signal:stop:conventional:form|sign}}
+* {{Tag|railway:signal:stop:conventional:for|driver_only}}
+
+- Stopping point for the front of the train (Tête de Train), regardless of the number of vehicles in the train, including the locomotive.
+
+<gallery>
+File:ARRET_VOY_TTL.svg|Passenger stop for trains with a locomotive
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:passenger_stop}}
+* {{Tag|railway:signal:stop:conventional|FR:TTL}}
+* {{Tag|railway:signal:stop:conventional:form|sign}}
+* {{Tag|railway:signal:stop:conventional:for|locomotive}}
+
+- Stopping point for trains composed of the number of carriages indicated on the sign.
+
+<gallery>
+File:ARRET_VOY_6V.svg|Passenger stop for 6-vehicle trains
+File:ARRET_VOY_12V.svg|Passenger stop for 12-vehicle trains
+File:ARRET VOY 8V 10V.svg|Passenger stop for trains with between 8 and 10 vehicles.
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:passenger_stop}}
+* {{Tag|railway:signal:stop:conventional|FR:vehicle_number}}
+* {{Tag|railway:signal:stop:conventional:form|sign}}
+* {{Tag|railway:signal:stop:conventional:for|vehicles}}
+* {{Tag|railway:signal:stop:conventional:number||({{TagValue|railway:signal:stop:conventional:number|6V}}/{{TagValue|railway:signal:stop:conventional:number|8V}}/{{TagValue|railway:signal:stop:conventional:number|10V}}/{{TagValue|railway:signal:stop:conventional:number|12V}})}} (one or two values, separated by a <code>;</code>, e.g. ''6V'', ''12V'' or ''8V;10V'')
+
+- Stopping point for self-propelled units of the specified length. 75m and 110m apply to single units while 110m and 220m apply to multiple units.
+
+<gallery>
+File:Pancarte L110.svg|Passenger stop for 110m-long self-propelled single railcar unit
+File:Pancarte L220.svg|Passenger stop for 220m-long self-propelled multiple railcar units
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:passenger_stop}}
+* {{Tag|railway:signal:stop:conventional|FR:train_length}}
+* {{Tag|railway:signal:stop:conventional:form|sign}}
+* {{Tag|railway:signal:stop:conventional:for|railcar}}
+* {{Tag|railway:signal:stop:conventional:length||(75/110/120/150/220)}} (train length in meters, e.g. ''110'' or ''220'')
+
+====Passenger stops for high-speed trains====
+
+- Stopping point for TGVs. The number indicates the number of rakes: 1=single unit, 2=multiple units.
+
+<gallery>
+File:ARRET_VOY_TGV1.svg|Passenger stop for single TGV unit.
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:passenger_stop}}
+* {{Tag|railway:signal:stop:highspeed|FR:TGV1}}
+* {{Tag|railway:signal:stop:highspeed:form|sign}}
+* {{Tag|railway:signal:stop:highspeed:for|single_unit}}
+
+<gallery>
+File:ARRET_VOY_TGV2.svg|Passenger stop for multiple TGV units
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:passenger_stop}}
+* {{Tag|railway:signal:stop:highspeed|FR:TGV2}}
+* {{Tag|railway:signal:stop:highspeed:form|sign}}
+* {{Tag|railway:signal:stop:highspeed:for|multiple_unit}}
+
+<gallery>
+File:ARRET_VOY_TGV1-2.svg|Passenger stop for TGV
+</gallery>
+
+* {{Tag|railway:signal:stop|FR:passenger_stop}}
+* {{Tag|railway:signal:stop:highspeed|FR:TGV1-2}}
+* {{Tag|railway:signal:stop:highspeed:form|sign}}
+
 ===Stations and facilities===
 
 ====Stations====
@@ -1039,195 +1275,6 @@ File:Pancarte POSTE.svg|POSTE sign
 * {{Tag|railway:signal:station_distant|FR:POSTE}}
 * {{Tag|railway:signal:station_distant:form|sign}}
 TBD
-
-====Distant stops====
-
-[[#Stops|Stop signs]] may be preceded by their respective advance boards described below.
-
-<gallery>
-File:Pancarte Arrêt A.svg|Advance ARRÊT sign
-</gallery>
-
-* {{Tag|railway:signal:stop_distant|FR:ARRET}}
-* {{Tag|railway:signal:stop_distant:form|sign}}
-* {{Tag|railway:signal:stop_distant:distance|}} (distance shown on the sign, in meters, e.g. ''100'')
-
-<gallery>
-File:Pancarte Arrêt pour Desserte à 300m.svg|Advance ARRÊT sign for industrial sidings
-</gallery>
-
-* {{Tag|railway:signal:stop_distant|FR:ARRET}}
-* {{Tag|railway:signal:stop_distant:form|sign}}
-* {{Tag|railway:signal:stop_distant:for|industrial_siding}}
-* {{Tag|railway:signal:stop_distant:distance|}} (distance shown on the sign, in meters, e.g. ''300'')
-
-<gallery>
-File:Pancarte STOP A.svg|Advance STOP sign
-</gallery>
-
-* {{Tag|railway:signal:stop_distant|FR:STOP}}
-* {{Tag|railway:signal:stop_distant:form|sign}}
-* {{Tag|railway:signal:stop_distant:distance|}} (distance shown on the sign, in meters, e.g. ''100'')
-
-====Stops====
-
-- The driver must stop before the sign and wait for a verbal order before passing, if passing is required.
-
-<gallery>
-File:Pancarte ARRET.svg|ARRÊT sign (horizontal arrangement)
-File:Pancarte ARRET verticale.svg|ARRÊT sign (vertical arrangement)
-</gallery>
-
-* {{Tag|railway:signal:stop|FR:ARRET}}
-* {{Tag|railway:signal:stop:form|sign}}
-
-Optional tags:
-* {{Tag|railway:signal:stop:arrangement|vertical}} (horizontal by default; only for '''ARRET''' sign without ''for'' property)
-* {{Tag|railway:signal:stop:for|}} (one of the values in the list below)
-
-<gallery>
-File:Pancarte ARRET.svg|''not used''
-File:Pancarte Arrêt des Machines.svg|locomotives
-File:Pancarte Arrêt des Manœuvres.svg|shunting
-File:Pancarte Arrêt Mouvements Rentrant au Dépôt.svg|depot_movements
-File:Pancarte Arrêt pour Desserte.svg|industrial_siding
-File:Pancarte Arrêt pour Refoulement.svg|pushing
-File:Pancarte ATC.svg|worksite_trains
-</gallery>
-
-- The driver must stop before the sign and may pass on their own initiative once stopped, if nothing prevents it.
-
-<gallery>
-File:Pancarte STOP.svg|STOP sign (horizontal arrangement)
-File:Pancarte STOP verticale.svg|STOP sign (vertical arrangement)
-</gallery>
-
-* {{Tag|railway:signal:stop|FR:STOP}}
-* {{Tag|railway:signal:stop:form|sign}}
-
-Optional tags:
-* {{Tag|railway:signal:stop:arrangement|vertical}} (horizontal by default)
-
-
-- The <span id="StopMarker">'''Jalon d'arrêt à damier rouge et blanc'''</span> (red and white checkered stop marker) is similar to the [[#Carré|Carré]] signal; it commands an absolute stop before the point where it is placed and cannot be crossed.
-
-<gallery>
-File:Jalon d'arret.svg|Stop marker
-</gallery>
-
-* {{Tag|railway:signal:stop|FR:marker}}
-* {{Tag|railway:signal:stop:type|stop_marker}}
-* {{Tag|railway:signal:stop:form|sign}}
-
-====Passenger stops====
-
-Signs used to mark the stopping point for passenger trains.
-
-Passenger stop signs are divided into two categories: those for [[#Passenger stops for conventional trains|conventional trains]] and those for [[#Passenger stops for high-speed trains|high-speed trains (TGV)]].
-
-=====Passenger stops for conventional trains=====
-
-- Stopping point for the front of the train (Tête de Train), regardless of the number of vehicles in the train.
-
-<gallery>
-File:ARRET_VOY_TT.svg|Passenger stop for the front of the train
-</gallery>
-
-* {{Tag|railway:signal:stop|FR:passenger_stop}}
-* {{Tag|railway:signal:stop:classic|FR:TT}}
-* {{Tag|railway:signal:stop:classic:form|sign}}
-* {{Tag|railway:signal:stop:classic:for|head_of_train}}
-
-- Stopping point for trains equipped for driver-only operations, referred to as '''Équipé Agent Seul''' (EAS).
-
-<gallery>
-File:ARRET_VOY_TT_EAS.svg|Passenger stop for trains equipped with EAS
-</gallery>
-
-* {{Tag|railway:signal:stop|FR:passenger_stop}}
-* {{Tag|railway:signal:stop:classic|FR:TT_EAS}}
-* {{Tag|railway:signal:stop:classic:form|sign}}
-* {{Tag|railway:signal:stop:classic:for|driver_only}}
-
-- Stopping point for the front of the train (Tête de Train), regardless of the number of vehicles in the train, including the locomotive.
-
-<gallery>
-File:ARRET_VOY_TTL.svg|Passenger stop for trains with a locomotive
-</gallery>
-
-* {{Tag|railway:signal:stop|FR:passenger_stop}}
-* {{Tag|railway:signal:stop:classic|FR:TTL}}
-* {{Tag|railway:signal:stop:classic:form|sign}}
-* {{Tag|railway:signal:stop:classic:for|locomotive}}
-
-- Stopping point for trains composed of the number of carriages indicated on the sign.
-
-<gallery>
-File:ARRET_VOY_6V.svg|Passenger stop for 6-vehicle trains
-File:ARRET_VOY_12V.svg|Passenger stop for 12-vehicle trains
-File:ARRET VOY 8V 10V.svg|Passenger stop for trains with between 8 and 10 vehicles.
-</gallery>
-
-* {{Tag|railway:signal:stop|FR:passenger_stop}}
-* {{Tag|railway:signal:stop:classic|FR:vehicle_number}}
-* {{Tag|railway:signal:stop:classic:form|sign}}
-* {{Tag|railway:signal:stop:classic:for|vehicles}}
-* {{Tag|railway:signal:stop:classic:number||({{TagValue|railway:signal:stop:classic:number|6V}}/{{TagValue|railway:signal:stop:classic:number|8V}}/{{TagValue|railway:signal:stop:classic:number|10V}}/{{TagValue|railway:signal:stop:classic:number|12V}})}} (one or two values, separated by a <code>;</code>, e.g. ''6V'', ''12V'' or ''8V;10V'')
-
-- Stopping point for self-propelled units of the specified length. 75m and 110m apply to single units while 110m and 220m apply to multiple units.
-
-<gallery>
-File:Pancarte L110.svg|Passenger stop for 110m-long self-propelled single railcar unit
-File:Pancarte L220.svg|Passenger stop for 220m-long self-propelled multiple railcar units
-</gallery>
-
-* {{Tag|railway:signal:stop|FR:passenger_stop}}
-* {{Tag|railway:signal:stop:classic|FR:train_length}}
-* {{Tag|railway:signal:stop:classic:form|sign}}
-* {{Tag|railway:signal:stop:classic:for|railcar}}
-* {{Tag|railway:signal:stop:classic:length||(75/110/150/220)}} (train length in meters, e.g. ''110'' or ''220'')
-
-=====Passenger stops for high-speed trains=====
-
-- Stopping point for TGVs. The number indicates the number of rakes: 1=single unit, 2=multiple units.
-
-<gallery>
-File:ARRET_VOY_TGV1.svg|Passenger stop for single TGV unit.
-</gallery>
-
-* {{Tag|railway:signal:stop|FR:passenger_stop}}
-* {{Tag|railway:signal:stop:highspeed|FR:TGV1}}
-* {{Tag|railway:signal:stop:highspeed:form|sign}}
-* {{Tag|railway:signal:stop:highspeed:for|single_unit}}
-
-<gallery>
-File:ARRET_VOY_TGV2.svg|Passenger stop for multiple TGV units
-</gallery>
-
-* {{Tag|railway:signal:stop|FR:passenger_stop}}
-* {{Tag|railway:signal:stop:highspeed|FR:TGV2}}
-* {{Tag|railway:signal:stop:highspeed:form|sign}}
-* {{Tag|railway:signal:stop:highspeed:for|multiple_unit}}
-
-<gallery>
-File:ARRET_VOY_TGV1-2.svg|Passenger stop for TGV
-</gallery>
-
-* {{Tag|railway:signal:stop|FR:passenger_stop}}
-* {{Tag|railway:signal:stop:highspeed|FR:TGV1-2}}
-* {{Tag|railway:signal:stop:highspeed:form|sign}}
-
-====Instruction board====
-Instruction boards (French: '''Pancarte de consigne''') display operational instructions for train drivers. They are generally used in conjunction with another board or signal.
-
-<gallery>
-File:Pancarte Tirez au Pied du Signal.svg|'''Tirez au Pied du Signal''' instruction board
-File:Pancarte Ne Franchir que sur Ordre du Poste 1+A.svg|'''Ne Franchir que sur Ordre du Poste 1+A''' instruction board
-</gallery>
-
-* {{Tag|railway:signal:minor|FR:instruction_board}}
-* {{Tag|railway:signal:minor:form|sign}}
-* {{Tag|railway:signal:minor:caption|}} (text displayed on the board)
 
 ====Train departure====
 
@@ -1414,7 +1461,7 @@ File:Heurtoir_500m.svg|Buffer stop advance sign
 * {{Tag|railway:signal:shunting_route|FR:destination}}
 * {{Tag|railway:signal:shunting_route:buffer_stop|FR:Heurtoir}}
 * {{Tag|railway:signal:shunting_route:buffer_stop:form|sign}}
-* {{Tag|railway:signal:shunting_route:buffer_stop:distance|}} (distance in meters as show on the sign, e.g. ''500'')
+* {{Tag|railway:signal:shunting_route:buffer_stop:distance|}} (distance in meters as shown on the sign, e.g. ''500'')
 
 
 The '''Imp''' (Impasse) board indicates that the train is directed towards a dead-end track.
@@ -1505,28 +1552,29 @@ Signs related to servicing facilities, such as rolling stock washing facilities.
 
 ====Rolling stock washing facility====
 
+=====Washing facility distant signs=====
 <gallery>
-File:Pancarte Lavage à 200m.svg|Washing facility advance sign
-File:Pancarte LAV 100m.svg|Washing facility advance sign (small)
+File:Pancarte Lavage à 200m.svg|Washing facility distant sign
+File:Pancarte LAV 100m.svg|Washing facility distant sign (small)
 </gallery>
 
-* {{Tag|railway:signal:servicing|FR:washing_facility_advance}}
-* {{Tag|railway:signal:servicing:form|sign}}
-* {{Tag|railway:signal:servicing:distance|}}
+* {{Tag|railway:signal:servicing_distant|FR:washing_facility}}
+* {{Tag|railway:signal:servicing_distant:form|sign}}
+* {{Tag|railway:signal:servicing_distant:distance|}} (distance in meters as shown on the sign, e.g. ''200'')
 
 Optional tag:
-* {{Tag|railway:signal:servicing:height|small}}
+* {{Tag|railway:signal:servicing_distant:height|small}}
 
-
+=====Washing facility (L sign)=====
 <gallery>
-File:Pancarte L.svg|Washing facility sign (L sign)
+File:Pancarte L.svg|L sign
 </gallery>
 
 * {{Tag|railway:signal:servicing|FR:L}}
 * {{Tag|railway:signal:servicing:type|washing_facility}}
 * {{Tag|railway:signal:servicing:form|sign}}
 
-
+=====Washing facility speed limit=====
 <gallery>
 File:Pancarte LAV 3km_h.svg|Washing facility speed limit
 </gallery>
@@ -1557,6 +1605,8 @@ File:Pancarte PN d'Annonce avec Pancarte Radio.svg|Level crossing advance sign w
 
 When fitted with an additional ''Radio'' sign, it indicates that the approaching level crossing is operated by radio control. In this case, the following tag must also be specified:
 * {{Tag|railway:signal:crossing_hint:type|radio_controlled}}
+
+'''Note:''' The ''Radio'' sign is not used where all level crossings on the line or track are radio-controlled.
 
 ====Radio-controlled level crossing====
 
@@ -1589,7 +1639,7 @@ File:Pancarte PN avec Bandeau Blanc.svg|Manually operated level crossing sign
 If the level crossing is manually operated, the following tag must be specified:
 * {{Tag|railway:signal:crossing_info:automatic|no}} (''yes'' by default)
 
-=====Signal de Franchissement Conditionnel=====
+====Signal de Franchissement Conditionnel====
 Radio-controlled level crossings are additionally equipped with a '''Signal de Franchissement Conditionnel''' (SFC). This signal consists of one or two ''green lights'', arranged vertically or horizontally, and installed close to or above the level crossing sign.
 
 When illuminated, the SFC confirms that the level crossing has been activated successfully and is securely closed, authorizing the train to proceed without stopping at the ''PN'' sign. When unlit, it is equivalent to a stop indication.
