@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.27_2026-07-27"
+    version="1.28_2026-08-01"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -98,7 +98,8 @@
 		<text
 			key="railway:signal:main:ref"
 			text="Network ID"
-			fr.text="Identifiant Réseau" length="7" />
+			fr.text="Identifiant Réseau"
+			length="7" />
 	</chunk>
 
 	<!-- Dwarf Carré -->
@@ -174,7 +175,8 @@
 		<text
 			key="railway:signal:main:ref"
 			text="Network ID"
-			fr.text="Identifiant Réseau" length="7" />
+			fr.text="Identifiant Réseau"
+			length="7" />
 	</chunk>
 
 	<!-- Mechanical Carré signals -->
@@ -189,7 +191,11 @@
 		<key key="railway:signal:speed_limit_distant:fixed" value="FR:TIV-D" />
 		<key key="railway:signal:speed_limit_distant:fixed:form" value="sign" />
 		<reference ref="base_with_plate" />
-		<text key="railway:signal:speed_limit_distant:fixed:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:speed_limit_distant:fixed:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 		<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_Ordinary-type_TIV-D" />
 	</chunk>
 
@@ -206,7 +212,8 @@
 		<text
 			key="railway:signal:speed_limit:ref"
 			text="Network ID"
-			fr.text="Identifiant Réseau" length="7" />
+			fr.text="Identifiant Réseau"
+			length="7" />
 	</chunk>
 
 	<!-- Distant signals, sign form -->
@@ -216,7 +223,8 @@
 		<text
 			key="railway:signal:distant:ref"
 			text="Network ID"
-			fr.text="Identifiant Réseau" length="7" />
+			fr.text="Identifiant Réseau"
+			length="7" />
 	</chunk>
 
 	<!-- Distant signs naming the stop signal ahead and its distance -->
@@ -235,7 +243,8 @@
 		<text
 			key="railway:signal:minor:ref"
 			text="Network ID"
-			fr.text="Identifiant Réseau" length="7" />
+			fr.text="Identifiant Réseau"
+			length="7" />
 	</chunk>
 
 	<!-- Mirlitons (distant distance boards; form=sign) -->
@@ -248,20 +257,32 @@
 	<chunk id="cat_distant">
 		<reference ref="base_with_plate" />
 		<key key="railway:signal:distant:form" value="light" />
-		<text key="railway:signal:distant:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:distant:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 	</chunk>
 
 	<!-- Route distant indicators (form varies) -->
 	<chunk id="cat_route_distant">
 		<reference ref="base_common" />
-		<text key="railway:signal:route_distant:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:route_distant:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 	</chunk>
 
 	<!-- Track information signs (form=sign) -->
 	<chunk id="cat_route_info">
 		<reference ref="base_common" />
 		<key key="railway:signal:route_info:form" value="sign" />
-		<text key="railway:signal:route_info:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:route_info:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 	</chunk>
 
 	<!-- Radio network marker (form: sign) -->
@@ -270,7 +291,11 @@
 		<key key="railway:signal:radio:mode:type" value="mode_transition" />
 		<key key="railway:signal:radio:mode:form" value="sign" />
 		<reference ref="base_common" />
-		<text key="railway:signal:radio:mode:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:radio:mode:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 		<link wiki="OpenRailwayMap/Tagging_in_France#Network_marker" />
 	</chunk>
 
@@ -278,7 +303,11 @@
 	<chunk id="cat_train_protection_distant">
 		<reference ref="base_common" />
 		<key key="railway:signal:train_protection_distant:form" value="sign" />
-		<text key="railway:signal:train_protection_distant:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:train_protection_distant:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 		<link wiki="OpenRailwayMap/Tagging_in_France#CAB_boards" />
 	</chunk>
 
@@ -286,7 +315,11 @@
 	<chunk id="cat_train_protection">
 		<reference ref="base_common" />
 		<key key="railway:signal:train_protection:form" value="sign" />
-		<text key="railway:signal:train_protection:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:train_protection:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 		<link wiki="OpenRailwayMap/Tagging_in_France#CAB_boards" />
 	</chunk>
 
@@ -300,7 +333,11 @@
 	<!-- Electricity signals with combo sign/light (generic) -->
 	<chunk id="cat_electricity_with_form">
 		<reference ref="base_common" />
-		<text key="railway:signal:electricity:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:electricity:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 		<combo
 			key="railway:signal:electricity:form"
 			text="Signal presentation"
@@ -325,7 +362,11 @@
 	<chunk id="cat_bimode">
 		<reference ref="base_common" />
 		<key key="railway:signal:bimode:form" value="sign" />
-		<text key="railway:signal:bimode:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:bimode:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 		<link wiki="OpenRailwayMap/Tagging_in_France#Bimode_operation" />
 	</chunk>
 
@@ -361,7 +402,11 @@
 	<!-- Shunting signals base -->
 	<chunk id="cat_shunting_base">
 		<reference ref="base_common" />
-		<text key="railway:signal:shunting:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:shunting:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 	</chunk>
 
 	<!-- Shunting signals with form=sign -->
@@ -375,14 +420,22 @@
 	<chunk id="cat_stop">
 		<reference ref="base_common" />
 		<key key="railway:signal:stop:form" value="sign" />
-		<text key="railway:signal:stop:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:stop:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 	</chunk>
 
 	<!-- Stop distant signals (distant signs for Arrêt/STOP) -->
 	<chunk id="cat_stop_distant">
 		<reference ref="base_common" />
 		<key key="railway:signal:stop_distant:form" value="sign" />
-		<text key="railway:signal:stop_distant:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:stop_distant:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 		<space />
 		<text
 			key="railway:signal:stop_distant:distance"
@@ -409,48 +462,76 @@
 	<chunk id="cat_conventional_passenger_stop">
 		<reference ref="cat_passenger_stop" />
 		<key key="railway:signal:stop:conventional:form" value="sign" />
-		<text key="railway:signal:stop:conventional:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:stop:conventional:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 	</chunk>
 
 	<!-- Passenger stop signs (highspeed) -->
 	<chunk id="cat_highspeed_passenger_stop">
 		<reference ref="cat_passenger_stop" />
 		<key key="railway:signal:stop:highspeed:form" value="sign" />
-		<text key="railway:signal:stop:highspeed:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:stop:highspeed:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 	</chunk>
 
 	<!-- Station signs (form=sign) -->
 	<chunk id="cat_station">
 		<reference ref="base_common" />
 		<key key="railway:signal:station:form" value="sign" />
-		<text key="railway:signal:station:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:station:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 	</chunk>
 
 	<!-- Station distant signs (form=sign) -->
 	<chunk id="cat_station_distant">
 		<reference ref="base_common" />
 		<key key="railway:signal:station_distant:form" value="sign" />
-		<text key="railway:signal:station_distant:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:station_distant:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 	</chunk>
 
 	<!-- Servicing distant signs (form=sign) -->
 	<chunk id="cat_servicing_distant">
 		<reference ref="base_common" />
 		<key key="railway:signal:servicing_distant:form" value="sign" />
-		<text key="railway:signal:servicing_distant:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:servicing_distant:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 	</chunk>
-	
+
 	<!-- Servicing signs (form=sign) -->
 	<chunk id="cat_servicing">
 		<reference ref="base_common" />
 		<key key="railway:signal:servicing:form" value="sign" />
-		<text key="railway:signal:servicing:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:servicing:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 	</chunk>
 
 	<!-- Reporting plates -->
 	<chunk id="cat_reporting">
 		<reference ref="base_common" />
-		<text key="railway:signal:departure:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:departure:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 		<optional text="">
 			<label
 				text="Telephone call indicator (VAT)"
@@ -487,7 +568,11 @@
 	<!-- Departure signals (form varies) -->
 	<chunk id="cat_departure">
 		<reference ref="base_common" />
-		<text key="railway:signal:departure:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:departure:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 		<link wiki="OpenRailwayMap/Tagging_in_France#Train_departure" />
 	</chunk>
 
@@ -496,7 +581,11 @@
 		<reference ref="base_common" />
 		<key key="railway:signal:crossing_hint" value="FR:PN" />
 		<key key="railway:signal:crossing_hint:form" value="sign" />
-		<text key="railway:signal:crossing_hint:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:crossing_hint:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 		<text
 			key="railway:signal:crossing_hint:number"
 			text="Crossing number"
@@ -513,7 +602,11 @@
 		<reference ref="base_common" />
 		<key key="railway:signal:crossing_info" value="FR:PN" />
 		<key key="railway:signal:crossing_info:form" value="sign" />
-		<text key="railway:signal:crossing_info:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:crossing_info:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 		<text
 			key="railway:signal:crossing_info:number"
 			text="Crossing number"
@@ -525,7 +618,11 @@
 	<chunk id="cat_snowplow">
 		<reference ref="base_common" />
 		<key key="railway:signal:snowplow:form" value="sign" />
-		<text key="railway:signal:snowplow:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+		<text
+			key="railway:signal:snowplow:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
 		<link wiki="OpenRailwayMap/Tagging_in_France#Snowplow" />
 	</chunk>
 
@@ -2139,65 +2236,6 @@
 				<link wiki="OpenRailwayMap/Tagging_in_France#Signal_de_milieu_de_quai_(2TMV)" />
 			</item>
 
-			<separator />
-
-			<!-- LIGHT BOX -->
-			<item
-				name="Light Box"
-				fr.name="Caisson Lumineux"
-				type="node"
-				icon="icons/boxes/double.svg">
-				<label
-					text="Light box"
-					fr.text="Caisson lumineux" />
-				<space />
-				<key key="railway:signal:combined" value="FR:light_box" />
-				<key key="railway:signal:combined:form" value="light" />
-				<key key="railway:signal:combined:shape" value="double" />
-				<reference ref="base_common" />
-				<text
-					key="railway:signal:combined:ref"
-					text="Network ID"
-					fr.text="Identifiant Réseau" length="7" />
-				<combo
-					key="railway:signal:combined:left"
-					text="Left Cell"
-					fr.text="Case de gauche"
-					editable="false">
-					<list_entry value="FR:D"
-								display_value="Depot"
-								fr.display_value="Dépôt"
-								icon="icons/boxes/D.svg" icon_size="24"/>
-					<list_entry value="FR:G"
-								display_value="Garage"
-								fr.display_value="Garage"
-								icon="icons/boxes/G.svg" icon_size="24"/>
-					<list_entry value="FR:TECS"
-								display_value="Wrong-road entry"
-								fr.display_value="Entrée de ContreSens"
-								icon="icons/boxes/TECS.svg" icon_size="24"/>
-				</combo>
-				<combo
-					key="railway:signal:combined:right"
-					text="Right Cell"
-					fr.text="Case de droite"
-					editable="false">
-					<list_entry value="FR:D"
-								display_value="Depot"
-								fr.display_value="Dépôt"
-								icon="icons/boxes/D.svg" icon_size="24"/>
-					<list_entry value="FR:TECS"
-								display_value="Wrong-road entry"
-								fr.display_value="Entrée de ContreSens"
-								icon="icons/boxes/TECS.svg" icon_size="24"/>
-					<list_entry value="FR:TSCS"
-								display_value="Wrong-road exit"
-								fr.display_value="Sortie de ContreSens"
-								icon="icons/boxes/TSCS.svg" icon_size="24"/>
-				</combo>
-				<link wiki="OpenRailwayMap/Tagging_in_France#Combined_signals" />
-			</item>
-
 		</group>
 
 		<!-- DISTANT SIGNALS -->
@@ -2729,7 +2767,7 @@
 				key="railway:signal:minor:caption"
 				text="Board caption"
 				fr.text="Libellé de la pancarte" />
-			<link wiki="OpenRailwayMap/Tagging_in_France#Instruction_board" />
+			<link wiki="OpenRailwayMap/Tagging_in_France#Instruction_boards" />
 		</item>
 
 		<!-- SIGNAL POSITION INDICATORS -->
@@ -2887,13 +2925,13 @@
 				fr.name="CARRÉ ...m"
 				type="node"
 				icon="icons/signs/distant_carre.svg"
-				match_expression="-&quot;railway:signal:distant:for&quot;=*">
+				match_expression="-&quot;railway:signal:distant:type&quot;=*">
 				<label
 					text="&quot;CARRÉ ...m&quot; distant sign"
 					fr.text="Pancarte à distance &quot;CARRÉ ...m&quot;" />
 				<space />
 				<key key="railway:signal:distant" value="FR:CARRE" />
-				<key key="railway:signal:distant:for" match="none" />
+				<key key="railway:signal:distant:type" match="none" />
 				<reference ref="cat_distant_sign_with_distance" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Carré_distant_sign" />
 			</item>
@@ -2909,7 +2947,7 @@
 					fr.text="Pancarte &quot;C... à droite à ...m&quot; (2TMV)" />
 				<space />
 				<key key="railway:signal:distant" value="FR:CARRE" />
-				<key key="railway:signal:distant:for" value="intermediate" />
+				<key key="railway:signal:distant:type" value="intermediate" />
 				<reference ref="cat_distant_sign_with_distance" />
 				<text
 					key="railway:signal:distant:caption"
@@ -3586,7 +3624,11 @@
 						<key key="railway:signal:shunting_route" value="FR:destination" />
 						<key key="railway:signal:shunting_route:depot" value="FR:D" />
 						<reference ref="base_common" />
-						<text key="railway:signal:shunting_route:depot:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+						<text
+							key="railway:signal:shunting_route:depot:ref"
+							text="Network ID"
+							fr.text="Identifiant Réseau"
+							length="7" />
 						<combo
 							key="railway:signal:shunting_route:depot:form"
 							text="Signal presentation"
@@ -3597,13 +3639,39 @@
 								value="sign"
 								display_value="Board"
 								fr.display_value="Tableau"
-								icon="icons/boards/empty.svg" icon_size="24"/>
+								icon="icons/boards/D.svg" icon_size="24"/>
 							<list_entry
 								value="light"
 								display_value="Light box"
 								fr.display_value="Caisson lumineux"
-								icon="icons/boxes/single.svg" icon_size="24"/>
+								icon="icons/boxes/D.svg" icon_size="24"/>
 						</combo>
+						<optional text="">
+							<combo
+							key="railway:signal:shunting_route:depot:lightbox"
+							text="Light box type"
+							fr.text="Type de caisson"
+							editable="false">
+								<list_entry
+									value=""
+									display_value="Single light box"
+									fr.display_value="Caisson simple"
+									icon="icons/boxes/D.svg"
+									icon_size="24"/>
+								<list_entry
+									value="left"
+									display_value="Double light box (left)"
+									fr.display_value="Caisson double (gauche)"
+									icon="icons/boxes/D_left.svg"
+									icon_size="24"/>
+								<list_entry
+									value="right"
+									display_value="Double light box (right)"
+									fr.display_value="Caisson double (droite)"
+									icon="icons/boxes/D_right.svg"
+									icon_size="24"/>
+							</combo>
+						</optional>
 						<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_boards" />
 					</item>
 
@@ -3620,7 +3688,11 @@
 						<key key="railway:signal:shunting_route" value="FR:destination" />
 						<key key="railway:signal:shunting_route:stabling" value="FR:G" />
 						<reference ref="base_common" />
-						<text key="railway:signal:shunting_route:stabling:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+						<text
+							key="railway:signal:shunting_route:stabling:ref"
+							text="Network ID"
+							fr.text="Identifiant Réseau"
+							length="7" />
 						<combo
 							key="railway:signal:shunting_route:stabling:form"
 							text="Signal presentation"
@@ -3631,13 +3703,39 @@
 								value="sign"
 								display_value="Board"
 								fr.display_value="Tableau"
-								icon="icons/boards/empty.svg" icon_size="24"/>
+								icon="icons/boards/G.svg" icon_size="24"/>
 							<list_entry
 								value="light"
 								display_value="Light box"
 								fr.display_value="Caisson lumineux"
-								icon="icons/boxes/single.svg" icon_size="24"/>
+								icon="icons/boxes/G.svg" icon_size="24"/>
 						</combo>
+						<optional text="">
+							<combo
+							key="railway:signal:shunting_route:stabling:lightbox"
+							text="Light box type"
+							fr.text="Type de caisson"
+							editable="false">
+								<list_entry
+									value=""
+									display_value="Single light box"
+									fr.display_value="Caisson simple"
+									icon="icons/boxes/G.svg"
+									icon_size="24"/>
+								<list_entry
+									value="left"
+									display_value="Double light box (left)"
+									fr.display_value="Caisson double (gauche)"
+									icon="icons/boxes/G_left.svg"
+									icon_size="24"/>
+								<list_entry
+									value="right"
+									display_value="Double light box (right)"
+									fr.display_value="Caisson double (droite)"
+									icon="icons/boxes/G_right.svg"
+									icon_size="24"/>
+							</combo>
+						</optional>
 						<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_boards" />
 					</item>
 
@@ -3654,7 +3752,11 @@
 						<key key="railway:signal:shunting_route" value="FR:destination" />
 						<key key="railway:signal:shunting_route:dead_end" value="FR:Imp" />
 						<reference ref="base_common" />
-						<text key="railway:signal:shunting_route:dead_end:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+						<text
+							key="railway:signal:shunting_route:dead_end:ref"
+							text="Network ID"
+							fr.text="Identifiant Réseau"
+							length="7" />
 						<combo
 							key="railway:signal:shunting_route:dead_end:form"
 							text="Signal presentation"
@@ -3688,7 +3790,11 @@
 						<key key="railway:signal:shunting_route" value="FR:destination" />
 						<key key="railway:signal:shunting_route:short_block" value="FR:SAS" />
 						<reference ref="base_common" />
-						<text key="railway:signal:shunting_route:short_block:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+						<text
+							key="railway:signal:shunting_route:short_block:ref"
+							text="Network ID"
+							fr.text="Identifiant Réseau"
+							length="7" />
 						<combo
 							key="railway:signal:shunting_route:short_block:form"
 							text="Signal presentation"
@@ -3723,7 +3829,11 @@
 						<key key="railway:signal:shunting_route:buffer_stop" value="FR:Heurtoir" />
 						<key key="railway:signal:shunting_route:buffer_stop:form" value="sign" />
 						<reference ref="base_common" />
-						<text key="railway:signal:shunting_route:buffer_stop:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+						<text
+							key="railway:signal:shunting_route:buffer_stop:ref"
+							text="Network ID"
+							fr.text="Identifiant Réseau"
+							length="7" />
 						<text
 							key="railway:signal:shunting_route:buffer_stop:distance"
 							text="Distance (m)"
@@ -3969,7 +4079,11 @@
 					<key key="railway:signal:speed_limit_distant" value="FR:speed_indicator" />
 					<key key="railway:signal:speed_limit_distant:switchable" value="FR:TIV-D" />
 					<reference ref="base_with_plate" />
-					<text key="railway:signal:speed_limit_distant:switchable:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+					<text
+						key="railway:signal:speed_limit_distant:switchable:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
 					<combo
                         key="railway:signal:speed_limit_distant:switchable:form"
 						text="Signal presentation"
@@ -4008,7 +4122,11 @@
 					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
 					<key key="railway:signal:speed_limit:switchable" value="FR:TIV-R" />
 					<reference ref="base_common" />
-					<text key="railway:signal:speed_limit:switchable:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+					<text
+						key="railway:signal:speed_limit:switchable:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
 					<combo
                         key="railway:signal:speed_limit:switchable:form"
 						text="Signal presentation"
@@ -4104,7 +4222,11 @@
 					<key key="railway:signal:speed_limit_distant:fast" value="FR:TIV-D" />
 					<key key="railway:signal:speed_limit_distant:fast:form" value="sign" />
 					<reference ref="base_common" />
-					<text key="railway:signal:speed_limit_distant:fast:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+					<text
+						key="railway:signal:speed_limit_distant:fast:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
 					<combo
 						key="railway:signal:speed_limit_distant:fast:speed"
 						text="Speed Limit (km/h)"
@@ -4137,7 +4259,11 @@
 					<key key="railway:signal:speed_limit_distant:railcar" value="FR:TIV-D" />
 					<key key="railway:signal:speed_limit_distant:railcar:form" value="sign" />
 					<reference ref="base_common" />
-					<text key="railway:signal:speed_limit_distant:railcar:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+					<text
+						key="railway:signal:speed_limit_distant:railcar:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
 					<combo
 						key="railway:signal:speed_limit_distant:railcar:speed"
 						text="Speed Limit (km/h)"
@@ -4176,7 +4302,8 @@
 					<text
 						key="railway:signal:speed_limit:main:ref"
 						text="Network ID"
-						fr.text="Identifiant Réseau" length="7" />
+						fr.text="Identifiant Réseau"
+						length="7" />
 
 					<item_separator />
 
@@ -4207,7 +4334,8 @@
 					<text
 						key="railway:signal:speed_limit:main:ref"
 						text="Network ID"
-						fr.text="Identifiant Réseau" length="7" />
+						fr.text="Identifiant Réseau"
+						length="7" />
 
 					<item_separator />
 
@@ -4234,7 +4362,11 @@
 					<key key="railway:signal:speed_limit:transition" value="FR:Km" />
 					<key key="railway:signal:speed_limit:transition:form" value="sign" />
 					<reference ref="base_common" />
-					<text key="railway:signal:speed_limit:transition:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+					<text
+						key="railway:signal:speed_limit:transition:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
 
 					<item_separator />
 
@@ -4265,7 +4397,8 @@
 				<text
 					key="railway:signal:speed_limit_distant:ref"
 					text="Network ID"
-					fr.text="Identifiant Réseau" length="7" />
+					fr.text="Identifiant Réseau"
+					length="7" />
 				<combo
 					key="railway:signal:speed_limit_distant:form"
 					text="Signal presentation"
@@ -4307,7 +4440,11 @@
 					<key key="railway:signal:speed_limit_distant:freight:form" value="sign" />
 					<key key="railway:signal:speed_limit_distant:freight:function" match="none" />
 					<reference ref="base_with_plate" />
-					<text key="railway:signal:speed_limit_distant:freight:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+					<text
+						key="railway:signal:speed_limit_distant:freight:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
 					<combo
                         key="railway:signal:speed_limit_distant:freight:speed"
 						text="Speed Limit (km/h)"
@@ -4339,7 +4476,8 @@
 					<text
                         key="railway:signal:speed_limit_distant:freight:condition:ref"
 						text="Network ID"
-						fr.text="Identifiant Réseau" length="7" />
+						fr.text="Identifiant Réseau"
+						length="7" />
 					<link wiki="OpenRailwayMap/Tagging_in_France#L_plate" />
 				</item>
 
@@ -4363,7 +4501,8 @@
 					<text
 						key="railway:signal:speed_limit:freight:ref"
 						text="Network ID"
-						fr.text="Identifiant Réseau" length="7" />
+						fr.text="Identifiant Réseau"
+						length="7" />
 					<combo
                         key="railway:signal:speed_limit:freight:speed"
 						text="Speed Limit (km/h)"
@@ -4392,7 +4531,8 @@
 					<text
 						key="railway:signal:speed_limit:freight:ref"
 						text="Network ID"
-						fr.text="Identifiant Réseau" length="7" />
+						fr.text="Identifiant Réseau"
+						length="7" />
 					<link wiki="OpenRailwayMap/Tagging_in_France#Pentagonal_white_board" />
 				</item>
 
@@ -4445,7 +4585,8 @@
 				<text
 					key="railway:signal:minor:ref"
 					text="Network ID"
-					fr.text="Identifiant Réseau" length="7" />
+					fr.text="Identifiant Réseau"
+					length="7" />
 
 				<item_separator />
 				<preset_link preset_name="Downward-pointing Chevron" text=""/>
@@ -4475,7 +4616,11 @@
 				<key key="railway:signal:route" value="FR:ID" />
 				<key key="railway:signal:route:form" value="light" />
 				<reference ref="base_common" />
-				<text key="railway:signal:route:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+				<text
+					key="railway:signal:route:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau"
+					length="7" />
 				<combo
 					key="railway:signal:route:states"
 					text="Number of Directions"
@@ -4514,7 +4659,11 @@
 				<key key="railway:signal:switch" value="FR:TIDD" />
 				<key key="railway:signal:switch:form" value="light" />
 				<reference ref="base_common" />
-				<text key="railway:signal:switch:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+				<text
+					key="railway:signal:switch:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau"
+					length="7" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Tableau_Indicateur_de_Direction_à_Distance" />
 			</item>
 
@@ -4533,7 +4682,7 @@
 				<reference ref="cat_route_distant" />
 				<combo
 					key="railway:signal:route_distant:shape"
-					text="Box Type"
+					text="Light box type"
 					fr.text="Type de caisson"
 					editable="false">
 					<list_entry
@@ -4632,7 +4781,11 @@
 				<space />
 				<key key="railway:signal:wrong_road:entry" value="FR:TECS" />
 				<reference ref="cat_wrong_road" />
-				<text key="railway:signal:wrong_road:entry:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+				<text
+					key="railway:signal:wrong_road:entry:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau"
+					length="7" />
 				<combo
 					key="railway:signal:wrong_road:entry:form"
 					text="Signal presentation"
@@ -4649,6 +4802,32 @@
 						fr.display_value="Caisson lumineux"
 						icon="icons/boxes/TECS.svg" icon_size="24"/>
 				</combo>
+				<optional text="">
+					<combo
+					key="railway:signal:wrong_road:entry:lightbox"
+					text="Light box type"
+					fr.text="Type de caisson"
+					editable="false">
+						<list_entry
+							value=""
+							display_value="Single light box"
+							fr.display_value="Caisson simple"
+							icon="icons/boxes/TECS.svg"
+							icon_size="24"/>
+						<list_entry
+							value="left"
+							display_value="Double light box (left)"
+							fr.display_value="Caisson double (gauche)"
+							icon="icons/boxes/TECS_left.svg"
+							icon_size="24"/>
+						<list_entry
+							value="right"
+							display_value="Double light box (right)"
+							fr.display_value="Caisson double (droite)"
+							icon="icons/boxes/TECS_right.svg"
+							icon_size="24"/>
+					</combo>
+				</optional>
 			</item>
 
 			<!-- TSCS -->
@@ -4663,7 +4842,11 @@
 				<space />
 				<key key="railway:signal:wrong_road:exit" value="FR:TSCS" />
 				<reference ref="cat_wrong_road" />
-				<text key="railway:signal:wrong_road:exit:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+				<text
+					key="railway:signal:wrong_road:exit:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau"
+					length="7" />
 				<combo
 					key="railway:signal:wrong_road:exit:form"
 					text="Signal presentation"
@@ -4680,6 +4863,32 @@
 						fr.display_value="Caisson lumineux"
 						icon="icons/boxes/TSCS.svg" icon_size="24"/>
 				</combo>
+				<optional text="">
+					<combo
+					key="railway:signal:wrong_road:exit:lightbox"
+					text="Light box type"
+					fr.text="Type de caisson"
+					editable="false">
+						<list_entry
+							value=""
+							display_value="Single light box"
+							fr.display_value="Caisson simple"
+							icon="icons/boxes/TSCS.svg"
+							icon_size="24"/>
+						<list_entry
+							value="left"
+							display_value="Double light box (left)"
+							fr.display_value="Caisson double (gauche)"
+							icon="icons/boxes/TSCS_left.svg"
+							icon_size="24"/>
+						<list_entry
+							value="right"
+							display_value="Double light box (right)"
+							fr.display_value="Caisson double (droite)"
+							icon="icons/boxes/TSCS_right.svg"
+							icon_size="24"/>
+					</combo>
+				</optional>
 			</item>
 
 		</group>
@@ -4777,7 +4986,11 @@
 				<key key="railway:signal:radio:channel:type" value="channel_transition" />
 				<key key="railway:signal:radio:channel:form" value="sign" />
 				<reference ref="base_common" />
-				<text key="railway:signal:radio:channel:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+				<text
+					key="railway:signal:radio:channel:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau"
+					length="7" />
 				<space />
 				<text
 					key="railway:signal:radio:channel:number"
@@ -4868,7 +5081,11 @@
 					<key key="railway:signal:train_protection:main" value="stop_marker" />
 					<key key="railway:signal:train_protection:main:form" value="sign" />
 					<reference ref="base_with_plate" />
-					<text key="railway:signal:train_protection:main:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+					<text
+						key="railway:signal:train_protection:main:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
 					<combo
 						key="railway:signal:train_protection:main:type"
 						text="Identification plate"
@@ -4918,7 +5135,11 @@
 					<key key="railway:signal:train_protection:system_change" value="FR:type_transition" />
 					<key key="railway:signal:train_protection:system_change:form" value="sign" />
 					<reference ref="base_common" />
-					<text key="railway:signal:train_protection:system_change:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+					<text
+						key="railway:signal:train_protection:system_change:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
 					<space />
 					<combo
 						key="railway:signal:train_protection:system_change:type"
@@ -4955,7 +5176,11 @@
 					<key key="railway:signal:shunting" value="FR:marker" />
 					<key key="railway:signal:shunting:form" value="sign" />
 					<reference ref="base_with_plate" />
-					<text key="railway:signal:shunting:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+					<text
+						key="railway:signal:shunting:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
 					<optional text="">
 						<label
 							text="Additional features"
@@ -4986,7 +5211,11 @@
 				<key key="railway:signal:train_protection" value="FR:X" />
 				<key key="railway:signal:train_protection:form" value="light" />
 				<reference ref="base_common" />
-				<text key="railway:signal:train_protection:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+				<text
+					key="railway:signal:train_protection:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau"
+					length="7" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Cancellation_signal_(RATP)" />
 			</item>
 
@@ -5294,7 +5523,11 @@
 					<key key="railway:signal:electricity:type" value="power_on" />
 					<key key="railway:signal:electricity:form" value="sign" />
 					<reference ref="base_common" />
-					<text key="railway:signal:electricity:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+					<text
+						key="railway:signal:electricity:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
 					<reference ref="optional_traction_supply" />
 					<link wiki="OpenRailwayMap/Tagging_in_France#REV_sign" />
 				</item>
@@ -5536,7 +5769,11 @@
 				<key key="railway:signal:crossing_hint" value="FR:radio_command" />
 				<key key="railway:signal:crossing_hint:form" value="sign" />
 				<reference ref="base_common" />
-				<text key="railway:signal:crossing_hint:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+				<text
+					key="railway:signal:crossing_hint:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau"
+					length="7" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Radio-controlled_level_crossing" />
 			</item>
 
@@ -5556,7 +5793,8 @@
 				<text
 					key="railway:signal:crossing:ref"
 					text="Network ID"
-					fr.text="Identifiant Réseau" length="7" />
+					fr.text="Identifiant Réseau"
+					length="7" />
 				<space />
 				<combo
 					key="railway:signal:crossing:arrangement"
@@ -5601,7 +5839,8 @@
 				<text
 					key="railway:signal:clearance:ref"
 					text="Network ID"
-					fr.text="Identifiant Réseau" length="7" />
+					fr.text="Identifiant Réseau"
+					length="7" />
 
 				<item_separator />
 				<preset_link preset_name="Tunnels" text=""/>
@@ -5625,7 +5864,8 @@
 				<text
 					key="railway:signal:structure:ref"
 					text="Network ID"
-					fr.text="Identifiant Réseau" length="7" />
+					fr.text="Identifiant Réseau"
+					length="7" />
 				<combo
 					key="railway:signal:structure:count"
 					text="Number of tunnels"
@@ -5650,7 +5890,11 @@
 			<key key="railway:signal:whistle" value="FR:S" />
 			<key key="railway:signal:whistle:form" value="sign" />
 			<reference ref="base_common" />
-			<text key="railway:signal:whistle:ref" text="Network ID" fr.text="Identifiant Réseau" length="7" />
+			<text
+				key="railway:signal:whistle:ref"
+				text="Network ID"
+				fr.text="Identifiant Réseau"
+				length="7" />
 			<optional text="">
 				<label
 					text="Additional features"
