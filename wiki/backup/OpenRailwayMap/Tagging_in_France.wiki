@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-07-28 04:47:23 UTC
+Last edited: 2026-08-03 05:02:32 UTC
 Last editor: Noeld
-Last edit comment: /* Level crossing announcement */ add note about Radio sign
-Backup date: 2026-07-28 04:50:24 UTC
+Last edit comment: /* Carré violet */ restore the unified layout (mobile-friendly) and incorporate the provided information about the mechanical form
+Backup date: 2026-08-03 05:40:27 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -24,8 +24,7 @@ All railway signals must include the following tags:
 * {{Tag|railway:signal:direction||({{TagValue|railway:signal:direction|forward}}/{{TagValue|railway:signal:direction|backward}}/{{TagValue|railway:signal:direction|both}})}} Direction of the signal relative to the direction of the way.
 * {{Tag|railway:signal:position||({{TagValue|railway:signal:position|left}}/{{TagValue|railway:signal:position|right}}/{{TagValue|railway:signal:position|bridge}}/{{TagValue|railway:signal:position|catenary_mast}}/{{TagValue|railway:signal:position|ground}}/{{TagValue|railway:signal:position|in_track}}/{{TagValue|railway:signal:position|overhead}})}} Lateral or vertical position of the signal relative to the track.
 * {{Tag|railway:position:exact||365.913}} where ''365.913'' is an example. Position of the signal along the track. This corresponds to the kilometric point (PK) of the signal installation, measured from the beginning of the line.
-
-* {{TagKey|railway:signal:main}}''':ref'''=123456 where '''main''' is an example of one of the [https://wiki.openstreetmap.org/wiki/Tag:railway%3Dsignal#List_of_signal_categories signal categories] and ''123456'' is an example of an '''idreseau''' identifier provided by [https://www.sncf-reseau.com/ SNCF Réseau]. One identifier is used per category and per physical signal, board, or sign at the node.
+* {{TagKey|railway:signal:main}}''':ref'''=123456 where '''main''' is an example of one of the [https://wiki.openstreetmap.org/wiki/Tag:railway%3Dsignal#List_of_signal_categories signal categories] and ''123456'' is an example of an '''idreseau''' identifier assigned by [https://www.sncf-reseau.com/ SNCF Réseau]. The '''idreseau''' value is unique for each physical signalling element at the node (signal, board, or sign).
 
 Optional tags:
 * {{Tag|ref|}}: identifier shown on the marker plate ('''plaque de repérage''') when present.
@@ -101,9 +100,9 @@ File:CarreMecanique.svg|Mechanical [[#Carré|Carré]] signal.
 
 ====Carré violet====
 
-An absolute stop signal, similar to the [[#Carré|Carré signal]], specifically used to control train movements during shunting operations, on service tracks, or during transitions of traffic to and from main lines. The signal displays a single steady purple light and is also equipped with an identification plate bearing the inscription '''Nf''' in white letters on a black background.
+An absolute stop signal, similar to the [[#Carré|Carré signal]], specifically used to control train movements during shunting operations, on service tracks, or at the transition between service tracks and main lines. It may be provided either as a mechanical board or as a light signal.
 
-Like the Carré signal, this signal may be equipped with a marker plate and/or a block plate with inscriptions in black letters on a white background.
+The light form displays a single steady purple light. Like the Carré signal, it is equipped with an identification plate bearing the inscription '''Nf''' in white letters on a black background and may also be equipped with a marker plate and/or a block plate with inscriptions in black letters on a white background.
 
 <gallery>
 File:CV_C_BAL.svg|Cv aspect on a C-type signal head.
@@ -123,8 +122,10 @@ Optional tags:
 
 =====Carré violet (mechanical)=====
 
+The mechanical form consists of a purple square with a white border. To ensure visibility at night, it is fitted with a purple light positioned below the board.
+
 <gallery>
-File:CarreVM.svg|Mechanical Carré violet.
+File:CarreVM.svg|Mechanical Carré violet
 </gallery>
 
 * {{Tag|railway:signal:main|FR:CV}}
@@ -240,7 +241,40 @@ Use one of the following tags depending on the signal type (main or distant):
 * {{Tag|railway:signal:main:deactivated|yes}}
 * {{Tag|railway:signal:distant:deactivated|yes}}
 
-===Instruction board===
+===Light boxes===
+
+Several illuminated [[#Shunting boards|shunting boards]] (D, G) and [[#Wrong-road signalling|wrong-road signalling boards]] (TECS, TSCS) may be installed in either a single light box (French: '''caisson lumineux''') or a double light box. These light boxes are usually installed alongside a [[#Carré|Carré]] signal. 
+
+This is mapped using the <code>lightbox</code> property, which only applies when <code>form=light</code> is used; a mechanical board (<code>form=sign</code>) is always installed as a single board. See the individual board descriptions below for the applicable tags.
+
+The <code>lightbox</code> property indicates the board's position within the light box:
+
+* ''unset'' - single light box (default)
+* <code>left</code> - the board occupies the left half of a double light box
+* <code>right</code> - the board occupies the right half of a double light box
+
+When two boards share a double light box, both are mapped '''on the same node'''. Each board is tagged separately, with one <code>lightbox</code> property set to <code>left</code> and the other to <code>right</code>. Both boards also share the same '''idreseau''' value (<code>*:ref</code>), which identifies the light box itself.
+
+<gallery>
+File:D TECS box.svg|Example of a double light box
+</gallery>
+
+For example, a light box displaying a '''D board''' on the left and a '''TECS board''' on the right would be tagged as follows:
+
+* {{Tag|railway:signal:shunting_route|FR:destination}}
+* {{Tag|railway:signal:shunting_route:depot|FR:D}}
+* {{Tag|railway:signal:shunting_route:depot:form|light}}
+* {{Tag|railway:signal:shunting_route:depot:lightbox|left}}
+* {{Tag|railway:signal:shunting_route:depot:ref|123456}}
+* {{Tag|railway:signal:wrong_road|FR:transition}}
+* {{Tag|railway:signal:wrong_road:entry|FR:TECS}}
+* {{Tag|railway:signal:wrong_road:entry:form|light}}
+* {{Tag|railway:signal:wrong_road:entry:lightbox|right}}
+* {{Tag|railway:signal:wrong_road:entry:ref|123456}}
+
+The combination of the <code>lightbox</code> property and the shared <code>*:ref</code> value indicates that both boards refer to the same physical light box. In this example, ''123456'' is a placeholder for an '''idreseau''' value.
+
+===Instruction boards===
 Instruction boards (French: '''Pancarte de consigne''') display operational instructions for train drivers. They are generally used in conjunction with another board or signal.
 
 <gallery>
@@ -287,20 +321,6 @@ File:SNCF Mirliton III.svg|Mirliton III
 * {{Tag|railway:signal:distant|FR:mirliton}}
 * {{Tag|railway:signal:distant:type||({{TagValue|railway:signal:distant:type|I}}/{{TagValue|railway:signal:distant:type|II}}/{{TagValue|railway:signal:distant:type|III}})}}
 * {{Tag|railway:signal:distant:form|sign}}
-
-===Combined signals===
-
-In some cases, [[#Shunting_boards|shunting]] and [[#Wrong-road_signalling|wrong-road]] boards may be installed together in a double light box.
-
-<gallery>
-File:D_TECS_box.svg|Combined signals in a double light box.
-</gallery>
-
-* {{Tag|railway:signal:combined|FR:light_box}}
-* {{Tag|railway:signal:combined:form|light}}
-* {{Tag|railway:signal:combined:shape|double}}
-* {{Tag|railway:signal:combined:left||({{TagValue|railway:signal:combined:left|FR:D}}/{{TagValue|railway:signal:combined:left|FR:G}}/{{TagValue|railway:signal:combined:left|FR:TECS}})}}
-* {{Tag|railway:signal:combined:right||({{TagValue|railway:signal:combined:right|FR:D}}/{{TagValue|railway:signal:combined:right|FR:TECS}}/{{TagValue|railway:signal:combined:right|FR:TSCS}})}}
 
 ===Permanent speed limits===
 
@@ -644,6 +664,11 @@ File:TECS_box.svg|Box (light)
 * {{Tag|railway:signal:wrong_road:entry|FR:TECS}}
 * {{Tag|railway:signal:wrong_road:entry:form||({{TagValue|railway:signal:wrong_road:entry:form|sign}}/{{TagValue|railway:signal:wrong_road:entry:form|light}})}}
 
+Optional tags:
+
+If the board is part of a double [[#Light boxes|light box]]:
+* {{Tag|railway:signal:wrong_road:entry:lightbox||({{TagValue|railway:signal:wrong_road:entry:lightbox|left}}/{{TagValue|railway:signal:wrong_road:entry:lightbox|right}})}} (single light box by default)
+
 
 The wrong-road exit board or '''Tableau de Sortie de ContreSens''' (TSCS) informs the driver that the train, currently running in the wrong road, is now directed back to the normal running direction.
 
@@ -655,6 +680,11 @@ File:TSCS_box.svg|Box (light)
 * {{Tag|railway:signal:wrong_road|FR:transition}}
 * {{Tag|railway:signal:wrong_road:exit|FR:TSCS}}
 * {{Tag|railway:signal:wrong_road:exit:form||({{TagValue|railway:signal:wrong_road:exit:form|sign}}/{{TagValue|railway:signal:wrong_road:exit:form|light}})}}
+
+Optional tags:
+
+If the board is part of a double [[#Light boxes|light box]]:
+* {{Tag|railway:signal:wrong_road:exit:lightbox||({{TagValue|railway:signal:wrong_road:exit:lightbox|left}}/{{TagValue|railway:signal:wrong_road:exit:lightbox|right}})}} (single light box by default)
 
 ===Ground-to-train radio===
 
@@ -981,11 +1011,10 @@ File:Pancarte à distance C881 à droite.svg|Intermediate signal distant sign
 
 * {{Tag|railway:signal:distant|FR:CARRE}}
 * {{Tag|railway:signal:distant:form|sign}}
-* {{Tag|railway:signal:distant:for|intermediate}}
-* {{Tag|railway:signal:distant:caption|}} (identification of the announced signal, e.g. ''C881'')
+* {{Tag|railway:signal:distant:type|intermediate}}
 
 Optional tags:
-
+* {{Tag|railway:signal:distant:caption|}} (identification of the announced signal, e.g. ''C881'')
 * {{Tag|railway:signal:distant:distance|}} (distance in meters as shown on the sign, e.g. ''100'')
 
 ====GA distant signs====
@@ -1438,6 +1467,11 @@ File:Tableau_D_box.svg|Luminous (light)
 * {{Tag|railway:signal:shunting_route:depot:form||
 ({{TagValue|railway:signal:shunting_route:depot:form|sign}}/{{TagValue|railway:signal:shunting_route:depot:form|light}})}}
 
+Optional tags:
+
+If the board is part of a double [[#Light boxes|light box]]:
+* {{Tag|railway:signal:shunting_route:depot:lightbox||({{TagValue|railway:signal:shunting_route:depot:lightbox|left}}/{{TagValue|railway:signal:shunting_route:depot:lightbox|right}})}} (single light box by default)
+
 
 The '''G''' (Garage) board indicates that the train is directed towards a service track.
 
@@ -1451,11 +1485,16 @@ File:Tableau_G_box.svg|Luminous (light)
 * {{Tag|railway:signal:shunting_route:stabling:form||
 ({{TagValue|railway:signal:shunting_route:stabling:form|sign}}/{{TagValue|railway:signal:shunting_route:stabling:form|light}})}}
 
+Optional tags:
+
+If the board is part of a double [[#Light boxes|light box]]:
+* {{Tag|railway:signal:shunting_route:stabling:lightbox||({{TagValue|railway:signal:shunting_route:stabling:lightbox|left}}/{{TagValue|railway:signal:shunting_route:stabling:lightbox|right}})}} (single light box by default)
+
 
 The '''Heurtoir à xxx mètres''' board announces a buffer stop at the specified distance.
 
 <gallery>
-File:Heurtoir_500m.svg|Buffer stop advance sign
+File:Heurtoir_500m.svg|Buffer stop distant sign
 </gallery>
 
 * {{Tag|railway:signal:shunting_route|FR:destination}}
@@ -1478,7 +1517,7 @@ File:Tableau_Imp.svg|'''Imp''' board
 The '''SAS''' board indicates the route leading to a very short track section (SAS) bounded by [[#Carré|Carré]] signals at both ends.
 
 <gallery>
-File:Pancarte_SAS.svg|'''SAS''' sign
+File:Pancarte_SAS.svg|'''SAS''' board
 </gallery>
 
 * {{Tag|railway:signal:shunting_route|FR:destination}}
