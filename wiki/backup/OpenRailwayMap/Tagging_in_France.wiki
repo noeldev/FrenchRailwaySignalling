@@ -3,7 +3,7 @@ Wiki page: OpenRailwayMap/Tagging_in_France
 Last edited: 2026-08-03 05:02:32 UTC
 Last editor: Noeld
 Last edit comment: /* Carré violet */ restore the unified layout (mobile-friendly) and incorporate the provided information about the mechanical form
-Backup date: 2026-08-03 05:40:27 UTC
+Backup date: 2026-08-03 05:41:07 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
