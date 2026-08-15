@@ -1,6 +1,6 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2026-08-03 05:41:07 UTC<br>
+**Backup generated:** 2026-08-15 06:15:19 UTC<br>
 **Category:** main<br>
 **Total pages:** 1<br>
 **Successfully backed up:** 1
@@ -10,9 +10,9 @@
 
 - **File:** [OpenRailwayMap/Tagging_in_France.wiki](OpenRailwayMap/Tagging_in_France.wiki)
 - **Wiki URL:** [OpenRailwayMap/Tagging_in_France](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
-- **Last edited:** 2026-08-03 05:02:32 UTC
+- **Last edited:** 2026-08-15 06:03:34 UTC
 - **Last editor:** Noeld
-- **Edit comment:** /* Carré violet */ restore the unified layout (mobile-friendly) and incorporate the provided information about the mechanical form
+- **Edit comment:** /* Shunting boards */ update section layout
 
 ## About
 
