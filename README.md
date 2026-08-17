@@ -36,7 +36,7 @@ A [taginfo project file](https://wiki.openstreetmap.org/wiki/Taginfo/Projects) i
 
 The `tools/` directory holds small C# (.NET 10) console applications that support the presets and the wiki backup. Each one is self-contained.
 
-- **PresetValidator** - Validates `French_Railway_Signalling.xml` before deployment. It checks the file against the JOSM tagging preset schema (the schema location is read from the preset file and downloaded automatically), verifies chunk definitions and references, confirms every icon exists on disk with exact path casing (so nothing breaks on the case-sensitive GitHub Pages host), resolves the wiki link of each item either inline or through referenced chunks, and can optionally check over the network that wiki links and their anchors are reachable.
+- **PresetValidator** - Validates `French_Railway_Signalling.xml` before deployment. It checks the file against the JOSM tagging preset schema (the schema location is read from the preset file and downloaded automatically), verifies chunk definitions and references, confirms every icon exists on disk with exact path casing (so nothing breaks on the case-sensitive OS), resolves the wiki link of each item either inline or through referenced chunks, and can optionally check over the network that wiki links and their anchors are reachable.
 - **SvgSquarer** - Normalizes the preset SVG icons to a square `viewBox` so they render consistently in JOSM and on taginfo.
 - **TagInfoGen** - Generates the taginfo project file from the presets, published as `taginfo.json`.
 - **WikiBackup** - Downloads the wiki pages, Lua modules, and templates into `wiki/backup/` for long-term preservation.
