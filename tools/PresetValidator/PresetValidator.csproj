@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <ImplicitUsings>enable</ImplicitUsings>
+	  <InvariantGlobalization>true</InvariantGlobalization>
+	  <RootNamespace>PresetValidator</RootNamespace>
+	  <AssemblyName>PresetValidator</AssemblyName>
+	  <Product>PresetValidator</Product>
+	  <Version>1.0.0</Version>
+	  <Company>Noël Danjou</Company>
+	  <Authors>Noël Danjou</Authors>
+	  <Copyright>Copyright (C) 2026 Noël Danjou</Copyright>
+	  <Description>Validator for the French Railway Signalling JOSM tagging preset.</Description>
+  </PropertyGroup>
+
+</Project>
