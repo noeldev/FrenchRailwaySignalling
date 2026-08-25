@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <RootNamespace>Signalling.Core</RootNamespace>
+    <AssemblyName>Signalling.Core</AssemblyName>
+    <Product>Signalling.Core</Product>
+    <Version>1.0.0</Version>
+    <Company>Noël Danjou</Company>
+    <Authors>Noël Danjou</Authors>
+    <Copyright>Copyright (C) 2026 Noël Danjou</Copyright>
+    <Description>Shared vocabulary and source resolution for the French railway signalling tooling.</Description>
+  </PropertyGroup>
+
+</Project>

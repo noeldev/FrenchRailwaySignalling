@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/Libs/">
+    <Project Path="libs/Signalling.Core/Signalling.Core.csproj" />
+    <Project Path="libs/Signalling.OrmVector/Signalling.OrmVector.csproj" />
+    <Project Path="libs/Signalling.Presets/Signalling.Presets.csproj" />
+    <Project Path="libs/Signalling.Sync/Signalling.Sync.csproj" />
+    <Project Path="libs/Signalling.Wiki/Signalling.Wiki.csproj" />
+  </Folder>
+  <Project Path="SignalAudit/SignalAudit.csproj" />
+  <Project Path="TagInfoGen/TagInfoGen.csproj" />
+</Solution>

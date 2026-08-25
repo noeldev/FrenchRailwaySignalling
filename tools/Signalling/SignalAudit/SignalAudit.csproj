@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <RootNamespace>SignalAudit</RootNamespace>
+    <AssemblyName>SignalAudit</AssemblyName>
+    <Product>SignalAudit</Product>
+    <Version>1.1.0</Version>
+    <Company>Noël Danjou</Company>
+    <Authors>Noël Danjou</Authors>
+    <Copyright>Copyright (C) 2026 Noël Danjou</Copyright>
+    <Description>Validator and cross-source consistency audit for the French Railway Signalling JOSM preset.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.11" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\libs\Signalling.Core\Signalling.Core.csproj" />
+    <ProjectReference Include="..\libs\Signalling.Presets\Signalling.Presets.csproj" />
+    <ProjectReference Include="..\libs\Signalling.OrmVector\Signalling.OrmVector.csproj" />
+    <ProjectReference Include="..\libs\Signalling.Sync\Signalling.Sync.csproj" />
+    <ProjectReference Include="..\libs\Signalling.Wiki\Signalling.Wiki.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+	<None Update="appsettings.Local.json" Condition="Exists('appsettings.Local.json')">
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</None>
+  </ItemGroup>
+
+</Project>

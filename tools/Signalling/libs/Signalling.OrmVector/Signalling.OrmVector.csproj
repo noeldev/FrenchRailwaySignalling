@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <RootNamespace>Signalling.OrmVector</RootNamespace>
+    <AssemblyName>Signalling.OrmVector</AssemblyName>
+    <Product>Signalling.OrmVector</Product>
+    <Version>1.0.0</Version>
+    <Company>Noël Danjou</Company>
+    <Authors>Noël Danjou</Authors>
+    <Copyright>Copyright (C) 2026 Noël Danjou</Copyright>
+    <Description>OpenRailwayMap-vector signals YAML reader producing render rules for the railway signalling tooling.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="YamlDotNet" Version="18.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Signalling.Core\Signalling.Core.csproj" />
+  </ItemGroup>
+
+</Project>
