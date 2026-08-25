@@ -34,12 +34,14 @@ A [taginfo project file](https://wiki.openstreetmap.org/wiki/Taginfo/Projects) i
 
 ## Tools
 
-The `tools/` directory holds small C# (.NET 10) console applications that support the presets and the wiki backup. Each one is self-contained.
+The `tools/` directory holds C# (.NET 10) console applications that support the presets and the wiki backup. The signalling-specific tools and their shared libraries live together under `tools/Signalling/` (one solution); `SvgSquarer` and `WikiBackup` are independent.
 
-- **PresetValidator** - Validates `French_Railway_Signalling.xml` before deployment. It checks the file against the JOSM tagging preset schema (the schema location is read from the preset file and downloaded automatically), verifies chunk definitions and references, confirms every icon exists on disk with exact path casing (so nothing breaks on the case-sensitive GitHub Pages host), resolves the wiki link of each item either inline or through referenced chunks, and can optionally check over the network that wiki links and their anchors are reachable.
+- **SignalAudit** - Validates `French_Railway_Signalling.xml` and audits it against related sources. Offline, it checks the file against the JOSM tagging preset schema (the schema location is read from the preset file and downloaded automatically), verifies chunk definitions and references, confirms every icon exists on disk with exact path casing (so nothing breaks on the case-sensitive GitHub Pages host), resolves the wiki link of each item either inline or through referenced chunks, and checks structure, menu-path uniqueness and `match_expression` usage. With `--wiki` it additionally verifies over the network that wiki links and anchors resolve, and that the preset's tags match the wiki specification (the source of truth). With `--yaml` it checks that every tag the preset emits is handled by the [OpenRailwayMap-vector](https://github.com/hiddewie/OpenRailwayMap-vector) map. Results can be written as a transcript (`--log`) and a structured JSON report (`--report-json`).
 - **SvgSquarer** - Normalizes the preset SVG icons to a square `viewBox` so they render consistently in JOSM and on taginfo.
 - **TagInfoGen** - Generates the taginfo project file from the presets, published as `taginfo.json`.
 - **WikiBackup** - Downloads the wiki pages, Lua modules, and templates into `wiki/backup/` for long-term preservation.
+
+The shared libraries under `tools/Signalling/libs/` are reused by SignalAudit and TagInfoGen: `Signalling.Core` (tag-rule vocabulary and local/remote source resolution), `Signalling.Presets` (JOSM preset reader), `Signalling.OrmVector` (ORM-vector YAML reader), `Signalling.Wiki` (OSM wiki reader), and `Signalling.Sync` (the tag-rule comparator behind the cross-source audits).
 
 ## Repository Structure
 
@@ -55,10 +57,17 @@ FrenchRailwaySignalling/
 │   ├── French_Railway_Signalling.xml     # Preset (single source of truth)
 │   └── icons/            # SVG icons (boards, boxes, plates, signals, signs) and SNCF_logo.png
 ├── tools/
-│   ├── PresetValidator/  # C# preset validator (schema, chunks, icons, links)
-│   ├── SvgSquarer/       # C# SVG viewBox normalizer
-│   ├── TagInfoGen/       # C# taginfo project file generator
-│   └── WikiBackup/       # C# wiki backup tool
+│   ├── Signalling/       # Signalling toolset (single solution)
+│   │   ├── SignalAudit/  # Preset validator + cross-source audit (ORM map, OSM wiki)
+│   │   ├── TagInfoGen/   # taginfo project file generator
+│   │   └── libs/         # Shared libraries
+│   │       ├── Signalling.Core/      # Tag-rule vocabulary + source resolvers
+│   │       ├── Signalling.Presets/   # JOSM preset reader
+│   │       ├── Signalling.OrmVector/ # ORM-vector YAML reader
+│   │       ├── Signalling.Wiki/      # OSM wiki reader
+│   │       └── Signalling.Sync/      # Tag-rule comparator
+│   ├── SvgSquarer/       # SVG viewBox normalizer
+│   └── WikiBackup/       # Wiki backup tool
 └── wiki/
     ├── backup/           # Auto-generated wiki backups
     └── draft/            # Initial content
@@ -78,5 +87,6 @@ FrenchRailwaySignalling/
 
 - **Wiki Content**: Available under the same license as OpenStreetMap wiki content
 - **JOSM Presets**: GPL-3.0
-- **Tools** (`PresetValidator`, `SvgSquarer`, `TagInfoGen`, `WikiBackup`): GPL-3.0
+- **Tools** (`SignalAudit`, `SvgSquarer`, `TagInfoGen`, `WikiBackup`) and the shared `Signalling.*` libraries: GPL-3.0
 - **Icons**: Original creations or adaptations from [Wikimedia Commons](https://commons.wikimedia.org) and [Nicolas Wurtz's signalisation-rfn-svg project](https://github.com/nicolaswurtz/signalisation-rfn-svg)
+```
