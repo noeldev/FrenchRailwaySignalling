@@ -16,3 +16,8 @@
 # Backup
 /presets/backup/
 /tools/PresetValidator/Properties/launchSettings.json
+/tools/Signalling/SignalAudit/appsettings.json
+/tools/Signalling/SignalAudit/appsettings.Local.json
+/tools/Signalling/SignalAudit/Properties/launchSettings.json
+/tools/Signalling/report.json
+/tools/Signalling/run.txt
