@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.30_2026-08-25"
+    version="1.31_2026-08-31"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -12,7 +12,7 @@
 	<!-- 1. Base Chunks (Inheritance) -->
 
 	<!-- Common tags applied to every railway signal node -->
-	<chunk id="base_common">
+	<chunk id="base_common_core">
 		<key key="source" value="SNCF - 03/2022" />
 		<key key="railway" value="signal" />
 		<text
@@ -38,6 +38,9 @@
 				display_value="Bidirectional"
 				fr.display_value="Bidirectionnel" />
 		</combo>
+	</chunk>
+	<chunk id="base_common">
+		<reference ref="base_common_core" />
 		<combo
 			key="railway:signal:position"
 			text="Position"
@@ -75,6 +78,21 @@
 		</combo>
 	</chunk>
 
+	<chunk id="marker_plate">
+		<text
+			key="ref"
+			text="Marker caption"
+			fr.text="Libellé du Repérage" />
+	</chunk>
+
+	<chunk id="main_idreseau">
+		<text
+			key="railway:signal:main:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
+	</chunk>
+
 	<!-- Base for signals carrying a marker plate: common + ref (marker plate text) -->
 	<!-- 
 		This chunk is used for signals that may bear a marker plate,
@@ -83,23 +101,28 @@
 	-->
 	<chunk id="base_with_plate">
 		<reference ref="base_common" />
-		<text
-			key="ref"
-			text="Marker caption"
-			fr.text="Libellé du Repérage" />
+		<reference ref="marker_plate" />
 	</chunk>
 
+	<chunk id="base_with_plate_core">
+		<reference ref="base_common_core" />
+		<reference ref="marker_plate" />
+	</chunk>	
+	
 	<!-- 2. Category Base Chunks -->
 
 	<!-- Stop Signals (form=light) -->
 	<chunk id="cat_stop_signals">
 		<reference ref="base_with_plate" />
+		<reference ref="main_idreseau" />
 		<key key="railway:signal:main:form" value="light" />
-		<text
-			key="railway:signal:main:ref"
-			text="Network ID"
-			fr.text="Identifiant Réseau"
-			length="7" />
+	</chunk>
+
+	<!-- Stop Signals (form=light, no position combo) -->
+	<chunk id="cat_stop_signals_core">
+		<reference ref="base_with_plate_core" />
+		<reference ref="main_idreseau" />
+		<key key="railway:signal:main:form" value="light" />
 	</chunk>
 
 	<!-- Dwarf Carré -->
@@ -111,70 +134,11 @@
 		<link wiki="OpenRailwayMap/Tagging_in_France#Carré_(dwarf)" />
 	</chunk>
 
-	<!-- 2TMV Intermediate Signal Chunk -->
-	<!-- Declare states and icons for taginfo.json -->
-	<chunk id="cat_intermediate_signal">
-		<multiselect
-			key="railway:signal:main:states"
-			text="Aspects"
-			fr.text="Aspects"
-			default="FR:C;FR:(S);FR:X;FR:A;FR:VL"
-			values_sort="false"
-			rows="5">
-			<list_entry
-				value="FR:C"
-				display_value="C"
-				short_description="Stop aspect"
-				fr.short_description="Carré"
-				icon="icons/signals/2TMV_C.svg" icon_size="24"/>
-			<list_entry
-				value="FR:S"
-				display_value="S"
-				short_description="Stop and proceed aspect"
-				fr.short_description="Sémaphore"
-				icon="icons/signals/2TMV_S.svg" icon_size="24"/>
-			<list_entry
-				value="FR:(S)"
-				display_value="(S)"
-				short_description="Flashing red light"
-				fr.short_description="Feu rouge clignotant"
-				icon="icons/signals/2TMV_S.svg" icon_size="24"/>
-			<list_entry
-				value="FR:X"
-				display_value="X"
-				short_description="Illuminated white cross"
-				fr.short_description="Croix blanche lumineuse"
-				icon="icons/signals/2TMV_X.svg" icon_size="24"/>
-			<list_entry
-				value="FR:A"
-				display_value="A"
-				short_description="Caution aspect"
-				fr.short_description="Avertissement"
-				icon="icons/signals/2TMV_A.svg" icon_size="24"/>
-			<list_entry
-				value="FR:(A)"
-				display_value="(A)"
-				short_description="Advance caution aspect"
-				fr.short_description="Feu jaune clignotant"
-				icon="icons/signals/2TMV_A.svg" icon_size="24"/>
-			<list_entry
-				value="FR:VL"
-				display_value="VL"
-				short_description="Clear aspect"
-				fr.short_description="Feu vert"
-				icon="icons/signals/2TMV_VL.svg" icon_size="24"/>
-		</multiselect>
-	</chunk>
-
 	<!-- Mechanical Stop Signals (form=sign) -->
 	<chunk id="cat_mechanical_stop_signals">
 		<reference ref="base_with_plate" />
+		<reference ref="main_idreseau" />
 		<key key="railway:signal:main:form" value="sign" />
-		<text
-			key="railway:signal:main:ref"
-			text="Network ID"
-			fr.text="Identifiant Réseau"
-			length="7" />
 	</chunk>
 
 	<!-- Mechanical Carré Signals -->
@@ -323,7 +287,7 @@
 	<!-- Wrong Road -->
 	<chunk id="cat_wrong_road">
 		<reference ref="base_common" />
-		<key key="railway:signal:wrong_road" value="FR:transition" />
+		<key key="railway:signal:wrong_road" value="FR:IPCS" />
 		<link wiki="OpenRailwayMap/Tagging_in_France#Wrong-road_signalling" />
 	</chunk>
 
@@ -447,7 +411,7 @@
 	</chunk>
 
 	<!-- Passenger stop signs (conventional trains) -->
-	<chunk id="cat_conventional_passenger_stop">
+	<chunk id="cat_conventional_base">
 		<reference ref="cat_passenger_stop" />
 		<key key="railway:signal:stop:conventional:form" value="sign" />
 		<text
@@ -455,6 +419,10 @@
 			text="Network ID"
 			fr.text="Identifiant Réseau"
 			length="7" />
+	</chunk>
+
+	<chunk id="cat_conventional_passenger_stop">
+		<reference ref="cat_conventional_base" />
 		<link wiki="OpenRailwayMap/Tagging_in_France#Passenger_stops_for_conventional_trains" />
 	</chunk>
 
@@ -468,7 +436,7 @@
 	<chunk id="cat_vehicle_number_passenger_stop">
 		<key key="railway:signal:stop:conventional" value="FR:vehicle_number" />
 		<key key="railway:signal:stop:conventional:for" value="vehicles" />
-		<reference ref="cat_conventional_passenger_stop" />
+		<reference ref="cat_conventional_base" />
 		<space />
 		<multiselect
 			key="railway:signal:stop:conventional:number"
@@ -500,7 +468,6 @@
 			text="Network ID"
 			fr.text="Identifiant Réseau"
 			length="7" />
-		<link wiki="OpenRailwayMap/Tagging_in_France#Passenger_stops_for_any_trains" />
 	</chunk>
 
 	<!-- Passenger stop signs (suburban) -->
@@ -844,32 +811,27 @@
 
 	<!-- Common plates for Carré / Carré violet -->
 	<chunk id="carre_plates">
-		<optional text="">
-			<label
-				text="Plates"
-				fr.text="Plaques" />
-			<space />
-			<combo
-				key="railway:signal:main:type"
-				text="Block Identification Plate"
-				fr.text="Plaque de Cantonnement"
-				editable="false">
-				<list_entry
-					value="FR:BM"
-					display_value="BM"
-					fr.display_value="BM"
-					icon="icons/plates/BM.svg" icon_size="24"/>
-				<list_entry
-					value="FR:PR"
-					display_value="BAPR"
-					fr.display_value="BAPR"
-					icon="icons/plates/PR.svg" icon_size="24"/>
-			</combo>
-			<text
-				key="railway:signal:main:caption"
-				text="Plate caption"
-				fr.text="Libellé de la plaque" />
-		</optional>
+		<space />
+		<combo
+			key="railway:signal:main:type"
+			text="Block Identification Plate"
+			fr.text="Plaque de Cantonnement"
+			editable="false">
+			<list_entry
+				value="FR:BM"
+				display_value="BM"
+				fr.display_value="BM"
+				icon="icons/plates/BM.svg" icon_size="24"/>
+			<list_entry
+				value="FR:PR"
+				display_value="BAPR"
+				fr.display_value="BAPR"
+				icon="icons/plates/PR.svg" icon_size="24"/>
+		</combo>
+		<text
+			key="railway:signal:main:caption"
+			text="Plate caption"
+			fr.text="Libellé de la plaque" />
 	</chunk>
 
 	<!-- Carré-specific tags -->
@@ -881,23 +843,11 @@
 				text="Special characteristics"
 				fr.text="Caractéristiques particulières" />
 			<space />
-			<checkgroup columns="3">
-				<check
-					key="railway:signal:main:clearing_light"
-					text="No Clearing Light"
-					fr.text="Sans Œilleton"
-					value_off="" value_on="no" disable_off="true"/>
-				<check
-					key="railway:crocodile"
-					text="No Crocodile"
-					fr.text="Sans Crocodile"
-					value_off="" value_on="no" disable_off="true"/>
-				<check
-					key="railway:signal:main:deactivated"
-					text="Deactivated"
-					fr.text="Annulé"
-					disable_off="true"/>
-			</checkgroup>
+			<check
+				key="railway:signal:main:deactivated"
+				text="Deactivated"
+				fr.text="Annulé"
+				disable_off="true"/>
 		</optional>
 
 		<item_separator />
@@ -930,18 +880,24 @@
 		<reference ref="optional_deactivated_only" />
 
 		<item_separator />
-
 		<preset_link preset_name="Switchable TIV-R" text=""/>
 		<preset_link preset_name="Ordinary-type TIV-D (diamond)" text=""/>
 		<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
 
 		<space />
+		<preset_link preset_name="Half-White, Half-Green Plate" text=""/>
+		<preset_link preset_name="Signal Lumineux de Départ" text=""/>
 
-		<preset_link preset_name="ID" text=""/>
+		<link wiki="OpenRailwayMap/Tagging_in_France#Carré_violet" />
+	</chunk>
 
-		<space />
+	<!-- Low-type-Cv-specific tags -->
+	<chunk id="low-type_cv_tags">
+		<key key="railway:signal:main" value="FR:Cv" />
+		<key key="railway:signal:main:shape" match="none" />
+		<key key="railway:signal:position" value="ground" />
 
-		<preset_link preset_name="Departure Request Plate" text=""/>
+		<item_separator />
 		<preset_link preset_name="Half-White, Half-Green Plate" text=""/>
 		<preset_link preset_name="Signal Lumineux de Départ" text=""/>
 
@@ -951,33 +907,28 @@
 	<!-- Semaphore-specific tags -->
 	<chunk id="semaphore_tags">
 		<key key="railway:signal:main" value="FR:S" />
-		<optional text="">
-			<label
-				text="Plates"
-				fr.text="Plaques" />
-			<space />
-			<combo
-				key="railway:signal:main:type"
-				text="Identification Plate"
-				fr.text="Plaque d'Identification"
-				editable="false">
-				<list_entry
-					value="FR:F"
-					display_value="F"
-					fr.display_value="F"
-					icon="icons/plates/ID_F.svg" icon_size="24"/>
-				<list_entry
-					value="FR:BM"
-					display_value="BM"
-					fr.display_value="BM"
-					icon="icons/plates/ID_BM.svg" icon_size="24"/>
-				<list_entry
-					value="FR:PR"
-					display_value="BAPR"
-					fr.display_value="BAPR"
-					icon="icons/plates/ID_PR.svg" icon_size="24"/>
-			</combo>
-		</optional>
+		<space />
+		<combo
+			key="railway:signal:main:type"
+			text="Identification Plate"
+			fr.text="Plaque d'Identification"
+			editable="false">
+			<list_entry
+				value="FR:F"
+				display_value="F"
+				fr.display_value="F"
+				icon="icons/plates/ID_F.svg" icon_size="24"/>
+			<list_entry
+				value="FR:BM"
+				display_value="BM"
+				fr.display_value="BM"
+				icon="icons/plates/ID_BM.svg" icon_size="24"/>
+			<list_entry
+				value="FR:PR"
+				display_value="BAPR"
+				fr.display_value="BAPR"
+				icon="icons/plates/ID_PR.svg" icon_size="24"/>
+		</combo>
 		<reference ref="optional_deactivated_only" />
 
 		<item_separator />
@@ -998,17 +949,10 @@
 				text="Special characteristics"
 				fr.text="Caractéristiques particulières" />
 			<space />
-			<checkgroup columns="3">
-				<check
-					key="railway:crocodile"
-					text="No Crocodile"
-					fr.text="Sans Crocodile"
-					value_off="" value_on="no" disable_off="true"/>
-				<check key="railway:signal:distant:deactivated"
-					text="Deactivated"
-					fr.text="Annulé"
-					disable_off="true"/>
-			</checkgroup>
+			<check key="railway:signal:distant:deactivated"
+				text="Deactivated"
+				fr.text="Annulé"
+				disable_off="true"/>
 		</optional>
 	</chunk>
 
@@ -1031,6 +975,56 @@
 				fr.name="Carré"
 				icon="icons/signals/C-C.svg">
 
+				<!-- Generic -->
+				<item
+					name="Unspecified head type"
+					fr.name="Cible à préciser"
+					type="node"
+					icon="icons/signals/C_unknown_shape.svg"
+					match_expression="-&quot;railway:signal:main:shape&quot;=* -&quot;railway:signal:main:function&quot;=* -&quot;railway:signal:main:height&quot;=*">
+					<label
+						text="Select the signal's head type"
+						fr.text="Sélectionnez le type de cible du signal" />
+					<space />
+					<key key="railway:signal:main" value="FR:C" />
+					<reference ref="cat_stop_signals" />
+					<space />
+					<combo
+						key="railway:signal:main:shape"
+						text="Head type"
+						fr.text="Type de cible"
+						editable="false"
+						values_sort="false">
+						<list_entry
+							value="FR:C"
+							display_value="C-type"
+							fr.display_value="Cible C"
+							icon="icons/signals/C-C.svg"
+							icon_size="24"/>
+						<list_entry
+							value="FR:F"
+							display_value="F-type"
+							fr.display_value="Cible F"
+							icon="icons/signals/F-C.svg"
+							icon_size="24"/>
+						<list_entry
+							value="FR:H"
+							display_value="H-type"
+							fr.display_value="Cible H"
+							icon="icons/signals/H-C.svg"
+							icon_size="24"/>
+					</combo>
+
+					<item_separator />
+					<label
+						text="Alternative head types"
+						fr.text="Autres types de cibles" />
+					<preset_link preset_name="Dwarf Carré" text="" />
+					<preset_link preset_name="Intermediate Signal (2TMV)" text="" />
+					
+					<link wiki="OpenRailwayMap/Tagging_in_France#Carré" />
+				</item>
+
 				<!-- C -->
 				<item
 					name="C-type Head"
@@ -1048,7 +1042,7 @@
 						key="railway:signal:main:states"
 						text="Aspects"
 						fr.text="Aspects"
-						default="FR:C;FR:S;FR:A;FR:VL"
+						default=""
 						values_sort="false"
 						rows="5">
 						<list_entry
@@ -1126,7 +1120,7 @@
 						key="railway:signal:main:states"
 						text="Aspects"
 						fr.text="Aspects"
-						default="FR:C;FR:S;FR:A;FR:R;FR:VL"
+						default=""
 						values_sort="false"
 						rows="5">
 						<list_entry
@@ -1240,7 +1234,7 @@
 						key="railway:signal:main:states"
 						text="Aspects"
 						fr.text="Aspects"
-						default="FR:C;FR:S;FR:RR;FR:A;FR:R;FR:VL"
+						default=""
 						values_sort="false"
 						rows="5">
 						<list_entry
@@ -1380,36 +1374,20 @@
 					name="Dwarf Carré"
 					fr.name="Carré nain"
 					type="node"
-					icon="icons/signals/dwarf_H_C.svg">
+					icon="icons/signals/dwarf_H_C.svg"
+					match_expression="-&quot;railway:signal:main:arrangement&quot;=vertical">
 					<label
 						text="Dwarf light Carré signal"
 						fr.text="Carré lumineux de taille réduite" />
 					<space />
 					<reference ref="cat_dwarf_carre_signal" />
-					<combo
-						key="railway:signal:main:arrangement"
-						text="Signal Arrangement"
-						fr.text="Disposition du Signal"
-						editable="false">
-						<list_entry
-							value=""
-							display_value="Horizontal"
-							fr.display_value="Horizontal"
-							icon="icons/signals/dwarf_H_C.svg"
-							icon_size="24"/>
-						<list_entry
-							value="vertical"
-							display_value="Vertical"
-							fr.display_value="Vertical"
-							icon="icons/signals/dwarf_V_C.svg"
-							icon_size="24"/>
-					</combo>
+					<key key="railway:signal:main:arrangement" match="none" />
 					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
 						fr.text="Aspects"
-						default="FR:C;FR:S;FR:A;FR:VL"
+						default=""
 						values_sort="false"
 						rows="5">
 						<list_entry
@@ -1449,6 +1427,144 @@
 							fr.short_description="Feu vert"
 							icon="icons/signals/dwarf_H_VL.svg" icon_size="24"/>
 					</multiselect>
+
+					<item_separator />
+					<label
+						text="Alternative head types"
+						fr.text="Autres types de cibles" />
+					<preset_link preset_name="Dwarf Carré (vertical)" text="" />
+					<preset_link preset_name="Intermediate Signal (2TMV)" text="" />
+				</item>
+
+				<!-- Dwarf Carré (vertical) -->
+				<item
+					name="Dwarf Carré (vertical)"
+					fr.name="Carré nain (vertical)"
+					type="node"
+					icon="icons/signals/dwarf_V_C.svg"
+					match_expression="&quot;railway:signal:main:arrangement&quot;=vertical">
+					<label
+						text="Dwarf light Carré signal (vertical arrangement)"
+						fr.text="Carré lumineux de taille réduite (disposition verticale)" />
+					<space />
+					<reference ref="cat_dwarf_carre_signal" />
+					<key key="railway:signal:main:arrangement" value="vertical" />
+					<space />
+					<multiselect
+						key="railway:signal:main:states"
+						text="Aspects"
+						fr.text="Aspects"
+						default=""
+						values_sort="false"
+						rows="5">
+						<list_entry
+							value="FR:C"
+							display_value="C"
+							short_description="Stop aspect"
+							fr.short_description="Carré"
+							icon="icons/signals/dwarf_V_C.svg" icon_size="24"/>
+						<list_entry
+							value="FR:S"
+							display_value="S"
+							short_description="Stop and proceed aspect"
+							fr.short_description="Sémaphore"
+							icon="icons/signals/dwarf_V_S.svg" icon_size="24"/>
+						<list_entry
+							value="FR:(S)"
+							display_value="(S)"
+							short_description="Flashing red light"
+							fr.short_description="Feu rouge clignotant"
+							icon="icons/signals/dwarf_V_S.svg" icon_size="24"/>
+						<list_entry
+							value="FR:A"
+							display_value="A"
+							short_description="Caution aspect"
+							fr.short_description="Avertissement"
+							icon="icons/signals/dwarf_V_A.svg" icon_size="24"/>
+						<list_entry
+							value="FR:(A)"
+							display_value="(A)"
+							short_description="Advance caution aspect"
+							fr.short_description="Feu jaune clignotant"
+							icon="icons/signals/dwarf_V_A.svg" icon_size="24"/>
+						<list_entry
+							value="FR:VL"
+							display_value="VL"
+							short_description="Clear aspect"
+							fr.short_description="Feu vert"
+							icon="icons/signals/dwarf_V_VL.svg" icon_size="24"/>
+					</multiselect>
+				</item>
+
+				<separator />
+
+				<!-- 2TMV -->
+				<item
+					name="Intermediate Signal (2TMV)"
+					fr.name="Signal Intermédiaire (2TMV)"
+					type="node"
+					icon="icons/signals/2TMV_X.svg">
+					<label
+						text="Mid-platform signal (2 trains on a same track)"
+						fr.text="Signal de milieu de quai (2 trains sur une même voie)" />
+					<space />
+					<key key="railway:signal:main" value="FR:C" />
+					<key key="railway:signal:main:function" value="intermediate" />
+					<key key="railway:signal:main:height" match="none" />
+					<reference ref="cat_stop_signals" />
+					<space />
+					<multiselect
+						key="railway:signal:main:states"
+						text="Aspects"
+						fr.text="Aspects"
+						default=""
+						values_sort="false"
+						rows="5">
+						<list_entry
+							value="FR:C"
+							display_value="C"
+							short_description="Stop aspect"
+							fr.short_description="Carré"
+							icon="icons/signals/2TMV_C.svg" icon_size="24"/>
+						<list_entry
+							value="FR:S"
+							display_value="S"
+							short_description="Stop and proceed aspect"
+							fr.short_description="Sémaphore"
+							icon="icons/signals/2TMV_S.svg" icon_size="24"/>
+						<list_entry
+							value="FR:(S)"
+							display_value="(S)"
+							short_description="Flashing red light"
+							fr.short_description="Feu rouge clignotant"
+							icon="icons/signals/2TMV_S.svg" icon_size="24"/>
+						<list_entry
+							value="FR:X"
+							display_value="X"
+							short_description="Illuminated white cross"
+							fr.short_description="Croix blanche lumineuse"
+							icon="icons/signals/2TMV_X.svg" icon_size="24"/>
+						<list_entry
+							value="FR:A"
+							display_value="A"
+							short_description="Caution aspect"
+							fr.short_description="Avertissement"
+							icon="icons/signals/2TMV_A.svg" icon_size="24"/>
+						<list_entry
+							value="FR:(A)"
+							display_value="(A)"
+							short_description="Advance caution aspect"
+							fr.short_description="Feu jaune clignotant"
+							icon="icons/signals/2TMV_A.svg" icon_size="24"/>
+						<list_entry
+							value="FR:VL"
+							display_value="VL"
+							short_description="Clear aspect"
+							fr.short_description="Feu vert"
+							icon="icons/signals/2TMV_VL.svg" icon_size="24"/>
+					</multiselect>
+
+					<link wiki="OpenRailwayMap/Tagging_in_France#Signal_de_milieu_de_quai_(2TMV)" />
 				</item>
 
 			</group>
@@ -1459,24 +1575,87 @@
 				fr.name="Carré violet"
 				icon="icons/signals/A-Cv.svg">
 
+				<!-- Generic -->
+				<item
+					name="Unspecified head type"
+					fr.name="Cible à préciser"
+					type="node"
+					icon="icons/signals/Cv_unknown_shape.svg"
+					match_expression="-&quot;railway:signal:main:shape&quot;=* -&quot;railway:signal:position&quot;=ground">
+					<label
+						text="Select the signal's head type"
+						fr.text="Sélectionnez le type de cible du signal" />
+					<space />
+					<key key="railway:signal:main" value="FR:Cv" />
+					<reference ref="cat_stop_signals" />
+					<space />
+					<combo
+						key="railway:signal:main:shape"
+						text="Head type"
+						fr.text="Type de cible"
+						editable="false"
+						values_sort="false">
+						<list_entry 
+							value="FR:A" 
+							display_value="A-type" 
+							fr.display_value="Cible A" 
+							icon="icons/signals/A-Cv.svg" 
+							icon_size="24"/>
+						<list_entry 
+							value="FR:C" 
+							display_value="C-type" 
+							fr.display_value="Cible C" 
+							icon="icons/signals/C-Cv.svg" 
+							icon_size="24"/>
+						<list_entry 
+							value="FR:F" 
+							display_value="F-type" 
+							fr.display_value="Cible F" 
+							icon="icons/signals/F-Cv.svg" 
+							icon_size="24"/>
+						<list_entry 
+							value="FR:H" 
+							display_value="H-type" 
+							fr.display_value="Cible H" 
+							icon="icons/signals/H-Cv.svg" 
+							icon_size="24"/>
+						<list_entry 
+							value="FR:K" 
+							display_value="K-type" 
+							fr.display_value="Cible K" 
+							icon="icons/signals/K-Cv.svg" 
+							icon_size="24"/>
+					</combo>
+
+					<item_separator />
+					<label
+						text="Ground-level installation"
+						fr.text="Installation au sol" />
+					<preset_link preset_name="Low-type Cv" text="" />
+					
+					<link wiki="OpenRailwayMap/Tagging_in_France#Carré_violet" />
+				</item>
+
 				<!-- A -->
 				<item
 					name="A-type Head"
 					fr.name="Cible A"
 					type="node"
-					icon="icons/signals/A-Cv.svg">
+					icon="icons/signals/A-Cv.svg"
+					match_expression="-&quot;railway:signal:position&quot;=ground -&quot;railway:signal:main:arrangement&quot;=*">
 					<label
 						text="Carré violet (A-type head)"
 						fr.text="Carré violet (cible A)" />
 					<space />
 					<key key="railway:signal:main:shape" value="FR:A" />
+					<key key="railway:signal:main:arrangement" match="none" />
 					<reference ref="cat_stop_signals" />
 					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
 						fr.text="Aspects"
-						default="FR:Cv;FR:M"
+						default=""
 						values_sort="false"
 						rows="5">
 						<list_entry
@@ -1506,19 +1685,21 @@
 					name="C-type Head"
 					fr.name="Cible C"
 					type="node"
-					icon="icons/signals/C-Cv.svg">
+					icon="icons/signals/C-Cv.svg"
+					match_expression="-&quot;railway:signal:position&quot;=ground -&quot;railway:signal:main:arrangement&quot;=*">
 					<label
 						text="Carré violet (C-type head)"
 						fr.text="Carré violet (Cible C)" />
 					<space />
 					<key key="railway:signal:main:shape" value="FR:C" />
+					<key key="railway:signal:main:arrangement" match="none" />
 					<reference ref="cat_stop_signals" />
 					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
 						fr.text="Aspects"
-						default="FR:Cv;FR:S;FR:M;FR:A;FR:VL"
+						default=""
 						values_sort="false"
 						rows="5">
 						<list_entry
@@ -1584,19 +1765,21 @@
 					name="F-type Head"
 					fr.name="Cible F"
 					type="node"
-					icon="icons/signals/F-Cv.svg">
+					icon="icons/signals/F-Cv.svg"
+					match_expression="-&quot;railway:signal:position&quot;=ground -&quot;railway:signal:main:arrangement&quot;=*">
 					<label
 						text="Carré violet (F-type head)"
 						fr.text="Carré violet (Cible F)" />
 					<space />
 					<key key="railway:signal:main:shape" value="FR:F" />
+					<key key="railway:signal:main:arrangement" match="none" />
 					<reference ref="cat_stop_signals" />
 					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
 						fr.text="Aspects"
-						default="FR:Cv;FR:S;FR:M;FR:A;FR:R;FR:VL"
+						default=""
 						values_sort="false"
 						rows="5">
 						<list_entry
@@ -1698,19 +1881,21 @@
 					name="H-type Head"
 					fr.name="Cible H"
 					type="node"
-					icon="icons/signals/H-Cv.svg">
+					icon="icons/signals/H-Cv.svg"
+					match_expression="-&quot;railway:signal:position&quot;=ground -&quot;railway:signal:main:arrangement&quot;=*">
 					<label
 						text="Carré violet (H-type head)"
 						fr.text="Carré violet (Cible H)" />
 					<space />
 					<key key="railway:signal:main:shape" value="FR:H" />
+					<key key="railway:signal:main:arrangement" match="none" />
 					<reference ref="cat_stop_signals" />
 					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
 						fr.text="Aspects"
-						default="FR:Cv;FR:S;FR:M;FR:RR;FR:A;FR:R;FR:VL"
+						default=""
 						values_sort="false"
 						rows="5">
 						<list_entry
@@ -1848,19 +2033,21 @@
 					name="K-type Head"
 					fr.name="Cible K"
 					type="node"
-					icon="icons/signals/K-Cv.svg">
+					icon="icons/signals/K-Cv.svg"
+					match_expression="-&quot;railway:signal:position&quot;=ground -&quot;railway:signal:main:arrangement&quot;=*">
 					<label
 						text="Carré violet (K-type head)"
 						fr.text="Carré violet (Cible K)" />
 					<space />
 					<key key="railway:signal:main:shape" value="FR:K" />
+					<key key="railway:signal:main:arrangement" match="none" />
 					<reference ref="cat_stop_signals" />
 					<space />
 					<multiselect
 						key="railway:signal:main:states"
 						text="Aspects"
 						fr.text="Aspects"
-						default="FR:Cv;FR:M"
+						default=""
 						values_sort="false"
 						rows="5">
 						<list_entry
@@ -1885,6 +2072,102 @@
 					<reference ref="cv_tags" />
 				</item>
 
+				<separator />
+
+				<!-- Low-type Cv (horizontal, default) -->
+				<item
+					name="Low-type Cv"
+					fr.name="Cv de type bas"
+					type="node"
+					icon="icons/signals/low_H_Cv.svg"
+					match_expression="&quot;railway:signal:position&quot;=ground -&quot;railway:signal:main:shape&quot;=* -&quot;railway:signal:main:arrangement&quot;=*">
+					<label
+						text="Low-type Carré violet"
+						fr.text="Carré violet de type bas" />
+					<space />
+					<key key="railway:signal:main:arrangement" match="none" />
+					<reference ref="cat_stop_signals_core" />
+					<space />
+					<multiselect
+						key="railway:signal:main:states"
+						text="Aspects"
+						fr.text="Aspects"
+						default=""
+						values_sort="false"
+						rows="5">
+						<list_entry
+							value="FR:Cv"
+							display_value="Cv"
+							short_description="Shunt stop"
+							fr.short_description="Carré violet"
+							icon="icons/signals/low_H_Cv.svg" icon_size="24"/>
+						<list_entry
+							value="FR:M"
+							display_value="M"
+							short_description="Shunting aspect"
+							fr.short_description="Feu blanc"
+							icon="icons/signals/low_H_M.svg" icon_size="24"/>
+						<list_entry
+							value="FR:(M)"
+							display_value="(M)"
+							short_description="Flashing white light"
+							fr.short_description="Feu blanc clignotant"
+							icon="icons/signals/low_H_M.svg" icon_size="24"/>
+					</multiselect>
+
+					<reference ref="low-type_cv_tags" />
+
+					<space />
+					<label
+						text="Alternative head types"
+						fr.text="Autres types de cibles" />
+					<preset_link preset_name="Low-type Cv (vertical)" text="" />
+				</item>
+
+				<!-- Low-type Cv (vertical) -->
+				<item
+					name="Low-type Cv (vertical)"
+					fr.name="Cv de type bas (vertical)"
+					type="node"
+					icon="icons/signals/low_V_Cv.svg"
+					match_expression="&quot;railway:signal:position&quot;=ground -&quot;railway:signal:main:shape&quot;=* &quot;railway:signal:main:arrangement&quot;=vertical">
+					<label
+						text="Low-type Carré violet (vertical arrangement)"
+						fr.text="Carré violet de type bas (disposition verticale)" />
+					<space />
+					<key key="railway:signal:main:arrangement" value="vertical" />
+					<reference ref="cat_stop_signals_core" />
+					<space />
+					<multiselect
+						key="railway:signal:main:states"
+						text="Aspects"
+						fr.text="Aspects"
+						default=""
+						values_sort="false"
+						rows="5">
+						<list_entry
+							value="FR:Cv"
+							display_value="Cv"
+							short_description="Shunt stop"
+							fr.short_description="Carré violet"
+							icon="icons/signals/low_V_Cv.svg" icon_size="24"/>
+						<list_entry
+							value="FR:M"
+							display_value="M"
+							short_description="Shunting aspect"
+							fr.short_description="Feu blanc"
+							icon="icons/signals/low_V_M.svg" icon_size="24"/>
+						<list_entry
+							value="FR:(M)"
+							display_value="(M)"
+							short_description="Flashing white light"
+							fr.short_description="Feu blanc clignotant"
+							icon="icons/signals/low_V_M.svg" icon_size="24"/>
+					</multiselect>
+
+					<reference ref="low-type_cv_tags" />
+				</item>
+
 			</group>
 
 			<!-- Sémaphore -->
@@ -1892,6 +2175,61 @@
 				name="Sémaphore"
 				fr.name="Sémaphore"
 				icon="icons/signals/C-S.svg">
+
+				<!-- Generic -->
+				<item
+					name="Unspecified head type"
+					fr.name="Cible à préciser"
+					type="node"
+					icon="icons/signals/S_unknown_shape.svg"
+					match_expression="-&quot;railway:signal:main:shape&quot;=*">
+					<label
+						text="Select the signal's head type"
+						fr.text="Sélectionnez le type de cible du signal" />
+					<space />
+					<key key="railway:signal:main" value="FR:S" />
+					<reference ref="cat_stop_signals" />
+					<space />
+					<combo
+						key="railway:signal:main:shape"
+						text="Head type"
+						fr.text="Type de cible"
+						editable="false"
+						values_sort="false">
+						<list_entry 
+							value="FR:A" 
+							display_value="A-type" 
+							fr.display_value="Cible A" 
+							icon="icons/signals/A-S.svg" 
+							icon_size="24"/>
+						<list_entry 
+							value="FR:C" 
+							display_value="C-type" 
+							fr.display_value="Cible C" 
+							icon="icons/signals/C-S.svg" 
+							icon_size="24"/>
+						<list_entry 
+							value="FR:F" 
+							display_value="F-type" 
+							fr.display_value="Cible F" 
+							icon="icons/signals/F-S.svg" 
+							icon_size="24"/>
+						<list_entry 
+							value="FR:H" 
+							display_value="H-type" 
+							fr.display_value="Cible H" 
+							icon="icons/signals/H-S.svg" 
+							icon_size="24"/>
+						<list_entry 
+							value="FR:K" 
+							display_value="K-type" 
+							fr.display_value="Cible K" 
+							icon="icons/signals/K-S.svg" 
+							icon_size="24"/>
+					</combo>
+
+					<link wiki="OpenRailwayMap/Tagging_in_France#Sémaphore" />
+				</item>
 
 				<!-- A -->
 				<item
@@ -1910,7 +2248,7 @@
 						key="railway:signal:main:states"
 						text="Aspects"
 						fr.text="Aspects"
-						default="FR:S;FR:VL"
+						default=""
 						values_sort="false"
 						rows="5">
 						<list_entry
@@ -1970,7 +2308,7 @@
 						key="railway:signal:main:states"
 						text="Aspects"
 						fr.text="Aspects"
-						default="FR:S;FR:A;FR:VL"
+						default=""
 						values_sort="false"
 						rows="5">
 						<list_entry
@@ -2042,7 +2380,7 @@
 						key="railway:signal:main:states"
 						text="Aspects"
 						fr.text="Aspects"
-						default="FR:S;FR:A;FR:R;FR:VL"
+						default=""
 						values_sort="false"
 						rows="5">
 						<list_entry
@@ -2150,7 +2488,7 @@
 						key="railway:signal:main:states"
 						text="Aspects"
 						fr.text="Aspects"
-						default="FR:S;FR:RR;FR:A;FR:R;FR:VL"
+						default=""
 						values_sort="false"
 						rows="5">
 						<list_entry
@@ -2294,7 +2632,7 @@
 						key="railway:signal:main:states"
 						text="Aspects"
 						fr.text="Aspects"
-						default="FR:S;FR:VL"
+						default=""
 						values_sort="false"
 						rows="5">
 						<list_entry
@@ -2326,6 +2664,8 @@
 				</item>
 
 			</group>
+
+			<separator />
 
 			<!-- Guidon d'Arrêt -->
 			<item
@@ -2360,24 +2700,6 @@
 				<link wiki="OpenRailwayMap/Tagging_in_France#Yellow_band" />
 			</item>
 
-			<!-- 2TMV -->
-			<item
-				name="Intermediate Signal (2TMV)"
-				fr.name="Signal Intermédiaire (2TMV)"
-				type="node"
-				icon="icons/signals/2TMV_X.svg">
-				<label
-					text="Mid-platform signal (2 trains on a same track)"
-					fr.text="Signal de milieu de quai (2 trains sur une même voie)" />
-				<space />
-				<key key="railway:signal:main" value="FR:C" />
-				<key key="railway:signal:main:function" value="intermediate" />
-				<key key="railway:signal:main:states" value="FR:C;FR:(S);FR:X;FR:A;FR:VL" />
-				<key key="railway:signal:main:height" match="none" />
-				<reference ref="cat_stop_signals" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Signal_de_milieu_de_quai_(2TMV)" />
-			</item>
-
 		</group>
 
 		<!-- Distant Signals -->
@@ -2403,7 +2725,7 @@
 					key="railway:signal:distant:states"
 					text="Aspects"
 					fr.text="Aspects"
-					default="FR:D;FR:A;FR:R;FR:VL"
+					default=""
 					values_sort="false"
 					rows="5">
 					<list_entry
@@ -2499,7 +2821,7 @@
 					key="railway:signal:distant:states"
 					text="Aspects"
 					fr.text="Aspects"
-					default="FR:A;FR:R;FR:VL"
+					default=""
 					values_sort="false"
 					rows="5">
 					<list_entry
@@ -2726,7 +3048,7 @@
 					key="railway:signal:main:states"
 					text="Aspects"
 					fr.text="Aspects"
-					default="CH-FDV:524;CH-FDV:530;CH-FDV:542;CH-FDV:545"
+					default=""
 					values_sort="false"
 					rows="5">
 					<list_entry
@@ -2795,7 +3117,7 @@
 					key="railway:signal:distant:states"
 					text="Aspects"
 					fr.text="Aspects"
-					default="CH-FDV:519;CH-FDV:528;CH-FDV:534;CH-FDV:536"
+					default=""
 					values_sort="false"
 					rows="5">
 					<list_entry
@@ -3176,9 +3498,18 @@
 						fr.text="Composition"
 						editable="false"
 						values_sort="false">
-						<list_entry value="" display_value="All compositions" fr.display_value="Toutes compositions" />
-						<list_entry value="single_unit" display_value="Single unit (US)" fr.display_value="Unité simple (US)" />
-						<list_entry value="multiple_unit" display_value="Multiple unit (UM)" fr.display_value="Unité multiple (UM)" />
+						<list_entry 
+							value="" 
+							display_value="All compositions" 
+							fr.display_value="Toutes compositions" />
+						<list_entry 
+							value="single_unit" 
+							display_value="Single unit (US)" 
+							fr.display_value="Unité simple (US)" />
+						<list_entry 
+							value="multiple_unit" 
+							display_value="Multiple unit (UM)" 
+							fr.display_value="Unité multiple (UM)" />
 					</combo>
 					<link wiki="OpenRailwayMap/Tagging_in_France#Arrêt_signs_for_high-speed_trains" />
 				</item>
@@ -3338,6 +3669,32 @@
 			fr.name="Arrêts Voyageurs"
 			icon="icons/signs/TT.svg">
 
+			<!-- Generic -->
+			<item
+				name="Unspecified category"
+				fr.name="Catégorie à préciser"
+				type="node"
+				icon="icons/signs/passenger_stop_unknown.svg"
+				match_expression="-&quot;railway:signal:stop:conventional&quot;=* -&quot;railway:signal:stop:any&quot;=* -&quot;railway:signal:stop:highspeed&quot;=* -&quot;railway:signal:stop:suburban&quot;=* -&quot;railway:signal:stop:regional&quot;=* -&quot;railway:signal:stop:accessibility&quot;=*">
+				<label
+					text="Select the passenger stop category"
+					fr.text="Sélectionnez la catégorie du repère voyageur" />
+				<space />
+				<reference ref="cat_passenger_stop" />
+
+				<item_separator />
+				<preset_link preset_name="...V" text="" />
+				<preset_link preset_name="L..." text="" />
+				<preset_link preset_name="TT" text="" />
+				
+				<space />
+				<preset_link preset_name="Z50-1" text="" />
+				<preset_link preset_name="Z57 1" text="" />
+				<preset_link preset_name="TGV 1" text="" />
+
+				<link wiki="OpenRailwayMap/Tagging_in_France#Passenger_stops" />
+			</item>
+
 			<group
 				name="Train Length"
 				fr.name="Longueur des Trains"
@@ -3354,6 +3711,7 @@
 						fr.text="Arrêt voyageurs pour les trains d'une longueur donnée" />
 					<space />
 					<key key="railway:signal:stop:any" value="FR:train_length" />
+					<key key="railway:signal:stop:any:reversal" match="none" />
 					<reference ref="cat_any_passenger_stop" />
 					<space />
 					<combo
@@ -3363,7 +3721,7 @@
 						editable="true"
 						length="4"
 						values_sort="false"
-						values="75,80,110,115,120,130,150,160,170,200,220,225,245,260,410" />
+						values="75,80,90,110,115,120,130,150,160,170,200,220,225,245,260,410" />
 					<reference ref="cat_ufr_preset_link" />
 					<link wiki="OpenRailwayMap/Tagging_in_France#Train_length_(L..._sign)" />
 				</item>
@@ -3414,6 +3772,9 @@
 					<key key="railway:signal:stop:conventional:for" match="none" />
 					<reference ref="cat_conventional_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
+					<space />
+					<preset_link preset_name="TT EAS" text="" />
+					<preset_link preset_name="TTL" text="" />
 				</item>
 
 				<!-- TT EAS -->
@@ -3429,6 +3790,9 @@
 					<key key="railway:signal:stop:conventional:for" value="driver_only" />
 					<reference ref="cat_conventional_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
+					<space />
+					<preset_link preset_name="TT" text="" />
+					<preset_link preset_name="TTL" text="" />
 				</item>
 
 				<!-- TTL -->
@@ -3444,6 +3808,9 @@
 					<key key="railway:signal:stop:conventional:for" value="locomotive" />
 					<reference ref="cat_conventional_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
+					<space />
+					<preset_link preset_name="TT" text="" />
+					<preset_link preset_name="TT EAS" text="" />
 				</item>
 			</group>
 
@@ -3462,6 +3829,7 @@
 						text="Passenger stop for trains up to x vehicles"
 						fr.text="Arrêt voyageurs pour trains jusqu'à x voitures" />
 					<space />
+					<key key="railway:signal:stop:conventional:reversal" match="none" />
 					<reference ref="cat_vehicle_number_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
 				</item>
@@ -3501,6 +3869,7 @@
 					<space />
 					<key key="railway:signal:stop:suburban" value="FR:Z50" />
 					<key key="railway:signal:stop:suburban:for" value="single_unit" />
+					<key key="railway:signal:stop:suburban:reversal" match="none" />
 					<reference ref="cat_suburban_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
 				</item>
@@ -3516,6 +3885,7 @@
 					<space />
 					<key key="railway:signal:stop:suburban" value="FR:Z50" />
 					<key key="railway:signal:stop:suburban:for" value="multiple_unit" />
+					<key key="railway:signal:stop:suburban:reversal" match="none" />
 					<reference ref="cat_suburban_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
 				</item>
@@ -3555,8 +3925,16 @@
 					<space />
 					<key key="railway:signal:stop:regional" value="FR:Z57" />
 					<key key="railway:signal:stop:regional:for" value="single_unit" />
+					<key key="railway:signal:stop:regional:reversal" match="none" />
+					<key key="railway:signal:stop:regional:unit_number" match="none" />
 					<reference ref="cat_regional_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
+					<space />
+					<preset_link preset_name="Z57-1 U-turn" text="" />
+					<preset_link preset_name="Z57 1-2" text="" />
+					<preset_link preset_name="Z57 2" text="" />
+					<preset_link preset_name="Z57 2-3" text="" />
+					<preset_link preset_name="Z57 3" text="" />
 				</item>
 
 				<!-- Z57 (U-turn) -->
@@ -3572,8 +3950,15 @@
 					<key key="railway:signal:stop:regional" value="FR:Z57" />
 					<key key="railway:signal:stop:regional:for" value="single_unit" />
 					<key key="railway:signal:stop:regional:reversal" value="yes" />
+					<key key="railway:signal:stop:regional:unit_number" match="none" />
 					<reference ref="cat_regional_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
+					<space />
+					<preset_link preset_name="Z57 1" text="" />
+					<preset_link preset_name="Z57 1-2" text="" />
+					<preset_link preset_name="Z57 2" text="" />
+					<preset_link preset_name="Z57 2-3" text="" />
+					<preset_link preset_name="Z57 3" text="" />
 				</item>
 
 				<!-- Z57 (US/UM2) -->
@@ -3587,8 +3972,16 @@
 						fr.text="Arrêt voyageurs : Z 57000, US ou UM2" />
 					<space />
 					<key key="railway:signal:stop:regional" value="FR:Z57" />
+					<key key="railway:signal:stop:regional:reversal" match="none" />
+					<key key="railway:signal:stop:regional:unit_number" match="none" />
 					<reference ref="cat_regional_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
+					<space />
+					<preset_link preset_name="Z57 1" text="" />
+					<preset_link preset_name="Z57-1 U-turn" text="" />
+					<preset_link preset_name="Z57 2" text="" />
+					<preset_link preset_name="Z57 2-3" text="" />
+					<preset_link preset_name="Z57 3" text="" />
 				</item>
 
 				<!-- Z57 (UM2) -->
@@ -3603,8 +3996,16 @@
 					<space />
 					<key key="railway:signal:stop:regional" value="FR:Z57" />
 					<key key="railway:signal:stop:regional:for" value="multiple_unit" />
+					<key key="railway:signal:stop:regional:reversal" match="none" />
+					<key key="railway:signal:stop:regional:unit_number" match="none" />
 					<reference ref="cat_regional_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
+					<space />
+					<preset_link preset_name="Z57 1" text="" />
+					<preset_link preset_name="Z57-1 U-turn" text="" />
+					<preset_link preset_name="Z57 1-2" text="" />
+					<preset_link preset_name="Z57 2-3" text="" />
+					<preset_link preset_name="Z57 3" text="" />
 				</item>
 
 				<!-- Z57 (UM2/UM3) -->
@@ -3619,8 +4020,15 @@
 					<key key="railway:signal:stop:regional" value="FR:Z57" />
 					<key key="railway:signal:stop:regional:for" value="multiple_unit" />
 					<key key="railway:signal:stop:regional:unit_number" value="2;3" />
+					<key key="railway:signal:stop:regional:reversal" match="none" />
 					<reference ref="cat_regional_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
+					<space />
+					<preset_link preset_name="Z57 1" text="" />
+					<preset_link preset_name="Z57-1 U-turn" text="" />
+					<preset_link preset_name="Z57 1-2" text="" />
+					<preset_link preset_name="Z57 2" text="" />
+					<preset_link preset_name="Z57 3" text="" />
 				</item>
 
 				<!-- Z57 (UM3) -->
@@ -3635,8 +4043,15 @@
 					<key key="railway:signal:stop:regional" value="FR:Z57" />
 					<key key="railway:signal:stop:regional:for" value="multiple_unit" />
 					<key key="railway:signal:stop:regional:unit_number" value="3" />
+					<key key="railway:signal:stop:regional:reversal" match="none" />
 					<reference ref="cat_regional_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
+					<space />
+					<preset_link preset_name="Z57 1" text="" />
+					<preset_link preset_name="Z57-1 U-turn" text="" />
+					<preset_link preset_name="Z57 1-2" text="" />
+					<preset_link preset_name="Z57 2" text="" />
+					<preset_link preset_name="Z57 2-3" text="" />
 				</item>
 			</group>
 
@@ -3658,7 +4073,13 @@
 					<space />
 					<key key="railway:signal:stop:highspeed" value="FR:TGV" />
 					<key key="railway:signal:stop:highspeed:for" value="single_unit" />
+					<key key="railway:signal:stop:highspeed:reversal" match="none" />
 					<reference ref="cat_highspeed_passenger_stop" />
+					<space />
+					<preset_link preset_name="TGV 1 RBT" text="" />
+					<preset_link preset_name="TGV 1-2" text="" />
+					<preset_link preset_name="TGV 2" text="" />
+					<preset_link preset_name="TGV 2D" text="" />
 				</item>
 
 				<!-- TGV 1 RBT (single unit, reversing) -->
@@ -3674,6 +4095,11 @@
 					<key key="railway:signal:stop:highspeed:for" value="single_unit" />
 					<key key="railway:signal:stop:highspeed:reversal" value="yes" />
 					<reference ref="cat_highspeed_passenger_stop" />
+					<space />
+					<preset_link preset_name="TGV 1" text="" />
+					<preset_link preset_name="TGV 1-2" text="" />
+					<preset_link preset_name="TGV 2" text="" />
+					<preset_link preset_name="TGV 2D" text="" />
 				</item>
 
 				<!-- TGV 1-2 -->
@@ -3688,7 +4114,13 @@
 					<space />
 					<key key="railway:signal:stop:highspeed" value="FR:TGV" />
 					<key key="railway:signal:stop:highspeed:for" match="none" />
+					<key key="railway:signal:stop:highspeed:reversal" match="none" />
 					<reference ref="cat_highspeed_passenger_stop" />
+					<space />
+					<preset_link preset_name="TGV 1" text="" />
+					<preset_link preset_name="TGV 1 RBT" text="" />
+					<preset_link preset_name="TGV 2" text="" />
+					<preset_link preset_name="TGV 2D" text="" />
 				</item>
 
 				<!-- TGV 2 (UM) -->
@@ -3703,7 +4135,13 @@
 					<space />
 					<key key="railway:signal:stop:highspeed" value="FR:TGV" />
 					<key key="railway:signal:stop:highspeed:for" value="multiple_unit" />
+					<key key="railway:signal:stop:highspeed:reversal" match="none" />
 					<reference ref="cat_highspeed_passenger_stop" />
+					<space />
+					<preset_link preset_name="TGV 1" text="" />
+					<preset_link preset_name="TGV 1 RBT" text="" />
+					<preset_link preset_name="TGV 1-2" text="" />
+					<preset_link preset_name="TGV 2D" text="" />
 				</item>
 
 				<!-- TGV 2D (Duplex, UM) -->
@@ -3718,7 +4156,13 @@
 					<key key="railway:signal:stop:highspeed" value="FR:TGV" />
 					<key key="railway:signal:stop:highspeed:type" value="D" />
 					<key key="railway:signal:stop:highspeed:for" value="multiple_unit" />
+					<key key="railway:signal:stop:highspeed:reversal" match="none" />
 					<reference ref="cat_highspeed_passenger_stop" />
+					<space />
+					<preset_link preset_name="TGV 1" text="" />
+					<preset_link preset_name="TGV 1 RBT" text="" />
+					<preset_link preset_name="TGV 1-2" text="" />
+					<preset_link preset_name="TGV 2" text="" />
 				</item>
 
 			</group>
@@ -3744,6 +4188,9 @@
 					<key key="railway:signal:stop:suburban" value="FR:long_train" />
 					<reference ref="cat_suburban_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
+					<space />
+					<preset_link preset_name="Short Train" text="" />
+					<preset_link preset_name="All Trains" text="" />
 				</item>
 
 				<!-- Train Court, TC (position=in_track) -->
@@ -3759,6 +4206,9 @@
 					<key key="railway:signal:stop:suburban" value="FR:short_train" />
 					<reference ref="cat_suburban_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
+					<space />
+					<preset_link preset_name="Long Train" text="" />
+					<preset_link preset_name="All Trains" text="" />
 				</item>
 
 				<!-- Tous Trains -->
@@ -3774,6 +4224,9 @@
 					<key key="railway:signal:stop:suburban" value="FR:all_trains" />
 					<reference ref="cat_suburban_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
+					<space />
+					<preset_link preset_name="Long Train" text="" />
+					<preset_link preset_name="Short Train" text="" />
 				</item>
 
 			</group>
@@ -4056,7 +4509,8 @@
 				<link wiki="OpenRailwayMap/Tagging_in_France#Facilities" />
 			</item>
 
-			<!-- TODO: POSTE -->
+			<separator />
+
 			<item
 				name="POSTE Sign"
 				fr.name="Pancarte POSTE"
@@ -6094,7 +6548,8 @@
 					<key key="railway:signal:electricity" value="ETCS:end_of_catenary" />
 					<key key="railway:signal:electricity:type" value="end_of_catenary" />
 					<key key="railway:signal:electricity:form" value="sign" />
-					<reference ref="base_common" />
+					<key key="railway:signal:position" value="overhead" />
+					<reference ref="base_common_core" />
 					<link wiki="OpenRailwayMap/ETCS_Markers#End_of_catenary" />
 				</item>
 			</group>
@@ -6522,7 +6977,8 @@
 				<key key="railway:signal:electricity" value="FR:end_of_catenary" />
 				<key key="railway:signal:electricity:type" value="end_of_catenary" />
 				<key key="railway:signal:electricity:form" value="sign" />
-				<reference ref="base_common" />
+				<key key="railway:signal:position" value="overhead" />
+				<reference ref="base_common_core" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#End_of_catenary" />
 			</item>
 
