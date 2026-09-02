@@ -4,8 +4,8 @@ on:
   push:
     paths:
       - 'presets/**'
-      - 'tools/Signalling/**'   # taginfo: regenerate when the generator changes
-      - '.github/pages/index.html'
+      - 'tools/Signalling/**'
+      - '.github/pages/**'
     branches: [ "main" ]
   workflow_dispatch:
 
@@ -44,7 +44,7 @@ jobs:
         run: |
           mkdir -p public
           cp ${{ env.ARCHIVE_NAME }} public/
-          cp .github/pages/index.html public/
+          cp -r .github/pages/* public/
 
       # --- taginfo: build the generator and emit taginfo.json into public/ ---
       - name: Setup .NET
