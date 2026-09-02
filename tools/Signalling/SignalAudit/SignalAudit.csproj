@@ -33,7 +33,7 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-	<None Update="appsettings.Local.json" Condition="Exists('appsettings.Local.json')">
+	<None Update="appsettings.local.json" Condition="Exists('appsettings.local.json')">
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</None>
   </ItemGroup>

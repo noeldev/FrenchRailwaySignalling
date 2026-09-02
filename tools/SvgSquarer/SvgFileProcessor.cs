@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Noël Danjou
 
+using System.Globalization;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace SvgSquarer;
 
@@ -17,74 +17,101 @@ internal enum ProcessStatus
 internal readonly record struct ProcessResult(
     ProcessStatus Status,
     string? Detail,
-    bool Rounded);
+    bool Rounded,
+    bool Written);
 
-// Reads a single SVG, squares its root viewBox if needed and writes it back
-// while preserving the original encoding, byte order mark and line endings.
-internal static partial class SvgFileProcessor
+// Reads a single SVG in place, squares its root viewBox if needed and
+// optionally adds width/height, writing back while preserving the original
+// encoding, byte order mark and line endings. Backs up the original bytes
+// through backupStore right before any overwrite.
+internal static class SvgFileProcessor
 {
-    private static readonly UTF8Encoding Utf8NoBom = new(false);
-
-    private static readonly Regex RootSvgTag = RootSvgTagRegex();
-    private static readonly Regex ViewBoxAttribute = ViewBoxAttributeRegex();
-
-    public static ProcessResult Process(string sourcePath, string targetPath, bool dryRun)
+    public static ProcessResult Process(string path, string relativePath, int? size, BackupStore? backupStore, bool dryRun)
     {
-        var bytes = File.ReadAllBytes(sourcePath);
-        var hasBom = bytes.AsSpan().StartsWith(Encoding.UTF8.Preamble);
-        var bomLength = hasBom ? Encoding.UTF8.Preamble.Length : 0;
-        var text = Utf8NoBom.GetString(bytes, bomLength, bytes.Length - bomLength);
+        var bytes = File.ReadAllBytes(path);
+        var text = Utf8TextFile.Read(bytes, out var hasBom);
 
-        var svgTag = RootSvgTag.Match(text);
-        if (!svgTag.Success)
+        var locateStatus = SvgRootTag.TryLocate(text, out var location, out var rawViewBoxValue);
+
+        if (locateStatus == SvgRootTag.LocateStatus.NoSvgTag)
         {
-            return new ProcessResult(ProcessStatus.NoViewBox, "no <svg> root element", false);
+            return new ProcessResult(ProcessStatus.NoViewBox, "no <svg> root element", false, false);
         }
 
-        var attribute = ViewBoxAttribute.Match(svgTag.Value);
-        if (!attribute.Success)
+        if (locateStatus == SvgRootTag.LocateStatus.NoViewBoxAttribute)
         {
-            return new ProcessResult(ProcessStatus.NoViewBox, "missing viewBox attribute", false);
+            return new ProcessResult(ProcessStatus.NoViewBox, "missing viewBox attribute", false, false);
         }
 
-        var rawValue = attribute.Groups[3].Value;
-        if (!ViewBox.TryParse(rawValue, out var viewBox) || !viewBox.IsValid)
+        if (locateStatus == SvgRootTag.LocateStatus.InvalidViewBox)
         {
-            return new ProcessResult(ProcessStatus.InvalidViewBox, $"viewBox \"{rawValue}\"", false);
+            return new ProcessResult(ProcessStatus.InvalidViewBox, $"viewBox \"{rawViewBoxValue}\"", false, false);
         }
+
+        var viewBox = location.ViewBox;
 
         // Skip only when the viewBox is already square and starts at 0 0. A
         // square viewBox with a non-zero origin (for example "-2 -2 16 16") is
         // still rewritten so the origin is normalized to 0 0.
         if (viewBox.IsSquare && viewBox.IsAtOrigin)
         {
-            if (!dryRun && sourcePath != targetPath)
+            var resizedTag = TryAddSize(location.SvgTag.Value, size, out var resized);
+            if (!resized)
             {
-                EnsureDirectoryExists(targetPath);
-                File.WriteAllBytes(targetPath, bytes);
+                return new ProcessResult(ProcessStatus.AlreadySquare, viewBox.ToAttributeValue(), false, false);
             }
-            return new ProcessResult(ProcessStatus.AlreadySquare, viewBox.ToAttributeValue(), false);
+
+            if (!dryRun)
+            {
+                WriteResizedOnly(path, text, location, resizedTag, hasBom, backupStore, relativePath, bytes);
+            }
+
+            return new ProcessResult(ProcessStatus.AlreadySquare, $"{viewBox.ToAttributeValue()} (width/height added)", false, true);
         }
 
         var (square, tx, ty, rounded) = viewBox.ToSquaredCentered();
-        var detail = $"{rawValue} -> {square.ToAttributeValue()} (translate: {ViewBox.Format(tx)}, {ViewBox.Format(ty)})";
+        var detail = $"{rawViewBoxValue} -> {square.ToAttributeValue()} (translate: {ViewBox.Format(tx)}, {ViewBox.Format(ty)})";
 
         if (!dryRun)
         {
-            WriteSquared(targetPath, text, svgTag, attribute, square, tx, ty, hasBom);
+            WriteSquared(path, text, location, square, tx, ty, size, hasBom, backupStore, relativePath, bytes);
         }
 
-        return new ProcessResult(ProcessStatus.Squared, detail, rounded);
+        return new ProcessResult(ProcessStatus.Squared, detail, rounded, true);
+    }
+
+    // Adds width/height to the root tag with the given size, but only when
+    // neither attribute is already present - existing dimensions are never
+    // overwritten.
+    private static string TryAddSize(string svgTag, int? size, out bool resized)
+    {
+        resized = false;
+
+        if (size is not { } value)
+        {
+            return svgTag;
+        }
+
+        if (SvgRootTag.WidthAttribute.IsMatch(svgTag) || SvgRootTag.HeightAttribute.IsMatch(svgTag))
+        {
+            return svgTag;
+        }
+
+        resized = true;
+        var formatted = value.ToString(CultureInfo.InvariantCulture);
+        return svgTag.Insert("<svg".Length, $" width=\"{formatted}\" height=\"{formatted}\"");
     }
 
     // Replaces the root viewBox value and wraps the original content in a
     // translate group so it stays centered, leaving the declaration, the other
     // attributes, the encoding and the line endings untouched.
     private static void WriteSquared(
-        string targetPath, string text, Match svgTag, Match attribute,
-        ViewBox square, double tx, double ty, bool hasBom)
+        string path, string text, SvgRootLocation location, ViewBox square, double tx, double ty,
+        int? size, bool hasBom, BackupStore? backupStore, string relativePath, byte[] originalBytes)
     {
-        var newTag = ReplaceViewBoxValue(svgTag.Value, attribute, square.ToAttributeValue());
+        var newTag = SvgRootTag.ReplaceAttributeValue(location.SvgTag.Value, location.ViewBoxAttribute, square.ToAttributeValue());
+        newTag = TryAddSize(newTag, size, out _);
+
         var translate = $"<g transform=\"translate({ViewBox.Format(tx)},{ViewBox.Format(ty)})\">";
 
         var closingSvgIndex = text.LastIndexOf("</svg>", StringComparison.OrdinalIgnoreCase);
@@ -93,10 +120,10 @@ internal static partial class SvgFileProcessor
             closingSvgIndex = text.Length;
         }
 
-        var contentStart = svgTag.Index + svgTag.Length;
+        var contentStart = location.SvgTag.Index + location.SvgTag.Length;
 
         var sb = new StringBuilder();
-        sb.Append(text, 0, svgTag.Index);
+        sb.Append(text, 0, location.SvgTag.Index);
         sb.Append(newTag);
         sb.Append(translate);
         sb.Append(text, contentStart, closingSvgIndex - contentStart);
@@ -106,36 +133,22 @@ internal static partial class SvgFileProcessor
             sb.Append(text, closingSvgIndex, text.Length - closingSvgIndex);
         }
 
-        EnsureDirectoryExists(targetPath);
-        File.WriteAllText(targetPath, sb.ToString(), new UTF8Encoding(hasBom));
+        backupStore?.BackupIfNeeded(relativePath, originalBytes, dryRun: false);
+        Utf8TextFile.Write(path, sb.ToString(), hasBom);
     }
 
-    // Rebuilds the opening svg tag with the new viewBox value, leaving the
-    // quote style and every other attribute untouched.
-    private static string ReplaceViewBoxValue(string svgTag, Match attribute, string newValue)
+    // Rewrites the root tag only (width/height added), used when the viewBox
+    // itself needs no change.
+    private static void WriteResizedOnly(
+        string path, string text, SvgRootLocation location, string resizedTag,
+        bool hasBom, BackupStore? backupStore, string relativePath, byte[] originalBytes)
     {
-        var prefix = attribute.Groups[1].Value;
-        var quote = attribute.Groups[2].Value;
-        var replacement = $"{prefix}{quote}{newValue}{quote}";
+        var newText = string.Concat(
+            text.AsSpan(0, location.SvgTag.Index),
+            resizedTag,
+            text.AsSpan(location.SvgTag.Index + location.SvgTag.Length));
 
-        return string.Concat(
-            svgTag.AsSpan(0, attribute.Index),
-            replacement,
-            svgTag.AsSpan(attribute.Index + attribute.Length));
+        backupStore?.BackupIfNeeded(relativePath, originalBytes, dryRun: false);
+        Utf8TextFile.Write(path, newText, hasBom);
     }
-
-    private static void EnsureDirectoryExists(string filePath)
-    {
-        var directory = Path.GetDirectoryName(filePath);
-        if (!string.IsNullOrEmpty(directory))
-        {
-            Directory.CreateDirectory(directory);
-        }
-    }
-
-    [GeneratedRegex(@"<svg\b[^>]*?>", RegexOptions.IgnoreCase, "")]
-    private static partial Regex RootSvgTagRegex();
-
-    [GeneratedRegex(@"(viewBox\s*=\s*)(""|')(.*?)\2", RegexOptions.IgnoreCase | RegexOptions.Singleline, "")]
-    private static partial Regex ViewBoxAttributeRegex();
 }

@@ -1,13 +1,12 @@
-################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
 # C# build outputs
 *.user
 *.suo
 **/.vs/
 **/bin/
 **/obj/
+
+# Local Visual Studio launch settings
+**/Properties/launchSettings.json
 
 # Taginfo
 /taginfo.json
@@ -17,9 +16,8 @@
 /presets/backup/
 
 # Tools
-/tools/Signalling/SignalAudit/appsettings.json
-/tools/Signalling/SignalAudit/appsettings.Local.json
-/tools/Signalling/SignalAudit/Properties/launchSettings.json
+**/appsettings.local.json
+
+# Local output folders
 /tools/Signalling/audit/
-/tools/SvgSquarer/icon-backup
-/tools/SvgSquarer/Properties/launchSettings.json
+/tools/SvgSquarer/icon-backup/
