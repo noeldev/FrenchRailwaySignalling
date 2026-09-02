@@ -1,0 +1,172 @@
+:root {
+    --bg: #ffffff;
+    --fg: #333333;
+    --heading: #000000;
+    --border: #d1d5da;
+    --muted-bg: #f6f8fa;
+    --install-bg: #e7f3ff;
+    --install-border: #0969da;
+    --link: #0366d6;
+    --code-bg: #f6f8fa;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0d1117;
+        --fg: #c9d1d9;
+        --heading: #f0f6fc;
+        --border: #30363d;
+        --muted-bg: #161b22;
+        --install-bg: #0d2438;
+        --install-border: #1f6feb;
+        --link: #58a6ff;
+        --code-bg: #161b22;
+    }
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    line-height: 1.6;
+    color: var(--fg);
+    background-color: var(--bg);
+}
+
+h1 {
+    color: var(--heading);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    font-size: 2em;
+}
+
+h2 {
+    color: var(--fg);
+    margin-top: 30px;
+    font-size: 1.5em;
+}
+
+.info-box {
+    background-color: var(--muted-bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 16px;
+    margin: 20px 0;
+}
+
+.info-box p {
+    margin: 0;
+}
+
+.installation-box {
+    background-color: var(--install-bg);
+    border: 1px solid var(--install-border);
+    border-left: 4px solid var(--install-border);
+    border-radius: 3px;
+    padding: 16px;
+    margin: 20px 0;
+}
+
+ol {
+    padding-left: 20px;
+    margin: 0;
+}
+
+ol li {
+    margin: 8px 0;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+ul li {
+    margin: 5px 0;
+}
+
+code {
+    background-color: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: "Courier New", monospace;
+    font-size: 0.9em;
+}
+
+a {
+    color: var(--link);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.preview {
+    margin: 20px auto;
+    max-width: 480px;
+    text-align: center;
+}
+
+.preview img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: zoom-in;
+}
+
+.preview figcaption {
+    margin-top: 8px;
+    font-size: 0.9em;
+    color: var(--fg);
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox:target {
+    display: flex;
+}
+
+html:has(.lightbox:target) {
+    overflow: hidden;
+}
+
+.lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    cursor: zoom-out;
+}
+
+.lightbox-image {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 1.75rem;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+}
