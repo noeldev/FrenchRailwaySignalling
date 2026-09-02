@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "SvgSquarer": {
-      "commandName": "Project",
-      "commandLineArgs": "..\\..\\..\\..\\..\\presets\\icons"
-    }
-  }
-}

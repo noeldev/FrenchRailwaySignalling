@@ -139,6 +139,6 @@ static IConfiguration LoadConfiguration()
         .SetBasePath(AppContext.BaseDirectory)
         .AddJsonFile("appsettings.json", optional: true)
         // Machine-specific overrides (local paths), kept out of the repository.
-        .AddJsonFile("appsettings.Local.json", optional: true)
+        .AddJsonFile("appsettings.local.json", optional: true)
         .Build();
 }

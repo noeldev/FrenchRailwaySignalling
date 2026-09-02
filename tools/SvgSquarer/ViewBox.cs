@@ -76,6 +76,30 @@ internal readonly struct ViewBox(double minX, double minY, double width, double 
         return (new ViewBox(0, 0, side, side), tx, ty, rounded);
     }
 
+    // Reconstructs the pre-squaring viewBox from a squared (0 0 side side)
+    // viewBox and the translation applied when squaring - the inverse of
+    // ToSquaredCentered. Assumes the original viewBox had its origin at 0 0,
+    // which is the only case a pure math reversal can recover without the
+    // actual original bytes: the origin offset and the axis shrink are both
+    // folded into a single translation value, so a non-zero original origin
+    // cannot be separated back out from tx/ty alone. Use a real backup for
+    // icons whose original viewBox did not start at 0 0.
+    public static bool TryReconstructOriginal(ViewBox square, double tx, double ty, out ViewBox original)
+    {
+        var side = square.Width;
+        var width = side - (2 * tx);
+        var height = side - (2 * ty);
+
+        if (width <= Epsilon || height <= Epsilon)
+        {
+            original = default;
+            return false;
+        }
+
+        original = new ViewBox(0, 0, width, height);
+        return true;
+    }
+
     // Formats the viewBox as an attribute value, emitting whole numbers as
     // integers to keep the output clean.
     public string ToAttributeValue()
