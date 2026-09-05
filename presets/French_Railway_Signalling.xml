@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.31_2026-08-31"
+    version="1.32_2026-09-05"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -107,8 +107,8 @@
 	<chunk id="base_with_plate_core">
 		<reference ref="base_common_core" />
 		<reference ref="marker_plate" />
-	</chunk>	
-	
+	</chunk>
+
 	<!-- 2. Category Base Chunks -->
 
 	<!-- Stop Signals (form=light) -->
@@ -411,7 +411,7 @@
 	</chunk>
 
 	<!-- Passenger stop signs (conventional trains) -->
-	<chunk id="cat_conventional_base">
+	<chunk id="cat_conventional_passenger_stop">
 		<reference ref="cat_passenger_stop" />
 		<key key="railway:signal:stop:conventional:form" value="sign" />
 		<text
@@ -421,9 +421,9 @@
 			length="7" />
 	</chunk>
 
-	<chunk id="cat_conventional_passenger_stop">
-		<reference ref="cat_conventional_base" />
-		<link wiki="OpenRailwayMap/Tagging_in_France#Passenger_stops_for_conventional_trains" />
+	<chunk id="cat_head_of_train_passenger_stop">
+		<reference ref="cat_conventional_passenger_stop" />
+		<link wiki="OpenRailwayMap/Tagging_in_France#TT_signs" />
 	</chunk>
 
 	<!-- UFR preset link -->
@@ -433,10 +433,15 @@
 	</chunk>
 
 	<!-- Passenger stop signs (vehicle count) -->
-	<chunk id="cat_vehicle_number_passenger_stop">
+	<chunk id="cat_base_vehicle_number_passenger_stop">
+		<reference ref="cat_conventional_passenger_stop" />
 		<key key="railway:signal:stop:conventional" value="FR:vehicle_number" />
 		<key key="railway:signal:stop:conventional:for" value="vehicles" />
-		<reference ref="cat_conventional_base" />
+		<link wiki="OpenRailwayMap/Tagging_in_France#Vehicles_stop_(...V_sign)" />
+	</chunk>
+
+	<chunk id="cat_vehicle_number_passenger_stop">
+		<reference ref="cat_base_vehicle_number_passenger_stop" />
 		<space />
 		<multiselect
 			key="railway:signal:stop:conventional:number"
@@ -444,7 +449,6 @@
 			fr.text="Nombre de voitures"
 			values_sort="false"
 			values="1;2;3;4;5;6;7;8;9;10;11;12;13;14;15;16;17;18;19;20"/>
-		<link wiki="OpenRailwayMap/Tagging_in_France#Vehicles_stop_(...V_sign)" />
 	</chunk>
 
 	<!-- Passenger stop signs (highspeed) -->
@@ -581,16 +585,7 @@
 			fr.text="Identifiant Réseau"
 			length="7" />
 		<optional text="">
-			<label
-				text="Telephone call indicator (VAT)"
-				fr.text="Voyant d'Appel Téléphonique (VAT)" />
-			<space />
-			<check
-				key="railway:signal:departure:phone:indicator"
-				text="Equipped with VAT"
-				fr.text="Munie d'un VAT"
-				value_off="" />
-			<!-- Direction to the phone location -->
+			<!-- Direction to the phone location (VAT-equipped plates only) -->
 			<combo
 				key="railway:signal:departure:phone:direction"
 				text="Telephone direction"
@@ -683,7 +678,7 @@
 			fr.text="Identifiant Réseau"
 			length="7" />
 	</chunk>
-	
+
 	<!-- Traction supply (voltage/frequency) optional info -->
 	<chunk id="optional_traction_supply">
 		<optional text="">
@@ -1021,7 +1016,7 @@
 						fr.text="Autres types de cibles" />
 					<preset_link preset_name="Dwarf Carré" text="" />
 					<preset_link preset_name="Intermediate Signal (2TMV)" text="" />
-					
+
 					<link wiki="OpenRailwayMap/Tagging_in_France#Carré" />
 				</item>
 
@@ -1441,8 +1436,7 @@
 					name="Dwarf Carré (vertical)"
 					fr.name="Carré nain (vertical)"
 					type="node"
-					icon="icons/signals/dwarf_V_C.svg"
-					match_expression="&quot;railway:signal:main:arrangement&quot;=vertical">
+					icon="icons/signals/dwarf_V_C.svg">
 					<label
 						text="Dwarf light Carré signal (vertical arrangement)"
 						fr.text="Carré lumineux de taille réduite (disposition verticale)" />
@@ -1505,7 +1499,7 @@
 					type="node"
 					icon="icons/signals/2TMV_X.svg">
 					<label
-						text="Mid-platform signal (2 trains on a same track)"
+						text="Intermediate platform signal (2 trains on a same track)"
 						fr.text="Signal de milieu de quai (2 trains sur une même voie)" />
 					<space />
 					<key key="railway:signal:main" value="FR:C" />
@@ -1564,7 +1558,7 @@
 							icon="icons/signals/2TMV_VL.svg" icon_size="24"/>
 					</multiselect>
 
-					<link wiki="OpenRailwayMap/Tagging_in_France#Signal_de_milieu_de_quai_(2TMV)" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#Intermediate_platform_signal_(2TMV)" />
 				</item>
 
 			</group>
@@ -1595,35 +1589,35 @@
 						fr.text="Type de cible"
 						editable="false"
 						values_sort="false">
-						<list_entry 
-							value="FR:A" 
-							display_value="A-type" 
-							fr.display_value="Cible A" 
-							icon="icons/signals/A-Cv.svg" 
+						<list_entry
+							value="FR:A"
+							display_value="A-type"
+							fr.display_value="Cible A"
+							icon="icons/signals/A-Cv.svg"
 							icon_size="24"/>
-						<list_entry 
-							value="FR:C" 
-							display_value="C-type" 
-							fr.display_value="Cible C" 
-							icon="icons/signals/C-Cv.svg" 
+						<list_entry
+							value="FR:C"
+							display_value="C-type"
+							fr.display_value="Cible C"
+							icon="icons/signals/C-Cv.svg"
 							icon_size="24"/>
-						<list_entry 
-							value="FR:F" 
-							display_value="F-type" 
-							fr.display_value="Cible F" 
-							icon="icons/signals/F-Cv.svg" 
+						<list_entry
+							value="FR:F"
+							display_value="F-type"
+							fr.display_value="Cible F"
+							icon="icons/signals/F-Cv.svg"
 							icon_size="24"/>
-						<list_entry 
-							value="FR:H" 
-							display_value="H-type" 
-							fr.display_value="Cible H" 
-							icon="icons/signals/H-Cv.svg" 
+						<list_entry
+							value="FR:H"
+							display_value="H-type"
+							fr.display_value="Cible H"
+							icon="icons/signals/H-Cv.svg"
 							icon_size="24"/>
-						<list_entry 
-							value="FR:K" 
-							display_value="K-type" 
-							fr.display_value="Cible K" 
-							icon="icons/signals/K-Cv.svg" 
+						<list_entry
+							value="FR:K"
+							display_value="K-type"
+							fr.display_value="Cible K"
+							icon="icons/signals/K-Cv.svg"
 							icon_size="24"/>
 					</combo>
 
@@ -1632,7 +1626,7 @@
 						text="Ground-level installation"
 						fr.text="Installation au sol" />
 					<preset_link preset_name="Low-type Cv" text="" />
-					
+
 					<link wiki="OpenRailwayMap/Tagging_in_France#Carré_violet" />
 				</item>
 
@@ -2130,7 +2124,7 @@
 					fr.name="Cv de type bas (vertical)"
 					type="node"
 					icon="icons/signals/low_V_Cv.svg"
-					match_expression="&quot;railway:signal:position&quot;=ground -&quot;railway:signal:main:shape&quot;=* &quot;railway:signal:main:arrangement&quot;=vertical">
+					match_expression="&quot;railway:signal:position&quot;=ground -&quot;railway:signal:main:shape&quot;=*">
 					<label
 						text="Low-type Carré violet (vertical arrangement)"
 						fr.text="Carré violet de type bas (disposition verticale)" />
@@ -2196,35 +2190,35 @@
 						fr.text="Type de cible"
 						editable="false"
 						values_sort="false">
-						<list_entry 
-							value="FR:A" 
-							display_value="A-type" 
-							fr.display_value="Cible A" 
-							icon="icons/signals/A-S.svg" 
+						<list_entry
+							value="FR:A"
+							display_value="A-type"
+							fr.display_value="Cible A"
+							icon="icons/signals/A-S.svg"
 							icon_size="24"/>
-						<list_entry 
-							value="FR:C" 
-							display_value="C-type" 
-							fr.display_value="Cible C" 
-							icon="icons/signals/C-S.svg" 
+						<list_entry
+							value="FR:C"
+							display_value="C-type"
+							fr.display_value="Cible C"
+							icon="icons/signals/C-S.svg"
 							icon_size="24"/>
-						<list_entry 
-							value="FR:F" 
-							display_value="F-type" 
-							fr.display_value="Cible F" 
-							icon="icons/signals/F-S.svg" 
+						<list_entry
+							value="FR:F"
+							display_value="F-type"
+							fr.display_value="Cible F"
+							icon="icons/signals/F-S.svg"
 							icon_size="24"/>
-						<list_entry 
-							value="FR:H" 
-							display_value="H-type" 
-							fr.display_value="Cible H" 
-							icon="icons/signals/H-S.svg" 
+						<list_entry
+							value="FR:H"
+							display_value="H-type"
+							fr.display_value="Cible H"
+							icon="icons/signals/H-S.svg"
 							icon_size="24"/>
-						<list_entry 
-							value="FR:K" 
-							display_value="K-type" 
-							fr.display_value="Cible K" 
-							icon="icons/signals/K-S.svg" 
+						<list_entry
+							value="FR:K"
+							display_value="K-type"
+							fr.display_value="Cible K"
+							icon="icons/signals/K-S.svg"
 							icon_size="24"/>
 					</combo>
 
@@ -3256,12 +3250,14 @@
 				name="Mirliton I"
 				fr.name="Mirliton I"
 				type="node"
-				icon="icons/signs/mirliton_I.svg">
+				icon="icons/signs/mirliton_I.svg"
+				match_expression="-&quot;railway:signal:distant:height&quot;=*">
 				<label
 					text="Mirliton I (100 m)"
 					fr.text="Mirliton I (100 m)" />
 				<space />
 				<key key="railway:signal:distant:type" value="I" />
+				<key key="railway:signal:distant:height" match="none" />
 				<reference ref="cat_mirliton" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Mirlitons" />
 			</item>
@@ -3271,12 +3267,14 @@
 				name="Mirliton II"
 				fr.name="Mirliton II"
 				type="node"
-				icon="icons/signs/mirliton_II.svg">
+				icon="icons/signs/mirliton_II.svg"
+				match_expression="-&quot;railway:signal:distant:height&quot;=*">
 				<label
 					text="Mirliton II (200 m)"
 					fr.text="Mirliton II (200 m)" />
 				<space />
 				<key key="railway:signal:distant:type" value="II" />
+				<key key="railway:signal:distant:height" match="none" />
 				<reference ref="cat_mirliton" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Mirlitons" />
 			</item>
@@ -3286,12 +3284,64 @@
 				name="Mirliton III"
 				fr.name="Mirliton III"
 				type="node"
-				icon="icons/signs/mirliton_III.svg">
+				icon="icons/signs/mirliton_III.svg"
+				match_expression="-&quot;railway:signal:distant:height&quot;=*">
 				<label
 					text="Mirliton III (300 m)"
 					fr.text="Mirliton III (300 m)" />
 				<space />
 				<key key="railway:signal:distant:type" value="III" />
+				<key key="railway:signal:distant:height" match="none" />
+				<reference ref="cat_mirliton" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Mirlitons" />
+			</item>
+
+			<separator />
+
+			<!-- I low-type -->
+			<item
+				name="Mirliton I (Low-type)"
+				fr.name="Mirliton I (type bas)"
+				type="node"
+				icon="icons/signs/mirliton_low_I.svg">
+				<label
+					text="Mirliton I - Low type (100 m)"
+					fr.text="Mirliton I - type bas (100 m)" />
+				<space />
+				<key key="railway:signal:distant:type" value="I" />
+				<key key="railway:signal:distant:height" value="dwarf" />
+				<reference ref="cat_mirliton" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Mirlitons" />
+			</item>
+
+			<!-- II low-type -->
+			<item
+				name="Mirliton II (Low-type)"
+				fr.name="Mirliton II (type bas)"
+				type="node"
+				icon="icons/signs/mirliton_low_II.svg">
+				<label
+					text="Mirliton II - Low type (200 m)"
+					fr.text="Mirliton II - type bas (200 m)" />
+				<space />
+				<key key="railway:signal:distant:type" value="II" />
+				<key key="railway:signal:distant:height" value="dwarf" />
+				<reference ref="cat_mirliton" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Mirlitons" />
+			</item>
+
+			<!-- III low-type -->
+			<item
+				name="Mirliton III (Low-type)"
+				fr.name="Mirliton III (type bas)"
+				type="node"
+				icon="icons/signs/mirliton_low_III.svg">
+				<label
+					text="Mirliton III - Low type (300 m)"
+					fr.text="Mirliton III - type bas (300 m)" />
+				<space />
+				<key key="railway:signal:distant:type" value="III" />
+				<key key="railway:signal:distant:height" value="dwarf" />
 				<reference ref="cat_mirliton" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Mirlitons" />
 			</item>
@@ -3498,17 +3548,17 @@
 						fr.text="Composition"
 						editable="false"
 						values_sort="false">
-						<list_entry 
-							value="" 
-							display_value="All compositions" 
+						<list_entry
+							value=""
+							display_value="All compositions"
 							fr.display_value="Toutes compositions" />
-						<list_entry 
-							value="single_unit" 
-							display_value="Single unit (US)" 
+						<list_entry
+							value="single_unit"
+							display_value="Single unit (US)"
 							fr.display_value="Unité simple (US)" />
-						<list_entry 
-							value="multiple_unit" 
-							display_value="Multiple unit (UM)" 
+						<list_entry
+							value="multiple_unit"
+							display_value="Multiple unit (UM)"
 							fr.display_value="Unité multiple (UM)" />
 					</combo>
 					<link wiki="OpenRailwayMap/Tagging_in_France#Arrêt_signs_for_high-speed_trains" />
@@ -3686,7 +3736,7 @@
 				<preset_link preset_name="...V" text="" />
 				<preset_link preset_name="L..." text="" />
 				<preset_link preset_name="TT" text="" />
-				
+
 				<space />
 				<preset_link preset_name="Z50-1" text="" />
 				<preset_link preset_name="Z57 1" text="" />
@@ -3721,7 +3771,7 @@
 						editable="true"
 						length="4"
 						values_sort="false"
-						values="75,80,90,110,115,120,130,150,160,170,200,220,225,245,260,410" />
+						values="75,80,90,110,115,120,130,150,160,170,200,220,225,245,260,410,480" />
 					<reference ref="cat_ufr_preset_link" />
 					<link wiki="OpenRailwayMap/Tagging_in_France#Train_length_(L..._sign)" />
 				</item>
@@ -3739,13 +3789,13 @@
 					<key key="railway:signal:stop:any:reversal" value="yes" />
 					<reference ref="cat_any_passenger_stop" />
 					<space />
-					<combo 
-						key="railway:signal:stop:any:length" 
-						text="Train length (m)" 
-						fr.text="Longueur du train (m)" 
-						editable="true" 
-						length="4" 
-						values_sort="false" 
+					<combo
+						key="railway:signal:stop:any:length"
+						text="Train length (m)"
+						fr.text="Longueur du train (m)"
+						editable="true"
+						length="4"
+						values_sort="false"
 						values="50,80,120,160,200" />
 					<reference ref="cat_ufr_preset_link" />
 					<link wiki="OpenRailwayMap/Tagging_in_France#Train_length_(L..._sign)" />
@@ -3770,7 +3820,7 @@
 					<space />
 					<key key="railway:signal:stop:conventional" value="FR:TT" />
 					<key key="railway:signal:stop:conventional:for" match="none" />
-					<reference ref="cat_conventional_passenger_stop" />
+					<reference ref="cat_head_of_train_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
 					<space />
 					<preset_link preset_name="TT EAS" text="" />
@@ -3788,7 +3838,7 @@
 					<space />
 					<key key="railway:signal:stop:conventional" value="FR:TT" />
 					<key key="railway:signal:stop:conventional:for" value="driver_only" />
-					<reference ref="cat_conventional_passenger_stop" />
+					<reference ref="cat_head_of_train_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
 					<space />
 					<preset_link preset_name="TT" text="" />
@@ -3806,7 +3856,7 @@
 					<space />
 					<key key="railway:signal:stop:conventional" value="FR:TT" />
 					<key key="railway:signal:stop:conventional:for" value="locomotive" />
-					<reference ref="cat_conventional_passenger_stop" />
+					<reference ref="cat_head_of_train_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
 					<space />
 					<preset_link preset_name="TT" text="" />
@@ -3824,14 +3874,37 @@
 					name="...V"
 					type="node"
 					icon="icons/signs/vehicle_number.svg"
-					match_expression="-&quot;railway:signal:stop:conventional:reversal&quot;=*">
+					match_expression="-&quot;railway:signal:stop:conventional:reversal&quot;=* -&quot;railway:signal:stop:conventional:trainset&quot;=*">
 					<label
 						text="Passenger stop for trains up to x vehicles"
 						fr.text="Arrêt voyageurs pour trains jusqu'à x voitures" />
 					<space />
 					<key key="railway:signal:stop:conventional:reversal" match="none" />
+					<key key="railway:signal:stop:conventional:trainset" match="none" />
 					<reference ref="cat_vehicle_number_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
+				</item>
+
+				<!-- # Vehicles (Z6400) -->
+				<item
+					name="...V (Z6400)"
+					type="node"
+					icon="icons/signs/vehicle_number_series.svg"
+					match_expression="-&quot;railway:signal:stop:conventional:reversal&quot;=*">
+					<label
+						text="Passenger stop for Z6400 units"
+						fr.text="Arrêt voyageurs pour rames Z6400" />
+					<space />
+					<key key="railway:signal:stop:conventional:reversal" match="none" />
+					<key key="railway:signal:stop:conventional:trainset" value="FR:Z6400" />
+					<reference ref="cat_base_vehicle_number_passenger_stop" />
+					<space />
+					<combo
+						key="railway:signal:stop:conventional:number"
+						text="Number of vehicles"
+						fr.text="Nombre de voitures"
+						values_sort="false"
+						values="4,8" />
 				</item>
 
 				<!-- ...V RBT (reversing) -->
@@ -3839,13 +3912,15 @@
 					name="...V U-turn"
 					fr.name="...V demi-tour"
 					type="node"
-					icon="icons/signs/vehicle_number_U-turn.svg">
+					icon="icons/signs/vehicle_number_U-turn.svg"
+					match_expression="-&quot;railway:signal:stop:conventional:trainset&quot;=*">
 					<label
 						text="Passenger stop for trains up to x vehicles, reversing"
 						fr.text="Arrêt voyageurs pour trains jusqu'à x voitures et demi-tour" />
 					<space />
-					<reference ref="cat_vehicle_number_passenger_stop" />
 					<key key="railway:signal:stop:conventional:reversal" value="yes" />
+					<key key="railway:signal:stop:conventional:trainset" match="none" />
+					<reference ref="cat_vehicle_number_passenger_stop" />
 					<reference ref="cat_ufr_preset_link" />
 				</item>
 			</group>
@@ -4266,57 +4341,132 @@
 					fr.name="Reconnaissance"
 					type="node"
 					icon="icons/plates/reporting.svg"
-					match_expression="-&quot;railway:signal:departure:type&quot;=*">
+					match_expression="-&quot;railway:signal:departure:type&quot;=* -&quot;railway:signal:departure:phone:indicator&quot;=*">
 					<label
 						text="Reporting Plate"
 						fr.text="Plaque de Reconnaissance" />
 					<space />
 					<key key="railway:signal:departure" value="FR:reporting" />
 					<key key="railway:signal:departure:type" match="none"/>
+					<key key="railway:signal:departure:phone:indicator" match="none"/>
 					<key key="railway:signal:departure:form" value="sign" />
 					<reference ref="cat_reporting" />
 
 					<item_separator />
+					<preset_link preset_name="Reporting (with VAT)" text=""/>
 					<preset_link preset_name="Delayed Reporting" text=""/>
 					<preset_link preset_name="Reporting Exemption" text=""/>
 				</item>
 
 				<item
+					name="Reporting (with VAT)"
+					fr.name="Reconnaissance (avec VAT)"
+					type="node"
+					icon="icons/plates/reporting_vat.svg">
+					<label
+						text="Reporting Plate (with VAT)"
+						fr.text="Plaque de Reconnaissance (avec VAT)" />
+					<space />
+					<key key="railway:signal:departure" value="FR:reporting" />
+					<key key="railway:signal:departure:type" match="none"/>
+					<key key="railway:signal:departure:phone:indicator" value="yes" />
+					<key key="railway:signal:departure:form" value="sign" />
+					<reference ref="cat_reporting" />
+
+					<item_separator />
+					<preset_link preset_name="Reporting" text=""/>
+					<preset_link preset_name="Delayed Reporting (with VAT)" text=""/>
+					<preset_link preset_name="Reporting Exemption (with VAT)" text=""/>
+				</item>
+
+				<separator />
+
+				<item
 					name="Delayed Reporting"
 					fr.name="Reconnaissance Différée"
 					type="node"
-					icon="icons/plates/delayed_reporting.svg">
+					icon="icons/plates/delayed_reporting.svg"
+					match_expression="-&quot;railway:signal:departure:phone:indicator&quot;=*">
 					<label
 						text="Delayed Reporting Plate"
 						fr.text="Plaque de Reconnaissance Différée" />
 					<space />
 					<key key="railway:signal:departure" value="FR:reporting" />
 					<key key="railway:signal:departure:type" value="delayed" />
+					<key key="railway:signal:departure:phone:indicator" match="none"/>
 					<key key="railway:signal:departure:form" value="sign" />
 					<reference ref="cat_reporting" />
 
 					<item_separator />
+					<preset_link preset_name="Delayed Reporting (with VAT)" text=""/>
 					<preset_link preset_name="Reporting" text=""/>
 					<preset_link preset_name="Reporting Exemption" text=""/>
 				</item>
 
 				<item
+					name="Delayed Reporting (with VAT)"
+					fr.name="Reconnaissance Différée (avec VAT)"
+					type="node"
+					icon="icons/plates/delayed_reporting_vat.svg">
+					<label
+						text="Delayed Reporting Plate (with VAT)"
+						fr.text="Plaque de Reconnaissance Différée (avec VAT)" />
+					<space />
+					<key key="railway:signal:departure" value="FR:reporting" />
+					<key key="railway:signal:departure:type" value="delayed" />
+					<key key="railway:signal:departure:phone:indicator" value="yes" />
+					<key key="railway:signal:departure:form" value="sign" />
+					<reference ref="cat_reporting" />
+
+					<item_separator />
+					<preset_link preset_name="Delayed Reporting" text=""/>
+					<preset_link preset_name="Reporting (with VAT)" text=""/>
+					<preset_link preset_name="Reporting Exemption (with VAT)" text=""/>
+				</item>
+
+				<separator />
+
+				<item
 					name="Reporting Exemption"
 					fr.name="Dispense de Reconnaissance"
 					type="node"
-					icon="icons/plates/reporting_exemption.svg">
+					icon="icons/plates/reporting_exemption.svg"
+					match_expression="-&quot;railway:signal:departure:phone:indicator&quot;=*">
 					<label
 						text="Reporting Exemption Plate"
 						fr.text="Plaque de Dispense de Reconnaissance" />
 					<space />
 					<key key="railway:signal:departure" value="FR:reporting" />
 					<key key="railway:signal:departure:type" value="exempt" />
+					<key key="railway:signal:departure:phone:indicator" match="none"/>
 					<key key="railway:signal:departure:form" value="sign" />
 					<reference ref="cat_reporting" />
 
 					<item_separator />
+					<preset_link preset_name="Reporting Exemption (with VAT)" text=""/>
 					<preset_link preset_name="Reporting" text=""/>
 					<preset_link preset_name="Delayed Reporting" text=""/>
+				</item>
+
+				<item
+					name="Reporting Exemption (with VAT)"
+					fr.name="Dispense de Reconnaissance (avec VAT)"
+					type="node"
+					icon="icons/plates/reporting_exemption_vat.svg">
+					<label
+						text="Reporting Exemption Plate (with VAT)"
+						fr.text="Plaque de Dispense de Reconnaissance (avec VAT)" />
+					<space />
+					<key key="railway:signal:departure" value="FR:reporting" />
+					<key key="railway:signal:departure:type" value="exempt" />
+					<key key="railway:signal:departure:phone:indicator" value="yes" />
+					<key key="railway:signal:departure:form" value="sign" />
+					<reference ref="cat_reporting" />
+
+					<item_separator />
+					<preset_link preset_name="Reporting Exemption" text=""/>
+					<preset_link preset_name="Reporting (with VAT)" text=""/>
+					<preset_link preset_name="Delayed Reporting (with VAT)" text=""/>
 				</item>
 			</group>
 
@@ -4353,7 +4503,7 @@
 				<reference ref="cat_departure" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Half-white,_half-green_plate" />
 			</item>
-			
+
 			<separator />
 
 			<!-- SLD -->
