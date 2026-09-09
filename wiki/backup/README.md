@@ -1,6 +1,6 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2026-09-04 00:05:04 UTC<br>
+**Backup generated:** 2026-09-09 22:31:21 UTC<br>
 **Category:** main<br>
 **Total pages:** 1<br>
 **Successfully backed up:** 1
@@ -10,9 +10,9 @@
 
 - **File:** [OpenRailwayMap/Tagging_in_France.wiki](OpenRailwayMap/Tagging_in_France.wiki)
 - **Wiki URL:** [OpenRailwayMap/Tagging_in_France](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
-- **Last edited:** 2026-09-03 21:05:50 UTC
+- **Last edited:** 2026-09-08 20:19:27 UTC
 - **Last editor:** Noeld
-- **Edit comment:** /* Mirlitons */ update description
+- **Edit comment:** /* Switchable TIV-R */ align lightbox icons with other lightboxes
 
 ## About
 

@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-09-03 21:05:50 UTC
+Last edited: 2026-09-08 20:19:27 UTC
 Last editor: Noeld
-Last edit comment: /* Mirlitons */ update description
-Backup date: 2026-09-04 00:05:04 UTC
+Last edit comment: /* Switchable TIV-R */ align lightbox icons with other lightboxes
+Backup date: 2026-09-09 22:31:21 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -27,6 +27,7 @@ All railway signals must include the following tags:
 
 Optional tag:
 * {{Tag|ref|}}: identifier shown on the marker plate ('''plaque de repérage''') when present.
+* {{Tag|source|}}: month and year of the SNCF open data used for this element, e.g. ''SNCF - 03/2022''.
 
 === Notes ===
 On this page, the <code>railcar</code> signal category covers [https://wikipedia.org/wiki/Electric_multiple_unit Electric Multiple Units] (EMUs) and [https://wikipedia.org/wiki/Diesel_multiple_unit Diesel Multiple Units] (DMUs), collectively called ''automoteurs'' in French.
@@ -351,12 +352,14 @@ File:TIV_Mobile_O.svg|Clear luminous TIV-D ({{TagValue|railway:signal:speed_limi
 * {{Tag|railway:signal:speed_limit_distant:switchable:turn_direction||({{TagValue|railway:signal:speed_limit_distant:switchable:turn_direction|left}}/{{TagValue|railway:signal:speed_limit_distant:switchable:turn_direction|through}}/{{TagValue|railway:signal:speed_limit_distant:switchable:turn_direction|thrown}}/{{TagValue|railway:signal:speed_limit_distant:switchable:turn_direction|right}})}} (route to which the speed restriction applies; use ''thrown'' when multiple diverging routes are possible)
 
 ==== Switchable TIV-R ====
-The '''TIV-R''' is always paired with the [[#Carré|Carré]] signal preceding the point.
+The '''TIV-R''' is always paired with the [[#Carré|Carré]] signal protecting the point.
 
 <gallery>
 File:TIV_R_MOB_60.svg|Mechanical TIV-R ({{TagValue|railway:signal:speed_limit:switchable:form|sign}})
-File:TIV_Rappel_Lumineux_60.svg|Luminous TIV-R ({{TagValue|railway:signal:speed_limit:switchable:form|light}})
-TIV_Rappel_Lumineux_O.svg|Clear luminous TIV-R ({{TagValue|railway:signal:speed_limit:switchable:form|light}})
+File:TIV-R_Lumineux_60.svg|Illuminated TIV-R ({{TagValue|railway:signal:speed_limit:switchable:form|light}} + {{TagValue|railway:signal:speed_limit:switchable:speed|60}})
+File:TIV-R_Lumineux_Ouvert.svg|Clear illuminated TIV-R ({{TagValue|railway:signal:speed_limit:switchable:form|light}})
+File:TIV-R_Lumineux_120.svg|Illuminated TIV-R ({{TagValue|railway:signal:speed_limit:switchable:form|light}} + {{TagValue|railway:signal:speed_limit:switchable:speed|120}})
+File:TIV-R_Lumineux_Ouvert_(large).svg|Clear illuminated TIV-R (wide) ({{TagValue|railway:signal:speed_limit:switchable:form|light}})
 </gallery>
 
 * {{Tag|railway:signal:speed_limit|FR:speed_indicator}}
@@ -374,8 +377,8 @@ In some cases, particularly at diverging exits from certain station tracks, a 30
 File:Chevron_bas.svg|Chevron pointe en bas
 </gallery>
 
-* {{Tag|railway:signal:minor|FR:chevron}}
-* {{Tag|railway:signal:minor:form|sign}}
+* {{Tag|railway:signal:speed_limit|FR:chevron}}
+* {{Tag|railway:signal:speed_limit:form|sign}}
 
 === Fixed speed indicators ===
 
@@ -1855,7 +1858,7 @@ File:524 Swiss main signal 4 lights.svg|Main signal
 * {{Tag|railway:signal:main|CH-FDV:l}}
 * {{Tag|railway:signal:main:form|light}}
 * {{Tag|railway:signal:main:function||({{TagValue|railway:signal:main:function|entry}}/{{TagValue|railway:signal:main:function|exit}}/{{TagValue|railway:signal:main:function|intermediate}}/{{TagValue|railway:signal:main:function|block}})}}
-* {{Tag|railway:signal:main:states|({{TagValue|railway:signal:main:states|CH-FDV:524}};{{TagValue|railway:signal:main:states|CH-FDV:530}};{{TagValue|railway:signal:main:states|CH-FDV:542}};{{TagValue|railway:signal:main:states|CH-FDV:545}};{{TagValue|railway:signal:main:states|CH-FDV:547}};{{TagValue|railway:signal:main:states|CH-FDV:550}})}}
+* {{Tag|railway:signal:main:states|({{TagValue|railway:signal:main:states|CH-FDV:524}};{{TagValue|railway:signal:main:states|CH-FDV:530}};{{TagValue|railway:signal:main:states|CH-FDV:542}};{{TagValue|railway:signal:main:states|CH-FDV:545}})}}
 
 == Distant signal ==
 Distant signal (German: '''Vorsignal''')
