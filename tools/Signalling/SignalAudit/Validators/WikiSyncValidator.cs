@@ -38,6 +38,8 @@ public sealed class WikiSyncValidator : IValidator
             producerRules = new PresetTagSource(useFrench: false, excludedKeys: []).ReadRules(preset.Content);
         }
 
+        producerRules = EtcsPendingCoverage.ExcludePending(producerRules);
+
         IReadOnlyList<SignalTagRule> authorityRules;
         using (var wiki = await resolver.OpenAsync(source, cancellationToken))
         {
@@ -45,11 +47,36 @@ public sealed class WikiSyncValidator : IValidator
             authorityRules = new WikiSource().ReadRules(wiki.Content);
         }
 
+        authorityRules = WithImpliedRefCoverage(producerRules, authorityRules);
+
         foreach (var finding in new SyncComparer().Compare(producerRules, authorityRules, SyncScope.AllKeys))
         {
             issues.Add(SyncIssueFormatter.ToIssue(finding, "the OSM wiki"));
         }
 
         return issues;
+    }
+
+    // The wiki documents the idreseau reference tag once, generically, under
+    // "General tags" ("railway:signal:<category>:ref"), in wikitext that is not
+    // in the "* {{Tag|...}}" shape WikiSource parses. Every preset key ending in
+    // ":ref" is implied to be covered by that clause regardless of category, so
+    // a synthetic wildcard rule is added for each one the preset actually uses.
+    private static IReadOnlyList<SignalTagRule> WithImpliedRefCoverage(
+        IReadOnlyList<SignalTagRule> producerRules,
+        IReadOnlyList<SignalTagRule> authorityRules)
+    {
+        var documentedKeys = new HashSet<string>(authorityRules.Select(rule => rule.Key), StringComparer.Ordinal);
+        var expanded = authorityRules.ToList();
+
+        foreach (var key in producerRules.Select(rule => rule.Key).Distinct(StringComparer.Ordinal))
+        {
+            if (key.EndsWith(":ref", StringComparison.Ordinal) && documentedKeys.Add(key))
+            {
+                expanded.Add(new SignalTagRule(key, new KeyPresent(), "General tags (idreseau, implied)"));
+            }
+        }
+
+        return expanded;
     }
 }

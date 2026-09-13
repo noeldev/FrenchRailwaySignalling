@@ -15,9 +15,18 @@ namespace Signalling.Sync;
 // combo, free text) or a consumer catch-all (default, regular expression) cannot
 // be enumerated, so it is compared by key presence rather than value by value.
 //
+// A value delimited with ";" (a multiselect combo emitting several selections
+// at once) is not required to appear as that exact joined string on the other
+// side: it is also accepted when every individual token is covered there, even
+// though the token never appears alone as its own value. This is checked in
+// both directions, so a documented single value is not reported missing just
+// because the producer only ever emits it combined with others.
+//
 // Findings are neutral: severity and wording are decided by the caller.
 public sealed class SyncComparer
 {
+    private const char MultiselectDelimiter = ';';
+
     public IReadOnlyList<SyncFinding> Compare(
         IReadOnlyList<SignalTagRule> producerRules,
         IReadOnlyList<SignalTagRule> consumerRules,
@@ -69,10 +78,12 @@ public sealed class SyncComparer
 
                 foreach (var value in values)
                 {
-                    if (!consumerMatchers.Any(matcher => matcher.Matches(value)))
+                    if (IsCoveredByConsumer(value, consumerMatchers))
                     {
-                        findings.Add(new SyncFinding(SyncFindingKind.ProducerValueUnmatched, key, value, producerRule.Origin));
+                        continue;
                     }
+
+                    findings.Add(new SyncFinding(SyncFindingKind.ProducerValueUnmatched, key, value, producerRule.Origin));
                 }
             }
         }
@@ -99,18 +110,59 @@ public sealed class SyncComparer
                 continue;
             }
 
+            var producerTokens = CollectTokens(producerRules);
+
             foreach (var consumerRule in consumerRules)
             {
                 foreach (var value in consumerRule.Matcher.EnumerateValues())
                 {
-                    if (!producerMatchers.Any(matcher => matcher.Matches(value)))
+                    if (producerMatchers.Any(matcher => matcher.Matches(value)) || producerTokens.Contains(value))
                     {
-                        findings.Add(new SyncFinding(SyncFindingKind.ConsumerValueUnmatched, key, value, consumerRule.Origin));
+                        continue;
                     }
+
+                    findings.Add(new SyncFinding(SyncFindingKind.ConsumerValueUnmatched, key, value, consumerRule.Origin));
                 }
             }
         }
     }
+
+    // Whether a producer value is covered by the consumer, either as an exact
+    // match or, for a ";"-joined multiselect value, token by token.
+    private static bool IsCoveredByConsumer(string value, List<Matcher> consumerMatchers)
+    {
+        if (consumerMatchers.Any(matcher => matcher.Matches(value)))
+        {
+            return true;
+        }
+
+        var tokens = SplitTokens(value);
+        return tokens.Length > 1 && tokens.All(token => consumerMatchers.Any(matcher => matcher.Matches(token)));
+    }
+
+    // The individual tokens across every value a set of producer rules can
+    // emit, so a consumer value can be matched against one piece of a
+    // multiselect combo even when that piece never appears alone.
+    private static HashSet<string> CollectTokens(List<SignalTagRule> producerRules)
+    {
+        var tokens = new HashSet<string>(StringComparer.Ordinal);
+
+        foreach (var rule in producerRules)
+        {
+            foreach (var value in rule.Matcher.EnumerateValues())
+            {
+                foreach (var token in SplitTokens(value))
+                {
+                    tokens.Add(token);
+                }
+            }
+        }
+
+        return tokens;
+    }
+
+    private static string[] SplitTokens(string value) =>
+        value.Split(MultiselectDelimiter, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
     private static IReadOnlyDictionary<string, List<SignalTagRule>> GroupByKey(IReadOnlyList<SignalTagRule> rules)
     {

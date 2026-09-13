@@ -55,6 +55,13 @@ var validators = new List<IValidator>
     new MatchExpressionValidator()
 };
 
+// --check-icons adds the SVG optimization check on top of the existence and
+// casing check that IconValidator always runs.
+if (options.CheckIconsRequested)
+{
+    validators.Add(new SvgOptimizationValidator());
+}
+
 // --wiki enables the link/anchor integrity check, and the content sync when a
 // source is available. --yaml enables the map sync.
 if (options.WikiRequested)

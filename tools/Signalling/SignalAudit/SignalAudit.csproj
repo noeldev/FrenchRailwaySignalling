@@ -9,10 +9,10 @@
     <RootNamespace>SignalAudit</RootNamespace>
     <AssemblyName>SignalAudit</AssemblyName>
     <Product>SignalAudit</Product>
-    <Version>1.1.0</Version>
-    <Company>Noël Danjou</Company>
+    <Version>1.2.0</Version>
+    <Company>Noël Danjou EI</Company>
     <Authors>Noël Danjou</Authors>
-    <Copyright>Copyright (C) 2026 Noël Danjou</Copyright>
+    <Copyright>Copyright © 2026 Noël Danjou</Copyright>
     <Description>Validator and cross-source consistency audit for the French Railway Signalling JOSM preset.</Description>
   </PropertyGroup>
 

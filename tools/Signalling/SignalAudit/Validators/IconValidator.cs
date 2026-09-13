@@ -32,7 +32,7 @@ public sealed class IconValidator : IValidator
                 continue;
             }
 
-            var resolution = ResolveCaseSensitive(iconRoot, iconPath);
+            var resolution = IconPathResolver.Resolve(iconRoot, iconPath);
             switch (resolution.Status)
             {
                 case IconResolutionStatus.Missing:
@@ -59,64 +59,4 @@ public sealed class IconValidator : IValidator
     private static bool IsRemote(string value) =>
         value.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
         || value.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
-
-    // Walks the path segment by segment, matching each one against the real
-    // directory entries so the exact on-disk casing can be compared.
-    private static IconResolution ResolveCaseSensitive(string root, string relativePath)
-    {
-        var segments = relativePath
-            .Replace('\\', '/')
-            .Split('/', StringSplitOptions.RemoveEmptyEntries);
-
-        var currentDirectory = root;
-        var actualSegments = new List<string>(segments.Length);
-
-        for (var i = 0; i < segments.Length; i++)
-        {
-            if (!Directory.Exists(currentDirectory))
-            {
-                return IconResolution.Missing;
-            }
-
-            var isLast = i == segments.Length - 1;
-            var candidates = isLast
-                ? Directory.GetFileSystemEntries(currentDirectory)
-                : Directory.GetDirectories(currentDirectory);
-
-            var match = candidates
-                .Select(entry => Path.GetFileName(entry))
-                .FirstOrDefault(name => string.Equals(name, segments[i], StringComparison.OrdinalIgnoreCase));
-
-            if (match is null)
-            {
-                return IconResolution.Missing;
-            }
-
-            actualSegments.Add(match);
-            currentDirectory = Path.Combine(currentDirectory, match);
-        }
-
-        var actualRelative = string.Join('/', actualSegments);
-        var expectedRelative = string.Join('/', segments);
-
-        return string.Equals(actualRelative, expectedRelative, StringComparison.Ordinal)
-            ? IconResolution.Match
-            : IconResolution.Mismatch(actualRelative);
-    }
-
-    private enum IconResolutionStatus
-    {
-        Match,
-        Missing,
-        CaseMismatch
-    }
-
-    private readonly record struct IconResolution(IconResolutionStatus Status, string? ActualRelativePath)
-    {
-        public static IconResolution Match => new(IconResolutionStatus.Match, null);
-
-        public static IconResolution Missing => new(IconResolutionStatus.Missing, null);
-
-        public static IconResolution Mismatch(string actual) => new(IconResolutionStatus.CaseMismatch, actual);
-    }
 }

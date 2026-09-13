@@ -26,6 +26,11 @@ public sealed class CommandLineOptions
 
     public required string IconRoot { get; init; }
 
+    // True when --check-icons was given: enables the SVG optimization check
+    // (Inkscape editor leftovers) on top of the existence/casing check that
+    // always runs.
+    public bool CheckIconsRequested { get; init; }
+
     // Resolved ORM-vector YAML source, or null when the map audit is not enabled.
     public string? OrmVectorYamlSource { get; init; }
 
@@ -53,6 +58,7 @@ public sealed class CommandLineOptions
         string? xmlPath = null;
         string? xsdPath = null;
         string? iconRoot = null;
+        var checkIconsRequested = false;
         var yamlRequested = false;
         string? yamlValue = null;
         var wikiRequested = false;
@@ -80,18 +86,22 @@ public sealed class CommandLineOptions
                     return null;
 
                 case "--xsd":
-                {
-                    if (!TryReadValue(args, ref i, out var value)) return null;
-                    xsdPath = value;
-                    break;
-                }
+                    {
+                        if (!TryReadValue(args, ref i, out var value)) return null;
+                        xsdPath = value;
+                        break;
+                    }
 
                 case "--icon-root":
-                {
-                    if (!TryReadValue(args, ref i, out var value)) return null;
-                    iconRoot = value;
+                    {
+                        if (!TryReadValue(args, ref i, out var value)) return null;
+                        iconRoot = value;
+                        break;
+                    }
+
+                case "--check-icons":
+                    checkIconsRequested = true;
                     break;
-                }
 
                 case "--yaml":
                     yamlRequested = true;
@@ -104,30 +114,30 @@ public sealed class CommandLineOptions
                     break;
 
                 case "--log":
-                {
-                    if (!TryReadValue(args, ref i, out var value)) return null;
-                    logPath = value;
-                    break;
-                }
-
-                case "--report-json":
-                {
-                    if (!TryReadValue(args, ref i, out var value)) return null;
-                    jsonReportPath = value;
-                    break;
-                }
-
-                case "--timeout":
-                {
-                    if (!TryReadValue(args, ref i, out var value)) return null;
-                    if (!int.TryParse(value, out timeout) || timeout <= 0)
                     {
-                        Console.Error.WriteLine($"Invalid value for --timeout: {value}");
-                        return null;
+                        if (!TryReadValue(args, ref i, out var value)) return null;
+                        logPath = value;
+                        break;
                     }
 
-                    break;
-                }
+                case "--report-json":
+                    {
+                        if (!TryReadValue(args, ref i, out var value)) return null;
+                        jsonReportPath = value;
+                        break;
+                    }
+
+                case "--timeout":
+                    {
+                        if (!TryReadValue(args, ref i, out var value)) return null;
+                        if (!int.TryParse(value, out timeout) || timeout <= 0)
+                        {
+                            Console.Error.WriteLine($"Invalid value for --timeout: {value}");
+                            return null;
+                        }
+
+                        break;
+                    }
 
                 default:
                     Console.Error.WriteLine($"Unknown option: {arg}");
@@ -164,6 +174,7 @@ public sealed class CommandLineOptions
             XmlPath = xmlPath,
             XsdPath = xsdPath,
             IconRoot = iconRoot,
+            CheckIconsRequested = checkIconsRequested,
             OrmVectorYamlSource = string.IsNullOrWhiteSpace(yamlSource) ? null : yamlSource,
             WikiRequested = wikiRequested,
             WikiSyncSource = string.IsNullOrWhiteSpace(wikiSource) ? null : wikiSource,
@@ -229,8 +240,8 @@ public sealed class CommandLineOptions
               SignalAudit <preset.xml> [options]
 
             The offline preset checks (schema, chunks, icons, internal links,
-            structure, menu paths, match expressions) always run. --yaml and --wiki
-            add the network cross-source audits.
+            structure, menu paths, match expressions) always run. --check-icons,
+            --yaml and --wiki add further optional audits.
 
             Arguments:
               <preset.xml>            Preset file to validate (absolute or relative path).
@@ -241,6 +252,9 @@ public sealed class CommandLineOptions
                                       downloaded automatically.
               --icon-root <dir>       Base directory for icon resolution
                                       (default: the preset file directory).
+              --check-icons           Also check that local SVG icons are Inkscape's
+                                      compact "Optimized SVG" export (no leftover
+                                      editor namespaces, metadata block, or comments).
               --yaml [source]         Audit the preset against the ORM-vector map YAML.
                                       No value: configured local file. 'online':
                                       configured URL. Or an explicit path/url.
