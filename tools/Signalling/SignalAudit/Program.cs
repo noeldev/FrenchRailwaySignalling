@@ -63,7 +63,8 @@ if (options.CheckIconsRequested)
 }
 
 // --wiki enables the link/anchor integrity check, and the content sync when a
-// source is available. --yaml enables the map sync.
+// source is available. --yaml enables the map sync and the map icon
+// existence check.
 if (options.WikiRequested)
 {
     validators.Add(new WikiLinkValidator());
@@ -77,6 +78,7 @@ if (options.WikiRequested)
 if (options.OrmVectorYamlSource is not null)
 {
     validators.Add(new RenderSyncValidator());
+    validators.Add(new MapIconValidator());
 }
 
 var utf8NoBom = new UTF8Encoding(false);
