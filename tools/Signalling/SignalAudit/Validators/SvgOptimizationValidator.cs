@@ -6,67 +6,96 @@ using SignalAudit.Core;
 
 namespace SignalAudit.Validators;
 
-// Verifies that every referenced local SVG icon has been exported in
-// Inkscape's compact "Optimized SVG" format rather than the default
-// "Inkscape SVG" format. The default format keeps editor state (Inkscape and
-// Sodipodi namespaces, a metadata block, XML comments) that bloats the file
-// and serves no purpose once the icon ships in a preset.
+// Verifies that every SVG icon under the preset icon root, and under the
+// ORM-vector map's FR symbols folder when a local YAML source is available,
+// has been exported in Inkscape's compact "Optimized SVG" format rather than
+// the default "Inkscape SVG" format. The default format keeps editor state
+// (Inkscape and Sodipodi namespaces, a metadata block, XML comments) that
+// bloats the file and serves no purpose once the icon ships. Scanning both
+// folders directly, instead of following preset/YAML references, also catches
+// icons that sit on disk but are not currently referenced by either.
 public sealed class SvgOptimizationValidator : IValidator
 {
     private static readonly XNamespace InkscapeNamespace = "http://www.inkscape.org/namespaces/inkscape";
     private static readonly XNamespace SodipodiNamespace = "http://sodipodi.sourceforge.net/DTD/sodipodi-0.0.dtd";
+    private const string FrSymbolsSubfolder = "fr";
 
     public string Name => "SVG optimization";
 
     public Task<IReadOnlyList<ValidationIssue>> ValidateAsync(ValidationContext context, CancellationToken cancellationToken)
     {
         var issues = new List<ValidationIssue>();
-        var iconRoot = context.Options.IconRoot;
+        var checkedFiles = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-        // A single icon can be referenced many times; check each distinct path once.
-        var checkedPaths = new HashSet<string>(StringComparer.Ordinal);
+        CheckFolder(context.Options.IconRoot, checkedFiles, issues, cancellationToken);
 
-        foreach (var element in context.Document.Descendants().Where(HasLocalSvgIcon))
+        var symbolsRoot = ResolveFrSymbolsRoot(context.Options.OrmVectorYamlSource);
+        if (symbolsRoot is not null)
         {
-            cancellationToken.ThrowIfCancellationRequested();
-
-            var iconPath = element.Attribute("icon")!.Value;
-            if (!checkedPaths.Add(iconPath))
-            {
-                continue;
-            }
-
-            var resolution = IconPathResolver.Resolve(iconRoot, iconPath);
-            if (resolution.FullPath is null)
-            {
-                // Missing files are already reported by IconValidator.
-                continue;
-            }
-
-            var reasons = FindNonOptimizedReasons(resolution.FullPath);
-            if (reasons.Count > 0)
-            {
-                issues.Add(element.ToIssue(
-                    ValidationSeverity.Warning,
-                    $"Icon '{iconPath}' is not an optimized SVG ({string.Join(", ", reasons)}). " +
-                    "Re-export it with Inkscape's 'Optimized SVG' format."));
-            }
+            CheckFolder(symbolsRoot, checkedFiles, issues, cancellationToken);
         }
 
         return Task.FromResult<IReadOnlyList<ValidationIssue>>(issues);
     }
 
-    private static bool HasLocalSvgIcon(XElement element)
+    // Recursively checks every .svg file under root, so no icon is missed
+    // just because nothing currently references it. Issues report the path
+    // relative to root for readability.
+    private static void CheckFolder(
+        string root,
+        HashSet<string> checkedFiles,
+        List<ValidationIssue> issues,
+        CancellationToken cancellationToken)
     {
-        var icon = element.Attribute("icon")?.Value;
-        return !string.IsNullOrWhiteSpace(icon)
-            && !IsRemote(icon)
-            && icon.EndsWith(".svg", StringComparison.OrdinalIgnoreCase);
+        if (!Directory.Exists(root))
+        {
+            return;
+        }
+
+        foreach (var filePath in Directory.EnumerateFiles(root, "*.svg", SearchOption.AllDirectories))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            var fullPath = Path.GetFullPath(filePath);
+            if (!checkedFiles.Add(fullPath))
+            {
+                continue;
+            }
+
+            var reasons = FindNonOptimizedReasons(fullPath);
+            if (reasons.Count == 0)
+            {
+                continue;
+            }
+
+            var relativePath = Path.GetRelativePath(root, fullPath).Replace('\\', '/');
+            issues.Add(new ValidationIssue(
+                ValidationSeverity.Warning,
+                $"Icon '{relativePath}' is not an optimized SVG ({string.Join(", ", reasons)}). " +
+                "Re-export it with Inkscape's 'Optimized SVG' format."));
+        }
     }
 
-    private static bool IsRemote(string value) =>
-        value.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
-        || value.StartsWith("https://", StringComparison.OrdinalIgnoreCase);
+    // The FR symbols folder is the ORM-vector map's "symbols/fr" folder, the
+    // same sibling-of-"features" resolution MapIconValidator uses. Returns
+    // null when there is no local YAML source to derive it from (missing, or
+    // a URL, matching MapIconValidator's own skip condition).
+    private static string? ResolveFrSymbolsRoot(string? ormVectorYamlSource)
+    {
+        if (string.IsNullOrWhiteSpace(ormVectorYamlSource))
+        {
+            return null;
+        }
+
+        if (Uri.TryCreate(ormVectorYamlSource, UriKind.Absolute, out var uri)
+            && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps))
+        {
+            return null;
+        }
+
+        var symbolsRoot = MapIconValidator.ResolveSymbolsRoot(ormVectorYamlSource);
+        return symbolsRoot is null ? null : Path.Combine(symbolsRoot, FrSymbolsSubfolder);
+    }
 
     // Loads the SVG and looks for the editor leftovers that a normal Inkscape
     // save keeps and the "Optimized SVG" export strips out.

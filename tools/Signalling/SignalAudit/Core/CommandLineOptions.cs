@@ -252,10 +252,12 @@ public sealed class CommandLineOptions
                                       downloaded automatically.
               --icon-root <dir>       Base directory for icon resolution
                                       (default: the preset file directory).
-              --check-icons           Also check that local SVG icons are Inkscape's
-                                      compact "Optimized SVG" export (no leftover
-                                      editor namespaces, metadata block, or comments).
-              --yaml [source]         Audit the preset against the ORM-vector map YAML.
+              --check-icons           Also check that local SVG icons, under the icon
+                                      root and (with --yaml) under the map's symbols/fr
+                                      folder, are Inkscape's compact "Optimized SVG"
+                                      export (no leftover editor namespaces, metadata
+                                      block, or comments).
+                          --yaml [source]         Audit the preset against the ORM-vector map YAML.
                                       No value: configured local file. 'online':
                                       configured URL. Or an explicit path/url.
               --wiki [source]         Audit the preset against the OSM wiki: link and
