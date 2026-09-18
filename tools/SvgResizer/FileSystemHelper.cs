@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright (C) 2026 Noel Danjou
+// Copyright (C) 2026 Noël Danjou
 
-namespace SvgSquarer;
+namespace SvgResizer;
 
 internal static class FileSystemHelper
 {

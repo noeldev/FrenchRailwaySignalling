@@ -3,9 +3,9 @@
 
 using System.Globalization;
 
-namespace SvgSquarer;
+namespace SvgResizer;
 
-// Parsed SVG viewBox (min-x, min-y, width, height) with squaring helpers.
+// Parsed SVG viewBox (min-x, min-y, width, height).
 internal readonly struct ViewBox(double minX, double minY, double width, double height)
 {
     private const double Epsilon = 1e-9;
@@ -48,42 +48,14 @@ internal readonly struct ViewBox(double minX, double minY, double width, double 
         return true;
     }
 
-    // Returns a square viewBox of side max(width, height) with the original
-    // content centered at 0 0, the translation to apply, and whether integer
-    // rounding shifted the content off perfect center (by at most 0.5).
-    public (ViewBox Square, double Tx, double Ty, bool Rounded) ToSquaredCentered()
-    {
-        var exactSide = Math.Max(Width, Height);
-        var side = (int)Math.Ceiling(exactSide - Epsilon);
-
-        var exactOffsetX = (side - Width) / 2.0;
-        var exactOffsetY = (side - Height) / 2.0;
-
-        var offsetX = (int)Math.Round(exactOffsetX, MidpointRounding.AwayFromZero);
-        var offsetY = (int)Math.Round(exactOffsetY, MidpointRounding.AwayFromZero);
-
-        // Translation that moves the origin to 0 0 and centers the content.
-        var tx = offsetX - MinX;
-        var ty = offsetY - MinY;
-
-        var rounded =
-            Math.Abs(side - exactSide) > Epsilon ||
-            Math.Abs(exactOffsetX - offsetX) > Epsilon ||
-            Math.Abs(exactOffsetY - offsetY) > Epsilon ||
-            Math.Abs(MinX - Math.Round(MinX)) > Epsilon ||
-            Math.Abs(MinY - Math.Round(MinY)) > Epsilon;
-
-        return (new ViewBox(0, 0, side, side), tx, ty, rounded);
-    }
-
-    // Reconstructs the pre-squaring viewBox from a squared (0 0 side side)
-    // viewBox and the translation applied when squaring - the inverse of
-    // ToSquaredCentered. Assumes the original viewBox had its origin at 0 0,
-    // which is the only case a pure math reversal can recover without the
-    // actual original bytes: the origin offset and the axis shrink are both
-    // folded into a single translation value, so a non-zero original origin
-    // cannot be separated back out from tx/ty alone. Use a real backup for
-    // icons whose original viewBox did not start at 0 0.
+    // Reconstructs the pre-hack viewBox from a squared (0 0 side side)
+    // viewBox and the translation the old square-plus-translate hack applied.
+    // Assumes the original viewBox had its origin at 0 0, which is the only
+    // case a pure math reversal can recover without the actual original
+    // bytes: the origin offset and the axis shrink are both folded into a
+    // single translation value, so a non-zero original origin cannot be
+    // separated back out from tx/ty alone. Use a real backup for icons whose
+    // original viewBox did not start at 0 0.
     public static bool TryReconstructOriginal(ViewBox square, double tx, double ty, out ViewBox original)
     {
         var side = square.Width;

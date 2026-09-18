@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright (C) 2026 Noel Danjou
+// Copyright (C) 2026 Noël Danjou
 
 using System.Security.Cryptography;
 
-namespace SvgSquarer;
+namespace SvgResizer;
 
 // Stores a pristine copy of a file before it is modified in place, mirroring
 // the scanned root's relative folder structure under a backup root. Writes

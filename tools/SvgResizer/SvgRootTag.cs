@@ -1,17 +1,16 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright (C) 2026 Noel Danjou
+// Copyright (C) 2026 Noël Danjou
 
-using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace SvgSquarer;
+namespace SvgResizer;
 
 internal readonly record struct SvgRootLocation(Match SvgTag, Match ViewBoxAttribute, ViewBox ViewBox);
 
-// Locates the root <svg> element and its viewBox using a narrow text scan
-// rather than a full XML parser, so the rest of the document - encoding,
-// indentation, comments, quote style - is never touched. Shared by the
-// squaring and restore processors so the two never drift apart.
+// Locates the root <svg> element and reads/writes its attributes using a
+// narrow text scan rather than a full XML parser, so the rest of the
+// document - encoding, indentation, comments, quote style - is never
+// touched. Shared by the sizing logic and the hack-removal logic.
 internal static partial class SvgRootTag
 {
     internal enum LocateStatus
@@ -26,6 +25,7 @@ internal static partial class SvgRootTag
     private static readonly Regex ViewBoxAttribute = ViewBoxAttributeRegex();
     public static readonly Regex WidthAttribute = WidthAttributeRegex();
     public static readonly Regex HeightAttribute = HeightAttributeRegex();
+    public static readonly Regex PreserveAspectRatioAttribute = PreserveAspectRatioAttributeRegex();
 
     public static LocateStatus TryLocate(string text, out SvgRootLocation location, out string? rawViewBoxValue)
     {
@@ -55,6 +55,27 @@ internal static partial class SvgRootTag
         return LocateStatus.Ok;
     }
 
+    // Returns an attribute's raw value if present on the tag, null otherwise.
+    public static string? TryGetAttributeValue(string svgTag, Regex attributeRegex)
+    {
+        var match = attributeRegex.Match(svgTag);
+        return match.Success ? match.Groups[3].Value : null;
+    }
+
+    // Replaces the attribute's value if present, or inserts it if absent -
+    // used for width/height/preserveAspectRatio, which are always driven to
+    // a single canonical value rather than merged with an existing one.
+    public static string SetAttribute(string svgTag, Regex attributeRegex, string name, string value)
+    {
+        var match = attributeRegex.Match(svgTag);
+        if (match.Success)
+        {
+            return ReplaceAttributeValue(svgTag, match, value);
+        }
+
+        return svgTag.Insert("<svg".Length, $" {name}=\"{value}\"");
+    }
+
     // Rebuilds a root tag with one attribute's value replaced, keeping the
     // quote style and every other attribute untouched.
     public static string ReplaceAttributeValue(string svgTag, Match attribute, string newValue)
@@ -69,26 +90,6 @@ internal static partial class SvgRootTag
             svgTag.AsSpan(attribute.Index + attribute.Length));
     }
 
-    // Removes a width/height attribute if present and its numeric value
-    // equals expectedValue - used by restore to undo a --size that was only
-    // added because the attribute was missing in the first place.
-    public static string RemoveAttributeIfValueEquals(string svgTag, Regex attributeRegex, int expectedValue)
-    {
-        var match = attributeRegex.Match(svgTag);
-        if (!match.Success)
-        {
-            return svgTag;
-        }
-
-        if (!double.TryParse(match.Groups[3].Value, NumberStyles.Float, CultureInfo.InvariantCulture, out var value) ||
-            Math.Abs(value - expectedValue) > 1e-9)
-        {
-            return svgTag;
-        }
-
-        return svgTag.Remove(match.Index, match.Length);
-    }
-
     [GeneratedRegex(@"<svg\b[^>]*?>", RegexOptions.IgnoreCase, "")]
     private static partial Regex RootSvgTagRegex();
 
@@ -100,4 +101,7 @@ internal static partial class SvgRootTag
 
     [GeneratedRegex(@"(\bheight\s*=\s*)(""|')(.*?)\2", RegexOptions.IgnoreCase | RegexOptions.Singleline, "")]
     private static partial Regex HeightAttributeRegex();
+
+    [GeneratedRegex(@"(\bpreserveAspectRatio\s*=\s*)(""|')(.*?)\2", RegexOptions.IgnoreCase | RegexOptions.Singleline, "")]
+    private static partial Regex PreserveAspectRatioAttributeRegex();
 }
