@@ -1,32 +1,30 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Noël Danjou
 
-namespace SvgSquarer;
+namespace SvgResizer;
 
-// Parsed command-line arguments. The single positional value is the root folder;
-// the rest are flags, except --backup, --restore and --size which consume the
-// following token.
+// Parsed command-line arguments. The single positional value is a root file
+// or folder; the rest are flags, except --backup, --width and --height which
+// consume the following token.
 internal sealed record CommandLineOptions(
     string Root,
+    int? Width,
+    int? Height,
+    bool KeepAspectRatio,
     string? BackupPath,
-    string? RestorePath,
     bool Force,
-    int? Size,
     bool DryRun,
     bool Verbose,
     bool ShowHelp)
 {
-    // True when --restore was given: the run reverses squaring instead of
-    // applying it.
-    public bool IsRestore => RestorePath != null;
-
     public static CommandLineOptions Parse(string[] args)
     {
         string? root = null;
+        int? width = null;
+        int? height = null;
+        var keepAspectRatio = false;
         string? backupPath = null;
-        string? restorePath = null;
         var force = false;
-        int? size = null;
         var dryRun = false;
         var verbose = false;
         var showHelp = false;
@@ -51,6 +49,10 @@ internal sealed record CommandLineOptions(
                     force = true;
                     break;
 
+                case "--keep-aspect-ratio" or "-k":
+                    keepAspectRatio = true;
+                    break;
+
                 case "--backup" or "-b":
                     if (i + 1 < args.Length)
                     {
@@ -58,24 +60,25 @@ internal sealed record CommandLineOptions(
                     }
                     break;
 
-                case "--restore":
-                    if (i + 1 < args.Length)
+                case "--width" or "-w":
+                    if (i + 1 < args.Length && int.TryParse(args[i + 1], out var parsedWidth) && parsedWidth > 0)
                     {
-                        restorePath ??= args[++i];
+                        width ??= parsedWidth;
+                        i++;
                     }
                     break;
 
-                case "--size" or "-s":
-                    if (i + 1 < args.Length && int.TryParse(args[i + 1], out var parsedSize) && parsedSize > 0)
+                case "--height":
+                    if (i + 1 < args.Length && int.TryParse(args[i + 1], out var parsedHeight) && parsedHeight > 0)
                     {
-                        size ??= parsedSize;
+                        height ??= parsedHeight;
                         i++;
                     }
                     break;
 
                 default:
-                    // First positional argument is the root directory; unknown
-                    // flags are ignored.
+                    // First positional argument is the root file or folder;
+                    // unknown flags are ignored.
                     if (!args[i].StartsWith('-'))
                     {
                         root ??= args[i];
@@ -86,10 +89,11 @@ internal sealed record CommandLineOptions(
 
         return new CommandLineOptions(
             root ?? Directory.GetCurrentDirectory(),
+            width,
+            height,
+            keepAspectRatio,
             backupPath,
-            restorePath,
             force,
-            size,
             dryRun,
             verbose,
             showHelp);
@@ -99,19 +103,9 @@ internal sealed record CommandLineOptions(
     // message otherwise. Does not touch the filesystem.
     public string? Validate()
     {
-        if (IsRestore)
+        if (Width is null && Height is null)
         {
-            if (BackupPath != null)
-            {
-                return "--backup cannot be combined with --restore.";
-            }
-
-            if (Force)
-            {
-                return "--force has no effect with --restore.";
-            }
-
-            return null;
+            return "--width <n> or --height <n> is required.";
         }
 
         if (BackupPath == null && !Force)

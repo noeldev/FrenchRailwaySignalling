@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright (C) 2026 Noel Danjou
+// Copyright (C) 2026 Noël Danjou
 
 using System.Text;
 
-namespace SvgSquarer;
+namespace SvgResizer;
 
-// Shared read/write helpers that preserve the original file's UTF-8 byte
-// order mark, used by both the squaring and restore processors.
+// Shared read/write helpers that preserve the original file's UTF-8 byte order mark.
 internal static class Utf8TextFile
 {
     private static readonly UTF8Encoding NoBom = new(false);
