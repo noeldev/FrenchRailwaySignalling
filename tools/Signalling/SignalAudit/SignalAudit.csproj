@@ -9,7 +9,7 @@
     <RootNamespace>SignalAudit</RootNamespace>
     <AssemblyName>SignalAudit</AssemblyName>
     <Product>SignalAudit</Product>
-    <Version>1.2.0</Version>
+    <Version>1.3.0</Version>
     <Company>Noël Danjou EI</Company>
     <Authors>Noël Danjou</Authors>
     <Copyright>Copyright © 2026 Noël Danjou</Copyright>
