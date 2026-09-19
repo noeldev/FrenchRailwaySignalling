@@ -8,16 +8,23 @@ namespace SignalAudit.Validators;
 
 // Verifies that every SVG icon under the preset icon root, and under the
 // ORM-vector map's FR symbols folder when a local YAML source is available,
-// has been exported in Inkscape's compact "Optimized SVG" format rather than
-// the default "Inkscape SVG" format. The default format keeps editor state
-// (Inkscape and Sodipodi namespaces, a metadata block, XML comments) that
-// bloats the file and serves no purpose once the icon ships. Scanning both
-// folders directly, instead of following preset/YAML references, also catches
-// icons that sit on disk but are not currently referenced by either.
+// is ready to publish:
+// - exported in Inkscape's compact "Optimized SVG" format rather than the
+//   default "Inkscape SVG" format, which keeps editor state (Inkscape
+//   namespace, a metadata block, XML comments) that bloats the file and
+//   serves no purpose once the icon ships. The Sodipodi namespace is not
+//   checked on its own: a normal Inkscape save never emits it without the
+//   Inkscape namespace alongside it, so the Inkscape check already covers it.
+// - free of <text> elements: unconverted text renders using whatever font is
+//   installed on the machine doing the rendering, which is rarely the exact
+//   font the icon was designed with. Glyphs must be converted to paths
+//   before export (Inkscape: Path > Object to Path).
+// Scanning both folders directly, instead of following preset/YAML
+// references, also catches icons that sit on disk but are not currently
+// referenced by either.
 public sealed class SvgOptimizationValidator : IValidator
 {
     private static readonly XNamespace InkscapeNamespace = "http://www.inkscape.org/namespaces/inkscape";
-    private static readonly XNamespace SodipodiNamespace = "http://sodipodi.sourceforge.net/DTD/sodipodi-0.0.dtd";
     private const string FrSymbolsSubfolder = "fr";
 
     public string Name => "SVG optimization";
@@ -39,8 +46,7 @@ public sealed class SvgOptimizationValidator : IValidator
     }
 
     // Recursively checks every .svg file under root, so no icon is missed
-    // just because nothing currently references it. Issues report the path
-    // relative to root for readability.
+    // just because nothing currently references it.
     private static void CheckFolder(
         string root,
         HashSet<string> checkedFiles,
@@ -62,17 +68,48 @@ public sealed class SvgOptimizationValidator : IValidator
                 continue;
             }
 
-            var reasons = FindNonOptimizedReasons(fullPath);
-            if (reasons.Count == 0)
-            {
-                continue;
-            }
+            CheckFile(root, fullPath, issues);
+        }
+    }
 
-            var relativePath = Path.GetRelativePath(root, fullPath).Replace('\\', '/');
+    // The two checks catch unrelated problems with unrelated fixes (re-export
+    // vs convert text to paths), so each gets its own issue instead of being
+    // merged into one combined message - a single message listing multiple
+    // unrelated reasons made it unclear which fix actually applied.
+    private static void CheckFile(string root, string fullPath, List<ValidationIssue> issues)
+    {
+        XDocument svg;
+        try
+        {
+            svg = XDocument.Load(fullPath, LoadOptions.None);
+        }
+        catch (Exception)
+        {
+            // Well-formedness is not this validator's concern; a file that
+            // fails to parse cannot be checked any further here.
+            return;
+        }
+
+        if (svg.Root is null)
+        {
+            return;
+        }
+
+        var relativePath = Path.GetRelativePath(root, fullPath).Replace('\\', '/');
+
+        var exportReasons = FindNonOptimizedExportReasons(svg);
+        if (exportReasons.Count > 0)
+        {
             issues.Add(new ValidationIssue(
                 ValidationSeverity.Warning,
-                $"Icon '{relativePath}' is not an optimized SVG ({string.Join(", ", reasons)}). " +
-                "Re-export it with Inkscape's 'Optimized SVG' format."));
+                $"Icon '{relativePath}': not exported as Optimized SVG ({string.Join(", ", exportReasons)})."));
+        }
+
+        if (svg.Descendants().Any(e => e.Name.LocalName == "text"))
+        {
+            issues.Add(new ValidationIssue(
+                ValidationSeverity.Warning,
+                $"Icon '{relativePath}': contains <text> elements, not converted to paths."));
         }
     }
 
@@ -97,37 +134,15 @@ public sealed class SvgOptimizationValidator : IValidator
         return symbolsRoot is null ? null : Path.Combine(symbolsRoot, FrSymbolsSubfolder);
     }
 
-    // Loads the SVG and looks for the editor leftovers that a normal Inkscape
-    // save keeps and the "Optimized SVG" export strips out.
-    private static List<string> FindNonOptimizedReasons(string fullPath)
+    // Editor leftovers that a normal Inkscape save keeps and the "Optimized
+    // SVG" export strips out.
+    private static List<string> FindNonOptimizedExportReasons(XDocument svg)
     {
-        var reasons = new List<string>();
-
-        XDocument svg;
-        try
-        {
-            svg = XDocument.Load(fullPath, LoadOptions.None);
-        }
-        catch (Exception)
-        {
-            // Well-formedness is not this validator's concern; a file that
-            // fails to parse cannot be checked any further here.
-            return reasons;
-        }
-
-        if (svg.Root is null)
-        {
-            return reasons;
-        }
+        List<string> reasons = [];
 
         if (HasNamespaceUsage(svg, InkscapeNamespace))
         {
-            reasons.Add("inkscape namespace present");
-        }
-
-        if (HasNamespaceUsage(svg, SodipodiNamespace))
-        {
-            reasons.Add("sodipodi namespace present");
+            reasons.Add("Inkscape namespace present");
         }
 
         if (svg.Descendants().Any(e => e.Name.LocalName == "metadata"))
@@ -143,9 +158,10 @@ public sealed class SvgOptimizationValidator : IValidator
         return reasons;
     }
 
-    // A namespace can appear either as an element (sodipodi:namedview) or as an
-    // attribute (inkscape:label="..."); either one means the file went through
-    // a normal Inkscape save rather than the optimized export.
+    // The namespace can appear either as an element (inkscape:* elements like
+    // sodipodi:namedview's inkscape:* attributes) or as an attribute
+    // (inkscape:label="..." on a layer); either one means the file went
+    // through a normal Inkscape save rather than the optimized export.
     private static bool HasNamespaceUsage(XDocument document, XNamespace ns)
     {
         return document.Descendants().Any(e => e.Name.Namespace == ns)
