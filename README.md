@@ -83,6 +83,16 @@ FrenchRailwaySignalling/
 - 🗺️ [OpenRailwayMap](https://www.openrailwaymap.app)
 - 🚦 [SNCF Signalisation Permanente](https://sncf-sigmap.netlify.app) – interactive map of French railway signalling based on SNCF open data
 
+## Support this project
+
+This repository supports my ongoing work on documenting French railway signalling within the OpenStreetMap community.
+
+It contains the JOSM presets that I have developed for mapping French railway signalling, as well as resources used to maintain and improve the related OpenStreetMap wiki documentation.
+
+If you benefit from the presets, the documentation, or other resources provided through this project, you may support their continued development and maintenance through GitHub Sponsors.
+
+Contributions are entirely voluntary, and the amount is left to your discretion.
+
 ## License
 
 - **Wiki Content**: Available under the same license as OpenStreetMap wiki content
