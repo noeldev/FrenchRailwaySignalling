@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" width="700" height="700">
-  <!-- Fond bleu aux coins arrondis -->
-  <rect width="700" height="700" rx="15" ry="15" fill="#005dd1"/>
-  <!-- Flèche blanche (alignée à x=35) -->
-  <path d="M 35,235 H 350 V 35 L 700,350 L 350,665 V 465 H 35 Z" fill="#ffffff"/>
-  <!-- Flèche jaune (alignée à x=35, bande blanche constante de 35 px) -->
-  <path d="M 35,270 H 385 V 113.59 L 647.68,350 L 385,586.41 V 430 H 35 Z" fill="#ffc800"/>
-</svg>

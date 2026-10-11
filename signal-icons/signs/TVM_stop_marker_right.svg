@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" width="700" height="700">
-  <!-- Fond bleu -->
-  <rect width="700" height="700" rx="15" ry="15" fill="#005dd1"/>
-  <!-- Triangle blanc (sommet à x=0, base à x=665) -->
-  <path d="M 665,20 L 0,350 L 665,680 Z" fill="#ffffff"/>
-  <!-- Triangle jaune (aligné à x=665, bande de 35 px) -->
-  <path d="M 665,59.07 L 78.74,350 L 665,640.93 Z" fill="#ffc800"/>
-</svg>

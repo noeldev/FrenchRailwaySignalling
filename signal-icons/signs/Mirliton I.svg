@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 2000">
-  <!-- Contour fin témoin -->
-  <rect x="4" y="4" width="492" height="1992" fill="#fff" stroke="#000" stroke-width="8" />
-  
-  <!-- Bande centrale -->
-  <polygon points="50,1025 450,715 450,975 50,1285" fill="#000" />
-</svg>

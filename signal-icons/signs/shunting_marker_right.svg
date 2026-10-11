@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" width="700" height="700">
-  <!-- Losange violet de fond -->
-  <path d="M 350,0 L 700,350 L 350,700 L 0,350 Z" fill="#800080"/>
-  <!-- Chevron blanc orienté vers la gauche -->
-  <path d="M 381.25,31.25 L 434.375,84.375 L 168.75,350 L 434.375,615.625 L 381.25,668.75 L 62.5,350 Z" fill="#ffffff"/>
-</svg>
