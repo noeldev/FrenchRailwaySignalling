@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="750"
+   height="750"
+   viewBox="0 0 750 750"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="limite des manœuvres TGV.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.52248525"
+     inkscape:cx="372.25931"
+     inkscape:cy="506.23439"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g1"
+     showgrid="false" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;stroke-width:26.5461"
+       id="rect1"
+       width="750"
+       height="750"
+       x="0"
+       y="0"
+       inkscape:label="board" />
+    <rect
+       style="fill:none;stroke:#ffffff;stroke-width:20.2778;stroke-dasharray:none"
+       id="rect2"
+       width="721.72229"
+       height="721.72223"
+       x="14.138863"
+       y="14.138861"
+       inkscape:label="border" />
+    <g
+       id="g1"
+       inkscape:label="text"
+       transform="translate(48.303406,-5.1553652)">
+      <g
+         id="g3"
+         inkscape:label="limite des"
+         transform="translate(6.9295347,-22.788086)">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;line-height:0;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:none;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke-width:14"
+           x="225.15063"
+           y="242.36728"
+           id="text1"
+           inkscape:label="limite"><tspan
+             sodipodi:role="line"
+             id="tspan1"
+             x="225.15063"
+             y="242.36728">LIMITE</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:60px;line-height:0;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:none;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke-width:14"
+           x="496.20966"
+           y="241.62509"
+           id="text2"
+           inkscape:label="des"><tspan
+             sodipodi:role="line"
+             id="tspan2"
+             x="496.20966"
+             y="241.62509">DES</tspan></text>
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:90px;line-height:0;font-family:Arial;-inkscape-font-specification:'Arial, Bold';font-variant-ligatures:none;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke-width:14"
+         x="325.70782"
+         y="405.67783"
+         id="text3"
+         inkscape:label="manœuvres"><tspan
+           sodipodi:role="line"
+           id="tspan3"
+           x="325.70782"
+           y="405.67783">MANŒUVRES</tspan></text>
+      <g
+         id="g2"
+         inkscape:label="TGV"
+         transform="translate(-1.0000002,17.211884)">
+        <text
+           style="font-size:80px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:none;text-align:center;fill:#ffffff;stroke-width:14"
+           x="224.79691"
+           y="587.94348"
+           id="text7">T</text>
+        <text
+           style="font-size:80px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:none;text-align:center;fill:#ffffff;stroke-width:14"
+           x="296.89191"
+           y="587.94348"
+           id="text6">G</text>
+        <text
+           style="font-size:80px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:none;text-align:center;fill:#ffffff;stroke-width:14"
+           x="375.75253"
+           y="587.94348"
+           id="text5">V</text>
+      </g>
+    </g>
+  </g>
+</svg>

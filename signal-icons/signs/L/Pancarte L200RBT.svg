@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1500"
+   height="300"
+   viewBox="0 0 1500 300"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   sodipodi:docname="Pancarte L200RBT.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.73890575"
+     inkscape:cx="669.90952"
+     inkscape:cy="345.78158"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;stroke-width:15.0104"
+       id="rect1"
+       width="1500"
+       height="300"
+       x="0"
+       y="0" />
+    <rect
+       style="fill:none;stroke:#ffffff;stroke-width:27.626;stroke-dasharray:none"
+       id="rect2"
+       width="1464.3739"
+       height="264.37396"
+       x="17.813025"
+       y="17.813025" />
+    <g
+       id="g1"
+       transform="translate(13.817146,-17.5)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:165px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke-width:20"
+         x="231.27208"
+         y="250"
+         id="text1"><tspan
+           sodipodi:role="line"
+           id="tspan1"
+           x="231.27208"
+           y="250">L</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:165px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke-width:20;stroke-dasharray:none"
+         x="606.01721"
+         y="250"
+         id="text2"><tspan
+           sodipodi:role="line"
+           id="tspan4"
+           x="606.01721"
+           y="250">200</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:165px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke-width:20;stroke-dasharray:none"
+         x="1110.8177"
+         y="250"
+         id="text3"><tspan
+           sodipodi:role="line"
+           id="tspan3"
+           x="1110.8177"
+           y="250">RBT</tspan></text>
+    </g>
+  </g>
+</svg>

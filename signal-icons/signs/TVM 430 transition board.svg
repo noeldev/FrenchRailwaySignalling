@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500.00003"
+   height="415.00003"
+   viewBox="0 0 500.00003 415.00003"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="TVM 430 transition board.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.0449705"
+     inkscape:cx="396.66192"
+     inkscape:cy="523.93824"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g14" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(2.0980835e-5,2.0980835e-5)">
+    <rect
+       style="fill:#000000;stroke:#000000;stroke-width:17.8332"
+       id="rect1"
+       width="482.16684"
+       height="397.16684"
+       x="8.9165792"
+       y="8.9165792"
+       inkscape:label="board" />
+    <rect
+       style="fill:none;stroke:#ffffff;stroke-width:5;stroke-dasharray:none"
+       id="rect2"
+       width="482.16684"
+       height="397.16684"
+       x="8.9165792"
+       y="8.9165792"
+       inkscape:label="border" />
+    <g
+       id="g14"
+       inkscape:label="TVM 430">
+      <path
+         d="M 56.910387,192.07399 V 131.579 H 35.305032 V 119.26146 H 93.167648 V 131.579 H 71.611961 V 192.07399 Z"
+         id="text8"
+         style="font-weight:bold;font-size:101.719px;line-height:0;font-family:Arial;-inkscape-font-specification:'Arial, Bold';text-align:center;fill:#ffffff;stroke-width:5.09899"
+         transform="scale(0.9913636,1.0087116)"
+         aria-label="T"
+         inkscape:label="T" />
+      <path
+         d="M 121.22977,192.07399 95.20401,119.26146 H 111.14727 L 129.57391,173.15068 147.40453,119.26146 H 163.00012 L 136.92469,192.07399 Z"
+         id="text7"
+         style="font-weight:bold;font-size:101.719px;line-height:0;font-family:Arial;-inkscape-font-specification:'Arial, Bold';text-align:center;fill:#ffffff;stroke-width:5.09899"
+         transform="scale(0.9913636,1.0087116)"
+         aria-label="V"
+         inkscape:label="V" />
+      <path
+         d="M 170.30124,192.07399 V 119.26146 H 192.30394 L 205.51549,168.92894 218.57803,119.26146 H 240.6304 V 192.07399 H 226.97184 V 134.75772 L 212.5186,192.07399 H 198.36337 L 183.9598,134.75772 V 192.07399 Z"
+         id="text6"
+         style="font-weight:bold;font-size:101.719px;line-height:0;font-family:Arial;-inkscape-font-specification:'Arial, Bold';text-align:center;fill:#ffffff;stroke-width:5.09899"
+         transform="scale(0.9913636,1.0087116)"
+         aria-label="M"
+         inkscape:label="M" />
+      <path
+         d="M 336.04161,192.07399 V 177.42208 H 306.24112 V 165.20388 L 337.82964,118.96346 H 349.55117 V 165.15421 H 358.59065 V 177.42208 H 349.55117 V 192.07399 Z M 336.04161,165.15421 V 140.27081 L 319.30367,165.15421 Z"
+         id="text5"
+         style="font-weight:bold;font-size:101.719px;line-height:0;font-family:Arial;-inkscape-font-specification:'Arial, Bold';text-align:center;fill:#ffffff;stroke-width:5.09899"
+         transform="scale(0.9913636,1.0087116)"
+         aria-label="4"
+         inkscape:label="4" />
+      <path
+         d="M 364.74941,172.75334 378.25897,171.11431 Q 378.90465,176.27973 381.73569,179.01144 384.56674,181.74315 388.58981,181.74315 392.91088,181.74315 395.84126,178.4651 398.82131,175.18705 398.82131,169.62429 398.82131,164.35954 395.99026,161.28015 393.15921,158.20077 389.08648,158.20077 386.40444,158.20077 382.67938,159.24378 L 384.21907,147.86993 Q 389.88116,148.01893 392.86121,145.43622 395.84126,142.80385 395.84126,138.48278 395.84126,134.80738 393.65589,132.62201 391.47052,130.43665 387.84479,130.43665 384.26873,130.43665 381.73569,132.92002 379.20265,135.40339 378.65631,140.17147 L 365.79243,137.9861 Q 367.13345,131.38033 369.8155,127.4566 372.54721,123.4832 377.36495,121.24816 382.23237,118.96346 388.24213,118.96346 398.5233,118.96346 404.73174,125.51956 409.84749,130.88365 409.84749,137.63843 409.84749,147.22425 399.36765,152.93601 405.62575,154.27704 409.35081,158.94578 413.12554,163.61452 413.12554,170.2203 413.12554,179.80612 406.12243,186.5609 399.11931,193.31568 388.68914,193.31568 378.80531,193.31568 372.29887,187.65358 365.79243,181.94182 364.74941,172.75334 Z"
+         id="text4"
+         style="font-weight:bold;font-size:101.719px;line-height:0;font-family:Arial;-inkscape-font-specification:'Arial, Bold';text-align:center;fill:#ffffff;stroke-width:5.09899"
+         transform="scale(0.9913636,1.0087116)"
+         aria-label="3"
+         inkscape:label="3" />
+      <path
+         d="M 445.40943,118.96346 Q 455.98861,118.96346 461.9487,126.51291 469.05115,135.45306 469.05115,156.1644 469.05115,176.82607 461.89904,185.86555 455.98861,193.31568 445.40943,193.31568 434.78059,193.31568 428.27415,185.17021 421.76771,176.97508 421.76771,156.0154 421.76771,135.45306 428.91983,126.41358 434.83026,118.96346 445.40943,118.96346 Z M 445.40943,130.53598 Q 442.87639,130.53598 440.88969,132.17501 438.90299,133.76437 437.81031,137.93644 436.36995,143.35019 436.36995,156.1644 436.36995,168.97861 437.6613,173.79636 438.95266,178.56443 440.88969,180.15379 442.87639,181.74315 445.40943,181.74315 447.94247,181.74315 449.92917,180.15379 451.91587,178.51477 453.00856,174.3427 454.44891,168.97861 454.44891,156.1644 454.44891,143.35019 453.15756,138.58211 451.8662,133.76437 449.87951,132.17501 447.94247,130.53598 445.40943,130.53598 Z"
+         id="text1"
+         style="font-weight:bold;font-size:101.719px;line-height:0;font-family:Arial;-inkscape-font-specification:'Arial, Bold';text-align:center;fill:#ffffff;stroke-width:5.09899"
+         transform="scale(0.9913636,1.0087116)"
+         aria-label="0"
+         inkscape:label="0" />
+    </g>
+    <g
+       id="g13"
+       inkscape:label="voie 2">
+      <path
+         d="M 143.0233,295.54987 124.32629,249.1568 H 137.21325 L 145.95017,272.83386 148.48388,280.74078 Q 149.48863,277.72654 149.75074,276.76548 150.36232,274.79967 151.06128,272.83386 L 159.88557,249.1568 H 172.51042 L 154.07551,295.54987 Z"
+         id="text13"
+         style="font-weight:bold;font-size:89.4661px;line-height:0;font-family:Arial;-inkscape-font-specification:'Arial, Bold';text-align:center;fill:#ffffff;stroke-width:4.98803"
+         inkscape:label="v"
+         transform="scale(1.0054182,0.99461096)"
+         aria-label="v" />
+      <path
+         d="M 177.18469,271.69806 Q 177.18469,265.58222 180.19893,259.85953 183.21317,254.13685 188.71743,251.12261 194.26538,248.10837 201.08018,248.10837 211.60817,248.10837 218.33561,254.96685 225.06304,261.78165 225.06304,272.22228 225.06304,282.75027 218.24824,289.69613 211.47712,296.5983 201.16755,296.5983 194.7896,296.5983 188.97954,293.71511 183.21317,290.83193 180.19893,285.28398 177.18469,279.69235 177.18469,271.69806 Z M 189.76586,272.35333 Q 189.76586,279.2555 193.04221,282.92501 196.31856,286.59452 201.12387,286.59452 205.92917,286.59452 209.16184,282.92501 212.43818,279.2555 212.43818,272.26596 212.43818,265.45116 209.16184,261.78165 205.92917,258.11215 201.12387,258.11215 196.31856,258.11215 193.04221,261.78165 189.76586,265.45116 189.76586,272.35333 Z"
+         id="text12"
+         style="font-weight:bold;font-size:89.4661px;line-height:0;font-family:Arial;-inkscape-font-specification:'Arial, Bold';text-align:center;fill:#ffffff;stroke-width:4.98803"
+         inkscape:label="o"
+         transform="scale(1.0054182,0.99461096)"
+         aria-label="o" />
+      <path
+         d="M 234.67365,242.86621 V 231.50821 H 246.94903 V 242.86621 Z M 234.67365,295.54987 V 249.1568 H 246.94903 V 295.54987 Z"
+         id="text11"
+         style="font-weight:bold;font-size:89.4661px;line-height:0;font-family:Arial;-inkscape-font-specification:'Arial, Bold';text-align:center;fill:#ffffff;stroke-width:4.98803"
+         inkscape:label="i"
+         transform="scale(1.0054182,0.99461096)"
+         aria-label="i" />
+      <path
+         d="M 286.39623,280.78446 298.62793,282.83764 Q 296.26896,289.56507 291.15786,293.10353 286.09044,296.5983 278.44563,296.5983 266.34499,296.5983 260.53494,288.69138 255.94805,282.35711 255.94805,272.70281 255.94805,261.17007 261.97653,254.66106 268.00501,248.10837 277.22246,248.10837 287.57572,248.10837 293.56051,254.96685 299.5453,261.78165 299.28319,275.89179 H 268.52922 Q 268.66028,281.35236 271.49978,284.41029 274.33928,287.42453 278.57668,287.42453 281.45987,287.42453 283.42568,285.85188 285.39149,284.27923 286.39623,280.78446 Z M 287.09519,268.37803 Q 286.96413,263.04851 284.34305,260.29638 281.72198,257.50056 277.9651,257.50056 273.94611,257.50056 271.32504,260.42743 268.70396,263.3543 268.74765,268.37803 Z"
+         id="text10"
+         style="font-weight:bold;font-size:89.4661px;line-height:0;font-family:Arial;-inkscape-font-specification:'Arial, Bold';text-align:center;fill:#ffffff;stroke-width:4.98803"
+         inkscape:label="e"
+         transform="scale(1.0054182,0.99461096)"
+         aria-label="e" />
+      <path
+         d="M 372.97916,284.14818 V 295.54987 H 329.94981 Q 330.64876,289.08454 334.14353,283.31817 337.6383,277.50812 347.94787,267.94119 356.24795,260.20901 358.12639,257.45688 360.6601,253.65631 360.6601,249.94312 360.6601,245.83677 358.43218,243.65254 356.24795,241.42462 352.36002,241.42462 348.51577,241.42462 346.24417,243.73991 343.97257,246.05519 343.6231,251.4284 L 331.3914,250.20523 Q 332.48352,240.0704 338.24989,235.65825 344.01626,231.2461 352.66581,231.2461 362.14537,231.2461 367.56227,236.35721 372.97916,241.46831 372.97916,249.06943 372.97916,253.39421 371.40651,257.32582 369.87755,261.21375 366.51384,265.49485 364.28592,268.33435 358.47587,273.66387 352.66581,278.99339 351.09317,280.74078 349.5642,282.48816 348.60314,284.14818 Z"
+         id="text9"
+         style="font-weight:bold;font-size:89.4661px;line-height:0;font-family:Arial;-inkscape-font-specification:'Arial, Bold';text-align:center;fill:#ffffff;stroke-width:4.98803"
+         inkscape:label="2"
+         transform="scale(1.0054182,0.99461096)"
+         aria-label="2" />
+    </g>
+  </g>
+</svg>

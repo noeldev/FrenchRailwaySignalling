@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1000"
+   height="1000"
+   viewBox="0 0 1000 1000"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   sodipodi:docname="Pancarte Limite de Manœuvre par l'Embranché.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.52248527"
+     inkscape:cx="509.10526"
+     inkscape:cy="347.37821"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-34.181587,-51.652172)">
+    <rect
+       style="opacity:1;fill:#ffffff;stroke:none;stroke-width:5.58769"
+       id="rect1"
+       width="1000"
+       height="1000"
+       x="34.181587"
+       y="51.652172" />
+    <rect
+       style="opacity:1;fill:none;stroke:#000000;stroke-width:25.2068;stroke-dasharray:none"
+       id="rect2"
+       width="966.79315"
+       height="966.79315"
+       x="50.785007"
+       y="68.255592" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:140px;line-height:0;font-family:Barlow;-inkscape-font-specification:'Barlow, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke:none;stroke-width:30;stroke-dasharray:none"
+       x="531.6615"
+       y="294.95953"
+       id="text2"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         x="531.6615"
+         y="294.95953">LIMITE DE</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:140px;line-height:0;font-family:Barlow;-inkscape-font-specification:'Barlow, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke:none;stroke-width:30;stroke-dasharray:none"
+       x="531.6615"
+       y="494.01804"
+       id="text3"><tspan
+         sodipodi:role="line"
+         id="tspan3"
+         x="531.6615"
+         y="494.01804">MANŒUVRE</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:140px;line-height:0;font-family:Barlow;-inkscape-font-specification:'Barlow, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke:none;stroke-width:30;stroke-dasharray:none"
+       x="531.52161"
+       y="693.14648"
+       id="text4"><tspan
+         sodipodi:role="line"
+         id="tspan4"
+         x="531.52161"
+         y="693.14648">PAR</tspan><tspan
+         sodipodi:role="line"
+         x="531.52161"
+         y="693.14648"
+         id="tspan5" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:140px;line-height:0;font-family:Barlow;-inkscape-font-specification:'Barlow, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke:none;stroke-width:30;stroke-dasharray:none"
+       x="531.6615"
+       y="905.08484"
+       id="text6"><tspan
+         sodipodi:role="line"
+         id="tspan6"
+         x="531.6615"
+         y="905.08484">L'EMBRANCHÉ</tspan></text>
+  </g>
+</svg>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500"
+   height="700"
+   viewBox="0 0 500.00001 700"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="PN 44 à 900m Radio.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.82943631"
+     inkscape:cx="39.786057"
+     inkscape:cy="502.14826"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffffff;stroke-width:25.8957"
+       id="rect1"
+       width="500"
+       height="500"
+       x="0"
+       y="0"
+       inkscape:label="board" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:20.0595;stroke-dasharray:none"
+       id="rect2"
+       width="471.94052"
+       height="471.94055"
+       x="14.029739"
+       y="14.029739"
+       inkscape:label="border" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:209.368px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Medium';font-variant-ligatures:none;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke:none;stroke-width:23.3513"
+       x="246.57315"
+       y="353.84634"
+       id="text1"
+       inkscape:label="44"><tspan
+         sodipodi:role="line"
+         id="tspan8"
+         x="246.57315"
+         y="353.84634"
+         style="stroke-width:23.3513">44</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:70px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:none;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke:none;stroke-width:23.4217"
+       x="250"
+       y="450"
+       id="text4"
+       inkscape:label="à 900 m"><tspan
+         sodipodi:role="line"
+         id="tspan9"
+         x="250"
+         y="450">à  900 m</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:70px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:none;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke:none;stroke-width:23.4217"
+       x="250"
+       y="120.00024"
+       id="text10"
+       inkscape:label="PN"><tspan
+         sodipodi:role="line"
+         id="tspan10"
+         x="250"
+         y="120.00024">PN</tspan></text>
+    <rect
+       style="fill:#ffffff;stroke:#000000;stroke-width:20.3977;stroke-dasharray:none"
+       id="rect1-7"
+       width="479.60229"
+       height="159.60228"
+       x="10.19885"
+       y="530.19885"
+       inkscape:label="plate" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:80px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:none;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;stroke-width:6.215"
+       x="248.59375"
+       y="650"
+       id="text1-9"
+       inkscape:label="radio"><tspan
+         sodipodi:role="line"
+         id="tspan1-3"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:80px;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:none;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;stroke-width:6.21501"
+         x="248.59375"
+         y="650">RADIO</tspan></text>
+  </g>
+</svg>

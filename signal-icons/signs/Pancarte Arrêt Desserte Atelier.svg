@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500"
+   height="500"
+   viewBox="0 0 500 500"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   sodipodi:docname="Pancarte Arrêt Desserte Atelier.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.0449705"
+     inkscape:cx="395.22647"
+     inkscape:cy="408.14549"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       d="M 0,500 H 500 V 0 H 0 Z M 0,500"
+       id="path1"
+       inkscape:label="board" />
+    <rect
+       id="rect4"
+       width="476.84415"
+       height="476.84418"
+       x="11.577923"
+       y="11.577923"
+       inkscape:label="border"
+       style="fill:none;stroke:#ffffff;stroke-width:15.1558;stroke-dasharray:none" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:127.003px;line-height:0;font-family:Arial;-inkscape-font-specification:'Arial, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke-width:56.9092"
+       x="336.5336"
+       y="130.31348"
+       id="text1"
+       transform="scale(0.7905306,1.2649732)"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         x="336.5336"
+         y="130.31348"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:127.003px;font-family:Arial;-inkscape-font-specification:'Arial, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:56.9092">ARRET</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:125.557px;line-height:0;font-family:Arial;-inkscape-font-specification:'Arial, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke-width:54.3703"
+       x="308.02701"
+       y="247.08743"
+       id="text2"
+       transform="scale(0.80871982,1.2365222)"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         x="308.02701"
+         y="247.08743"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:125.557px;font-family:Arial;-inkscape-font-specification:'Arial, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:54.3703">DESSERTE</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:127.003px;line-height:0;font-family:Arial;-inkscape-font-specification:'Arial, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke-width:51.7359"
+       x="336.28552"
+       y="355.86316"
+       id="text3"
+       transform="scale(0.79053065,1.2649731)"><tspan
+         sodipodi:role="line"
+         id="tspan3"
+         x="336.28552"
+         y="355.86316"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:condensed;font-size:127.003px;font-family:Arial;-inkscape-font-specification:'Arial, Condensed';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:51.7359">ATELIER</tspan></text>
+  </g>
+</svg>

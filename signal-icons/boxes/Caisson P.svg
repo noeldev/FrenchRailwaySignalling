@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="590"
+   height="500"
+   viewBox="0 0 590 500"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   sodipodi:docname="Caisson P.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.3823938"
+     inkscape:cx="397.86058"
+     inkscape:cy="325.1606"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#0a0c0e;fill-opacity:1;stroke-width:23.147"
+       id="rect1"
+       width="590"
+       height="500"
+       x="0"
+       y="0" />
+    <rect
+       style="fill:#fffab4;stroke-width:25.1429;fill-opacity:1"
+       id="rect2"
+       width="440"
+       height="440"
+       x="30"
+       y="30" />
+    <g
+       id="g6"
+       transform="matrix(0.96756532,0,0,1.172328,28.70371,-21.078061)">
+      <rect
+         style="fill:#1a1a1a;fill-opacity:1;stroke-width:22.5262"
+         id="rect3"
+         width="62.011318"
+         height="375.32159"
+         x="487.09506"
+         y="43.569771" />
+      <rect
+         style="fill:#333333;fill-opacity:1;stroke-width:21.9451"
+         id="rect4"
+         width="41.340878"
+         height="102.36043"
+         x="497.43027"
+         y="52.099804" />
+      <rect
+         style="fill:#333333;fill-opacity:1;stroke-width:21.9451"
+         id="rect5"
+         width="41.340878"
+         height="102.36043"
+         x="497.43027"
+         y="180.05034" />
+      <rect
+         style="fill:#333333;fill-opacity:1;stroke-width:21.9452"
+         id="rect6"
+         width="41.340878"
+         height="102.36043"
+         x="497.43039"
+         y="308.00089" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;font-size:550px;line-height:0;font-family:Avenir;-inkscape-font-specification:'Avenir, Heavy';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:20"
+       x="237.35013"
+       y="444.70004"
+       id="text6"><tspan
+         sodipodi:role="line"
+         id="tspan6"
+         x="237.35013"
+         y="444.70004">P</tspan></text>
+  </g>
+</svg>

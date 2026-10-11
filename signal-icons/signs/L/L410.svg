@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500"
+   height="500"
+   viewBox="0 0 500 500"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   sodipodi:docname="L410.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.74571481"
+     inkscape:cx="-204.50177"
+     inkscape:cy="610.82333"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       d="M 0,500 H 500 V 0 H 0 Z M 0,500"
+       id="path1"
+       inkscape:label="board" />
+    <rect
+       id="rect4"
+       width="471.99756"
+       height="471.99756"
+       x="14.001216"
+       y="14.001216"
+       inkscape:label="border"
+       style="fill:none;stroke:#ffffff;stroke-width:20.0024;stroke-dasharray:none" />
+    <text
+       x="80.999855"
+       y="437.24991"
+       id="text1"
+       inkscape:label="length"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:250px;font-family:Barlow;-inkscape-font-specification:'Barlow, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff"
+       xml:space="default"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         x="80.999855"
+         y="437.24991">410</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:230px;line-height:0;font-family:Barlow;-inkscape-font-specification:'Barlow, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke:none;stroke-width:20;stroke-dasharray:none"
+       x="228.01872"
+       y="231.00018"
+       id="text3"
+       inkscape:label="L"><tspan
+         sodipodi:role="line"
+         id="tspan3"
+         x="228.01872"
+         y="231.00018">L</tspan></text>
+  </g>
+</svg>

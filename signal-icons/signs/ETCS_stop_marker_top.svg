@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700" width="700" height="700">
+  <!-- Fond bleu -->
+  <rect width="700" height="700" rx="15" ry="15" fill="#005dd1"/>
+  <!-- Flèche blanche -->
+  <path d="M 235,35 V 350 H 35 L 350,700 L 665,350 H 465 V 35 Z" fill="#ffffff"/>
+  <!-- Flèche jaune -->
+  <path d="M 270,35 V 385 H 113.59 L 350,647.68 L 586.41,385 H 430 V 35 Z" fill="#ffc800"/>
+</svg>

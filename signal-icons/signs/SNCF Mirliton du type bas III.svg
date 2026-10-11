@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 500 500"
+   width="500"
+   height="500"
+   version="1.1"
+   id="svg3"
+   sodipodi:docname="mirliton 3.svg"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs3" />
+  <sodipodi:namedview
+     id="namedview3"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.173"
+     inkscape:cx="83.546462"
+     inkscape:cy="206.73487"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3" />
+  <!-- Plaque blanche avec liseré à angles droits -->
+  <rect
+     x="3.0242186"
+     y="3.0242186"
+     width="493.96365"
+     height="493.96365"
+     fill="#ffffff"
+     stroke="#000000"
+     stroke-width="6.02424"
+     id="rect1" />
+  <polygon
+     points="100,170 100,100 400,15 400,85 "
+     fill="#000000"
+     id="polygon1"
+     transform="translate(0,2.5)" />
+  <polygon
+     points="100,250 400,165 400,235 100,320 "
+     fill="#000000"
+     id="polygon2"
+     transform="translate(0,7.5)" />
+  <polygon
+     points="400,385 100,470 100,400 400,315 "
+     fill="#000000"
+     id="polygon3"
+     transform="translate(0,12.5)" />
+</svg>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1220"
+   height="1270"
+   viewBox="0 0 1220 1270"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   sodipodi:docname="R_disabled.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.92362205"
+     inkscape:cx="610.63938"
+     inkscape:cy="635"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g12" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Signal"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="pannel"
+       d="M 610,0 A 610,610 0 0 0 0,610 610,610 0 0 0 104.63867,950.21484 H 103.6875 L 103.69336,950.22656 C 309.99992,1270.0007 103.68681,950.21605 310,1270 H 910 L 1116.2773,950 H 1115.5215 A 610,610 0 0 0 1220,610 610,610 0 0 0 610,0 Z"
+       fill="#000000"
+       inkscape:label="Chassis" />
+    <circle
+       id="border"
+       cx="610"
+       cy="610"
+       r="579.99982"
+       fill="none"
+       stroke="#ffffff"
+       stroke-width="30.5128"
+       inkscape:label="Border"
+       style="stroke-width:30.0003;stroke-dasharray:none" />
+    <g
+       fill="#333333"
+       id="g12"
+       inkscape:label="Lights">
+      <circle
+         cx="610"
+         cy="950"
+         r="85"
+         id="circle7"
+         inkscape:label="A" />
+      <circle
+         cx="910"
+         cy="730"
+         r="85"
+         id="circle5"
+         inkscape:label="DR" />
+      <circle
+         cx="310"
+         cy="730"
+         r="85"
+         id="circle3"
+         inkscape:label="DJ" />
+      <circle
+         cx="610"
+         cy="565"
+         r="85"
+         id="circle6"
+         inkscape:label="VL" />
+      <circle
+         cx="310"
+         cy="430"
+         r="85"
+         id="circle2"
+         inkscape:label="R1" />
+      <circle
+         cx="910"
+         cy="430"
+         r="85"
+         id="circle4"
+         inkscape:label="R2" />
+    </g>
+    <path
+       id="rect1"
+       style="fill:#ffffff;stroke:#000000;stroke-width:1.9819;stroke-dasharray:none"
+       d="M 192.85261,266.40141 109.40143,349.85258 526.59484,767.04594 109.40142,1184.2393 192.85255,1267.6904 610.04595,850.49706 1027.2395,1267.6904 1110.6906,1184.2393 693.49713,767.04588 1110.6906,349.85253 1027.2395,266.40141 610.04601,683.59477 Z"
+       inkscape:label="Cross" />
+  </g>
+</svg>

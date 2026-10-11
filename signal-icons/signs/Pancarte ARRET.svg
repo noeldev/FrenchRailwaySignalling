@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="820"
+   height="430"
+   viewBox="0 0 820 430"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   sodipodi:docname="Pancarte ARRET.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.0449705"
+     inkscape:cx="397.14038"
+     inkscape:cy="484.70266"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;stroke-width:20"
+       id="rect1"
+       width="820"
+       height="430"
+       x="0"
+       y="0" />
+    <rect
+       style="fill:none;stroke:#ffffff;stroke-width:18.9629;stroke-dasharray:none"
+       id="rect2"
+       width="793.03717"
+       height="403.03714"
+       x="13.481417"
+       y="13.481417" />
+    <text
+       style="font-size:218.792px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';text-align:center;fill:#ffffff;stroke-width:17.5034"
+       x="63.374603"
+       y="297.55707"
+       id="text11"
+       transform="scale(0.87516781,1.142638)">A</text>
+    <text
+       style="font-size:209.063px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';text-align:center;fill:#ffffff;stroke-width:16.725"
+       x="234.7802"
+       y="284.32562"
+       id="text10"
+       transform="scale(0.83625179,1.1958121)">R</text>
+    <text
+       style="font-size:209.063px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';text-align:center;fill:#ffffff;stroke-width:16.725"
+       x="406.67816"
+       y="284.32562"
+       id="text9"
+       transform="scale(0.83625179,1.1958121)">R</text>
+    <text
+       style="font-size:218.792px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';text-align:center;fill:#ffffff;stroke-width:17.5034"
+       x="545.24103"
+       y="297.55673"
+       id="text8"
+       transform="scale(0.87516688,1.1426392)">E</text>
+    <text
+       style="font-size:218.97px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';text-align:center;fill:#ffffff;stroke-width:17.5176"
+       x="722.99536"
+       y="297.79926"
+       id="text7"
+       transform="scale(0.87588022,1.1417086)">T</text>
+  </g>
+</svg>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   viewBox="0 0 499.99999 650"
+   id="svg3"
+   sodipodi:docname="Tableau Fin de Baissez Panto 25000V.svg"
+   width="500"
+   height="650"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs3" />
+  <sodipodi:namedview
+     id="namedview3"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.80999634"
+     inkscape:cx="32.09891"
+     inkscape:cy="722.84277"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3" />
+  <path
+     d="M 0,0 H 500 V 650 H 0 Z"
+     id="path1"
+     style="stroke-width:8.90762" />
+  <path
+     d="M 15.685368,15.685375 H 484.31463 V 634.31464 H 15.685368 Z"
+     fill="none"
+     stroke="#ffffff"
+     stroke-width="31.2269"
+     id="path2"
+     style="stroke-width:23.3707;stroke-dasharray:none" />
+  <g
+     id="g4"
+     transform="translate(-0.48731)">
+    <path
+       style="fill:#ffffff;paint-order:markers stroke fill"
+       d="M 160.06815,88.00834 C 162.25263,75.300913 230.9746,37.918137 230.9746,46.180083 V 468.82315 C 230.9746,477.62059 152.77519,434.52585 160.55264,424.8019 195.76787,380.77216 204.56531,319.14751 204.56531,257.51437 204.56531,195.88122 195.76787,134.23958 160.55264,90.218339 A 2.6349799,2.6349848 0 0 1 160.06815,88.00834"
+       id="path4" />
+    <path
+       style="fill:#ffffff;paint-order:markers stroke fill"
+       d="M 340.90647,88.00834 C 338.72198,75.300913 270,37.918137 270,46.180083 V 468.82315 C 270,477.62059 348.19941,434.52585 340.42198,424.8019 305.20674,380.77216 296.40931,319.14751 296.40931,257.51437 296.40931,195.88122 305.20674,134.23958 340.42198,90.218339 A 2.6349799,2.6349848 0 0 0 340.90647,88.00834"
+       id="path3" />
+  </g>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:150px;line-height:0;font-family:'Roboto Condensed';-inkscape-font-specification:'Roboto Condensed, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke-width:20;stroke-dasharray:none"
+     x="250.76904"
+     y="608.10547"
+     id="text3"><tspan
+       sodipodi:role="line"
+       id="tspan3"
+       x="250.76904"
+       y="608.10547">25 000</tspan></text>
+</svg>

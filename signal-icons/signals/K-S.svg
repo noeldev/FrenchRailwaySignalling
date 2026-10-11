@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   viewBox="0 0 460 665"
+   id="svg4"
+   sodipodi:docname="K-S.svg"
+   width="460"
+   height="665"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="namedview4"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.88195489"
+     inkscape:cx="233.57204"
+     inkscape:cy="296.50043"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4" />
+  <path
+     id="rect1"
+     d="M 230 0 C 102.58 0 0 102.58 0 230 L 0 415 L 0 665 L 460 665 L 460 415 L 460 230 C 460 102.58 357.42 0 230 0 z "
+     inkscape:label="Chassis" />
+  <rect
+     x="30"
+     y="30"
+     width="400"
+     height="590"
+     rx="200"
+     ry="200"
+     fill="none"
+     stroke="#ffffff"
+     stroke-width="30"
+     id="rect3"
+     inkscape:label="Border"
+     style="display:inline" />
+  <g
+     id="g4"
+     inkscape:label="Aspects">
+    <circle
+       cx="230"
+       cy="215"
+       r="85"
+       fill="#00ff00"
+       id="circle3"
+       inkscape:label="VL"
+       style="fill:#333333;fill-opacity:1" />
+    <circle
+       cx="230"
+       cy="435"
+       r="85"
+       fill="#333333"
+       id="circle4"
+       inkscape:label="S"
+       style="fill:#ff0000" />
+  </g>
+</svg>

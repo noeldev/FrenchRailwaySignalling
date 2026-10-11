@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1085 625"
+   version="1.1"
+   id="svg5"
+   sodipodi:docname="CnH_disabled.svg"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   width="1085"
+   height="625"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs5" />
+  <sodipodi:namedview
+     id="namedview5"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.76095069"
+     inkscape:cx="487.54802"
+     inkscape:cy="305.53885"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer2" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Clearing Light"
+     transform="translate(316.939)">
+    <rect
+       style="display:inline;fill:#000000;stroke-width:12.9955;stroke-linecap:square;paint-order:markers fill stroke"
+       id="rect2-0"
+       width="300"
+       height="300"
+       x="-316.939"
+       y="245"
+       rx="50"
+       ry="50"
+       inkscape:label="Board" />
+    <circle
+       style="display:inline;fill:#404040;fill-opacity:1;stroke-width:19.2857;stroke-linecap:square;paint-order:markers fill stroke"
+       id="path2-1"
+       cx="-166.939"
+       cy="388.32797"
+       r="45"
+       inkscape:label="Light" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Signal"
+     transform="translate(316.939)">
+    <rect
+       width="700"
+       height="545"
+       x="33.060799"
+       y="0"
+       rx="160"
+       ry="160"
+       fill="#000000"
+       id="rect1"
+       inkscape:label="Chassis" />
+    <rect
+       width="670"
+       height="515"
+       x="48.060799"
+       y="15"
+       rx="145"
+       ry="145"
+       fill="none"
+       stroke="#ffffff"
+       stroke-width="24"
+       id="rect2"
+       inkscape:label="Border" />
+    <g
+       id="g3"
+       fill="#333333"
+       transform="translate(33.060798)"
+       inkscape:label="Lights">
+      <circle
+         cx="540"
+         cy="385"
+         r="80"
+         id="circle5"
+         inkscape:label="A" />
+      <circle
+         cx="160"
+         cy="385"
+         r="80"
+         id="circle4"
+         inkscape:label="VL" />
+      <circle
+         cx="160"
+         cy="160"
+         r="80"
+         id="circle2"
+         inkscape:label="C" />
+      <circle
+         cx="540"
+         cy="160"
+         r="80"
+         id="circle3"
+         inkscape:label="C-S" />
+    </g>
+    <path
+       id="rect1-0"
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:2.04742;stroke-dasharray:none"
+       d="M -47.653463,143.28822 -97.841652,172.26359 89.052978,495.97447 -284.73618,495.97441 -284.73549,553.92634 122.51067,553.92638 326.13379,906.61189 376.32198,877.63652 189.42735,553.92564 563.21651,553.9257 563.21582,495.97377 155.96966,495.97372 Z"
+       transform="rotate(-30)"
+       inkscape:label="Cross" />
+  </g>
+</svg>

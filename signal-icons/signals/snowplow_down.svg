@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   width="500"
+   height="500"
+   viewBox="0 0 500 500"
+   id="svg5"
+   sodipodi:docname="snowplow_down.svg"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs5" />
+  <sodipodi:namedview
+     id="namedview5"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.173"
+     inkscape:cx="-39.215686"
+     inkscape:cy="263.00085"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg5" />
+  <path
+     d="M250 40v440"
+     stroke="#8a959e"
+     stroke-linecap="square"
+     stroke-width="35"
+     id="path1"
+     inkscape:label="Mast" />
+  <path
+     d="M45 45h410L250 400z"
+     fill="none"
+     stroke="#d95000"
+     stroke-width="50"
+     id="path2"
+     inkscape:label="Signal" />
+  <g
+     fill="#e2e8f0"
+     stroke="#475467"
+     stroke-width="2"
+     id="g5"
+     inkscape:label="Bolts">
+    <circle
+       cx="275"
+       cy="365"
+       r="5"
+       id="circle2" />
+    <circle
+       cx="225"
+       cy="365"
+       r="5"
+       id="circle3" />
+    <circle
+       cx="275"
+       cy="45"
+       r="5"
+       id="circle4" />
+    <circle
+       cx="225"
+       cy="45"
+       r="5"
+       id="circle5" />
+  </g>
+</svg>

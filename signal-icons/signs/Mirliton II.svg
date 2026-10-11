@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 2000">
+  <!-- Contour fin témoin -->
+  <rect x="4" y="4" width="492" height="1992" fill="#FFFFFF" stroke="#000000" stroke-width="8" />
+  
+  <g fill="#000000">
+    <!-- Bande supérieure (Dans le prolongement exact du mirliton III) -->
+    <polygon points="50,640 450,330 450,590 50,900" />
+    
+    <!-- Bande inférieure (Copie conforme pivotée à 180° tête-bêche) -->
+    <polygon points="50,1410 450,1100 450,1360 50,1670" />
+  </g>
+</svg>

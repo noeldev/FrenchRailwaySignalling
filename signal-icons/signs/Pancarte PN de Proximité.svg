@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500"
+   height="500"
+   viewBox="0 0 500 500"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="PN44.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.0449705"
+     inkscape:cx="-49.283688"
+     inkscape:cy="400.48977"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;stroke-width:17.6974"
+       id="rect1"
+       width="500"
+       height="500"
+       x="0"
+       y="0"
+       inkscape:label="board" />
+    <rect
+       style="fill:none;stroke:#ffffff;stroke-width:19.9998;stroke-dasharray:none"
+       id="rect2"
+       width="472.00012"
+       height="472.00015"
+       x="13.999934"
+       y="13.999934"
+       inkscape:label="border" />
+    <text
+       xml:space="preserve"
+       style="font-size:100px;font-family:PoliceSNCF;fill:#ffffff"
+       x="172.50977"
+       y="175.00026"
+       id="text2"
+       inkscape:label="PN"><tspan
+         sodipodi:role="line"
+         id="tspan2"
+         x="172.50977"
+         y="175.00026"
+         style="stroke-width:20">PN</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:200px;font-family:PoliceSNCF;fill:#ffffff"
+       x="116.01562"
+       y="425"
+       id="text3"
+       inkscape:label="44"><tspan
+         sodipodi:role="line"
+         id="tspan3"
+         x="116.01562"
+         y="425">44</tspan></text>
+  </g>
+</svg>

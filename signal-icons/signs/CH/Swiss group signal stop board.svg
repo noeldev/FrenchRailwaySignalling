@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="450"
+   height="900"
+   viewBox="0 0 450 900"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="Swiss group signal stop board.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.52248525"
+     inkscape:cx="590.44729"
+     inkscape:cy="333.98072"
+     inkscape:window-width="1623"
+     inkscape:window-height="1154"
+     inkscape:window-x="3490"
+     inkscape:window-y="131"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(627,-659)">
+    <polygon
+       points="400,472 450,522 450,1322 400,1372 50,1372 0,1322 0,522 50,472 "
+       fill="#ffffff"
+       id="polygon2"
+       transform="translate(-627,187)" />
+    <polygon
+       points="225,1285.016 50,549.016 400,549.016 "
+       fill="#ff6600"
+       stroke="#000000"
+       stroke-miterlimit="10"
+       stroke-width="6"
+       id="polygon3"
+       transform="matrix(0.85203178,0,0,0.9933399,-593.70715,189.07015)"
+       style="fill:#ef7b00;fill-opacity:1;stroke-width:10.9321;stroke-dasharray:none" />
+    <path
+       d="M -570.00038,675.89953 H -233.99962 L -193.89953,715.99957 V 1502.0004 L -233.99962,1542.1005 H -570.00038 L -610.10047,1502.0004 V 715.99957 Z"
+       fill="none"
+       stroke="#000000"
+       stroke-width="29.799"
+       id="path3" />
+  </g>
+</svg>

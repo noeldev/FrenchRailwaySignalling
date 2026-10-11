@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500"
+   height="500"
+   viewBox="0 0 500 500"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   sodipodi:docname="Tableau distant 25000.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.838"
+     inkscape:cx="250"
+     inkscape:cy="250"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffffff;stroke:#000000;stroke-width:5.24092;stroke-dasharray:none"
+       id="rect2"
+       width="494.75909"
+       height="494.75909"
+       x="2.6204576"
+       y="2.6204576" />
+    <text
+       style="font-size:72.994px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';text-align:center;fill:#000000;stroke-width:18.2485"
+       x="138.80605"
+       y="264.60336"
+       id="text7"
+       transform="scale(0.9124255,1.0959799)">2</text>
+    <text
+       style="font-size:73.0535px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';text-align:center;fill:#000000;stroke-width:18.2634"
+       x="192.85229"
+       y="264.81876"
+       id="text6"
+       transform="scale(0.91316821,1.0950885)">5</text>
+    <text
+       style="font-size:72.9941px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';text-align:center;fill:#000000;stroke-width:18.2485"
+       x="247.37071"
+       y="264.60339"
+       id="text5"
+       transform="scale(0.91242532,1.0959801)">0</text>
+    <text
+       style="font-size:72.9941px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';text-align:center;fill:#000000;stroke-width:18.2485"
+       x="301.65305"
+       y="264.60339"
+       id="text4"
+       transform="scale(0.91242532,1.0959801)">0</text>
+    <text
+       style="font-size:72.994px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';text-align:center;fill:#000000;stroke-width:18.2485"
+       x="355.93539"
+       y="264.60342"
+       id="text3"
+       transform="scale(0.91242541,1.09598)">0</text>
+  </g>
+</svg>

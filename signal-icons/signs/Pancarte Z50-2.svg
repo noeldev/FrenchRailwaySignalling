@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500"
+   height="500"
+   viewBox="0 0 500 500"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   sodipodi:docname="Pancarte Z50-2.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.4778115"
+     inkscape:cx="269.99384"
+     inkscape:cy="227.70157"
+     inkscape:window-width="2538"
+     inkscape:window-height="1472"
+     inkscape:window-x="2546"
+     inkscape:window-y="62"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;stroke-width:11.1881"
+       id="rect1"
+       width="500"
+       height="500"
+       x="0"
+       y="0"
+       inkscape:label="board" />
+    <rect
+       style="fill:none;stroke:#ffffff;stroke-width:19.984;stroke-dasharray:none"
+       id="rect2"
+       width="472.01593"
+       height="472.01596"
+       x="13.992023"
+       y="13.992023"
+       inkscape:label="border" />
+    <text
+       style="font-size:130px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';text-align:center;fill:#ffffff;stroke-width:20"
+       x="202.58301"
+       y="420.0004"
+       id="text5"
+       inkscape:label="2">2</text>
+    <g
+       id="g10"
+       transform="translate(11.021561)">
+      <text
+         style="font-size:150px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';text-align:center;fill:#ffffff;stroke-width:20"
+         x="43.164062"
+         y="230"
+         id="text10">Z</text>
+      <text
+         style="font-size:150px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';text-align:center;fill:#ffffff;stroke-width:20"
+         x="148.04688"
+         y="230"
+         id="text9">5</text>
+      <text
+         style="font-size:150px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';text-align:center;fill:#ffffff;stroke-width:20"
+         x="257.4707"
+         y="230"
+         id="text8">0</text>
+      <rect
+         style="fill:#ffffff;stroke-width:22.0454"
+         id="rect7"
+         width="45"
+         height="27"
+         x="382.32211"
+         y="141.5" />
+    </g>
+  </g>
+</svg>

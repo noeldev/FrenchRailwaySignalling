@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
+  <polygon points="130,0 870,0 1000,130 1000,870 870,1000 130,1000 0,870 0,130" fill="#111111" />
+
+  <polygon points="139,22 861,22 978,139 978,861 861,978 139,978 22,861 22,139" 
+           fill="none" 
+           stroke="#ffffff" 
+           stroke-width="40" 
+           stroke-linejoin="miter" />
+
+  <g fill="#00ff00">
+    <circle cx="750" cy="470" r="80" />
+    <circle cx="250" cy="780" r="80" />
+  </g>
+
+  <g fill="#404040">
+    <circle cx="250" cy="220" r="80" />
+    <circle cx="750" cy="220" r="80" />
+  </g>
+</svg>

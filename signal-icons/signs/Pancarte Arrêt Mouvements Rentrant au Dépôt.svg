@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500"
+   height="500"
+   viewBox="0 0 500 500"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="arrêt mouvements rentrant au dépôt.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.4778115"
+     inkscape:cx="377.92371"
+     inkscape:cy="338.67648"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       d="M 0,500 H 500 V 0 H 0 Z M 0,500"
+       id="path1"
+       inkscape:label="board"
+       style="stroke:none" />
+    <rect
+       id="rect4"
+       width="471.99762"
+       height="471.99759"
+       x="14.0012"
+       y="14.0012"
+       inkscape:label="border"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:110px;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:none;stroke:#ffffff;stroke-width:20.0024;stroke-dasharray:none" />
+    <g
+       id="g1"
+       inkscape:label="text"
+       transform="translate(4,-19.164148)">
+      <text
+         x="48.530239"
+         y="206.02827"
+         id="text1"
+         inkscape:label="Arrêt"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:110px;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff"
+         xml:space="default"><tspan
+           id="tspan1"
+           x="48.530239"
+           y="206.02827"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:110px;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff">ARRET</tspan></text>
+      <text
+         x="27.039028"
+         y="299.79456"
+         id="text2"
+         inkscape:label="mouvements"
+         xml:space="default"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56px;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff"><tspan
+           id="tspan2"
+           x="27.039028"
+           y="299.79456"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56px;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff">MOUVEMENTS</tspan></text>
+      <text
+         x="82.492157"
+         y="375.04724"
+         id="text4"
+         inkscape:label="rentrant"
+         xml:space="default"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56px;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff"><tspan
+           id="tspan4"
+           x="82.492157"
+           y="375.04724"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56px;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff">RENTRANT</tspan></text>
+      <text
+         x="94.347961"
+         y="450.29996"
+         id="text5"
+         inkscape:label="au dépôt"
+         xml:space="default"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56px;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff"><tspan
+           id="tspan5"
+           x="94.347961"
+           y="450.29996"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56px;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff">AU DEPOT</tspan></text>
+    </g>
+  </g>
+</svg>

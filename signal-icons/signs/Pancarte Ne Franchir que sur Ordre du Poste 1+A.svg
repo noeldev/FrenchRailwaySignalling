@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="700"
+   height="700"
+   viewBox="0 0 700.00001 699.99999"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   sodipodi:docname="Ne franchir que sur ordre du poste 1+A.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="1.0449705"
+     inkscape:cx="469.86972"
+     inkscape:cy="308.62115"
+     inkscape:window-width="2560"
+     inkscape:window-height="1494"
+     inkscape:window-x="2549"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;stroke-width:28.515"
+       id="rect1"
+       width="700"
+       height="700"
+       x="0"
+       y="0"
+       inkscape:label="board" />
+    <rect
+       style="fill:none;stroke:#ffffff;stroke-width:21.3074"
+       id="rect2"
+       width="670.69263"
+       height="670.69257"
+       x="14.653702"
+       y="14.653702"
+       inkscape:label="border" />
+    <g
+       id="g6"
+       inkscape:label="text"
+       transform="translate(-32.409206,-44.815857)">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:none;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke:none;stroke-width:23.4217"
+         x="381.26663"
+         y="266.68762"
+         id="text2"
+         inkscape:label="ne franchir"><tspan
+           sodipodi:role="line"
+           id="tspan2"
+           x="381.26663"
+           y="266.68762">NE FRANCHIR</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:none;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke:none;stroke-width:23.4217"
+         x="382.09183"
+         y="424.07855"
+         id="text3"
+         inkscape:label="que sur ordre"><tspan
+           sodipodi:role="line"
+           id="tspan3"
+           x="382.09183"
+           y="424.07855">QUE SUR ORDRE</tspan></text>
+      <g
+         id="g5"
+         transform="translate(-12.696535,33.349731)"
+         inkscape:label="du poste 1+A">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:65px;line-height:0;font-family:PoliceSNCF;-inkscape-font-specification:'PoliceSNCF, Normal';font-variant-ligatures:none;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke:none;stroke-width:23.4217"
+           x="321.01492"
+           y="554.59436"
+           id="text4"
+           inkscape:label="du poste"><tspan
+             sodipodi:role="line"
+             id="tspan4"
+             x="321.01492"
+             y="554.59436">DU POSTE</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:condensed;font-size:90px;line-height:0;font-family:'Barlow Condensed';-inkscape-font-specification:'Barlow Condensed, Semi-Bold Condensed';font-variant-ligatures:none;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffff;stroke:none;stroke-width:23.4217"
+           x="592.55231"
+           y="553.59442"
+           id="text5"
+           inkscape:label="1+A"><tspan
+             sodipodi:role="line"
+             id="tspan5"
+             x="592.55231"
+             y="553.59442">1+A</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>
