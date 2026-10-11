@@ -1,16 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700"><g transform="translate(78,0)">
-  <rect width="545" height="700" x="0" y="0" rx="160" ry="160" fill="#000000"/>
-  
-  <rect width="515" height="670" x="15" y="15" rx="145" ry="145" fill="none" stroke="#ffffff" stroke-width="24"/>
-  
-  <g fill="#404040">
-    <circle cx="160" cy="540" r="80"/>
-    <circle cx="385" cy="160" r="80"/>
-    <circle cx="385" cy="540" r="80"/>
-  </g>
-  
-  <g fill="#00ff00">
-    <circle cx="160" cy="160" r="80"/>
-  </g>
-</g></svg>
+<svg version="1.1" viewBox="0 0 545 700" xmlns="http://www.w3.org/2000/svg"><rect width="545" height="700" rx="80" ry="80"/><rect x="15" y="15" width="515" height="670" rx="65" ry="65" fill="none" stroke="#fff" stroke-width="20"/><circle cx="160" cy="540" r="80" fill="#404040"/><circle cx="160" cy="160" r="80" fill="#0f0"/><circle cx="385" cy="540" r="80" fill="#404040"/><circle cx="385" cy="160" r="80" fill="#404040"/></svg>

@@ -1,2 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg version="1.1" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><g><path transform="translate(-107.73 -4.842)" d="m107.73 4.842h64v64h-64z" fill="#00a" style="paint-order:markers stroke fill"/><path transform="translate(-107.73 -4.842)" d="m107.73 4.842 64 32-64 32z" fill="#fff"/><path transform="translate(-107.73 -4.842)" d="m107.73 8.042 57.6 28.8-57.6 28.8z" fill="#fc0"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 700">
+  <!-- Fond bleu aux coins arrondis -->
+  <rect width="700" height="700" rx="15" ry="15" fill="#005dd1"/>
+  <!-- Triangle blanc (sommet à x=700, pointes à y=20 et y=680) -->
+  <path d="M 35,20 L 700,350 L 35,680 Z" fill="#ffffff"/>
+  <!-- Triangle jaune (aligné à x=35, bande blanche perpendiculaire de 35 px) -->
+  <path d="M 35,59.07 L 621.26,350 L 35,640.93 Z" fill="#ffc800"/>
+</svg>
