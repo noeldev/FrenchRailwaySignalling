@@ -3,14 +3,14 @@
 
 using System.Text.RegularExpressions;
 
-namespace SvgResizer;
+namespace SvgSquarer;
 
-internal readonly record struct SvgRootLocation(Match SvgTag, Match ViewBoxAttribute, ViewBox ViewBox);
+internal readonly record struct SvgRootLocation(Match SvgTag, ViewBox ViewBox);
 
 // Locates the root <svg> element and reads/writes its attributes using a
 // narrow text scan rather than a full XML parser, so the rest of the
 // document - encoding, indentation, comments, quote style - is never
-// touched. Shared by the sizing logic and the hack-removal logic.
+// touched.
 internal static partial class SvgRootTag
 {
     internal enum LocateStatus
@@ -22,7 +22,7 @@ internal static partial class SvgRootTag
     }
 
     private static readonly Regex RootSvgTag = RootSvgTagRegex();
-    private static readonly Regex ViewBoxAttribute = ViewBoxAttributeRegex();
+    public static readonly Regex ViewBoxAttribute = ViewBoxAttributeRegex();
     public static readonly Regex WidthAttribute = WidthAttributeRegex();
     public static readonly Regex HeightAttribute = HeightAttributeRegex();
     public static readonly Regex PreserveAspectRatioAttribute = PreserveAspectRatioAttributeRegex();
@@ -38,20 +38,18 @@ internal static partial class SvgRootTag
             return LocateStatus.NoSvgTag;
         }
 
-        var attribute = ViewBoxAttribute.Match(svgTag.Value);
-        if (!attribute.Success)
+        rawViewBoxValue = TryGetAttributeValue(svgTag.Value, ViewBoxAttribute);
+        if (rawViewBoxValue == null)
         {
             return LocateStatus.NoViewBoxAttribute;
         }
-
-        rawViewBoxValue = attribute.Groups[3].Value;
 
         if (!ViewBox.TryParse(rawViewBoxValue, out var viewBox) || !viewBox.IsValid)
         {
             return LocateStatus.InvalidViewBox;
         }
 
-        location = new SvgRootLocation(svgTag, attribute, viewBox);
+        location = new SvgRootLocation(svgTag, viewBox);
         return LocateStatus.Ok;
     }
 
@@ -62,46 +60,60 @@ internal static partial class SvgRootTag
         return match.Success ? match.Groups[3].Value : null;
     }
 
-    // Replaces the attribute's value if present, or inserts it if absent -
-    // used for width/height/preserveAspectRatio, which are always driven to
-    // a single canonical value rather than merged with an existing one.
-    public static string SetAttribute(string svgTag, Regex attributeRegex, string name, string value)
+    // Removes an attribute and the whitespace in front of it. Returns the tag
+    // unchanged when the attribute is absent.
+    public static string RemoveAttribute(string svgTag, Regex attributeRegex)
     {
         var match = attributeRegex.Match(svgTag);
-        if (match.Success)
+        if (!match.Success)
         {
-            return ReplaceAttributeValue(svgTag, match, value);
+            return svgTag;
         }
 
-        return svgTag.Insert("<svg".Length, $" {name}=\"{value}\"");
+        var start = match.Index;
+        while (start > 0 && char.IsWhiteSpace(svgTag[start - 1]))
+        {
+            start--;
+        }
+
+        return svgTag.Remove(start, match.Index + match.Length - start);
     }
 
-    // Rebuilds a root tag with one attribute's value replaced, keeping the
-    // quote style and every other attribute untouched.
-    public static string ReplaceAttributeValue(string svgTag, Match attribute, string newValue)
+    // Replaces an existing attribute's value, keeping its quote style and
+    // every other attribute untouched. Returns the tag unchanged when the
+    // attribute is absent.
+    public static string ReplaceAttributeValue(string svgTag, Regex attributeRegex, string newValue)
     {
-        var prefix = attribute.Groups[1].Value;
-        var quote = attribute.Groups[2].Value;
-        var replacement = $"{prefix}{quote}{newValue}{quote}";
+        var match = attributeRegex.Match(svgTag);
+        if (!match.Success)
+        {
+            return svgTag;
+        }
+
+        var prefix = match.Groups[1].Value;
+        var quote = match.Groups[2].Value;
 
         return string.Concat(
-            svgTag.AsSpan(0, attribute.Index),
-            replacement,
-            svgTag.AsSpan(attribute.Index + attribute.Length));
+            svgTag.AsSpan(0, match.Index),
+            $"{prefix}{quote}{newValue}{quote}",
+            svgTag.AsSpan(match.Index + match.Length));
     }
 
+    // The lookbehinds keep an attribute name from matching inside another
+    // one: \b alone would accept the "width" of stroke-width, since "-" is a
+    // word boundary.
     [GeneratedRegex(@"<svg\b[^>]*?>", RegexOptions.IgnoreCase, "")]
     private static partial Regex RootSvgTagRegex();
 
-    [GeneratedRegex(@"(viewBox\s*=\s*)(""|')(.*?)\2", RegexOptions.IgnoreCase | RegexOptions.Singleline, "")]
+    [GeneratedRegex(@"((?<![\w:.-])viewBox\s*=\s*)(""|')(.*?)\2", RegexOptions.IgnoreCase | RegexOptions.Singleline, "")]
     private static partial Regex ViewBoxAttributeRegex();
 
-    [GeneratedRegex(@"(\bwidth\s*=\s*)(""|')(.*?)\2", RegexOptions.IgnoreCase | RegexOptions.Singleline, "")]
+    [GeneratedRegex(@"((?<![\w:.-])width\s*=\s*)(""|')(.*?)\2", RegexOptions.IgnoreCase | RegexOptions.Singleline, "")]
     private static partial Regex WidthAttributeRegex();
 
-    [GeneratedRegex(@"(\bheight\s*=\s*)(""|')(.*?)\2", RegexOptions.IgnoreCase | RegexOptions.Singleline, "")]
+    [GeneratedRegex(@"((?<![\w:.-])height\s*=\s*)(""|')(.*?)\2", RegexOptions.IgnoreCase | RegexOptions.Singleline, "")]
     private static partial Regex HeightAttributeRegex();
 
-    [GeneratedRegex(@"(\bpreserveAspectRatio\s*=\s*)(""|')(.*?)\2", RegexOptions.IgnoreCase | RegexOptions.Singleline, "")]
+    [GeneratedRegex(@"((?<![\w:.-])preserveAspectRatio\s*=\s*)(""|')(.*?)\2", RegexOptions.IgnoreCase | RegexOptions.Singleline, "")]
     private static partial Regex PreserveAspectRatioAttributeRegex();
 }

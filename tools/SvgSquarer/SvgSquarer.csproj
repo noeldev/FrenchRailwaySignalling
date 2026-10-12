@@ -6,8 +6,12 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<InvariantGlobalization>true</InvariantGlobalization>
-		<RootNamespace>SvgResizer</RootNamespace>
-		<AssemblyName>SvgResizer</AssemblyName>
-		<Version>1.0.0</Version>
+		<RootNamespace>SvgSquarer</RootNamespace>
+		<AssemblyName>SvgSquarer</AssemblyName>
+		<Version>1.1.0</Version>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Folder Include="Properties\" />
+	</ItemGroup>
 </Project>

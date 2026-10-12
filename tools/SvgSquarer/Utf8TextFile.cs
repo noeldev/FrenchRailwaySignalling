@@ -3,7 +3,7 @@
 
 using System.Text;
 
-namespace SvgResizer;
+namespace SvgSquarer;
 
 // Shared read/write helpers that preserve the original file's UTF-8 byte order mark.
 internal static class Utf8TextFile
