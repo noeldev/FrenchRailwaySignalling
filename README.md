@@ -37,8 +37,8 @@ A [taginfo project file](https://wiki.openstreetmap.org/wiki/Taginfo/Projects) i
 The `tools/` directory holds C# (.NET 10) console applications that support the presets and the wiki backup. The signalling-specific tools and their shared libraries live together under `tools/Signalling/` (one solution); `SvgSquarer` and `WikiBackup` are independent.
 
 - **SignalAudit** - Validates `French_Railway_Signalling.xml` and audits it against related sources. Offline, it checks the file against the JOSM tagging preset schema (the schema location is read from the preset file and downloaded automatically), verifies chunk definitions and references, confirms every icon exists on disk with exact path casing (so nothing breaks on the case-sensitive GitHub Pages host), resolves the wiki link of each item either inline or through referenced chunks, and checks structure, menu-path uniqueness and `match_expression` usage. With `--wiki` it additionally verifies over the network that wiki links and anchors resolve, and that the preset's tags match the wiki specification (the source of truth). With `--yaml` it checks that every tag the preset emits is handled by the [OpenRailwayMap-vector](https://github.com/hiddewie/OpenRailwayMap-vector) map. Results can be written as a transcript (`--log`) and a structured JSON report (`--report-json`).
-- **SvgSquarer** - Normalizes the preset SVG icons to a square `viewBox` so they render consistently in JOSM and on taginfo.
 - **TagInfoGen** - Generates the taginfo project file from the presets, published as `taginfo.json`.
+- **SvgSquarer** - Prepares the preset icons for JOSM, in place. JOSM aligns non-square icons to the left of their slot and ignores both the `viewBox` origin and `preserveAspectRatio`, so each icon with a non-square `viewBox` is turned into a square document whose content is centered by a `<g id="josm-square" transform="translate(...)">` group. `width`, `height` and `preserveAspectRatio` are removed from every icon. `--unsquare` removes that group again and restores the original `viewBox`, so the icons can be edited at their real size.
 - **WikiBackup** - Downloads the wiki pages, Lua modules, and templates into `wiki/backup/` for long-term preservation.
 
 The shared libraries under `tools/Signalling/libs/` are reused by SignalAudit and TagInfoGen: `Signalling.Core` (tag-rule vocabulary and local/remote source resolution), `Signalling.Presets` (JOSM preset reader), `Signalling.OrmVector` (ORM-vector YAML reader), `Signalling.Wiki` (OSM wiki reader), and `Signalling.Sync` (the tag-rule comparator behind the cross-source audits).
@@ -66,7 +66,7 @@ FrenchRailwaySignalling/
 │   │       ├── Signalling.OrmVector/ # ORM-vector YAML reader
 │   │       ├── Signalling.Wiki/      # OSM wiki reader
 │   │       └── Signalling.Sync/      # Tag-rule comparator
-│   ├── SvgSquarer/       # SVG viewBox normalizer
+│   ├── SvgSquarer/       # Icon preparation for JOSM
 │   └── WikiBackup/       # Wiki backup tool
 └── wiki/
     ├── backup/           # Auto-generated wiki backups
@@ -99,4 +99,3 @@ Contributions are entirely voluntary, and the amount is left to your discretion.
 - **JOSM Presets**: GPL-3.0
 - **Tools** (`SignalAudit`, `SvgSquarer`, `TagInfoGen`, `WikiBackup`) and the shared `Signalling.*` libraries: GPL-3.0
 - **Icons**: Original creations or adaptations from [Wikimedia Commons](https://commons.wikimedia.org) and [Nicolas Wurtz's signalisation-rfn-svg project](https://github.com/nicolaswurtz/signalisation-rfn-svg)
-```

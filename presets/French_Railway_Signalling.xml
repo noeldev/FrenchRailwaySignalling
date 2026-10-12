@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.33_2026-10-11"
+    version="1.33_2026-10-12"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -391,14 +391,18 @@
 	</chunk>
 
 	<!-- Stop signals w/o links (form=sign) -->
-	<chunk id="cat_stop">
+	<chunk id="cat_stop_core">
 		<reference ref="base_common" />
-		<key key="railway:signal:stop:form" value="sign" />
 		<text
 			key="railway:signal:stop:ref"
 			text="Network ID"
 			fr.text="Identifiant Réseau"
 			length="7" />
+	</chunk>
+
+	<chunk id="cat_stop">
+		<key key="railway:signal:stop:form" value="sign" />
+		<reference ref="cat_stop_core" />
 	</chunk>
 
 	<!-- Stop distant signals (distant signs for Arrêt/STOP) -->
@@ -3603,7 +3607,27 @@
 					<space />
 					<key key="railway:signal:stop" value="FR:ARRET" />
 					<key key="railway:signal:stop:for" match="none" />
-					<reference ref="cat_stop" />
+					<reference ref="cat_stop_core" />
+					<combo
+						key="railway:signal:stop:form"
+						text="Signal presentation"
+						fr.text="Présentation du signal"
+						default="sign"
+						editable="false"
+						values_sort="false">
+						<list_entry
+							value="sign"
+							display_value="Board"
+							fr.display_value="Pancarte"
+							icon="icons/signs/ARRET.svg"
+							icon_size="24"/>
+						<list_entry
+							value="board"
+							display_value="Illuminated board"
+							fr.display_value="Tableau lumineux"
+							icon="icons/boards/ARRET.svg"
+							icon_size="24"/>
+					</combo>
 					<space />
 					<combo
 						key="railway:signal:stop:arrangement"
@@ -4997,7 +5021,7 @@
 					<list_entry
 						value="sign"
 						display_value="Board"
-						fr.display_value="Tableau"
+						fr.display_value="Pancarte"
 						icon="icons/signs/D.svg" icon_size="24"/>
 					<list_entry
 						value="board"
@@ -5041,7 +5065,7 @@
 					<list_entry
 						value="sign"
 						display_value="Board"
-						fr.display_value="Tableau"
+						fr.display_value="Pancarte"
 						icon="icons/signs/G.svg" icon_size="24"/>
 					<list_entry
 						value="board"
@@ -5086,7 +5110,7 @@
 					<list_entry
 						value="sign"
 						display_value="Board"
-						fr.display_value="Tableau"
+						fr.display_value="Pancarte"
 						icon="icons/signs/SAS.svg" icon_size="24"/>
 					<list_entry
 						value="board"
@@ -5133,7 +5157,7 @@
 					<list_entry
 						value="sign"
 						display_value="Board"
-						fr.display_value="Tableau"
+						fr.display_value="Pancarte"
 						icon="icons/signs/Imp.svg" icon_size="24"/>
 					<list_entry
 						value="board"
@@ -5197,7 +5221,7 @@
 					<list_entry
 						value="sign"
 						display_value="Board"
-						fr.display_value="Tableau"
+						fr.display_value="Pancarte"
 						icon="icons/signs/H.svg" icon_size="24"/>
 					<list_entry
 						value="board"
@@ -5506,13 +5530,13 @@
 						<list_entry
 							value="sign"
 							display_value="Board"
-							fr.display_value="Tableau"
+							fr.display_value="Pancarte"
 							icon="icons/signs/TIV-D_diamond.svg" icon_size="24"/>
 						<list_entry
 							value="board"
 							display_value="Illuminated board"
 							fr.display_value="Tableau lumineux"
-							icon="icons/boards/TIV-D_diamond_switchable.svg" icon_size="24"/>
+							icon="icons/boards/TIV-D_diamond.svg" icon_size="24"/>
 						<list_entry
 							value="light"
 							display_value="Light box"
@@ -5579,7 +5603,7 @@
 						<list_entry
 							value="sign"
 							display_value="Board"
-							fr.display_value="Tableau"
+							fr.display_value="Pancarte"
 							icon="icons/signs/TIV-R.svg" icon_size="24"/>
 						<list_entry
 							value="board"
@@ -5656,7 +5680,7 @@
 						<list_entry
 							value="sign"
 							display_value="Board"
-							fr.display_value="Tableau"
+							fr.display_value="Pancarte"
 							icon="icons/signs/TIV-D_diamond.svg"
 							icon_size="24"/>
 						<list_entry
@@ -5700,7 +5724,7 @@
 						<list_entry
 							value="sign"
 							display_value="Board"
-							fr.display_value="Tableau"
+							fr.display_value="Pancarte"
 							icon="icons/signs/TIV-D_square.svg"
 							icon_size="24"/>
 						<list_entry
@@ -6266,7 +6290,7 @@
 					<list_entry
 						value="sign"
 						display_value="Board"
-						fr.display_value="Tableau"
+						fr.display_value="Pancarte"
 						icon="icons/signs/TECS.svg" icon_size="24"/>
 					<list_entry
 						value="board"
@@ -6308,7 +6332,7 @@
 					<list_entry
 						value="sign"
 						display_value="Board"
-						fr.display_value="Tableau"
+						fr.display_value="Pancarte"
 						icon="icons/signs/TSCS.svg" icon_size="24"/>
 					<list_entry
 						value="board"
@@ -6629,23 +6653,6 @@
 				fr.name="Repères"
 				icon="icons/signs/ETCS/stop_marker.svg">
 
-				<!-- Transition Marker -->
-				<item
-					name="Transition Marker"
-					fr.name="Repère de Transition"
-					type="node"
-					icon="icons/signs/ETCS/transition_marker.svg">
-					<label
-						text="Transition marker"
-						fr.text="Repère de transition" />
-					<space />
-					<reference ref="base_common" />
-					<key key="railway:signal:train_protection" value="ETCS:marker" />
-					<key key="railway:signal:train_protection:system_change" value="ETCS:level_transition" />
-					<key key="railway:signal:train_protection:system_change:form" value="sign" />
-					<link wiki="OpenRailwayMap/ETCS_Markers#ETCS_transition_marker" />
-				</item>
-
 				<!-- Stop Marker -->
 				<item
 					name="Stop Marker"
@@ -6674,6 +6681,23 @@
 					<key key="railway:signal:train_protection:main" value="ETCS:location_marker" />
 					<reference ref="cat_etcs_main_marker" />
 					<link wiki="OpenRailwayMap/ETCS_Markers#ETCS_location_marker" />
+				</item>
+
+				<!-- Transition Marker -->
+				<item
+					name="Transition Marker"
+					fr.name="Repère de Transition"
+					type="node"
+					icon="icons/signs/ETCS/transition_marker.svg">
+					<label
+						text="Transition marker"
+						fr.text="Repère de transition" />
+					<space />
+					<reference ref="base_common" />
+					<key key="railway:signal:train_protection" value="ETCS:marker" />
+					<key key="railway:signal:train_protection:system_change" value="ETCS:level_transition" />
+					<key key="railway:signal:train_protection:system_change:form" value="sign" />
+					<link wiki="OpenRailwayMap/ETCS_Markers#ETCS_transition_marker" />
 				</item>
 
 			</group>
@@ -6874,7 +6898,7 @@
 						<list_entry
 							value="sign"
 							display_value="Board"
-							fr.display_value="Tableau"
+							fr.display_value="Pancarte"
 							icon="icons/signs/distant_neutral_section.svg"
 							icon_size="24"/>
 						<list_entry
@@ -6913,7 +6937,7 @@
 						<list_entry
 							value="sign"
 							display_value="Board"
-							fr.display_value="Tableau"
+							fr.display_value="Pancarte"
 							icon="icons/signs/neutral_section.svg"
 							icon_size="24"/>
 						<list_entry
@@ -6954,7 +6978,7 @@
 						<list_entry
 							value="sign"
 							display_value="Board"
-							fr.display_value="Tableau"
+							fr.display_value="Pancarte"
 							icon="icons/signs/end_of_neutral_section.svg"
 							icon_size="24"/>
 						<list_entry
@@ -7029,7 +7053,7 @@
 						<list_entry
 							value="sign"
 							display_value="Board"
-							fr.display_value="Tableau"
+							fr.display_value="Pancarte"
 							icon="icons/signs/distant_lower_pantograph.svg"
 							icon_size="24"/>
 						<list_entry
@@ -7074,7 +7098,7 @@
 						<list_entry
 							value="sign"
 							display_value="Board"
-							fr.display_value="Tableau"
+							fr.display_value="Pancarte"
 							icon="icons/signs/lower_pantograph.svg"
 							icon_size="24"/>
 						<list_entry
@@ -7115,7 +7139,7 @@
 						<list_entry
 							value="sign"
 							display_value="Board"
-							fr.display_value="Tableau"
+							fr.display_value="Pancarte"
 							icon="icons/signs/raise_pantograph.svg"
 							icon_size="24"/>
 						<list_entry
