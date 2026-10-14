@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.33_2026-10-12"
+    version="1.34_2026-10-14"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -737,69 +737,6 @@
 			</combo>
 			<combo
 				key="railway:signal:electricity:frequency"
-				text="Frequency (Hz)"
-				fr.text="Fréquence (Hz)"
-				editable="false"
-				values_sort="false">
-				<list_entry
-					value=""
-					display_value="DC"
-					fr.display_value="CC"/>
-				<list_entry
-					value="16"
-					display_value="16 2/3"
-					fr.display_value="16 2/3"/>
-				<list_entry
-					value="50"
-					display_value="50"
-					fr.display_value="50"/>
-			</combo>
-		</optional>
-	</chunk>
-
-	<!-- Catenary boards: common base (railway=signal, source, position, network ref, form=sign) -->
-	<chunk id="cat_catenary">
-		<reference ref="base_common" />
-		<key key="railway:signal:catenary:form" value="sign" />
-		<text
-			key="railway:signal:catenary:ref"
-			text="Network ID"
-			fr.text="Identifiant Réseau"
-			length="7" />
-	</chunk>
-
-	<!-- Catenary voltage/frequency optional info -->
-	<chunk id="optional_catenary_supply">
-		<optional text="">
-			<label
-				text="Catenary Voltage"
-				fr.text="Tension caténaire" />
-			<space />
-			<combo
-				key="railway:signal:catenary:voltage"
-				text="Voltage (V)"
-				fr.text="Tension (V)"
-				editable="false"
-				values_sort="false">
-				<list_entry
-					value="1500"
-					display_value="1500 (DC)"
-					fr.display_value="1500 (CC)"/>
-				<list_entry
-					value="3000"
-					display_value="3000 (DC)"
-					fr.display_value="3000 (CC)"/>
-				<list_entry
-					value="15000"
-					display_value="15000 (AC)"
-					fr.display_value="15000 (CA)"/>
-				<list_entry
-					value="25000"
-					display_value="25000 (AC)"
-					fr.display_value="25000 (CA)"/>
-			</combo>
-			<combo
-				key="railway:signal:catenary:frequency"
 				text="Frequency (Hz)"
 				fr.text="Fréquence (Hz)"
 				editable="false"
@@ -1591,7 +1528,7 @@
 
 					<item_separator />
 					<preset_link preset_name="Dwarf Carré" text="" />
-					
+
 					<link wiki="OpenRailwayMap/Tagging_in_France#Intermediate_platform_signal" />
 				</item>
 
@@ -5333,8 +5270,8 @@
 
 			<!-- Other Limit Signs -->
 			<group
-				name="Other limit signs"
-				fr.name="Autres pancartes de limite"
+				name="Other Limit Signs"
+				fr.name="Autres Pancartes de Limite"
 				icon="icons/signs/LM_as_text.svg">
 
 				<!-- Limite de Manoeuvre (text) -->
@@ -5397,7 +5334,7 @@
 				<!-- Limite de stationnement -->
 				<item
 					name="Shunting Limit for parking"
-					fr.name="Limite de stationnement"
+					fr.name="Limite de Stationnement"
 					type="node"
 					icon="icons/signs/LM_for_parking.svg">
 					<label
@@ -5420,7 +5357,7 @@
 				icon="icons/signs/instruction_board.svg">
 				<label
 					text="Board displaying an operational instruction"
-					fr.text="Pancarte affichant une consigne d'exploitation" />
+					fr.text="Pancarte de consigne" />
 				<space />
 				<key key="railway:signal:minor" value="FR:instruction_board" />
 				<key key="railway:signal:minor:form" value="sign" />
@@ -5443,52 +5380,91 @@
 			fr.name="Chevrons"
 			icon="icons/signs/chevron_down.svg">
 
-			<!-- Up -->
+			<!-- Facing switch (speed limit) -->
 			<item
-				name="Upward-pointing Chevron"
-				fr.name="Chevron pointe en haut"
+				name="Downward-pointing Chevron"
+				fr.name="Chevron pointe en bas"
+				type="node"
+				icon="icons/signs/chevron_down.svg"
+				match_expression="-&quot;railway:signal:speed_limit:switch:type&quot;=trailing">
+				<label
+					text="Downward-pointing chevron (facing switch)"
+					fr.text="Chevron pointe en bas (aiguille prise en pointe)" />
+				<space />
+				<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
+				<key key="railway:signal:speed_limit:switch" value="FR:chevron" />
+				<key key="railway:signal:speed_limit:switch:form" value="sign" />
+				<key key="railway:signal:speed_limit:switch:type" match="none"/>
+				<key key="ref" match="none"/>
+				<reference ref="base_common" />
+				<text
+					key="railway:signal:speed_limit:switch:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau"
+					length="7" />
+
+				<item_separator />
+				<preset_link preset_name="Upward-pointing Chevron (Trailing Switch)" text=""/>
+
+				<link wiki="OpenRailwayMap/Tagging_in_France#Chevron_pointe_en_bas" />
+			</item>
+
+			<!-- Trailing switch (speed limit) -->
+			<item
+				name="Upward-pointing Chevron (Trailing Switch)"
+				fr.name="Chevron pointe en haut (Aiguille en Talon)"
 				type="node"
 				icon="icons/signs/chevron_up.svg">
 				<label
-					text="Upward-pointing chevron"
-					fr.text="Chevron pointe en haut" />
+					text="Upward-pointing chevron (trailing switch)"
+					fr.text="Chevron pointe en haut (aiguille prise en talon)" />
 				<space />
-				<key key="railway:signal:minor" value="FR:chevron" />
-				<key key="railway:signal:minor:form" value="sign" />
-				<reference ref="base_with_plate" />
+				<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
+				<key key="railway:signal:speed_limit:switch" value="FR:chevron" />
+				<key key="railway:signal:speed_limit:switch:form" value="sign" />
+				<key key="railway:signal:speed_limit:switch:type" value="trailing" />
+				<key key="ref" match="none"/>
+				<reference ref="base_common" />
 				<text
-					key="railway:signal:minor:ref"
+					key="railway:signal:speed_limit:switch:ref"
 					text="Network ID"
 					fr.text="Identifiant Réseau"
 					length="7" />
 
 				<item_separator />
 				<preset_link preset_name="Downward-pointing Chevron" text=""/>
+				<preset_link preset_name="Upward-pointing Chevron (Stop)" text=""/>
+
+				<link wiki="OpenRailwayMap/Tagging_in_France#Chevron_pointe_en_bas" />
+			</item>
+			
+			<separator />
+
+			<!-- Stop point -->
+			<item
+				name="Upward-pointing Chevron (Stop)"
+				fr.name="Chevron pointe en haut (Repère d'Arrêt)"
+				type="node"
+				icon="icons/signs/chevron_up.svg">
+				<label
+					text="Upward-pointing chevron (stop point)"
+					fr.text="Chevron pointe en haut (point d'arrêt)" />
+				<space />
+				<key key="railway:signal:stop" value="FR:chevron" />
+				<key key="railway:signal:stop:form" value="sign" />
+				<reference ref="base_with_plate" />
+				<text
+					key="railway:signal:stop:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau"
+					length="7" />
+
+				<item_separator />
+				<preset_link preset_name="Upward-pointing Chevron (Trailing Switch)" text=""/>
 
 				<link wiki="OpenRailwayMap/Tagging_in_France#Chevron_pointe_en_haut" />
 			</item>
 
-			<!-- Down -->
-			<item
-				name="Downward-pointing Chevron"
-				fr.name="Chevron pointe en bas"
-				type="node"
-				icon="icons/signs/chevron_down.svg"
-				match_expression="-&quot;railway:signal:minor:type&quot;=*">
-				<label
-					text="Downward-pointing chevron"
-					fr.text="Chevron pointe en bas" />
-				<space />
-				<key key="railway:signal:speed_limit" value="FR:chevron" />
-				<key key="railway:signal:speed_limit:form" value="sign" />
-				<key key="ref" match="none"/>
-				<reference ref="cat_minor" />
-
-				<item_separator />
-				<preset_link preset_name="Upward-pointing Chevron" text=""/>
-
-				<link wiki="OpenRailwayMap/Tagging_in_France#Chevron_pointe_en_bas" />
-			</item>
 		</group>
 
 		<!-- Speed Limits -->
@@ -5836,13 +5812,13 @@
 						text="Z Sign"
 						fr.text="Pancarte Z" />
 					<space />
-					<key key="railway:signal:speed_limit" value="FR:marker" />
-					<key key="railway:signal:speed_limit:main" value="FR:Z" />
-					<key key="railway:signal:speed_limit:main:form" value="sign" />
-					<key key="railway:signal:speed_limit:main:function" value="entry" />
+					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
+					<key key="railway:signal:speed_limit:marker" value="FR:Z" />
+					<key key="railway:signal:speed_limit:marker:form" value="sign" />
+					<key key="railway:signal:speed_limit:marker:function" value="entry" />
 					<reference ref="base_common" />
 					<text
-						key="railway:signal:speed_limit:main:ref"
+						key="railway:signal:speed_limit:marker:ref"
 						text="Network ID"
 						fr.text="Identifiant Réseau"
 						length="7" />
@@ -5868,13 +5844,13 @@
 						text="R Sign"
 						fr.text="Pancarte R" />
 					<space />
-					<key key="railway:signal:speed_limit" value="FR:marker" />
-					<key key="railway:signal:speed_limit:main" value="FR:R" />
-					<key key="railway:signal:speed_limit:main:form" value="sign" />
-					<key key="railway:signal:speed_limit:main:function" value="exit" />
+					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
+					<key key="railway:signal:speed_limit:marker" value="FR:R" />
+					<key key="railway:signal:speed_limit:marker:form" value="sign" />
+					<key key="railway:signal:speed_limit:marker:function" value="exit" />
 					<reference ref="base_common" />
 					<text
-						key="railway:signal:speed_limit:main:ref"
+						key="railway:signal:speed_limit:marker:ref"
 						text="Network ID"
 						fr.text="Identifiant Réseau"
 						length="7" />
@@ -5900,7 +5876,7 @@
 						text="Speed Marker"
 						fr.text="Repère de Vitesse" />
 					<space />
-					<key key="railway:signal:speed_limit" value="FR:marker" />
+					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
 					<key key="railway:signal:speed_limit:transition" value="FR:Km" />
 					<key key="railway:signal:speed_limit:transition:form" value="sign" />
 					<reference ref="base_common" />
@@ -6953,6 +6929,7 @@
 							icon="icons/boxes/neutral_section_wide.svg"
 							icon_size="24"/>
 					</combo>
+					<reference ref="optional_traction_supply" />
 					<link wiki="OpenRailwayMap/Tagging_in_France#Power-off_signal" />
 				</item>
 
@@ -7021,6 +6998,90 @@
 						length="7" />
 					<reference ref="optional_traction_supply" />
 					<link wiki="OpenRailwayMap/Tagging_in_France#REV_sign" />
+				</item>
+
+				<separator />
+
+				<!-- Catenary Transition (new voltage ahead) -->
+				<item
+					name="Volt 3000 board"
+					fr.name="Pancarte Volt 3000"
+					type="node"
+					icon="icons/signs/3000V.svg">
+					<label
+						text="Pancarte Volt 3000 (new voltage ahead)"
+						fr.text="Pancarte Volt 3000 (nouvelle tension en aval)" />
+					<space />
+					<key key="railway:signal:electricity" value="FR:power_on" />
+					<key key="railway:signal:electricity:voltage" value="3000" />
+					<key key="railway:signal:electricity:transition" value="FR:voltage" />
+					<key key="railway:signal:electricity:transition:form" value="sign" />
+					<reference ref="base_common" />
+					<text
+						key="railway:signal:electricity:transition:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#Catenary_voltage_transition" />
+				</item>
+
+				<!-- Catenary Transition (end of a voltage section) -->
+				<item
+					name="Fin 1500 board"
+					fr.name="Pancarte Fin 1500"
+					type="node"
+					icon="icons/signs/end_of_1500V.svg">
+					<label
+						text="Catenary voltage transition, end of 1500V section"
+						fr.text="Transition de tension caténaire, fin de section 1500V" />
+					<space />
+					<key key="railway:signal:electricity" value="FR:power_off" />
+					<key key="railway:signal:electricity:voltage" value="1500" />
+					<key key="railway:signal:electricity:transition" value="FR:voltage" />
+					<key key="railway:signal:electricity:transition:form" value="sign" />
+					<reference ref="base_common" />
+					<text
+						key="railway:signal:electricity:transition:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#Catenary_voltage_transition" />
+				</item>
+
+				<separator />
+
+				<!-- Switchable Station -->
+				<item
+					name="Switchable Station"
+					fr.name="Gare Commutable"
+					type="node"
+					icon="icons/signs/switchable_station.svg">
+					<label
+						text="Switchable station"
+						fr.text="Gare commutable" />
+					<space />
+					<key key="railway:signal:electricity" value="FR:switchable_station" />
+					<key key="railway:signal:electricity:form" value="sign" />
+					<key key="railway:signal:electricity:function" value="entry" />
+					<reference ref="cat_electricity" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#Switchable_station" />
+				</item>
+
+				<!-- End of Switchable Station -->
+				<item
+					name="End of Switchable Station"
+					fr.name="Fin Gare Commutable"
+					type="node"
+					icon="icons/signs/end_of_switchable_station.svg">
+					<label
+						text="End of switchable station"
+						fr.text="Fin de gare commutable" />
+					<space />
+					<key key="railway:signal:electricity" value="FR:switchable_station" />
+					<key key="railway:signal:electricity:form" value="sign" />
+					<key key="railway:signal:electricity:function" value="exit" />
+					<reference ref="cat_electricity" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#Switchable_station" />
 				</item>
 
 			</group>
@@ -7168,111 +7229,78 @@
 					<link wiki="OpenRailwayMap/Tagging_in_France#Pantograph_up_signal" />
 				</item>
 
+				<separator />
+
+				<!-- Frost Board -->
+				<item
+					name="Frost Board"
+					fr.name="Tableau GIVRE"
+					type="node"
+					icon="icons/boards/frost.svg">
+					<label
+						text="Frost Board"
+						fr.text="Tableau GIVRE" />
+					<space />
+					<key key="railway:signal:electricity" value="FR:frost" />
+					<reference ref="cat_electricity" />
+					<combo
+						key="railway:signal:electricity:form"
+						text="Signal presentation"
+						fr.text="Présentation du signal"
+						editable="false"
+						values_sort="false">
+						<list_entry
+							value="board"
+							display_value="Illuminated board"
+							fr.display_value="Tableau lumineux"
+							icon="icons/boards/frost.svg"
+							icon_size="24"/>
+						<list_entry
+							value="light"
+							display_value="Light box"
+							fr.display_value="Caisson lumineux"
+							icon="icons/boxes/frost.svg"
+							icon_size="24"/>
+					</combo>
+					<link wiki="OpenRailwayMap/Tagging_in_France#Frost_board" />
+				</item>
+
+				<!-- LGV Lightbox (constant contact wire height) -->
+				<item
+					name="LGV Lightbox"
+					fr.name="Caisson LGV"
+					type="node"
+					icon="icons/boxes/LGV.svg">
+					<label
+						text="LGV lightbox"
+						fr.text="Caisson LGV" />
+					<space />
+					<key key="railway:signal:electricity" value="FR:LGV" />
+					<key key="railway:signal:electricity:form" value="light" />
+					<reference ref="cat_electricity" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#LGV_lightbox" />
+				</item>
+
 			</group>
 
 			<separator />
 
-			<!-- Catenary Voltage -->
-			<group
-				name="Catenary Voltage"
-				fr.name="Tension Caténaire"
+			<!-- Catenary Voltage Reminder -->
+			<item
+				name="Catenary Voltage Reminder"
+				fr.name="Rappel Tension Caténaire"
+				type="node"
 				icon="icons/signs/25000.svg">
-
-				<!-- Catenary Voltage Reminder -->
-				<item
-					name="Catenary Voltage Reminder"
-					fr.name="Rappel Tension Caténaire"
-					type="node"
-					icon="icons/signs/25000.svg">
-					<label
-						text="Catenary voltage reminder board"
-						fr.text="Pancarte de rappel de tension caténaire" />
-					<space />
-					<key key="railway:signal:catenary" value="FR:reminder" />
-					<reference ref="cat_catenary" />
-					<reference ref="optional_catenary_supply" />
-					<link wiki="OpenRailwayMap/Tagging_in_France#Catenary_voltage_reminder" />
-				</item>
-
-				<!-- Catenary Transition (end of a voltage section) -->
-				<item
-					name="Catenary Transition (end)"
-					fr.name="Transition Caténaire (Fin)"
-					type="node"
-					icon="icons/signs/end_of_1500V.svg">
-					<label
-						text="Catenary voltage transition, end of a voltage section"
-						fr.text="Transition de tension caténaire, fin de section" />
-					<space />
-					<key key="railway:signal:catenary" value="FR:transition" />
-					<key key="railway:signal:catenary:function" value="exit" />
-					<reference ref="cat_catenary" />
-					<reference ref="optional_catenary_supply" />
-					<text
-						key="railway:signal:catenary:caption"
-						text="Sign caption"
-						fr.text="Libellé de la pancarte" />
-					<link wiki="OpenRailwayMap/Tagging_in_France#Catenary_voltage_transition" />
-				</item>
-
-				<!-- Catenary Transition (new voltage ahead) -->
-				<item
-					name="Catenary Transition (ahead)"
-					fr.name="Transition Caténaire (nouvelle tension)"
-					type="node"
-					icon="icons/signs/3000V.svg">
-					<label
-						text="Catenary voltage transition, new voltage ahead"
-						fr.text="Transition de tension caténaire, nouvelle tension en aval" />
-					<space />
-					<key key="railway:signal:catenary" value="FR:transition" />
-					<key key="railway:signal:catenary:function" value="entry" />
-					<reference ref="cat_catenary" />
-					<reference ref="optional_catenary_supply" />
-					<text
-						key="railway:signal:catenary:caption"
-						text="Sign caption"
-						fr.text="Libellé de la pancarte" />
-					<link wiki="OpenRailwayMap/Tagging_in_France#Catenary_voltage_transition" />
-				</item>
-
-				<separator />
-
-				<!-- Switchable Station -->
-				<item
-					name="Switchable Station"
-					fr.name="Gare Commutable"
-					type="node"
-					icon="icons/signs/switchable_station.svg">
-					<label
-						text="Switchable station"
-						fr.text="Gare commutable" />
-					<space />
-					<key key="railway:signal:catenary" value="FR:switchable_station" />
-					<key key="railway:signal:catenary:form" value="sign" />
-					<key key="railway:signal:catenary:function" value="entry" />
-					<reference ref="cat_catenary" />
-					<link wiki="OpenRailwayMap/Tagging_in_France#Switchable_station" />
-				</item>
-
-				<!-- End of Switchable Station -->
-				<item
-					name="End of Switchable Station"
-					fr.name="Fin Gare Commutable"
-					type="node"
-					icon="icons/signs/end_of_switchable_station.svg">
-					<label
-						text="End of switchable station"
-						fr.text="Fin de gare commutable" />
-					<space />
-					<key key="railway:signal:catenary" value="FR:switchable_station" />
-					<key key="railway:signal:catenary:form" value="sign" />
-					<key key="railway:signal:catenary:function" value="exit" />
-					<reference ref="cat_catenary" />
-					<link wiki="OpenRailwayMap/Tagging_in_France#Switchable_station" />
-				</item>
-
-			</group>
+				<label
+					text="Catenary voltage reminder board"
+					fr.text="Pancarte de rappel de tension caténaire" />
+				<space />
+				<key key="railway:signal:electricity" value="FR:voltage_reminder" />
+				<key key="railway:signal:electricity:form" value="sign" />
+				<reference ref="cat_electricity" />
+				<reference ref="optional_traction_supply" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Catenary_voltage_reminder" />
+			</item>
 
 			<!-- End of Catenary -->
 			<item
@@ -7290,40 +7318,6 @@
 				<key key="railway:signal:position" value="overhead" />
 				<reference ref="base_common_core" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#End_of_catenary" />
-			</item>
-
-			<!-- Frost Board -->
-			<item
-				name="Frost Board"
-				fr.name="Tableau GIVRE"
-				type="node"
-				icon="icons/boards/frost.svg">
-				<label
-					text="Frost Board"
-					fr.text="Tableau GIVRE" />
-				<space />
-				<key key="railway:signal:electricity" value="FR:frost" />
-				<reference ref="cat_electricity" />
-				<combo
-					key="railway:signal:electricity:form"
-					text="Signal presentation"
-					fr.text="Présentation du signal"
-					editable="false"
-					values_sort="false">
-					<list_entry
-						value="board"
-						display_value="Illuminated board"
-						fr.display_value="Tableau lumineux"
-						icon="icons/boards/frost.svg"
-						icon_size="24"/>
-					<list_entry
-						value="light"
-						display_value="Light box"
-						fr.display_value="Caisson lumineux"
-						icon="icons/boxes/frost.svg"
-						icon_size="24"/>
-				</combo>
-				<link wiki="OpenRailwayMap/Tagging_in_France#Frost_board" />
 			</item>
 
 			<separator />
