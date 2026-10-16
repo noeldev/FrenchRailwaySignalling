@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: FR:Key:railway:signal:main:states
-Last edited: 2024-10-25 01:38:17 UTC
+Last edited: 2026-08-19 02:11:33 UTC
 Last editor: Noeld
-Last edit comment: /* See also */ Edit.
-Backup date: 2025-08-09 02:16:17 UTC
+Last edit comment: /* Available states */ change CV state to Cv to align with official references
+Backup date: 2026-10-16 03:50:51 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/FR:Key:railway:signal:main:states
 --}}
 
@@ -13,47 +13,74 @@ Source URL: https://wiki.openstreetmap.org/wiki/FR:Key:railway:signal:main:state
 !States
 !Description
 |-
-|{{TagValue|railway:signal:main:states|FR:VL}}
-|Green light
+|{{TagValue|railway:signal:main:states|FR:C}}
+|Stop aspect (Carré)
 |-
-|{{TagValue|railway:signal:main:states|FR:(VL)}}
-|Flashing green light
-|-
-|{{TagValue|railway:signal:main:states|FR:R}}, {{TagValue|railway:signal:main:states|FR:R+A}}, {{TagValue|railway:signal:main:states|FR:R+(A)}}
-|Ralentissement 30 (Slow 30)
-|-
-|{{TagValue|railway:signal:main:states|FR:(R)}}, {{TagValue|railway:signal:main:states|FR:(R)+A}}, {{TagValue|railway:signal:main:states|FR:(R)+(A)}}
-|Ralentissement 60 (Slow 60)
-|-
-|{{TagValue|railway:signal:main:states|FR:A}}
-|Avertissement (Announcement)
-|-
-|{{TagValue|railway:signal:main:states|FR:(A)}}
-|Flashing yellow light
-|-
-|{{TagValue|railway:signal:main:states|FR:RR}}, {{TagValue|railway:signal:main:states|FR:RR+A}}, {{TagValue|railway:signal:main:states|FR:RR+(A)}}
-|Rappel 30 (Reminder 30)
-|-
-|{{TagValue|railway:signal:main:states|FR:(RR)}}, {{TagValue|railway:signal:main:states|FR:(RR)+A}}, {{TagValue|railway:signal:main:states|FR:(RR)+(A)}}
-|Rappel 60 (Reminder 60)
-|-
-|{{TagValue|railway:signal:main:states|FR:M}}
-|White light
-|-
-|{{TagValue|railway:signal:main:states|FR:(M)}}
-|Flashing white light
+|{{TagValue|railway:signal:main:states|FR:Cv}}
+|Shunt stop aspect (Carré violet)
 |-
 |{{TagValue|railway:signal:main:states|FR:S}}
-|Sémaphore
+|Stop and proceed aspect (Sémaphore)
+|-
+|{{TagValue|railway:signal:main:states|FR:X}}
+|Cancelled aspect (Illuminated cross)
 |-
 |{{TagValue|railway:signal:main:states|FR:(S)}}
 |Flashing red light
 |-
-|{{TagValue|railway:signal:main:states|FR:CV}}
-|Carré violet
+|{{TagValue|railway:signal:main:states|FR:M}}
+|Shunting aspect (Feu blanc, marche en manœuvre)
 |-
-|{{TagValue|railway:signal:main:states|FR:C}}
-|Carré
+|{{TagValue|railway:signal:main:states|FR:(M)}}
+|Flashing white light
+|-
+|{{TagValue|railway:signal:main:states|FR:RR}}
+|30 km/h speed reminder (Rappel 30)
+|-
+|{{TagValue|railway:signal:main:states|FR:RR+A}}
+|30 km/h speed reminder and caution aspect
+|-
+|{{TagValue|railway:signal:main:states|FR:RR+(A)}}
+|30 km/h speed reminder and advance caution aspect
+|-
+|{{TagValue|railway:signal:main:states|FR:(RR)}}
+|60 km/h speed reminder (Rappel 60)
+|-
+|{{TagValue|railway:signal:main:states|FR:(RR)+A}}
+|60 km/h speed reminder and caution aspect
+|-
+|{{TagValue|railway:signal:main:states|FR:(RR)+(A)}}
+|60 km/h speed reminder and advance caution aspect
+|-
+|{{TagValue|railway:signal:main:states|FR:A}}
+|Caution aspect (Avertissement)
+|-
+|{{TagValue|railway:signal:main:states|FR:(A)}}
+|Advance caution aspect (Feu jaune clignotant)
+|-
+|{{TagValue|railway:signal:main:states|FR:R}}
+|30 km/h speed restriction (Ralentissement 30)
+|-
+|{{TagValue|railway:signal:main:states|FR:R+A}}
+|30 km/h speed restriction and caution aspect
+|-
+|{{TagValue|railway:signal:main:states|FR:R+(A)}}
+|30 km/h speed restriction and advance caution aspect
+|-
+|{{TagValue|railway:signal:main:states|FR:(R)}}
+|60 km/h speed restriction (Ralentissement 60)
+|-
+|{{TagValue|railway:signal:main:states|FR:(R)+A}}
+|60 km/h speed restriction and caution aspect
+|-
+|{{TagValue|railway:signal:main:states|FR:(R)+(A)}}
+|60 km/h speed restriction and advance caution aspect
+|-
+|{{TagValue|railway:signal:main:states|FR:VL}}
+|Clear aspect (Feu vert)
+|-
+|{{TagValue|railway:signal:main:states|FR:(VL)}}
+|Flashing green light
 |}
 
 == See also ==

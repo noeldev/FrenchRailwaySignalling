@@ -1,18 +1,34 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2026-10-04 00:20:25 UTC<br>
+**Backup generated:** 2026-10-16 03:50:51 UTC<br>
 **Category:** main<br>
-**Total pages:** 1<br>
-**Successfully backed up:** 1
-## Successfully Backed Up Pages (1)
+**Total pages:** 3<br>
+**Successfully backed up:** 3
+## Successfully Backed Up Pages (3)
+
+### FR:Key:railway:signal:distant:states
+
+- **File:** [FR/Key/railway-signal-distant-states.wiki](FR/Key/railway-signal-distant-states.wiki)
+- **Wiki URL:** [FR:Key:railway:signal:distant:states](https://wiki.openstreetmap.org/wiki/FR:Key:railway:signal:distant:states)
+- **Last edited:** 2026-07-10 23:05:26 UTC
+- **Last editor:** Noeld
+- **Edit comment:** /* Available states */ fix FR:(VL) category
+
+### FR:Key:railway:signal:main:states
+
+- **File:** [FR/Key/railway-signal-main-states.wiki](FR/Key/railway-signal-main-states.wiki)
+- **Wiki URL:** [FR:Key:railway:signal:main:states](https://wiki.openstreetmap.org/wiki/FR:Key:railway:signal:main:states)
+- **Last edited:** 2026-08-19 02:11:33 UTC
+- **Last editor:** Noeld
+- **Edit comment:** /* Available states */ change CV state to Cv to align with official references
 
 ### OpenRailwayMap/Tagging_in_France
 
 - **File:** [OpenRailwayMap/Tagging_in_France.wiki](OpenRailwayMap/Tagging_in_France.wiki)
 - **Wiki URL:** [OpenRailwayMap/Tagging_in_France](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
-- **Last edited:** 2026-10-01 23:50:58 UTC
+- **Last edited:** 2026-10-15 21:27:50 UTC
 - **Last editor:** Noeld
-- **Edit comment:** /* Disabled signal */ import and extend the 2TMV section
+- **Edit comment:** /* Speed limit announcement (P board) */ replace form=sign with board, P is an illuminated board or a lightbox
 
 ## About
 
