@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.34_2026-10-14"
+    version="1.35_2026-10-16"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -5952,8 +5952,7 @@
 					name="Distant Speed Indicator"
 					fr.name="TIV à Distance"
 					type="node"
-					icon="icons/signs/pentagonal_distant_speed_indicator.svg"
-					match_expression="-&quot;railway:signal:speed_limit_distant:freight:function&quot;=*">
+					icon="icons/signs/pentagonal_distant_speed_indicator.svg">
 					<label
 						text="Pentagonal distant speed indicator"
 						fr.text="TIV à distance de forme pentagonale" />
@@ -5961,7 +5960,6 @@
 					<key key="railway:signal:speed_limit_distant" value="FR:speed_indicator" />
 					<key key="railway:signal:speed_limit_distant:freight" value="FR:TIV-D" />
 					<key key="railway:signal:speed_limit_distant:freight:form" value="sign" />
-					<key key="railway:signal:speed_limit_distant:freight:function" match="none" />
 					<reference ref="base_with_plate" />
 					<text
 						key="railway:signal:speed_limit_distant:freight:ref"
