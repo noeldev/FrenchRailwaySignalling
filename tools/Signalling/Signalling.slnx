@@ -8,4 +8,5 @@
   </Folder>
   <Project Path="SignalAudit/SignalAudit.csproj" />
   <Project Path="TagInfoGen/TagInfoGen.csproj" />
+  <Project Path="ValidatorGen/ValidatorGen.csproj" />
 </Solution>
