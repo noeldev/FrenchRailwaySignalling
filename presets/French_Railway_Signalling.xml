@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.35_2026-10-16"
+    version="1.36_2026-10-16"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -5557,7 +5557,7 @@
 					name="Switchable TIV-R"
 					fr.name="TIV-R Mobile"
 					type="node"
-					icon="icons/signs/TIV-R.svg">
+					icon="icons/boards/TIV-R.svg">
 					<label
 						text="Switchable TIV-R"
 						fr.text="TIV-R Mobile" />
@@ -5576,11 +5576,6 @@
 						fr.text="Présentation du signal"
 						editable="false"
 						values_sort="false">
-						<list_entry
-							value="sign"
-							display_value="Board"
-							fr.display_value="Pancarte"
-							icon="icons/signs/TIV-R.svg" icon_size="24"/>
 						<list_entry
 							value="board"
 							display_value="Illuminated board"
