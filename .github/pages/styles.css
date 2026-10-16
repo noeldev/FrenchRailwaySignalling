@@ -68,6 +68,10 @@ h2 {
     margin: 20px 0;
 }
 
+.installation-box p {
+    margin: 12px 0 0;
+}
+
 ol {
     padding-left: 20px;
     margin: 0;
@@ -91,6 +95,7 @@ code {
     border-radius: 3px;
     font-family: "Courier New", monospace;
     font-size: 0.9em;
+    overflow-wrap: anywhere;
 }
 
 a {

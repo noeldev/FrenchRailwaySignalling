@@ -4,8 +4,10 @@ on:
   push:
     paths:
       - 'presets/**'
+      - 'validator/**'
       - 'tools/Signalling/**'
       - '.github/pages/**'
+      - '.github/workflows/build-and-deploy-presets.yml'
     branches: [ "main" ]
   workflow_dispatch:
 
@@ -14,10 +16,18 @@ permissions:
   pages: write
   id-token: write
 
+# One Pages deployment at a time; a queued run waits instead of cancelling the
+# deployment in progress.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 env:
   ARCHIVE_NAME: French_Railway_Signalling_presets.zip
   PRESET_FILE: presets/French_Railway_Signalling.xml
   TAGINFO_PROJECT: tools/Signalling/TagInfoGen/TagInfoGen.csproj
+  VALIDATOR_PROJECT: tools/Signalling/ValidatorGen/ValidatorGen.csproj
+  VALIDATOR_FILE: public/French_Railway_Signalling.validator.mapcss
 
 jobs:
   build:
@@ -46,19 +56,25 @@ jobs:
           cp ${{ env.ARCHIVE_NAME }} public/
           cp -r .github/pages/* public/
 
-      # --- taginfo: build the generator and emit taginfo.json into public/ ---
+      # --- .NET tools: taginfo.json and the validator rules, into public/ ---
       - name: Setup .NET
         uses: actions/setup-dotnet@v6
         with:
           dotnet-version: '10.0.x'
           cache: true
-          cache-dependency-path: ${{ env.TAGINFO_PROJECT }}
+          cache-dependency-path: |
+            ${{ env.TAGINFO_PROJECT }}
+            ${{ env.VALIDATOR_PROJECT }}
 
       - name: Restore dependencies
-        run: dotnet restore ${{ env.TAGINFO_PROJECT }}
+        run: |
+          dotnet restore ${{ env.TAGINFO_PROJECT }}
+          dotnet restore ${{ env.VALIDATOR_PROJECT }}
 
-      - name: Build project
-        run: dotnet build ${{ env.TAGINFO_PROJECT }} -c Release --no-restore
+      - name: Build projects
+        run: |
+          dotnet build ${{ env.TAGINFO_PROJECT }} -c Release --no-restore
+          dotnet build ${{ env.VALIDATOR_PROJECT }} -c Release --no-restore
 
       - name: Generate taginfo.json
         # Writes taginfo.json into public/ (published with the Pages content);
@@ -70,6 +86,24 @@ jobs:
         with:
           name: taginfo-log
           path: taginfo.md
+
+      - name: Generate validator rules
+        # --local reads the wiki pages from the committed backup in wiki/backup/,
+        # never from the live wiki, so only reviewed content is published.
+        run: dotnet run --project ${{ env.VALIDATOR_PROJECT }} --configuration Release --no-build --no-restore -- ${{ env.VALIDATOR_FILE }} --local
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Check validator rules with JOSM
+        # Parses the rules and runs their assertMatch/assertNoMatch self-tests
+        # with the current tested JOSM release; any failure stops the run.
+        run: |
+          curl -fsSL -o josm-tested.jar https://josm.openstreetmap.de/josm-tested.jar
+          java -Djava.awt.headless=true -jar josm-tested.jar validate --input ${{ env.VALIDATOR_FILE }}
 
       - name: Upload artifact for GitHub Pages
         uses: actions/upload-pages-artifact@v5
