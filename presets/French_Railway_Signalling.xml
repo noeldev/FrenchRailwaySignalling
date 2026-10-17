@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.36_2026-10-16"
+    version="1.37_2026-10-17"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -4448,7 +4448,7 @@
 			<group
 				name="Reporting Plates"
 				fr.name="Plaques de Reconnaissance"
-				icon="icons/plates/reporting.svg">
+				icon="icons/plates/reporting_vat.svg">
 
 				<item
 					name="Reporting"
