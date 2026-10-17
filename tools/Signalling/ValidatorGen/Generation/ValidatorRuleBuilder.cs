@@ -156,12 +156,17 @@ public sealed class ValidatorRuleBuilder(TagSchema schema, RuleTable table, Vali
             var accepted = spec.Values.Where(value => !schema.IsForeign(value))
                 .Concat(legacyValues.GetValueOrDefault(spec.Key, NoValues))
                 .Distinct()
-                .Order(StringComparer.Ordinal);
+                .Order(StringComparer.Ordinal)
+                .ToList();
+
+            // A key documented with foreign values only accepts no domestic
+            // value: no empty alternative in front of the foreign pattern.
+            var alternatives = accepted.Count > 0 ? $"{Alternation(accepted)}|{foreign}" : foreign;
 
             // The presence test comes first: Osmose-QA matches a regular
             // expression against an empty string when the key is absent.
             var key = Quote(spec.Key);
-            return $"node[{key}][{key}=~/(^|;)(?!(?:{Alternation(accepted)}|{foreign})(?:;|$))/].{_scopeClass}";
+            return $"node[{key}][{key}=~/(^|;)(?!(?:{alternatives})(?:;|$))/].{_scopeClass}";
         }).ToList();
 
         List<string> declarations =
