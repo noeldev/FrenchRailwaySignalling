@@ -1,6 +1,6 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2026-10-16 03:50:51 UTC<br>
+**Backup generated:** 2026-10-17 02:02:37 UTC<br>
 **Category:** main<br>
 **Total pages:** 3<br>
 **Successfully backed up:** 3
@@ -26,9 +26,9 @@
 
 - **File:** [OpenRailwayMap/Tagging_in_France.wiki](OpenRailwayMap/Tagging_in_France.wiki)
 - **Wiki URL:** [OpenRailwayMap/Tagging_in_France](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
-- **Last edited:** 2026-10-15 21:27:50 UTC
+- **Last edited:** 2026-10-17 00:04:30 UTC
 - **Last editor:** Noeld
-- **Edit comment:** /* Speed limit announcement (P board) */ replace form=sign with board, P is an illuminated board or a lightbox
+- **Edit comment:** /* Fixed Ordinary-type TIV-D */ add board (illuminated) form
 
 ## About
 

@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-10-15 21:27:50 UTC
+Last edited: 2026-10-17 00:04:30 UTC
 Last editor: Noeld
-Last edit comment: /* Speed limit announcement (P board) */ replace form=sign with board, P is an illuminated board or a lightbox
-Backup date: 2026-10-16 03:50:51 UTC
+Last edit comment: /* Fixed Ordinary-type TIV-D */ add board (illuminated) form
+Backup date: 2026-10-17 02:02:37 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -13,8 +13,11 @@ Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 
 This page is an editorial consolidation of the tagging scheme specific to French railway signalling, based on the international [[Tag:railway=signal|railway signal]] tagging model.
 
-== JOSM presets ==
-Dedicated [https://josm.openstreetmap.de/wiki/Presets JOSM presets] are available to simplify mapping in conformance with this scheme. See [https://noeldev.github.io/FrenchRailwaySignalling/ French railway signalling JOSM Presets].
+== JOSM presets and validator rules ==
+
+Dedicated [https://josm.openstreetmap.de/wiki/Presets JOSM presets] are available to simplify mapping in accordance with this scheme. Complementary [https://josm.openstreetmap.de/wiki/Rules JOSM validator rules] help identify French railway signals whose tagging does not conform to the documented scheme.
+
+It is recommended to install both the presets and the validator rules directly from JOSM. See [https://noeldev.github.io/FrenchRailwaySignalling/ French Railway Signalling for JOSM] for installation instructions.
 
 == General tags ==
 All railway signals must include the following tags:
@@ -425,7 +428,7 @@ TIV_Distance_Crocodile_40.svg|Diamond-shaped TIV-D
 Common tags:
 * {{Tag|railway:signal:speed_limit_distant|FR:speed_indicator}}
 * {{Tag|railway:signal:speed_limit_distant:fixed|FR:TIV-D}}
-* {{Tag|railway:signal:speed_limit_distant:fixed:form|sign}}
+* {{Tag|railway:signal:speed_limit_distant:fixed:form||({{TagValue|railway:signal:speed_limit_distant:fixed:form|board}}/{{TagValue|railway:signal:speed_limit_distant:fixed:form|sign}})}}
 * {{Tag|railway:signal:speed_limit_distant:fixed:speed|}} (speed as displayed on the signal, e.g. 80)
 
 Additional tag for diamond-shaped indicators only:
@@ -555,6 +558,10 @@ File:FR_Pancarte_Km.svg|Km sign
 * {{Tag|railway:signal:speed_limit|FR:speed_indicator}}
 * {{Tag|railway:signal:speed_limit:transition|FR:Km}}
 * {{Tag|railway:signal:speed_limit:transition:form|sign}}
+
+
+Optional tag:
+
 * {{Tag|railway:signal:speed_limit:transition:caption|}} (text as shown on the sign, e.g. ''Km 74,7'')
 
 =Route indicators=
@@ -1912,5 +1919,6 @@ File:304 Swiss shunting stop board.svg|Shunting stop board
 * [https://github.com/nicolaswurtz/signalisation-rfn-svg signalisation-rfn-svg] (Nicolas Wurtz, SVG)
 * [https://commons.wikimedia.org/wiki/Category:Diagrams_of_railway_signals_in_France Diagrams of railway signals in France] (Various authors, SVG+GIF)
 * [https://commons.wikimedia.org/wiki/Category:Diagrams_of_railway_signs_in_France Diagrams of railway signs in France] (Various authors, SVG)
+* [https://www.sncf-reseau.com/en/drr/network-statement-national-rail-network-timetable-2027 Network Statement SNCF]
 
 {{Railway signals}}
