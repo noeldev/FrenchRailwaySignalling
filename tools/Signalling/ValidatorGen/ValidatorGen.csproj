@@ -9,7 +9,7 @@
     <RootNamespace>ValidatorGen</RootNamespace>
     <AssemblyName>ValidatorGen</AssemblyName>
     <Product>ValidatorGen</Product>
-    <Version>1.0.0</Version>
+    <Version>1.1.0</Version>
     <Company>Noël Danjou EI</Company>
     <Authors>Noël Danjou</Authors>
     <Copyright>Copyright © 2026 Noël Danjou</Copyright>
@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\libs\Signalling.Core\Signalling.Core.csproj" />
+    <ProjectReference Include="..\libs\Signalling.Rules\Signalling.Rules.csproj" />
     <ProjectReference Include="..\libs\Signalling.Wiki\Signalling.Wiki.csproj" />
   </ItemGroup>
 

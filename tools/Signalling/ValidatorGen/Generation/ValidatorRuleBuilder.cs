@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Noël Danjou
 
+using Signalling.Rules;
 using ValidatorGen.Core;
 using ValidatorGen.MapCss;
-using ValidatorGen.Rules;
 using ValidatorGen.Schema;
 using static ValidatorGen.MapCss.MapCssSyntax;
 
@@ -90,7 +90,7 @@ public sealed class ValidatorRuleBuilder(TagSchema schema, RuleTable table, Vali
 
         List<string> declarations =
         [
-            $"throwError: tr(\"{{0}} is deprecated\", {Quote(RuleTableValidator.Describe(entry.PresentTags))})",
+            $"throwError: tr(\"{{0}} is deprecated\", {Quote(RuleTable.Describe(entry.PresentTags))})",
             .. entry.Rename.Select(rename => $"fixChangeKey: {Quote($"{rename.Key}=>{rename.Value}")}"),
             .. entry.Remove.Select(key => $"fixRemove: {Quote(key)}"),
             .. entry.Set.Select(tag => $"fixAdd: {Quote($"{tag.Key}={tag.Value}")}"),
@@ -108,7 +108,7 @@ public sealed class ValidatorRuleBuilder(TagSchema schema, RuleTable table, Vali
     private MapCssRule BuildConflictRule(TagConflict entry, int index)
     {
         var selector = "node" + string.Concat(entry.Tags.Select(tag => $"[{Quote(tag.Key)}={Quote(tag.Value)}]"));
-        var tags = RuleTableValidator.Describe(entry.Tags);
+        var tags = RuleTable.Describe(entry.Tags);
         var message = string.IsNullOrWhiteSpace(entry.Note)
             ? $"throwError: tr(\"{{0}} cannot be combined\", {Quote(tags)})"
             : $"throwError: tr(\"{{0}} cannot be combined: {{1}}\", {Quote(tags)}, {Quote(entry.Note)})";

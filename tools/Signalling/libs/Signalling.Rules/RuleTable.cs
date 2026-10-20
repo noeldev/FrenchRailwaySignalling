@@ -4,11 +4,11 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace ValidatorGen.Rules;
+namespace Signalling.Rules;
 
-// The hand-maintained part of the validator: how legacy tagging is replaced,
-// and which documented tags must not be combined. Everything else (what is
-// documented) comes from the wiki.
+// The hand-maintained part of the validator and of the MapRoulette challenge:
+// how legacy tagging is replaced, and which documented tags must not be
+// combined. Everything else (what is documented) comes from the wiki.
 //
 // Value replacements rename one value of a key, in place. The value is matched
 // as a token, so the same entry also fixes a ";" separated list such as
@@ -41,6 +41,10 @@ public sealed class RuleTable
     public List<TagReplacement> TagReplacements { get; set; } = [];
 
     public List<TagConflict> Conflicts { get; set; } = [];
+
+    // Tags as "key=value + key=value", for messages and reports.
+    public static string Describe(IEnumerable<KeyValuePair<string, string>> tags) =>
+        string.Join(" + ", tags.Select(tag => $"{tag.Key}={tag.Value}"));
 
     public static RuleTable Load(string path)
     {

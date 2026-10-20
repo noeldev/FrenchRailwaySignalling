@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Noël Danjou
 
+using Signalling.Rules;
 using ValidatorGen.Schema;
 
 namespace ValidatorGen.Rules;
@@ -24,9 +25,6 @@ public static class RuleTableValidator
         return errors;
     }
 
-    public static string Describe(IEnumerable<KeyValuePair<string, string>> tags) =>
-        string.Join(" + ", tags.Select(tag => $"{tag.Key}={tag.Value}"));
-
     private static IEnumerable<string> ValidateValueReplacement(ValueReplacement entry, TagSchema schema)
     {
         var label = $"value replacement {entry.Key}={entry.From}";
@@ -47,7 +45,7 @@ public static class RuleTableValidator
 
     private static IEnumerable<string> ValidateTagReplacement(TagReplacement entry, TagSchema schema)
     {
-        var label = $"tag replacement {Describe(entry.PresentTags)}";
+        var label = $"tag replacement {RuleTable.Describe(entry.PresentTags)}";
         if (!entry.PresentTags.Any())
         {
             yield return "tag replacement: \"match\" needs at least one present tag.";
@@ -77,7 +75,7 @@ public static class RuleTableValidator
 
     private static IEnumerable<string> ValidateConflict(TagConflict entry, TagSchema schema)
     {
-        var label = $"conflict {Describe(entry.Tags)}";
+        var label = $"conflict {RuleTable.Describe(entry.Tags)}";
         if (entry.Tags.Count < 2)
         {
             yield return $"{label}: a conflict needs at least two tags.";
