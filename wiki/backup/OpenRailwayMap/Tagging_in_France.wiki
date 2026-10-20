@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-10-17 00:04:30 UTC
+Last edited: 2026-10-20 04:11:04 UTC
 Last editor: Noeld
-Last edit comment: /* Fixed Ordinary-type TIV-D */ add board (illuminated) form
-Backup date: 2026-10-17 02:02:37 UTC
+Last edit comment: /* TVM stop marker */ fix ETCS link
+Backup date: 2026-10-20 04:12:20 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -736,13 +736,14 @@ File:Fin_de_Signalisation_de_Cabine.svg|Cab signalling line exit board
 File:Repère_TGV.svg|TVM stop marker
 </gallery>
 
-* {{Tag|railway:signal:train_protection|FR:marker}}
+* {{Tag|railway:signal:train_protection|FR:TVM}}
 * {{Tag|railway:signal:train_protection:main|stop_marker}}
 * {{Tag|railway:signal:train_protection:main:form|sign}}
 * {{Tag|railway:signal:train_protection:main:type||({{TagValue|railway:signal:train_protection:main:type|FR:F}}/{{TagValue|railway:signal:train_protection:main:type|FR:Nf}})}} (identification plate)
 
 Optional tags:
 * {{Tag|railway:signal:train_protection:main:passing_light|yes}} (if '''Nf''' signal is equipped with a white passing light)
+* {{Tag|railway:signal:train_protection:main:etcs|yes}} (if co-located with an [[OpenRailwayMap/ETCS_Markers#ETCS_stop_marker|ETCS stop marker]])
 
 ==== TVM transition marker ====
 The boards indicate transitions between TVM systems or types of cab signalling. The numbers 300 or 430 indicate the downstream TVM system, while 1 or 2 indicate the track direction.
@@ -752,7 +753,7 @@ File:TVM300 transition board.svg|TVM300 transition board
 File:TVM430 transition board.svg|TVM430 transition board
 </gallery>
 
-* {{Tag|railway:signal:train_protection|FR:marker}}
+* {{Tag|railway:signal:train_protection|FR:TVM}}
 * {{Tag|railway:signal:train_protection:system_change|FR:type_transition}}
 * {{Tag|railway:signal:train_protection:system_change:form|sign}}
 * {{Tag|railway:signal:train_protection:system_change:type||({{TagValue|railway:signal:train_protection:system_change:type|300}}/{{TagValue|railway:signal:train_protection:system_change:type|430}})}} (TVM 300 / TVM 430)
@@ -1427,6 +1428,7 @@ File:Repère SID.svg|Exit signals on both sides of tracks
 
 * {{Tag|railway:signal:station|FR:bilateral_exit_signals}}
 * {{Tag|railway:signal:station:form|sign}}
+* {{Tag|railway:signal:position|ground}}
 
 =Facilities=
 In this context, ''facility'' refers to any non-station railway site (French: '''établissement''') such as a depot, yard, or technical installation.
@@ -1443,14 +1445,14 @@ File:Schéma_de_signalisation_ferroviaire_Pancarte_d'annonce.svg|Approach marker
 Optional tags:
 * {{Tag|railway:signal:facility_distant:caption|}} (text as shown on the sign, e.g. ''Chailles à 200m'')
 
-- This half-black, half-white sign marks the approach to a facility other than a station on single-track lines with simplified signalling (VUSS), indicating that the points within the facility must not be traversed at a speed exceeding 30 km/h (40 km/h on certain lines).
+- This half-black, half-white sign marks the approach to a facility other than a station on branch lines with '''simplified operational rules''' (VUSS), indicating that the points within the facility must not be traversed at a speed exceeding 30 km/h (40 km/h on certain lines).
 
 <gallery>
 File:Approche_Etablissement.svg|Facility approach marker (VUSS)
 </gallery>
 
 * {{Tag|railway:signal:facility_distant|FR:marker}}
-* {{Tag|railway:signal:facility_distant:type|FR:VUSS}}
+* {{Tag|railway:signal:facility_distant:type|simplified}}
 * {{Tag|railway:signal:facility_distant:form|sign}}
 
 - The boundary of certain facilities is marked by the diamond-shaped sign below:
