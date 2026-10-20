@@ -187,7 +187,7 @@
 	<chunk id="cat_ordinary_speed_indicator_presets">
 		<preset_link preset_name="B-type TIV-D" text=""/>
 		<preset_link preset_name="C-type TIV-D" text=""/>
-		<preset_link preset_name="Z Sign" text=""/>
+		<preset_link preset_name="Z Board" text=""/>
 	</chunk>
 
 	<!-- Mechanical Speed Limit Signals -->
@@ -218,7 +218,7 @@
 		<space />
 		<text
 			key="railway:signal:distant:caption"
-			text="Sign caption"
+			text="Board caption"
 			fr.text="Libellé de la pancarte" />
 	</chunk>
 
@@ -300,7 +300,7 @@
 			length="7" />
 	</chunk>
 
-	<!-- Track Information Signs (form=sign) -->
+	<!-- Track Information Boards (form=sign) -->
 	<chunk id="cat_route_info">
 		<reference ref="base_common" />
 		<key key="railway:signal:route_info:form" value="sign" />
@@ -399,7 +399,7 @@
 		<reference ref="cat_shunting_sign" />
 		<text
 			key="railway:signal:shunting:caption"
-			text="Sign caption"
+			text="Board caption"
 			fr.text="Libellé de la pancarte" />
 		<link wiki="OpenRailwayMap/Tagging_in_France#Other_limit_signs" />
 	</chunk>
@@ -431,7 +431,7 @@
 		<space />
 		<text
 			key="railway:signal:stop_distant:caption"
-			text="Sign caption"
+			text="Board caption"
 			fr.text="Libellé de la pancarte" />
 	</chunk>
 
@@ -442,7 +442,7 @@
 		<reference ref="cat_stop" />
 		<text
 			key="railway:signal:stop:caption"
-			text="Sign caption"
+			text="Board caption"
 			fr.text="Libellé de la pancarte" />
 		<link wiki="OpenRailwayMap/Tagging_in_France#Arrêt_signs_for_specific_movements" />
 	</chunk>
@@ -472,7 +472,7 @@
 	<!-- UFR preset link -->
 	<chunk id="cat_ufr_preset_link">
 		<item_separator />
-		<preset_link preset_name="UFR Sign" text="" />
+		<preset_link preset_name="UFR Board" text="" />
 	</chunk>
 
 	<!-- Passenger stop signs (vehicle count) -->
@@ -674,7 +674,7 @@
 			length="7" />
 		<text
 			key="railway:signal:crossing_hint:caption"
-			text="Sign caption"
+			text="Board caption"
 			fr.text="Libellé de la pancarte" />
 		<link wiki="OpenRailwayMap/Tagging_in_France#Level_crossing_announcement" />
 	</chunk>
@@ -691,7 +691,7 @@
 			length="7" />
 		<text
 			key="railway:signal:crossing_info:caption"
-			text="Sign caption"
+			text="Board caption"
 			fr.text="Libellé de la pancarte" />
 		<link wiki="OpenRailwayMap/Tagging_in_France#Level_crossing_ahead" />
 	</chunk>
@@ -832,7 +832,7 @@
 		<preset_link preset_name="Switchable TIV-R" text=""/>
 		<preset_link preset_name="Ordinary-type TIV-D (diamond)" text=""/>
 		<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
-		<preset_link preset_name="Z Sign" text=""/>
+		<preset_link preset_name="Z Board" text=""/>
 
 		<space />
 		<preset_link preset_name="ID" text=""/>
@@ -845,7 +845,7 @@
 		<preset_link preset_name="Signal Lumineux de Départ" text=""/>
 
 		<space />
-		<preset_link preset_name="Yellow Light Band" text=""/>
+		<preset_link preset_name="Illuminated Yellow Band" text=""/>
 
 		<link wiki="OpenRailwayMap/Tagging_in_France#Carré" />
 	</chunk>
@@ -915,7 +915,7 @@
 		<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
 		<preset_link preset_name="B-type TIV-D" text=""/>
 		<preset_link preset_name="C-type TIV-D" text=""/>
-		<preset_link preset_name="Z Sign" text=""/>
+		<preset_link preset_name="Z Board" text=""/>
 
 		<link wiki="OpenRailwayMap/Tagging_in_France#Sémaphore" />
 	</chunk>
@@ -2730,20 +2730,20 @@
 
 			<separator />
 
-			<!-- Yellow Light Band -->
+			<!-- Illuminated Horizontal Yellow Band -->
 			<item
-				name="Yellow Light Band"
+				name="Illuminated Yellow Band"
 				fr.name="Bande Lumineuse Jaune"
 				type="node"
-				icon="icons/signals/yellow_light_band.svg">
+				icon="icons/signals/yellow_band.svg">
 				<label
-					text="Horizontal yellow light band"
+					text="Illuminated horizontal yellow band"
 					fr.text="Bande lumineuse jaune horizontale" />
 				<space />
 				<key key="railway:signal:short_route" value="FR:yellow_band" />
 				<key key="railway:signal:short_route:form" value="light" />
 				<reference ref="base_common" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Yellow_light_band" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Illuminated_horizontal_yellow_band" />
 			</item>
 
 		</group>
@@ -3518,7 +3518,7 @@
 				<space />
 				<combo
 					key="railway:signal:stop:arrangement"
-					text="Sign Arrangement"
+					text="Board Arrangement"
 					fr.text="Disposition de la Pancarte"
 					values_sort="false"
 					editable="false">
@@ -3592,7 +3592,7 @@
 				<space />
 				<combo
 					key="railway:signal:stop:arrangement"
-					text="Sign Arrangement"
+					text="Board Arrangement"
 					fr.text="Disposition de la Pancarte"
 					editable="false"
 					values_sort="false">
@@ -3627,7 +3627,7 @@
 				<reference ref="cat_stop" />
 				<text
 					key="railway:signal:stop:caption"
-					text="Sign caption"
+					text="Board caption"
 					fr.text="Libellé de la pancarte" />
 				<space />
 				<multiselect
@@ -4336,7 +4336,7 @@
 					<reference ref="cat_suburban_passenger_stop" />
 					<text
 						key="railway:signal:stop:suburban:caption"
-						text="Sign caption"
+						text="Board caption"
 						fr.text="Libellé de la pancarte" />
 					<reference ref="cat_ufr_preset_link" />
 					<space />
@@ -4358,7 +4358,7 @@
 					<reference ref="cat_suburban_passenger_stop" />
 					<text
 						key="railway:signal:stop:suburban:caption"
-						text="Sign caption"
+						text="Board caption"
 						fr.text="Libellé de la pancarte" />
 					<reference ref="cat_ufr_preset_link" />
 					<space />
@@ -4380,7 +4380,7 @@
 					<reference ref="cat_suburban_passenger_stop" />
 					<text
 						key="railway:signal:stop:suburban:caption"
-						text="Sign caption"
+						text="Board caption"
 						fr.text="Libellé de la pancarte" />
 					<reference ref="cat_ufr_preset_link" />
 					<space />
@@ -4394,7 +4394,7 @@
 
 			<!-- UFR -->
 			<item
-				name="UFR Sign"
+				name="UFR Board"
 				fr.name="Pancarte UFR"
 				type="node"
 				icon="icons/signs/UFR.svg">
@@ -4705,11 +4705,11 @@
 
 			<!-- Station (VUSS) -->
 			<item
-				name="GARE Sign"
-				fr.name="Pancarte GARE"
+				name="Gare Board"
+				fr.name="Pancarte Gare"
 				type="node" icon="icons/signs/GARE.svg">
 				<label
-					text="GARE Sign"
+					text="GARE Board"
 					fr.text="Pancarte GARE" />
 				<space />
 				<key key="railway:signal:station_distant" value="FR:GARE" />
@@ -4754,19 +4754,19 @@
 				<reference ref="cat_facility_distant" />
 				<text
 					key="railway:signal:facility_distant:caption"
-					text="Sign caption"
+					text="Board caption"
 					fr.text="Libellé de la pancarte" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Facilities" />
 			</item>
 
 			<!-- Approach (VUSS) -->
 			<item
-				name="Approaching a Facility (Simplified Signalling)"
+				name="Approaching a Facility (Simplified Rules)"
 				fr.name="Approche d'un Établissement (VUSS)"
 				type="node"
 				icon="icons/signs/facility_approach_simplified.svg">
 				<label
-					text="Approaching a Facility (Simplified signalling)"
+					text="Approaching a Facility (Simplified Operational Rules)"
 					fr.text="Approche d'un Établissement sur VUSS" />
 				<space />
 				<key key="railway:signal:facility_distant" value="FR:marker" />
@@ -4793,11 +4793,11 @@
 			<separator />
 
 			<item
-				name="POSTE Sign"
-				fr.name="Pancarte POSTE"
+				name="Poste Board"
+				fr.name="Pancarte Poste"
 				type="node" icon="icons/signs/POSTE.svg">
 				<label
-					text="POSTE Sign"
+					text="POSTE Board"
 					fr.text="Pancarte POSTE" />
 				<space />
 				<key key="railway:signal:facility" value="FR:POSTE" />
@@ -4815,24 +4815,24 @@
 
 			<!-- Announcement -->
 			<item
-				name="Distant Sign"
+				name="Distant Board"
 				fr.name="Pancarte à Distance"
 				type="node"
 				icon="icons/signs/distant_washing_facility.svg">
 				<label
-					text="&quot;Lavage à ...m&quot; distant sign"
+					text="&quot;Lavage à ...m&quot; distant board"
 					fr.text="Pancarte à distance &quot;Lavage à ...m&quot;" />
 				<space />
 				<key key="railway:signal:servicing_distant" value="FR:washing_facility" />
 				<reference ref="cat_servicing_distant" />
 				<text
 					key="railway:signal:servicing_distant:caption"
-					text="Sign caption"
+					text="Board caption"
 					fr.text="Libellé de la pancarte" />
 				<space />
 				<combo
 					key="railway:signal:servicing_distant:height"
-					text="Sign Size"
+					text="Board Size"
 					fr.text="Taille de la Pancarte"
 					editable="false"
 					values_sort="false">
@@ -4890,7 +4890,7 @@
 					values_sort="false"/>
 				<text
 					key="railway:signal:speed_limit:caption"
-					text="Sign caption"
+					text="Board caption"
 					fr.text="Libellé de la pancarte" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Washing_facility_speed_limit" />
 			</item>
@@ -5193,12 +5193,12 @@
 
 			<!-- Fond de Voie -->
 			<item
-				name="End-of-track sign"
+				name="End-of-track Board"
 				fr.name="Fond de voie"
 				type="node"
 				icon="icons/signs/end_of_track.svg">
 				<label
-					text="End-of-track sign"
+					text="End-of-track board"
 					fr.text="Pancarte Fond de Voie" />
 				<space />
 				<key key="railway:signal:shunting" value="FR:end_of_track" />
@@ -5247,12 +5247,12 @@
 
 			<!-- MV -->
 			<item
-				name="MV Sign"
+				name="MV Board"
 				fr.name="Pancarte MV"
 				type="node"
 				icon="icons/signs/MV.svg">
 				<label
-					text="MV Sign"
+					text="MV Board"
 					fr.text="Pancarte MV" />
 				<space />
 				<key key="railway:signal:shunting" value="FR:MV" />
@@ -5262,12 +5262,12 @@
 
 			<!-- LGR -->
 			<item
-				name="LGR Sign"
+				name="LGR Board"
 				fr.name="Pancarte LGR"
 				type="node"
 				icon="icons/signs/LGR.svg">
 				<label
-					text="LGR Sign"
+					text="LGR Board"
 					fr.text="Pancarte LGR" />
 				<space />
 				<key key="railway:signal:shunting" value="FR:LGR" />
@@ -5277,12 +5277,12 @@
 
 			<!-- LM -->
 			<item
-				name="LM Sign"
+				name="LM Board"
 				fr.name="Pancarte LM"
 				type="node"
 				icon="icons/signs/LM.svg">
 				<label
-					text="LM Sign"
+					text="LM Board"
 					fr.text="Pancarte LM" />
 				<space />
 				<key key="railway:signal:shunting" value="FR:LM" />
@@ -5290,9 +5290,9 @@
 				<link wiki="OpenRailwayMap/Tagging_in_France#LM_sign" />
 			</item>
 
-			<!-- Other Limit Signs -->
+			<!-- Other Limit Boards -->
 			<group
-				name="Other Limit Signs"
+				name="Other Limit Boards"
 				fr.name="Autres Pancartes de Limite"
 				icon="icons/signs/LM_as_text.svg">
 
@@ -5304,7 +5304,7 @@
 					icon="icons/signs/LM_as_text.svg"
 					match_expression="-&quot;railway:signal:shunting:for&quot;=*">
 					<label
-						text="Shunting limit sign"
+						text="Shunting limit board"
 						fr.text="Pancarte Limite de Manœuvre" />
 					<space />
 					<key key="railway:signal:shunting:for" match="none" />
@@ -5772,8 +5772,8 @@
 					<preset_link preset_name="Ordinary-type TIV-D (diamond)" text=""/>
 					<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
 					<preset_link preset_name="C-type TIV-D" text=""/>
-					<preset_link preset_name="Z Sign" text=""/>
-					<preset_link preset_name="R Sign" text=""/>
+					<preset_link preset_name="Z Board" text=""/>
+					<preset_link preset_name="R Board" text=""/>
 
 					<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_B-type_TIV-D" />
 				</item>
@@ -5811,22 +5811,22 @@
 					<preset_link preset_name="Ordinary-type TIV-D (diamond)" text=""/>
 					<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
 					<preset_link preset_name="B-type TIV-D" text=""/>
-					<preset_link preset_name="Z Sign" text=""/>
-					<preset_link preset_name="R Sign" text=""/>
+					<preset_link preset_name="Z Board" text=""/>
+					<preset_link preset_name="R Board" text=""/>
 
 					<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_C-type_TIV-D" />
 				</item>
 
 				<separator />
 
-				<!-- Z Sign -->
+				<!-- Z Board -->
 				<item
-					name="Z Sign"
+					name="Z Board"
 					fr.name="Pancarte Z"
 					type="node"
 					icon="icons/signs/Z.svg">
 					<label
-						text="Z Sign"
+						text="Z Board"
 						fr.text="Pancarte Z" />
 					<space />
 					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
@@ -5851,14 +5851,14 @@
 					<link wiki="OpenRailwayMap/Tagging_in_France#Z_sign" />
 				</item>
 
-				<!-- R Sign -->
+				<!-- R Board -->
 				<item
-					name="R Sign"
+					name="R Board"
 					fr.name="Pancarte R"
 					type="node"
 					icon="icons/signs/R.svg">
 					<label
-						text="R Sign"
+						text="R Board"
 						fr.text="Pancarte R" />
 					<space />
 					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
@@ -5904,7 +5904,7 @@
 						length="7" />
 					<text
 						key="railway:signal:speed_limit:transition:caption"
-						text="Sign caption"
+						text="Board caption"
 						fr.text="Libellé de la pancarte" />
 
 					<item_separator />
@@ -5913,8 +5913,8 @@
 					<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
 					<preset_link preset_name="B-type TIV-D" text=""/>
 					<preset_link preset_name="C-type TIV-D" text=""/>
-					<preset_link preset_name="Z Sign" text=""/>
-					<preset_link preset_name="R Sign" text=""/>
+					<preset_link preset_name="Z Board" text=""/>
+					<preset_link preset_name="R Board" text=""/>
 
 					<link wiki="OpenRailwayMap/Tagging_in_France#Speed_marker_(Km_sign)" />
 				</item>
@@ -5993,19 +5993,19 @@
 
 					<item_separator />
 
-					<preset_link preset_name="L Sign" />
+					<preset_link preset_name="L Board" />
 
 					<link wiki="OpenRailwayMap/Tagging_in_France#Pentagonal_distant_TIV" />
 				</item>
 
-				<!-- L Sign -->
+				<!-- L Board -->
 				<item
-					name="L Sign"
+					name="L Board"
 					fr.name="Pancarte L"
 					type="node"
 					icon="icons/signs/locomotive_restriction.svg">
 					<label
-						text="L Sign (locomotive restriction)"
+						text="L Board (locomotive restriction)"
 						fr.text="Pancarte L (locomotive)" />
 					<space />
 					<key key="railway:signal:speed_limit_distant:restriction" value="FR:L"/>
@@ -6191,12 +6191,12 @@
 
 			<!-- Track Direction -->
 			<item
-				name="Track Direction Sign"
+				name="Track Direction Board"
 				fr.name="Pancarte Direction de Voie"
 				type="node"
 				icon="icons/signs/track_direction.svg">
 				<label
-					text="Track direction sign"
+					text="Track direction board"
 					fr.text="Pancarte indiquant la direction de la voie" />
 				<space />
 				<key key="railway:signal:route_info" value="FR:track_direction" />
@@ -6204,7 +6204,7 @@
 				<space />
 				<combo
 					key="railway:signal:route_info:arrangement"
-					text="Sign Arrangement"
+					text="Board Arrangement"
 					fr.text="Disposition de la Pancarte"
 					editable="false"
 					values_sort="false">
@@ -6221,19 +6221,19 @@
 				</combo>
 				<text
 					key="railway:signal:route_info:caption"
-					text="Sign caption"
+					text="Board caption"
 					fr.text="Libellé de la pancarte" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Track_direction_signs" />
 			</item>
 
 			<!-- Track Name -->
 			<item
-				name="Track Indicator Sign"
+				name="Track Indicator Board"
 				fr.name="Pancarte Nom de Voie"
 				type="node"
 				icon="icons/signs/track_name.svg">
 				<label
-					text="Track indicator sign"
+					text="Track indicator board"
 					fr.text="Pancarte indiquant le nom de la voie" />
 				<space />
 				<key key="railway:signal:route_info" value="FR:track_name" />
@@ -6241,7 +6241,7 @@
 				<space />
 				<text
 					key="railway:signal:route_info:caption"
-					text="Sign caption"
+					text="Board caption"
 					fr.text="Libellé de la pancarte" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Track_indicator_signs" />
 			</item>
@@ -6362,7 +6362,7 @@
 				<reference ref="cat_radio_mode" />
 
 				<item_separator />
-				<preset_link preset_name="Change Radio Channel Sign" text=""/>
+				<preset_link preset_name="Change Radio Channel Board" text=""/>
 			</item>
 
 			<!-- RST Network Marker -->
@@ -6381,14 +6381,14 @@
 
 			<separator />
 
-			<!-- Channel Transition Sign -->
+			<!-- Channel Transition Board -->
 			<item
-				name="Change Radio Channel Sign"
+				name="Change Radio Channel Board"
 				fr.name="Pancarte de Changement de Canal"
 				type="node"
 				icon="icons/signs/channel.svg">
 				<label
-					text="Radio channel change sign"
+					text="Radio channel change board"
 					fr.text="Pancarte de changement de canal radio" />
 				<space />
 				<key key="railway:signal:radio" value="FR:marker" />
@@ -6404,7 +6404,7 @@
 				<space />
 				<text
 					key="railway:signal:radio:channel:caption"
-					text="Sign caption"
+					text="Board caption"
 					fr.text="Libellé de la pancarte" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Channel_signs" />
 			</item>
@@ -6491,7 +6491,7 @@
 
 					<item_separator />
 
-					<preset_link preset_name="Yellow Light Band" text=""/>
+					<preset_link preset_name="Illuminated Yellow Band" text=""/>
 
 					<link wiki="OpenRailwayMap/Tagging_in_France#TVM_stop_marker" />
 				</item>
@@ -6511,7 +6511,7 @@
 
 					<item_separator />
 
-					<preset_link preset_name="Yellow Light Band" text=""/>
+					<preset_link preset_name="Illuminated Yellow Band" text=""/>
 
 					<link wiki="OpenRailwayMap/Tagging_in_France#TVM_stop_marker" />
 				</item>
@@ -6553,7 +6553,7 @@
 					</combo>
 					<text
 						key="railway:signal:train_protection:system_change:caption"
-						text="Sign caption"
+						text="Board caption"
 						fr.text="Libellé de la pancarte" />
 
 					<link wiki="OpenRailwayMap/Tagging_in_France#TVM_transition_marker" />
@@ -6665,7 +6665,7 @@
 					</combo>
 					<text
 						key="railway:signal:electricity:caption"
-						text="Sign caption"
+						text="Board caption"
 						fr.text="Libellé de la pancarte" />
 					<link wiki="OpenRailwayMap/Tagging_in_France#Power-off_advance_signal" />
 				</item>
@@ -6758,12 +6758,12 @@
 
 				<!-- REV -->
 				<item
-					name="REV Sign"
+					name="REV Board"
 					fr.name="Pancarte REV"
 					type="node"
 					icon="icons/signs/REV.svg">
 					<label
-						text="REV sign"
+						text="REV board"
 						fr.text="Pancarte REV" />
 					<space />
 					<key key="railway:signal:electricity" value="FR:REV" />
@@ -6912,7 +6912,7 @@
 
 					<item_separator />
 
-					<preset_link preset_name="Bimode Entry Sign" text=""/>
+					<preset_link preset_name="Bimode Entry Board" text=""/>
 
 					<link wiki="OpenRailwayMap/Tagging_in_France#Pantograph_down_advance_signal" />
 				</item>
@@ -6953,7 +6953,7 @@
 
 					<item_separator />
 
-					<preset_link preset_name="Bimode Entry Sign" text=""/>
+					<preset_link preset_name="Bimode Entry Board" text=""/>
 
 					<link wiki="OpenRailwayMap/Tagging_in_France#Pantograph_down_signal" />
 				</item>
@@ -7003,7 +7003,7 @@
 
 					<item_separator />
 
-					<preset_link preset_name="Bimode Exit Sign" text=""/>
+					<preset_link preset_name="Bimode Exit Board" text=""/>
 
 					<link wiki="OpenRailwayMap/Tagging_in_France#Pantograph_up_signal" />
 				</item>
@@ -7109,7 +7109,7 @@
 
 				<!-- Entry -->
 				<item
-					name="Bimode Entry Sign"
+					name="Bimode Entry Board"
 					fr.name="Début de Parcours BIMODE"
 					type="node"
 					icon="icons/signs/bimode_entry.svg">
@@ -7122,13 +7122,13 @@
 					<reference ref="cat_bimode" />
 					<text
 						key="railway:signal:bimode:caption"
-						text="Sign caption"
+						text="Board caption"
 						fr.text="Libellé de la pancarte" />
 				</item>
 
 				<!-- Exit -->
 				<item
-					name="Bimode Exit Sign"
+					name="Bimode Exit Board"
 					fr.name="Fin de Parcours BIMODE"
 					type="node"
 					icon="icons/signs/bimode_exit.svg">
@@ -7193,13 +7193,13 @@
 
 			<!-- Announcement -->
 			<item
-				name="PN Distant Sign"
+				name="PN Distant Board"
 				fr.name="PN à Distance"
 				type="node"
 				icon="icons/signs/crossing_hint.svg"
 				match_expression="-&quot;railway:signal:crossing_hint:type&quot;=*">
 				<label
-					text="PN distant sign"
+					text="PN distant board"
 					fr.text="Pancarte PN d'annonce" />
 				<space />
 				<key key="railway:signal:crossing_hint:type" match="none" />
@@ -7208,12 +7208,12 @@
 
 			<!-- Announcement (Radio) -->
 			<item
-				name="PN Distant Sign (Radio)"
+				name="PN Distant Board (Radio)"
 				fr.name="PN à Distance (Radio)"
 				type="node"
 				icon="icons/signs/crossing_hint_radio.svg">
 				<label
-					text="PN distant sign and Radio sign"
+					text="PN distant board and Radio board"
 					fr.text="Pancarte PN d'annonce et pancarte Radio" />
 				<space />
 				<key key="railway:signal:crossing_hint:type" value="radio_controlled" />
@@ -7224,13 +7224,13 @@
 
 			<!-- Ahead (Automatic) -->
 			<item
-				name="PN Sign"
+				name="PN Board"
 				fr.name="Pancarte PN"
 				type="node"
 				icon="icons/signs/crossing_info.svg"
 				match_expression="-&quot;railway:signal:crossing_info:manual&quot;=*">
 				<label
-					text="Automatic level crossing sign"
+					text="Automatic level crossing board"
 					fr.text="Pancarte PN à fonctionnement automatique" />
 				<space />
 				<key key="railway:signal:crossing_info:manual" match="none" />
@@ -7239,12 +7239,12 @@
 
 			<!-- Ahead (Manual) -->
 			<item
-				name="PN Sign (Manual)"
+				name="PN Board (Manual)"
 				fr.name="Pancarte PN (Manuel)"
 				type="node"
 				icon="icons/signs/crossing_info_manual.svg">
 				<label
-					text="Manually operated level crossing sign"
+					text="Manually operated level crossing board"
 					fr.text="Pancarte PN manuel" />
 				<space />
 				<key key="railway:signal:crossing_info:manual" value="yes" />
@@ -7260,7 +7260,7 @@
 				type="node"
 				icon="icons/signs/radio_command.svg">
 				<label
-					text="Radio command sign"
+					text="Radio command board"
 					fr.text="Pancarte &quot;Commande Radio&quot;" />
 				<space />
 				<key key="railway:signal:crossing_hint" value="FR:radio_command" />
@@ -7352,7 +7352,7 @@
 				type="node"
 				icon="icons/signs/tunnel.svg">
 				<label
-					text="Sign indicating the number of tunnels ahead"
+					text="Board indicating the number of tunnels ahead"
 					fr.text="Pancarte indiquant le nombre de tunnels à venir" />
 				<space />
 				<key key="railway:signal:structure" value="FR:tunnel" />
@@ -7366,7 +7366,7 @@
 					length="7" />
 				<text
 					key="railway:signal:structure:caption"
-					text="Sign caption"
+					text="Board caption"
 					fr.text="Libellé de la pancarte" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Tunnel_sign" />
 			</item>
@@ -7386,7 +7386,7 @@
 				icon="icons/signs/whistle.svg"
 				match_expression="-&quot;railway:signal:whistle:type&quot;=*">
 				<label
-					text="S sign"
+					text="S board"
 					fr.text="Pancarte S" />
 				<space />
 				<key key="railway:signal:whistle" value="FR:S" />
