@@ -10,11 +10,15 @@ namespace Signalling.Schema;
 // - every key declared under the configured prefix is documented;
 // - a key is open when a scheme page declares it with a wildcard and no domain
 //   page lists its values, closed otherwise;
-// - "<key>:ref" is implied for every signal type key: the wiki documents the
-//   idreseau ref once, generically, under the general tags.
+// - "<key>:ref" is implied for every key of a signal element, a category or a
+//   subcategory, recognized by its prefixed values (FR:C) or by its ":form"
+//   key (train_protection:main=stop_marker): the wiki documents the idreseau
+//   ref once, generically, under the general tags. A ref identifies a single
+//   element, so it never applies to a list of colocated boards.
 public static class TagSchemaBuilder
 {
     private const string RefSuffix = ":ref";
+    private const string FormSuffix = ":form";
 
     public static TagSchema Build(IReadOnlyList<WikiPage> pages, string keyPrefix, string countryPrefix)
     {
@@ -54,7 +58,7 @@ public static class TagSchemaBuilder
                 entry.Value.Count == 0 || (wildcards.Contains(entry.Key) && !domainKeys.Contains(entry.Key))),
             StringComparer.Ordinal);
 
-        foreach (var spec in specs.Values.Where(spec => spec.HasPrefixedValue).ToList())
+        foreach (var spec in specs.Values.Where(spec => spec.HasPrefixedValue || specs.ContainsKey(spec.Key + FormSuffix)).ToList())
         {
             specs.TryAdd(spec.Key + RefSuffix, new KeySpec(spec.Key + RefSuffix, new SortedSet<string>(StringComparer.Ordinal), true));
         }

@@ -189,6 +189,91 @@
       "key": "railway:signal:facility_distant:type",
       "from": "FR:VUSS",
       "to": "simplified"
+    },
+    {
+      "key": "railway:signal:speed_limit",
+      "from": "FR:marker",
+      "to": "FR:speed_indicator"
+    },
+    {
+      "key": "railway:signal:speed_limit_distant:form",
+      "from": "sign",
+      "to": "board"
+    },
+    {
+      "key": "railway:signal:speed_limit_distant:fast",
+      "from": "FR:TIV-D_B",
+      "to": "FR:TIV-D"
+    },
+    {
+      "key": "railway:signal:main:shape",
+      "from": "FR:B",
+      "to": "FR:C"
+    },
+    {
+      "key": "railway:signal:route:states",
+      "from": "(FR:ID1/FR:ID2)",
+      "to": "FR:ID1;FR:ID2"
+    },
+    {
+      "key": "railway:signal:wrong_road",
+      "from": "FR:transition",
+      "to": "FR:IPCS"
+    },
+    {
+      "key": "railway:signal:wrong_road:entry:form",
+      "from": "sign",
+      "to": "board"
+    },
+    {
+      "key": "railway:signal:wrong_road:exit:form",
+      "from": "sign",
+      "to": "board"
+    },
+    {
+      "key": "railway:signal:facility_distant",
+      "from": "FR:facility_approach",
+      "to": "FR:marker"
+    },
+    {
+      "key": "railway:signal:station_distant",
+      "from": "FR:Pancarte Divers",
+      "to": "FR:GARE"
+    },
+    {
+      "key": "railway:signal:shunting",
+      "from": "FR:pancarte_LM",
+      "to": "FR:LM"
+    },
+    {
+      "key": "railway:signal:whistle",
+      "from": "FR:SIFFLER",
+      "to": "FR:S"
+    },
+    {
+      "key": "railway:signal:crossing_info",
+      "from": "FR:pancarte_PN",
+      "to": "FR:PN"
+    },
+    {
+      "key": "railway:signal:switch:states",
+      "from": "off",
+      "to": ""
+    },
+    {
+      "key": "railway:signal:shunting:states",
+      "from": "FR:T",
+      "to": ""
+    },
+    {
+      "key": "railway:signal:shunting:states",
+      "from": "FR:SLD",
+      "to": ""
+    },
+    {
+      "key": "railway:signal:shunting:states",
+      "from": "FR:MARKER",
+      "to": ""
     }
   ],
   "tagReplacements": [
@@ -202,8 +287,12 @@
         "railway:signal:speed_limit:marker:function": "entry"
       },
       "rename": {
-        "railway:signal:speed_limit:form": "railway:signal:speed_limit:marker:form"
-      }
+        "railway:signal:speed_limit:form": "railway:signal:speed_limit:marker:form",
+        "railway:signal:speed_limit:ref": "railway:signal:speed_limit:marker:ref"
+      },
+      "remove": [
+        "railway:signal:speed_limit:function"
+      ]
     },
     {
       "match": {
@@ -215,8 +304,12 @@
         "railway:signal:speed_limit:marker:function": "exit"
       },
       "rename": {
-        "railway:signal:speed_limit:form": "railway:signal:speed_limit:marker:form"
-      }
+        "railway:signal:speed_limit:form": "railway:signal:speed_limit:marker:form",
+        "railway:signal:speed_limit:ref": "railway:signal:speed_limit:marker:ref"
+      },
+      "remove": [
+        "railway:signal:speed_limit:function"
+      ]
     },
     {
       "match": {
@@ -228,7 +321,8 @@
         "railway:signal:speed_limit:switch": "FR:chevron"
       },
       "rename": {
-        "railway:signal:speed_limit:form": "railway:signal:speed_limit:switch:form"
+        "railway:signal:speed_limit:form": "railway:signal:speed_limit:switch:form",
+        "railway:signal:speed_limit:ref": "railway:signal:speed_limit:switch:ref"
       },
       "remove": [
         "railway:signal:speed_limit:pointing"
@@ -237,7 +331,9 @@
     {
       "match": {
         "railway:signal:speed_limit_distant": "FR:TIV-D",
-        "railway:signal:speed_limit_distant:mobile": null
+        "railway:signal:speed_limit_distant:form": "sign",
+        "railway:signal:speed_limit_distant:mobile": null,
+        "railway:signal:speed_limit_distant:states": null
       },
       "set": {
         "railway:signal:speed_limit_distant": "FR:speed_indicator",
@@ -245,7 +341,8 @@
       },
       "rename": {
         "railway:signal:speed_limit_distant:form": "railway:signal:speed_limit_distant:fixed:form",
-        "railway:signal:speed_limit_distant:speed": "railway:signal:speed_limit_distant:fixed:speed"
+        "railway:signal:speed_limit_distant:speed": "railway:signal:speed_limit_distant:fixed:speed",
+        "railway:signal:speed_limit_distant:ref": "railway:signal:speed_limit_distant:fixed:ref"
       }
     },
     {
@@ -258,7 +355,8 @@
       },
       "rename": {
         "railway:signal:speed_limit_distant:form": "railway:signal:speed_limit_distant:fast:form",
-        "railway:signal:speed_limit_distant:speed": "railway:signal:speed_limit_distant:fast:speed"
+        "railway:signal:speed_limit_distant:speed": "railway:signal:speed_limit_distant:fast:speed",
+        "railway:signal:speed_limit_distant:ref": "railway:signal:speed_limit_distant:fast:ref"
       }
     },
     {
@@ -271,7 +369,8 @@
       },
       "rename": {
         "railway:signal:speed_limit_distant:form": "railway:signal:speed_limit_distant:railcar:form",
-        "railway:signal:speed_limit_distant:speed": "railway:signal:speed_limit_distant:railcar:speed"
+        "railway:signal:speed_limit_distant:speed": "railway:signal:speed_limit_distant:railcar:speed",
+        "railway:signal:speed_limit_distant:ref": "railway:signal:speed_limit_distant:railcar:ref"
       }
     },
     {
@@ -282,7 +381,8 @@
         "railway:signal:train_protection_distant": "FR:CAB"
       },
       "rename": {
-        "railway:signal:train_protection:form": "railway:signal:train_protection_distant:form"
+        "railway:signal:train_protection:form": "railway:signal:train_protection_distant:form",
+        "railway:signal:train_protection:ref": "railway:signal:train_protection_distant:ref"
       },
       "remove": [
         "railway:signal:train_protection"
@@ -296,7 +396,8 @@
         "railway:signal:train_protection_distant": "FR:CAB"
       },
       "rename": {
-        "railway:signal:train_protection:form": "railway:signal:train_protection_distant:form"
+        "railway:signal:train_protection:form": "railway:signal:train_protection_distant:form",
+        "railway:signal:train_protection:ref": "railway:signal:train_protection_distant:ref"
       },
       "remove": [
         "railway:signal:train_protection"
@@ -338,7 +439,8 @@
         "railway:signal:train_protection:main": "stop_marker"
       },
       "rename": {
-        "railway:signal:train_protection:form": "railway:signal:train_protection:main:form"
+        "railway:signal:train_protection:form": "railway:signal:train_protection:main:form",
+        "railway:signal:train_protection:ref": "railway:signal:train_protection:main:ref"
       }
     },
     {
@@ -350,7 +452,8 @@
         "railway:signal:train_protection:main": "stop_marker"
       },
       "rename": {
-        "railway:signal:train_protection:form": "railway:signal:train_protection:main:form"
+        "railway:signal:train_protection:form": "railway:signal:train_protection:main:form",
+        "railway:signal:train_protection:ref": "railway:signal:train_protection:main:ref"
       }
     },
     {
@@ -362,8 +465,69 @@
         "railway:signal:train_protection:main": "ETCS:stop_marker"
       },
       "rename": {
-        "railway:signal:train_protection:form": "railway:signal:train_protection:main:form"
+        "railway:signal:train_protection:form": "railway:signal:train_protection:main:form",
+        "railway:signal:train_protection:ref": "railway:signal:train_protection:main:ref"
       }
+    },
+    {
+      "match": {
+        "railway:signal:train_protection": "FR:repère_arrêt_ETCS;FR:repère_arrêt_TVM",
+        "railway:signal:train_protection:ref": null
+      },
+      "set": {
+        "railway:signal:train_protection": "FR:TVM",
+        "railway:signal:train_protection:main": "stop_marker",
+        "railway:signal:train_protection:main:etcs": "yes"
+      },
+      "rename": {
+        "railway:signal:train_protection:form": "railway:signal:train_protection:main:form"
+      },
+      "remove": [
+        "railway:signal:train_protection:type"
+      ],
+      "note": "the TVM and ETCS stop markers are colocated: add the ref (idreseau) of the TVM stop marker"
+    },
+    {
+      "match": {
+        "railway:signal:train_protection": "FR:REP_ETCS;FR:REP_TVM",
+        "railway:signal:train_protection:ref": null
+      },
+      "set": {
+        "railway:signal:train_protection": "FR:TVM",
+        "railway:signal:train_protection:main": "stop_marker",
+        "railway:signal:train_protection:main:etcs": "yes"
+      },
+      "rename": {
+        "railway:signal:train_protection:form": "railway:signal:train_protection:main:form"
+      },
+      "remove": [
+        "railway:signal:train_protection:function"
+      ],
+      "note": "the TVM and ETCS stop markers are colocated: add the ref (idreseau) of the TVM stop marker"
+    },
+    {
+      "match": {
+        "railway:signal:train_protection:function": "block_marker"
+      },
+      "set": {
+        "railway:signal:train_protection": "FR:TVM",
+        "railway:signal:train_protection:main": "stop_marker"
+      },
+      "remove": [
+        "railway:signal:train_protection:function"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:train_protection:type": "block_marker"
+      },
+      "set": {
+        "railway:signal:train_protection": "FR:TVM",
+        "railway:signal:train_protection:main": "stop_marker"
+      },
+      "remove": [
+        "railway:signal:train_protection:type"
+      ]
     },
     {
       "match": {
@@ -374,7 +538,8 @@
         "railway:signal:shunting_route:depot": "FR:D"
       },
       "rename": {
-        "railway:signal:shunting:form": "railway:signal:shunting_route:depot:form"
+        "railway:signal:shunting:form": "railway:signal:shunting_route:depot:form",
+        "railway:signal:shunting:ref": "railway:signal:shunting_route:ref"
       },
       "remove": [
         "railway:signal:shunting"
@@ -389,7 +554,8 @@
         "railway:signal:shunting_route:stabling": "FR:G"
       },
       "rename": {
-        "railway:signal:shunting:form": "railway:signal:shunting_route:stabling:form"
+        "railway:signal:shunting:form": "railway:signal:shunting_route:stabling:form",
+        "railway:signal:shunting:ref": "railway:signal:shunting_route:ref"
       },
       "remove": [
         "railway:signal:shunting"
@@ -404,7 +570,8 @@
         "railway:signal:wrong_road:entry": "FR:TECS"
       },
       "rename": {
-        "railway:signal:wrong_road:form": "railway:signal:wrong_road:entry:form"
+        "railway:signal:wrong_road:form": "railway:signal:wrong_road:entry:form",
+        "railway:signal:wrong_road:ref": "railway:signal:wrong_road:entry:ref"
       }
     },
     {
@@ -416,7 +583,8 @@
         "railway:signal:wrong_road:exit": "FR:TSCS"
       },
       "rename": {
-        "railway:signal:wrong_road:form": "railway:signal:wrong_road:exit:form"
+        "railway:signal:wrong_road:form": "railway:signal:wrong_road:exit:form",
+        "railway:signal:wrong_road:ref": "railway:signal:wrong_road:exit:ref"
       }
     },
     {
@@ -428,7 +596,8 @@
       },
       "rename": {
         "railway:signal:route_distant:form": "railway:signal:switch:form",
-        "railway:signal:route_distant:states": "railway:signal:switch:states"
+        "railway:signal:route_distant:states": "railway:signal:switch:states",
+        "railway:signal:route_distant:ref": "railway:signal:switch:ref"
       },
       "remove": [
         "railway:signal:route_distant"
@@ -442,7 +611,8 @@
         "railway:signal:facility_distant": "FR:marker"
       },
       "rename": {
-        "railway:signal:station_distant:form": "railway:signal:facility_distant:form"
+        "railway:signal:station_distant:form": "railway:signal:facility_distant:form",
+        "railway:signal:station_distant:ref": "railway:signal:facility_distant:ref"
       },
       "remove": [
         "railway:signal:station_distant"
@@ -456,7 +626,8 @@
         "railway:signal:facility_distant": "FR:marker"
       },
       "rename": {
-        "railway:signal:station_distant:form": "railway:signal:facility_distant:form"
+        "railway:signal:station_distant:form": "railway:signal:facility_distant:form",
+        "railway:signal:station_distant:ref": "railway:signal:facility_distant:ref"
       },
       "remove": [
         "railway:signal:station_distant"
@@ -470,7 +641,8 @@
         "railway:signal:facility": "FR:boundary"
       },
       "rename": {
-        "railway:signal:station_distant:form": "railway:signal:facility:form"
+        "railway:signal:station_distant:form": "railway:signal:facility:form",
+        "railway:signal:station_distant:ref": "railway:signal:facility:ref"
       },
       "remove": [
         "railway:signal:station_distant"
@@ -498,7 +670,8 @@
         "railway:signal:stop:conventional:for": "locomotive"
       },
       "rename": {
-        "railway:signal:stop:form": "railway:signal:stop:conventional:form"
+        "railway:signal:stop:form": "railway:signal:stop:conventional:form",
+        "railway:signal:stop:ref": "railway:signal:stop:conventional:ref"
       }
     },
     {
@@ -511,7 +684,8 @@
         "railway:signal:stop:conventional:for": "driver_only"
       },
       "rename": {
-        "railway:signal:stop:form": "railway:signal:stop:conventional:form"
+        "railway:signal:stop:form": "railway:signal:stop:conventional:form",
+        "railway:signal:stop:ref": "railway:signal:stop:conventional:ref"
       }
     },
     {
@@ -524,7 +698,8 @@
         "railway:signal:stop:conventional:for": "vehicles"
       },
       "rename": {
-        "railway:signal:stop:form": "railway:signal:stop:conventional:form"
+        "railway:signal:stop:form": "railway:signal:stop:conventional:form",
+        "railway:signal:stop:ref": "railway:signal:stop:conventional:ref"
       }
     },
     {
@@ -537,7 +712,8 @@
         "railway:signal:stop:highspeed:for": "single_unit"
       },
       "rename": {
-        "railway:signal:stop:form": "railway:signal:stop:highspeed:form"
+        "railway:signal:stop:form": "railway:signal:stop:highspeed:form",
+        "railway:signal:stop:ref": "railway:signal:stop:highspeed:ref"
       }
     },
     {
@@ -550,7 +726,8 @@
         "railway:signal:stop:highspeed:for": "multiple_unit"
       },
       "rename": {
-        "railway:signal:stop:form": "railway:signal:stop:highspeed:form"
+        "railway:signal:stop:form": "railway:signal:stop:highspeed:form",
+        "railway:signal:stop:ref": "railway:signal:stop:highspeed:ref"
       }
     },
     {
@@ -562,7 +739,8 @@
         "railway:signal:stop:highspeed": "FR:TGV"
       },
       "rename": {
-        "railway:signal:stop:form": "railway:signal:stop:highspeed:form"
+        "railway:signal:stop:form": "railway:signal:stop:highspeed:form",
+        "railway:signal:stop:ref": "railway:signal:stop:highspeed:ref"
       }
     },
     {
@@ -573,7 +751,8 @@
         "railway:signal:bimode": "FR:BIMODE"
       },
       "rename": {
-        "railway:signal:electricity:form": "railway:signal:bimode:form"
+        "railway:signal:electricity:form": "railway:signal:bimode:form",
+        "railway:signal:electricity:ref": "railway:signal:bimode:ref"
       },
       "remove": [
         "railway:signal:electricity"
@@ -588,10 +767,1123 @@
         "railway:signal:bimode:function": "entry"
       },
       "rename": {
-        "railway:signal:electricity:form": "railway:signal:bimode:form"
+        "railway:signal:electricity:form": "railway:signal:bimode:form",
+        "railway:signal:electricity:ref": "railway:signal:bimode:ref"
       },
       "remove": [
         "railway:signal:electricity"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit:main": "*"
+      },
+      "set": {
+        "railway:signal:speed_limit": "FR:speed_indicator"
+      },
+      "rename": {
+        "railway:signal:speed_limit:main": "railway:signal:speed_limit:marker",
+        "railway:signal:speed_limit:main:form": "railway:signal:speed_limit:marker:form",
+        "railway:signal:speed_limit:main:function": "railway:signal:speed_limit:marker:function",
+        "railway:signal:speed_limit:main:ref": "railway:signal:speed_limit:marker:ref"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit:entry": "FR:Z"
+      },
+      "set": {
+        "railway:signal:speed_limit": "FR:speed_indicator",
+        "railway:signal:speed_limit:marker:function": "entry"
+      },
+      "rename": {
+        "railway:signal:speed_limit:entry": "railway:signal:speed_limit:marker",
+        "railway:signal:speed_limit:entry:form": "railway:signal:speed_limit:marker:form",
+        "railway:signal:speed_limit:entry:ref": "railway:signal:speed_limit:marker:ref"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit:exit": "FR:R"
+      },
+      "set": {
+        "railway:signal:speed_limit": "FR:speed_indicator",
+        "railway:signal:speed_limit:marker:function": "exit"
+      },
+      "rename": {
+        "railway:signal:speed_limit:exit": "railway:signal:speed_limit:marker",
+        "railway:signal:speed_limit:exit:form": "railway:signal:speed_limit:marker:form",
+        "railway:signal:speed_limit:exit:ref": "railway:signal:speed_limit:marker:ref"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit": "FR:KM"
+      },
+      "set": {
+        "railway:signal:speed_limit": "FR:speed_indicator",
+        "railway:signal:speed_limit:transition": "FR:Km"
+      },
+      "rename": {
+        "railway:signal:speed_limit:form": "railway:signal:speed_limit:transition:form",
+        "railway:signal:speed_limit:ref": "railway:signal:speed_limit:transition:ref"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit": "FR:CHEVRON_BAS",
+        "railway:signal:speed_limit:type": "downwards"
+      },
+      "set": {
+        "railway:signal:speed_limit": "FR:speed_indicator",
+        "railway:signal:speed_limit:switch": "FR:chevron"
+      },
+      "rename": {
+        "railway:signal:speed_limit:form": "railway:signal:speed_limit:switch:form",
+        "railway:signal:speed_limit:ref": "railway:signal:speed_limit:switch:ref"
+      },
+      "remove": [
+        "railway:signal:speed_limit:type"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit": "FR:CHEVRON_BAS",
+        "railway:signal:speed_limit:type": null
+      },
+      "set": {
+        "railway:signal:speed_limit": "FR:speed_indicator",
+        "railway:signal:speed_limit:switch": "FR:chevron"
+      },
+      "rename": {
+        "railway:signal:speed_limit:form": "railway:signal:speed_limit:switch:form",
+        "railway:signal:speed_limit:ref": "railway:signal:speed_limit:switch:ref"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit": "FR:CHEVRON",
+        "railway:signal:speed_limit:type": "downwards"
+      },
+      "set": {
+        "railway:signal:speed_limit": "FR:speed_indicator",
+        "railway:signal:speed_limit:switch": "FR:chevron"
+      },
+      "rename": {
+        "railway:signal:speed_limit:form": "railway:signal:speed_limit:switch:form",
+        "railway:signal:speed_limit:ref": "railway:signal:speed_limit:switch:ref"
+      },
+      "remove": [
+        "railway:signal:speed_limit:type"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit_reminder": "FR:TIV-R"
+      },
+      "set": {
+        "railway:signal:speed_limit": "FR:speed_indicator",
+        "railway:signal:speed_limit:switchable": "FR:TIV-R"
+      },
+      "rename": {
+        "railway:signal:speed_limit_reminder:form": "railway:signal:speed_limit:switchable:form",
+        "railway:signal:speed_limit_reminder:speed": "railway:signal:speed_limit:switchable:speed",
+        "railway:signal:speed_limit_reminder:ref": "railway:signal:speed_limit:switchable:ref"
+      },
+      "remove": [
+        "railway:signal:speed_limit_reminder"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit_reminder": "FR:TIV-R_MOB"
+      },
+      "set": {
+        "railway:signal:speed_limit": "FR:speed_indicator",
+        "railway:signal:speed_limit:switchable": "FR:TIV-R"
+      },
+      "rename": {
+        "railway:signal:speed_limit_reminder:form": "railway:signal:speed_limit:switchable:form",
+        "railway:signal:speed_limit_reminder:speed": "railway:signal:speed_limit:switchable:speed",
+        "railway:signal:speed_limit_reminder:ref": "railway:signal:speed_limit:switchable:ref"
+      },
+      "remove": [
+        "railway:signal:speed_limit_reminder"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit_distant": "FR:TIV-R"
+      },
+      "set": {
+        "railway:signal:speed_limit": "FR:speed_indicator",
+        "railway:signal:speed_limit:switchable": "FR:TIV-R"
+      },
+      "rename": {
+        "railway:signal:speed_limit_distant:form": "railway:signal:speed_limit:switchable:form",
+        "railway:signal:speed_limit_distant:speed": "railway:signal:speed_limit:switchable:speed",
+        "railway:signal:speed_limit_distant:ref": "railway:signal:speed_limit:switchable:ref"
+      },
+      "remove": [
+        "railway:signal:speed_limit_distant"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit_distant": "FR:TIV-D",
+        "railway:signal:speed_limit_distant:mobile": "yes"
+      },
+      "set": {
+        "railway:signal:speed_limit_distant": "FR:speed_indicator",
+        "railway:signal:speed_limit_distant:switchable": "FR:TIV-D"
+      },
+      "rename": {
+        "railway:signal:speed_limit_distant:form": "railway:signal:speed_limit_distant:switchable:form",
+        "railway:signal:speed_limit_distant:speed": "railway:signal:speed_limit_distant:switchable:speed",
+        "railway:signal:speed_limit_distant:ref": "railway:signal:speed_limit_distant:switchable:ref",
+        "railway:signal:speed_limit_distant:turn_direction": "railway:signal:speed_limit_distant:switchable:turn_direction"
+      },
+      "remove": [
+        "railway:signal:speed_limit_distant:mobile"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit_distant": "FR:TIV-D_MOB"
+      },
+      "set": {
+        "railway:signal:speed_limit_distant": "FR:speed_indicator",
+        "railway:signal:speed_limit_distant:switchable": "FR:TIV-D"
+      },
+      "rename": {
+        "railway:signal:speed_limit_distant:form": "railway:signal:speed_limit_distant:switchable:form",
+        "railway:signal:speed_limit_distant:speed": "railway:signal:speed_limit_distant:switchable:speed",
+        "railway:signal:speed_limit_distant:ref": "railway:signal:speed_limit_distant:switchable:ref",
+        "railway:signal:speed_limit_distant:turn_direction": "railway:signal:speed_limit_distant:switchable:turn_direction"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit_distant": "FR:TIV-D_FIXE"
+      },
+      "set": {
+        "railway:signal:speed_limit_distant": "FR:speed_indicator",
+        "railway:signal:speed_limit_distant:fixed": "FR:TIV-D"
+      },
+      "rename": {
+        "railway:signal:speed_limit_distant:form": "railway:signal:speed_limit_distant:fixed:form",
+        "railway:signal:speed_limit_distant:speed": "railway:signal:speed_limit_distant:fixed:speed",
+        "railway:signal:speed_limit_distant:ref": "railway:signal:speed_limit_distant:fixed:ref"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit_distant": "FR:TIV-D_B_FIXE"
+      },
+      "set": {
+        "railway:signal:speed_limit_distant": "FR:speed_indicator",
+        "railway:signal:speed_limit_distant:fast": "FR:TIV-D"
+      },
+      "rename": {
+        "railway:signal:speed_limit_distant:form": "railway:signal:speed_limit_distant:fast:form",
+        "railway:signal:speed_limit_distant:speed": "railway:signal:speed_limit_distant:fast:speed",
+        "railway:signal:speed_limit_distant:ref": "railway:signal:speed_limit_distant:fast:ref"
+      },
+      "remove": [
+        "railway:signal:speed_limit_distant:type"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit_distant": "FR:TIV-D_C_FIXE"
+      },
+      "set": {
+        "railway:signal:speed_limit_distant": "FR:speed_indicator",
+        "railway:signal:speed_limit_distant:railcar": "FR:TIV-D"
+      },
+      "rename": {
+        "railway:signal:speed_limit_distant:form": "railway:signal:speed_limit_distant:railcar:form",
+        "railway:signal:speed_limit_distant:speed": "railway:signal:speed_limit_distant:railcar:speed",
+        "railway:signal:speed_limit_distant:ref": "railway:signal:speed_limit_distant:railcar:ref"
+      },
+      "remove": [
+        "railway:signal:speed_limit_distant:type"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:main:plate": "FR:F"
+      },
+      "rename": {
+        "railway:signal:main:plate": "railway:signal:main:type"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:main:plate": "FR:PR"
+      },
+      "rename": {
+        "railway:signal:main:plate": "railway:signal:main:type"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:main:plate": "FR:BM"
+      },
+      "rename": {
+        "railway:signal:main:plate": "railway:signal:main:type"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:main:plate": "FR:NF"
+      },
+      "remove": [
+        "railway:signal:main:plate"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:main:plate:block": "FR:PR"
+      },
+      "rename": {
+        "railway:signal:main:plate:block": "railway:signal:main:type"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:main:plate:block": "FR:BM"
+      },
+      "rename": {
+        "railway:signal:main:plate:block": "railway:signal:main:type"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:main:clearing_light": "*"
+      },
+      "remove": [
+        "railway:signal:main:clearing_light"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:main:height": "normal"
+      },
+      "remove": [
+        "railway:signal:main:height"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:distant:height": "normal"
+      },
+      "remove": [
+        "railway:signal:distant:height"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:main:type": "FR:K"
+      },
+      "set": {
+        "railway:signal:main:shape": "FR:K"
+      },
+      "remove": [
+        "railway:signal:main:type"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:main:shape": "FR:S"
+      },
+      "remove": [
+        "railway:signal:main:shape"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:main": "yes"
+      },
+      "remove": [
+        "railway:signal:main"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:main": "FR:A"
+      },
+      "rename": {
+        "railway:signal:main": "railway:signal:distant",
+        "railway:signal:main:form": "railway:signal:distant:form",
+        "railway:signal:main:states": "railway:signal:distant:states",
+        "railway:signal:main:ref": "railway:signal:distant:ref"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:main": "FR:GABARIT"
+      },
+      "set": {
+        "railway:signal:clearance": "FR:reduced_clearance"
+      },
+      "rename": {
+        "railway:signal:main:form": "railway:signal:clearance:form",
+        "railway:signal:main:ref": "railway:signal:clearance:ref"
+      },
+      "remove": [
+        "railway:signal:main"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:minor": "FR:reduced_clearance"
+      },
+      "set": {
+        "railway:signal:clearance": "FR:reduced_clearance"
+      },
+      "rename": {
+        "railway:signal:minor:form": "railway:signal:clearance:form",
+        "railway:signal:minor:ref": "railway:signal:clearance:ref"
+      },
+      "remove": [
+        "railway:signal:minor"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:minor": "FR:Sémaphore"
+      },
+      "set": {
+        "railway:signal:main": "FR:S"
+      },
+      "rename": {
+        "railway:signal:minor:form": "railway:signal:main:form",
+        "railway:signal:minor:ref": "railway:signal:main:ref"
+      },
+      "remove": [
+        "railway:signal:minor"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:shunting": "FR:DEPOT"
+      },
+      "set": {
+        "railway:signal:shunting_route": "FR:destination",
+        "railway:signal:shunting_route:depot": "FR:D"
+      },
+      "rename": {
+        "railway:signal:shunting:form": "railway:signal:shunting_route:depot:form",
+        "railway:signal:shunting:ref": "railway:signal:shunting_route:depot:ref"
+      },
+      "remove": [
+        "railway:signal:shunting"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:shunting": "FR:IMP"
+      },
+      "set": {
+        "railway:signal:shunting_route": "FR:destination",
+        "railway:signal:shunting_route:dead_end": "FR:Imp"
+      },
+      "rename": {
+        "railway:signal:shunting:form": "railway:signal:shunting_route:dead_end:form",
+        "railway:signal:shunting:ref": "railway:signal:shunting_route:dead_end:ref"
+      },
+      "remove": [
+        "railway:signal:shunting"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:shunting": "FR:pancarte_Imp"
+      },
+      "set": {
+        "railway:signal:shunting_route": "FR:destination",
+        "railway:signal:shunting_route:dead_end": "FR:Imp"
+      },
+      "rename": {
+        "railway:signal:shunting:form": "railway:signal:shunting_route:dead_end:form",
+        "railway:signal:shunting:ref": "railway:signal:shunting_route:dead_end:ref"
+      },
+      "remove": [
+        "railway:signal:shunting"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:shunting": "FR:HEURTOIR_A"
+      },
+      "set": {
+        "railway:signal:shunting_route": "FR:destination",
+        "railway:signal:shunting_route:buffer_stop": "FR:Heurtoir"
+      },
+      "rename": {
+        "railway:signal:shunting:form": "railway:signal:shunting_route:buffer_stop:form",
+        "railway:signal:shunting:ref": "railway:signal:shunting_route:buffer_stop:ref"
+      },
+      "remove": [
+        "railway:signal:shunting",
+        "railway:signal:shunting:type"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:shunting": "FR:DEPOT;FR:G",
+        "railway:signal:shunting:form": "light",
+        "railway:signal:shunting:ref": null
+      },
+      "set": {
+        "railway:signal:shunting_route": "FR:destination",
+        "railway:signal:shunting_route:depot": "FR:D",
+        "railway:signal:shunting_route:depot:form": "light",
+        "railway:signal:shunting_route:stabling": "FR:G",
+        "railway:signal:shunting_route:stabling:form": "light"
+      },
+      "remove": [
+        "railway:signal:shunting",
+        "railway:signal:shunting:form"
+      ],
+      "note": "several boards are tagged on one node: add the ref (idreseau) of each board"
+    },
+    {
+      "match": {
+        "railway:signal:shunting": "FR:G;FR:DEPOT",
+        "railway:signal:shunting:form": "light",
+        "railway:signal:shunting:ref": null
+      },
+      "set": {
+        "railway:signal:shunting_route": "FR:destination",
+        "railway:signal:shunting_route:depot": "FR:D",
+        "railway:signal:shunting_route:depot:form": "light",
+        "railway:signal:shunting_route:stabling": "FR:G",
+        "railway:signal:shunting_route:stabling:form": "light"
+      },
+      "remove": [
+        "railway:signal:shunting",
+        "railway:signal:shunting:form"
+      ],
+      "note": "several boards are tagged on one node: add the ref (idreseau) of each board"
+    },
+    {
+      "match": {
+        "railway:signal:shunting_route": "FR:D"
+      },
+      "set": {
+        "railway:signal:shunting_route": "FR:destination",
+        "railway:signal:shunting_route:depot": "FR:D"
+      },
+      "rename": {
+        "railway:signal:shunting_route:form": "railway:signal:shunting_route:depot:form",
+        "railway:signal:shunting_route:ref": "railway:signal:shunting_route:depot:ref"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:route": "FR:tableau_G"
+      },
+      "set": {
+        "railway:signal:shunting_route": "FR:destination",
+        "railway:signal:shunting_route:stabling": "FR:G"
+      },
+      "rename": {
+        "railway:signal:route:form": "railway:signal:shunting_route:stabling:form",
+        "railway:signal:route:ref": "railway:signal:shunting_route:stabling:ref"
+      },
+      "remove": [
+        "railway:signal:route"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:shunting": "FR:CHEVRON_HAUT"
+      },
+      "set": {
+        "railway:signal:stop": "FR:chevron"
+      },
+      "rename": {
+        "railway:signal:shunting:form": "railway:signal:stop:form",
+        "railway:signal:shunting:ref": "railway:signal:stop:ref"
+      },
+      "remove": [
+        "railway:signal:shunting",
+        "railway:signal:shunting:type"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:shunting": "FR:TIP"
+      },
+      "set": {
+        "railway:signal:minor": "FR:TIP"
+      },
+      "rename": {
+        "railway:signal:shunting:form": "railway:signal:minor:form",
+        "railway:signal:shunting:ref": "railway:signal:minor:ref"
+      },
+      "remove": [
+        "railway:signal:shunting"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:shunting": "FR:ATC"
+      },
+      "set": {
+        "railway:signal:stop": "FR:ARRET",
+        "railway:signal:stop:for": "worksite_trains"
+      },
+      "rename": {
+        "railway:signal:shunting:form": "railway:signal:stop:form",
+        "railway:signal:shunting:ref": "railway:signal:stop:ref"
+      },
+      "remove": [
+        "railway:signal:shunting"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:shunting": "FR:pancarte_Heurtoir"
+      },
+      "set": {
+        "railway:signal:shunting": "FR:H",
+        "railway:signal:shunting:form": "sign"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:train_protection": "FR:jalon_de_manoeuvre_TVM"
+      },
+      "set": {
+        "railway:signal:shunting": "FR:marker"
+      },
+      "rename": {
+        "railway:signal:train_protection:form": "railway:signal:shunting:form",
+        "railway:signal:train_protection:ref": "railway:signal:shunting:ref"
+      },
+      "remove": [
+        "railway:signal:train_protection",
+        "railway:signal:train_protection:type"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:stop": "FR:ATC"
+      },
+      "set": {
+        "railway:signal:stop": "FR:ARRET",
+        "railway:signal:stop:for": "worksite_trains"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:stop": "FR:ARRET_TGV"
+      },
+      "set": {
+        "railway:signal:stop": "FR:passenger_stop",
+        "railway:signal:stop:highspeed": "FR:TGV"
+      },
+      "rename": {
+        "railway:signal:stop:for": "railway:signal:stop:highspeed:for",
+        "railway:signal:stop:form": "railway:signal:stop:highspeed:form",
+        "railway:signal:stop:ref": "railway:signal:stop:highspeed:ref"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:stop": "FR:TT"
+      },
+      "set": {
+        "railway:signal:stop": "FR:passenger_stop",
+        "railway:signal:stop:conventional": "FR:TT"
+      },
+      "rename": {
+        "railway:signal:stop:form": "railway:signal:stop:conventional:form",
+        "railway:signal:stop:ref": "railway:signal:stop:conventional:ref"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:stop:form": "FR:passenger_stop",
+        "railway:signal:stop": null
+      },
+      "set": {
+        "railway:signal:stop": "FR:passenger_stop"
+      },
+      "remove": [
+        "railway:signal:stop:form"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:stop": "FR:LM"
+      },
+      "set": {
+        "railway:signal:shunting": "FR:LM"
+      },
+      "rename": {
+        "railway:signal:stop:form": "railway:signal:shunting:form",
+        "railway:signal:stop:ref": "railway:signal:shunting:ref"
+      },
+      "remove": [
+        "railway:signal:stop"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:stop": "FR:Z57-1;FR:4V",
+        "railway:signal:stop:ref": null
+      },
+      "set": {
+        "railway:signal:stop": "FR:passenger_stop",
+        "railway:signal:stop:regional": "FR:Z57",
+        "railway:signal:stop:regional:for": "single_unit",
+        "railway:signal:stop:conventional": "FR:vehicle_number",
+        "railway:signal:stop:conventional:for": "vehicles",
+        "railway:signal:stop:conventional:number": "4"
+      },
+      "note": "several boards are tagged on one node: add the ref (idreseau) of each board"
+    },
+    {
+      "match": {
+        "railway:signal:stop": "FR:Z57-2;FR:8V",
+        "railway:signal:stop:ref": null
+      },
+      "set": {
+        "railway:signal:stop": "FR:passenger_stop",
+        "railway:signal:stop:regional": "FR:Z57",
+        "railway:signal:stop:regional:for": "multiple_unit",
+        "railway:signal:stop:conventional": "FR:vehicle_number",
+        "railway:signal:stop:conventional:for": "vehicles",
+        "railway:signal:stop:conventional:number": "8"
+      },
+      "note": "several boards are tagged on one node: add the ref (idreseau) of each board"
+    },
+    {
+      "match": {
+        "railway:signal:stop": "FR:8V;FR:Z57-2",
+        "railway:signal:stop:ref": null
+      },
+      "set": {
+        "railway:signal:stop": "FR:passenger_stop",
+        "railway:signal:stop:regional": "FR:Z57",
+        "railway:signal:stop:regional:for": "multiple_unit",
+        "railway:signal:stop:conventional": "FR:vehicle_number",
+        "railway:signal:stop:conventional:for": "vehicles",
+        "railway:signal:stop:conventional:number": "8"
+      },
+      "note": "several boards are tagged on one node: add the ref (idreseau) of each board"
+    },
+    {
+      "match": {
+        "railway:signal:stop:conventional:for": "head_of_train"
+      },
+      "remove": [
+        "railway:signal:stop:conventional:for"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:stop:classic": "*"
+      },
+      "rename": {
+        "railway:signal:stop:classic": "railway:signal:stop:conventional",
+        "railway:signal:stop:classic:for": "railway:signal:stop:conventional:for",
+        "railway:signal:stop:classic:form": "railway:signal:stop:conventional:form",
+        "railway:signal:stop:classic:ref": "railway:signal:stop:conventional:ref"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:whistle": "FR:pancarte_S"
+      },
+      "set": {
+        "railway:signal:whistle": "FR:S",
+        "railway:signal:whistle:form": "sign"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:whistle:plate": "FR:J"
+      },
+      "rename": {
+        "railway:signal:whistle:plate": "railway:signal:whistle:type"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:station_distant": "FR:facility_approach"
+      },
+      "set": {
+        "railway:signal:facility_distant": "FR:marker"
+      },
+      "rename": {
+        "railway:signal:station_distant:form": "railway:signal:facility_distant:form",
+        "railway:signal:station_distant:caption": "railway:signal:facility_distant:caption",
+        "railway:signal:station_distant:ref": "railway:signal:facility_distant:ref"
+      },
+      "remove": [
+        "railway:signal:station_distant"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:station_distant": "FR:POSTE"
+      },
+      "set": {
+        "railway:signal:facility": "FR:POSTE"
+      },
+      "rename": {
+        "railway:signal:station_distant:form": "railway:signal:facility:form",
+        "railway:signal:station_distant:ref": "railway:signal:facility:ref"
+      },
+      "remove": [
+        "railway:signal:station_distant"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:station": "FR:facility_boundary"
+      },
+      "set": {
+        "railway:signal:facility": "FR:boundary"
+      },
+      "rename": {
+        "railway:signal:station:form": "railway:signal:facility:form",
+        "railway:signal:station:ref": "railway:signal:facility:ref"
+      },
+      "remove": [
+        "railway:signal:station"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:station": "FR:LIMITE_ETS"
+      },
+      "set": {
+        "railway:signal:facility": "FR:boundary"
+      },
+      "rename": {
+        "railway:signal:station:form": "railway:signal:facility:form",
+        "railway:signal:station:ref": "railway:signal:facility:ref"
+      },
+      "remove": [
+        "railway:signal:station"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:train_protection": "FR:CAB_DIS"
+      },
+      "set": {
+        "railway:signal:train_protection_distant": "FR:CAB"
+      },
+      "rename": {
+        "railway:signal:train_protection:form": "railway:signal:train_protection_distant:form",
+        "railway:signal:train_protection:ref": "railway:signal:train_protection_distant:ref"
+      },
+      "remove": [
+        "railway:signal:train_protection"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:train_protection": "FR:CAB_EXE"
+      },
+      "set": {
+        "railway:signal:train_protection": "FR:CAB",
+        "railway:signal:train_protection:function": "entry"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:train_protection": "FR:CAB_FIN"
+      },
+      "set": {
+        "railway:signal:train_protection": "FR:CAB",
+        "railway:signal:train_protection:function": "exit"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:route_distant:shape": "double"
+      },
+      "remove": [
+        "railway:signal:route_distant:shape"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:wrong_route": "FR:TECS"
+      },
+      "set": {
+        "railway:signal:wrong_road": "FR:IPCS",
+        "railway:signal:wrong_road:entry": "FR:TECS"
+      },
+      "rename": {
+        "railway:signal:wrong_route:form": "railway:signal:wrong_road:entry:form",
+        "railway:signal:wrong_route:ref": "railway:signal:wrong_road:entry:ref"
+      },
+      "remove": [
+        "railway:signal:wrong_route",
+        "railway:signal:wrong_route:function"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:wrong_route": "FR:TSCS"
+      },
+      "set": {
+        "railway:signal:wrong_road": "FR:IPCS",
+        "railway:signal:wrong_road:exit": "FR:TSCS"
+      },
+      "rename": {
+        "railway:signal:wrong_route:form": "railway:signal:wrong_road:exit:form",
+        "railway:signal:wrong_route:ref": "railway:signal:wrong_road:exit:ref"
+      },
+      "remove": [
+        "railway:signal:wrong_route",
+        "railway:signal:wrong_route:function"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:wrong_road": "FR:TECS;FR:TSCS",
+        "railway:signal:wrong_road:form": "light",
+        "railway:signal:wrong_road:ref": null
+      },
+      "set": {
+        "railway:signal:wrong_road": "FR:IPCS",
+        "railway:signal:wrong_road:entry": "FR:TECS",
+        "railway:signal:wrong_road:entry:form": "light",
+        "railway:signal:wrong_road:exit": "FR:TSCS",
+        "railway:signal:wrong_road:exit:form": "light"
+      },
+      "remove": [
+        "railway:signal:wrong_road:form"
+      ],
+      "note": "several boards are tagged on one node: add the ref (idreseau) of each board"
+    },
+    {
+      "match": {
+        "railway:signal:wrong_road": "FR:TECS;FR:TSCS",
+        "railway:signal:wrong_road:form": "sign",
+        "railway:signal:wrong_road:ref": null
+      },
+      "set": {
+        "railway:signal:wrong_road": "FR:IPCS",
+        "railway:signal:wrong_road:entry": "FR:TECS",
+        "railway:signal:wrong_road:entry:form": "board",
+        "railway:signal:wrong_road:exit": "FR:TSCS",
+        "railway:signal:wrong_road:exit:form": "board"
+      },
+      "remove": [
+        "railway:signal:wrong_road:form"
+      ],
+      "note": "several boards are tagged on one node: add the ref (idreseau) of each board"
+    },
+    {
+      "match": {
+        "railway:signal:combined": "FR:light_box",
+        "railway:signal:combined:form": "light",
+        "railway:signal:combined:shape": "double"
+      },
+      "set": {
+        "railway:signal:lightbox": "FR:double_lightbox",
+        "railway:signal:lightbox:form": "light"
+      },
+      "rename": {
+        "railway:signal:combined:left": "railway:signal:lightbox:left",
+        "railway:signal:combined:right": "railway:signal:lightbox:right",
+        "railway:signal:combined:ref": "railway:signal:lightbox:ref"
+      },
+      "remove": [
+        "railway:signal:combined",
+        "railway:signal:combined:form",
+        "railway:signal:combined:shape"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:dual_mode": "FR:BIMODE_A"
+      },
+      "set": {
+        "railway:signal:bimode": "FR:BIMODE",
+        "railway:signal:bimode:function": "entry"
+      },
+      "rename": {
+        "railway:signal:dual_mode:form": "railway:signal:bimode:form",
+        "railway:signal:dual_mode:caption": "railway:signal:bimode:caption",
+        "railway:signal:dual_mode:ref": "railway:signal:bimode:ref"
+      },
+      "remove": [
+        "railway:signal:dual_mode",
+        "railway:signal:dual_mode:function"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:dual_mode": "FR:BIMODE"
+      },
+      "set": {
+        "railway:signal:bimode": "FR:BIMODE",
+        "railway:signal:bimode:function": "exit"
+      },
+      "rename": {
+        "railway:signal:dual_mode:form": "railway:signal:bimode:form",
+        "railway:signal:dual_mode:caption": "railway:signal:bimode:caption",
+        "railway:signal:dual_mode:ref": "railway:signal:bimode:ref"
+      },
+      "remove": [
+        "railway:signal:dual_mode",
+        "railway:signal:dual_mode:function"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:shunting": "FR"
+      },
+      "remove": [
+        "railway:signal:shunting"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:distant": "FR"
+      },
+      "remove": [
+        "railway:signal:distant"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:minor": "FR:"
+      },
+      "remove": [
+        "railway:signal:minor"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit": "FR:"
+      },
+      "remove": [
+        "railway:signal:speed_limit"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit_distant": "FR:"
+      },
+      "remove": [
+        "railway:signal:speed_limit_distant"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:position": "t"
+      },
+      "remove": [
+        "railway:signal:position"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:form": "*"
+      },
+      "remove": [
+        "railway:signal:form"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:wrong_road:function": "*"
+      },
+      "remove": [
+        "railway:signal:wrong_road:function"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:wrong_road:states": "*"
+      },
+      "remove": [
+        "railway:signal:wrong_road:states"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:departure:states": "*"
+      },
+      "remove": [
+        "railway:signal:departure:states"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:electricity:states": "*"
+      },
+      "remove": [
+        "railway:signal:electricity:states"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:electricity:voltage:ref": "*"
+      },
+      "remove": [
+        "railway:signal:electricity:voltage:ref"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:radio:mode:form:ref": "*"
+      },
+      "remove": [
+        "railway:signal:radio:mode:form:ref"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit_distant:caption": "*"
+      },
+      "remove": [
+        "railway:signal:speed_limit_distant:caption"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:crossing_info:height": "*"
+      },
+      "remove": [
+        "railway:signal:crossing_info:height"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:crossing_hint:distance": "*"
+      },
+      "remove": [
+        "railway:signal:crossing_hint:distance"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:shunting:sign": "*"
+      },
+      "remove": [
+        "railway:signal:shunting:sign"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:location": "*"
+      },
+      "remove": [
+        "railway:signal:location"
       ]
     }
   ],
