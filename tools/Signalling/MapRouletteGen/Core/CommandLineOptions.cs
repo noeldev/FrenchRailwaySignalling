@@ -15,14 +15,24 @@ public sealed class CommandLineOptions
 
     public required string RulesPath { get; init; }
 
+    // True when the wiki pages are read from their local copy (the reviewed
+    // backup) instead of being downloaded.
+    public bool UseLocalPages { get; init; }
+
     // Challenge texts and statistics, next to the challenge file.
     public string TextPath => Path.ChangeExtension(OutputPath, ".md");
+
+    // One sample node per correction, with its original tags, to test the
+    // JOSM validator fixes.
+    public required string SamplesPath { get; init; }
 
     public static CommandLineOptions? Parse(string[] args, GeneratorSettings settings, string repositoryRoot)
     {
         string? inputPath = null;
         string? outputPath = null;
         string? rulesPath = null;
+        string? samplesPath = null;
+        var useLocalPages = false;
 
         for (var i = 0; i < args.Length; i++)
         {
@@ -33,6 +43,10 @@ public sealed class CommandLineOptions
                     PrintUsage();
                     return null;
 
+                case "--local":
+                    useLocalPages = true;
+                    break;
+
                 case "--print-query":
                     Console.WriteLine(string.Join(Environment.NewLine, settings.OverpassQuery));
                     return null;
@@ -41,6 +55,13 @@ public sealed class CommandLineOptions
                     {
                         if (!TryReadValue(args, ref i, out var value)) return null;
                         outputPath = value;
+                        break;
+                    }
+
+                case "--samples":
+                    {
+                        if (!TryReadValue(args, ref i, out var value)) return null;
+                        samplesPath = value;
                         break;
                     }
 
@@ -76,6 +97,8 @@ public sealed class CommandLineOptions
             InputPath = inputPath,
             OutputPath = outputPath ?? Path.Combine(repositoryRoot, settings.Output),
             RulesPath = rulesPath ?? Path.Combine(repositoryRoot, settings.Rules),
+            SamplesPath = samplesPath ?? Path.Combine(repositoryRoot, settings.Samples),
+            UseLocalPages = useLocalPages,
         };
     }
 
@@ -97,7 +120,8 @@ public sealed class CommandLineOptions
         Console.WriteLine(
             """
             Generates a MapRoulette tag fix challenge (line-by-line GeoJSON) that migrates
-            legacy French railway signal tagging, with the fixes of the validator rule table.
+            legacy French railway signal tagging, with the fixes of the validator rule table
+            and the corrections of mistyped values against the values the wiki documents.
 
             Usage:
               MapRouletteGen <export> [options]
@@ -111,7 +135,12 @@ public sealed class CommandLineOptions
               --out <path>            Challenge file (default: the configured output,
                                       relative to the repository root). The challenge
                                       texts and statistics are written next to it (.md).
+              --samples <path>        One sample node per correction, with its original
+                                      tags, to test the JOSM validator fixes (default:
+                                      the configured file, in the data folder).
               --rules <path>          Rule table (default: the configured file).
+              --local                 Read the wiki pages from their local copy (the
+                                      reviewed backup) instead of the live wiki.
               --print-query           Print the Overpass query and exit.
               -h, --help              Show this help.
             """);

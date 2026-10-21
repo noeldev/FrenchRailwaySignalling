@@ -12,7 +12,8 @@ namespace MapRouletteGen.Challenge;
 // separator (required by MapRoulette since v3.6.5). The cooperativeWork
 // section (meta version 2, type 1) holds the tag changes MapRoulette offers to
 // apply; the feature properties carry the current tags, the element reference
-// and the legacy tagging found (legacy_rules, for the instruction).
+// the legacy tagging and mistyped values found (legacy_rules) and what is left
+// to do by hand (legacy_notes), both for the instruction.
 // References:
 //   https://github.com/maproulette/maproulette3/wiki/Cooperative-Challenges
 //   https://learn.maproulette.org/en-US/documentation/line-by-line-geojson/
@@ -20,6 +21,7 @@ public static class ChallengeFileWriter
 {
     private const char RecordSeparator = '\u001e';
     private const string LegacyRulesProperty = "legacy_rules";
+    private const string LegacyNotesProperty = "legacy_notes";
 
     // Accented values are written as is, not as \u escapes.
     private static readonly JsonWriterOptions WriterOptions = new() { Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
@@ -91,7 +93,8 @@ public static class ChallengeFileWriter
             writer.WriteString(key, value);
         }
 
-        writer.WriteString(LegacyRulesProperty, string.Join(", ", task.Fix.AppliedRules));
+        writer.WriteString(LegacyRulesProperty, string.Join(", ", task.Findings));
+        writer.WriteString(LegacyNotesProperty, string.Join(" ", task.Fix.Notes.Select(note => char.ToUpperInvariant(note[0]) + note[1..] + ".")));
         writer.WriteEndObject();
 
         writer.WriteEndObject();

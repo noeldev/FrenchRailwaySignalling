@@ -28,4 +28,12 @@ public static class Banner
 
         Console.WriteLine();
     }
+    // Product name and version, for the User-Agent header and the generator
+    // attribute of the sample file.
+    public static string ProductVersion()
+    {
+        var assembly = Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly();
+        var name = assembly.GetName();
+        return $"{name.Name ?? "MapRouletteGen"}/{name.Version?.ToString(3) ?? "1.0.0"}";
+    }
 }

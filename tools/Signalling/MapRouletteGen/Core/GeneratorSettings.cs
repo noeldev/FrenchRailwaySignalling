@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Noël Danjou
 
+using Signalling.Schema;
+
 namespace MapRouletteGen.Core;
 
 // Configuration bound from appsettings.json (and the gitignored
@@ -8,12 +10,24 @@ namespace MapRouletteGen.Core;
 // case-insensitively by the configuration binder.
 public sealed class GeneratorSettings
 {
+    // Wiki pages documenting the scheme, the same as ValidatorGen's.
+    public WikiSettings Wiki { get; set; } = new();
+
+    // Only keys under this prefix are checked, for example "railway:signal:".
+    public string KeyPrefix { get; set; } = string.Empty;
+
+    // Prefix of the documented values, for example "FR" for "FR:C".
+    public string CountryPrefix { get; set; } = string.Empty;
+
     // Rule table shared with ValidatorGen, relative to the repository root.
     public string Rules { get; set; } = string.Empty;
 
     // Default challenge file, relative to the repository root. The challenge
-    // texts are written next to it, with the .md extension.
+    // texts (.md) are written next to it.
     public string Output { get; set; } = string.Empty;
+
+    // Default test sample file, relative to the repository root.
+    public string Samples { get; set; } = string.Empty;
 
     // Overpass QL query that exports the input file, one line per entry,
     // printed by --print-query.

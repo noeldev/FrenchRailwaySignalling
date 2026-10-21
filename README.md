@@ -59,11 +59,11 @@ In JOSM, go to **Edit** → **Preferences** → **Data Validator** → **Tag che
 
 `validator/rules.json` is the only hand-maintained input. It holds three lists:
 
-- `valueReplacements` rename a value in place. The value is matched as a token, so the same entry also fixes a `;` separated list:
+- `valueReplacements` rename a value in place. The value is matched as a token, so the same entry also fixes a `;` separated list; an empty `to` drops the token:
   ```json
   { "key": "railway:signal:main:states", "from": "FR:CV", "to": "FR:Cv" }
   ```
-- `tagReplacements` describe a structural change. `match` lists the tags that identify the legacy tagging (`null` means the key must be absent), `set` adds or overwrites tags, `rename` moves a value to another key and `remove` deletes keys:
+- `tagReplacements` describe a structural change. `match` lists the tags that identify the legacy tagging (`"*"` accepts any value, `null` means the key must be absent), `set` adds or overwrites tags, `rename` moves a value to another key and `remove` deletes keys:
   ```json
   {
     "match": { "railway:signal:speed_limit": "FR:Z" },
@@ -77,30 +77,34 @@ In JOSM, go to **Edit** → **Preferences** → **Data Validator** → **Tag che
   ```
 - `conflicts` list documented tags that must not appear together, with a `note` telling how to choose.
 
+A tag replacement never overwrites what it does not match: a tag it sets must be absent or already hold that value (or a legacy spelling of it, from `valueReplacements`), and a key it renames to must be absent. Otherwise the validator reports the legacy tagging without a fix, to be corrected by hand. When a category changes (for example `shunting` to `shunting_route`), its `:ref` is renamed with it. An optional `note` is added to the message (and to the MapRoulette instruction) for what the fix cannot do, such as adding the ref of each board when several boards are tagged on one node.
+
 The generation fails, and nothing is written, when an entry no longer fits the wiki: a legacy side that the wiki documents, or a replacement or conflict tag that it does not.
 
 ### Legacy tagging migration (MapRoulette)
 
-The same rule table drives a [MapRoulette](https://maproulette.org/) tag fix challenge that migrates the legacy tagging already in OpenStreetMap: every task proposes exactly the fix that the JOSM validator offers.
+The same rule table drives a [MapRoulette](https://maproulette.org/) tag fix challenge that migrates the legacy tagging already in OpenStreetMap: every task proposes the fix that the JOSM validator offers. The challenge also corrects mistyped values of closed keys against the values the wiki documents, without enumerating them: case (`FR:cv` to `FR:Cv`), missing, doubled or misspelled country prefix (`S`, `FR:FR:S`, `FR!S` to `FR:S`), leading punctuation, a colon used as list separator (`FR:C:FR:S`) and empty list entries. Such a correction is made only when it leads to exactly one documented value; the JOSM validator reports these values without a fix.
 
 1. Print the Overpass query with `MapRouletteGen --print-query`, run it (for example in [overpass-turbo](https://overpass-turbo.eu/)) and save the export, as raw data (JSON) or GeoJSON.
-2. Run `MapRouletteGen <export>`. It writes the challenge as line-by-line GeoJSON and, next to it, a Markdown file with the challenge texts (name, description, instruction) and the number of signals fixed by each rule.
+2. Run `MapRouletteGen <export> --local`. It writes the challenge as line-by-line GeoJSON and, next to it:
+   - a Markdown file with the challenge texts (name, description, instruction) and the statistics: signals fixed by each rule and by each kind of value correction, then what is left to fix by hand (replacements that would overwrite a tag, conflicts, undocumented keys and values);
+   - in `data/` (or the file given with `--samples`), a `.samples.osm` file with one real signal per correction, with its original tags, to open in JOSM and check what the validator reports and how its fixes apply (new nodes that cannot be uploaded).
 3. Create the challenge in MapRoulette from the GeoJSON file and paste the texts.
 
-Conflicts between documented alternatives cannot be fixed automatically; they are only counted, and left to the JOSM validator.
+Conflicts between documented alternatives and legacy tagging whose replacement would overwrite a tag cannot be fixed automatically; they are only counted, and left to the JOSM validator.
 
 ## Tools
 
 The `tools/` directory holds C# (.NET 10) console applications that support the presets and the wiki backup. The signalling-specific tools and their shared libraries live together under `tools/Signalling/` (one solution); `SvgSquarer` and `WikiBackup` are independent.
 
 - **SignalAudit** - Validates `French_Railway_Signalling.xml` and audits it against related sources. Offline, it checks the file against the JOSM tagging preset schema (the schema location is read from the preset file and downloaded automatically), verifies chunk definitions and references, confirms every icon exists on disk with exact path casing (so nothing breaks on the case-sensitive GitHub Pages host), resolves the wiki link of each item either inline or through referenced chunks, and checks structure, menu-path uniqueness and `match_expression` usage. With `--wiki` it additionally verifies over the network that wiki links and anchors resolve, and that the preset's tags match the wiki specification (the source of truth). With `--yaml` it checks that every tag the preset emits is handled by the [OpenRailwayMap-vector](https://github.com/hiddewie/OpenRailwayMap-vector) map. Results can be written as a transcript (`--log`) and a structured JSON report (`--report-json`).
-- **MapRouletteGen** - Generates the MapRoulette tag fix challenge that migrates legacy tagging, from an Overpass export (raw data or GeoJSON) and `validator/rules.json` (see [Legacy tagging migration](#legacy-tagging-migration-maproulette)).
+- **MapRouletteGen** - Generates the MapRoulette tag fix challenge that migrates legacy tagging and corrects mistyped values, from an Overpass export (raw data or GeoJSON), `validator/rules.json` and the same wiki pages as ValidatorGen (`--local` reads the committed backup), see [Legacy tagging migration](#legacy-tagging-migration-maproulette).
 - **TagInfoGen** - Generates the taginfo project file from the presets, published as `taginfo.json`.
 - **ValidatorGen** - Generates the JOSM/Osmose-QA validator rules from the wiki pages listed in its `appsettings.json` (Tagging in France and the Key pages that list the states) and from `validator/rules.json`. The pages are downloaded in a single MediaWiki API request; `--local` reads them from the committed backup instead, as the deployment does. The rules version combines the date of the newest wiki revision with a hash of the rules, so it only changes when the rules do.
 - **SvgSquarer** - Prepares the preset icons for JOSM, in place. JOSM aligns non-square icons to the left of their slot and ignores both the `viewBox` origin and `preserveAspectRatio`, so each icon with a non-square `viewBox` is turned into a square document whose content is centered by a `<g id="josm-square" transform="translate(...)">` group. `width`, `height` and `preserveAspectRatio` are removed from every icon. `--unsquare` removes that group again and restores the original `viewBox`, so the icons can be edited at their real size.
 - **WikiBackup** - Downloads the wiki pages, Lua modules, and templates into `wiki/backup/` for long-term preservation.
 
-The shared libraries under `tools/Signalling/libs/` are reused by the tools above: `Signalling.Core` (tag-rule vocabulary and local/remote source resolution), `Signalling.Presets` (JOSM preset reader), `Signalling.OrmVector` (ORM-vector YAML reader), `Signalling.Rules` (the legacy tagging rule table and its application, shared by ValidatorGen and MapRouletteGen), `Signalling.Wiki` (OSM wiki reader), and `Signalling.Sync` (the tag-rule comparator behind the cross-source audits).
+The shared libraries under `tools/Signalling/libs/` are reused by the tools above: `Signalling.Core` (tag-rule vocabulary and local/remote source resolution), `Signalling.Presets` (JOSM preset reader), `Signalling.OrmVector` (ORM-vector YAML reader), `Signalling.Rules` (the legacy tagging rule table and its application, shared by ValidatorGen and MapRouletteGen), `Signalling.Schema` (the documented scheme built from the wiki pages, and the correction of mistyped values against it, shared by ValidatorGen and MapRouletteGen), `Signalling.Wiki` (OSM wiki reader), and `Signalling.Sync` (the tag-rule comparator behind the cross-source audits).
 
 ## Repository Structure
 
@@ -128,6 +132,7 @@ FrenchRailwaySignalling/
 │   │       ├── Signalling.Presets/   # JOSM preset reader
 │   │       ├── Signalling.OrmVector/ # ORM-vector YAML reader
 │   │       ├── Signalling.Rules/     # Legacy tagging rule table and its application
+│   │       ├── Signalling.Schema/    # Documented scheme from the wiki + value corrections
 │   │       ├── Signalling.Wiki/      # OSM wiki reader
 │   │       └── Signalling.Sync/      # Tag-rule comparator
 │   ├── SvgSquarer/       # Icon preparation for JOSM
