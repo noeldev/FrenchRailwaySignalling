@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-10-20 04:11:04 UTC
+Last edited: 2026-10-21 03:27:44 UTC
 Last editor: Noeld
-Last edit comment: /* TVM stop marker */ fix ETCS link
-Backup date: 2026-10-20 04:12:20 UTC
+Last edit comment: /* Wrong-road exit board */ replace sign with board
+Backup date: 2026-10-21 04:28:43 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -154,8 +154,8 @@ File:Guidon_d'Arrêt.svg|Guidon d'Arrêt.
 * {{Tag|railway:signal:main|FR:GA}}
 * {{Tag|railway:signal:main:form|light}}
 
-== Yellow light band ==
-In some stations, the entrance [[#Carré|Carré signal]] may be equipped with a ''horizontal yellow light band'' (French: '''Bande lumineuse jaune horizontale'''). The band may be steady or flashing and is lit in addition to the [[Tag:railway:signal:main:states=FR:A|Caution]] ('''Avertissement''') light. It instructs the driver to be prepared to stop within a short distance, either due to the presence of vehicles or the closure of an [[#Intermediate_platform_signal|intermediate stop signal]].
+== Illuminated horizontal yellow band ==
+In some stations, the entrance [[#Carré|Carré signal]] may be equipped with an ''illuminated horizontal yellow band'' (French: '''bande lumineuse jaune horizontale'''). The band may be steady or flashing and is lit in addition to the [[Tag:railway:signal:main:states=FR:A|Caution]] ('''Avertissement''') light. It instructs the driver to be prepared to stop within a short distance, either due to the presence of vehicles or the closure of an [[#Intermediate_platform_signal|intermediate stop signal]].
 
 A [[#TVM_stop_marker|TVM stop marker]] may also be equipped with a yellow light band.
 
@@ -642,25 +642,25 @@ These boards are used on double-track sections equipped with wrong-road signalli
 The wrong-road entry board or '''Tableau d'Entrée de ContreSens''' (TECS) indicates or confirms to the driver that the train is authorised to run in the opposite direction to normal traffic.
 
 <gallery caption="Various arrangements of the signal">
-File:Tableau_d'entrée_de_contresens_(TECS).svg|Mechanical board ({{TagValue|railway:signal:wrong_road:entry:form|sign}})
+File:Tableau_d'entrée_de_contresens_(TECS).svg|Mechanical board ({{TagValue|railway:signal:wrong_road:entry:form|board}})
 File:TECS_box.svg|Light box ({{TagValue|railway:signal:wrong_road:entry:form|light}})
 </gallery>
 
 * {{Tag|railway:signal:wrong_road|FR:IPCS}}
 * {{Tag|railway:signal:wrong_road:entry|FR:TECS}}
-* {{Tag|railway:signal:wrong_road:entry:form||({{TagValue|railway:signal:wrong_road:entry:form|sign}}/{{TagValue|railway:signal:wrong_road:entry:form|light}})}}
+* {{Tag|railway:signal:wrong_road:entry:form||({{TagValue|railway:signal:wrong_road:entry:form|board}}/{{TagValue|railway:signal:wrong_road:entry:form|light}})}}
 
 == Wrong-road exit board ==
 The wrong-road exit board or '''Tableau de Sortie de ContreSens''' (TSCS) informs the driver that the train, currently running in the wrong road, is now directed back to the normal running direction.
 
 <gallery>
-File:Tableau_de_sortie_de_contresens_(TSCS).svg|Mechanical board ({{TagValue|railway:signal:wrong_road:exit:form|sign}})
+File:Tableau_de_sortie_de_contresens_(TSCS).svg|Mechanical board ({{TagValue|railway:signal:wrong_road:exit:form|board}})
 File:TSCS_box.svg|Light box ({{TagValue|railway:signal:wrong_road:exit:form|light}})
 </gallery>
 
 * {{Tag|railway:signal:wrong_road|FR:IPCS}}
 * {{Tag|railway:signal:wrong_road:exit|FR:TSCS}}
-* {{Tag|railway:signal:wrong_road:exit:form||({{TagValue|railway:signal:wrong_road:exit:form|sign}}/{{TagValue|railway:signal:wrong_road:exit:form|light}})}}
+* {{Tag|railway:signal:wrong_road:exit:form||({{TagValue|railway:signal:wrong_road:exit:form|board}}/{{TagValue|railway:signal:wrong_road:exit:form|light}})}}
 
 =Ground-to-train radio=
 
@@ -1409,8 +1409,8 @@ Optional tags:
 
 =Stations=
 
-== Gare sign ==
-The '''Gare''' sign indicates the approach to a facility where special regulations for stations apply. Typically, a [[#Chevron_pointe_en_bas|downward-pointing chevron]] placed in front of the entry point marks the entrance to the facility.
+== GARE sign ==
+The '''GARE''' sign indicates the approach to a facility where special regulations for stations apply. Typically, a [[#Chevron_pointe_en_bas|downward-pointing chevron]] placed in front of the entry point marks the entrance to the facility.
 
 <gallery>
 File:Pancarte_GARE.svg|GARE sign
