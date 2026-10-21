@@ -4,6 +4,7 @@
     <Project Path="libs/Signalling.OrmVector/Signalling.OrmVector.csproj" />
     <Project Path="libs/Signalling.Presets/Signalling.Presets.csproj" />
     <Project Path="libs/Signalling.Rules/Signalling.Rules.csproj" />
+    <Project Path="libs/Signalling.Schema/Signalling.Schema.csproj" />
     <Project Path="libs/Signalling.Sync/Signalling.Sync.csproj" />
     <Project Path="libs/Signalling.Wiki/Signalling.Wiki.csproj" />
   </Folder>

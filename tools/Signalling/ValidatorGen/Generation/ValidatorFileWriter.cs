@@ -3,9 +3,9 @@
 
 using System.Security.Cryptography;
 using System.Text;
+using Signalling.Schema;
 using ValidatorGen.Core;
 using ValidatorGen.MapCss;
-using ValidatorGen.Wiki;
 using static ValidatorGen.MapCss.MapCssSyntax;
 
 namespace ValidatorGen.Generation;

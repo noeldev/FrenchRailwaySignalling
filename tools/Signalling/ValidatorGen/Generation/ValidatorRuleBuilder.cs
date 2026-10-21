@@ -2,9 +2,9 @@
 // Copyright (C) 2026 Noël Danjou
 
 using Signalling.Rules;
+using Signalling.Schema;
 using ValidatorGen.Core;
 using ValidatorGen.MapCss;
-using ValidatorGen.Schema;
 using static ValidatorGen.MapCss.MapCssSyntax;
 
 namespace ValidatorGen.Generation;
@@ -14,13 +14,16 @@ namespace ValidatorGen.Generation;
 //    prefix in one of the checked keys);
 // 2. one rule per legacy value and per legacy tagging, with its fix. The
 //    message only names the legacy tagging, to keep the JOSM dialogs narrow;
-//    the replacement is carried by the fix;
+//    the replacement is carried by the fix. The fix of a legacy tagging is
+//    guarded so it never overwrites a tag it does not match; one more rule
+//    reports, without a fix, the legacy tagging a guard keeps;
 // 3. one rule per conflict between documented alternatives;
 // 4. one rule for keys the wiki does not document;
 // 5. one rule for values the wiki does not list, for every closed key. Values
 //    of another scheme (CH-FDV:, ETCS:...) are out of scope and never reported.
 // Legacy keys and values reported by 2 are left out of 4 and 5, so a legacy tag
-// is reported once, with its fix.
+// is reported once, with its fix. Only those of a rule matched by a single tag
+// are left out: a rule with more conditions does not report every occurrence.
 //
 // The assertMatch/assertNoMatch declarations are self-tests run by JOSM and
 // Osmose-QA against the rule itself; they never inspect map data.
@@ -28,6 +31,9 @@ public sealed class ValidatorRuleBuilder(TagSchema schema, RuleTable table, Vali
 {
     private const int ValueSampleCount = 2;
     private const string UndocumentedSuffix = "_undocumented";
+
+    // A value that no replacement sets, for the self-tests of the guards.
+    private const string ConflictingValue = "XX:conflicting";
 
     // A token of another scheme: a namespace prefix (same shape as
     // TagSchema.HasNamespacePrefix) that is not the country prefix.
@@ -45,6 +51,7 @@ public sealed class ValidatorRuleBuilder(TagSchema schema, RuleTable table, Vali
             BuildScopeRule(),
             .. table.ValueReplacements.Select(BuildValueReplacementRule),
             .. table.TagReplacements.Select(BuildTagReplacementRule),
+            .. table.TagReplacements.Where(entry => entry.GuardedSets.Any() || entry.GuardedTargets.Any()).Select(BuildGuardRule),
             .. table.Conflicts.Select(BuildConflictRule),
             BuildUndocumentedKeyRule(scope),
             BuildUndocumentedValueRule(scope),
@@ -65,36 +72,44 @@ public sealed class ValidatorRuleBuilder(TagSchema schema, RuleTable table, Vali
         var selector = $"node[{Quote(entry.Key)}=~/{TokenPattern(EscapeRegex(entry.From))}/]";
         var separator = TagSchema.ValueSeparator.ToString();
 
-        // Replace the token inside ";list;" then drop the empty edge entries,
-        // which works for a single value and for a list alike.
+        // Replace the token inside ";list;" then drop the empty entries, which
+        // works for a single value and for a list alike, and drops the token
+        // when the replacement is empty (JOSM removes a tag set to "").
         var listed = $"concat({Quote(separator)}, tag({Quote(entry.Key)}), {Quote(separator)})";
         var replaced = $"replace({listed}, {Quote(separator + entry.From + separator)}, {Quote(separator + entry.To + separator)})";
         var fix = $"concat({Quote(entry.Key + "=")}, join_list({Quote(separator)}, trim_list(split({Quote(separator)}, {replaced}))))";
 
-        return new MapCssRule(
-            index == 0 ? "Legacy values, renamed in place" : null,
-            [selector],
-            [
-                $"throwError: tr(\"{{0}}={{1}} is deprecated\", {Quote(entry.Key)}, {Quote(entry.From)})",
-                $"fixAdd: {fix}",
-                $"assertMatch: {Quote(AssertNode([KeyValuePair.Create(entry.Key, entry.From)]))}",
-                $"assertNoMatch: {Quote(AssertNode([KeyValuePair.Create(entry.Key, entry.To)]))}",
-            ]);
+        List<string> declarations =
+        [
+            $"throwError: tr(\"{{0}}={{1}} is deprecated\", {Quote(entry.Key)}, {Quote(entry.From)})",
+            $"fixAdd: {fix}",
+            $"assertMatch: {Quote(AssertNode([KeyValuePair.Create(entry.Key, entry.From)]))}",
+        ];
+
+        // An empty replacement drops the token: no replacement value to test.
+        if (entry.To.Length > 0)
+        {
+            declarations.Add($"assertNoMatch: {Quote(AssertNode([KeyValuePair.Create(entry.Key, entry.To)]))}");
+        }
+
+        return new MapCssRule(index == 0 ? "Legacy values, renamed in place" : null, [selector], declarations);
     }
 
     private MapCssRule BuildTagReplacementRule(TagReplacement entry, int index)
     {
-        var selector = "node" + string.Concat(entry.Match.Select(tag => tag.Value is null
-            ? $"[!{Quote(tag.Key)}]"
-            : $"[{Quote(tag.Key)}={Quote(tag.Value)}]"));
+        // A set tag must be absent (an empty value for Osmose-QA) or hold an
+        // accepted value; a rename target must be absent.
+        var guards = entry.GuardedSets
+            .Select(tag => $"[{Quote(tag.Key)}!~/^(?!(?:{Alternation(table.AcceptedValues(tag.Key, tag.Value).Order(StringComparer.Ordinal))}|)$)/]")
+            .Concat(entry.GuardedTargets.Select(key => $"[!{Quote(key)}]"));
 
         List<string> declarations =
         [
-            $"throwError: tr(\"{{0}} is deprecated\", {Quote(RuleTable.Describe(entry.PresentTags))})",
+            DeprecatedMessage(entry),
             .. entry.Rename.Select(rename => $"fixChangeKey: {Quote($"{rename.Key}=>{rename.Value}")}"),
             .. entry.Remove.Select(key => $"fixRemove: {Quote(key)}"),
             .. entry.Set.Select(tag => $"fixAdd: {Quote($"{tag.Key}={tag.Value}")}"),
-            $"assertMatch: {Quote(AssertNode(entry.PresentTags))}",
+            $"assertMatch: {Quote(AssertNode(SampleTags(entry)))}",
         ];
 
         if (entry.Set.Count > 0)
@@ -102,8 +117,60 @@ public sealed class ValidatorRuleBuilder(TagSchema schema, RuleTable table, Vali
             declarations.Add($"assertNoMatch: {Quote(AssertNode(entry.Set))}");
         }
 
-        return new MapCssRule(index == 0 ? "Legacy tagging, restructured" : null, [selector], declarations);
+        declarations.AddRange(GuardSamples(entry).Select(sample => $"assertNoMatch: {Quote(AssertNode([.. SampleTags(entry), sample]))}"));
+
+        return new MapCssRule(
+            index == 0 ? "Legacy tagging, restructured" : null,
+            [MatchSelector(entry) + string.Concat(guards)],
+            declarations);
     }
+
+    private static string DeprecatedMessage(TagReplacement entry)
+    {
+        var legacy = Quote(RuleTable.Describe(entry.PresentTags));
+        return string.IsNullOrWhiteSpace(entry.Note)
+            ? $"throwError: tr(\"{{0}} is deprecated\", {legacy})"
+            : $"throwError: tr(\"{{0}} is deprecated: {{1}}\", {legacy}, {Quote(entry.Note)})";
+    }
+
+    // Reports, without a fix, a legacy tagging whose replacement would
+    // overwrite a tag: one selector per guarded key. The guarded key condition
+    // follows the match conditions in every selector, so the message names it
+    // by its index.
+    private MapCssRule BuildGuardRule(TagReplacement entry, int index)
+    {
+        var selectors = entry.GuardedSets
+            .Select(tag => $"[{Quote(tag.Key)}][{Quote(tag.Key)}!~/^(?:{Alternation(table.AcceptedValues(tag.Key, tag.Value).Order(StringComparer.Ordinal))})$/]")
+            .Concat(entry.GuardedTargets.Select(key => $"[{Quote(key)}]"))
+            .Select(condition => MatchSelector(entry) + condition)
+            .ToList();
+
+        return new MapCssRule(
+            index == 0 ? "Legacy tagging whose replacement would overwrite a tag, fixed by hand" : null,
+            selectors,
+            [
+                $"throwError: tr(\"{{0}} is deprecated, but {{1}} is already set: fix it by hand\", {Quote(RuleTable.Describe(entry.PresentTags))}, \"{{{entry.Match.Count}.key}}\")",
+                .. GuardSamples(entry).Select(sample => $"assertMatch: {Quote(AssertNode([.. SampleTags(entry), sample]))}"),
+                $"assertNoMatch: {Quote(AssertNode(SampleTags(entry)))}",
+            ]);
+    }
+
+    private static string MatchSelector(TagReplacement entry) =>
+        "node" + string.Concat(entry.Match.Select(tag => tag.Value switch
+        {
+            null => $"[!{Quote(tag.Key)}]",
+            RuleTable.AnyValue => $"[{Quote(tag.Key)}]",
+            _ => $"[{Quote(tag.Key)}={Quote(tag.Value)}]",
+        }));
+
+    // The matched tags of a self-test node, with a sample for "any value".
+    private static IEnumerable<KeyValuePair<string, string>> SampleTags(TagReplacement entry) =>
+        entry.PresentTags.Select(tag => tag.Value == RuleTable.AnyValue ? KeyValuePair.Create(tag.Key, "yes") : tag);
+
+    // One tag per guard that blocks the fix.
+    private static IEnumerable<KeyValuePair<string, string>> GuardSamples(TagReplacement entry) =>
+        entry.GuardedSets.Select(tag => tag.Key).Concat(entry.GuardedTargets)
+            .Select(key => KeyValuePair.Create(key, ConflictingValue));
 
     private MapCssRule BuildConflictRule(TagConflict entry, int index)
     {
@@ -230,14 +297,15 @@ public sealed class ValidatorRuleBuilder(TagSchema schema, RuleTable table, Vali
     // Undocumented keys reported by a tag replacement rule.
     private IEnumerable<string> LegacyKeys() =>
         table.TagReplacements
+            .Where(entry => entry.IsUnconditional)
             .SelectMany(entry => entry.PresentTags.Select(tag => tag.Key).Concat(entry.Rename.Keys))
             .Where(key => key.StartsWith(settings.KeyPrefix, StringComparison.Ordinal) && !schema.IsDocumentedKey(key));
 
     // Undocumented values reported by a replacement rule, by key.
     private Dictionary<string, IReadOnlySet<string>> LegacyValues() =>
         table.ValueReplacements.Select(entry => KeyValuePair.Create(entry.Key, entry.From))
-            .Concat(table.TagReplacements.SelectMany(entry => entry.PresentTags))
-            .Where(tag => !schema.IsDocumentedValue(tag.Key, tag.Value))
+            .Concat(table.TagReplacements.Where(entry => entry.IsUnconditional).SelectMany(entry => entry.PresentTags))
+            .Where(tag => tag.Value != RuleTable.AnyValue && !schema.IsDocumentedValue(tag.Key, tag.Value))
             .GroupBy(tag => tag.Key, StringComparer.Ordinal)
             .ToDictionary(
                 group => group.Key,

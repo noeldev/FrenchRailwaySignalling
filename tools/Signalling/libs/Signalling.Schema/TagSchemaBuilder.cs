@@ -3,10 +3,8 @@
 
 using Signalling.Core.Model;
 using Signalling.Wiki;
-using ValidatorGen.Core;
-using ValidatorGen.Wiki;
 
-namespace ValidatorGen.Schema;
+namespace Signalling.Schema;
 
 // Builds the documented scheme from the wiki pages:
 // - every key declared under the configured prefix is documented;

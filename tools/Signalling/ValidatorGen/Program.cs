@@ -5,11 +5,10 @@ using System.Net;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 using Signalling.Rules;
+using Signalling.Schema;
 using ValidatorGen.Core;
 using ValidatorGen.Generation;
 using ValidatorGen.Rules;
-using ValidatorGen.Schema;
-using ValidatorGen.Wiki;
 
 TrySetUtf8Output();
 

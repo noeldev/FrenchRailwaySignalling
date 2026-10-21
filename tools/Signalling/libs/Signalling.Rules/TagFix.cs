@@ -3,14 +3,17 @@
 
 namespace Signalling.Rules;
 
-// The tags of an OSM object before and after the rule table was applied, and
-// the rules that changed them (empty when the tags were already up to date).
+// The tags of an OSM object before and after the rule table was applied, the
+// rules that changed them with their notes, and the legacy tagging left because
+// its replacement would overwrite a tag (to be fixed by hand).
 public sealed record TagFix(
     IReadOnlyDictionary<string, string> Original,
     IReadOnlyDictionary<string, string> Fixed,
-    IReadOnlyList<string> AppliedRules)
+    IReadOnlyList<string> AppliedRules,
+    IReadOnlyList<string> Notes,
+    IReadOnlyList<string> BlockedRules)
 {
-    public bool HasChanges => AppliedRules.Count > 0;
+    public bool HasChanges => SetTags.Count > 0 || UnsetKeys.Count > 0;
 
     // Tags added or changed by the fix.
     public IReadOnlyDictionary<string, string> SetTags =>

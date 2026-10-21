@@ -2,7 +2,7 @@
 // Copyright (C) 2026 Noël Danjou
 
 using Signalling.Rules;
-using ValidatorGen.Schema;
+using Signalling.Schema;
 
 namespace ValidatorGen.Rules;
 

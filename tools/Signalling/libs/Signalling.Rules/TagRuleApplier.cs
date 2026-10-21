@@ -6,11 +6,14 @@ namespace Signalling.Rules;
 // Applies the rule table to the tags of one OSM object, the way the JOSM
 // validator fixes would be applied one after the other until none is left:
 // - a value replacement renames a token of a ";" separated value (FR:CV;FR:M
-//   becomes FR:Cv;FR:M), the edge spaces and empty entries being dropped;
+//   becomes FR:Cv;FR:M), or drops it when the replacement is empty, the edge
+//   spaces and empty entries being dropped;
 // - a tag replacement first renames keys, then removes keys, then sets tags,
-//   in the order of its MapCSS fix declarations.
-// A fix can enable another one (a tag replacement producing a legacy value),
-// so the rules are applied again until the tags no longer change.
+//   in the order of its MapCSS fix declarations. It is skipped (blocked) when
+//   it would overwrite a tag it does not match, like its MapCSS fix.
+// A fix can enable another one (a tag replacement producing a legacy value, or
+// a value replacement unblocking a tag replacement), so the rules are applied
+// again until the tags no longer change.
 public sealed class TagRuleApplier(RuleTable table)
 {
     private const char ValueSeparator = ';';
@@ -22,15 +25,21 @@ public sealed class TagRuleApplier(RuleTable table)
     {
         var tags = new Dictionary<string, string>(source, StringComparer.Ordinal);
         List<string> applied = [];
+        List<string> notes = [];
 
         for (var pass = 0; pass < MaxPasses; pass++)
         {
             var changed = false;
 
-            foreach (var entry in table.TagReplacements.Where(entry => Matches(entry, tags)))
+            foreach (var entry in table.TagReplacements.Where(entry => Matches(entry, tags) && !IsBlocked(entry, tags)))
             {
                 ApplyTagReplacement(entry, tags);
                 applied.Add(RuleTable.Describe(entry.PresentTags));
+                if (!string.IsNullOrWhiteSpace(entry.Note))
+                {
+                    notes.Add(entry.Note);
+                }
+
                 changed = true;
             }
 
@@ -45,7 +54,14 @@ public sealed class TagRuleApplier(RuleTable table)
 
             if (!changed)
             {
-                return new TagFix(source, tags, [.. applied.Distinct()]);
+                List<string> blocked =
+                [
+                    .. table.TagReplacements
+                        .Where(entry => Matches(entry, tags) && IsBlocked(entry, tags))
+                        .Select(entry => RuleTable.Describe(entry.PresentTags)),
+                ];
+
+                return new TagFix(source, tags, [.. applied.Distinct()], [.. notes.Distinct()], blocked);
             }
         }
 
@@ -63,9 +79,17 @@ public sealed class TagRuleApplier(RuleTable table)
 
     private static bool Matches(TagReplacement entry, Dictionary<string, string> tags) =>
         entry.PresentTags.Any()
-        && entry.Match.All(tag => tag.Value is null
-            ? !tags.ContainsKey(tag.Key)
-            : tags.TryGetValue(tag.Key, out var value) && value == tag.Value);
+        && entry.Match.All(tag => tag.Value switch
+        {
+            null => !tags.ContainsKey(tag.Key),
+            RuleTable.AnyValue => tags.ContainsKey(tag.Key),
+            _ => tags.TryGetValue(tag.Key, out var value) && value == tag.Value,
+        });
+
+    private bool IsBlocked(TagReplacement entry, Dictionary<string, string> tags) =>
+        entry.GuardedSets.Any(tag => tags.TryGetValue(tag.Key, out var value)
+            && !table.AcceptedValues(tag.Key, tag.Value).Contains(value))
+        || entry.GuardedTargets.Any(tags.ContainsKey);
 
     private static void ApplyTagReplacement(TagReplacement entry, Dictionary<string, string> tags)
     {
@@ -101,9 +125,20 @@ public sealed class TagRuleApplier(RuleTable table)
             return false;
         }
 
-        tags[entry.Key] = string.Join(ValueSeparator, tokens
+        var replaced = string.Join(ValueSeparator, tokens
             .Select(token => token == entry.From ? entry.To : token.Trim())
             .Where(token => token.Length > 0));
+
+        // An empty replacement drops the token, and the key with its last one.
+        if (replaced.Length == 0)
+        {
+            tags.Remove(entry.Key);
+        }
+        else
+        {
+            tags[entry.Key] = replaced;
+        }
+
         return true;
     }
 }
