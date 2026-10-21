@@ -6275,14 +6275,9 @@
 					key="railway:signal:wrong_road:entry:form"
 					text="Signal presentation"
 					fr.text="Présentation du signal"
-					default="sign"
+					default="board"
 					editable="false"
 					values_sort="false">
-					<list_entry
-						value="sign"
-						display_value="Board"
-						fr.display_value="Pancarte"
-						icon="icons/signs/TECS.svg" icon_size="24"/>
 					<list_entry
 						value="board"
 						display_value="Illuminated board"
@@ -6317,14 +6312,9 @@
 					key="railway:signal:wrong_road:exit:form"
 					text="Signal presentation"
 					fr.text="Présentation du signal"
-					default="sign"
+					default="board"
 					editable="false"
 					values_sort="false">
-					<list_entry
-						value="sign"
-						display_value="Board"
-						fr.display_value="Pancarte"
-						icon="icons/signs/TSCS.svg" icon_size="24"/>
 					<list_entry
 						value="board"
 						display_value="Illuminated board"
