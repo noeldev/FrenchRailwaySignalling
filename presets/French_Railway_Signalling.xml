@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.38_2026-10-20"
+    version="1.39_2026-10-23"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -273,6 +273,36 @@
 		</optional>
 	</chunk>
 
+	<!-- ETCS Main Marker (form=sign) -->
+	<chunk id="cat_etcs_main_marker">
+		<reference ref="base_common" />
+		<key key="railway:signal:train_protection" value="ETCS:marker" />
+		<key key="railway:signal:train_protection:main:form" value="sign" />
+		<text
+			key="railway:signal:train_protection:main:caption"
+			text="Plate caption"
+			fr.text="Libellé de la plaque" />
+		<combo
+			name="Marker Function"
+			fr.name="Fonction du repère"
+			key="railway:signal:train_protection:main:function"
+			values_sort="false"
+			editable="false">
+			<list_entry
+				value="entry"
+				display_value="Entry"
+				fr.display_value="Entrée"/>
+			<list_entry
+				value="block"
+				display_value="Block"
+				fr.display_value="Canton"/>
+			<list_entry
+				value="exit"
+				display_value="Exit"
+				fr.display_value="Sortie"/>
+		</combo>
+	</chunk>
+
 	<!-- Mirlitons (form=sign) -->
 	<chunk id="cat_mirliton">
 		<key key="railway:signal:distant" value="FR:mirliton" />
@@ -363,6 +393,21 @@
 			text="Network ID"
 			fr.text="Identifiant Réseau"
 			length="7" />
+	</chunk>
+
+	<!-- Catenary height boards: they always read 25000, so no voltage key -->
+	<chunk id="cat_catenary_height_advance">
+		<key key="railway:signal:electricity" value="FR:catenary_height_advance" />
+		<key key="railway:signal:electricity:form" value="sign" />
+		<reference ref="cat_electricity" />
+		<link wiki="OpenRailwayMap/Tagging_in_France#Catenary_height_advance_board" />
+	</chunk>
+
+	<chunk id="cat_catenary_height">
+		<key key="railway:signal:electricity" value="FR:catenary_height" />
+		<key key="railway:signal:electricity:form" value="sign" />
+		<reference ref="cat_electricity" />
+		<link wiki="OpenRailwayMap/Tagging_in_France#Catenary_height_execution_board" />
 	</chunk>
 
 	<!-- Bimode (form=sign) -->
@@ -5499,14 +5544,14 @@
 			<group
 				name="Switchable Speed Indicators"
 				fr.name="TIV Mobiles"
-				icon="icons/signs/TIV-D_diamond.svg">
+				icon="icons/boards/TIV-D_diamond.svg">
 
 				<!-- Switchable TIV-D -->
 				<item
 					name="Switchable TIV-D"
 					fr.name="TIV-D Mobile"
 					type="node"
-					icon="icons/signs/TIV-D_diamond.svg">
+					icon="icons/boards/TIV-D_diamond.svg">
 					<label
 						text="Switchable TIV-D"
 						fr.text="TIV-D Mobile" />
@@ -6486,26 +6531,6 @@
 					<link wiki="OpenRailwayMap/Tagging_in_France#TVM_stop_marker" />
 				</item>
 
-				<!-- TVM Stop Marker with an ETCS Stop Marker on the same post -->
-				<item
-					name="Stop Marker (TVM + ETCS)"
-					fr.name="Repère d'Arrêt (TVM + ETCS)"
-					type="node"
-					icon="icons/signs/ETCS_stop_marker.svg">
-					<label
-						text="TVM stop marker with an ETCS stop marker"
-						fr.text="Repère d'arrêt TVM avec repère d'arrêt ETCS" />
-					<space />
-					<key key="railway:signal:train_protection:main:etcs" value="yes" />
-					<reference ref="tvm_stop_marker" />
-
-					<item_separator />
-
-					<preset_link preset_name="Illuminated Yellow Band" text=""/>
-
-					<link wiki="OpenRailwayMap/Tagging_in_France#TVM_stop_marker" />
-				</item>
-
 				<!-- TVM Transition Marker -->
 				<item
 					name="Transition Marker"
@@ -6582,6 +6607,252 @@
 					</optional>
 					<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_marker" />
 				</item>
+			</group>
+
+			<!-- European Train Control System (ETCS) -->
+			<group
+				name="ETCS Markers"
+				fr.name="Repères ETCS"
+				icon="icons/signs/ETCS/stop_marker.svg">
+
+				<group
+					name="Markers"
+					fr.name="Repères"
+					icon="icons/signs/ETCS/stop_marker.svg">
+
+					<!-- Stop Marker -->
+					<item
+						name="Stop Marker"
+						fr.name="Jalon d'Arrêt"
+						type="node"
+						icon="icons/signs/ETCS/stop_marker.svg">
+						<label
+							text="Stop marker"
+							fr.text="Jalon d'arrêt" />
+						<space />
+						<key key="railway:signal:train_protection:main" value="ETCS:stop_marker" />
+						<reference ref="cat_etcs_main_marker" />
+						<link wiki="OpenRailwayMap/ETCS_Markers#ETCS_stop_marker" />
+					</item>
+
+					<!-- Location Marker -->
+					<item
+						name="Location Marker"
+						fr.name="Repère de Localisation"
+						type="node"
+						icon="icons/signs/ETCS/location_marker.svg">
+						<label
+							text="Location marker"
+							fr.text="Repère de localisation" />
+						<space />
+						<key key="railway:signal:train_protection:main" value="ETCS:location_marker" />
+						<reference ref="cat_etcs_main_marker" />
+						<link wiki="OpenRailwayMap/ETCS_Markers#ETCS_location_marker" />
+					</item>
+
+					<!-- Transition Marker -->
+					<item
+						name="Transition Marker"
+						fr.name="Repère de Transition"
+						type="node"
+						icon="icons/signs/ETCS/transition_marker.svg">
+						<label
+							text="Transition marker"
+							fr.text="Repère de transition" />
+						<space />
+						<reference ref="base_common" />
+						<key key="railway:signal:train_protection" value="ETCS:marker" />
+						<key key="railway:signal:train_protection:system_change" value="ETCS:level_transition" />
+						<key key="railway:signal:train_protection:system_change:form" value="sign" />
+						<link wiki="OpenRailwayMap/ETCS_Markers#ETCS_transition_marker" />
+					</item>
+
+					<separator />
+
+					<!-- ERTMS N2 board: national transition from TVM to ETCS level 2 -->
+					<item
+						name="ERTMS N2 Board"
+						fr.name="Tableau ERTMS N2"
+						type="node"
+						icon="icons/signs/ERTMS_transition.svg">
+						<label
+							text="ERTMS N2 transition board (TVM to ETCS level 2)"
+							fr.text="Tableau ERTMS N2 (transition TVM vers ETCS niveau 2)" />
+						<space />
+						<reference ref="base_common" />
+						<key key="railway:signal:train_protection" value="ETCS:marker" />
+						<key key="railway:signal:train_protection:system_change" value="FR:ETCS-2" />
+						<key key="railway:signal:train_protection:system_change:form" value="sign" />
+						<text
+							key="railway:signal:train_protection:system_change:ref"
+							text="Network ID"
+							fr.text="Identifiant Réseau"
+							length="7" />
+						<link wiki="OpenRailwayMap/Tagging_in_France#ERTMS_N2_transition_board" />
+					</item>
+
+				</group>
+
+				<separator />
+
+				<!-- Neutral Section -->
+				<group
+					name="Neutral Section"
+					fr.name="Zone de Sectionnement"
+					icon="icons/signs/ETCS/neutral_section.svg">
+
+					<!-- Distant -->
+					<item
+						name="Distant Neutral Section"
+						fr.name="Zone de Sectionnement à Distance"
+						type="node"
+						icon="icons/signs/ETCS/distant_neutral_section.svg">
+						<label
+							text="Distant begin of neutral section"
+							fr.text="Zone de Sectionnement à Distance" />
+						<space />
+						<key key="railway:signal:electricity" value="ETCS:power_off_advance" />
+						<key key="railway:signal:electricity:type" value="power_off_advance" />
+						<key key="railway:signal:electricity:form" value="sign" />
+						<reference ref="base_common" />
+						<link wiki="OpenRailwayMap/ETCS_Markers#Distant_begin_of_neutral_section" />
+					</item>
+
+					<!-- Begin -->
+					<item
+						name="Begin of Neutral Section"
+						fr.name="Début de Zone de Sectionnement"
+						type="node"
+						icon="icons/signs/ETCS/neutral_section.svg">
+						<label
+							text="Begin of neutral section"
+							fr.text="Début de zone de sectionnement" />
+						<space />
+						<key key="railway:signal:electricity" value="ETCS:power_off" />
+						<key key="railway:signal:electricity:type" value="power_off" />
+						<key key="railway:signal:electricity:form" value="sign" />
+						<reference ref="base_common" />
+						<link wiki="OpenRailwayMap/ETCS_Markers#Begin_of_neutral_section" />
+					</item>
+
+					<!-- End -->
+					<item
+						name="End of Neutral section"
+						fr.name="Fin de Zone de Sectionnement"
+						type="node"
+						icon="icons/signs/ETCS/end_of_neutral_section.svg">
+						<label
+							text="End of Neutral section"
+							fr.text="Fin de zone de sectionnement" />
+						<space />
+						<key key="railway:signal:electricity" value="ETCS:power_on" />
+						<key key="railway:signal:electricity:type" value="power_on" />
+						<key key="railway:signal:electricity:form" value="sign" />
+						<reference ref="base_common" />
+						<link wiki="OpenRailwayMap/ETCS_Markers#End_of_neutral_section" />
+					</item>
+
+				</group>
+
+				<!-- Lower Pantograph -->
+				<group
+					name="Lower Pantograph"
+					fr.name="Baissez Pantographe"
+					icon="icons/signs/ETCS/distant_lower_pantograph.svg">
+
+					<!-- Advance-->
+					<item
+						name="Distant Lower Pantograph"
+						fr.name="Baissez Panto à Distance"
+						type="node"
+						icon="icons/signs/ETCS/distant_lower_pantograph.svg">
+						<label
+							text="Distant lower pantograph"
+							fr.text="Signal à distance &quot;Baissez panto&quot;" />
+						<space />
+						<key key="railway:signal:electricity" value="ETCS:pantograph_down_advance" />
+						<key key="railway:signal:electricity:type" value="pantograph_down_advance" />
+						<key key="railway:signal:electricity:form" value="sign" />
+						<reference ref="base_common" />
+						<link wiki="OpenRailwayMap/ETCS_Markers#Distant_Lower_pantograph" />
+					</item>
+
+					<!-- Begin -->
+					<item
+						name="Lower Pantograph"
+						fr.name="Baissez Panto"
+						type="node"
+						icon="icons/signs/ETCS/lower_pantograph.svg">
+						<label
+							text="Lower Pantograph"
+							fr.text="Signal d'exécution &quot;Baissez panto&quot;" />
+						<space />
+						<key key="railway:signal:electricity" value="ETCS:pantograph_down" />
+						<key key="railway:signal:electricity:type" value="pantograph_down" />
+						<key key="railway:signal:electricity:form" value="sign" />
+						<reference ref="base_common" />
+						<link wiki="OpenRailwayMap/ETCS_Markers#Lower_pantograph" />
+					</item>
+
+					<!-- End -->
+					<item
+						name="Raise Pantograph"
+						fr.name="Fin de Parcours"
+						type="node"
+						icon="icons/signs/ETCS/raise_pantograph.svg">
+						<label
+							text="Raise Pantograph"
+							fr.text="Signal de fin de parcours" />
+						<space />
+						<key key="railway:signal:electricity" value="ETCS:pantograph_up" />
+						<key key="railway:signal:electricity:type" value="pantograph_up" />
+						<key key="railway:signal:electricity:form" value="sign" />
+						<reference ref="base_common" />
+						<link wiki="OpenRailwayMap/ETCS_Markers#Raise_pantograph" />
+					</item>
+
+				</group>
+
+				<group
+					name="End of Catenary"
+					fr.name="Fin de Caténaire"
+					icon="icons/signs/ETCS/end_of_catenary.svg">
+
+					<!-- Distant End of Catenary -->
+					<item
+						name="Distant End of Catenary"
+						fr.name="Fin de Caténaire à distance"
+						type="node"
+						icon="icons/signs/ETCS/distant_end_of_catenary.svg">
+						<label
+							text="Distant End of Catenary"
+							fr.text="Fin de Caténaire à distance" />
+						<space />
+						<key key="railway:signal:electricity" value="ETCS:end_of_catenary_advance" />
+						<key key="railway:signal:electricity:type" value="end_of_catenary_advance" />
+						<key key="railway:signal:electricity:form" value="sign" />
+						<reference ref="base_common" />
+						<link wiki="OpenRailwayMap/ETCS_Markers#Distant_end_of_catenary" />
+					</item>
+
+					<!-- End of Catenary -->
+					<item
+						name="End of Catenary"
+						fr.name="Fin de Caténaire"
+						type="node"
+						icon="icons/signs/ETCS/end_of_catenary.svg">
+						<label
+							text="End of Catenary"
+							fr.text="Fin de Caténaire" />
+						<space />
+						<key key="railway:signal:electricity" value="ETCS:end_of_catenary" />
+						<key key="railway:signal:electricity:type" value="end_of_catenary" />
+						<key key="railway:signal:electricity:form" value="sign" />
+						<key key="railway:signal:position" value="overhead" />
+						<reference ref="base_common_core" />
+						<link wiki="OpenRailwayMap/ETCS_Markers#End_of_catenary" />
+					</item>
+				</group>
 			</group>
 
 			<separator />
@@ -7000,17 +7271,17 @@
 
 				<separator />
 
-				<!-- Frost Board -->
+				<!-- GIVRE Board -->
 				<item
-					name="Frost Board"
+					name="GIVRE Board"
 					fr.name="Tableau GIVRE"
 					type="node"
-					icon="icons/boards/frost.svg">
+					icon="icons/boards/GIVRE.svg">
 					<label
-						text="Frost Board"
+						text="GIVRE (frost) Board"
 						fr.text="Tableau GIVRE" />
 					<space />
-					<key key="railway:signal:electricity" value="FR:frost" />
+					<key key="railway:signal:electricity" value="FR:GIVRE" />
 					<reference ref="cat_electricity" />
 					<combo
 						key="railway:signal:electricity:form"
@@ -7022,19 +7293,89 @@
 							value="board"
 							display_value="Illuminated board"
 							fr.display_value="Tableau lumineux"
-							icon="icons/boards/frost.svg"
+							icon="icons/boards/GIVRE.svg"
 							icon_size="24"/>
 						<list_entry
 							value="light"
 							display_value="Light box"
 							fr.display_value="Caisson lumineux"
-							icon="icons/boxes/frost.svg"
+							icon="icons/boxes/GIVRE.svg"
 							icon_size="24"/>
 					</combo>
-					<link wiki="OpenRailwayMap/Tagging_in_France#Frost_board" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#GIVRE_board" />
 				</item>
 
-				<!-- LGV Lightbox (constant contact wire height) -->
+			</group>
+
+			<separator />
+
+			<!-- Catenary Height (contact wire height regime) -->
+			<group
+				name="Catenary Height"
+				fr.name="Hauteur de Caténaire"
+				icon="icons/signs/constant_catenary_height.svg">
+
+				<!-- Distant board, variable height -->
+				<item
+					name="25000 Distant Board"
+					fr.name="Tableau à Distance 25000"
+					type="node"
+					icon="icons/signs/variable_catenary_height_advance.svg">
+					<label
+						text="&quot;25000&quot; distant board (variable catenary height)"
+						fr.text="Tableau à distance &quot;25000&quot; (caténaire de hauteur variable)" />
+					<space />
+					<key key="railway:signal:electricity:catenary_height" value="variable" />
+					<reference ref="cat_catenary_height_advance" />
+				</item>
+
+				<!-- Distant board, constant height -->
+				<item
+					name="25000 LGV Distant Board"
+					fr.name="Tableau à Distance 25000 LGV"
+					type="node"
+					icon="icons/signs/constant_catenary_height_advance.svg">
+					<label
+						text="&quot;25000 LGV&quot; distant board (constant catenary height)"
+						fr.text="Tableau à distance &quot;25000 LGV&quot; (caténaire de hauteur constante)" />
+					<space />
+					<key key="railway:signal:electricity:catenary_height" value="constant" />
+					<reference ref="cat_catenary_height_advance" />
+				</item>
+
+				<separator />
+
+				<!-- Execution board, variable height -->
+				<item
+					name="25000 Board"
+					fr.name="Tableau 25000"
+					type="node"
+					icon="icons/signs/variable_catenary_height.svg">
+					<label
+						text="&quot;25000&quot; board (variable catenary height)"
+						fr.text="Tableau d'exécution &quot;25000&quot; (caténaire de hauteur variable)" />
+					<space />
+					<key key="railway:signal:electricity:catenary_height" value="variable" />
+					<reference ref="cat_catenary_height" />
+				</item>
+
+				<!-- Execution board, constant height -->
+				<item
+					name="25000 LGV Board"
+					fr.name="Tableau 25000 LGV"
+					type="node"
+					icon="icons/signs/constant_catenary_height.svg">
+					<label
+						text="&quot;25000 LGV&quot; board (constant catenary height)"
+						fr.text="Tableau d'exécution &quot;25000 LGV&quot; (caténaire de hauteur constante)" />
+					<space />
+					<key key="railway:signal:electricity:catenary_height" value="constant" />
+					<reference ref="cat_catenary_height" />
+				</item>
+
+				<separator />
+
+				<!-- LGV Lightbox (constant height, 25000 implied) -->
 				<item
 					name="LGV Lightbox"
 					fr.name="Caisson LGV"
@@ -7045,31 +7386,13 @@
 						fr.text="Caisson LGV" />
 					<space />
 					<key key="railway:signal:electricity" value="FR:LGV" />
+					<key key="railway:signal:electricity:catenary_height" value="constant" />
 					<key key="railway:signal:electricity:form" value="light" />
 					<reference ref="cat_electricity" />
 					<link wiki="OpenRailwayMap/Tagging_in_France#LGV_lightbox" />
 				</item>
 
 			</group>
-
-			<separator />
-
-			<!-- Catenary Voltage Reminder -->
-			<item
-				name="Catenary Voltage Reminder"
-				fr.name="Rappel Tension Caténaire"
-				type="node"
-				icon="icons/signs/25000.svg">
-				<label
-					text="Catenary voltage reminder board"
-					fr.text="Pancarte de rappel de tension caténaire" />
-				<space />
-				<key key="railway:signal:electricity" value="FR:voltage_reminder" />
-				<key key="railway:signal:electricity:form" value="sign" />
-				<reference ref="cat_electricity" />
-				<reference ref="optional_traction_supply" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Catenary_voltage_reminder" />
-			</item>
 
 			<!-- End of Catenary -->
 			<item
