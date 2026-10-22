@@ -1,6 +1,6 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2026-10-21 04:28:43 UTC<br>
+**Backup generated:** 2026-10-22 22:42:22 UTC<br>
 **Category:** main<br>
 **Total pages:** 3<br>
 **Successfully backed up:** 3
@@ -26,9 +26,9 @@
 
 - **File:** [OpenRailwayMap/Tagging_in_France.wiki](OpenRailwayMap/Tagging_in_France.wiki)
 - **Wiki URL:** [OpenRailwayMap/Tagging_in_France](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
-- **Last edited:** 2026-10-21 03:27:44 UTC
+- **Last edited:** 2026-10-22 22:39:54 UTC
 - **Last editor:** Noeld
-- **Edit comment:** /* Wrong-road exit board */ replace sign with board
+- **Edit comment:** /* ERTMS N2 board */ update title after merge
 
 ## About
 
