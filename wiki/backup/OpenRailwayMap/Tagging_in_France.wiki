@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-10-21 03:27:44 UTC
+Last edited: 2026-10-22 22:39:54 UTC
 Last editor: Noeld
-Last edit comment: /* Wrong-road exit board */ replace sign with board
-Backup date: 2026-10-21 04:28:43 UTC
+Last edit comment: /* ERTMS N2 board */ update title after merge
+Backup date: 2026-10-22 22:42:22 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -155,12 +155,12 @@ File:Guidon_d'Arrêt.svg|Guidon d'Arrêt.
 * {{Tag|railway:signal:main:form|light}}
 
 == Illuminated horizontal yellow band ==
-In some stations, the entrance [[#Carré|Carré signal]] may be equipped with an ''illuminated horizontal yellow band'' (French: '''bande lumineuse jaune horizontale'''). The band may be steady or flashing and is lit in addition to the [[Tag:railway:signal:main:states=FR:A|Caution]] ('''Avertissement''') light. It instructs the driver to be prepared to stop within a short distance, either due to the presence of vehicles or the closure of an [[#Intermediate_platform_signal|intermediate stop signal]].
+In some stations, the entrance [[#Carré|Carré signal]] may be equipped with an ''illuminated horizontal yellow band'' (French: '''bande lumineuse jaune horizontale'''). The band may be steady or flashing and is lit in addition to the [[Tag:railway:signal:main:states=FR:A|Caution]] ('''Avertissement''') light. It instructs the driver to be prepared to stop within a short distance, either due to the presence of vehicles or the closure of an [[#Intermediate_platform_signal|intermediate platform signal]].
 
 A [[#TVM_stop_marker|TVM stop marker]] may also be equipped with a yellow light band.
 
 <gallery>
-File:Bande_Jaune.svg|Yellow light band
+File:Bande_Jaune.svg|Illuminated horizontal yellow band
 </gallery>
 
 * {{Tag|railway:signal:short_route|FR:yellow_band}}
@@ -231,7 +231,7 @@ File:Signal de milieu de quai.svg|Illuminated white cross aspect on an intermedi
 </gallery>
 
 Depending on the operational scenario, the signal presents the following aspects:
-* '''Carré''': Closed to stop an incoming train at the middle of the platform. This aspect is announced upstream by a [[Tag:railway:signal:main:states=FR:A|Caution]] (''Avertissement'') aspect combined with a flashing [[#Yellow_band|illuminated horizontal yellow band]].
+* '''Carré''': Closed to stop an incoming train at the middle of the platform. This aspect is announced upstream by a [[Tag:railway:signal:main:states=FR:A|Caution]] (''Avertissement'') aspect combined with a flashing [[#Illuminated_horizontal_yellow_band|illuminated horizontal yellow band]].
 * '''Illuminated White Cross''': Cancels the signal when a multiple-unit train occupies the entire platform, or when an incoming single unit is routed to stop at the end of the second half of the platform. In these cases the upstream ''Caution'' signal is presented without the flashing ''illuminated yellow band''.
 * '''Caution''': Displayed when the station's exit signal is open (e.g. displaying a [[Tag:railway:signal:main:states=FR:RR|Rappel 30]]), ensuring the train does not exceed 30 km/h between the intermediate and exit signals.
 * '''Flashing Red''': Opens after an initial stop at the [[Tag:railway:signal:main:states=FR:C|Carré]] to authorize a low-speed (15 km/h max) entry and safe coupling onto a railcar already stationary at the second half of the platform.
@@ -241,7 +241,6 @@ Depending on the operational scenario, the signal presents the following aspects
 * {{Tag|railway:signal:main:form|light}}
 * {{Tag|railway:signal:main:function|intermediate}}
 * {{Tag|railway:signal:main:states||({{TagValue|railway:signal:main:states|FR:C}}/{{TagValue|railway:signal:main:states|FR:(S)}}/{{TagValue|railway:signal:main:states|FR:X}}/{{TagValue|railway:signal:main:states|FR:A}}/{{TagValue|railway:signal:main:states|FR:VL}})}}
-
 
 == Stop marker for coupling ==
 
@@ -743,7 +742,6 @@ File:Repère_TGV.svg|TVM stop marker
 
 Optional tags:
 * {{Tag|railway:signal:train_protection:main:passing_light|yes}} (if '''Nf''' signal is equipped with a white passing light)
-* {{Tag|railway:signal:train_protection:main:etcs|yes}} (if co-located with an [[OpenRailwayMap/ETCS_Markers#ETCS_stop_marker|ETCS stop marker]])
 
 ==== TVM transition marker ====
 The boards indicate transitions between TVM systems or types of cab signalling. The numbers 300 or 430 indicate the downstream TVM system, while 1 or 2 indicate the track direction.
@@ -784,6 +782,17 @@ File:Illuminated_cross_(SACEM).svg|SACEM cancellation signal
 
 =ETCS markers=
 See [[OpenRailwayMap/ETCS_Markers|ETCS markers]].
+
+== ERTMS N2 transition board ==
+Board installed on a TVM-equipped line to mark the transition point to ETCS Level 2 cab signalling. Trains equipped with ETCS follow ETCS Level 2 operating rules once an indication from ETCS cab signalling appears.
+
+<gallery>
+File:Tableau ERTMS Niveau 2.svg|ETCS Level 2 transition board
+</gallery>
+
+* {{Tag|railway:signal:train_protection|ETCS:marker}}
+* {{Tag|railway:signal:train_protection:system_change|FR:ETCS-2}}
+* {{Tag|railway:signal:train_protection:system_change:form|sign}}
 
 =Electrified railway lines=
 
@@ -923,7 +932,7 @@ The signal may also indicate the catenary '''voltage''' and '''installation''' t
 File:Signal fin de Baissez Panto.svg|Mechanical signal ({{TagValue|railway:signal:electricity:form|sign}})
 File:Signal fin de Baissez Panto 1500V.svg|Catenary supplied at {{TagValue|railway:signal:electricity:voltage|1500}} V DC
 File:Signal Fin de parcours Baissez Panto 25000V.svg|Catenary supplied at {{TagValue|railway:signal:electricity:voltage|25000}} V AC, with variable height
-File:Signal fin de Baissez Panto 25000V LGV.svg|Catenary supplied at {{TagValue|railway:signal:electricity:voltage|25000}} V AC, with constant height ({{TagValue|railway:signal:electricity:installation|LGV}})
+File:Signal fin de Baissez Panto 25000V LGV.svg|Catenary supplied at {{TagValue|railway:signal:electricity:voltage|25000}} V AC, with constant height ({{TagValue|railway:signal:electricity:installation|FR:LGV}})
 </gallery>
 
 * {{Tag|railway:signal:electricity|FR:pantograph_up}}
@@ -934,7 +943,7 @@ Optional tags:
 * {{Tag|railway:signal:electricity:voltage|}}
 * {{Tag|railway:signal:electricity:installation|({{TagValue|railway:signal:electricity:installation|FR:LGV}}/{{TagValue|railway:signal:electricity:installation|FR:ET}})}} (installation type, e.g. ''LGV'', ''ET'')
 
-== Frost board ==
+== GIVRE board ==
 '''GIVRE''' (frost) boards are installed on some 1500 V DC electrified lines. When a driver encounters such an illuminated board, the second pantograph must be raised to improve current collection: the first pantograph clears ice from the catenary, improving contact for the second one.
 
 The second pantograph is lowered when another frost board in the off state is encountered, after verbal authorization, or when no icing conditions are observed.
@@ -944,31 +953,46 @@ File:Tableau_GIVRE.svg|Illuminated board ({{TagValue|railway:signal:electricity:
 File:Tableau_GIVRE_box.svg|Light box ({{TagValue|railway:signal:electricity:form|light}})
 </gallery>
 
-* {{Tag|railway:signal:electricity|FR:frost}}
+* {{Tag|railway:signal:electricity|FR:GIVRE}}
 * {{Tag|railway:signal:electricity:form||({{TagValue|railway:signal:electricity:form|board}}/{{TagValue|railway:signal:electricity:form|light}})}}
 
-== LGV lightbox ==
-A lightbox displaying '''LGV''' identifies a high-speed line (French: ''Ligne à Grande Vitesse'') equipped with a contact wire at a constant height above rail level.
+== Catenary height ==
+On 25 kV AC lines, boards indicate whether the contact wire is at a '''constant''' or '''variable''' height. A constant height requires the ''pantograph stop'' (French: '''butée''') to be set, whereas a variable height requires it to be removed. A ''25000 LGV'' board indicates a constant height, while a ''25000'' board indicates a variable height. Since both types of board always display 25000, no voltage tag is needed.
+
+=== Catenary height advance board ===
+Announces an upcoming change in the contact wire height regime.
+
+<gallery>
+File:Tableau_à_distance_25000.svg|25000 distant board ({{TagValue|railway:signal:electricity:catenary_height|variable}})
+File:Tableau_à_distance_25000_LGV.svg|25000 LGV distant board ({{TagValue|railway:signal:electricity:catenary_height|constant}})
+</gallery>
+
+* {{Tag|railway:signal:electricity|FR:catenary_height_advance}}
+* {{Tag|railway:signal:electricity:catenary_height||({{TagValue|railway:signal:electricity:catenary_height|variable}}/{{TagValue|railway:signal:electricity:catenary_height|constant}})}}
+* {{Tag|railway:signal:electricity:form|sign}}
+
+=== Catenary height execution board ===
+Marks the point where the contact wire height regime changes. When fitted to a [[#Pantograph_up_signal|pantograph up signal]], the board is described using that signal's voltage and installation tags instead. The tagging described below applies to standalone boards only.
+
+<gallery>
+File:Tableau_d'exécution_25000.svg|25000 execution board ({{TagValue|railway:signal:electricity:catenary_height|variable}})
+File:Tableau_d'exécution_25000_LGV.svg|25000 LGV execution board ({{TagValue|railway:signal:electricity:catenary_height|constant}})
+</gallery>
+
+* {{Tag|railway:signal:electricity|FR:catenary_height}}
+* {{Tag|railway:signal:electricity:catenary_height||({{TagValue|railway:signal:electricity:catenary_height|variable}}/{{TagValue|railway:signal:electricity:catenary_height|constant}})}}
+* {{Tag|railway:signal:electricity:form|sign}}
+
+=== LGV lightbox ===
+A lightbox displaying '''LGV''' identifies a high-speed line (French: ''Ligne à Grande Vitesse''). It indicates a 25 kV AC supply and a constant contact wire height.
 
 <gallery>
 File:Caisson LGV.svg|LGV lightbox
 </gallery>
 
 * {{Tag|railway:signal:electricity|FR:LGV}}
+* {{Tag|railway:signal:electricity:catenary_height|constant}}
 * {{Tag|railway:signal:electricity:form|light}}
-
-== Catenary voltage reminder ==
-This board reminds the driver of the catenary voltage on the current track.
-
-<gallery>
-File:Pancarte 25000.svg|25000V reminder board
-</gallery>
-
-* {{Tag|railway:signal:electricity|FR:voltage_reminder}}
-* {{Tag|railway:signal:electricity:form|sign}}
-
-Optional tags:
-* {{Tag|railway:signal:electricity:voltage|}}
 
 == End of catenary ==
 Beyond this sign, the line is no longer electrified and only diesel or dual-mode trains can continue.
@@ -1020,7 +1044,7 @@ File:Pancarte_à_distance_Carré.svg|Carré distant sign
 * {{Tag|railway:signal:distant:caption|}} (text as shown on the sign, e.g. ''Carré à 500m'')
 
 == Intermediate signal distant signs ==
-A distant sign announcing an [[#Intermediate_platform_signal_(2TMV)|intermediate signal]] (2TMV) installed on the right-hand side of the track at platform mid-point. The sign carries the identification of the announced signal.
+A distant sign announcing an [[#Intermediate_platform_signal|intermediate platform signal]] (2TMV) installed on the right-hand side of the track at platform mid-point. The sign carries the identification of the announced signal.
 
 <gallery>
 File:Pancarte à distance C881 à droite.svg|Intermediate signal distant sign
@@ -1531,7 +1555,7 @@ File:Chevron_haut.svg|Chevron pointe en haut
 A '''Tableau Lumineux de Correspondance''' (TLC) for converging tracks is a signal installed to the left of the track it addresses and is normally off. At any given time, it can display one of the following:
 - A white letter '''T''', either ''fixed'' if the group signal is ''clear'' or flashing, if the group signal is ''at danger''.
 - The [[#Signal_Lumineux_de_Départ|Signal Lumineux de Départ]] if applicable.
-- A red and white checkerboard, which has the same meaning as the [[#StopMarker|Jalon d'Arrêt]] and is used instead of the [[#Chevron_pointe_en_haut|chevron]].
+- A red and white checkerboard, which has the same meaning as a ''jalon d'arrêt'' and is used instead of the [[#Chevron_pointe_en_haut|chevron]].
 
 <gallery>
 File:TLC-T.svg|The group signal is clear
