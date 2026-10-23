@@ -257,7 +257,7 @@ public sealed class CommandLineOptions
                                       folder, are Inkscape's compact "Optimized SVG"
                                       export (no leftover editor namespaces, metadata
                                       block, or comments).
-                          --yaml [source]         Audit the preset against the ORM-vector map YAML.
+              --yaml [source]         Audit the preset against the ORM-vector map YAML.
                                       No value: configured local file. 'online':
                                       configured URL. Or an explicit path/url.
               --wiki [source]         Audit the preset against the OSM wiki: link and
