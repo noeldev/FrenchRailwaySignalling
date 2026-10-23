@@ -10,7 +10,8 @@ namespace ValidatorGen.Rules;
 // the generation instead of producing a rule that flags valid tagging or
 // suggests undocumented tagging:
 // - the legacy side of a replacement must be undocumented;
-// - the replacement side and the tags of a conflict must be documented.
+// - the replacement side and the tags of a conflict must be documented;
+// - a redundancy only removes tags it matches, and keeps the others.
 public static class RuleTableValidator
 {
     public static IReadOnlyList<string> Validate(RuleTable table, TagSchema schema)
@@ -20,6 +21,7 @@ public static class RuleTableValidator
             .. table.ValueReplacements.SelectMany(entry => ValidateValueReplacement(entry, schema)),
             .. table.TagReplacements.SelectMany(entry => ValidateTagReplacement(entry, schema)),
             .. table.Conflicts.SelectMany(entry => ValidateConflict(entry, schema)),
+            .. table.Redundancies.SelectMany(ValidateRedundancy),
         ];
 
         return errors;
@@ -70,6 +72,31 @@ public static class RuleTableValidator
         if (entry.Set.Count == 0 && entry.Rename.Count == 0 && entry.Remove.Count == 0)
         {
             yield return $"{label}: nothing to fix (set, rename and remove are empty).";
+        }
+    }
+
+    private static IEnumerable<string> ValidateRedundancy(TagReplacement entry)
+    {
+        var label = $"redundancy {RuleTable.Describe(entry.PresentTags)}";
+        if (entry.Set.Count > 0 || entry.Rename.Count > 0)
+        {
+            yield return $"{label}: only \"match\", \"remove\" and \"note\" are allowed.";
+        }
+
+        if (entry.Remove.Count == 0)
+        {
+            yield return $"{label}: nothing to remove.";
+        }
+
+        var present = entry.PresentTags.Select(tag => tag.Key).ToHashSet(StringComparer.Ordinal);
+        foreach (var key in entry.Remove.Where(key => !present.Contains(key)))
+        {
+            yield return $"{label}: the removed key {key} is not a matched tag.";
+        }
+
+        if (entry.PresentTags.All(tag => entry.Remove.Contains(tag.Key)))
+        {
+            yield return $"{label}: no matched tag is kept to imply the removed ones.";
         }
     }
 

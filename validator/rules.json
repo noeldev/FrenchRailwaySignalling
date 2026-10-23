@@ -11,6 +11,11 @@
       "to": "FR:Cv"
     },
     {
+      "key": "railway:signal:main",
+      "from": "FR:A",
+      "to": "FR:C"
+    },
+    {
       "key": "railway:signal:main:states",
       "from": "FR:CV",
       "to": "FR:Cv"
@@ -1195,17 +1200,6 @@
     },
     {
       "match": {
-        "railway:signal:main": "FR:A"
-      },
-      "rename": {
-        "railway:signal:main": "railway:signal:distant",
-        "railway:signal:main:form": "railway:signal:distant:form",
-        "railway:signal:main:states": "railway:signal:distant:states",
-        "railway:signal:main:ref": "railway:signal:distant:ref"
-      }
-    },
-    {
-      "match": {
         "railway:signal:main": "FR:GABARIT"
       },
       "set": {
@@ -2010,6 +2004,41 @@
         "railway:signal:stop": "FR:chevron"
       },
       "note": "an upward-pointing chevron marks either a trailing point (speed_limit:switch) or a stop position (stop), depending on its role"
+    }
+  ],
+  "redundancies": [
+    {
+      "match": {
+        "railway:crocodile": "yes",
+        "railway:signal:main": "FR:C",
+        "railway:signal:speed_limit_distant": null
+      },
+      "remove": [
+        "railway:crocodile"
+      ],
+      "note": "railway:crocodile is only needed with a TIV-D, where it sets the diamond (yes) or square (no) shape"
+    },
+    {
+      "match": {
+        "railway:crocodile": "yes",
+        "railway:signal:distant": "FR:D",
+        "railway:signal:speed_limit_distant": null
+      },
+      "remove": [
+        "railway:crocodile"
+      ],
+      "note": "railway:crocodile is only needed with a TIV-D, where it sets the diamond (yes) or square (no) shape"
+    },
+    {
+      "match": {
+        "railway:crocodile": "yes",
+        "railway:signal:distant": "FR:A",
+        "railway:signal:speed_limit_distant": null
+      },
+      "remove": [
+        "railway:crocodile"
+      ],
+      "note": "railway:crocodile is only needed with a TIV-D, where it sets the diamond (yes) or square (no) shape"
     }
   ]
 }

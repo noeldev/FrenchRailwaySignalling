@@ -35,6 +35,13 @@ namespace Signalling.Rules;
 // must not appear together; "note" tells how to choose:
 //   { "tags": { "railway:signal:speed_limit:switch": "FR:chevron", "railway:signal:stop": "FR:chevron" },
 //     "note": "..." }
+//
+// Redundancies list documented tags that are implied by the rest of the
+// tagging: the validator warns and offers to remove them, but they are not
+// legacy, so the MapRoulette challenge leaves them alone. They use the shape
+// of a tag replacement with "match", "remove" and an optional "note" only:
+//   { "match": { "railway:crocodile": "yes", "railway:signal:main": "FR:C" },
+//     "remove": [ "railway:crocodile" ], "note": "..." }
 public sealed class RuleTable
 {
     // A "match" value that accepts any value of the key.
@@ -52,6 +59,8 @@ public sealed class RuleTable
     public List<TagReplacement> TagReplacements { get; set; } = [];
 
     public List<TagConflict> Conflicts { get; set; } = [];
+
+    public List<TagReplacement> Redundancies { get; set; } = [];
 
     // Tags as "key=value + key=value", for messages and reports.
     public static string Describe(IEnumerable<KeyValuePair<string, string>> tags) =>

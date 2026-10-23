@@ -17,7 +17,8 @@ namespace ValidatorGen.Generation;
 //    the replacement is carried by the fix. The fix of a legacy tagging is
 //    guarded so it never overwrites a tag it does not match; one more rule
 //    reports, without a fix, the legacy tagging a guard keeps;
-// 3. one rule per conflict between documented alternatives;
+// 3. one rule per conflict between documented alternatives, and one warning
+//    per redundant tag, with a fix that removes it;
 // 4. one rule for keys the wiki does not document;
 // 5. one rule for values the wiki does not list, for every closed key. Values
 //    of another scheme (CH-FDV:, ETCS:...) are out of scope and never reported.
@@ -53,6 +54,7 @@ public sealed class ValidatorRuleBuilder(TagSchema schema, RuleTable table, Vali
             .. table.TagReplacements.Select(BuildTagReplacementRule),
             .. table.TagReplacements.Where(entry => entry.GuardedSets.Any() || entry.GuardedTargets.Any()).Select(BuildGuardRule),
             .. table.Conflicts.Select(BuildConflictRule),
+            .. table.Redundancies.Select(BuildRedundancyRule),
             BuildUndocumentedKeyRule(scope),
             BuildUndocumentedValueRule(scope),
         ];
@@ -187,6 +189,33 @@ public sealed class ValidatorRuleBuilder(TagSchema schema, RuleTable table, Vali
                 message,
                 $"assertMatch: {Quote(AssertNode(entry.Tags))}",
                 .. entry.Tags.Select(tag => $"assertNoMatch: {Quote(AssertNode([tag]))}"),
+            ]);
+    }
+
+    // A documented tag implied by the rest of the tagging: a warning, not an
+    // error, with a fix that removes it. The self-tests check that the rule
+    // needs the implying tag, and that a key required absent prevents it.
+    private MapCssRule BuildRedundancyRule(TagReplacement entry, int index)
+    {
+        var implicitTags = Quote(RuleTable.Describe(entry.PresentTags.Where(tag => entry.Remove.Contains(tag.Key))));
+        var message = string.IsNullOrWhiteSpace(entry.Note)
+            ? $"throwWarning: tr(\"{{0}} is implicit\", {implicitTags})"
+            : $"throwWarning: tr(\"{{0}} is implicit: {{1}}\", {implicitTags}, {Quote(entry.Note)})";
+
+        var sample = SampleTags(entry).ToList();
+        var implying = sample.Where(tag => !entry.Remove.Contains(tag.Key)).ToList();
+        var blockers = entry.Match.Where(tag => tag.Value is null)
+            .Select(tag => KeyValuePair.Create(tag.Key, ConflictingValue));
+
+        return new MapCssRule(
+            index == 0 ? "Documented tags implied by the rest of the tagging" : null,
+            [MatchSelector(entry)],
+            [
+                message,
+                .. entry.Remove.Select(key => $"fixRemove: {Quote(key)}"),
+                $"assertMatch: {Quote(AssertNode(sample))}",
+                $"assertNoMatch: {Quote(AssertNode(implying))}",
+                .. blockers.Select(blocker => $"assertNoMatch: {Quote(AssertNode([.. sample, blocker]))}"),
             ]);
     }
 
