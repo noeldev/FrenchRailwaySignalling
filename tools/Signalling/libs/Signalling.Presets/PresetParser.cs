@@ -12,6 +12,7 @@ namespace Signalling.Presets;
 //   - flatten transparent containers (<optional>, <checkgroup>),
 //   - emit one entry per fixed <key>, <text>, <check> and per <combo> /
 //     <multiselect> value (both comma lists and <list_entry> children),
+//   - skip <key match="none"> elements, which are match conditions only,
 //   - emit entries from chunks that no item references, treating them as
 //     declaration-only tags (added after the items, in traversal order).
 //
@@ -208,7 +209,7 @@ public sealed class PresetParser
         List<PresetTag> output)
     {
         var key = element.Attribute("key")?.Value;
-        if (string.IsNullOrEmpty(key) || _excludedKeys.Contains(key))
+        if (string.IsNullOrEmpty(key) || _excludedKeys.Contains(key) || IsAbsenceCondition(element))
         {
             return;
         }
@@ -226,6 +227,13 @@ public sealed class PresetParser
             Description = isIdentity ? itemName : null,
             IconPath = isIdentity ? itemIconPath : null,
         });
+    }
+
+    // A <key match="none"> only tells JOSM that the item matches when the key
+    // is absent (it disambiguates sibling items); it never writes the tag.
+    private static bool IsAbsenceCondition(XElement element)
+    {
+        return string.Equals(element.Attribute("match")?.Value, "none", StringComparison.Ordinal);
     }
 
     private void EmitText(XElement element, IReadOnlyList<string> objectTypes, List<PresetTag> output)
