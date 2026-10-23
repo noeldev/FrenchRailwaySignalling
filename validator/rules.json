@@ -157,8 +157,8 @@
     },
     {
       "key": "railway:signal:electricity",
-      "from": "FR:GIVRE",
-      "to": "FR:frost"
+      "from": "FR:frost",
+      "to": "FR:GIVRE"
     },
     {
       "key": "railway:signal:stop_distant",
@@ -476,8 +476,7 @@
       },
       "set": {
         "railway:signal:train_protection": "FR:TVM",
-        "railway:signal:train_protection:main": "stop_marker",
-        "railway:signal:train_protection:main:etcs": "yes"
+        "railway:signal:train_protection:main": "stop_marker"
       },
       "rename": {
         "railway:signal:train_protection:form": "railway:signal:train_protection:main:form"
@@ -485,7 +484,7 @@
       "remove": [
         "railway:signal:train_protection:type"
       ],
-      "note": "the TVM and ETCS stop markers are colocated: add the ref (idreseau) of the TVM stop marker"
+      "note": "the TVM and ETCS stop markers are colocated: add the ref (idreseau) of the TVM stop marker, and map the ETCS stop marker on its own node (railway:signal:train_protection=ETCS:marker + railway:signal:train_protection:main=ETCS:stop_marker)"
     },
     {
       "match": {
@@ -494,8 +493,7 @@
       },
       "set": {
         "railway:signal:train_protection": "FR:TVM",
-        "railway:signal:train_protection:main": "stop_marker",
-        "railway:signal:train_protection:main:etcs": "yes"
+        "railway:signal:train_protection:main": "stop_marker"
       },
       "rename": {
         "railway:signal:train_protection:form": "railway:signal:train_protection:main:form"
@@ -503,7 +501,7 @@
       "remove": [
         "railway:signal:train_protection:function"
       ],
-      "note": "the TVM and ETCS stop markers are colocated: add the ref (idreseau) of the TVM stop marker"
+      "note": "the TVM and ETCS stop markers are colocated: add the ref (idreseau) of the TVM stop marker, and map the ETCS stop marker on its own node (railway:signal:train_protection=ETCS:marker + railway:signal:train_protection:main=ETCS:stop_marker)"
     },
     {
       "match": {
@@ -1012,11 +1010,29 @@
     },
     {
       "match": {
+        "railway:signal:main:plate": "FR:F",
+        "railway:signal:main:type": "FR:F"
+      },
+      "remove": [
+        "railway:signal:main:plate"
+      ]
+    },
+    {
+      "match": {
         "railway:signal:main:plate": "FR:F"
       },
       "rename": {
         "railway:signal:main:plate": "railway:signal:main:type"
       }
+    },
+    {
+      "match": {
+        "railway:signal:main:plate": "FR:PR",
+        "railway:signal:main:type": "FR:PR"
+      },
+      "remove": [
+        "railway:signal:main:plate"
+      ]
     },
     {
       "match": {
@@ -1028,6 +1044,15 @@
     },
     {
       "match": {
+        "railway:signal:main:plate": "FR:BM",
+        "railway:signal:main:type": "FR:BM"
+      },
+      "remove": [
+        "railway:signal:main:plate"
+      ]
+    },
+    {
+      "match": {
         "railway:signal:main:plate": "FR:BM"
       },
       "rename": {
@@ -1036,11 +1061,57 @@
     },
     {
       "match": {
+        "railway:signal:main:plate": "F"
+      },
+      "set": {
+        "railway:signal:main:type": "FR:F"
+      },
+      "remove": [
+        "railway:signal:main:plate"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:main:plate": "PR"
+      },
+      "set": {
+        "railway:signal:main:type": "FR:PR"
+      },
+      "remove": [
+        "railway:signal:main:plate"
+      ]
+    },
+    {
+      "match": {
         "railway:signal:main:plate": "FR:NF"
       },
       "remove": [
         "railway:signal:main:plate"
       ]
+    },
+    {
+      "match": {
+        "railway:signal:main:plates": "FR:NF"
+      },
+      "remove": [
+        "railway:signal:main:plates"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:main:plates": "FR:F"
+      },
+      "rename": {
+        "railway:signal:main:plates": "railway:signal:main:type"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:main:caption:marker": "*"
+      },
+      "rename": {
+        "railway:signal:main:caption:marker": "railway:signal:main:caption"
+      }
     },
     {
       "match": {
@@ -1106,7 +1177,20 @@
         "railway:signal:main": "yes"
       },
       "remove": [
-        "railway:signal:main"
+        "railway:signal:main",
+        "railway:signal:main:form",
+        "railway:signal:main:states",
+        "railway:signal:main:function",
+        "railway:signal:main:height"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:speed_limit": "yes"
+      },
+      "remove": [
+        "railway:signal:speed_limit",
+        "railway:signal:speed_limit:speed"
       ]
     },
     {
@@ -1744,6 +1828,37 @@
     },
     {
       "match": {
+        "railway:signal:electricity": "FR:voltage_reminder"
+      },
+      "set": {
+        "railway:signal:electricity": "FR:catenary_height",
+        "railway:signal:electricity:catenary_height": "variable"
+      },
+      "remove": [
+        "railway:signal:electricity:voltage",
+        "railway:signal:electricity:frequency"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:radio:channel:number": "*"
+      },
+      "rename": {
+        "railway:signal:radio:channel:number": "railway:signal:radio:channel:caption"
+      },
+      "note": "complete the caption as shown on the sign (e.g. Canal 4)"
+    },
+    {
+      "match": {
+        "railway:signal:crossing_hint:number": "*"
+      },
+      "rename": {
+        "railway:signal:crossing_hint:number": "railway:signal:crossing_hint:caption"
+      },
+      "note": "write the caption as shown on the sign (e.g. PN 46 à 300m), then remove railway:signal:crossing_hint:distance"
+    },
+    {
+      "match": {
         "railway:signal:shunting": "FR"
       },
       "remove": [
@@ -1864,14 +1979,6 @@
     },
     {
       "match": {
-        "railway:signal:crossing_hint:distance": "*"
-      },
-      "remove": [
-        "railway:signal:crossing_hint:distance"
-      ]
-    },
-    {
-      "match": {
         "railway:signal:shunting:sign": "*"
       },
       "remove": [
@@ -1885,6 +1992,15 @@
       "remove": [
         "railway:signal:location"
       ]
+    },
+    {
+      "match": {
+        "wikidata": "*"
+      },
+      "remove": [
+        "wikidata"
+      ],
+      "note": "a signal is not a Wikidata item; Q1467113 is the generic railway signal concept"
     }
   ],
   "conflicts": [
