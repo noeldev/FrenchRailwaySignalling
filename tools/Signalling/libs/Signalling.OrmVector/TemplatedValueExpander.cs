@@ -5,35 +5,45 @@ using System.Text.RegularExpressions;
 
 namespace Signalling.OrmVector;
 
-// Expands a regex-matched icon case into its concrete values by brute force
-// over the small numeric domain every such pattern in this project matches
-// against (railway speed limits, 1 to 999 km/h). This is not a general
-// regex-to-language enumerator: it works because every observed pattern is an
-// anchored digit alternation, and a full symbolic enumerator would be more
-// machinery than that need justifies.
-public static class TemplatedValueExpander
+// Expands a regex-matched icon case into the values its "{}" placeholder takes,
+// by brute force over the small numeric domain every such pattern in this
+// project matches against (speeds, lengths and digit splits, 1 to 999). The
+// placeholder takes the first capture group when the pattern has one (as the
+// map does, e.g. one digit of a two-digit number), the whole value otherwise.
+//
+// Only closed patterns are expanded. A pattern with an unbounded quantifier
+// ("+", "*", "{n,}") accepts any number, and the map draws only the values it
+// has icons for, so enumerating it would report every number without an icon.
+// A closed pattern that accepts no number (roman numerals, "a;b" pairs) also
+// expands to nothing. In both cases the caller falls back to the example path
+// the YAML case declares.
+public static partial class TemplatedValueExpander
 {
     private const int MinCandidate = 1;
     private const int MaxCandidate = 999;
 
-    // The concrete values a regex pattern accepts within the numeric domain,
-    // in ascending numeric order. Empty when the pattern matches none of them
-    // (for example a non-numeric pattern), so the caller can fall back to
-    // whatever example value the case declares.
     public static IReadOnlyList<string> Expand(string pattern)
     {
+        if (UnboundedQuantifier().IsMatch(pattern))
+        {
+            return [];
+        }
+
         var regex = new Regex(pattern);
-        var matches = new List<string>();
+        var values = new SortedSet<string>(StringComparer.Ordinal);
 
         for (var candidate = MinCandidate; candidate <= MaxCandidate; candidate++)
         {
-            var text = candidate.ToString();
-            if (regex.IsMatch(text))
+            var match = regex.Match(candidate.ToString());
+            if (match.Success)
             {
-                matches.Add(text);
+                values.Add(match.Groups.Count > 1 ? match.Groups[1].Value : match.Value);
             }
         }
 
-        return matches;
+        return [.. values];
     }
+
+    [GeneratedRegex(@"(?<!\\)[*+]|\{\d+,\}")]
+    private static partial Regex UnboundedQuantifier();
 }
