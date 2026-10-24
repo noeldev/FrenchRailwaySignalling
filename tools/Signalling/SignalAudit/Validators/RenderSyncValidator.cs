@@ -23,15 +23,6 @@ public sealed class RenderSyncValidator : IValidator
     // signalling, which the map documents in full, is left out of scope.
     private static readonly string[] MapCountries = ["FR", "CH"];
 
-    // Keys the map reads for rendering only, which the preset deliberately no
-    // longer writes: "main:etcs" draws a TVM and an ETCS stop marker side by
-    // side for legacy data mapped on one node, while new data maps them on
-    // separate nodes.
-    private static readonly HashSet<string> RenderOnlyKeys = new(StringComparer.Ordinal)
-    {
-        "railway:signal:train_protection:main:etcs",
-    };
-
     public string Name => "Preset/map synchronization";
 
     public async Task<IReadOnlyList<ValidationIssue>> ValidateAsync(ValidationContext context, CancellationToken cancellationToken)
@@ -54,7 +45,7 @@ public sealed class RenderSyncValidator : IValidator
             producerRules = new PresetTagSource(useFrench: false, excludedKeys: []).ReadRules(preset.Content);
         }
 
-        producerRules = EtcsPendingCoverage.ExcludePending(producerRules);
+        producerRules = MapRenderExceptions.ExcludeUnrendered(EtcsPendingCoverage.ExcludePending(producerRules));
 
         IReadOnlyList<SignalTagRule> consumerRules;
         using (var yaml = await resolver.OpenAsync(source, cancellationToken))
@@ -70,7 +61,8 @@ public sealed class RenderSyncValidator : IValidator
                 buffer.Position = 0;
                 var rules = new OrmVectorSource(country).ReadRules(buffer);
                 return country == "FR" ? rules : FilterToProducerCoverage(rules, producerPairs);
-            }).Where(rule => !RenderOnlyKeys.Contains(rule.Key))];
+            })];
+            consumerRules = MapRenderExceptions.ExcludeRenderOnly(consumerRules);
         }
 
         foreach (var finding in new SyncComparer().Compare(producerRules, consumerRules, SyncScope.ConsumerKeys))

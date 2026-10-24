@@ -21,8 +21,9 @@ namespace Signalling.Presets;
 // own resolution and reconciliation. TagInfoGen resolves icons, de-duplicates
 // and serializes; the sync source projects the entries into tag rules.
 //
-// Numeric-only combos (open-ended lists such as speeds) are emitted once as a
-// key-only entry flagged IsOpenDomain, since their value domain is not closed.
+// Editable numeric-only combos (open-ended lists such as lengths) are emitted
+// once as a key-only entry flagged IsOpenDomain, since their value domain is
+// not closed. Non-editable ones are closed lists, enumerated value by value.
 //
 // Description language is controlled by the useFrench flag.
 public sealed class PresetParser
@@ -271,8 +272,8 @@ public sealed class PresetParser
     }
 
     // Handles both the comma-separated "values" attribute and <list_entry>
-    // children. Combos whose values are all numeric (open-ended lists such as
-    // speeds) are declared once as a key-only entry flagged IsOpenDomain;
+    // children. Editable combos whose values are all numeric (open-ended lists
+    // such as lengths) are declared once as a key-only entry flagged IsOpenDomain;
     // otherwise every value is enumerated with the icon declared in the preset.
     private void EmitChoiceValues(XElement element, IReadOnlyList<string> objectTypes, List<PresetTag> output)
     {
@@ -284,7 +285,7 @@ public sealed class PresetParser
 
         var comboIconPath = element.Attribute("icon")?.Value;
 
-        if (HasOnlyNumericValues(element))
+        if (IsOpenNumericList(element))
         {
             output.Add(new PresetTag
             {
@@ -351,10 +352,17 @@ public sealed class PresetParser
         return types.Count > 0 ? types : [DefaultObjectType];
     }
 
-    // True when the combo has at least one value and every value is purely
-    // numeric (covers open-ended numeric lists such as speeds, whatever the key).
-    private static bool HasOnlyNumericValues(XElement element)
+    // True for an editable combo whose values are all numeric (lengths): the
+    // listed values are only suggestions, so the domain is open. A combo with
+    // editable="false" (speeds, voltages, TVM types) is a closed list and its
+    // values are enumerated like any other.
+    private static bool IsOpenNumericList(XElement element)
     {
+        if (string.Equals(element.Attribute("editable")?.Value, "false", StringComparison.Ordinal))
+        {
+            return false;
+        }
+
         var values = new List<string>();
 
         var valuesAttr = element.Attribute("values")?.Value;

@@ -261,11 +261,6 @@
       "to": "FR:PN"
     },
     {
-      "key": "railway:signal:switch:states",
-      "from": "off",
-      "to": ""
-    },
-    {
       "key": "railway:signal:shunting:states",
       "from": "FR:T",
       "to": ""
@@ -599,11 +594,11 @@
       },
       "rename": {
         "railway:signal:route_distant:form": "railway:signal:switch:form",
-        "railway:signal:route_distant:states": "railway:signal:switch:states",
         "railway:signal:route_distant:ref": "railway:signal:switch:ref"
       },
       "remove": [
-        "railway:signal:route_distant"
+        "railway:signal:route_distant",
+        "railway:signal:route_distant:states"
       ]
     },
     {
@@ -2004,41 +1999,6 @@
         "railway:signal:stop": "FR:chevron"
       },
       "note": "an upward-pointing chevron marks either a trailing point (speed_limit:switch) or a stop position (stop), depending on its role"
-    }
-  ],
-  "redundancies": [
-    {
-      "match": {
-        "railway:crocodile": "yes",
-        "railway:signal:main": "FR:C",
-        "railway:signal:speed_limit_distant": null
-      },
-      "remove": [
-        "railway:crocodile"
-      ],
-      "note": "railway:crocodile is only needed with a TIV-D, where it sets the diamond (yes) or square (no) shape"
-    },
-    {
-      "match": {
-        "railway:crocodile": "yes",
-        "railway:signal:distant": "FR:D",
-        "railway:signal:speed_limit_distant": null
-      },
-      "remove": [
-        "railway:crocodile"
-      ],
-      "note": "railway:crocodile is only needed with a TIV-D, where it sets the diamond (yes) or square (no) shape"
-    },
-    {
-      "match": {
-        "railway:crocodile": "yes",
-        "railway:signal:distant": "FR:A",
-        "railway:signal:speed_limit_distant": null
-      },
-      "remove": [
-        "railway:crocodile"
-      ],
-      "note": "railway:crocodile is only needed with a TIV-D, where it sets the diamond (yes) or square (no) shape"
     }
   ]
 }
