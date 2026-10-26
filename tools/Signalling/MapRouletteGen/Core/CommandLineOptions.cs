@@ -119,8 +119,8 @@ public sealed class CommandLineOptions
     {
         Console.WriteLine(
             """
-            Generates a MapRoulette tag fix challenge (line-by-line GeoJSON) that migrates
-            legacy French railway signal tagging, with the fixes of the validator rule table
+            Generates a MapRoulette tag fix challenge (line-by-line GeoJSON) that unifies
+            heterogeneous French railway signal tagging, with the fixes of the validator rule table
             and the corrections of mistyped values against the values the wiki documents.
 
             Usage:

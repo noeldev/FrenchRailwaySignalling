@@ -29,12 +29,12 @@ public static class ChallengeTextWriter
         text.AppendLine();
         text.AppendLine($"- Input: {inputName}");
         text.AppendLine($"- Nodes checked: {content.NodeCount}");
-        text.AppendLine($"- Tasks (nodes with legacy tagging or mistyped values): {content.Tasks.Count}");
+        text.AppendLine($"- Tasks (nodes with heterogeneous tagging or mistyped values): {content.Tasks.Count}");
         text.AppendLine();
 
-        AppendTable(text, "Fixed by the rule table", "Legacy tagging", content.RuleCounts);
+        AppendTable(text, "Fixed by the rule table", "Tagging", content.RuleCounts);
         AppendTable(text, "Fixed against the documented values (MapRoulette only)", "Mistyped value", content.TokenFixCounts);
-        AppendTable(text, "Not fixed: legacy tagging to fix by hand (the replacement would overwrite a tag, or needs the sign)", "Legacy tagging", content.BlockedCounts);
+        AppendTable(text, "Not fixed: tagging to fix by hand (the replacement would overwrite a tag, or needs the sign)", "Tagging", content.BlockedCounts);
         AppendTable(text, "Not fixed: documented alternatives that cannot be combined", "Tags", content.ConflictCounts);
         AppendTable(text, "Not fixed: undocumented keys and values left (review by hand)", "Key or key=value", content.UndocumentedCounts);
 
