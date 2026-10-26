@@ -10,7 +10,8 @@ namespace MapRouletteGen.Challenge;
 // Applies the rule table then the corrections of mistyped values to every
 // node: a node becomes a task when its tags change. What cannot be fixed
 // automatically is only counted, for the JOSM validator and the mappers:
-// legacy tagging whose replacement would overwrite a tag, conflicts between
+// legacy tagging whose replacement would overwrite a tag or that is only
+// reported (its note tells what to do), conflicts between
 // documented alternatives, and the tags the wiki does not document. The first
 // node of each correction is kept as a test sample.
 public sealed class ChallengeBuilder(RuleTable table, TagSchema schema, string keyPrefix, string countryPrefix)
@@ -48,7 +49,9 @@ public sealed class ChallengeBuilder(RuleTable table, TagSchema schema, string k
             conflicts.AddRange(_applier.FindConflicts(task.Fix.Fixed));
             if (IsInScope(task.Fix.Fixed))
             {
-                undocumented.AddRange(schema.FindUndocumented(task.Fix.Fixed, keyPrefix).Distinct(StringComparer.Ordinal));
+                undocumented.AddRange(schema.FindUndocumented(task.Fix.Fixed, keyPrefix)
+                    .Where(label => !IsAccepted(label))
+                    .Distinct(StringComparer.Ordinal));
             }
         }
 
@@ -68,6 +71,10 @@ public sealed class ChallengeBuilder(RuleTable table, TagSchema schema, string k
     private bool IsInScope(IReadOnlyDictionary<string, string> tags) =>
         tags.Any(tag => tag.Key.StartsWith(keyPrefix, StringComparison.Ordinal)
             && tag.Value.StartsWith(_domesticPrefix, StringComparison.OrdinalIgnoreCase));
+
+    // An undocumented key or key=value label of a key accepted by the rule
+    // table (documented elsewhere, or read by the renderer only).
+    private bool IsAccepted(string label) => table.AcceptedKeys.Contains(label.Split('=')[0]);
 
     // Occurrences of each label (one per node), most frequent first.
     private static IReadOnlyList<KeyValuePair<string, int>> CountByNode(IEnumerable<string> labels) =>

@@ -8,9 +8,12 @@ namespace Signalling.Rules;
 // - a value replacement renames a token of a ";" separated value (FR:CV;FR:M
 //   becomes FR:Cv;FR:M), or drops it when the replacement is empty, the edge
 //   spaces and empty entries being dropped;
-// - a tag replacement first renames keys, then removes keys, then sets tags,
-//   in the order of its MapCSS fix declarations. It is skipped (blocked) when
-//   it would overwrite a tag it does not match, like its MapCSS fix.
+// - a tag replacement first renames keys, then removes keys, then sets tags
+//   and finally gives their default value to the keys still absent, in the
+//   order of its MapCSS fix declarations. It is skipped (blocked) when it would
+//   overwrite a tag it does not match, like its MapCSS fix, and when it only
+//   reports the legacy tagging (left to fix by hand, like a blocked one).
+// The redundant tags are removed like legacy ones.
 // A fix can enable another one (a tag replacement producing a legacy value, or
 // a value replacement unblocking a tag replacement), so the rules are applied
 // again until the tags no longer change.
@@ -31,10 +34,10 @@ public sealed class TagRuleApplier(RuleTable table)
         {
             var changed = false;
 
-            foreach (var entry in table.TagReplacements.Where(entry => Matches(entry, tags) && !IsBlocked(entry, tags)))
+            foreach (var entry in Replacements.Where(entry => !entry.IsReportOnly && Matches(entry, tags) && !IsBlocked(entry, tags)))
             {
                 ApplyTagReplacement(entry, tags);
-                applied.Add(RuleTable.Describe(entry.PresentTags));
+                applied.Add(RuleTable.Describe(entry.LegacyTags));
                 if (!string.IsNullOrWhiteSpace(entry.Note))
                 {
                     notes.Add(entry.Note);
@@ -57,8 +60,8 @@ public sealed class TagRuleApplier(RuleTable table)
                 List<string> blocked =
                 [
                     .. table.TagReplacements
-                        .Where(entry => Matches(entry, tags) && IsBlocked(entry, tags))
-                        .Select(entry => RuleTable.Describe(entry.PresentTags)),
+                        .Where(entry => Matches(entry, tags) && (entry.IsReportOnly || IsBlocked(entry, tags)))
+                        .Select(entry => RuleTable.Describe(entry.LegacyTags)),
                 ];
 
                 return new TagFix(source, tags, [.. applied.Distinct()], [.. notes.Distinct()], blocked);
@@ -68,6 +71,9 @@ public sealed class TagRuleApplier(RuleTable table)
         throw new InvalidOperationException(
             $"The rule table does not converge on {RuleTable.Describe(source)}: check the replacements for a cycle.");
     }
+
+    // The tag replacements, then the redundant tags to remove.
+    private IEnumerable<TagReplacement> Replacements => table.TagReplacements.Concat(table.Redundancies);
 
     // Documented alternatives found together (not fixable automatically).
     public IReadOnlyList<string> FindConflicts(IReadOnlyDictionary<string, string> tags) =>
@@ -109,6 +115,11 @@ public sealed class TagRuleApplier(RuleTable table)
         foreach (var (key, value) in entry.Set)
         {
             tags[key] = value;
+        }
+
+        foreach (var (key, value) in entry.Default)
+        {
+            tags.TryAdd(key, value);
         }
     }
 

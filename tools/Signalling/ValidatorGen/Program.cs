@@ -38,7 +38,7 @@ try
 
     Console.WriteLine($"Reading rules from '{options.RulesPath}'...");
     var table = RuleTable.Load(options.RulesPath);
-    var errors = RuleTableValidator.Validate(table, schema);
+    var errors = RuleTableValidator.Validate(table, schema, settings.Validator.KeyPrefix);
     if (errors.Count > 0)
     {
         foreach (var error in errors)

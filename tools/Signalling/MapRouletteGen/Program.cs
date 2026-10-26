@@ -48,7 +48,7 @@ try
     Console.WriteLine($"Checked {nodes.Count} nodes: {content.Tasks.Count} tasks.");
     Console.WriteLine($"  Legacy tagging fixed: {content.RuleCounts.Sum(entry => entry.Value)} ({content.RuleCounts.Count} rules).");
     Console.WriteLine($"  Mistyped values fixed: {content.TokenFixCounts.Sum(entry => entry.Value)}.");
-    Console.WriteLine($"  Left to fix by hand: {content.BlockedCounts.Sum(entry => entry.Value)} blocked replacements, "
+    Console.WriteLine($"  Left to fix by hand: {content.BlockedCounts.Sum(entry => entry.Value)} legacy taggings, "
         + $"{content.ConflictCounts.Sum(entry => entry.Value)} conflicts, "
         + $"{content.UndocumentedCounts.Sum(entry => entry.Value)} undocumented keys or values.");
     Console.WriteLine($"Wrote '{options.OutputPath}', '{options.TextPath}' and '{options.SamplesPath}' ({content.Samples.Count} samples).");

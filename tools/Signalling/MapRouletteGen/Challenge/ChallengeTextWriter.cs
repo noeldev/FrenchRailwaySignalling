@@ -34,7 +34,7 @@ public static class ChallengeTextWriter
 
         AppendTable(text, "Fixed by the rule table", "Legacy tagging", content.RuleCounts);
         AppendTable(text, "Fixed against the documented values (MapRoulette only)", "Mistyped value", content.TokenFixCounts);
-        AppendTable(text, "Not fixed: the replacement would overwrite a tag (fix by hand)", "Legacy tagging", content.BlockedCounts);
+        AppendTable(text, "Not fixed: legacy tagging to fix by hand (the replacement would overwrite a tag, or needs the sign)", "Legacy tagging", content.BlockedCounts);
         AppendTable(text, "Not fixed: documented alternatives that cannot be combined", "Tags", content.ConflictCounts);
         AppendTable(text, "Not fixed: undocumented keys and values left (review by hand)", "Key or key=value", content.UndocumentedCounts);
 

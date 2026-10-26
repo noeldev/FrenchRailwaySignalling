@@ -31,15 +31,39 @@ namespace Signalling.Rules;
 // tagging is only reported, to be fixed by hand. An optional "note" is added
 // to the message, for what the fix cannot do (a ref to add by hand...).
 //
+// "default" gives a value to a key left absent by the fix, typically the form
+// of a board when the legacy tagging has none: a renamed value wins over it, and
+// a key already set is kept:
+//   { "rename": { "railway:signal:stop:form": "railway:signal:stop:conventional:form" },
+//     "default": { "railway:signal:stop:conventional:form": "sign" } }
+//
+// "suggest" marks a replacement that guesses the right tagging from an
+// incomplete one: the message asks "did you mean ...?" with the note, or else
+// the tags it sets, and the fix applies them. A key to overwrite goes into
+// "remove" as well as "set".
+//
+// "undocumented" marks a replacement whose legacy tagging is a mistake rather
+// than a former tagging (FR alone, a truncated value...): the message says it
+// "is not documented" instead of "is deprecated".
+//
+// A replacement with a "note" and nothing to fix (no set, rename, remove or
+// default) only reports the legacy tagging, with the note telling what to do.
+//
+// "acceptedKeys" lists keys that the wiki page does not document but that are
+// valid, documented on another page (railway:signal:catenary_mast). They are
+// never reported as undocumented, with any value. A key that the wiki comes to
+// document must leave the list (the generation fails otherwise).
+//
 // Conflicts list documented tags that are alternatives for the same sign and
 // must not appear together; "note" tells how to choose:
 //   { "tags": { "railway:signal:speed_limit:switch": "FR:chevron", "railway:signal:stop": "FR:chevron" },
 //     "note": "..." }
 //
 // Redundancies list documented tags that are implied by the rest of the
-// tagging: the validator warns and offers to remove them, but they are not
-// legacy, so the MapRoulette challenge leaves them alone. They use the shape
-// of a tag replacement with "match", "remove" and an optional "note" only:
+// tagging: the validator warns (they are not legacy) and offers to remove them,
+// and the MapRoulette challenge removes them with the legacy tagging, to keep
+// the data lean. They use the shape of a tag replacement with "match",
+// "remove" and an optional "note" only:
 //   { "match": { "railway:crocodile": "yes", "railway:signal:main": "FR:C" },
 //     "remove": [ "railway:crocodile" ], "note": "..." }
 public sealed class RuleTable
@@ -61,6 +85,8 @@ public sealed class RuleTable
     public List<TagConflict> Conflicts { get; set; } = [];
 
     public List<TagReplacement> Redundancies { get; set; } = [];
+
+    public List<string> AcceptedKeys { get; set; } = [];
 
     // Tags as "key=value + key=value", for messages and reports.
     public static string Describe(IEnumerable<KeyValuePair<string, string>> tags) =>
@@ -102,6 +128,12 @@ public sealed class TagReplacement
 
     public List<string> Remove { get; set; } = [];
 
+    public Dictionary<string, string> Default { get; set; } = [];
+
+    public bool Suggest { get; set; }
+
+    public bool Undocumented { get; set; }
+
     // Shown with the legacy tagging, for what is left to do by hand.
     public string? Note { get; set; }
 
@@ -110,10 +142,34 @@ public sealed class TagReplacement
     [JsonIgnore]
     public bool IsUnconditional => Match.Count == 1 && PresentTags.Any();
 
+    // True when the replacement only reports the legacy tagging, with its note.
+    [JsonIgnore]
+    public bool IsReportOnly => Set.Count == 0 && Rename.Count == 0 && Remove.Count == 0 && Default.Count == 0;
+
     // Pairs of "match" that must be present (a null value means absent).
     [JsonIgnore]
     public IEnumerable<KeyValuePair<string, string>> PresentTags =>
         Match.Where(entry => entry.Value is not null).Select(entry => KeyValuePair.Create(entry.Key, entry.Value!));
+
+    // The matched tags that the fix changes, which name the legacy tagging in
+    // the messages; the others only give the context (all of them when the
+    // replacement only reports). A key matched with any value is legacy when
+    // the fix removes or renames it, not when it only overwrites it.
+    [JsonIgnore]
+    public IEnumerable<KeyValuePair<string, string>> LegacyTags
+    {
+        get
+        {
+            var changed = PresentTags.Where(tag => IsChanged(tag.Key)).ToList();
+            return changed.Count > 0 ? changed : PresentTags;
+        }
+    }
+
+    // Keys the replacement deals with when it matches: its matched, renamed and
+    // removed keys. The validator reports nothing else about them on the node.
+    [JsonIgnore]
+    public IEnumerable<string> HandledKeys =>
+        PresentTags.Select(tag => tag.Key).Concat(Rename.Keys).Concat(Remove).Distinct(StringComparer.Ordinal);
 
     // Tags set on a key the replacement does not match, remove or rename: the
     // key must be absent or already hold the value.
@@ -126,6 +182,11 @@ public sealed class TagReplacement
     public IEnumerable<string> GuardedTargets => Rename.Values.Where(key => !IsReplaced(key));
 
     private bool IsReplaced(string key) => Match.ContainsKey(key) || Remove.Contains(key) || Rename.ContainsKey(key);
+
+    private bool IsChanged(string key) =>
+        Remove.Contains(key)
+        || Rename.ContainsKey(key)
+        || (Set.TryGetValue(key, out var value) && Match.GetValueOrDefault(key) is { } matched && matched != RuleTable.AnyValue && matched != value);
 }
 
 public sealed class TagConflict

@@ -10,16 +10,32 @@ namespace ValidatorGen.Rules;
 // the generation instead of producing a rule that flags valid tagging or
 // suggests undocumented tagging:
 // - the legacy side of a replacement must be undocumented;
-// - the replacement side and the tags of a conflict must be documented;
+// - the replacement side (set, rename, default) and the tags of a conflict
+//   must be documented, for the keys of the scheme (under the key prefix):
+//   another key (ref...) is out of the wiki tables, and an accepted key takes
+//   any value;
+// - a suggestion has a fix;
+// - an accepted key is not documented (else it is stale);
+// - a replacement that extends the match of another one comes before it, so
+//   the validator can skip the general one where the specific one matched;
+// - a replacement fixes something, or reports with a note;
 // - a redundancy only removes tags it matches, and keeps the others.
 public static class RuleTableValidator
 {
-    public static IReadOnlyList<string> Validate(RuleTable table, TagSchema schema)
+    public static IReadOnlyList<string> Validate(RuleTable table, TagSchema schema, string keyPrefix)
     {
+        var accepted = table.AcceptedKeys.ToHashSet(StringComparer.Ordinal);
+        var replacements = table.TagReplacements;
         List<string> errors =
         [
             .. table.ValueReplacements.SelectMany(entry => ValidateValueReplacement(entry, schema)),
-            .. table.TagReplacements.SelectMany(entry => ValidateTagReplacement(entry, schema)),
+            .. table.TagReplacements.SelectMany(entry => ValidateTagReplacement(entry, schema, keyPrefix, accepted)),
+            .. table.AcceptedKeys.Where(schema.IsDocumentedKey)
+                .Select(key => $"accepted key {key}: it is documented, so it must be removed from acceptedKeys."),
+            .. replacements.SelectMany((entry, index) => replacements.Skip(index + 1)
+                .Where(other => other.Match.Count > entry.Match.Count
+                    && entry.Match.All(tag => other.Match.TryGetValue(tag.Key, out var value) && value == tag.Value))
+                .Select(other => $"tag replacement {RuleTable.Describe(other.PresentTags)}: it extends {RuleTable.Describe(entry.PresentTags)}, so it must come before it.")),
             .. table.Conflicts.SelectMany(entry => ValidateConflict(entry, schema)),
             .. table.Redundancies.SelectMany(ValidateRedundancy),
         ];
@@ -45,7 +61,7 @@ public static class RuleTableValidator
         }
     }
 
-    private static IEnumerable<string> ValidateTagReplacement(TagReplacement entry, TagSchema schema)
+    private static IEnumerable<string> ValidateTagReplacement(TagReplacement entry, TagSchema schema, string keyPrefix, IReadOnlySet<string> accepted)
     {
         var label = $"tag replacement {RuleTable.Describe(entry.PresentTags)}";
         if (!entry.PresentTags.Any())
@@ -59,26 +75,44 @@ public static class RuleTableValidator
             yield return $"{label}: every matched tag is documented, so it is not legacy.";
         }
 
-        foreach (var tag in entry.Set.Where(tag => !schema.IsDocumentedValue(tag.Key, tag.Value)))
+        bool InScheme(string key) => key.StartsWith(keyPrefix, StringComparison.Ordinal) && !accepted.Contains(key);
+
+        foreach (var tag in entry.Set.Where(tag => InScheme(tag.Key) && !schema.IsDocumentedValue(tag.Key, tag.Value)))
         {
             yield return $"{label}: the replacement {tag.Key}={tag.Value} is not documented.";
         }
 
-        foreach (var rename in entry.Rename.Where(rename => !schema.IsDocumentedKey(rename.Value)))
+        foreach (var rename in entry.Rename.Where(rename => InScheme(rename.Value) && !schema.IsDocumentedKey(rename.Value)))
         {
             yield return $"{label}: the renamed key {rename.Value} is not documented.";
         }
 
-        if (entry.Set.Count == 0 && entry.Rename.Count == 0 && entry.Remove.Count == 0)
+        foreach (var tag in entry.Default.Where(tag => InScheme(tag.Key) && !schema.IsDocumentedValue(tag.Key, tag.Value)))
         {
-            yield return $"{label}: nothing to fix (set, rename and remove are empty).";
+            yield return $"{label}: the default {tag.Key}={tag.Value} is not documented.";
+        }
+
+        foreach (var key in entry.Default.Keys.Where(entry.Set.ContainsKey))
+        {
+            yield return $"{label}: {key} is both set and defaulted.";
+        }
+
+
+        if (entry.IsReportOnly && string.IsNullOrWhiteSpace(entry.Note))
+        {
+            yield return $"{label}: nothing to fix (set, rename, remove and default are empty) and no note to report.";
+        }
+
+        if (entry.Suggest && entry.IsReportOnly)
+        {
+            yield return $"{label}: a suggestion needs a fix that applies it.";
         }
     }
 
     private static IEnumerable<string> ValidateRedundancy(TagReplacement entry)
     {
         var label = $"redundancy {RuleTable.Describe(entry.PresentTags)}";
-        if (entry.Set.Count > 0 || entry.Rename.Count > 0)
+        if (entry.Set.Count > 0 || entry.Rename.Count > 0 || entry.Default.Count > 0 || entry.Suggest)
         {
             yield return $"{label}: only \"match\", \"remove\" and \"note\" are allowed.";
         }
