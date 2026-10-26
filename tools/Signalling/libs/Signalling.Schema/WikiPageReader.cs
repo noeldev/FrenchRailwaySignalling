@@ -3,9 +3,8 @@
 
 using System.Text.Json;
 using Signalling.Core.Sources;
-using ValidatorGen.Core;
 
-namespace ValidatorGen.Wiki;
+namespace Signalling.Schema;
 
 // Reads the configured wiki pages. Online, they are downloaded in a single
 // MediaWiki API query that also returns the timestamp of their last revision.

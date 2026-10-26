@@ -15,7 +15,8 @@ namespace SignalAudit.Validators;
 // This is an explicit allow-list, not a namespace-wide exemption: anything not
 // listed here, including a typo in a new ETCS value, is still compared
 // normally. Update this list when either downstream adopts ETCS markers, or
-// when the preset's ETCS coverage changes.
+// when the preset's ETCS coverage changes. "train_protection=ETCS:marker" is no
+// longer listed: both the wiki and the map document it for the ERTMS N2 board.
 internal static class EtcsPendingCoverage
 {
     private static readonly HashSet<(string Key, string Value)> PendingValues = new()
@@ -29,7 +30,6 @@ internal static class EtcsPendingCoverage
         ("railway:signal:electricity", "ETCS:power_off_advance"),
         ("railway:signal:electricity", "ETCS:power_on"),
         ("railway:signal:electricity:type", "end_of_catenary_advance"),
-        ("railway:signal:train_protection", "ETCS:marker"),
         ("railway:signal:train_protection:main", "ETCS:location_marker"),
         ("railway:signal:train_protection:main", "ETCS:stop_marker"),
         ("railway:signal:train_protection:system_change", "ETCS:level_transition"),

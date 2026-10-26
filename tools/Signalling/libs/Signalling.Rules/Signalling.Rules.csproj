@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <RootNamespace>Signalling.Rules</RootNamespace>
+    <AssemblyName>Signalling.Rules</AssemblyName>
+    <Product>Signalling.Rules</Product>
+    <Version>1.1.0</Version>
+    <Company>Noël Danjou</Company>
+    <Authors>Noël Danjou</Authors>
+    <Copyright>Copyright (C) 2026 Noël Danjou</Copyright>
+    <Description>Legacy tagging rule table (replacements and conflicts) and its application to OSM tags, shared by the validator and MapRoulette generators.</Description>
+  </PropertyGroup>
+
+</Project>

@@ -4,11 +4,11 @@
 using System.Net;
 using System.Text;
 using Microsoft.Extensions.Configuration;
+using Signalling.Rules;
+using Signalling.Schema;
 using ValidatorGen.Core;
 using ValidatorGen.Generation;
 using ValidatorGen.Rules;
-using ValidatorGen.Schema;
-using ValidatorGen.Wiki;
 
 TrySetUtf8Output();
 
@@ -38,7 +38,7 @@ try
 
     Console.WriteLine($"Reading rules from '{options.RulesPath}'...");
     var table = RuleTable.Load(options.RulesPath);
-    var errors = RuleTableValidator.Validate(table, schema);
+    var errors = RuleTableValidator.Validate(table, schema, settings.Validator.KeyPrefix);
     if (errors.Count > 0)
     {
         foreach (var error in errors)

@@ -45,7 +45,7 @@ public sealed class RenderSyncValidator : IValidator
             producerRules = new PresetTagSource(useFrench: false, excludedKeys: []).ReadRules(preset.Content);
         }
 
-        producerRules = EtcsPendingCoverage.ExcludePending(producerRules);
+        producerRules = MapRenderExceptions.ExcludeUnrendered(EtcsPendingCoverage.ExcludePending(producerRules));
 
         IReadOnlyList<SignalTagRule> consumerRules;
         using (var yaml = await resolver.OpenAsync(source, cancellationToken))
@@ -55,13 +55,14 @@ public sealed class RenderSyncValidator : IValidator
             using var buffer = new MemoryStream();
             await yaml.Content.CopyToAsync(buffer, cancellationToken);
 
-            var producerValues = CollectValues(producerRules);
+            var producerPairs = CollectPairs(producerRules);
             consumerRules = [.. MapCountries.SelectMany(country =>
             {
                 buffer.Position = 0;
                 var rules = new OrmVectorSource(country).ReadRules(buffer);
-                return country == "FR" ? rules : FilterToProducerCoverage(rules, producerValues);
+                return country == "FR" ? rules : FilterToProducerCoverage(rules, producerPairs);
             })];
+            consumerRules = MapRenderExceptions.ExcludeRenderOnly(consumerRules);
         }
 
         foreach (var finding in new SyncComparer().Compare(producerRules, consumerRules, SyncScope.ConsumerKeys))
@@ -74,26 +75,29 @@ public sealed class RenderSyncValidator : IValidator
 
     // A non-FR country section (CH) documents that country's own signalling in
     // full, most of which this preset has no reason to implement. Only the
-    // values the preset already emits are kept, so the comparison neither
-    // demands the rest of that section nor loses the cross-border values the
-    // preset does carry.
+    // key/value pairs the preset already emits are kept, so the comparison
+    // neither demands the rest of that section nor loses the cross-border
+    // values the preset does carry. Pairs, not bare values: a CH clause such as
+    // "combined:form=light" must not survive just because the preset emits
+    // "light" for some other key.
     private static IReadOnlyList<SignalTagRule> FilterToProducerCoverage(
         IReadOnlyList<SignalTagRule> consumerRules,
-        HashSet<string> producerValues)
+        HashSet<(string Key, string Value)> producerPairs)
     {
         return [.. consumerRules.Where(rule =>
-            rule.Matcher.EnumerateValues() is { Count: > 0 } values && values.All(producerValues.Contains))];
+            rule.Matcher.EnumerateValues() is { Count: > 0 } values
+            && values.All(value => producerPairs.Contains((rule.Key, value))))];
     }
 
     // A preset value can be a ";"-joined multiselect combo (see SyncComparer),
     // so each token is collected on its own: a compound "CH-FDV:308;CH-FDV:310"
     // must still be recognized as covering "CH-FDV:308" alone.
-    private static HashSet<string> CollectValues(IReadOnlyList<SignalTagRule> rules)
+    private static HashSet<(string Key, string Value)> CollectPairs(IReadOnlyList<SignalTagRule> rules)
     {
-        var tokens = rules
-            .SelectMany(rule => rule.Matcher.EnumerateValues())
-            .SelectMany(value => value.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
+        var pairs = rules.SelectMany(rule => rule.Matcher.EnumerateValues()
+            .SelectMany(value => value.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+            .Select(token => (rule.Key, token)));
 
-        return new HashSet<string>(tokens, StringComparer.Ordinal);
+        return [.. pairs];
     }
 }

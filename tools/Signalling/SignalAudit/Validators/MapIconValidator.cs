@@ -53,10 +53,18 @@ public sealed class MapIconValidator : IValidator
 
         var checkedPaths = new HashSet<string>(StringComparer.Ordinal);
         var missingPaths = new SortedSet<string>(StringComparer.Ordinal);
+        var uncheckedTemplates = new SortedSet<string>(StringComparer.Ordinal);
 
         foreach (var reference in references)
         {
-            foreach (var relativePath in ExpandedPaths(reference))
+            var paths = ExpandedPaths(reference);
+            if (paths.Count == 0)
+            {
+                uncheckedTemplates.Add($"{reference.PathTemplate} ({reference.Origin})");
+                continue;
+            }
+
+            foreach (var relativePath in paths)
             {
                 if (!checkedPaths.Add(relativePath))
                 {
@@ -77,25 +85,40 @@ public sealed class MapIconValidator : IValidator
             issues.Add(new ValidationIssue(ValidationSeverity.Warning, $"Missing icon: symbols/{missing}{IconExtension}"));
         }
 
+        foreach (var template in uncheckedTemplates)
+        {
+            issues.Add(new ValidationIssue(ValidationSeverity.Warning, $"Templated icon not checked (open pattern, no example): {template}"));
+        }
+
         return Task.FromResult<IReadOnlyList<ValidationIssue>>(issues);
     }
 
     // The concrete relative paths a reference resolves to: itself for a
-    // literal value, or one path per value its regex accepts (see
-    // TemplatedValueExpander) for a templated one. A pattern that expands to
-    // nothing is skipped rather than checked as a literal "{}"-containing path.
-    private static IEnumerable<string> ExpandedPaths(IconReference reference)
+    // literal value. A templated value is checked through the example path its
+    // case declares, plus one path per value a closed pattern accepts (see
+    // TemplatedValueExpander). The map keeps the braces in the file name: value
+    // 110 for "fr/signs/L/L{}" is the icon "fr/signs/L/L{110}". Empty when a
+    // templated value has neither an example nor a closed pattern.
+    private static List<string> ExpandedPaths(IconReference reference)
     {
-        if (!reference.IsTemplated || reference.ValuePattern is null)
+        if (!reference.IsTemplated)
         {
-            yield return reference.PathTemplate;
-            yield break;
+            return [reference.PathTemplate];
         }
 
-        foreach (var value in TemplatedValueExpander.Expand(reference.ValuePattern))
+        var paths = new List<string>();
+        if (reference.Example is not null)
         {
-            yield return reference.PathTemplate.Replace("{}", value, StringComparison.Ordinal);
+            paths.Add(reference.Example);
         }
+
+        if (reference.ValuePattern is not null)
+        {
+            paths.AddRange(TemplatedValueExpander.Expand(reference.ValuePattern)
+                .Select(value => reference.PathTemplate.Replace(IconReference.Placeholder, $"{{{value}}}", StringComparison.Ordinal)));
+        }
+
+        return paths;
     }
 
     // The YAML sits in a "features" folder; "symbols" is that folder's

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Noël Danjou
 
+using Signalling.Presets;
 using SignalAudit.Core;
 
 namespace SignalAudit.Validators;
@@ -8,7 +9,10 @@ namespace SignalAudit.Validators;
 // Checks chunk definitions and references:
 // - duplicate chunk ids
 // - references pointing to an unknown chunk
-// - chunks defined but never referenced (reported as a warning)
+// - chunks defined but never referenced (reported as a warning), except the
+//   declaration-only chunks, whose id starts with the declaration prefix: they
+//   declare tags that no item offers (see PresetParser), so referencing one is
+//   reported instead
 public sealed class ChunkValidator : IValidator
 {
     public string Name => "Chunks and references";
@@ -50,9 +54,17 @@ public sealed class ChunkValidator : IValidator
             }
         }
 
-        foreach (var unused in definedIds.Except(referencedIds).OrderBy(id => id, StringComparer.Ordinal))
+        foreach (var id in definedIds.OrderBy(id => id, StringComparer.Ordinal))
         {
-            issues.Add(new ValidationIssue(ValidationSeverity.Warning, $"Chunk defined but never referenced: {unused}"));
+            var declaration = id.StartsWith(PresetParser.DeclarationChunkPrefix, StringComparison.Ordinal);
+            if (declaration && referencedIds.Contains(id))
+            {
+                issues.Add(new ValidationIssue(ValidationSeverity.Warning, $"Declaration-only chunk referenced by an item: {id}"));
+            }
+            else if (!declaration && !referencedIds.Contains(id))
+            {
+                issues.Add(new ValidationIssue(ValidationSeverity.Warning, $"Chunk defined but never referenced: {id}"));
+            }
         }
 
         return Task.FromResult<IReadOnlyList<ValidationIssue>>(issues);

@@ -10,6 +10,7 @@ namespace Signalling.OrmVector;
 // treats an icon case's value as the icon path only to skip it, since coverage
 // comparison cares about the tag match, not the file; this reader is the
 // mirror image, walking the same "icon" structure but keeping only the paths.
+// The feature-level "exampleIcon" (legend icon) is read as a literal path too.
 public sealed class IconReferenceSource(string country = "FR")
 {
     public string Country { get; } = country;
@@ -38,6 +39,13 @@ public sealed class IconReferenceSource(string country = "FR")
                 }
 
                 var origin = feature.ScalarValue("description") ?? "(feature)";
+
+                var exampleIcon = feature.ScalarValue("exampleIcon");
+                if (exampleIcon is not null)
+                {
+                    references.Add(new IconReference(exampleIcon, null, null, origin));
+                }
+
                 ReadIconValues(feature, origin, references);
             }
         }
@@ -57,7 +65,7 @@ public sealed class IconReferenceSource(string country = "FR")
             var defaultValue = component.ScalarValue("default");
             if (defaultValue is not null)
             {
-                references.Add(new IconReference(defaultValue, null, origin));
+                references.Add(new IconReference(defaultValue, null, null, origin));
             }
 
             if (component.Child("cases") is not YamlSequenceNode cases)
@@ -73,8 +81,11 @@ public sealed class IconReferenceSource(string country = "FR")
                     continue;
                 }
 
-                var pattern = caseNode.ScalarValue("regex");
-                references.Add(new IconReference(value, pattern, origin));
+                references.Add(new IconReference(
+                    value,
+                    caseNode.ScalarValue("regex"),
+                    caseNode.ScalarValue("example"),
+                    origin));
             }
         }
     }
