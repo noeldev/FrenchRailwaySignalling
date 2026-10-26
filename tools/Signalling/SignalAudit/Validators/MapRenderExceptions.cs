@@ -9,11 +9,12 @@ namespace SignalAudit.Validators;
 // renders, so the preset/map comparison only reports real gaps:
 // - render-only keys and values are read by the map but never written by the
 //   preset: "main:etcs" draws a TVM and an ETCS stop marker side by side for
-//   legacy data mapped on one node, "states=off" draws an unlit signal, and
-//   "switch:states" picks the lit direction of a TIDD;
+//   legacy data mapped on one node, "states=off" draws an unlit signal (the
+//   states of a TIDD, a TLC or a switchable TIV are declared by the preset);
 // - unrendered values are written by the preset but have no effect on the
 //   icon: the map only discriminates "main:function=intermediate" (2TMV), the
-//   other functions are drawn like any main signal.
+//   other functions are drawn like any main signal, and a switchable TIV is
+//   drawn closed (with its speed) unless its states say open or off.
 // This is an explicit list, not a pattern: anything else is compared normally.
 internal static class MapRenderExceptions
 {
@@ -24,7 +25,6 @@ internal static class MapRenderExceptions
         ("railway:signal:train_protection:main:etcs", AnyValue),
         ("railway:signal:main:states", "off"),
         ("railway:signal:distant:states", "off"),
-        ("railway:signal:switch:states", AnyValue),
     ];
 
     private static readonly HashSet<(string Key, string Value)> Unrendered =
@@ -32,6 +32,8 @@ internal static class MapRenderExceptions
         ("railway:signal:main:function", "block"),
         ("railway:signal:main:function", "entry"),
         ("railway:signal:main:function", "exit"),
+        ("railway:signal:speed_limit:switchable:states", "closed"),
+        ("railway:signal:speed_limit_distant:switchable:states", "closed"),
     ];
 
     public static IReadOnlyList<SignalTagRule> ExcludeRenderOnly(IReadOnlyList<SignalTagRule> consumerRules) =>

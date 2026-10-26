@@ -15,6 +15,8 @@ namespace Signalling.Presets;
 //   - skip <key match="none"> elements, which are match conditions only,
 //   - emit entries from chunks that no item references, treating them as
 //     declaration-only tags (added after the items, in traversal order).
+//     Such chunks are named with DeclarationChunkPrefix, so the audit can tell
+//     them from forgotten ones.
 //
 // The parser no longer resolves icon URLs nor de-duplicates: it emits the raw
 // relative icon path and preserves emission order so each consumer applies its
@@ -28,6 +30,9 @@ namespace Signalling.Presets;
 // Description language is controlled by the useFrench flag.
 public sealed class PresetParser
 {
+    // The id prefix of the chunks that only declare tags (never referenced).
+    public const string DeclarationChunkPrefix = "decl_";
+
     private const string FrenchValuePrefix = "FR:";
     private const string EtcsValuePrefix = "ETCS:";
     private const string DefaultObjectType = "node";

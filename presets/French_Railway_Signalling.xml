@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.39_2026-10-23"
+    version="1.39_2026-10-26"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -133,7 +133,7 @@
 		<reference ref="marker_plate" />
 	</chunk>
 
-	<!-- 2. Category Base Chunks -->
+	<!-- 2a. Category Base Chunks -->
 
 	<!-- Stop Signals (form=light) -->
 	<chunk id="cat_stop_signals">
@@ -977,6 +977,146 @@
 				fr.text="Annulé"
 				disable_off="true"/>
 		</optional>
+	</chunk>
+
+	<!-- 2b. Declaration-only Chunks -->
+
+	<!-- These chunks are never referenced by an item: they only declare the
+	     optional states drawn by the map, for TagInfo and the checks, without
+	     offering them to mappers. Their ids start with "decl_". -->
+
+	<!-- TLC aspects -->
+	<chunk id="decl_tlc_states">
+		<multiselect
+			key="railway:signal:minor:states"
+			text="Aspects"
+			fr.text="Aspects"
+			default=""
+			values_sort="false"
+			rows="5">
+			<list_entry
+				value="FR:T"
+				display_value="T"
+				short_description="Group signal open"
+				fr.short_description="Signal de groupe ouvert"
+				icon="icons/boxes/TLC_T.svg" icon_size="24"/>
+			<list_entry
+				value="FR:(T)"
+				display_value="Flashing T"
+				fr.display_value="T clignotant"
+				short_description="Group signal closed"
+				fr.short_description="Signal de groupe fermé"
+				icon="icons/boxes/TLC_T.svg" icon_size="24"/>
+			<list_entry
+				value="FR:SLD"
+				display_value="SLD"
+				short_description="Signal Lumineux de Départ"
+				fr.short_description="Signal Lumineux de Départ"
+				icon="icons/boxes/TLC_SLD.svg" icon_size="24"/>
+			<list_entry
+				value="FR:C"
+				display_value="Stop marker"
+				fr.display_value="Jalon d'arrêt"
+				short_description="Red-and-white checkered aspect"
+				fr.short_description="Voyant à damier rouge et blanc"
+				icon="icons/boxes/TLC_C.svg" icon_size="24"/>
+			<list_entry
+				value="off"
+				display_value="Off"
+				short_description="Unlit"
+				fr.short_description="Éteint"
+				icon="icons/boxes/TLC_off.svg" icon_size="24"/>
+		</multiselect>
+	</chunk>
+
+	<!-- TIDD aspects -->
+	<chunk id="decl_tidd_states">
+		<multiselect
+			key="railway:signal:switch:states"
+			text="Aspects"
+			fr.text="Aspects"
+			default=""
+			values_sort="false"
+			rows="5">
+			<list_entry
+				value="left"
+				display_value="Left"
+				short_description="First direction"
+				fr.short_description="Première direction"
+				icon="icons/boxes/TIDD.svg" icon_size="24"/>
+			<list_entry
+				value="right"
+				display_value="Right"
+				short_description="Second direction"
+				fr.short_description="Seconde direction"
+				icon="icons/boxes/TIDD_right.svg" icon_size="24"/>
+			<list_entry
+				value="off"
+				display_value="Off"
+				short_description="Unlit"
+				fr.short_description="Éteint"
+				icon="icons/boxes/double.svg" icon_size="24"/>
+		</multiselect>
+	</chunk>
+
+	<!-- Switchable TIV-D aspects -->
+	<chunk id="decl_tiv_d_switchable_states">
+		<multiselect
+			key="railway:signal:speed_limit_distant:switchable:states"
+			text="Aspects"
+			fr.text="Aspects"
+			default=""
+			values_sort="false"
+			rows="5">
+			<list_entry
+				value="open"
+				display_value="Open"
+				short_description="Open (white band)"
+				fr.short_description="Ouvert (bande blanche)"
+				icon="icons/boxes/TIV-D_open.svg" icon_size="24"/>
+			<list_entry
+				value="closed"
+				display_value="Closed"
+				short_description="Closed (speed shown)"
+				fr.short_description="Fermé (vitesse présentée)"
+				icon="icons/boxes/TIV-D.svg" icon_size="24"/>
+			<list_entry
+				value="off"
+				display_value="Off"
+				short_description="Unlit"
+				fr.short_description="Éteint"
+				icon="icons/boxes/TIV-D_off.svg" icon_size="24"/>
+		</multiselect>
+	</chunk>
+
+	<!-- Switchable TIV-R aspects -->
+	<chunk id="decl_tiv_r_switchable_states">
+		<multiselect
+			key="railway:signal:speed_limit:switchable:states"
+			text="Aspects"
+			fr.text="Aspects"
+			default=""
+			values_sort="false"
+			rows="5">
+			<list_entry
+				value="open"
+				display_value="Open"
+				short_description="Open (white band)"
+				fr.short_description="Ouvert (bande blanche)"
+				icon="icons/boxes/TIV-R_open.svg" icon_size="24"/>
+			<list_entry
+				value="closed"
+				display_value="Closed"
+				short_description="Closed (speed shown)"
+				fr.short_description="Fermé (vitesse présentée)"
+				icon="icons/boxes/TIV-R.svg" icon_size="24"/>
+			<list_entry
+				value="off"
+				display_value="Off"
+				short_description="Unlit"
+				fr.short_description="Éteint"
+				icon="icons/boxes/TIV-R_off.svg" icon_size="24"/>
+		</multiselect>
 	</chunk>
 
 	<!-- 3. Main Preset Structure -->
@@ -4977,7 +5117,7 @@
 				name="TLC"
 				fr.name="TLC"
 				type="node"
-				icon="icons/boxes/TLC.svg">
+				icon="icons/boxes/TLC_C.svg">
 				<label
 					text="Tableau Lumineux de Correspondance (TLC)"
 					fr.text="Tableau Lumineux de Correspondance (TLC)" />
