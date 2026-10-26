@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-10-23 23:11:43 UTC
+Last edited: 2026-10-25 22:13:41 UTC
 Last editor: Noeld
-Last edit comment: /* Switchable TIV-R */ remove form=sign, replace with form=board
-Backup date: 2026-10-24 04:41:29 UTC
+Last edit comment: /* Switchable speed indicators */ add optional states
+Backup date: 2026-10-25 22:15:06 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -369,7 +369,8 @@ These boards can be luminous or mechanical; when clear, they present a continuou
 <gallery>
 File:TIV_D_MOB_100.svg|Mechanical TIV-D ({{TagValue|railway:signal:speed_limit_distant:switchable:form|sign}})
 File:TIV-D Mobile Lumineux 100.svg|Switchable TIV-D lightbox 100]]|Luminous TIV-D ({{TagValue|railway:signal:speed_limit_distant:switchable:form|light}})
-File:TIV-D Mobile Lumineux ouvert.svg|Clear luminous TIV-D ({{TagValue|railway:signal:speed_limit_distant:switchable:form|light}})
+File:TIV-D Mobile Lumineux ouvert.svg|Open luminous TIV-D ({{TagValue|railway:signal:speed_limit_distant:switchable:form|light}})
+File:TIV-D Mobile Lumineux éteint.svg|Unlit TIV-D ({{TagValue|railway:signal:speed_limit_distant:switchable:states|off}})
 </gallery>
 
 * {{Tag|railway:signal:speed_limit_distant|FR:speed_indicator}}
@@ -378,13 +379,18 @@ File:TIV-D Mobile Lumineux ouvert.svg|Clear luminous TIV-D ({{TagValue|railway:s
 * {{Tag|railway:signal:speed_limit_distant:switchable:speed|}} (speed as displayed on the signal, e.g. ''100'')
 * {{Tag|railway:signal:speed_limit_distant:switchable:turn_direction||({{TagValue|railway:signal:speed_limit_distant:switchable:turn_direction|left}}/{{TagValue|railway:signal:speed_limit_distant:switchable:turn_direction|through}}/{{TagValue|railway:signal:speed_limit_distant:switchable:turn_direction|thrown}}/{{TagValue|railway:signal:speed_limit_distant:switchable:turn_direction|right}})}} (route to which the speed restriction applies; use ''thrown'' when multiple diverging routes are possible)
 
+Optional states (for rendering only):
+
+* {{Tag|railway:signal:speed_limit_distant:switchable:states||({{TagValue|railway:signal:speed_limit_distant:switchable:states|open}}/{{TagValue|railway:signal:speed_limit_distant:switchable:states|closed}}/{{TagValue|railway:signal:speed_limit_distant:switchable:states|off}})}}
+
+
 === Switchable TIV-R ===
 The '''TIV-R''' is always paired with the [[#Carré|Carré]] signal protecting the point.
 
 <gallery>
 File:TIV_R_MOB_60.svg|Mechanical TIV-R ({{TagValue|railway:signal:speed_limit:switchable:form|board}})
 File:TIV-R_Lumineux_60.svg|Illuminated TIV-R ({{TagValue|railway:signal:speed_limit:switchable:form|light}} + {{TagValue|railway:signal:speed_limit:switchable:speed|60}})
-File:TIV-R_Lumineux_Ouvert.svg|Clear illuminated TIV-R ({{TagValue|railway:signal:speed_limit:switchable:form|light}})
+File:TIV-R_Lumineux_Ouvert.svg|Open illuminated TIV-R ({{TagValue|railway:signal:speed_limit:switchable:form|light}})
 File:TIV-R_Lumineux_120.svg|Illuminated TIV-R ({{TagValue|railway:signal:speed_limit:switchable:form|light}} + {{TagValue|railway:signal:speed_limit:switchable:speed|120}})
 File:TIV-R_Lumineux_Ouvert_(large).svg|Clear illuminated TIV-R (wide) ({{TagValue|railway:signal:speed_limit:switchable:form|light}})
 </gallery>
@@ -394,6 +400,11 @@ File:TIV-R_Lumineux_Ouvert_(large).svg|Clear illuminated TIV-R (wide) ({{TagValu
 * {{Tag|railway:signal:speed_limit:switchable:form||({{TagValue|railway:signal:speed_limit:switchable:form|board}}/{{TagValue|railway:signal:speed_limit:switchable:form|light}})}}
 * {{Tag|railway:signal:speed_limit:switchable:speed|}} (speed as displayed on the signal, e.g. 60)
 * {{Tag|railway:signal:speed_limit:switchable:turn_direction||({{TagValue|railway:signal:speed_limit:switchable:turn_direction|left}}/{{TagValue|railway:signal:speed_limit:switchable:turn_direction|through}}/{{TagValue|railway:signal:speed_limit:switchable:turn_direction|thrown}}/{{TagValue|railway:signal:speed_limit:switchable:turn_direction|right}})}}
+
+
+Optional states (for rendering only):
+
+* {{Tag|railway:signal:speed_limit:switchable:states||({{TagValue|railway:signal:speed_limit:switchable:states|open}}/{{TagValue|railway:signal:speed_limit:switchable:states|closed}}/{{TagValue|railway:signal:speed_limit:switchable:states|off}})}}
 
 === Chevron pointe en bas ===
 A 30 km/h speed restriction may apply to either a '''facing''' or a '''trailing''' point. A chevron indicates the location of the point concerned, or of the first point in a succession of points. A downward-pointing chevron ('''Chevron pointe en bas''') indicates a facing point, while an upward-pointing chevron ('''Chevron pointe en haut''') indicates a trailing point.
@@ -582,13 +593,18 @@ File:Indicateur_de_Direction_(ID4).svg|ID (up to 5 directions)
 The '''Tableau Indicateur de Direction à Distance''' (TIDD) indicates the position of the next point, either left or right, unless the next signal displays a closed [[#Carré|Carré]], in which case the TIDD is off.
 
 <gallery>
-File:TIDD_gauche.svg|First direction aspect
-File:TIDD_droit.svg|Second direction aspect
-File:Caisson double éteint.svg|Double light box normally unlit
+File:TIDD_gauche.svg|First direction aspect ({{TagValue|railway:signal:switch:states|left}})
+File:TIDD_droit.svg|Second direction aspect ({{TagValue|railway:signal:switch:states|right}})
+File:Caisson double éteint.svg|Double light box normally unlit ({{TagValue|railway:signal:switch:states|off}})
 </gallery>
 
 * {{Tag|railway:signal:switch|FR:TIDD}}
 * {{Tag|railway:signal:switch:form|light}}
+
+
+Optional states (for rendering only):
+
+* {{Tag|railway:signal:switch:states||({{TagValue|railway:signal:switch:states|left}}/{{TagValue|railway:signal:switch:states|right}}/{{TagValue|railway:signal:switch:states|off}})}}
 
 == Tableau Lumineux de Direction ==
 For some routes, a '''Tableau Lumineux de Direction''' (TLD) provides a more precise indication of the direction, in the form of a track number, an abbreviation, or a destination name.
@@ -1550,19 +1566,24 @@ File:Chevron_haut.svg|Chevron pointe en haut
 
 == Tableau Lumineux de Correspondance ==
 A '''Tableau Lumineux de Correspondance''' (TLC) for converging tracks is a signal installed to the left of the track it addresses and is normally off. At any given time, it can display one of the following:
-- A white letter '''T''', either ''fixed'' if the group signal is ''clear'' or flashing, if the group signal is ''at danger''.
-- The [[#Signal_Lumineux_de_Départ|Signal Lumineux de Départ]] if applicable.
-- A red and white checkerboard, which has the same meaning as a ''jalon d'arrêt'' and is used instead of the [[#Chevron_pointe_en_haut|chevron]].
+* A white letter '''T''', either ''fixed'' if the group signal is ''clear'' or flashing, if the group signal is ''at danger''.
+* The [[#Signal_Lumineux_de_Départ|Signal Lumineux de Départ]] if applicable.
+* A red and white checkerboard, which has the same meaning as a ''jalon d'arrêt'' and is used instead of the [[#Chevron_pointe_en_haut|chevron]].
 
 <gallery>
-File:TLC-T.svg|The group signal is clear
-File:TLC-T.gif|The group signal is at danger
-File:TLC-SLD.gif|Signal Lumineux de Départ
-File:TLC-C.svg|Stop marker
+File:TLC-T.svg|The group signal is open ({{TagValue|railway:signal:minor:states|FR:T}})
+File:TLC-T.gif|The group signal is closed ({{TagValue|railway:signal:minor:states|FR:(T)}})
+File:TLC-SLD.gif|Signal Lumineux de Départ ({{TagValue|railway:signal:minor:states|FR:SLD}})
+File:TLC-C.svg|Stop marker ({{TagValue|railway:signal:minor:states|FR:C}})
 </gallery>
 
 * {{Tag|railway:signal:minor|FR:TLC}}
 * {{Tag|railway:signal:minor:form|light}}
+
+
+Optional states (for rendering only):
+
+* {{Tag|railway:signal:minor:states||({{TagValue|railway:signal:minor:states|FR:T}}/{{TagValue|railway:signal:minor:states|FR:(T)}}/{{TagValue|railway:signal:minor:states|FR:SLD}}/{{TagValue|railway:signal:minor:states|FR:C}}/{{TagValue|railway:signal:minor:states|off}})}}
 
 == Tableau Indicateur de Provenance ==
 At the exit of some service track yards, a '''Tableau Indicateur de Provenance''' (TIP), a track indicator, complements the [[#Chevron_pointe_en_haut|chevron]]. It can display any of the numbers designating each of the tracks. When the TIP displays a number, the driver on the corresponding track is allowed to cross the chevron. When the group signal is closed, the driver can advance to an agreed point, usually in preparation for a reversing movement.
