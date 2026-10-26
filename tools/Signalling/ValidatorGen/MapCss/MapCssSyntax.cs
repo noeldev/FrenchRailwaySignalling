@@ -58,7 +58,15 @@ public static class MapCssSyntax
         return builder.ToString();
     }
 
-    // The object of an assertMatch/assertNoMatch declaration.
+    // The object of an assertMatch/assertNoMatch declaration. JOSM reads the
+    // tags as space separated key=value pairs (TextTagParser free format), so a
+    // value with a space, a quote or a backslash is quoted, with the last two
+    // escaped. Without the quotes, "caption=Z57 1" reads as no tag at all.
     public static string AssertNode(IEnumerable<KeyValuePair<string, string>> tags) =>
-        "node " + string.Join(' ', tags.Select(tag => $"{tag.Key}={tag.Value}"));
+        "node " + string.Join(' ', tags.Select(tag => $"{tag.Key}={AssertValue(tag.Value)}"));
+
+    private static string AssertValue(string value) =>
+        value.Any(character => char.IsWhiteSpace(character) || character is '"' or '\\')
+            ? "\"" + value.Replace("\\", "\\\\", StringComparison.Ordinal).Replace("\"", "\\\"", StringComparison.Ordinal) + "\""
+            : value;
 }
