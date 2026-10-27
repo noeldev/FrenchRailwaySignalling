@@ -101,8 +101,9 @@ jobs:
       - name: Check validator rules with JOSM
         # Parses the rules and runs their assertMatch/assertNoMatch self-tests
         # with the current tested JOSM release; any failure stops the run.
+        # The download is retried, the JOSM site being sometimes unreachable.
         run: |
-          curl -fsSL -o josm-tested.jar https://josm.openstreetmap.de/josm-tested.jar
+          curl -fsSL --retry 5 --retry-delay 30 --retry-all-errors -o josm-tested.jar https://josm.openstreetmap.de/josm-tested.jar
           java -Djava.awt.headless=true -jar josm-tested.jar validate --input ${{ env.VALIDATOR_FILE }}
 
       - name: Upload artifact for GitHub Pages
