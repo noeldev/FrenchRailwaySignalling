@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.39_2026-10-26"
+    version="1.40_2026-10-28"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -7511,25 +7511,6 @@
 					<space />
 					<key key="railway:signal:electricity:catenary_height" value="constant" />
 					<reference ref="cat_catenary_height" />
-				</item>
-
-				<separator />
-
-				<!-- LGV Lightbox (constant height, 25000 implied) -->
-				<item
-					name="LGV Lightbox"
-					fr.name="Caisson LGV"
-					type="node"
-					icon="icons/boxes/LGV.svg">
-					<label
-						text="LGV lightbox"
-						fr.text="Caisson LGV" />
-					<space />
-					<key key="railway:signal:electricity" value="FR:LGV" />
-					<key key="railway:signal:electricity:catenary_height" value="constant" />
-					<key key="railway:signal:electricity:form" value="light" />
-					<reference ref="cat_electricity" />
-					<link wiki="OpenRailwayMap/Tagging_in_France#LGV_lightbox" />
 				</item>
 
 			</group>
