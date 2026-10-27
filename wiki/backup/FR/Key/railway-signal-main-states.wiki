@@ -3,7 +3,7 @@ Wiki page: FR:Key:railway:signal:main:states
 Last edited: 2026-08-19 02:11:33 UTC
 Last editor: Noeld
 Last edit comment: /* Available states */ change CV state to Cv to align with official references
-Backup date: 2026-10-25 22:15:06 UTC
+Backup date: 2026-10-27 23:31:31 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/FR:Key:railway:signal:main:states
 --}}
 
