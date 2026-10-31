@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.40_2026-10-28"
+    version="1.41_2026-10-31"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -4812,12 +4812,12 @@
 				name="Half-White, Half-Green Plate"
 				fr.name="Plaque Mi-Blanche, Mi-Verte"
 				type="node"
-				icon="icons/plates/departure_marker.svg">
+				icon="icons/plates/departure_authorization.svg">
 				<label
 					text="Half-White, Half-Green Plate"
 					fr.text="Plaque Mi-Blanche, Mi-Verte" />
 				<space />
-				<key key="railway:signal:departure" value="FR:departure_marker" />
+				<key key="railway:signal:departure" value="FR:authorization_plate" />
 				<key key="railway:signal:departure:form" value="sign" />
 				<reference ref="cat_departure" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Half-white,_half-green_plate" />
@@ -7411,10 +7411,10 @@
 
 				<separator />
 
-				<!-- GIVRE Board -->
+				<!-- Givre Board -->
 				<item
-					name="GIVRE Board"
-					fr.name="Tableau GIVRE"
+					name="Givre Board"
+					fr.name="Tableau Givre"
 					type="node"
 					icon="icons/boards/GIVRE.svg">
 					<label
