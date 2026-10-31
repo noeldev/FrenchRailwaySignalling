@@ -1,6 +1,6 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2026-10-27 23:31:31 UTC<br>
+**Backup generated:** 2026-10-31 04:29:24 UTC<br>
 **Category:** main<br>
 **Total pages:** 3<br>
 **Successfully backed up:** 3
@@ -26,9 +26,9 @@
 
 - **File:** [OpenRailwayMap/Tagging_in_France.wiki](OpenRailwayMap/Tagging_in_France.wiki)
 - **Wiki URL:** [OpenRailwayMap/Tagging_in_France](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
-- **Last edited:** 2026-10-27 23:30:27 UTC
+- **Last edited:** 2026-10-31 04:28:22 UTC
 - **Last editor:** Noeld
-- **Edit comment:** /* LGV lightbox */ remove section, this light box is actually a TLD
+- **Edit comment:** /* Half-white, half-green plate */ change value name
 
 ## About
 

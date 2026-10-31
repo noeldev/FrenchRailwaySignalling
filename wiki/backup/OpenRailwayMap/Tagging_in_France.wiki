@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-10-27 23:30:27 UTC
+Last edited: 2026-10-31 04:28:22 UTC
 Last editor: Noeld
-Last edit comment: /* LGV lightbox */ remove section, this light box is actually a TLD
-Backup date: 2026-10-27 23:31:31 UTC
+Last edit comment: /* Half-white, half-green plate */ change value name
+Backup date: 2026-10-31 04:29:23 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -1404,7 +1404,7 @@ Departure authorization may be given simply by the opening of the corresponding 
 File:Plaque_mi-blanche_mi-verte.svg|Half-white, half-green plate
 </gallery>
 
-* {{Tag|railway:signal:departure|FR:departure_marker}}
+* {{Tag|railway:signal:departure|FR:authorization_plate}}
 * {{Tag|railway:signal:departure:form|sign}}
 
 ==== Dispositifs d'Aide à la Mise en Mouvement ====
@@ -1757,10 +1757,7 @@ File:Pancarte Ne Franchir que sur Ordre du Poste 1+A.svg|'''Ne Franchir que sur 
 =Snowplow=
 The '''snowplow signal''' indicates where trains equipped with a snowplow must lower or raise the equipment. The '''down''' type (French: ''triangle d'abaissement'') indicates where the equipment must be lowered, while the '''up''' type (French: ''triangle de relevage'') indicates where it must be raised to avoid striking obstructions.
 
-<!-- waiting for renaming -->
 <gallery>
-File:Triangle de Relevage (baisser).svg|Snowplow lowering signal ({{TagValue|railway:signal:snowplow:type|down}})
-File:Triangle de Relevage (relever).svg|Snowplow raising signal ({{TagValue|railway:signal:snowplow:type|up}})
 File:Triangle_d'abaissement.svg|Snowplow lowering signal ({{TagValue|railway:signal:snowplow:type|down}})
 File:Triangle_de_relevage.svg|Snowplow raising signal ({{TagValue|railway:signal:snowplow:type|up}})
 </gallery>
