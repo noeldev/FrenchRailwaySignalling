@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.41_2026-10-31"
+    version="1.42_2026-11-3"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -1335,29 +1335,11 @@
 							fr.short_description="Ralentissement 30"
 							icon="icons/signals/F-R.svg" icon_size="24"/>
 						<list_entry
-							value="FR:R+A"
-							display_value="R+A"
-							short_description="30 km/h speed restriction and caution aspect"
-							fr.short_description="Ralentissement 30 et Avertissement"
-							icon="icons/signals/F-R-A.svg" icon_size="24"/>
-						<list_entry
-							value="FR:R+(A)"
-							display_value="R+(A)"
-							short_description="30 km/h speed restriction and advance caution aspect"
-							fr.short_description="Ralentissement 30 et feu jaune clignotant"
-							icon="icons/signals/F-R-A.svg" icon_size="24"/>
-						<list_entry
 							value="FR:(R)"
 							display_value="(R)"
 							short_description="60 km/h speed restriction"
 							fr.short_description="Ralentissement 60"
 							icon="icons/signals/F-R.svg" icon_size="24"/>
-						<list_entry
-							value="FR:(R)+A"
-							display_value="(R)+A"
-							short_description="60 km/h speed restriction and caution aspect"
-							fr.short_description="Ralentissement 60 et Avertissement"
-							icon="icons/signals/F-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)+(A)"
 							display_value="(R)+(A)"
@@ -1485,29 +1467,11 @@
 							fr.short_description="Ralentissement 30"
 							icon="icons/signals/H-R.svg" icon_size="24"/>
 						<list_entry
-							value="FR:R+A"
-							display_value="R+A"
-							short_description="30 km/h speed restriction and caution aspect"
-							fr.short_description="Ralentissement 30 et Avertissement"
-							icon="icons/signals/H-R-A.svg" icon_size="24"/>
-						<list_entry
-							value="FR:R+(A)"
-							display_value="R+(A)"
-							short_description="30 km/h speed restriction and advance caution aspect"
-							fr.short_description="Ralentissement 30 et feu jaune clignotant"
-							icon="icons/signals/H-R-A.svg" icon_size="24"/>
-						<list_entry
 							value="FR:(R)"
 							display_value="(R)"
 							short_description="60 km/h speed restriction"
 							fr.short_description="Ralentissement 60"
 							icon="icons/signals/H-R.svg" icon_size="24"/>
-						<list_entry
-							value="FR:(R)+A"
-							display_value="(R)+A"
-							short_description="60 km/h speed restriction and caution aspect"
-							fr.short_description="Ralentissement 60 et Avertissement"
-							icon="icons/signals/H-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)+(A)"
 							display_value="(R)+(A)"
@@ -1941,29 +1905,11 @@
 							fr.short_description="Ralentissement 30"
 							icon="icons/signals/F-R.svg" icon_size="24"/>
 						<list_entry
-							value="FR:R+A"
-							display_value="R+A"
-							short_description="30 km/h speed restriction and caution aspect"
-							fr.short_description="Ralentissement 30 et Avertissement"
-							icon="icons/signals/F-R-A.svg" icon_size="24"/>
-						<list_entry
-							value="FR:R+(A)"
-							display_value="R+(A)"
-							short_description="30 km/h speed restriction and advance caution aspect"
-							fr.short_description="Ralentissement 30 et feu jaune clignotant"
-							icon="icons/signals/F-R-A.svg" icon_size="24"/>
-						<list_entry
 							value="FR:(R)"
 							display_value="(R)"
 							short_description="60 km/h speed restriction"
 							fr.short_description="Ralentissement 60"
 							icon="icons/signals/F-R.svg" icon_size="24"/>
-						<list_entry
-							value="FR:(R)+A"
-							display_value="(R)+A"
-							short_description="60 km/h speed restriction and caution aspect"
-							fr.short_description="Ralentissement 60 et Avertissement"
-							icon="icons/signals/F-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)+(A)"
 							display_value="(R)+(A)"
@@ -2093,29 +2039,11 @@
 							fr.short_description="Ralentissement 30"
 							icon="icons/signals/H-R.svg" icon_size="24"/>
 						<list_entry
-							value="FR:R+A"
-							display_value="R+A"
-							short_description="30 km/h speed restriction and caution aspect"
-							fr.short_description="Ralentissement 30 et Avertissement"
-							icon="icons/signals/H-R-A.svg" icon_size="24"/>
-						<list_entry
-							value="FR:R+(A)"
-							display_value="R+(A)"
-							short_description="30 km/h speed restriction and advance caution aspect"
-							fr.short_description="Ralentissement 30 et feu jaune clignotant"
-							icon="icons/signals/H-R-A.svg" icon_size="24"/>
-						<list_entry
 							value="FR:(R)"
 							display_value="(R)"
 							short_description="60 km/h speed restriction"
 							fr.short_description="Ralentissement 60"
 							icon="icons/signals/H-R.svg" icon_size="24"/>
-						<list_entry
-							value="FR:(R)+A"
-							display_value="(R)+A"
-							short_description="60 km/h speed restriction and caution aspect"
-							fr.short_description="Ralentissement 60 et Avertissement"
-							icon="icons/signals/H-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)+(A)"
 							display_value="(R)+(A)"
@@ -2536,29 +2464,11 @@
 							fr.short_description="Ralentissement 30"
 							icon="icons/signals/F-R.svg" icon_size="24"/>
 						<list_entry
-							value="FR:R+A"
-							display_value="R+A"
-							short_description="30 km/h speed restriction and caution aspect"
-							fr.short_description="Ralentissement 30 et Avertissement"
-							icon="icons/signals/F-R-A.svg" icon_size="24"/>
-						<list_entry
-							value="FR:R+(A)"
-							display_value="R+(A)"
-							short_description="30 km/h speed restriction and advance caution aspect"
-							fr.short_description="Ralentissement 30 et feu jaune clignotant"
-							icon="icons/signals/F-R-A.svg" icon_size="24"/>
-						<list_entry
 							value="FR:(R)"
 							display_value="(R)"
 							short_description="60 km/h speed restriction"
 							fr.short_description="Ralentissement 60"
 							icon="icons/signals/F-R.svg" icon_size="24"/>
-						<list_entry
-							value="FR:(R)+A"
-							display_value="(R)+A"
-							short_description="60 km/h speed restriction and caution aspect"
-							fr.short_description="Ralentissement 60 et Avertissement"
-							icon="icons/signals/F-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)+(A)"
 							display_value="(R)+(A)"
@@ -2680,29 +2590,11 @@
 							fr.short_description="Ralentissement 30"
 							icon="icons/signals/H-R.svg" icon_size="24"/>
 						<list_entry
-							value="FR:R+A"
-							display_value="R+A"
-							short_description="30 km/h speed restriction and caution aspect"
-							fr.short_description="Ralentissement 30 et Avertissement"
-							icon="icons/signals/H-R-A.svg" icon_size="24"/>
-						<list_entry
-							value="FR:R+(A)"
-							display_value="R+(A)"
-							short_description="30 km/h speed restriction and advance caution aspect"
-							fr.short_description="Ralentissement 30 et feu jaune clignotant"
-							icon="icons/signals/H-R-A.svg" icon_size="24"/>
-						<list_entry
 							value="FR:(R)"
 							display_value="(R)"
 							short_description="60 km/h speed restriction"
 							fr.short_description="Ralentissement 60"
 							icon="icons/signals/H-R.svg" icon_size="24"/>
-						<list_entry
-							value="FR:(R)+A"
-							display_value="(R)+A"
-							short_description="60 km/h speed restriction and caution aspect"
-							fr.short_description="Ralentissement 60 et Avertissement"
-							icon="icons/signals/H-R-A.svg" icon_size="24"/>
 						<list_entry
 							value="FR:(R)+(A)"
 							display_value="(R)+(A)"
@@ -2873,7 +2765,7 @@
 				</item>
 
 			</group>
-			
+
 			<!-- Guidon d'Arrêt -->
 			<group
 				name="Guidon d'Arrêt"
@@ -3965,6 +3857,24 @@
 				<key key="railway:signal:stop_distant:for" value="industrial_siding" />
 				<reference ref="cat_stop_distant" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#ARRÊT_distant_signs" />
+			</item>
+
+			<separator />
+
+			<!-- Stop Marker -->
+			<item
+				name="Red-and-White Checkered Stop Marker"
+				fr.name="Jalon d'Arrêt"
+				type="node"
+				icon="icons/signs/stop_marker.svg">
+				<label
+					text="Red-and-white checkered stop marker"
+					fr.text="Jalon d'arrêt à damier rouge et blanc" />
+				<space />
+				<key key="railway:signal:minor" value="FR:stop_marker" />
+				<key key="railway:signal:minor:form" value="sign" />
+				<reference ref="cat_minor" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Red-and-white_checkered_stop_marker" />
 			</item>
 
 		</group>
@@ -6726,25 +6636,15 @@
 						text="Shunting marker"
 						fr.text="Jalon de manœuvre" />
 					<space />
-					<key key="railway:signal:shunting" value="FR:marker" />
-					<key key="railway:signal:shunting:form" value="sign" />
+					<key key="railway:signal:train_protection" value="FR:TVM" />
+					<key key="railway:signal:train_protection:main" value="shunting_marker" />
+					<key key="railway:signal:train_protection:main:form" value="sign" />
 					<reference ref="base_with_plate" />
 					<text
-						key="railway:signal:shunting:ref"
+						key="railway:signal:train_protection:main:ref"
 						text="Network ID"
 						fr.text="Identifiant Réseau"
 						length="7" />
-					<optional text="">
-						<label
-							text="Additional features"
-							fr.text="Caractéristiques complémentaires" />
-						<space />
-						<check
-							key="railway:signal:shunting:passing_light"
-							text="White passing light"
-							fr.text="Feu blanc de franchissement"
-							disable_off="true"/>
-					</optional>
 					<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_marker" />
 				</item>
 			</group>
@@ -7531,6 +7431,22 @@
 				<key key="railway:signal:position" value="overhead" />
 				<reference ref="base_common_core" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#End_of_catenary" />
+			</item>
+
+			<!-- Stop Marker for Electric Traction -->
+			<item
+				name="Blue-and-White Checkered Marker"
+				fr.name="Jalon Bleu et Blanc"
+				type="node"
+				icon="icons/signs/stop_marker_elec.svg">
+				<label
+					text="Blue-and-white checkered marker for electric traction"
+					fr.text="Jalon à damier bleu et blanc pour la traction électrique" />
+				<space />
+				<key key="railway:signal:electricity" value="FR:stop_marker" />
+				<key key="railway:signal:electricity:form" value="sign" />
+				<reference ref="cat_electricity" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Blue-and-white_checkered_marker" />
 			</item>
 
 			<separator />

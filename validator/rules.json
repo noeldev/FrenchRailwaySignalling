@@ -47,21 +47,6 @@
     },
     {
       "key": "railway:signal:main:states",
-      "from": "FR:R(A)",
-      "to": "FR:R+A"
-    },
-    {
-      "key": "railway:signal:main:states",
-      "from": "FR:R(Ac)",
-      "to": "FR:R+(A)"
-    },
-    {
-      "key": "railway:signal:main:states",
-      "from": "FR:Rc(A)",
-      "to": "FR:(R)+A"
-    },
-    {
-      "key": "railway:signal:main:states",
       "from": "FR:Rc(Ac)",
       "to": "FR:(R)+(A)"
     },
@@ -174,16 +159,6 @@
       "key": "railway:signal:stop_distant",
       "from": "FR:STOP_A",
       "to": "FR:STOP"
-    },
-    {
-      "key": "railway:signal:shunting",
-      "from": "FR:JAL_MAN",
-      "to": "FR:marker"
-    },
-    {
-      "key": "railway:signal:shunting",
-      "from": "FR:jalon_de_manoeuvre_TVM",
-      "to": "FR:marker"
     },
     {
       "key": "railway:signal:train_protection",
@@ -1928,15 +1903,111 @@
         "railway:signal:train_protection": "FR:jalon_de_manoeuvre_TVM"
       },
       "set": {
-        "railway:signal:shunting": "FR:marker"
+        "railway:signal:train_protection": "FR:TVM",
+        "railway:signal:train_protection:main": "shunting_marker"
       },
       "rename": {
-        "railway:signal:train_protection:form": "railway:signal:shunting:form",
-        "railway:signal:train_protection:ref": "railway:signal:shunting:ref"
+        "railway:signal:train_protection:form": "railway:signal:train_protection:main:form",
+        "railway:signal:train_protection:ref": "railway:signal:train_protection:main:ref"
       },
       "remove": [
-        "railway:signal:train_protection",
-        "railway:signal:train_protection:type"
+        "railway:signal:train_protection:type",
+        "railway:signal:shunting:passing_light"
+      ],
+      "default": {
+        "railway:signal:train_protection:main:form": "sign"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:shunting": "FR:marker"
+      },
+      "set": {
+        "railway:signal:train_protection": "FR:TVM",
+        "railway:signal:train_protection:main": "shunting_marker"
+      },
+      "rename": {
+        "railway:signal:shunting:form": "railway:signal:train_protection:main:form",
+        "railway:signal:shunting:ref": "railway:signal:train_protection:main:ref"
+      },
+      "remove": [
+        "railway:signal:shunting",
+        "railway:signal:shunting:passing_light"
+      ],
+      "default": {
+        "railway:signal:train_protection:main:form": "sign"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:shunting": "FR:JAL_MAN"
+      },
+      "set": {
+        "railway:signal:train_protection": "FR:TVM",
+        "railway:signal:train_protection:main": "shunting_marker"
+      },
+      "rename": {
+        "railway:signal:shunting:form": "railway:signal:train_protection:main:form",
+        "railway:signal:shunting:ref": "railway:signal:train_protection:main:ref"
+      },
+      "remove": [
+        "railway:signal:shunting",
+        "railway:signal:shunting:passing_light"
+      ],
+      "default": {
+        "railway:signal:train_protection:main:form": "sign"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:shunting": "FR:jalon_de_manoeuvre_TVM"
+      },
+      "set": {
+        "railway:signal:train_protection": "FR:TVM",
+        "railway:signal:train_protection:main": "shunting_marker"
+      },
+      "rename": {
+        "railway:signal:shunting:form": "railway:signal:train_protection:main:form",
+        "railway:signal:shunting:ref": "railway:signal:train_protection:main:ref"
+      },
+      "remove": [
+        "railway:signal:shunting",
+        "railway:signal:shunting:passing_light"
+      ],
+      "default": {
+        "railway:signal:train_protection:main:form": "sign"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:stop": "FR:JALON_ARRET"
+      },
+      "set": {
+        "railway:signal:minor": "FR:stop_marker",
+        "railway:signal:minor:form": "sign"
+      },
+      "rename": {
+        "railway:signal:stop:ref": "railway:signal:minor:ref"
+      },
+      "remove": [
+        "railway:signal:stop",
+        "railway:signal:stop:form"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:stop": "FR:JAL_ARRET"
+      },
+      "set": {
+        "railway:signal:minor": "FR:stop_marker",
+        "railway:signal:minor:form": "sign"
+      },
+      "rename": {
+        "railway:signal:stop:ref": "railway:signal:minor:ref"
+      },
+      "remove": [
+        "railway:signal:stop",
+        "railway:signal:stop:form"
       ]
     },
     {
