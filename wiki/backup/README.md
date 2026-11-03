@@ -1,6 +1,6 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2026-10-31 04:29:24 UTC<br>
+**Backup generated:** 2026-11-03 00:42:36 UTC<br>
 **Category:** main<br>
 **Total pages:** 3<br>
 **Successfully backed up:** 3
@@ -18,17 +18,17 @@
 
 - **File:** [FR/Key/railway-signal-main-states.wiki](FR/Key/railway-signal-main-states.wiki)
 - **Wiki URL:** [FR:Key:railway:signal:main:states](https://wiki.openstreetmap.org/wiki/FR:Key:railway:signal:main:states)
-- **Last edited:** 2026-08-19 02:11:33 UTC
-- **Last editor:** Noeld
-- **Edit comment:** /* Available states */ change CV state to Cv to align with official references
+- **Last edited:** 2026-11-02 11:36:51 UTC
+- **Last editor:** SharpeSerana
+- **Edit comment:** Suppression des combinaisons d'indications qui n'existent pas dans la signalisation ferroviaire française
 
 ### OpenRailwayMap/Tagging_in_France
 
 - **File:** [OpenRailwayMap/Tagging_in_France.wiki](OpenRailwayMap/Tagging_in_France.wiki)
 - **Wiki URL:** [OpenRailwayMap/Tagging_in_France](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
-- **Last edited:** 2026-10-31 04:28:22 UTC
+- **Last edited:** 2026-11-03 00:19:10 UTC
 - **Last editor:** Noeld
-- **Edit comment:** /* Half-white, half-green plate */ change value name
+- **Edit comment:** /* Tableau Lumineux de Correspondance */ add link to red-and-white_checkered_stop_marker
 
 ## About
 

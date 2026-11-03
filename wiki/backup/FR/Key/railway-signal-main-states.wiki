@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: FR:Key:railway:signal:main:states
-Last edited: 2026-08-19 02:11:33 UTC
-Last editor: Noeld
-Last edit comment: /* Available states */ change CV state to Cv to align with official references
-Backup date: 2026-10-31 04:29:23 UTC
+Last edited: 2026-11-02 11:36:51 UTC
+Last editor: SharpeSerana
+Last edit comment: Suppression des combinaisons d'indications qui n'existent pas dans la signalisation ferroviaire française
+Backup date: 2026-11-03 00:42:36 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/FR:Key:railway:signal:main:states
 --}}
 
@@ -26,13 +26,13 @@ Source URL: https://wiki.openstreetmap.org/wiki/FR:Key:railway:signal:main:state
 |Cancelled aspect (Illuminated cross)
 |-
 |{{TagValue|railway:signal:main:states|FR:(S)}}
-|Flashing red light
+|Flashing red light (Feu rouge clignotant)
 |-
 |{{TagValue|railway:signal:main:states|FR:M}}
 |Shunting aspect (Feu blanc, marche en manœuvre)
 |-
 |{{TagValue|railway:signal:main:states|FR:(M)}}
-|Flashing white light
+|Flashing white light (Feu blanc clignotant)
 |-
 |{{TagValue|railway:signal:main:states|FR:RR}}
 |30 km/h speed reminder (Rappel 30)
@@ -61,17 +61,8 @@ Source URL: https://wiki.openstreetmap.org/wiki/FR:Key:railway:signal:main:state
 |{{TagValue|railway:signal:main:states|FR:R}}
 |30 km/h speed restriction (Ralentissement 30)
 |-
-|{{TagValue|railway:signal:main:states|FR:R+A}}
-|30 km/h speed restriction and caution aspect
-|-
-|{{TagValue|railway:signal:main:states|FR:R+(A)}}
-|30 km/h speed restriction and advance caution aspect
-|-
 |{{TagValue|railway:signal:main:states|FR:(R)}}
 |60 km/h speed restriction (Ralentissement 60)
-|-
-|{{TagValue|railway:signal:main:states|FR:(R)+A}}
-|60 km/h speed restriction and caution aspect
 |-
 |{{TagValue|railway:signal:main:states|FR:(R)+(A)}}
 |60 km/h speed restriction and advance caution aspect
@@ -80,7 +71,7 @@ Source URL: https://wiki.openstreetmap.org/wiki/FR:Key:railway:signal:main:state
 |Clear aspect (Feu vert)
 |-
 |{{TagValue|railway:signal:main:states|FR:(VL)}}
-|Flashing green light
+|Flashing green light (Feu vert clignotant)
 |}
 
 == See also ==

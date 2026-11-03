@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-10-31 04:28:22 UTC
+Last edited: 2026-11-03 00:19:10 UTC
 Last editor: Noeld
-Last edit comment: /* Half-white, half-green plate */ change value name
-Backup date: 2026-10-31 04:29:23 UTC
+Last edit comment: /* Tableau Lumineux de Correspondance */ add link to red-and-white_checkered_stop_marker
+Backup date: 2026-11-03 00:42:36 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -743,7 +743,7 @@ File:Fin_de_Signalisation_de_Cabine.svg|Cab signalling line exit board
 
 == TVM markers ==
 
-==== TVM stop marker ====
+=== TVM stop marker ===
 <gallery>
 File:Repère_TGV.svg|TVM stop marker
 </gallery>
@@ -756,7 +756,7 @@ File:Repère_TGV.svg|TVM stop marker
 Optional tags:
 * {{Tag|railway:signal:train_protection:main:passing_light|yes}} (if '''Nf''' signal is equipped with a white passing light)
 
-==== TVM transition marker ====
+=== TVM transition marker ===
 The boards indicate transitions between TVM systems or types of cab signalling. The numbers 300 or 430 indicate the downstream TVM system, while 1 or 2 indicate the track direction.
 
 <gallery>
@@ -770,18 +770,16 @@ File:TVM430 transition board.svg|TVM430 transition board
 * {{Tag|railway:signal:train_protection:system_change:type||({{TagValue|railway:signal:train_protection:system_change:type|300}}/{{TagValue|railway:signal:train_protection:system_change:type|430}})}} (TVM 300 / TVM 430)
 * {{Tag|railway:signal:train_protection:system_change:caption|}} (e.g. ''TVM 430 voie 2'')
 
-== Shunting marker ==
-A shunting marker (French: '''Jalon de Manœuvre''') is placed at a point where certain train movements take place. These movements may include reversing, shunting, or departing trains from a work site. The white chevron points to the track involved.
+=== TVM shunting marker ===
+A shunting marker (French: '''Jalon de Manœuvre''') is placed on TVM lines at a point where certain train movements take place. These movements may include reversing, shunting, or departing trains from a work site. The white chevron on a purple background points to the track involved. The marker is always equipped with a white passing light, so no tag is needed for it. It also carries a ''marker plate'' ('''plaque de repérage''') bearing a number in black on a white background.
 
 <gallery>
 File:Jalon_Manoeuvre.svg|Shunting marker
 </gallery>
 
-* {{Tag|railway:signal:shunting|FR:marker}}
-* {{Tag|railway:signal:shunting:form|sign}}
-
-Optional tags:
-* {{Tag|railway:signal:shunting:passing_light|yes}} (if equipped with a white passing light)
+* {{Tag|railway:signal:train_protection|FR:TVM}}
+* {{Tag|railway:signal:train_protection:main|shunting_marker}}
+* {{Tag|railway:signal:train_protection:main:form|sign}}
 
 == Cancellation signal (RATP) ==
 The [https://wikipedia.org/wiki/Syst%C3%A8me_d%27aide_%C3%A0_la_conduite,%C3%A0_l%27exploitation_et%C3%A0_la_maintenance SACEM] (French: '''Système d'Aide à la Conduite, à l'Exploitation et à la Maintenance''') is a cab signalling system used on the [https://wikipedia.org/wiki/RER_A RER A] line in the Paris region. When SACEM is active, most lineside signal indications are cancelled and replaced by an illuminated Saint-Andrew's cross (X), with the exception of stop signals, the clearing light (''œilleton''), route indicators and partially occupied track indicators.
@@ -1008,6 +1006,17 @@ File:Signal fin de caténaire.svg|End of catenary
 * {{Tag|railway:signal:electricity:form|sign}}
 * {{Tag|railway:signal:position|overhead}}
 
+== Blue-and-white checkered marker ==
+A blue-and-white checkered marker ('''jalon à damier bleu et blanc''') marks a point that electric traction units must not pass. Other trains are not concerned.
+
+<gallery>
+File:Jalon d'arrêt E.svg|Blue-and-white checkered marker
+File:Jalon_à_damier_bleu_et_blanc.svg|Blue-and-white checkered marker
+</gallery>
+
+* {{Tag|railway:signal:electricity|FR:stop_marker}}
+* {{Tag|railway:signal:electricity:form|sign}}
+
 == Bimode operation ==
 This distant sign announces the approach of a non-electrified section for bi-mode trains only. It accompanies the [[#Pantograph_down_advance_signal|distant]] and [[#Pantograph_down_signal|execution]] pantograph down signals when these signals apply exclusively to bi-mode trains. In this case, they are not followed by a [[#Pantograph_up_signal|pantograph up signal]].
 
@@ -1178,6 +1187,17 @@ File:Pancarte STOP verticale.svg|STOP sign (vertical arrangement)
 
 Optional tags:
 * {{Tag|railway:signal:stop:arrangement|vertical}} (horizontal by default)
+
+== Red-and-white checkered stop marker ==
+A red-and-white checkered stop marker ('''jalon d'arrêt''') marks a point that the driver must not pass. Fixed stop markers are used, for example, to show the limit of a movement on sight or a shunting movement, or a scheduled stop.
+
+<gallery>
+File:Jalon d'arret.svg|Red-and-white checkered stop marker
+File:Jalon_d’arrêt_à_damier_rouge_et_blanc.svg|Red-and-white checkered stop marker
+</gallery>
+
+* {{Tag|railway:signal:minor|FR:stop_marker}}
+* {{Tag|railway:signal:minor:form|sign}}
 
 =Passenger stops=
 Passenger stop signs apply to a category of train. The categories are nested, from the most general to the most specific, and a sign is tagged with the '''most specific''' category that applies to it:
@@ -1556,8 +1576,8 @@ File:Chevron_haut.svg|Chevron pointe en haut
 == Tableau Lumineux de Correspondance ==
 A '''Tableau Lumineux de Correspondance''' (TLC) for converging tracks is a signal installed to the left of the track it addresses and is normally off. At any given time, it can display one of the following:
 * A white letter '''T''', either ''fixed'' if the group signal is ''clear'' or flashing, if the group signal is ''at danger''.
-* The [[#Signal_Lumineux_de_Départ|Signal Lumineux de Départ]] if applicable.
-* A red and white checkerboard, which has the same meaning as a ''jalon d'arrêt'' and is used instead of the [[#Chevron_pointe_en_haut|chevron]].
+* The [[#Signal_Lumineux_de_Départ|Signal Lumineux de Départ]] (SLD) if applicable.
+* A red and white checkerboard, which has the same meaning as a [[#Red-and-white_checkered_stop_marker|red-and-white checkered stop marker]] (''jalon d'arrêt'') and is used instead of the [[#Chevron_pointe_en_haut|chevron]].
 
 <gallery>
 File:TLC-T.svg|The group signal is open ({{TagValue|railway:signal:minor:states|FR:T}})
