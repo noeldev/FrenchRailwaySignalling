@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.42_2026-11-3"
+    version="1.42_2026-11-03"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -6626,12 +6626,12 @@
 
 				<separator />
 
-				<!-- Shunting Marker -->
+				<!-- TVM Shunting Marker -->
 				<item
 					name="Shunting Marker"
 					fr.name="Jalon de Manœuvre"
 					type="node"
-					icon="icons/signs/shunting_marker.svg">
+					icon="icons/signs/TVM_shunting_marker.svg">
 					<label
 						text="Shunting marker"
 						fr.text="Jalon de manœuvre" />
@@ -6645,7 +6645,7 @@
 						text="Network ID"
 						fr.text="Identifiant Réseau"
 						length="7" />
-					<link wiki="OpenRailwayMap/Tagging_in_France#Shunting_marker" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#TVM_shunting_marker" />
 				</item>
 			</group>
 
