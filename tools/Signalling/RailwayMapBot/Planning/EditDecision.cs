@@ -17,7 +17,7 @@ public enum SkipReason
     // No longer carries the tags of the scope.
     OutOfScope,
 
-    // Its last mapper, or the node itself, is on the opt-out list.
+    // One of its mappers, or the node itself, is on the opt-out list.
     OptedOut,
 
     // Edited within the quiet period: its mapper may still be working on it.

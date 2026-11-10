@@ -21,6 +21,7 @@ namespace RailwayMapBot.Execution;
 public sealed class EditRunner(
     OsmApiClient api,
     IEditPlanner planner,
+    ContributorGuard guard,
     RunJournal journal,
     RunSummary summary,
     ChangesetTagBuilder tagBuilder,
@@ -155,11 +156,13 @@ public sealed class EditRunner(
 
     private async Task<IReadOnlyList<EditDecision>> DecideAsync(OsmNode[] listed, CancellationToken cancellationToken)
     {
-        IReadOnlyList<OsmNode> fresh = mode == RunMode.Offline
-            ? listed
-            : await api.GetNodesAsync(listed.Select(node => node.Id), cancellationToken);
+        if (mode == RunMode.Offline)
+        {
+            return [.. listed.Select(planner.Decide)];
+        }
 
-        return [.. fresh.Select(planner.Decide)];
+        var fresh = await api.GetNodesAsync(listed.Select(node => node.Id), cancellationToken);
+        return await guard.ApplyAsync([.. fresh.Select(planner.Decide)], cancellationToken);
     }
 
     // Journal first, then the osmChange file: both exist before the upload.

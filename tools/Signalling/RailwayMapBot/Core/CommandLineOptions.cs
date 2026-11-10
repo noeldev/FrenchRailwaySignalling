@@ -10,6 +10,7 @@ public enum BotCommand
     Revert,
     Seed,
     Login,
+    Rules,
 }
 
 // Parses and holds the command line. Parse returns null when the arguments are
@@ -138,7 +139,7 @@ public sealed class CommandLineOptions
         {
             _ when sources > 1 => "Use only one of --area, --input and --nodes.",
             BotCommand.Revert when journalPath is null => "Missing journal: the journal.jsonl of the run to revert.",
-            BotCommand.Revert or BotCommand.Login when sources > 0 => $"--area, --input and --nodes do not apply to {args[0]}.",
+            BotCommand.Revert or BotCommand.Login or BotCommand.Rules when sources > 0 => $"--area, --input and --nodes do not apply to {args[0]}.",
             BotCommand.Seed when nodesPath is not null => "--nodes does not apply to seed.",
             BotCommand.Seed when limit is null => "Missing --limit: the number of test nodes to create.",
             not BotCommand.Plan when offline => "--offline only applies to plan.",
@@ -202,6 +203,8 @@ public sealed class CommandLineOptions
               RailwayMapBot seed   [source] --limit <n> Create test nodes on a sandbox server,
                                                         copied from signals to fix.
               RailwayMapBot login  [options]            Authorize the bot account (OAuth 2).
+              RailwayMapBot rules                       Write the list of the corrections (wikitext)
+                                                        for the page documenting the edit.
 
             Source (default: every configured area, read from Overpass):
               --area <code>[,<code>]  Only these areas, for example FR-BRE.

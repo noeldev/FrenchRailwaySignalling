@@ -30,6 +30,8 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
 
     private string RulesPath => Path.Combine(repositoryRoot, settings.Rules);
 
+    private string RulesHash => Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(RulesPath)));
+
     public async Task<int> RunAsync(CancellationToken stop)
     {
         using var client = CreateClient(Server);
@@ -38,6 +40,7 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         return options.Command switch
         {
             BotCommand.Login => await LoginAsync(client, api, stop),
+            BotCommand.Rules => WriteCorrectionList(),
             BotCommand.Seed => await SeedAsync(client, api, stop),
             BotCommand.Revert => await RevertAsync(client, api, stop),
             _ => await FixAsync(client, api, stop),
@@ -64,6 +67,11 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
     {
         var mode = options.Offline ? RunMode.Offline : options.Command == BotCommand.Apply ? RunMode.Write : RunMode.DryRun;
         var planner = await CreateFixPlannerAsync(client, mode == RunMode.Offline ? TimeSpan.Zero : TimeSpan.FromHours(Server.QuietPeriodHours), stop);
+        if (mode == RunMode.Write)
+        {
+            RequireApprovedRules();
+        }
+
         var account = mode == RunMode.Write ? await AuthenticateAsync(client, api, stop) : string.Empty;
 
         var groups = Prefilter(await LoadCandidatesAsync(client, api, stop), planner);
@@ -76,7 +84,7 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
             return 1;
         }
 
-        return await ExecuteAsync(api, planner, groups, mode, limit, settings.Changeset.FixComment, account, stop);
+        return await ExecuteAsync(api, planner, new ContributorGuard(api, settings.OptOut), groups, mode, limit, settings.Changeset.FixComment, account, stop);
     }
 
     private async Task<int> RevertAsync(HttpClient client, OsmApiClient api, CancellationToken stop)
@@ -104,7 +112,8 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         }
 
         var planner = new RevertPlanner(edits.ToDictionary(edit => edit.Value.Id, edit => edit.Value));
-        return await ExecuteAsync(api, planner, groups, RunMode.Write, limit, settings.Changeset.RevertComment, account, stop);
+        // A revert restores the tags whoever mapped the node: no opt-out applies.
+        return await ExecuteAsync(api, planner, new ContributorGuard(api, new OptOutSettings()), groups, RunMode.Write, limit, settings.Changeset.RevertComment, account, stop);
     }
 
     private async Task<int> SeedAsync(HttpClient client, OsmApiClient api, CancellationToken stop)
@@ -142,6 +151,7 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
     private async Task<int> ExecuteAsync(
         OsmApiClient api,
         IEditPlanner planner,
+        ContributorGuard guard,
         IReadOnlyList<CandidateGroup> groups,
         RunMode mode,
         int limit,
@@ -160,13 +170,13 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
             DescribeSource(),
             limit,
             DryRun: mode != RunMode.Write,
-            Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(RulesPath))));
+            RulesHash);
 
         var summary = new RunSummary();
         using (var journal = new RunJournal(Path.Combine(folder, RunJournal.FileName)))
         {
             journal.Write(new JournalRecord("run") { Run = run });
-            var runner = new EditRunner(api, planner, journal, summary, new ChangesetTagBuilder(settings.Changeset), settings.Limits, mode, commentTemplate, folder);
+            var runner = new EditRunner(api, planner, guard, journal, summary, new ChangesetTagBuilder(settings.Changeset), settings.Limits, mode, commentTemplate, folder);
             await runner.RunAsync(groups, limit, stop);
             journal.Write(new JournalRecord("end") { Outcome = summary.Outcome });
         }
@@ -179,6 +189,38 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
             + $"{summary.Skips.Sum(skip => skip.Value)} left untouched, {summary.Changesets.Count} changesets.");
         Console.WriteLine($"Report: '{reportPath}'");
         return summary.Failed ? 1 : 0;
+    }
+
+    // The corrections are those the community was shown: another rule table
+    // is a change of scope, to document and discuss before it is applied.
+    private void RequireApprovedRules()
+    {
+        var approved = Server.ApprovedRulesSha256;
+        if (approved.Length == 0 && Server.AllowSeeding)
+        {
+            return;
+        }
+
+        if (approved.Length == 0)
+        {
+            throw new InvalidOperationException($"servers:{_serverName}:approvedRulesSha256 is missing: set it to the hash of the rule table once the edit is documented and discussed (current: {RulesHash}).");
+        }
+
+        if (!approved.Equals(RulesHash, StringComparison.OrdinalIgnoreCase))
+        {
+            throw new InvalidOperationException($"The rule table changed since the edit was discussed (sha256 {RulesHash}): update the documentation, discuss the change, then set servers:{_serverName}:approvedRulesSha256.");
+        }
+    }
+
+    private int WriteCorrectionList()
+    {
+        var folder = Path.Combine(repositoryRoot, settings.Output);
+        Directory.CreateDirectory(folder);
+
+        var path = Path.Combine(folder, CorrectionListWriter.FileName);
+        CorrectionListWriter.Write(path, RuleTable.Load(RulesPath), settings.Policy, RulesHash);
+        Console.WriteLine($"Wrote '{path}' (rule table sha256 {RulesHash}).");
+        return 0;
     }
 
     private async Task<FixPlanner> CreateFixPlannerAsync(HttpClient client, TimeSpan quietPeriod, CancellationToken stop)

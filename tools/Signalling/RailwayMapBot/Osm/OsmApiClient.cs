@@ -28,6 +28,12 @@ public sealed class OsmApiClient(HttpClient client, LimitSettings limits)
         return nodes;
     }
 
+    // Names of everyone who edited the node, from its history.
+    public async Task<IReadOnlySet<string>> GetNodeContributorsAsync(long id, CancellationToken cancellationToken) =>
+        OsmXml.ReadNodes(await ReadAsync($"{ApiPath}node/{id}/history", cancellationToken))
+            .Select(node => node.User)
+            .ToHashSet(StringComparer.Ordinal);
+
     // Display name of the account the token belongs to.
     public async Task<string> GetAccountNameAsync(CancellationToken cancellationToken) =>
         OsmXml.ReadUserName(await ReadAsync($"{ApiPath}user/details", cancellationToken));

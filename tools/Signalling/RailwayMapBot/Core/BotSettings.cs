@@ -75,6 +75,11 @@ public sealed class ServerSettings
     // True on a sandbox only: lets the seed command create test nodes.
     public bool AllowSeeding { get; set; }
 
+    // SHA-256 of the rule table the community discussion was held on. When
+    // set, apply refuses any other rule table: a change of the corrections
+    // must be documented and discussed first. Required outside a sandbox.
+    public string ApprovedRulesSha256 { get; set; } = string.Empty;
+
     // A node edited less than this long ago is left alone, since its mapper
     // may still be working on it.
     public int QuietPeriodHours { get; set; }
@@ -130,7 +135,8 @@ public sealed class PolicySettings
 // Mappers and nodes the bot must leave untouched, on request.
 public sealed class OptOutSettings
 {
-    // Nodes last edited by one of these users are skipped.
+    // Nodes one of these users ever edited are skipped (the history of each
+    // node to edit is read when the list is not empty).
     public List<string> Users { get; set; } = [];
 
     public List<long> Nodes { get; set; } = [];

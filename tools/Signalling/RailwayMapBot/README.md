@@ -7,8 +7,9 @@ It is written to follow the [Automated Edits code of conduct](https://wiki.opens
 | Policy | In the tool |
 |---|---|
 | Work on the current data, never overwrite a recent edit | Overpass only lists the candidates. Each batch is read again from the OSM API just before it is decided and uploaded, each node with the version it was read at. On a conflict the server refuses the whole upload; the batch is read and decided again, never forced (`EditRunner`). |
+| A stated list of changes, discussed; any extension discussed again | `rules` writes the exact list of the corrections for the wiki page. Outside the sandbox, `apply` only runs with the rule table whose hash was recorded after the discussion (`approvedRulesSha256`). |
 | Only trivial, certain corrections | Fixes that guess (`suggest`) or need a manual complement (a rule `note`) are left to a human, as are conflicts, blocked rules and undocumented tags (`FixPlanner`, `policy` settings). |
-| Respect the mappers | A node edited in the last 24 hours is left alone (`quietPeriodHours`). Mappers and nodes can be opted out (`optOut`). |
+| Respect the mappers | A node edited in the last 24 hours is left alone (`quietPeriodHours`). Mappers and nodes can be opted out (`optOut`): a node an opted-out mapper ever edited is skipped (its history is read), not only the nodes they edited last. |
 | Start small, get feedback | The sandbox server is the default; `plan` is a dry run; `apply` is bounded by `--limit` (200 by default) and `--area`. |
 | Changesets grouped in small regions, good comments | One series of changesets per area (French regions), at most 500 nodes each, comment in French naming the area. A node is edited once, with all its fixes. |
 | Identify the edits | Dedicated account, checked before the first write; `bot=yes`, `mechanical=yes`, `created_by` and `description` (the wiki page) on every changeset; settings without them are refused. |
@@ -23,6 +24,7 @@ RailwayMapBot apply  [source] [options]    Upload the fixes, area by area.
 RailwayMapBot revert <journal> [options]   Restore the tags a run replaced.
 RailwayMapBot seed   [source] --limit <n>  Create test nodes on a sandbox server.
 RailwayMapBot login  [options]             Authorize the bot account (OAuth 2).
+RailwayMapBot rules                        Write the list of the corrections (wikitext).
 ```
 
 Run `RailwayMapBot --help` for the options. The source is every configured area by default (`--area FR-BRE` for one), an Overpass export (`--input`) or a list of node ids (`--nodes`).
@@ -70,10 +72,18 @@ Each step produces a report that can be published before the next one.
 
 1. Dry run on the real data, nothing written: `RailwayMapBot plan --server prod` (or `--area FR-BRE` first).
 2. Rehearsal on the sandbox, which has no French signals: `RailwayMapBot seed --area FR-BRE --limit 50` copies 50 signals to fix as test nodes, then `plan` and `apply` with `--nodes <seeded-nodes.txt>`, then `revert <journal.jsonl>`.
-3. Once the edit is documented and accepted: a small real run, `RailwayMapBot apply --server prod --area FR-BRE --limit 50`, then wait for feedback.
+3. Once the edit is documented and accepted: copy the hash printed by `RailwayMapBot rules` into `servers:prod:approvedRulesSha256` (in `appsettings.local.json`), then a small real run, `RailwayMapBot apply --server prod --area FR-BRE --limit 50`, then wait for feedback.
 4. The rest, area by area: `RailwayMapBot apply --server prod --area FR-BRE --limit 1000`, and so on.
 
 A new account is limited by the server in the number of edits per hour. When the limit is reached the run stops cleanly; run the same command again later.
+
+## When the rule table changes
+
+The edit is discussed for a stated list of corrections. After any change of `validator/rules.json`, `apply --server prod` refuses to run until the change is documented and accepted:
+
+1. Run `RailwayMapBot rules`: it writes `bot/runs/corrections.wiki` and prints the new hash.
+2. Replace the content of the wiki page `Automated edits/<account>/Corrections` with that file, and announce the change in the discussion.
+3. Once accepted, set the new hash in `servers:prod:approvedRulesSha256`.
 
 ## Tests
 

@@ -1,73 +1,72 @@
-''English summary: this page documents a proposed automated edit of railway signals in France. It renames deprecated or mistyped tag values and keys of <code>railway:signal:*</code> to the documented scheme ([[OpenRailwayMap/Tagging in France]]), without changing the meaning of the data, and never touches geometry. Nothing is edited before the discussion on the French forum is over. Contact: see below.''
+This page documents a proposed automated edit of the railway signals mapped in France, as required by the [[Automated Edits code of conduct]].
 
-Cette page décrit une modification automatisée de la signalisation ferroviaire française dans OpenStreetMap, conformément au [[FR:Code de conduite des modifications automatisées|code de conduite des modifications automatisées]].
+'''Status: proposal under discussion. No edit has been made.'''
 
-'''État : proposition en cours de discussion. Aucune modification n'a été effectuée.'''
+== Who ==
 
-== Qui ==
+* Operator: Noël Danjou ([[User:‹PERSONAL_OSM_ACCOUNT›]]), contributor to the [[OpenRailwayMap/Tagging in France]] page and author of the [https://noeldev.github.io/FrenchRailwaySignalling/ French Railway Signalling] JOSM presets and validator rules.
+* Account used for the edit: {{User|RailwayMapBot}}. It is used for this edit only.
+* Contact: ‹E-MAIL ADDRESS›, an OSM message to either account, or the forum thread listed under [[#Consultation|Consultation]].
 
-* Opérateur : Noël Danjou ([[User:‹COMPTE_OSM_PERSONNEL›]]), contributeur du schéma [[OpenRailwayMap/Tagging in France]] et auteur des presets et des règles de validation [https://noeldev.github.io/FrenchRailwaySignalling/ French Railway Signalling].
-* Compte dédié : {{User|RailwayMapBot}}. Ce compte ne sert qu'à cette modification.
-* Contact : message privé OSM à l'un des deux comptes, ou le fil de discussion du forum (voir [[#Consultation|Consultation]]).
+== Motivation ==
 
-== Objectif ==
+About 17,600 railway signals are mapped in France. Their tagging was built over several years by a few mappers, with several spellings and key layouts for the same signal, and with typing mistakes. About half of the signals carry one of these variants. They are not rendered consistently by OpenRailwayMap and cannot be used reliably by other data consumers.
 
-Environ 17 600 signaux ferroviaires sont cartographiés en France. Leur balisage s'est construit au fil des années avec plusieurs variantes pour un même signal, et comporte des erreurs de saisie. Le schéma a depuis été unifié et documenté sur la page [[OpenRailwayMap/Tagging in France]]. Les signaux qui portent encore une ancienne variante ne sont plus affichés correctement par OpenRailwayMap et sont signalés par les outils de contrôle.
+The corrections were first offered to mappers as a [https://maproulette.org/browse/challenges/57319 MapRoulette tag fix challenge], where each one is confirmed by hand. With close to 9,000 signals, this is long and repetitive work for the few mappers involved, while the correction is always the same for a given tagging. The automated edit applies these same corrections, and leaves to mappers the cases that need a human decision.
 
-La correction a d'abord été proposée aux contributeurs sous la forme d'un [https://maproulette.org/browse/challenges/57319 défi MapRoulette], où chaque correction est validée à la main. Avec près de 9 000 signaux concernés, ce travail est long et répétitif pour les quelques contributeurs investis, alors que la correction proposée est toujours la même pour un balisage donné. La modification automatisée applique ces mêmes corrections, et laisse aux contributeurs les cas qui demandent réellement un regard humain.
+The corrections change how the data is written, not what it says: a signal keeps its type, its states and every other tag. This page does not claim that the wiki defines the only correct tagging. The corrections are limited to the list below, which is submitted to the discussion, and any of them can be withdrawn on objection.
 
-== Périmètre ==
+== Scope ==
 
-* '''Zone''' : France métropolitaine.
-* '''Objets''' : uniquement les nœuds <code>railway=signal</code> existants.
-* '''Balises''' : uniquement les clés <code>railway:signal:*</code> du schéma français (valeurs préfixées <code>FR:</code>), ainsi que les quelques balises associées listées dans la table des règles.
-* '''Volume''' (export du 20 octobre 2026) : sur 17 599 signaux, environ 8 600 seraient corrigés automatiquement, et environ 400 resteraient à corriger à la main.
+* '''Area''': metropolitan France.
+* '''Objects''': existing nodes tagged <code>railway=signal</code> only. No object is created, moved or deleted. No geometry is changed.
+* '''Tags''': keys under <code>railway:signal:</code> whose values belong to the French scheme (prefix <code>FR:</code>), and the few related tags named in the list of corrections.
+* '''Volume''' (data of 20 October 2026): of 17,599 signals, about 8,600 would be corrected automatically, and about 400 are left to mappers.
+* '''Frequency''': one-off edit, carried out region by region. It is not a recurring bot.
 
-Aucun signal n'est créé, déplacé ou supprimé. Aucune géométrie n'est modifiée.
+== Algorithm ==
 
-== Ce qui est modifié ==
+=== Corrections ===
 
-Les corrections sont celles du défi MapRoulette et des règles de validation JOSM. Elles sont décrites une à une dans une table publique : [https://github.com/noeldev/FrenchRailwaySignalling/blob/main/validator/rules.json validator/rules.json]. Elles ne changent pas le sens des données, seulement leur écriture :
+The corrections are those of the MapRoulette challenge and of the JOSM validator rules: all three are generated from the same public rule table, [https://github.com/noeldev/FrenchRailwaySignalling/blob/main/validator/rules.json validator/rules.json]. The complete list, generated from that table, is on [[Automated edits/RailwayMapBot/Corrections]]. There are four kinds:
 
 {| class="wikitable"
-! Nature !! Exemple
+! Kind !! Example
 |-
-| Valeur renommée || <code>railway:signal:main=FR:CARRE</code> devient <code>railway:signal:main=FR:C</code>
+| Renamed value. The value is matched as a whole item of a <code>;</code> separated list. || <code>railway:signal:main=FR:CARRE</code> becomes <code>railway:signal:main=FR:C</code>
 |-
-| Casse ou orthographe d'une valeur || <code>railway:signal:main:states=FR:CV</code> devient <code>FR:Cv</code> ; <code>FR:FR:S</code> devient <code>FR:S</code>
+| Replaced tagging: keys renamed with their value kept, tags set or removed, when a stated combination of tags is found. A replacement is not applied when it would overwrite a tag it does not expect. || <code>railway:signal:speed_limit=FR:Z</code> becomes <code>railway:signal:speed_limit=FR:speed_indicator</code>, with its <code>:form</code> and <code>:ref</code> moved under <code>railway:signal:speed_limit:marker</code>
 |-
-| Clé renommée ou balisage restructuré || une ancienne clé est remplacée par la clé documentée, sa valeur étant conservée
+| Redundant tag removed. || <code>railway:crocodile=yes</code> on a main signal, which implies it
 |-
-| Balise redondante supprimée || <code>railway:crocodile=yes</code> sur un signal principal, qui l'implique déjà
+| Mistyped value of a key whose values are listed on [[OpenRailwayMap/Tagging in France]]: letter case, missing or doubled <code>FR:</code> prefix, wrong separator after the prefix, leading punctuation, a colon used as list separator, empty list items. The value is corrected only when this leads to exactly one documented value; otherwise it is left as it is. || <code>FR:cv</code> becomes <code>FR:Cv</code>; <code>FR:FR:S</code> becomes <code>FR:S</code>
 |}
 
-Toutes les corrections d'un signal sont faites en une seule fois : chaque nœud n'est modifié qu'une fois.
+All the corrections of a signal are made together, so each node is edited once.
 
-== Ce qui n'est pas modifié ==
+=== What is not changed ===
 
-* Les corrections qui supposent une interprétation ou un complément (par exemple une légende à compléter) : elles restent proposées dans MapRoulette et par le validateur JOSM.
-* Les balisages contradictoires et les balises non documentées : ils sont seulement signalés par le validateur.
-* Les textes libres (<code>ref</code>, <code>:caption</code>) et les valeurs d'autres schémas (signaux suisses <code>CH-FDV:</code>, <code>ETCS:</code>).
-* Un signal modifié depuis moins de 24 heures, pour ne pas gêner un contributeur en cours de travail.
-* Les signaux des contributeurs qui en font la demande (voir [[#Désaccord et exclusion|Désaccord et exclusion]]).
+* Replacements that guess the intended tagging, or that need a complement only a mapper can give (a caption to complete, a board to map on its own node). They stay in the MapRoulette challenge and in the JOSM validator.
+* Conflicting tags and undocumented keys or values: they are only reported by the validator.
+* Free text (<code>ref</code>, <code>:caption</code>) and values of other schemes (Swiss signals <code>CH-FDV:</code>, <code>ETCS:</code>).
+* A signal edited in the last 24 hours, so that a mapper at work is not disturbed.
+* Signals of mappers who opted out (see [[#Opting out|Opting out]]).
 
-== Méthode ==
+=== Procedure ===
 
-# Les signaux sont listés région par région.
-# Juste avant chaque envoi, chaque signal est relu sur le serveur OSM et la correction est recalculée sur ces données à jour. Un signal déjà corrigé entre-temps est ignoré.
-# Chaque signal est envoyé avec le numéro de version lu. Si un contributeur l'a modifié dans l'intervalle, le serveur refuse l'envoi : le lot est alors relu et recalculé. Une modification concurrente n'est jamais écrasée.
-# Les groupes de modifications sont constitués par région et limités à 500 signaux.
+# The signals are listed region by region with Overpass.
+# Just before each upload, every signal of the batch is read again from the OSM API, and its correction is computed on that current data. A signal corrected in the meantime is skipped.
+# Each signal is uploaded with the version number that was read. If someone edited it in between, the API refuses the upload; the batch is then read and computed again. A concurrent edit is never overwritten.
+# Changesets are grouped by region and hold at most 500 signals.
 
-Un essai à blanc sur les données réelles et une répétition complète sur le serveur de développement d'OSM précèdent toute modification réelle. Leurs rapports sont publiés (voir [[#Suivi|Suivi]]).
+The bot only runs with the rule table that was discussed: it refuses to upload if the table has changed. Any change or extension of the corrections will be documented here and discussed before it is applied.
 
-== Groupes de modifications ==
-
-Chaque groupe de modifications porte :
+=== Changeset tags ===
 
 {| class="wikitable"
-! Balise !! Valeur
+! Key !! Value
 |-
-| <code>comment</code> || <code>Signalisation ferroviaire française : unification du balisage et correction des erreurs de saisie (''région'', lot ''n'')</code>
+| <code>comment</code> || <code>Signalisation ferroviaire française : unification du balisage et correction des erreurs de saisie (''region'', lot ''n'')</code>
 |-
 | <code>created_by</code> || <code>RailwayMapBot/''version''</code>
 |-
@@ -75,42 +74,41 @@ Chaque groupe de modifications porte :
 |-
 | <code>mechanical</code> || <code>yes</code>
 |-
-| <code>description</code> || l'adresse de cette page
+| <code>description</code> || the address of this page
 |}
-
-== Déroulement ==
-
-# Publication de cette page et discussion sur le forum.
-# Essai à blanc sur les données réelles, sans aucune écriture, et publication du rapport.
-# Répétition sur le serveur de développement d'OSM.
-# Après accord : première série limitée à 50 signaux d'une seule région, puis attente des retours.
-# Poursuite région par région, annoncée sur le forum. La modification peut être interrompue à tout moment.
-
-Calendrier : ‹À DÉFINIR APRÈS LA DISCUSSION›.
 
 == Consultation ==
 
-* Forum OSM France : ‹LIEN VERS LE FIL DE DISCUSSION›, ouvert le ‹DATE›.
-* Discussion précédente sur le schéma et le défi MapRoulette : [https://forum.openstreetmap.fr/t/integration-de-la-signalisation-ferroviaire-suite/47854 Intégration de la signalisation ferroviaire (suite)].
+* French community forum: ‹LINK TO THE THREAD›, opened on ‹DATE›.
+* Earlier discussion of the tagging scheme and of the MapRoulette challenge: [https://forum.openstreetmap.fr/t/integration-de-la-signalisation-ferroviaire-suite/47854 Intégration de la signalisation ferroviaire (suite)].
 
-== Désaccord et exclusion ==
+== Timing ==
 
-Tout contributeur peut demander, par message ou sur le forum, que ses signaux ou une zone ne soient pas modifiés : la demande est appliquée avant la série suivante. En cas d'objection sur une correction, celle-ci est retirée de la modification le temps d'en discuter.
+# This page is published and discussed on the forum.
+# Dry run on the real data, with nothing written, and its report published.
+# Rehearsal on the OSM development server.
+# After the discussion: a first series of 50 signals in one region, then a pause for feedback.
+# The rest region by region, each announced on the forum. The edit can be stopped at any time.
 
-== Annulation ==
+Dates: ‹TO BE SET AFTER THE DISCUSSION›. The series are recorded under [[#Log|Log]].
 
-Chaque série conserve les balises d'origine de chaque signal modifié. Une série peut être annulée entièrement : les balises d'origine sont rétablies sur tous les signaux qui n'ont pas été modifiés depuis par un contributeur.
+== Opting out ==
 
-== Suivi ==
+Any mapper can ask, by message or on the forum, that the signals they edited, or an area, be left untouched. The request is applied before the next series: the bot then skips every signal that mapper ever edited. An objection to a correction removes it from the edit while it is discussed.
 
-* Rapports de chaque série (régions, groupes de modifications, corrections et nombres) : ‹LIEN VERS LES RAPPORTS›.
-* Code source (GPL-3.0) : [https://github.com/noeldev/FrenchRailwaySignalling/tree/main/tools/Signalling/RailwayMapBot RailwayMapBot].
+== Reverting ==
+
+Each series keeps the original tags of every signal it edits. A series can be reverted as a whole: the original tags are restored on every signal that nobody has edited since.
+
+== Log ==
+
+* Reports of each series (regions, changesets, corrections and counts): ‹LINK TO THE REPORTS›.
+* Source code (GPL-3.0): [https://github.com/noeldev/FrenchRailwaySignalling/tree/main/tools/Signalling/RailwayMapBot RailwayMapBot].
 
 {| class="wikitable"
-! Date !! Région !! Signaux modifiés !! Groupes de modifications
+! Date !! Region !! Signals edited !! Changesets
 |-
 | || || ||
 |}
 
 [[Category:Automated edits log]]
-[[Category:FR:Modifications automatisées]]

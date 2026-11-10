@@ -19,6 +19,9 @@ public sealed class FakeOsmServer : HttpMessageHandler
 
     public Dictionary<long, OsmNode> Nodes { get; } = [];
 
+    // Earlier versions of the nodes, for their history.
+    public List<OsmNode> History { get; } = [];
+
     public List<FakeChangeset> Changesets { get; } = [];
 
     // Number of requests that changed something on the server.
@@ -40,7 +43,13 @@ public sealed class FakeOsmServer : HttpMessageHandler
 
     // An edit by someone else: new tags, next version.
     public void EditAs(string user, long id, IReadOnlyDictionary<string, string> tags) =>
-        Nodes[id] = Nodes[id] with { Version = Nodes[id].Version + 1, Tags = tags, User = user, Timestamp = DateTimeOffset.UnixEpoch };
+        Replace(Nodes[id] with { Version = Nodes[id].Version + 1, Tags = tags, User = user, Timestamp = DateTimeOffset.UnixEpoch });
+
+    private void Replace(OsmNode node)
+    {
+        History.Add(Nodes[node.Id]);
+        Nodes[node.Id] = node;
+    }
 
     public void Delete(long id) => Nodes[id] = Nodes[id] with { Version = Nodes[id].Version + 1, Visible = false };
 
@@ -52,6 +61,7 @@ public sealed class FakeOsmServer : HttpMessageHandler
         return (request.Method.Method, path.Split('/')) switch
         {
             ("GET", ["api", "0.6", "nodes"]) => ReadNodes(request.RequestUri.Query),
+            ("GET", ["api", "0.6", "node", var id, "history"]) => Ok(WriteNodes(History.Where(node => node.Id == long.Parse(id)).Append(Nodes[long.Parse(id)]))),
             ("GET", ["api", "0.6", "user", "details"]) => Ok($"<osm><user id=\"1\" display_name=\"{Account}\"/></osm>"),
             ("PUT", ["api", "0.6", "changeset", "create"]) => CreateChangeset(body),
             ("POST", ["api", "0.6", "changeset", var id, "upload"]) => Upload(long.Parse(id), body),
@@ -69,7 +79,11 @@ public sealed class FakeOsmServer : HttpMessageHandler
             return Answer(HttpStatusCode.NotFound, string.Empty);
         }
 
-        return Ok(new XElement("osm", ids.Select(id => Nodes[id]).Select(node => new XElement("node",
+        return Ok(WriteNodes(ids.Select(id => Nodes[id])));
+    }
+
+    private static string WriteNodes(IEnumerable<OsmNode> nodes) =>
+        new XElement("osm", nodes.Select(node => new XElement("node",
             new XAttribute("id", node.Id),
             new XAttribute("visible", node.Visible ? "true" : "false"),
             new XAttribute("version", node.Version),
@@ -77,8 +91,7 @@ public sealed class FakeOsmServer : HttpMessageHandler
             new XAttribute("user", node.User),
             node.Visible ? new XAttribute("lat", node.Lat.ToString("0.0000000")) : null,
             node.Visible ? new XAttribute("lon", node.Lon.ToString("0.0000000")) : null,
-            node.Tags.Select(tag => new XElement("tag", new XAttribute("k", tag.Key), new XAttribute("v", tag.Value)))))).ToString());
-    }
+            node.Tags.Select(tag => new XElement("tag", new XAttribute("k", tag.Key), new XAttribute("v", tag.Value)))))).ToString();
 
     private HttpResponseMessage CreateChangeset(string body)
     {
@@ -131,7 +144,7 @@ public sealed class FakeOsmServer : HttpMessageHandler
         foreach (var node in modified)
         {
             var id = (long)node.Attribute("id")!;
-            Nodes[id] = Nodes[id] with { Version = Nodes[id].Version + 1, Tags = ReadTags(node), User = Account, Timestamp = DateTimeOffset.UtcNow };
+            Replace(Nodes[id] with { Version = Nodes[id].Version + 1, Tags = ReadTags(node), User = Account, Timestamp = DateTimeOffset.UtcNow });
             result.Add(new XElement("node", new XAttribute("old_id", id), new XAttribute("new_id", id), new XAttribute("new_version", Nodes[id].Version)));
         }
 

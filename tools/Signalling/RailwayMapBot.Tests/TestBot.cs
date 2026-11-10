@@ -111,7 +111,7 @@ public sealed class TestBot : IDisposable
         });
 
         var api = new OsmApiClient(Server.CreateClient(), Limits);
-        var runner = new EditRunner(api, planner ?? CreateFixPlanner(), journal, summary, new ChangesetTagBuilder(settings), Limits, mode, "Unification ({area}, lot {batch})", Folder);
+        var runner = new EditRunner(api, planner ?? CreateFixPlanner(), new ContributorGuard(api, planner is null ? OptOut : new OptOutSettings()), journal, summary, new ChangesetTagBuilder(settings), Limits, mode, "Unification ({area}, lot {batch})", Folder);
 
         IReadOnlyList<OsmNode> nodes = listed ?? [.. Server.Nodes.Values.OrderBy(node => node.Id)];
         await runner.RunAsync([new CandidateGroup(Area, nodes.Count, nodes)], limit, stop);

@@ -1,0 +1,514 @@
+Rule table: <code>sha256 64d87d76365ca570773254edd4018847bedb2517ef5320cbe7e6fe8313634e05</code>.
+
+{| class="wikitable mw-collapsible mw-collapsed"
+|+ Renamed values (65)
+! Key !! Old value !! New value
+|-
+| <code>railway:signal:main</code> || <code>FR:CARRE</code> || <code>FR:C</code>
+|-
+| <code>railway:signal:main</code> || <code>FR:CV</code> || <code>FR:Cv</code>
+|-
+| <code>railway:signal:main</code> || <code>FR:A</code> || <code>FR:C</code>
+|-
+| <code>railway:signal:main:states</code> || <code>FR:CV</code> || <code>FR:Cv</code>
+|-
+| <code>railway:signal:main:states</code> || <code>FR:VLc</code> || <code>FR:(VL)</code>
+|-
+| <code>railway:signal:main:states</code> || <code>FR:Ac</code> || <code>FR:(A)</code>
+|-
+| <code>railway:signal:main:states</code> || <code>FR:Sc</code> || <code>FR:(S)</code>
+|-
+| <code>railway:signal:main:states</code> || <code>FR:Rc</code> || <code>FR:(R)</code>
+|-
+| <code>railway:signal:main:states</code> || <code>FR:RRc</code> || <code>FR:(RR)</code>
+|-
+| <code>railway:signal:main:states</code> || <code>FR:Rc(Ac)</code> || <code>FR:(R)+(A)</code>
+|-
+| <code>railway:signal:main:states</code> || <code>FR:RR(A)</code> || <code>FR:RR+A</code>
+|-
+| <code>railway:signal:main:states</code> || <code>FR:RR(Ac)</code> || <code>FR:RR+(A)</code>
+|-
+| <code>railway:signal:main:states</code> || <code>FR:RRc(A)</code> || <code>FR:(RR)+A</code>
+|-
+| <code>railway:signal:main:states</code> || <code>FR:RRc(Ac)</code> || <code>FR:(RR)+(A)</code>
+|-
+| <code>railway:signal:main:states</code> || <code>FR:Mr</code> || <code>FR:(M)</code>
+|-
+| <code>railway:signal:distant:states</code> || <code>FR:VLc</code> || <code>FR:(VL)</code>
+|-
+| <code>railway:signal:distant:states</code> || <code>FR:Ac</code> || <code>FR:(A)</code>
+|-
+| <code>railway:signal:distant:states</code> || <code>FR:Rc</code> || <code>FR:(R)</code>
+|-
+| <code>railway:signal:distant:states</code> || <code>FR:R(A)</code> || <code>FR:R+A</code>
+|-
+| <code>railway:signal:distant:states</code> || <code>FR:R(Ac)</code> || <code>FR:R+(A)</code>
+|-
+| <code>railway:signal:distant:states</code> || <code>FR:Rc(A)</code> || <code>FR:(R)+A</code>
+|-
+| <code>railway:signal:distant:states</code> || <code>FR:Rc(Ac)</code> || <code>FR:(R)+(A)</code>
+|-
+| <code>railway:signal:electricity</code> || <code>FR:SECT</code> || <code>FR:power_off_advance</code>
+|-
+| <code>railway:signal:electricity</code> || <code>FR:CC_EXE</code> || <code>FR:power_off</code>
+|-
+| <code>railway:signal:electricity</code> || <code>FR:CC_FIN</code> || <code>FR:power_on</code>
+|-
+| <code>railway:signal:electricity</code> || <code>FR:BP_DIS</code> || <code>FR:pantograph_down_advance</code>
+|-
+| <code>railway:signal:electricity</code> || <code>FR:BP_EXE</code> || <code>FR:pantograph_down</code>
+|-
+| <code>railway:signal:electricity</code> || <code>FR:BP_FIN</code> || <code>FR:pantograph_up</code>
+|-
+| <code>railway:signal:electricity</code> || <code>FR:FIN_CAT</code> || <code>FR:end_of_catenary</code>
+|-
+| <code>railway:signal:electricity</code> || <code>FR:frost</code> || <code>FR:GIVRE</code>
+|-
+| <code>railway:signal:stop_distant</code> || <code>FR:ARRET_A</code> || <code>FR:ARRET</code>
+|-
+| <code>railway:signal:stop_distant</code> || <code>FR:STOP_A</code> || <code>FR:STOP</code>
+|-
+| <code>railway:signal:train_protection</code> || <code>FR:marker</code> || <code>FR:TVM</code>
+|-
+| <code>railway:signal:facility_distant:type</code> || <code>FR:VUSS</code> || <code>simplified</code>
+|-
+| <code>railway:signal:speed_limit</code> || <code>FR:marker</code> || <code>FR:speed_indicator</code>
+|-
+| <code>railway:signal:speed_limit_distant:fast</code> || <code>FR:TIV-D_B</code> || <code>FR:TIV-D</code>
+|-
+| <code>railway:signal:main:shape</code> || <code>FR:B</code> || <code>FR:C</code>
+|-
+| <code>railway:signal:route:states</code> || <code>(FR:ID1/FR:ID2)</code> || <code>FR:ID1;FR:ID2</code>
+|-
+| <code>railway:signal:wrong_road</code> || <code>FR:transition</code> || <code>FR:IPCS</code>
+|-
+| <code>railway:signal:wrong_road:entry:form</code> || <code>sign</code> || <code>board</code>
+|-
+| <code>railway:signal:wrong_road:exit:form</code> || <code>sign</code> || <code>board</code>
+|-
+| <code>railway:signal:facility_distant</code> || <code>FR:facility_approach</code> || <code>FR:marker</code>
+|-
+| <code>railway:signal:station_distant</code> || <code>FR:Pancarte Divers</code> || <code>FR:GARE</code>
+|-
+| <code>railway:signal:shunting</code> || <code>FR:pancarte_LM</code> || <code>FR:LM</code>
+|-
+| <code>railway:signal:whistle</code> || <code>FR:SIFFLER</code> || <code>FR:S</code>
+|-
+| <code>railway:signal:crossing_info</code> || <code>FR:pancarte_PN</code> || <code>FR:PN</code>
+|-
+| <code>railway:signal:speed_limit:switchable:form</code> || <code>sign</code> || <code>board</code>
+|-
+| <code>railway:signal:train_protection:main:type</code> || <code>FR:NF</code> || <code>FR:Nf</code>
+|-
+| <code>railway:signal:main:shape</code> || <code>FR:S</code> || <code>FR:C</code>
+|-
+| <code>railway:signal:stop:conventional:for</code> || <code>head_of_train</code> || (removed)
+|-
+| <code>railway:signal:bimode:form</code> || <code>board</code> || <code>sign</code>
+|-
+| <code>railway:signal:clearance:form</code> || <code>board</code> || <code>sign</code>
+|-
+| <code>railway:signal:facility:form</code> || <code>board</code> || <code>sign</code>
+|-
+| <code>railway:signal:facility_distant:form</code> || <code>board</code> || <code>sign</code>
+|-
+| <code>railway:signal:shunting_route:buffer_stop:form</code> || <code>board</code> || <code>sign</code>
+|-
+| <code>railway:signal:speed_limit:marker:form</code> || <code>board</code> || <code>sign</code>
+|-
+| <code>railway:signal:speed_limit:switch:form</code> || <code>board</code> || <code>sign</code>
+|-
+| <code>railway:signal:speed_limit:transition:form</code> || <code>board</code> || <code>sign</code>
+|-
+| <code>railway:signal:speed_limit_distant:fast:form</code> || <code>board</code> || <code>sign</code>
+|-
+| <code>railway:signal:speed_limit_distant:railcar:form</code> || <code>board</code> || <code>sign</code>
+|-
+| <code>railway:signal:stop:conventional:form</code> || <code>board</code> || <code>sign</code>
+|-
+| <code>railway:signal:stop:highspeed:form</code> || <code>board</code> || <code>sign</code>
+|-
+| <code>railway:signal:stop:regional:form</code> || <code>board</code> || <code>sign</code>
+|-
+| <code>railway:signal:train_protection:main:form</code> || <code>board</code> || <code>sign</code>
+|-
+| <code>railway:signal:train_protection_distant:form</code> || <code>board</code> || <code>sign</code>
+|}
+
+{| class="wikitable mw-collapsible mw-collapsed"
+|+ Replaced tagging (148)
+! Tagging found !! Change
+|-
+| <code>railway:signal:speed_limit=FR:Z</code> || rename <code>railway:signal:speed_limit:form</code> to <code>railway:signal:speed_limit:marker:form</code>; rename <code>railway:signal:speed_limit:ref</code> to <code>railway:signal:speed_limit:marker:ref</code>; remove <code>railway:signal:speed_limit:function</code>; set <code>railway:signal:speed_limit=FR:speed_indicator</code>; set <code>railway:signal:speed_limit:marker=FR:Z</code>; set <code>railway:signal:speed_limit:marker:function=entry</code>; set <code>railway:signal:speed_limit:marker:form=sign</code> if absent
+|-
+| <code>railway:signal:speed_limit=FR:R</code> || rename <code>railway:signal:speed_limit:form</code> to <code>railway:signal:speed_limit:marker:form</code>; rename <code>railway:signal:speed_limit:ref</code> to <code>railway:signal:speed_limit:marker:ref</code>; remove <code>railway:signal:speed_limit:function</code>; set <code>railway:signal:speed_limit=FR:speed_indicator</code>; set <code>railway:signal:speed_limit:marker=FR:R</code>; set <code>railway:signal:speed_limit:marker:function=exit</code>; set <code>railway:signal:speed_limit:marker:form=sign</code> if absent
+|-
+| <code>railway:signal:speed_limit=FR:Chevron</code> + <code>railway:signal:speed_limit:pointing=downwards</code> || rename <code>railway:signal:speed_limit:form</code> to <code>railway:signal:speed_limit:switch:form</code>; rename <code>railway:signal:speed_limit:ref</code> to <code>railway:signal:speed_limit:switch:ref</code>; remove <code>railway:signal:speed_limit:pointing</code>; set <code>railway:signal:speed_limit=FR:speed_indicator</code>; set <code>railway:signal:speed_limit:switch=FR:chevron</code>; set <code>railway:signal:speed_limit:switch:form=sign</code> if absent
+|-
+| <code>railway:signal:speed_limit_distant=FR:TIV-D</code> + <code>railway:signal:speed_limit_distant:form=sign</code> + no <code>railway:signal:speed_limit_distant:mobile</code> + no <code>railway:signal:speed_limit_distant:states</code> || rename <code>railway:signal:speed_limit_distant:form</code> to <code>railway:signal:speed_limit_distant:fixed:form</code>; rename <code>railway:signal:speed_limit_distant:speed</code> to <code>railway:signal:speed_limit_distant:fixed:speed</code>; rename <code>railway:signal:speed_limit_distant:ref</code> to <code>railway:signal:speed_limit_distant:fixed:ref</code>; set <code>railway:signal:speed_limit_distant=FR:speed_indicator</code>; set <code>railway:signal:speed_limit_distant:fixed=FR:TIV-D</code>
+|-
+| <code>railway:signal:speed_limit_distant=FR:TIV-D_B</code> || rename <code>railway:signal:speed_limit_distant:form</code> to <code>railway:signal:speed_limit_distant:fast:form</code>; rename <code>railway:signal:speed_limit_distant:speed</code> to <code>railway:signal:speed_limit_distant:fast:speed</code>; rename <code>railway:signal:speed_limit_distant:ref</code> to <code>railway:signal:speed_limit_distant:fast:ref</code>; set <code>railway:signal:speed_limit_distant=FR:speed_indicator</code>; set <code>railway:signal:speed_limit_distant:fast=FR:TIV-D</code>; set <code>railway:signal:speed_limit_distant:fast:form=sign</code> if absent
+|-
+| <code>railway:signal:speed_limit_distant=FR:TIV-D_C</code> || rename <code>railway:signal:speed_limit_distant:form</code> to <code>railway:signal:speed_limit_distant:railcar:form</code>; rename <code>railway:signal:speed_limit_distant:speed</code> to <code>railway:signal:speed_limit_distant:railcar:speed</code>; rename <code>railway:signal:speed_limit_distant:ref</code> to <code>railway:signal:speed_limit_distant:railcar:ref</code>; set <code>railway:signal:speed_limit_distant=FR:speed_indicator</code>; set <code>railway:signal:speed_limit_distant:railcar=FR:TIV-D</code>; set <code>railway:signal:speed_limit_distant:railcar:form=sign</code> if absent
+|-
+| <code>railway:signal:train_protection=FR:CAB_E</code> || rename <code>railway:signal:train_protection:form</code> to <code>railway:signal:train_protection_distant:form</code>; rename <code>railway:signal:train_protection:ref</code> to <code>railway:signal:train_protection_distant:ref</code>; remove <code>railway:signal:train_protection</code>; remove <code>railway:signal:train_protection:type</code>; set <code>railway:signal:train_protection_distant=FR:CAB</code>; set <code>railway:signal:train_protection_distant:form=sign</code> if absent
+|-
+| <code>railway:signal:train_protection=FR:pancarte_CAB_entrée</code> || rename <code>railway:signal:train_protection:form</code> to <code>railway:signal:train_protection_distant:form</code>; rename <code>railway:signal:train_protection:ref</code> to <code>railway:signal:train_protection_distant:ref</code>; remove <code>railway:signal:train_protection</code>; remove <code>railway:signal:train_protection:type</code>; set <code>railway:signal:train_protection_distant=FR:CAB</code>; set <code>railway:signal:train_protection_distant:form=sign</code> if absent
+|-
+| <code>railway:signal:train_protection=FR:CAB_R</code> || remove <code>railway:signal:train_protection:type</code>; set <code>railway:signal:train_protection=FR:CAB</code>; set <code>railway:signal:train_protection:function=entry</code>
+|-
+| <code>railway:signal:train_protection=FR:CAB_S</code> || remove <code>railway:signal:train_protection:type</code>; set <code>railway:signal:train_protection=FR:CAB</code>; set <code>railway:signal:train_protection:function=exit</code>
+|-
+| <code>railway:signal:train_protection=FR:pancarte_CAB_sortie</code> || remove <code>railway:signal:train_protection:type</code>; set <code>railway:signal:train_protection=FR:CAB</code>; set <code>railway:signal:train_protection:function=exit</code>
+|-
+| <code>railway:signal:train_protection=FR:REP_TVM</code> || rename <code>railway:signal:train_protection:form</code> to <code>railway:signal:train_protection:main:form</code>; rename <code>railway:signal:train_protection:ref</code> to <code>railway:signal:train_protection:main:ref</code>; remove <code>railway:signal:train_protection:function</code>; remove <code>railway:signal:train_protection:type</code>; set <code>railway:signal:train_protection=FR:TVM</code>; set <code>railway:signal:train_protection:main=stop_marker</code>; set <code>railway:signal:train_protection:main:form=sign</code> if absent
+|-
+| <code>railway:signal:train_protection=FR:repère_arrêt_TVM</code> || rename <code>railway:signal:train_protection:form</code> to <code>railway:signal:train_protection:main:form</code>; rename <code>railway:signal:train_protection:ref</code> to <code>railway:signal:train_protection:main:ref</code>; remove <code>railway:signal:train_protection:function</code>; remove <code>railway:signal:train_protection:type</code>; set <code>railway:signal:train_protection=FR:TVM</code>; set <code>railway:signal:train_protection:main=stop_marker</code>; set <code>railway:signal:train_protection:main:form=sign</code> if absent
+|-
+| <code>railway:signal:train_protection=FR:REP_ETCS</code> || rename <code>railway:signal:train_protection:form</code> to <code>railway:signal:train_protection:main:form</code>; rename <code>railway:signal:train_protection:ref</code> to <code>railway:signal:train_protection:main:ref</code>; remove <code>railway:signal:train_protection:function</code>; remove <code>railway:signal:train_protection:type</code>; set <code>railway:signal:train_protection=ETCS:marker</code>; set <code>railway:signal:train_protection:main=ETCS:stop_marker</code>; set <code>railway:signal:train_protection:main:form=sign</code> if absent
+|-
+| <code>railway:signal:train_protection:function=block_marker</code> || remove <code>railway:signal:train_protection:function</code>; set <code>railway:signal:train_protection=FR:TVM</code>; set <code>railway:signal:train_protection:main=stop_marker</code>
+|-
+| <code>railway:signal:train_protection:type=block_marker</code> || remove <code>railway:signal:train_protection:type</code>; set <code>railway:signal:train_protection=FR:TVM</code>; set <code>railway:signal:train_protection:main=stop_marker</code>
+|-
+| <code>railway:signal:shunting=FR:D</code> + no <code>railway:signal:shunting_route:depot</code> || rename <code>railway:signal:shunting:form</code> to <code>railway:signal:shunting_route:depot:form</code>; rename <code>railway:signal:shunting:ref</code> to <code>railway:signal:shunting_route:depot:ref</code>; remove <code>railway:signal:shunting</code>; set <code>railway:signal:shunting_route=FR:destination</code>; set <code>railway:signal:shunting_route:depot=FR:D</code>
+|-
+| <code>railway:signal:shunting=FR:D</code> + <code>railway:signal:shunting_route:depot=FR:D</code> || remove <code>railway:signal:shunting</code>; remove <code>railway:signal:shunting:form</code>
+|-
+| <code>railway:signal:shunting=FR:G</code> + no <code>railway:signal:shunting_route:stabling</code> || rename <code>railway:signal:shunting:form</code> to <code>railway:signal:shunting_route:stabling:form</code>; rename <code>railway:signal:shunting:ref</code> to <code>railway:signal:shunting_route:stabling:ref</code>; remove <code>railway:signal:shunting</code>; set <code>railway:signal:shunting_route=FR:destination</code>; set <code>railway:signal:shunting_route:stabling=FR:G</code>
+|-
+| <code>railway:signal:shunting=FR:G</code> + <code>railway:signal:shunting_route:stabling=FR:G</code> || remove <code>railway:signal:shunting</code>; remove <code>railway:signal:shunting:form</code>
+|-
+| <code>railway:signal:wrong_road=FR:TECS</code> || rename <code>railway:signal:wrong_road:form</code> to <code>railway:signal:wrong_road:entry:form</code>; rename <code>railway:signal:wrong_road:ref</code> to <code>railway:signal:wrong_road:entry:ref</code>; set <code>railway:signal:wrong_road=FR:IPCS</code>; set <code>railway:signal:wrong_road:entry=FR:TECS</code>
+|-
+| <code>railway:signal:wrong_road=FR:TSCS</code> || rename <code>railway:signal:wrong_road:form</code> to <code>railway:signal:wrong_road:exit:form</code>; rename <code>railway:signal:wrong_road:ref</code> to <code>railway:signal:wrong_road:exit:ref</code>; set <code>railway:signal:wrong_road=FR:IPCS</code>; set <code>railway:signal:wrong_road:exit=FR:TSCS</code>
+|-
+| <code>railway:signal:route_distant=FR:TIDD</code> || rename <code>railway:signal:route_distant:form</code> to <code>railway:signal:switch:form</code>; rename <code>railway:signal:route_distant:ref</code> to <code>railway:signal:switch:ref</code>; remove <code>railway:signal:route_distant</code>; remove <code>railway:signal:route_distant:states</code>; set <code>railway:signal:switch=FR:TIDD</code>; set <code>railway:signal:switch:form=light</code> if absent
+|-
+| <code>railway:signal:station_distant=FR:APPROCHE_ETS</code> || rename <code>railway:signal:station_distant:form</code> to <code>railway:signal:facility_distant:form</code>; rename <code>railway:signal:station_distant:ref</code> to <code>railway:signal:facility_distant:ref</code>; remove <code>railway:signal:station_distant</code>; set <code>railway:signal:facility_distant=FR:marker</code>; set <code>railway:signal:facility_distant:form=sign</code> if absent
+|-
+| <code>railway:signal:station_distant=FR:APPROCHE_ETS_A</code> || rename <code>railway:signal:station_distant:form</code> to <code>railway:signal:facility_distant:form</code>; rename <code>railway:signal:station_distant:ref</code> to <code>railway:signal:facility_distant:ref</code>; remove <code>railway:signal:station_distant</code>; set <code>railway:signal:facility_distant=FR:marker</code>; set <code>railway:signal:facility_distant:form=sign</code> if absent
+|-
+| <code>railway:signal:station_distant=FR:LIMITE_ETS</code> || rename <code>railway:signal:station_distant:form</code> to <code>railway:signal:facility:form</code>; rename <code>railway:signal:station_distant:ref</code> to <code>railway:signal:facility:ref</code>; remove <code>railway:signal:station_distant</code>; set <code>railway:signal:facility=FR:boundary</code>; set <code>railway:signal:facility:form=sign</code> if absent
+|-
+| <code>railway:signal:stop=FR:ARRET_TT</code> || rename <code>railway:signal:stop:form</code> to <code>railway:signal:stop:conventional:form</code>; rename <code>railway:signal:stop:ref</code> to <code>railway:signal:stop:conventional:ref</code>; set <code>railway:signal:stop=FR:passenger_stop</code>; set <code>railway:signal:stop:conventional=FR:TT</code>; set <code>railway:signal:stop:conventional:form=sign</code> if absent
+|-
+| <code>railway:signal:stop=FR:ARRET_TTL</code> || rename <code>railway:signal:stop:form</code> to <code>railway:signal:stop:conventional:form</code>; rename <code>railway:signal:stop:ref</code> to <code>railway:signal:stop:conventional:ref</code>; set <code>railway:signal:stop=FR:passenger_stop</code>; set <code>railway:signal:stop:conventional=FR:TT</code>; set <code>railway:signal:stop:conventional:for=locomotive</code>; set <code>railway:signal:stop:conventional:form=sign</code> if absent
+|-
+| <code>railway:signal:stop=FR:ARRET_TT_EAS</code> || rename <code>railway:signal:stop:form</code> to <code>railway:signal:stop:conventional:form</code>; rename <code>railway:signal:stop:ref</code> to <code>railway:signal:stop:conventional:ref</code>; set <code>railway:signal:stop=FR:passenger_stop</code>; set <code>railway:signal:stop:conventional=FR:TT</code>; set <code>railway:signal:stop:conventional:for=driver_only</code>; set <code>railway:signal:stop:conventional:form=sign</code> if absent
+|-
+| <code>railway:signal:stop=FR:ARRET_V</code> + <code>railway:signal:stop:carriages=*</code> || rename <code>railway:signal:stop:form</code> to <code>railway:signal:stop:conventional:form</code>; rename <code>railway:signal:stop:ref</code> to <code>railway:signal:stop:conventional:ref</code>; rename <code>railway:signal:stop:carriages</code> to <code>railway:signal:stop:conventional:number</code>; remove <code>railway:signal:stop:for</code>; set <code>railway:signal:stop=FR:passenger_stop</code>; set <code>railway:signal:stop:conventional=FR:vehicle_number</code>; set <code>railway:signal:stop:conventional:for=vehicles</code>; set <code>railway:signal:stop:conventional:form=sign</code> if absent
+|-
+| <code>railway:signal:stop=FR:ARRET_TGV1</code> || rename <code>railway:signal:stop:form</code> to <code>railway:signal:stop:highspeed:form</code>; rename <code>railway:signal:stop:ref</code> to <code>railway:signal:stop:highspeed:ref</code>; remove <code>railway:signal:stop:for</code>; set <code>railway:signal:stop=FR:passenger_stop</code>; set <code>railway:signal:stop:highspeed=FR:TGV</code>; set <code>railway:signal:stop:highspeed:for=single_unit</code>; set <code>railway:signal:stop:highspeed:form=sign</code> if absent
+|-
+| <code>railway:signal:stop=FR:ARRET_TGV2</code> || rename <code>railway:signal:stop:form</code> to <code>railway:signal:stop:highspeed:form</code>; rename <code>railway:signal:stop:ref</code> to <code>railway:signal:stop:highspeed:ref</code>; remove <code>railway:signal:stop:for</code>; set <code>railway:signal:stop=FR:passenger_stop</code>; set <code>railway:signal:stop:highspeed=FR:TGV</code>; set <code>railway:signal:stop:highspeed:for=multiple_unit</code>; set <code>railway:signal:stop:highspeed:form=sign</code> if absent
+|-
+| <code>railway:signal:stop=FR:ARRET_TGV1-2</code> || rename <code>railway:signal:stop:form</code> to <code>railway:signal:stop:highspeed:form</code>; rename <code>railway:signal:stop:ref</code> to <code>railway:signal:stop:highspeed:ref</code>; remove <code>railway:signal:stop:for</code>; set <code>railway:signal:stop=FR:passenger_stop</code>; set <code>railway:signal:stop:highspeed=FR:TGV</code>; set <code>railway:signal:stop:highspeed:form=sign</code> if absent
+|-
+| <code>railway:signal:electricity=FR:BIMODE</code> || rename <code>railway:signal:electricity:form</code> to <code>railway:signal:bimode:form</code>; rename <code>railway:signal:electricity:ref</code> to <code>railway:signal:bimode:ref</code>; remove <code>railway:signal:electricity</code>; set <code>railway:signal:bimode=FR:BIMODE</code>; set <code>railway:signal:bimode:form=sign</code> if absent
+|-
+| <code>railway:signal:electricity=FR:BIMODE_A</code> || rename <code>railway:signal:electricity:form</code> to <code>railway:signal:bimode:form</code>; rename <code>railway:signal:electricity:ref</code> to <code>railway:signal:bimode:ref</code>; remove <code>railway:signal:electricity</code>; set <code>railway:signal:bimode=FR:BIMODE</code>; set <code>railway:signal:bimode:function=entry</code>; set <code>railway:signal:bimode:form=sign</code> if absent
+|-
+| <code>railway:signal:speed_limit:main=*</code> || rename <code>railway:signal:speed_limit:main</code> to <code>railway:signal:speed_limit:marker</code>; rename <code>railway:signal:speed_limit:main:form</code> to <code>railway:signal:speed_limit:marker:form</code>; rename <code>railway:signal:speed_limit:main:function</code> to <code>railway:signal:speed_limit:marker:function</code>; rename <code>railway:signal:speed_limit:main:ref</code> to <code>railway:signal:speed_limit:marker:ref</code>; set <code>railway:signal:speed_limit=FR:speed_indicator</code>; set <code>railway:signal:speed_limit:marker:form=sign</code> if absent
+|-
+| <code>railway:signal:speed_limit:entry=FR:Z</code> || rename <code>railway:signal:speed_limit:entry</code> to <code>railway:signal:speed_limit:marker</code>; rename <code>railway:signal:speed_limit:entry:form</code> to <code>railway:signal:speed_limit:marker:form</code>; rename <code>railway:signal:speed_limit:entry:ref</code> to <code>railway:signal:speed_limit:marker:ref</code>; set <code>railway:signal:speed_limit=FR:speed_indicator</code>; set <code>railway:signal:speed_limit:marker:function=entry</code>; set <code>railway:signal:speed_limit:marker:form=sign</code> if absent
+|-
+| <code>railway:signal:speed_limit:exit=FR:R</code> || rename <code>railway:signal:speed_limit:exit</code> to <code>railway:signal:speed_limit:marker</code>; rename <code>railway:signal:speed_limit:exit:form</code> to <code>railway:signal:speed_limit:marker:form</code>; rename <code>railway:signal:speed_limit:exit:ref</code> to <code>railway:signal:speed_limit:marker:ref</code>; set <code>railway:signal:speed_limit=FR:speed_indicator</code>; set <code>railway:signal:speed_limit:marker:function=exit</code>; set <code>railway:signal:speed_limit:marker:form=sign</code> if absent
+|-
+| <code>railway:signal:speed_limit=FR:KM</code> || rename <code>railway:signal:speed_limit:form</code> to <code>railway:signal:speed_limit:transition:form</code>; rename <code>railway:signal:speed_limit:ref</code> to <code>railway:signal:speed_limit:transition:ref</code>; set <code>railway:signal:speed_limit=FR:speed_indicator</code>; set <code>railway:signal:speed_limit:transition=FR:Km</code>; set <code>railway:signal:speed_limit:transition:form=sign</code> if absent
+|-
+| <code>railway:signal:speed_limit=FR:CHEVRON_BAS</code> + <code>railway:signal:speed_limit:type=downwards</code> || rename <code>railway:signal:speed_limit:form</code> to <code>railway:signal:speed_limit:switch:form</code>; rename <code>railway:signal:speed_limit:ref</code> to <code>railway:signal:speed_limit:switch:ref</code>; remove <code>railway:signal:speed_limit:type</code>; set <code>railway:signal:speed_limit=FR:speed_indicator</code>; set <code>railway:signal:speed_limit:switch=FR:chevron</code>; set <code>railway:signal:speed_limit:switch:form=sign</code> if absent
+|-
+| <code>railway:signal:speed_limit=FR:CHEVRON_BAS</code> + no <code>railway:signal:speed_limit:type</code> || rename <code>railway:signal:speed_limit:form</code> to <code>railway:signal:speed_limit:switch:form</code>; rename <code>railway:signal:speed_limit:ref</code> to <code>railway:signal:speed_limit:switch:ref</code>; set <code>railway:signal:speed_limit=FR:speed_indicator</code>; set <code>railway:signal:speed_limit:switch=FR:chevron</code>; set <code>railway:signal:speed_limit:switch:form=sign</code> if absent
+|-
+| <code>railway:signal:speed_limit=FR:CHEVRON</code> + <code>railway:signal:speed_limit:type=downwards</code> || rename <code>railway:signal:speed_limit:form</code> to <code>railway:signal:speed_limit:switch:form</code>; rename <code>railway:signal:speed_limit:ref</code> to <code>railway:signal:speed_limit:switch:ref</code>; remove <code>railway:signal:speed_limit:type</code>; set <code>railway:signal:speed_limit=FR:speed_indicator</code>; set <code>railway:signal:speed_limit:switch=FR:chevron</code>; set <code>railway:signal:speed_limit:switch:form=sign</code> if absent
+|-
+| <code>railway:signal:speed_limit_reminder=FR:TIV-R</code> + no <code>railway:signal:speed_limit:switchable:ref</code> || rename <code>railway:signal:speed_limit_reminder:form</code> to <code>railway:signal:speed_limit:switchable:form</code>; rename <code>railway:signal:speed_limit_reminder:speed</code> to <code>railway:signal:speed_limit:switchable:speed</code>; rename <code>railway:signal:speed_limit_reminder:ref</code> to <code>railway:signal:speed_limit:switchable:ref</code>; remove <code>railway:signal:speed_limit_reminder</code>; remove <code>railway:signal:speed_limit_reminder:states</code>; set <code>railway:signal:speed_limit=FR:speed_indicator</code>; set <code>railway:signal:speed_limit:switchable=FR:TIV-R</code>
+|-
+| <code>railway:signal:speed_limit_reminder=FR:TIV-R</code> + <code>railway:signal:speed_limit:switchable:ref=*</code> || rename <code>railway:signal:speed_limit_reminder:form</code> to <code>railway:signal:speed_limit:switchable:form</code>; rename <code>railway:signal:speed_limit_reminder:speed</code> to <code>railway:signal:speed_limit:switchable:speed</code>; remove <code>railway:signal:speed_limit_reminder</code>; remove <code>railway:signal:speed_limit_reminder:ref</code>; remove <code>railway:signal:speed_limit_reminder:states</code>; set <code>railway:signal:speed_limit=FR:speed_indicator</code>; set <code>railway:signal:speed_limit:switchable=FR:TIV-R</code>
+|-
+| <code>railway:signal:speed_limit_reminder=FR:TIV-R_MOB</code> || rename <code>railway:signal:speed_limit_reminder:form</code> to <code>railway:signal:speed_limit:switchable:form</code>; rename <code>railway:signal:speed_limit_reminder:speed</code> to <code>railway:signal:speed_limit:switchable:speed</code>; rename <code>railway:signal:speed_limit_reminder:ref</code> to <code>railway:signal:speed_limit:switchable:ref</code>; remove <code>railway:signal:speed_limit_reminder</code>; remove <code>railway:signal:speed_limit_reminder:states</code>; set <code>railway:signal:speed_limit=FR:speed_indicator</code>; set <code>railway:signal:speed_limit:switchable=FR:TIV-R</code>
+|-
+| <code>railway:signal:speed_limit_distant=FR:TIV-R</code> || rename <code>railway:signal:speed_limit_distant:form</code> to <code>railway:signal:speed_limit:switchable:form</code>; rename <code>railway:signal:speed_limit_distant:speed</code> to <code>railway:signal:speed_limit:switchable:speed</code>; rename <code>railway:signal:speed_limit_distant:ref</code> to <code>railway:signal:speed_limit:switchable:ref</code>; remove <code>railway:signal:speed_limit_distant</code>; remove <code>railway:signal:speed_limit_distant:states</code>; set <code>railway:signal:speed_limit=FR:speed_indicator</code>; set <code>railway:signal:speed_limit:switchable=FR:TIV-R</code>
+|-
+| <code>railway:signal:speed_limit_distant=FR:TIV-D</code> + <code>railway:signal:speed_limit_distant:mobile=yes</code> || rename <code>railway:signal:speed_limit_distant:form</code> to <code>railway:signal:speed_limit_distant:switchable:form</code>; rename <code>railway:signal:speed_limit_distant:speed</code> to <code>railway:signal:speed_limit_distant:switchable:speed</code>; rename <code>railway:signal:speed_limit_distant:ref</code> to <code>railway:signal:speed_limit_distant:switchable:ref</code>; rename <code>railway:signal:speed_limit_distant:turn_direction</code> to <code>railway:signal:speed_limit_distant:switchable:turn_direction</code>; remove <code>railway:signal:speed_limit_distant:mobile</code>; remove <code>railway:signal:speed_limit_distant:states</code>; set <code>railway:signal:speed_limit_distant=FR:speed_indicator</code>; set <code>railway:signal:speed_limit_distant:switchable=FR:TIV-D</code>
+|-
+| <code>railway:signal:speed_limit_distant=FR:TIV-D</code> + <code>railway:signal:speed_limit_distant:states=*</code> + no <code>railway:signal:speed_limit_distant:mobile</code> || rename <code>railway:signal:speed_limit_distant:form</code> to <code>railway:signal:speed_limit_distant:switchable:form</code>; rename <code>railway:signal:speed_limit_distant:speed</code> to <code>railway:signal:speed_limit_distant:switchable:speed</code>; rename <code>railway:signal:speed_limit_distant:ref</code> to <code>railway:signal:speed_limit_distant:switchable:ref</code>; rename <code>railway:signal:speed_limit_distant:turn_direction</code> to <code>railway:signal:speed_limit_distant:switchable:turn_direction</code>; remove <code>railway:signal:speed_limit_distant:states</code>; set <code>railway:signal:speed_limit_distant=FR:speed_indicator</code>; set <code>railway:signal:speed_limit_distant:switchable=FR:TIV-D</code>
+|-
+| <code>railway:signal:speed_limit_distant=FR:TIV-D_MOB</code> || rename <code>railway:signal:speed_limit_distant:form</code> to <code>railway:signal:speed_limit_distant:switchable:form</code>; rename <code>railway:signal:speed_limit_distant:speed</code> to <code>railway:signal:speed_limit_distant:switchable:speed</code>; rename <code>railway:signal:speed_limit_distant:ref</code> to <code>railway:signal:speed_limit_distant:switchable:ref</code>; rename <code>railway:signal:speed_limit_distant:turn_direction</code> to <code>railway:signal:speed_limit_distant:switchable:turn_direction</code>; remove <code>railway:signal:speed_limit_distant:states</code>; set <code>railway:signal:speed_limit_distant=FR:speed_indicator</code>; set <code>railway:signal:speed_limit_distant:switchable=FR:TIV-D</code>
+|-
+| <code>railway:signal:speed_limit_distant=FR:TIV-D_FIXE</code> || rename <code>railway:signal:speed_limit_distant:form</code> to <code>railway:signal:speed_limit_distant:fixed:form</code>; rename <code>railway:signal:speed_limit_distant:speed</code> to <code>railway:signal:speed_limit_distant:fixed:speed</code>; rename <code>railway:signal:speed_limit_distant:ref</code> to <code>railway:signal:speed_limit_distant:fixed:ref</code>; set <code>railway:signal:speed_limit_distant=FR:speed_indicator</code>; set <code>railway:signal:speed_limit_distant:fixed=FR:TIV-D</code>
+|-
+| <code>railway:signal:speed_limit_distant=FR:TIV-D_B_FIXE</code> || rename <code>railway:signal:speed_limit_distant:form</code> to <code>railway:signal:speed_limit_distant:fast:form</code>; rename <code>railway:signal:speed_limit_distant:speed</code> to <code>railway:signal:speed_limit_distant:fast:speed</code>; rename <code>railway:signal:speed_limit_distant:ref</code> to <code>railway:signal:speed_limit_distant:fast:ref</code>; remove <code>railway:signal:speed_limit_distant:type</code>; set <code>railway:signal:speed_limit_distant=FR:speed_indicator</code>; set <code>railway:signal:speed_limit_distant:fast=FR:TIV-D</code>; set <code>railway:signal:speed_limit_distant:fast:form=sign</code> if absent
+|-
+| <code>railway:signal:speed_limit_distant=FR:TIV-D_C_FIXE</code> || rename <code>railway:signal:speed_limit_distant:form</code> to <code>railway:signal:speed_limit_distant:railcar:form</code>; rename <code>railway:signal:speed_limit_distant:speed</code> to <code>railway:signal:speed_limit_distant:railcar:speed</code>; rename <code>railway:signal:speed_limit_distant:ref</code> to <code>railway:signal:speed_limit_distant:railcar:ref</code>; remove <code>railway:signal:speed_limit_distant:type</code>; set <code>railway:signal:speed_limit_distant=FR:speed_indicator</code>; set <code>railway:signal:speed_limit_distant:railcar=FR:TIV-D</code>; set <code>railway:signal:speed_limit_distant:railcar:form=sign</code> if absent
+|-
+| <code>railway:signal:main:plate=FR:F</code> + <code>railway:signal:main:type=*</code> || remove <code>railway:signal:main:plate</code>
+|-
+| <code>railway:signal:main:plate=FR:F</code> + no <code>railway:signal:main:type</code> || rename <code>railway:signal:main:plate</code> to <code>railway:signal:main:type</code>
+|-
+| <code>railway:signal:main:plate=FR:PR</code> + <code>railway:signal:main:type=*</code> || remove <code>railway:signal:main:plate</code>
+|-
+| <code>railway:signal:main:plate=FR:PR</code> + no <code>railway:signal:main:type</code> || rename <code>railway:signal:main:plate</code> to <code>railway:signal:main:type</code>
+|-
+| <code>railway:signal:main:plate=FR:BM</code> + <code>railway:signal:main:type=*</code> || remove <code>railway:signal:main:plate</code>
+|-
+| <code>railway:signal:main:plate=FR:BM</code> + no <code>railway:signal:main:type</code> || rename <code>railway:signal:main:plate</code> to <code>railway:signal:main:type</code>
+|-
+| <code>railway:signal:main:plate=F</code> + no <code>railway:signal:main:type</code> || remove <code>railway:signal:main:plate</code>; set <code>railway:signal:main:type=FR:F</code>
+|-
+| <code>railway:signal:main:plate=F</code> + <code>railway:signal:main:type=*</code> || remove <code>railway:signal:main:plate</code>
+|-
+| <code>railway:signal:main:plate=PR</code> + no <code>railway:signal:main:type</code> || remove <code>railway:signal:main:plate</code>; set <code>railway:signal:main:type=FR:PR</code>
+|-
+| <code>railway:signal:main:plate=PR</code> + <code>railway:signal:main:type=*</code> || remove <code>railway:signal:main:plate</code>
+|-
+| <code>railway:signal:main:plate=FR:NF</code> || remove <code>railway:signal:main:plate</code>
+|-
+| <code>railway:signal:main:plates=FR:NF</code> || remove <code>railway:signal:main:plates</code>
+|-
+| <code>railway:signal:main:plates=FR:F</code> + no <code>railway:signal:main:type</code> || rename <code>railway:signal:main:plates</code> to <code>railway:signal:main:type</code>
+|-
+| <code>railway:signal:main:plates=FR:F</code> + <code>railway:signal:main:type=*</code> || remove <code>railway:signal:main:plates</code>
+|-
+| <code>railway:signal:main:caption:marker=*</code> || rename <code>railway:signal:main:caption:marker</code> to <code>railway:signal:main:caption</code>
+|-
+| <code>railway:signal:main:plate:block=FR:PR</code> + no <code>railway:signal:main:type</code> || rename <code>railway:signal:main:plate:block</code> to <code>railway:signal:main:type</code>
+|-
+| <code>railway:signal:main:plate:block=FR:PR</code> + <code>railway:signal:main:type=*</code> || remove <code>railway:signal:main:plate:block</code>
+|-
+| <code>railway:signal:main:plate:block=PR</code> + no <code>railway:signal:main:type</code> || remove <code>railway:signal:main:plate:block</code>; set <code>railway:signal:main:type=FR:PR</code>
+|-
+| <code>railway:signal:main:plate:block=PR</code> + <code>railway:signal:main:type=*</code> || remove <code>railway:signal:main:plate:block</code>
+|-
+| <code>railway:signal:main:plate:block=FR:BM</code> + no <code>railway:signal:main:type</code> || rename <code>railway:signal:main:plate:block</code> to <code>railway:signal:main:type</code>
+|-
+| <code>railway:signal:main:plate:block=FR:BM</code> + <code>railway:signal:main:type=*</code> || remove <code>railway:signal:main:plate:block</code>
+|-
+| <code>railway:signal:main:clearing_light=*</code> || remove <code>railway:signal:main:clearing_light</code>
+|-
+| <code>railway:signal:main:height=normal</code> || remove <code>railway:signal:main:height</code>
+|-
+| <code>railway:signal:distant:height=normal</code> || remove <code>railway:signal:distant:height</code>
+|-
+| <code>railway:signal:main:type=FR:K</code> + no <code>railway:signal:main:shape</code> || remove <code>railway:signal:main:type</code>; set <code>railway:signal:main:shape=FR:K</code>
+|-
+| <code>railway:signal:main:type=FR:K</code> + <code>railway:signal:main:shape=*</code> || remove <code>railway:signal:main:type</code>
+|-
+| <code>railway:signal:main=yes</code> || remove <code>railway:signal:main</code>; remove <code>railway:signal:main:form</code>; remove <code>railway:signal:main:states</code>; remove <code>railway:signal:main:function</code>; remove <code>railway:signal:main:height</code>
+|-
+| <code>railway:signal:speed_limit=yes</code> || remove <code>railway:signal:speed_limit</code>; remove <code>railway:signal:speed_limit:speed</code>
+|-
+| <code>railway:signal:main=FR:GABARIT</code> || rename <code>railway:signal:main:form</code> to <code>railway:signal:clearance:form</code>; rename <code>railway:signal:main:ref</code> to <code>railway:signal:clearance:ref</code>; remove <code>railway:signal:main</code>; set <code>railway:signal:clearance=FR:reduced_clearance</code>; set <code>railway:signal:clearance:form=sign</code> if absent
+|-
+| <code>railway:signal:minor=FR:reduced_clearance</code> || rename <code>railway:signal:minor:form</code> to <code>railway:signal:clearance:form</code>; rename <code>railway:signal:minor:ref</code> to <code>railway:signal:clearance:ref</code>; remove <code>railway:signal:minor</code>; set <code>railway:signal:clearance=FR:reduced_clearance</code>; set <code>railway:signal:clearance:form=sign</code> if absent
+|-
+| <code>railway:signal:minor=FR:Sémaphore</code> || rename <code>railway:signal:minor:ref</code> to <code>railway:signal:main:ref</code>; remove <code>railway:signal:minor</code>; remove <code>railway:signal:minor:form</code>; set <code>railway:signal:main=FR:S</code>; set <code>railway:signal:main:form=light</code>
+|-
+| <code>railway:signal:shunting=FR:DEPOT</code> + no <code>railway:signal:shunting_route:depot</code> || rename <code>railway:signal:shunting:form</code> to <code>railway:signal:shunting_route:depot:form</code>; rename <code>railway:signal:shunting:ref</code> to <code>railway:signal:shunting_route:depot:ref</code>; remove <code>railway:signal:shunting</code>; set <code>railway:signal:shunting_route=FR:destination</code>; set <code>railway:signal:shunting_route:depot=FR:D</code>
+|-
+| <code>railway:signal:shunting=FR:DEPOT</code> + <code>railway:signal:shunting_route:depot=FR:D</code> || remove <code>railway:signal:shunting</code>; remove <code>railway:signal:shunting:form</code>
+|-
+| <code>railway:signal:shunting=FR:IMP</code> || rename <code>railway:signal:shunting:form</code> to <code>railway:signal:shunting_route:dead_end:form</code>; rename <code>railway:signal:shunting:ref</code> to <code>railway:signal:shunting_route:dead_end:ref</code>; remove <code>railway:signal:shunting</code>; set <code>railway:signal:shunting_route=FR:destination</code>; set <code>railway:signal:shunting_route:dead_end=FR:Imp</code>
+|-
+| <code>railway:signal:shunting=FR:pancarte_Imp</code> || rename <code>railway:signal:shunting:form</code> to <code>railway:signal:shunting_route:dead_end:form</code>; rename <code>railway:signal:shunting:ref</code> to <code>railway:signal:shunting_route:dead_end:ref</code>; remove <code>railway:signal:shunting</code>; set <code>railway:signal:shunting_route=FR:destination</code>; set <code>railway:signal:shunting_route:dead_end=FR:Imp</code>
+|-
+| <code>railway:signal:shunting_route=FR:D</code> || rename <code>railway:signal:shunting_route:form</code> to <code>railway:signal:shunting_route:depot:form</code>; rename <code>railway:signal:shunting_route:ref</code> to <code>railway:signal:shunting_route:depot:ref</code>; set <code>railway:signal:shunting_route=FR:destination</code>; set <code>railway:signal:shunting_route:depot=FR:D</code>
+|-
+| <code>railway:signal:route=FR:tableau_G</code> || rename <code>railway:signal:route:form</code> to <code>railway:signal:shunting_route:stabling:form</code>; rename <code>railway:signal:route:ref</code> to <code>railway:signal:shunting_route:stabling:ref</code>; remove <code>railway:signal:route</code>; set <code>railway:signal:shunting_route=FR:destination</code>; set <code>railway:signal:shunting_route:stabling=FR:G</code>
+|-
+| <code>railway:signal:shunting=FR:CHEVRON_HAUT</code> || rename <code>railway:signal:shunting:form</code> to <code>railway:signal:stop:form</code>; rename <code>railway:signal:shunting:ref</code> to <code>railway:signal:stop:ref</code>; remove <code>railway:signal:shunting</code>; remove <code>railway:signal:shunting:type</code>; set <code>railway:signal:stop=FR:chevron</code>; set <code>railway:signal:stop:form=sign</code> if absent
+|-
+| <code>railway:signal:shunting=FR:TIP</code> || rename <code>railway:signal:shunting:form</code> to <code>railway:signal:minor:form</code>; rename <code>railway:signal:shunting:ref</code> to <code>railway:signal:minor:ref</code>; remove <code>railway:signal:shunting</code>; set <code>railway:signal:minor=FR:TIP</code>
+|-
+| <code>railway:signal:shunting=FR:ATC</code> || rename <code>railway:signal:shunting:form</code> to <code>railway:signal:stop:form</code>; rename <code>railway:signal:shunting:ref</code> to <code>railway:signal:stop:ref</code>; remove <code>railway:signal:shunting</code>; set <code>railway:signal:stop=FR:ARRET</code>; set <code>railway:signal:stop:for=worksite_trains</code>
+|-
+| <code>railway:signal:shunting=FR:pancarte_Heurtoir</code> || set <code>railway:signal:shunting=FR:H</code>; set <code>railway:signal:shunting:form=sign</code>
+|-
+| <code>railway:signal:train_protection=FR:jalon_de_manoeuvre_TVM</code> || rename <code>railway:signal:train_protection:form</code> to <code>railway:signal:train_protection:main:form</code>; rename <code>railway:signal:train_protection:ref</code> to <code>railway:signal:train_protection:main:ref</code>; remove <code>railway:signal:train_protection:type</code>; remove <code>railway:signal:shunting:passing_light</code>; set <code>railway:signal:train_protection=FR:TVM</code>; set <code>railway:signal:train_protection:main=shunting_marker</code>; set <code>railway:signal:train_protection:main:form=sign</code> if absent
+|-
+| <code>railway:signal:shunting=FR:marker</code> || rename <code>railway:signal:shunting:form</code> to <code>railway:signal:train_protection:main:form</code>; rename <code>railway:signal:shunting:ref</code> to <code>railway:signal:train_protection:main:ref</code>; remove <code>railway:signal:shunting</code>; remove <code>railway:signal:shunting:passing_light</code>; set <code>railway:signal:train_protection=FR:TVM</code>; set <code>railway:signal:train_protection:main=shunting_marker</code>; set <code>railway:signal:train_protection:main:form=sign</code> if absent
+|-
+| <code>railway:signal:shunting=FR:JAL_MAN</code> || rename <code>railway:signal:shunting:form</code> to <code>railway:signal:train_protection:main:form</code>; rename <code>railway:signal:shunting:ref</code> to <code>railway:signal:train_protection:main:ref</code>; remove <code>railway:signal:shunting</code>; remove <code>railway:signal:shunting:passing_light</code>; set <code>railway:signal:train_protection=FR:TVM</code>; set <code>railway:signal:train_protection:main=shunting_marker</code>; set <code>railway:signal:train_protection:main:form=sign</code> if absent
+|-
+| <code>railway:signal:shunting=FR:jalon_de_manoeuvre_TVM</code> || rename <code>railway:signal:shunting:form</code> to <code>railway:signal:train_protection:main:form</code>; rename <code>railway:signal:shunting:ref</code> to <code>railway:signal:train_protection:main:ref</code>; remove <code>railway:signal:shunting</code>; remove <code>railway:signal:shunting:passing_light</code>; set <code>railway:signal:train_protection=FR:TVM</code>; set <code>railway:signal:train_protection:main=shunting_marker</code>; set <code>railway:signal:train_protection:main:form=sign</code> if absent
+|-
+| <code>railway:signal:stop=FR:JALON_ARRET</code> || rename <code>railway:signal:stop:ref</code> to <code>railway:signal:minor:ref</code>; remove <code>railway:signal:stop</code>; remove <code>railway:signal:stop:form</code>; set <code>railway:signal:minor=FR:stop_marker</code>; set <code>railway:signal:minor:form=sign</code>
+|-
+| <code>railway:signal:stop=FR:JAL_ARRET</code> || rename <code>railway:signal:stop:ref</code> to <code>railway:signal:minor:ref</code>; remove <code>railway:signal:stop</code>; remove <code>railway:signal:stop:form</code>; set <code>railway:signal:minor=FR:stop_marker</code>; set <code>railway:signal:minor:form=sign</code>
+|-
+| <code>railway:signal:stop=FR:ATC</code> || set <code>railway:signal:stop=FR:ARRET</code>; set <code>railway:signal:stop:for=worksite_trains</code>
+|-
+| <code>railway:signal:stop=FR:ARRET_TGV</code> || rename <code>railway:signal:stop:for</code> to <code>railway:signal:stop:highspeed:for</code>; rename <code>railway:signal:stop:form</code> to <code>railway:signal:stop:highspeed:form</code>; rename <code>railway:signal:stop:ref</code> to <code>railway:signal:stop:highspeed:ref</code>; set <code>railway:signal:stop=FR:passenger_stop</code>; set <code>railway:signal:stop:highspeed=FR:TGV</code>; set <code>railway:signal:stop:highspeed:form=sign</code> if absent
+|-
+| <code>railway:signal:stop=FR:TT</code> || rename <code>railway:signal:stop:form</code> to <code>railway:signal:stop:conventional:form</code>; rename <code>railway:signal:stop:ref</code> to <code>railway:signal:stop:conventional:ref</code>; set <code>railway:signal:stop=FR:passenger_stop</code>; set <code>railway:signal:stop:conventional=FR:TT</code>; set <code>railway:signal:stop:conventional:form=sign</code> if absent
+|-
+| <code>railway:signal:stop:form=FR:passenger_stop</code> + no <code>railway:signal:stop</code> || remove <code>railway:signal:stop:form</code>; remove <code>ref</code>; set <code>railway:signal:stop=FR:passenger_stop</code>
+|-
+| <code>railway:signal:stop=FR:LM</code> || rename <code>railway:signal:stop:form</code> to <code>railway:signal:shunting:form</code>; rename <code>railway:signal:stop:ref</code> to <code>railway:signal:shunting:ref</code>; remove <code>railway:signal:stop</code>; set <code>railway:signal:shunting=FR:LM</code>
+|-
+| <code>railway:signal:stop:classic=*</code> || rename <code>railway:signal:stop:classic</code> to <code>railway:signal:stop:conventional</code>; rename <code>railway:signal:stop:classic:for</code> to <code>railway:signal:stop:conventional:for</code>; rename <code>railway:signal:stop:classic:form</code> to <code>railway:signal:stop:conventional:form</code>; rename <code>railway:signal:stop:classic:ref</code> to <code>railway:signal:stop:conventional:ref</code>; set <code>railway:signal:stop:conventional:form=sign</code> if absent
+|-
+| <code>railway:signal:whistle=FR:pancarte_S</code> || set <code>railway:signal:whistle=FR:S</code>; set <code>railway:signal:whistle:form=sign</code>
+|-
+| <code>railway:signal:whistle:plate=FR:J</code> || rename <code>railway:signal:whistle:plate</code> to <code>railway:signal:whistle:type</code>
+|-
+| <code>railway:signal:station_distant=FR:facility_approach</code> || rename <code>railway:signal:station_distant:form</code> to <code>railway:signal:facility_distant:form</code>; rename <code>railway:signal:station_distant:caption</code> to <code>railway:signal:facility_distant:caption</code>; rename <code>railway:signal:station_distant:ref</code> to <code>railway:signal:facility_distant:ref</code>; remove <code>railway:signal:station_distant</code>; set <code>railway:signal:facility_distant=FR:marker</code>; set <code>railway:signal:facility_distant:form=sign</code> if absent
+|-
+| <code>railway:signal:station_distant=FR:POSTE</code> || rename <code>railway:signal:station_distant:form</code> to <code>railway:signal:facility:form</code>; rename <code>railway:signal:station_distant:ref</code> to <code>railway:signal:facility:ref</code>; remove <code>railway:signal:station_distant</code>; set <code>railway:signal:facility=FR:POSTE</code>; set <code>railway:signal:facility:form=sign</code> if absent
+|-
+| <code>railway:signal:station=FR:facility_boundary</code> || rename <code>railway:signal:station:form</code> to <code>railway:signal:facility:form</code>; rename <code>railway:signal:station:ref</code> to <code>railway:signal:facility:ref</code>; remove <code>railway:signal:station</code>; set <code>railway:signal:facility=FR:boundary</code>; set <code>railway:signal:facility:form=sign</code> if absent
+|-
+| <code>railway:signal:station=FR:LIMITE_ETS</code> || rename <code>railway:signal:station:form</code> to <code>railway:signal:facility:form</code>; rename <code>railway:signal:station:ref</code> to <code>railway:signal:facility:ref</code>; remove <code>railway:signal:station</code>; set <code>railway:signal:facility=FR:boundary</code>; set <code>railway:signal:facility:form=sign</code> if absent
+|-
+| <code>railway:signal:train_protection=FR:CAB_DIS</code> || rename <code>railway:signal:train_protection:form</code> to <code>railway:signal:train_protection_distant:form</code>; rename <code>railway:signal:train_protection:ref</code> to <code>railway:signal:train_protection_distant:ref</code>; remove <code>railway:signal:train_protection</code>; remove <code>railway:signal:train_protection:type</code>; set <code>railway:signal:train_protection_distant=FR:CAB</code>; set <code>railway:signal:train_protection_distant:form=sign</code> if absent
+|-
+| <code>railway:signal:train_protection=FR:CAB_EXE</code> || remove <code>railway:signal:train_protection:type</code>; set <code>railway:signal:train_protection=FR:CAB</code>; set <code>railway:signal:train_protection:function=entry</code>
+|-
+| <code>railway:signal:train_protection=FR:CAB_FIN</code> || remove <code>railway:signal:train_protection:type</code>; set <code>railway:signal:train_protection=FR:CAB</code>; set <code>railway:signal:train_protection:function=exit</code>
+|-
+| <code>railway:signal:route_distant:shape=double</code> || remove <code>railway:signal:route_distant:shape</code>
+|-
+| <code>railway:signal:wrong_route=FR:TECS</code> || rename <code>railway:signal:wrong_route:form</code> to <code>railway:signal:wrong_road:entry:form</code>; rename <code>railway:signal:wrong_route:ref</code> to <code>railway:signal:wrong_road:entry:ref</code>; remove <code>railway:signal:wrong_route</code>; remove <code>railway:signal:wrong_route:function</code>; set <code>railway:signal:wrong_road=FR:IPCS</code>; set <code>railway:signal:wrong_road:entry=FR:TECS</code>
+|-
+| <code>railway:signal:wrong_route=FR:TSCS</code> || rename <code>railway:signal:wrong_route:form</code> to <code>railway:signal:wrong_road:exit:form</code>; rename <code>railway:signal:wrong_route:ref</code> to <code>railway:signal:wrong_road:exit:ref</code>; remove <code>railway:signal:wrong_route</code>; remove <code>railway:signal:wrong_route:function</code>; set <code>railway:signal:wrong_road=FR:IPCS</code>; set <code>railway:signal:wrong_road:exit=FR:TSCS</code>
+|-
+| <code>railway:signal:combined=FR:light_box</code> + <code>railway:signal:combined:form=light</code> + <code>railway:signal:combined:shape=double</code> || rename <code>railway:signal:combined:left</code> to <code>railway:signal:lightbox:left</code>; rename <code>railway:signal:combined:right</code> to <code>railway:signal:lightbox:right</code>; rename <code>railway:signal:combined:ref</code> to <code>railway:signal:lightbox:ref</code>; remove <code>railway:signal:combined</code>; remove <code>railway:signal:combined:form</code>; remove <code>railway:signal:combined:shape</code>; set <code>railway:signal:lightbox=FR:double_lightbox</code>; set <code>railway:signal:lightbox:form=light</code>
+|-
+| <code>railway:signal:dual_mode=FR:BIMODE_A</code> || rename <code>railway:signal:dual_mode:form</code> to <code>railway:signal:bimode:form</code>; rename <code>railway:signal:dual_mode:caption</code> to <code>railway:signal:bimode:caption</code>; rename <code>railway:signal:dual_mode:ref</code> to <code>railway:signal:bimode:ref</code>; remove <code>railway:signal:dual_mode</code>; remove <code>railway:signal:dual_mode:function</code>; set <code>railway:signal:bimode=FR:BIMODE</code>; set <code>railway:signal:bimode:function=entry</code>; set <code>railway:signal:bimode:form=sign</code> if absent
+|-
+| <code>railway:signal:dual_mode=FR:BIMODE</code> || rename <code>railway:signal:dual_mode:form</code> to <code>railway:signal:bimode:form</code>; rename <code>railway:signal:dual_mode:caption</code> to <code>railway:signal:bimode:caption</code>; rename <code>railway:signal:dual_mode:ref</code> to <code>railway:signal:bimode:ref</code>; remove <code>railway:signal:dual_mode</code>; remove <code>railway:signal:dual_mode:function</code>; set <code>railway:signal:bimode=FR:BIMODE</code>; set <code>railway:signal:bimode:function=exit</code>; set <code>railway:signal:bimode:form=sign</code> if absent
+|-
+| <code>railway:signal:electricity=FR:voltage_reminder</code> || remove <code>railway:signal:electricity:voltage</code>; remove <code>railway:signal:electricity:frequency</code>; set <code>railway:signal:electricity=FR:catenary_height</code>; set <code>railway:signal:electricity:catenary_height=variable</code>
+|-
+| <code>railway:signal:distant=FR</code> || remove <code>railway:signal:distant</code>
+|-
+| <code>railway:signal:form=*</code> || remove <code>railway:signal:form</code>
+|-
+| <code>railway:signal:wrong_road:function=*</code> || remove <code>railway:signal:wrong_road:function</code>
+|-
+| <code>railway:signal:wrong_road:states=*</code> || remove <code>railway:signal:wrong_road:states</code>
+|-
+| <code>railway:signal:departure:states=*</code> || remove <code>railway:signal:departure:states</code>
+|-
+| <code>railway:signal:electricity:states=*</code> || remove <code>railway:signal:electricity:states</code>
+|-
+| <code>railway:signal:radio:mode:form:ref=*</code> || rename <code>railway:signal:radio:mode:form:ref</code> to <code>railway:signal:radio:mode:ref</code>
+|-
+| <code>railway:signal:speed_limit_distant:caption=*</code> || rename <code>railway:signal:speed_limit_distant:caption</code> to <code>ref</code>
+|-
+| <code>railway:signal:speed_limit_distant=FR:P</code> + <code>railway:signal:speed_limit_distant:form=sign</code> || set <code>railway:signal:speed_limit_distant:form=board</code>
+|-
+| <code>railway:signal:crossing_info:height=*</code> || remove <code>railway:signal:crossing_info:height</code>
+|-
+| <code>railway:signal:shunting:sign=*</code> || remove <code>railway:signal:shunting:sign</code>
+|-
+| <code>railway:signal:location=ground</code> + no <code>railway:signal:position</code> || remove <code>railway:signal:location</code>; set <code>railway:signal:position=ground</code>
+|-
+| <code>railway:signal:location=ground</code> + <code>railway:signal:position=*</code> || remove <code>railway:signal:location</code>; set <code>railway:signal:position=ground</code>
+|-
+| <code>railway:signal:electricity:distance=*</code> + <code>railway:signal:electricity:caption=*</code> || remove <code>railway:signal:electricity:distance</code>
+|-
+| <code>railway:signal:main:short_route=no</code> || remove <code>railway:signal:main:short_route</code>
+|-
+| <code>railway:signal:main:short_route=yes</code> || remove <code>railway:signal:main:short_route</code>; set <code>railway:signal:short_route=FR:yellow_band</code>; set <code>railway:signal:short_route:form=light</code>
+|-
+| <code>railway:crocodile=no</code> || remove <code>railway:crocodile</code>
+|-
+| <code>railway:signal:shunting:height=*</code> || remove <code>railway:signal:shunting:height</code>
+|-
+| <code>railway:signal:facility_distant:town=*</code> + <code>railway:signal:facility_distant:caption=*</code> || remove <code>railway:signal:facility_distant:town</code>; remove <code>railway:signal:facility_distant:distance</code>
+|-
+| <code>railway:signal:facility_distant:distance=*</code> + no <code>railway:signal:facility_distant:town</code> + <code>railway:signal:facility_distant:caption=*</code> || remove <code>railway:signal:facility_distant:distance</code>
+|-
+| <code>railway:signal:speed_limit_distant:shape=*</code> || remove <code>railway:signal:speed_limit_distant:shape</code>
+|-
+| <code>railway:signal:distant:caption:marker=*</code> || rename <code>railway:signal:distant:caption:marker</code> to <code>ref</code>
+|-
+| <code>railway:signal:main:plate:caption=*</code> || rename <code>railway:signal:main:plate:caption</code> to <code>railway:signal:main:caption</code>
+|-
+| <code>railway:signal:speed_limit:entry:ref=*</code> || rename <code>railway:signal:speed_limit:entry:ref</code> to <code>railway:signal:speed_limit:marker:ref</code>
+|-
+| <code>railway:signal:speed_limit:exit:ref=*</code> || rename <code>railway:signal:speed_limit:exit:ref</code> to <code>railway:signal:speed_limit:marker:ref</code>
+|-
+| <code>railway:signal:distant:plate=FR:A</code> || remove <code>railway:signal:distant:plate</code>; set <code>ref=A</code>
+|-
+| <code>railway:signal:shunting=FR:TLC</code> || rename <code>railway:signal:shunting:form</code> to <code>railway:signal:minor:form</code>; rename <code>railway:signal:shunting:ref</code> to <code>railway:signal:minor:ref</code>; remove <code>railway:signal:shunting</code>; remove <code>railway:signal:shunting:states</code>; set <code>railway:signal:minor=FR:TLC</code>
+|}
+
+{| class="wikitable mw-collapsible mw-collapsed"
+|+ Redundant tags removed (3)
+! Tagging found !! Change !! Reason
+|-
+| <code>railway:crocodile=yes</code> + <code>railway:signal:main=*</code> || remove <code>railway:crocodile</code> || implied by the signal
+|-
+| <code>railway:crocodile=yes</code> + <code>railway:signal:distant=*</code> + no <code>railway:signal:main</code> || remove <code>railway:crocodile</code> || implied by the signal
+|-
+| <code>railway:position=*</code> + <code>railway:position:exact=*</code> || remove <code>railway:position</code> || railway:position:exact gives the position
+|}
+
+{| class="wikitable mw-collapsible mw-collapsed"
+|+ Not automated, left to mappers (30)
+! Tagging found !! Reason
+|-
+| <code>railway:signal:train_protection=FR:repère_arrêt_ETCS;FR:repère_arrêt_TVM</code> + no <code>railway:signal:train_protection:ref</code> || needs a manual complement: map the ETCS stop marker on its own node (railway:signal:train_protection=ETCS:marker + railway:signal:train_protection:main=ETCS:stop_marker)
+|-
+| <code>railway:signal:train_protection=FR:REP_ETCS;FR:REP_TVM</code> + no <code>railway:signal:train_protection:ref</code> || needs a manual complement: map the ETCS stop marker on its own node (railway:signal:train_protection=ETCS:marker + railway:signal:train_protection:main=ETCS:stop_marker)
+|-
+| <code>railway:signal:stop=FR:ARRET_V</code> + <code>railway:signal:stop:caption=Z57 1</code> || the replacement is a guess
+|-
+| <code>railway:signal:stop=FR:ARRET_V</code> + <code>railway:signal:stop:caption=Z57 2</code> || the replacement is a guess
+|-
+| <code>railway:signal:stop=FR:ARRET_V</code> + <code>railway:signal:stop:caption=Z57 1-2</code> || the replacement is a guess
+|-
+| <code>railway:signal:stop=FR:ARRET_V</code> + <code>railway:signal:stop:caption=Z57 1.2</code> || the replacement is a guess
+|-
+| <code>railway:signal:stop=FR:ARRET_V</code> || needs a manual complement: add railway:signal:stop:conventional:number
+|-
+| <code>railway:signal:shunting=FR:HEURTOIR_A</code> || needs a manual complement: complete the caption (e.g. Heurtoir 500m)
+|-
+| <code>railway:signal:shunting=FR:DEPOT;FR:G</code> + <code>railway:signal:shunting:form=light</code> + no <code>railway:signal:shunting:ref</code> || needs a manual complement: one key per board
+|-
+| <code>railway:signal:shunting=FR:G;FR:DEPOT</code> + <code>railway:signal:shunting:form=light</code> + no <code>railway:signal:shunting:ref</code> || needs a manual complement: one key per board
+|-
+| <code>railway:signal:stop=FR:Z57-1;FR:4V</code> + no <code>railway:signal:stop:ref</code> || needs a manual complement: one key per board
+|-
+| <code>railway:signal:stop=FR:Z57-2;FR:8V</code> + no <code>railway:signal:stop:ref</code> || needs a manual complement: one key per board
+|-
+| <code>railway:signal:stop=FR:8V;FR:Z57-2</code> + no <code>railway:signal:stop:ref</code> || needs a manual complement: one key per board
+|-
+| <code>railway:signal:wrong_road=FR:TECS;FR:TSCS</code> + <code>railway:signal:wrong_road:form=light</code> + no <code>railway:signal:wrong_road:ref</code> || needs a manual complement: one key per board
+|-
+| <code>railway:signal:wrong_road=FR:TECS;FR:TSCS</code> + <code>railway:signal:wrong_road:form=sign</code> + no <code>railway:signal:wrong_road:ref</code> || needs a manual complement: one key per board
+|-
+| <code>railway:signal:radio:channel:number=*</code> || needs a manual complement: complete the caption (e.g. Canal 4)
+|-
+| <code>railway:signal:crossing_hint:number=*</code> + no <code>railway:signal:crossing_hint:distance</code> || needs a manual complement: complete the caption (e.g. PN 46 à 300m)
+|-
+| <code>railway:signal:crossing_hint:distance=*</code> + no <code>railway:signal:crossing_hint:number</code> || needs a manual complement: complete the caption (e.g. PN 46 à 300m)
+|-
+| <code>railway:signal:crossing_hint:number=*</code> + <code>railway:signal:crossing_hint:distance=*</code> || reported only: replaced with railway:signal:crossing_hint:caption=*
+|-
+| <code>railway:signal:crossing_info:number=*</code> || needs a manual complement: complete the caption (e.g. PN 44)
+|-
+| <code>railway:signal:shunting=FR</code> || the replacement is a guess
+|-
+| <code>railway:signal:minor=FR:</code> || the replacement is a guess
+|-
+| <code>railway:signal:speed_limit=FR:</code> || the replacement is a guess
+|-
+| <code>railway:signal:speed_limit_distant=FR:</code> || the replacement is a guess
+|-
+| <code>railway:signal:position=t</code> || the replacement is a guess
+|-
+| <code>railway=signal</code> + <code>wikidata=Q1467113</code> || needs a manual complement: a signal is not a Wikidata item
+|-
+| <code>railway:signal:electricity:distance=*</code> + no <code>railway:signal:electricity:caption</code> || needs a manual complement: complete the caption (e.g. Sect. à 500m)
+|-
+| <code>railway:signal:facility_distant:town=*</code> + no <code>railway:signal:facility_distant:caption</code> || reported only: replaced with railway:signal:facility_distant:caption=*
+|-
+| <code>railway:signal:facility_distant:distance=*</code> + no <code>railway:signal:facility_distant:town</code> + no <code>railway:signal:facility_distant:caption</code> || reported only: replaced with railway:signal:facility_distant:caption=*
+|-
+| <code>railway:signal:main:plate:departure=*</code> || reported only: did you mean railway:signal:departure=FR:DD?
+|}
+

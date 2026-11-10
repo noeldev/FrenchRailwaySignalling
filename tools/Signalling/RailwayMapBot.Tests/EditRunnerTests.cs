@@ -187,6 +187,23 @@ public sealed class EditRunnerTests
     }
 
     [Fact]
+    public async Task Apply_skips_a_node_an_opted_out_mapper_ever_edited()
+    {
+        using var bot = new TestBot();
+        bot.OptOut.Users.Add("careful mapper");
+        bot.Server.Add(1, 1, TestBot.Legacy, user: "careful mapper");
+        bot.Server.EditAs("someone else", 1, TestBot.Legacy);
+        bot.Server.Add(2, 1, TestBot.Legacy);
+
+        var summary = await bot.RunAsync(RunMode.Write);
+
+        Assert.Equal(1, summary.EditCount);
+        Assert.Equal(1, summary.Skips[SkipReason.OptedOut]);
+        Assert.Equal("someone else", bot.Server.Nodes[1].User);
+        Assert.Equal("FR:C", bot.Server.Nodes[2].Tags["railway:signal:main"]);
+    }
+
+    [Fact]
     public async Task Apply_waits_when_the_server_limits_the_rate_for_a_short_time()
     {
         using var bot = new TestBot();
