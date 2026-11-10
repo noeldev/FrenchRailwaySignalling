@@ -175,3 +175,16 @@ html:has(.lightbox:target) {
     text-decoration: none;
     cursor: pointer;
 }
+
+.site-footer {
+    margin-top: 40px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 0.85em;
+    opacity: 0.75;
+    text-align: center;
+}
+
+.site-footer p {
+    margin: 0;
+}

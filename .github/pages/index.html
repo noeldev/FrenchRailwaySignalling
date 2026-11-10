@@ -79,5 +79,10 @@
         <li><a href="https://sncf-sigmap.netlify.app/">SNCF Signalisation Permanente</a></li>
     </ul>
 
+    <!-- The build line placeholders are replaced by the deployment workflow. -->
+    <footer class="site-footer">
+        <p>Built <time datetime="{{BUILD_DATE_ISO}}">{{BUILD_DATE}}</time> from commit <a href="https://github.com/noeldev/FrenchRailwaySignalling/commit/{{BUILD_SHA}}">{{BUILD_SHORT_SHA}}</a>.</p>
+    </footer>
+
 </body>
 </html>
