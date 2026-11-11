@@ -33,6 +33,9 @@ public static class CorrectionListWriter
         AppendTable(text, $"Redundant tags removed ({table.Redundancies.Count})", ["Tagging found", "Change", "Reason"],
             table.Redundancies.Select(entry => new[] { Tagging(entry), Change(entry), entry.Note ?? string.Empty }));
 
+        AppendTable(text, $"Computed tags added ({table.Completions.Count})", ["Tagging found", "Change"],
+            table.Completions.Select(entry => new[] { Tagging(entry), Change(entry) }));
+
         AppendTable(text, $"Not automated, left to mappers ({manual.Count})", ["Tagging found", "Reason"],
             manual.Select(entry => new[] { Tagging(entry), Reason(entry) }));
 

@@ -18,8 +18,9 @@ namespace ValidatorGen.Generation;
 //    so it never overwrites a tag it does not match; one more rule reports,
 //    without a fix, the legacy tagging a guard keeps. A legacy tagging with a
 //    note and nothing to fix is only reported;
-// 3. one rule per conflict between documented alternatives, and one warning
-//    per redundant tag, with a fix that removes it;
+// 3. one rule per conflict between documented alternatives, one warning per
+//    redundant tag, with a fix that removes it, and one warning per missing
+//    computed tag, with a fix that computes it (see TemplateExpression);
 // 4. one rule per closed key for the mistyped values (see
 //    MistypedValueRuleBuilder);
 // 5. rules for keys the wiki does not document, with a fix that removes them;
@@ -37,6 +38,9 @@ public sealed class ValidatorRuleBuilder(TagSchema schema, RuleTable table, Vali
 
     // A value that no replacement sets, for the self-tests of the guards.
     private const string ConflictingValue = "XX:conflicting";
+
+    // A number for the self-tests of a completion template.
+    private const string NumberSample = "223.799";
 
     // A token of another scheme: a namespace prefix (same shape as
     // TagSchema.HasNamespacePrefix) that is not the country prefix.
@@ -57,6 +61,7 @@ public sealed class ValidatorRuleBuilder(TagSchema schema, RuleTable table, Vali
                 .Select((entry, index) => BuildGuardRule(entry, index, scope)),
             .. table.Conflicts.Select((entry, index) => BuildConflictRule(entry, index, scope)),
             .. table.Redundancies.Select((entry, index) => BuildRedundancyRule(entry, index, scope)),
+            .. table.Completions.Select((entry, index) => BuildCompletionRule(entry, index, scope)),
             .. mistyped,
             BuildUndocumentedKeyRule(scope),
             .. BuildHandledUndocumentedKeyRules(scope),
@@ -309,6 +314,39 @@ public sealed class ValidatorRuleBuilder(TagSchema schema, RuleTable table, Vali
                 $"assertMatch: {Quote(AssertNode(scope.InScope(sample)))}",
                 $"assertNoMatch: {Quote(AssertNode(scope.InScope(implying)))}",
                 .. blockers.Select(blocker => $"assertNoMatch: {Quote(AssertNode(scope.InScope([.. sample, blocker])))}"),
+            ]);
+    }
+
+    // A documented tag computed from the rest of the tagging, missing: a
+    // warning with a fix that computes it. The selector requires the number
+    // keys of the templates to hold a plain number, so the fix can always be
+    // computed. The self-tests check that a tag already set, or a value that
+    // is not a number, prevents the rule.
+    private static MapCssRule BuildCompletionRule(TagReplacement entry, int index, RuleScope scope)
+    {
+        var templates = entry.Default.ToDictionary(tag => tag.Key, tag => TagTemplate.Parse(tag.Value), StringComparer.Ordinal);
+        var numberKeys = templates.Values.SelectMany(template => template.NumberKeys).Distinct(StringComparer.Ordinal).ToList();
+        var selector = MatchSelector(entry)
+            + string.Concat(numberKeys.Select(key => $"[{Quote(key)}=~/{TagTemplate.NumberPattern}/]"));
+
+        var missing = Quote(string.Join(" + ", entry.Default.Keys));
+        var message = string.IsNullOrWhiteSpace(entry.Note)
+            ? $"throwWarning: tr(\"{{0}} is missing\", {missing})"
+            : $"throwWarning: tr(\"{{0}} is missing: {{1}}\", {missing}, {Quote(entry.Note)})";
+
+        var sample = SampleTags(entry)
+            .Select(tag => numberKeys.Contains(tag.Key) ? KeyValuePair.Create(tag.Key, NumberSample) : tag)
+            .ToList();
+
+        return new MapCssRule(
+            index == 0 ? "Documented tags computed from the rest of the tagging, when missing" : null,
+            [scope.Restrict(selector)],
+            [
+                message,
+                .. templates.Select(tag => $"fixAdd: concat({Quote(tag.Key + "=")}, {TemplateExpression.Build(tag.Value)})"),
+                $"assertMatch: {Quote(AssertNode(scope.InScope(sample)))}",
+                .. entry.Default.Keys.Select(key => $"assertNoMatch: {Quote(AssertNode(scope.InScope([.. sample, KeyValuePair.Create(key, ConflictingValue)])))}"),
+                .. numberKeys.Select(key => $"assertNoMatch: {Quote(AssertNode(scope.InScope([.. sample.Where(tag => tag.Key != key), KeyValuePair.Create(key, "mi:12.5")])))}"),
             ]);
     }
 

@@ -13,7 +13,9 @@ namespace Signalling.Rules;
 //   order of its MapCSS fix declarations. It is skipped (blocked) when it would
 //   overwrite a tag it does not match, like its MapCSS fix, and when it only
 //   reports the legacy tagging (left to fix by hand, like a blocked one).
-// The redundant tags are removed like legacy ones.
+// The redundant tags are removed like legacy ones. A completion then adds its
+// computed tags (see TagTemplate) where they are missing, when its template
+// can be filled.
 // A fix can enable another one (a tag replacement producing a legacy value, or
 // a value replacement unblocking a tag replacement), so the rules are applied
 // again until the tags no longer change.
@@ -51,6 +53,15 @@ public sealed class TagRuleApplier(RuleTable table)
                 if (TryReplaceValue(entry, tags))
                 {
                     applied.Add($"{entry.Key}={entry.From}");
+                    changed = true;
+                }
+            }
+
+            foreach (var entry in table.Completions.Where(entry => Matches(entry, tags)))
+            {
+                if (TryComplete(entry, tags))
+                {
+                    applied.Add(RuleTable.DescribeCompletion(entry));
                     changed = true;
                 }
             }
@@ -121,6 +132,26 @@ public sealed class TagRuleApplier(RuleTable table)
         {
             tags.TryAdd(key, value);
         }
+    }
+
+    // Adds every missing default of a completion, or none when one of its
+    // templates cannot be filled (a position that is not a plain number...).
+    private static bool TryComplete(TagReplacement entry, Dictionary<string, string> tags)
+    {
+        var values = entry.Default.Where(tag => !tags.ContainsKey(tag.Key))
+            .Select(tag => KeyValuePair.Create(tag.Key, TagTemplate.Parse(tag.Value).Fill(tags)))
+            .ToList();
+        if (values.Count == 0 || values.Any(tag => tag.Value is null))
+        {
+            return false;
+        }
+
+        foreach (var (key, value) in values)
+        {
+            tags[key] = value!;
+        }
+
+        return true;
     }
 
     private static bool TryReplaceValue(ValueReplacement entry, Dictionary<string, string> tags)

@@ -57,7 +57,7 @@ In JOSM, go to **Edit** → **Preferences** → **Data Validator** → **Tag che
 
 ### Rule table
 
-`validator/rules.json` is the only hand-maintained input. It holds three lists:
+`validator/rules.json` is the only hand-maintained input. It holds these lists:
 
 - `valueReplacements` rename a value in place. The value is matched as a token, so the same entry also fixes a `;` separated list; an empty `to` drops the token:
   ```json
@@ -76,6 +76,18 @@ In JOSM, go to **Edit** → **Preferences** → **Data Validator** → **Tag che
   }
   ```
 - `conflicts` list documented tags that must not appear together, with a `note` telling how to choose.
+- `completions` add a documented tag computed from the rest of the tagging, where it is missing: the validator warns and offers to add it, the MapRoulette challenge and RailwayMapBot add it. `match` requires the key to add as absent (`null`) and the keys of the template as present; `default` gives the template. `{key}` is the value of a key, `{key|n}` its number truncated (never rounded) to `n` decimals with a decimal comma, as written on the signs; sncf-sigmap uses the same notation for the captions it exports:
+  ```json
+  {
+    "match": {
+      "railway:signal:speed_limit:transition": "FR:Km",
+      "railway:position:exact": "*",
+      "railway:signal:speed_limit:transition:caption": null
+    },
+    "default": { "railway:signal:speed_limit:transition:caption": "Km {railway:position:exact|1}" }
+  }
+  ```
+  With `railway:position:exact=223.799`, the caption is `Km 223,7`.
 
 A tag replacement never overwrites what it does not match: a tag it sets must be absent or already hold that value (or a legacy spelling of it, from `valueReplacements`), and a key it renames to must be absent. Otherwise the validator reports the legacy tagging without a fix, to be corrected by hand. When a category changes (for example `shunting` to `shunting_route`), its `:ref` is renamed with it. An optional `note` is added to the message (and to the MapRoulette instruction) for what the fix cannot do, such as adding the ref of each board when several boards are tagged on one node.
 
@@ -121,7 +133,7 @@ FrenchRailwaySignalling/
 │   ├── French_Railway_Signalling.xml     # Preset (single source of truth)
 │   └── icons/            # SVG icons (boards, boxes, plates, signals, signs) and SNCF_logo.png
 ├── validator/
-│   └── rules.json        # Legacy tagging replacements and conflicts (ValidatorGen, MapRouletteGen, RailwayMapBot)
+│   └── rules.json        # Legacy tagging replacements, conflicts and computed tags (ValidatorGen, MapRouletteGen, RailwayMapBot)
 ├── tools/
 │   ├── Signalling/       # Signalling toolset (single solution)
 │   │   ├── MapRouletteGen/ # MapRoulette legacy tagging migration challenge generator

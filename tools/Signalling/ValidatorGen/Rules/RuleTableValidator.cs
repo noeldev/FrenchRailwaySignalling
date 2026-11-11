@@ -19,7 +19,9 @@ namespace ValidatorGen.Rules;
 // - a replacement that extends the match of another one comes before it, so
 //   the validator can skip the general one where the specific one matched;
 // - a replacement fixes something, or reports with a note;
-// - a redundancy only removes tags it matches, and keeps the others.
+// - a redundancy only removes tags it matches, and keeps the others;
+// - a completion only adds documented keys it matches as absent, with a
+//   well-formed template whose keys it matches as present.
 public static class RuleTableValidator
 {
     public static IReadOnlyList<string> Validate(RuleTable table, TagSchema schema, string keyPrefix)
@@ -38,6 +40,7 @@ public static class RuleTableValidator
                 .Select(other => $"tag replacement {RuleTable.Describe(other.PresentTags)}: it extends {RuleTable.Describe(entry.PresentTags)}, so it must come before it.")),
             .. table.Conflicts.SelectMany(entry => ValidateConflict(entry, schema)),
             .. table.Redundancies.SelectMany(ValidateRedundancy),
+            .. table.Completions.SelectMany(entry => ValidateCompletion(entry, schema)),
         ];
 
         return errors;
@@ -131,6 +134,49 @@ public static class RuleTableValidator
         if (entry.PresentTags.All(tag => entry.Remove.Contains(tag.Key)))
         {
             yield return $"{label}: no matched tag is kept to imply the removed ones.";
+        }
+    }
+
+    private static IEnumerable<string> ValidateCompletion(TagReplacement entry, TagSchema schema)
+    {
+        var label = $"completion {RuleTable.DescribeCompletion(entry)}";
+        if (entry.Set.Count > 0 || entry.Rename.Count > 0 || entry.Remove.Count > 0 || entry.Suggest || entry.Undocumented)
+        {
+            yield return $"{label}: only \"match\", \"default\" and \"note\" are allowed.";
+        }
+
+        if (entry.Default.Count == 0)
+        {
+            yield return $"{label}: nothing to add.";
+        }
+
+        if (!entry.PresentTags.Any())
+        {
+            yield return $"{label}: \"match\" needs at least one present tag.";
+        }
+
+        foreach (var (key, text) in entry.Default)
+        {
+            if (!schema.IsDocumentedKey(key))
+            {
+                yield return $"{label}: {key} is not documented.";
+            }
+
+            if (!entry.Match.TryGetValue(key, out var matched) || matched is not null)
+            {
+                yield return $"{label}: {key} must be matched as absent (null).";
+            }
+
+            var template = TagTemplate.Parse(text);
+            if (template.Parts.Any(part => part.Literal is { } literal && (literal.Contains('{') || literal.Contains('}'))))
+            {
+                yield return $"{label}: malformed placeholder in \"{text}\" (expected {{key}} or {{key|n}}).";
+            }
+
+            foreach (var source in template.Keys.Where(source => entry.Match.GetValueOrDefault(source) is null))
+            {
+                yield return $"{label}: the template key {source} must be matched as present.";
+            }
         }
     }
 

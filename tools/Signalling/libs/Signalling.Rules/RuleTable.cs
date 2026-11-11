@@ -66,6 +66,16 @@ namespace Signalling.Rules;
 // "remove" and an optional "note" only:
 //   { "match": { "railway:crocodile": "yes", "railway:signal:main": "FR:C" },
 //     "remove": [ "railway:crocodile" ], "note": "..." }
+//
+// Completions add a documented tag computed from the rest of the tagging,
+// where it is missing: the validator warns and offers to add it, the
+// MapRoulette challenge and the bot add it. They use the shape of a tag
+// replacement with "match" and "default" only: each default key must be
+// matched as absent, and its value is a template (see TagTemplate) whose keys
+// are matched as present:
+//   { "match": { "railway:signal:speed_limit:transition": "FR:Km", "railway:position:exact": "*",
+//                "railway:signal:speed_limit:transition:caption": null },
+//     "default": { "railway:signal:speed_limit:transition:caption": "Km {railway:position:exact|1}" } }
 public sealed class RuleTable
 {
     // A "match" value that accepts any value of the key.
@@ -86,11 +96,17 @@ public sealed class RuleTable
 
     public List<TagReplacement> Redundancies { get; set; } = [];
 
+    public List<TagReplacement> Completions { get; set; } = [];
+
     public List<string> AcceptedKeys { get; set; } = [];
 
     // Tags as "key=value + key=value", for messages and reports.
     public static string Describe(IEnumerable<KeyValuePair<string, string>> tags) =>
         string.Join(" + ", tags.Select(tag => $"{tag.Key}={tag.Value}"));
+
+    // A completion in messages and reports: the keys it adds.
+    public static string DescribeCompletion(TagReplacement entry) =>
+        string.Join(" + ", entry.Default.Keys) + " missing";
 
     // The value a replacement sets and its legacy spellings, which the value
     // replacements turn into it.

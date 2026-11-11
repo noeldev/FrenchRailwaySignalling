@@ -2889,6 +2889,18 @@
       "note": "railway:position:exact gives the position"
     }
   ],
+  "completions": [
+    {
+      "match": {
+        "railway:signal:speed_limit:transition": "FR:Km",
+        "railway:position:exact": "*",
+        "railway:signal:speed_limit:transition:caption": null
+      },
+      "default": {
+        "railway:signal:speed_limit:transition:caption": "Km {railway:position:exact|1}"
+      }
+    }
+  ],
   "acceptedKeys": [
     "railway:signal:catenary_mast"
   ]
