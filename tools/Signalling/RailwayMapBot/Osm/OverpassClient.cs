@@ -12,9 +12,9 @@ public sealed class OverpassClient(HttpClient client, OverpassSettings settings,
 {
     private const string AreaPlaceholder = "{area}";
 
-    public async Task<IReadOnlyList<OsmNode>> QueryAsync(string areaCode, string? savePath, CancellationToken cancellationToken)
+    public async Task<OverpassAnswer> QueryAsync(string areaSelector, string? savePath, CancellationToken cancellationToken)
     {
-        var query = string.Join('\n', settings.Query).Replace(AreaPlaceholder, areaCode, StringComparison.Ordinal);
+        var query = string.Join('\n', settings.Query).Replace(AreaPlaceholder, areaSelector, StringComparison.Ordinal);
 
         for (var attempt = 0; ; attempt++)
         {
@@ -24,13 +24,13 @@ public sealed class OverpassClient(HttpClient client, OverpassSettings settings,
                 using var response = await client.PostAsync(settings.Endpoint, content, cancellationToken);
                 response.EnsureSuccessStatusCode();
                 var answer = await response.Content.ReadAsByteArrayAsync(cancellationToken);
-                var nodes = OverpassReader.Read(new MemoryStream(answer, writable: false));
+                var result = OverpassReader.Read(new MemoryStream(answer, writable: false));
                 if (savePath is not null)
                 {
                     await File.WriteAllBytesAsync(savePath, answer, cancellationToken);
                 }
 
-                return nodes;
+                return result;
             }
             catch (Exception ex) when (attempt < limits.ReadRetries
                 && ex is HttpRequestException or TaskCanceledException or InvalidDataException

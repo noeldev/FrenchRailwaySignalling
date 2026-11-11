@@ -101,6 +101,8 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
     {
         var mode = options.Offline ? RunMode.Offline : options.Command == BotCommand.Apply ? RunMode.Write : RunMode.DryRun;
         var source = ResolveSource(mode);
+        // An unknown area code is reported before anything is read or written.
+        _ = new AreaResolver(settings).Resolve(source.Areas);
         var planner = await CreateFixPlannerAsync(client, mode == RunMode.Offline ? TimeSpan.Zero : TimeSpan.FromHours(Server.QuietPeriodHours), stop);
         if (mode == RunMode.Write)
         {
@@ -123,8 +125,8 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         var exitCode = await ExecuteAsync(api, planner, new ContributorGuard(api, settings.OptOut), groups, mode, limit, settings.Changeset.FixComment, account, source, folder, stop);
         PrintNextStep(mode switch
         {
-            RunMode.Write when Server.AllowSeeding => "check the changesets on the sandbox (links in report.md), then revert to try again.",
-            RunMode.Write => "check the changesets (links in report.md) and wait for the feedback of the mappers before the next run.",
+            RunMode.Write when Server.AllowSeeding => "check the changesets on the sandbox (links in report.md); revert restores the test nodes.",
+            RunMode.Write => "check the changesets (links in report.md).",
             _ => "read report.md, then open a few changes-NNN.osc in JOSM to check the edits.",
         });
         return exitCode;
@@ -288,12 +290,12 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
 
         if (approved.Length == 0)
         {
-            throw new InvalidOperationException($"No rule table approved for '{_serverName}': publish the corrections on the wiki, discuss the edit, then run approve.");
+            throw new InvalidOperationException($"No rule table approved for '{_serverName}': run approve first.");
         }
 
         if (!approved.Equals(RulesHash, StringComparison.OrdinalIgnoreCase))
         {
-            throw new InvalidOperationException($"The rule table changed since it was approved for '{_serverName}': publish the new corrections on the wiki, discuss the change, then run approve.");
+            throw new InvalidOperationException($"The rule table changed since it was approved for '{_serverName}': run rules to see the corrections, then approve.");
         }
     }
 
@@ -303,14 +305,15 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         var paths = CorrectionListWriter.Write(OutputRoot, RuleTable.Load(RulesPath), settings.Policy, RulesHash);
         Console.WriteLine($"List of the corrections (rule table sha256 {RulesHash}):");
         Console.WriteLine($"  {paths[0]}");
-        Console.WriteLine("      to read it");
+        Console.WriteLine("      the corrections, to read");
         Console.WriteLine($"  {paths[1]}");
-        Console.WriteLine("      to paste as it is into the wiki page documenting the edit");
+        Console.WriteLine("      the same, as wikitext");
         return 0;
     }
 
-    // Records the current rule table as the one the community accepted, once
-    // its list of corrections is on the wiki and the discussion is over.
+    // Records the current rule table as the one apply may use on the server:
+    // apply refuses any other table, so the corrections made are always the
+    // listed ones.
     private int Approve()
     {
         WriteCorrectionList();
@@ -324,7 +327,6 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         Console.WriteLine(Server.ApprovedRulesSha256.Length == 0
             ? $"No rule table is approved for '{_serverName}' yet."
             : $"The rule table approved for '{_serverName}' was sha256 {Server.ApprovedRulesSha256}.");
-        Console.WriteLine("Approve only once corrections.wiki is on the wiki page and the discussion accepted it.");
         if (!Confirm($"approve the rule table sha256 {RulesHash} for '{_serverName}'"))
         {
             return 1;

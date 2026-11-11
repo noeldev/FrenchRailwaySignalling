@@ -67,9 +67,9 @@ public sealed class InteractiveSession(string? settingsPath, string repositoryRo
               1. On prod, plan: dry run on the real data, nothing written. Read the report.
               2. On dev (the sandbox, separate from the real map): seed creates test nodes,
                  then plan, apply and revert work on them.
-              3. rules writes the list of the corrections for the wiki page; once the edit
-                 is discussed and accepted, approve on prod.
-              4. On prod, apply, a small area first, then wait for feedback.
+              3. rules writes the list of the corrections; approve, on prod, records this
+                 rule table as the one apply may use.
+              4. On prod, apply, a small area first.
 
             """);
     }
@@ -101,10 +101,10 @@ public sealed class InteractiveSession(string? settingsPath, string repositoryRo
 
         commands.Add((Name(BotCommand.Apply), server.AllowSeeding ? "fix the test nodes" : "upload the fixes to the real map"));
         commands.Add((Name(BotCommand.Revert), "undo the last apply run"));
-        commands.Add((Name(BotCommand.Rules), "write the list of the corrections (to read, and for the wiki)"));
+        commands.Add((Name(BotCommand.Rules), "write the list of the corrections"));
         if (!server.AllowSeeding)
         {
-            commands.Add((Name(BotCommand.Approve), "record the rule table as discussed and accepted"));
+            commands.Add((Name(BotCommand.Approve), "record the current rule table as the one apply may use"));
         }
 
         commands.Add((Name(BotCommand.Login), "log in with the bot account"));
@@ -117,31 +117,31 @@ public sealed class InteractiveSession(string? settingsPath, string repositoryRo
     {
         var options = new CommandLineOptions { Command = command, Server = server, SettingsPath = settingsPath };
         var sandbox = settings.Servers[server].AllowSeeding;
-        var codes = string.Join(", ", settings.Areas.Select(area => area.Code));
+        var kinds = AreaResolver.Describe(settings.AreaKinds);
 
         return command switch
         {
             BotCommand.Seed => options with
             {
-                Areas = [ConsolePrompt.Required($"Area to copy the signals from ({codes})")],
+                Areas = [ConsolePrompt.Required($"Area to copy the signals from. {kinds}{Environment.NewLine}Area")],
                 Limit = ConsolePrompt.Number("Number of test nodes", Execution.Seeder.DefaultCount),
             },
             BotCommand.Plan when !sandbox => options with
             {
-                Areas = AskAreas(codes),
+                Areas = AskAreas(kinds),
             },
             BotCommand.Apply when !sandbox => options with
             {
-                Areas = AskAreas(codes),
+                Areas = AskAreas(kinds),
                 Limit = ConsolePrompt.Number("Largest number of edits", settings.Limits.MaxEditsPerRun),
             },
             _ => options,
         };
     }
 
-    private static List<string> AskAreas(string codes) =>
+    private static List<string> AskAreas(string kinds) =>
     [
-        .. ConsolePrompt.Ask($"Areas, comma-separated, empty for all ({codes})")
+        .. ConsolePrompt.Ask($"Areas, comma-separated, empty for every region. {kinds}{Environment.NewLine}Areas")
             .Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries),
     ];
 

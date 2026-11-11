@@ -26,7 +26,7 @@ The usual order:
 2. **dev, `login`, `seed`, `plan`, `apply`, `revert`**: rehearsal on the sandbox, a separate database without the French signals. `seed` copies signals to fix as test nodes (on a small grid, not at their real place); `plan` and `apply` then work on them, and `revert` undoes the last `apply`.
 3. **`rules`**: writes the list of the corrections. Publish `corrections.wiki` on the wiki page, discuss the edit.
 4. **prod, `login`, `approve`**: once the edit is accepted, records the rule table as approved.
-5. **prod, `apply`**: a small area first (`FR-BRE`, 50 edits), then wait for feedback, then the rest area by area.
+5. **prod, `apply`**: a small area first (a department such as `14`, 50 edits), then the rest area by area.
 
 ## Commands
 
@@ -38,9 +38,9 @@ The usual order:
 | `seed` | Sandbox only: creates test nodes copied from signals to fix (50 by default). | yes, sandbox only |
 | `login` | Registers the OAuth 2 application if needed and authorizes the bot account, guided; saves the account, client ID and token. | no |
 | `rules` | Writes the list of the corrections: `corrections.md` to read it, `corrections.wiki` for the wiki page. | no |
-| `approve` | Records the current rule table as the one discussed and accepted, so `apply` accepts it. | no |
+| `approve` | Records the current rule table as the one `apply` may use on the server; `apply` refuses any other. | no |
 
-The same commands run from the command line, for scripts: `RailwayMapBot plan --server prod --area FR-BRE`. Run `RailwayMapBot --help` for the options. The source is every configured area by default (`--area FR-BRE` for one), an Overpass answer (`--input`, for example one saved by an earlier run) or a list of node ids (`--nodes`). On the sandbox, `plan` and `apply` work on the test nodes of the last `seed`.
+The same commands run from the command line, for scripts: `RailwayMapBot plan --server prod --area BRE`. Run `RailwayMapBot --help` for the options. The source is every configured region by default; `--area` takes regions or departments (`--area BRE`, `--area 14,75`, see `areaKinds`); an Overpass answer (`--input`, for example one saved by an earlier run) or a list of node ids (`--nodes`). On the sandbox, `plan` and `apply` work on the test nodes of the last `seed`.
 
 A run can be stopped with Ctrl+C: the current changeset is completed and closed first. There is no checkpoint file to manage: running the same command again resumes the work, because every decision is taken on fresh data and a fixed signal is no longer a candidate.
 
@@ -57,7 +57,9 @@ Besides: `corrections.md` and `corrections.wiki` (written by `rules` and `approv
 
 ## Settings
 
-Everything that depends on a country, a scheme or a server is in `appsettings.json`: wiki pages, key and country prefixes, rule table, scope, servers, Overpass query, areas, changeset comments and tags, policy, opt-out list and limits. Another country uses its own file, read over the default one with `--settings <path>`.
+Everything that depends on a country, a scheme or a server is in `appsettings.json`: wiki pages, key and country prefixes, rule table, scope, servers, Overpass query, areas, changeset comments and tags, policy, opt-out list and limits.
+
+The area codes are those of OpenStreetMap: a region by the end of its `ISO3166-2` code (`BRE` for `FR-BRE`), a department by its `ref:INSEE` code (`14`, `75`, `2A`, `69D`, `974`). Each kind of code is an entry of `areaKinds`: a pattern to recognize it and the Overpass area statement to select it. The regions of `areas` make a whole run, one series of changesets each; a department is named after its `name` tag in OpenStreetMap. Another country uses its own file, read over the default one with `--settings <path>`.
 
 The values of the operator are written by the program itself in the user profile, never in the repository, and there is nothing to edit by hand:
 
