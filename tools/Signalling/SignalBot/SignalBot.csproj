@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <RootNamespace>SignalBot</RootNamespace>
+    <AssemblyName>SignalBot</AssemblyName>
+    <Product>SignalBot</Product>
+    <Version>1.0.0</Version>
+    <Company>Noël Danjou EI</Company>
+    <Authors>Noël Danjou</Authors>
+    <Copyright>Copyright © 2026 Noël Danjou</Copyright>
+    <Description>Applies the fixes of the validator rule table to the railway signals already in OpenStreetMap, as a documented automated edit: dry run by default, fresh data before every upload, small changesets grouped by area, journal and revert.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.11" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="10.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\libs\Signalling.Rules\Signalling.Rules.csproj" />
+    <ProjectReference Include="..\libs\Signalling.Schema\Signalling.Schema.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="countries\*.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

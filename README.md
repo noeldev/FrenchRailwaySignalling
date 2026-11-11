@@ -76,7 +76,7 @@ In JOSM, go to **Edit** → **Preferences** → **Data Validator** → **Tag che
   }
   ```
 - `conflicts` list documented tags that must not appear together, with a `note` telling how to choose.
-- `completions` add a documented tag computed from the rest of the tagging, where it is missing: the validator warns and offers to add it, the MapRoulette challenge and RailwayMapBot add it. `match` requires the key to add as absent (`null`) and the keys of the template as present; `default` gives the template. `{key}` is the value of a key, `{key|n}` its number truncated (never rounded) to `n` decimals with a decimal comma, as written on the signs; sncf-sigmap uses the same notation for the captions it exports:
+- `completions` add a documented tag computed from the rest of the tagging, where it is missing: the validator warns and offers to add it, the MapRoulette challenge and SignalBot add it. `match` requires the key to add as absent (`null`) and the keys of the template as present; `default` gives the template. `{key}` is the value of a key, `{key|n}` its number truncated (never rounded) to `n` decimals with a decimal comma, as written on the signs; sncf-sigmap uses the same notation for the captions it exports:
   ```json
   {
     "match": {
@@ -111,13 +111,13 @@ The `tools/` directory holds C# (.NET 10) console applications that support the 
 
 - **SignalAudit** - Validates `French_Railway_Signalling.xml` and audits it against related sources. Offline, it checks the file against the JOSM tagging preset schema (the schema location is read from the preset file and downloaded automatically), verifies chunk definitions and references, confirms every icon exists on disk with exact path casing (so nothing breaks on the case-sensitive GitHub Pages host), resolves the wiki link of each item either inline or through referenced chunks, and checks structure, menu-path uniqueness and `match_expression` usage. With `--wiki` it additionally verifies over the network that wiki links and anchors resolve, and that the preset's tags match the wiki specification (the source of truth). With `--yaml` it checks that every tag the preset emits is handled by the [OpenRailwayMap-vector](https://github.com/hiddewie/OpenRailwayMap-vector) map. Results can be written as a transcript (`--log`) and a structured JSON report (`--report-json`).
 - **MapRouletteGen** - Generates the MapRoulette tag fix challenge that migrates legacy tagging and corrects mistyped values, from an Overpass export (raw data or GeoJSON), `validator/rules.json` and the same wiki pages as ValidatorGen (`--local` reads the committed backup), see [Legacy tagging migration](#legacy-tagging-migration-maproulette).
-- **RailwayMapBot** - Applies the fixes of `validator/rules.json` (and the corrections of mistyped values) to the signals already in OpenStreetMap, as a documented automated edit that follows the [Automated Edits code of conduct](https://wiki.openstreetmap.org/wiki/Automated_Edits_code_of_conduct): a guided interactive session (or one command per run), dry run by default on the sandbox server, every node read again just before its upload, conflicts never forced, changesets grouped by region in small squares, a journal of every run and a `revert` command. See its [README](tools/Signalling/RailwayMapBot/README.md).
+- **SignalBot** - Applies the fixes of `validator/rules.json` (and the corrections of mistyped values) to the signals already in OpenStreetMap, as a documented automated edit that follows the [Automated Edits code of conduct](https://wiki.openstreetmap.org/wiki/Automated_Edits_code_of_conduct): a guided interactive session (or one command per run), one profile per country, the whole country or a filter (region, department, mapper), dry run by default on the sandbox server, every node read again just before its upload, conflicts never forced, changesets in small squares, a journal of every run and a `revert` command. See its [README](tools/Signalling/SignalBot/README.md).
 - **TagInfoGen** - Generates the taginfo project file from the presets, published as `taginfo.json`.
 - **ValidatorGen** - Generates the JOSM/Osmose-QA validator rules from the wiki pages listed in its `appsettings.json` (Tagging in France and the Key pages that list the states) and from `validator/rules.json`. The pages are downloaded in a single MediaWiki API request; `--local` reads them from the committed backup instead, as the deployment does. The rules version combines the date of the newest wiki revision with a hash of the rules, so it only changes when the rules do.
 - **SvgSquarer** - Prepares the preset icons for JOSM, in place. JOSM aligns non-square icons to the left of their slot and ignores both the `viewBox` origin and `preserveAspectRatio`, so each icon with a non-square `viewBox` is turned into a square document whose content is centered by a `<g id="josm-square" transform="translate(...)">` group. `width`, `height` and `preserveAspectRatio` are removed from every icon. `--unsquare` removes that group again and restores the original `viewBox`, so the icons can be edited at their real size.
 - **WikiBackup** - Downloads the wiki pages, Lua modules, and templates into `wiki/backup/` for long-term preservation.
 
-The shared libraries under `tools/Signalling/libs/` are reused by the tools above: `Signalling.Core` (tag-rule vocabulary and local/remote source resolution), `Signalling.Presets` (JOSM preset reader), `Signalling.OrmVector` (ORM-vector YAML reader), `Signalling.Rules` (the legacy tagging rule table and its application, shared by ValidatorGen, MapRouletteGen and RailwayMapBot), `Signalling.Schema` (the documented scheme built from the wiki pages, and the correction of mistyped values against it, shared by ValidatorGen, MapRouletteGen and RailwayMapBot), `Signalling.Wiki` (OSM wiki reader), and `Signalling.Sync` (the tag-rule comparator behind the cross-source audits).
+The shared libraries under `tools/Signalling/libs/` are reused by the tools above: `Signalling.Core` (tag-rule vocabulary and local/remote source resolution), `Signalling.Presets` (JOSM preset reader), `Signalling.OrmVector` (ORM-vector YAML reader), `Signalling.Rules` (the legacy tagging rule table and its application, shared by ValidatorGen, MapRouletteGen and SignalBot), `Signalling.Schema` (the documented scheme built from the wiki pages, and the correction of mistyped values against it, shared by ValidatorGen, MapRouletteGen and SignalBot), `Signalling.Wiki` (OSM wiki reader), and `Signalling.Sync` (the tag-rule comparator behind the cross-source audits).
 
 ## Repository Structure
 
@@ -133,12 +133,12 @@ FrenchRailwaySignalling/
 │   ├── French_Railway_Signalling.xml     # Preset (single source of truth)
 │   └── icons/            # SVG icons (boards, boxes, plates, signals, signs) and SNCF_logo.png
 ├── validator/
-│   └── rules.json        # Legacy tagging replacements, conflicts and computed tags (ValidatorGen, MapRouletteGen, RailwayMapBot)
+│   └── rules.json        # Legacy tagging replacements, conflicts and computed tags (ValidatorGen, MapRouletteGen, SignalBot)
 ├── tools/
 │   ├── Signalling/       # Signalling toolset (single solution)
 │   │   ├── MapRouletteGen/ # MapRoulette legacy tagging migration challenge generator
-│   │   ├── RailwayMapBot/  # Automated edit applying the rule table to OSM (+ RailwayMapBot.Tests/)
 │   │   ├── SignalAudit/  # Preset validator + cross-source audit (ORM map, OSM wiki)
+│   │   ├── SignalBot/    # Automated edit applying the rule table to OSM (+ SignalBot.Tests/)
 │   │   ├── TagInfoGen/   # taginfo project file generator
 │   │   ├── ValidatorGen/ # JOSM/Osmose-QA validator rules generator
 │   │   └── libs/         # Shared libraries
@@ -181,5 +181,5 @@ Contributions are entirely voluntary, and the amount is left to your discretion.
 - **Wiki Content**: Available under the same license as OpenStreetMap wiki content
 - **JOSM Presets**: GPL-3.0
 - **Validator rules** and `validator/rules.json`: GPL-3.0
-- **Tools** (`MapRouletteGen`, `RailwayMapBot`, `SignalAudit`, `SvgSquarer`, `TagInfoGen`, `ValidatorGen`, `WikiBackup`) and the shared `Signalling.*` libraries: GPL-3.0
+- **Tools** (`MapRouletteGen`, `SignalAudit`, `SignalBot`, `SvgSquarer`, `TagInfoGen`, `ValidatorGen`, `WikiBackup`) and the shared `Signalling.*` libraries: GPL-3.0
 - **Icons**: Original creations or adaptations from [Wikimedia Commons](https://commons.wikimedia.org) and [Nicolas Wurtz's signalisation-rfn-svg project](https://github.com/nicolaswurtz/signalisation-rfn-svg)
