@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-11-11 22:30:59 UTC
+Last edited: 2026-11-11 23:55:36 UTC
 Last editor: Noeld
-Last edit comment: /* Sémaphore (mechanical) */ change form=sign to form=semaphore
-Backup date: 2026-11-11 23:17:11 UTC
+Last edit comment: /* General tags */ update form property description
+Backup date: 2026-11-11 23:56:55 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -31,8 +31,9 @@ All railway signals must include the following tags:
 The <code>form</code> property can take the following values:
 
 * <code>sign</code>: Sign or non-illuminated board (French: ''pancarte''). It may be reflectorized.
+* <code>semaphore</code>: Mechanical semaphore.
 * <code>board</code>: Illuminated board (French: ''tableau lumineux''), of the ''Caisson Fixe 1980'' (CF80) type.
-* <code>light</code>: Light signal (French: ''signal lumineux''), displaying different aspects through lights, or lightbox (French: ''caisson lumineux''), of the ''Tableau Indicateur 1966'' (TI66) type.
+* <code>light</code>: Light signal (French: ''signal lumineux''), displaying different aspects by means of lights; or a lightbox (French: ''caisson lumineux''), of the ''Tableau Indicateur 1966'' (TI66) type.
 
 Optional tag:
 * {{Tag|ref|}}: identifier shown on the marker plate ('''plaque de repérage''') when present.
