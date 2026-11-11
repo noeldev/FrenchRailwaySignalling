@@ -41,8 +41,13 @@ public sealed class BotSettings
 
     public OverpassSettings Overpass { get; set; } = new();
 
-    // Areas the signals are read and grouped by, one changeset series each.
+    // Areas the signals are read and grouped by, one changeset series each:
+    // the areas of a whole run, when none is given.
     public List<AreaSettings> Areas { get; set; } = [];
+
+    // Kinds of area codes the operator can give (--area), each recognized by
+    // its pattern: the configured areas, and others such as smaller ones.
+    public List<AreaKindSettings> AreaKinds { get; set; } = [];
 
     public ChangesetSettings Changeset { get; set; } = new();
 
@@ -95,14 +100,32 @@ public sealed class OverpassSettings
     // Pause between two area queries.
     public int DelaySeconds { get; set; }
 
-    // Overpass QL query, one line per entry; {area} is replaced by the code
-    // of the area. It must output the nodes with their metadata (out meta).
+    // Overpass QL query, one line per entry; {area} is replaced by the
+    // selector of the area (see AreaKindSettings). It must output the nodes
+    // with their metadata (out meta), and may output the area (.scope out
+    // tags;) to give its name.
     public List<string> Query { get; set; } = [];
+}
+
+public sealed class AreaKindSettings
+{
+    // What the code designates, shown to the operator, for example "region".
+    public string Name { get; set; } = string.Empty;
+
+    // Regular expression a code of this kind matches (whole code).
+    public string Pattern { get; set; } = string.Empty;
+
+    // Overpass area statement put in place of {area} in the query; {code} is
+    // replaced by the code.
+    public string Selector { get; set; } = string.Empty;
+
+    // Codes shown as examples to the operator.
+    public string Examples { get; set; } = string.Empty;
 }
 
 public sealed class AreaSettings
 {
-    // Value of the area for the query, for example an ISO 3166-2 code.
+    // Code of the area, as the operator types it (see AreaKindSettings).
     public string Code { get; set; } = string.Empty;
 
     // Name written in the changeset comments and in the report.

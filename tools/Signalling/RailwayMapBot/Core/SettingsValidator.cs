@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Noël Danjou
 
+using System.Text.RegularExpressions;
+
 namespace RailwayMapBot.Core;
 
 // Checks the settings before anything else runs, so a broken configuration
@@ -56,6 +58,8 @@ public static class SettingsValidator
         {
             errors.Add("areas: at least one area, each with a code and a name.");
         }
+
+        ValidateAreaKinds(errors, settings);
 
         // The policy asks for these on every changeset of an automated edit.
         if (settings.Changeset.Tags.GetValueOrDefault("bot") != "yes" && settings.Changeset.Tags.GetValueOrDefault("mechanical") != "yes")
@@ -113,6 +117,33 @@ public static class SettingsValidator
         if (value < min || value > max)
         {
             errors.Add($"{name} must be between {min} and {max} (found {value}).");
+        }
+    }
+
+    private static void ValidateAreaKinds(List<string> errors, BotSettings settings)
+    {
+        foreach (var kind in settings.AreaKinds)
+        {
+            if (string.IsNullOrWhiteSpace(kind.Name) || !kind.Selector.Contains(AreaResolver.CodePlaceholder, StringComparison.Ordinal))
+            {
+                errors.Add($"areaKinds: each kind needs a name and a selector containing {AreaResolver.CodePlaceholder}.");
+                continue;
+            }
+
+            try
+            {
+                _ = new Regex(kind.Pattern);
+            }
+            catch (ArgumentException)
+            {
+                errors.Add($"areaKinds:{kind.Name}: invalid pattern '{kind.Pattern}'.");
+            }
+        }
+
+        var unmatched = settings.Areas.Where(area => !AreaResolver.TryFindKind(settings.AreaKinds, area.Code, out _)).Select(area => area.Code).ToList();
+        if (unmatched.Count > 0)
+        {
+            errors.Add($"areas: no kind of areaKinds matches {string.Join(", ", unmatched)}.");
         }
     }
 }

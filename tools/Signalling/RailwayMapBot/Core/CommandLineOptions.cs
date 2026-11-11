@@ -210,14 +210,14 @@ public sealed record CommandLineOptions
                                                         from signals to fix (default: 50).
               RailwayMapBot login  [options]            Register and authorize the bot account
                                                         (OAuth 2), guided.
-              RailwayMapBot rules                       Write the list of the corrections, for
-                                                        the page documenting the edit.
+              RailwayMapBot rules                       Write the list of the corrections.
               RailwayMapBot approve [options]           Record the current rule table as the one
-                                                        discussed, so apply accepts it.
+                                                        apply may use on the server.
 
             Source (default: every configured area, read from Overpass; on a sandbox,
             the test nodes of the last seed):
-              --area <code>[,<code>]  Only these areas, for example FR-BRE.
+              --area <code>[,<code>]  Only these areas: a region (BRE) or a department (14),
+                                      as configured in areaKinds.
               --input <path>          Overpass answer (raw data, JSON) instead of a query,
                                       for example one saved by an earlier run.
               --nodes <path>          Node ids, one per line, read from the server.

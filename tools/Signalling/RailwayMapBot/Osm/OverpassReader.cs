@@ -7,10 +7,12 @@ namespace RailwayMapBot.Osm;
 
 // Reads the nodes of an Overpass answer or export in raw data format
 // ([out:json] ... out meta;). Without the metadata (out body) the nodes have
-// version 0, which only an offline plan accepts. Other elements are ignored.
+// version 0, which only an offline plan accepts. The name of the area comes
+// from an area element, when the query outputs one (.scope out tags;). Other
+// elements are ignored.
 public static class OverpassReader
 {
-    public static IReadOnlyList<OsmNode> Read(Stream stream)
+    public static OverpassAnswer Read(Stream stream)
     {
         using var document = JsonDocument.Parse(stream);
         if (!document.RootElement.TryGetProperty("elements", out var elements))
@@ -25,8 +27,20 @@ public static class OverpassReader
         }
 
         List<OsmNode> nodes = [];
-        foreach (var element in elements.EnumerateArray().Where(element => element.GetProperty("type").GetString() == "node"))
+        string? areaName = null;
+        foreach (var element in elements.EnumerateArray())
         {
+            var type = element.GetProperty("type").GetString();
+            if (type == "area" && areaName is null && element.TryGetProperty("tags", out var areaTags) && areaTags.TryGetProperty("name", out var name))
+            {
+                areaName = name.GetString();
+            }
+
+            if (type != "node")
+            {
+                continue;
+            }
+
             nodes.Add(new OsmNode(
                 element.GetProperty("id").GetInt64(),
                 element.TryGetProperty("version", out var version) ? version.GetInt32() : 0,
@@ -38,7 +52,7 @@ public static class OverpassReader
                 element.TryGetProperty("tags", out var tags) ? ReadTags(tags) : new Dictionary<string, string>()));
         }
 
-        return nodes;
+        return new OverpassAnswer(nodes, areaName);
     }
 
     private static Dictionary<string, string> ReadTags(JsonElement tags) =>
