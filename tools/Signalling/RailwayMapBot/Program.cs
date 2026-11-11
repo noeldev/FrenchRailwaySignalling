@@ -2,44 +2,31 @@
 // Copyright (C) 2026 Noël Danjou
 
 using System.Text;
-using Microsoft.Extensions.Configuration;
 using RailwayMapBot.Core;
 
 TrySetUtf8Output();
 
 Banner.Print();
 
-var options = CommandLineOptions.Parse(args);
-if (options is null)
-{
-    return 1;
-}
+using var stopSignal = new StopSignal();
+var repositoryRoot = FindRepositoryRoot(Directory.GetCurrentDirectory());
 
 try
 {
-    var settings = LoadConfiguration(options.SettingsPath).Get<BotSettings>() ?? new BotSettings();
-    var errors = SettingsValidator.Validate(settings);
-    if (errors.Count > 0)
+    // Without a command (or with --settings only): the interactive session.
+    if (args.Length == 0 || (args.Length == 2 && args[0] == "--settings"))
     {
-        Console.Error.WriteLine("Error: invalid settings.");
-        foreach (var error in errors)
-        {
-            Console.Error.WriteLine($"  - {error}");
-        }
+        return await new InteractiveSession(args.Length == 2 ? args[1] : null, repositoryRoot, stopSignal).RunAsync();
+    }
 
+    var options = CommandLineOptions.Parse(args);
+    if (options is null)
+    {
         return 1;
     }
 
-    // Ctrl+C asks the run to stop after the current batch, changeset closed.
-    using var stop = new CancellationTokenSource();
-    Console.CancelKeyPress += (_, e) =>
-    {
-        e.Cancel = true;
-        Console.WriteLine("Stopping after the current batch...");
-        stop.Cancel();
-    };
-
-    return await new BotApplication(settings, options, FindRepositoryRoot(Directory.GetCurrentDirectory())).RunAsync(stop.Token);
+    var settings = SettingsLoader.Load(options.SettingsPath);
+    return await new BotApplication(settings, options, repositoryRoot).RunAsync(stopSignal.Start());
 }
 catch (OperationCanceledException)
 {
@@ -50,22 +37,6 @@ catch (Exception ex)
 {
     Console.Error.WriteLine($"Error: {ex.Message}");
     return 1;
-}
-
-static IConfiguration LoadConfiguration(string? settingsPath)
-{
-    var builder = new ConfigurationBuilder()
-        .SetBasePath(AppContext.BaseDirectory)
-        .AddJsonFile("appsettings.json", optional: false)
-        // Machine-specific overrides (accounts, client ids), kept out of the repository.
-        .AddJsonFile("appsettings.local.json", optional: true);
-
-    if (settingsPath is not null)
-    {
-        builder.AddJsonFile(Path.GetFullPath(settingsPath), optional: false);
-    }
-
-    return builder.Build();
 }
 
 // Nearest parent containing a .git folder, so the tool can be launched from

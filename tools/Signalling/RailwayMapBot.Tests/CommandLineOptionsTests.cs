@@ -31,15 +31,38 @@ public sealed class CommandLineOptionsTests
     }
 
     [Fact]
+    public void Parse_leaves_the_journal_and_the_number_of_test_nodes_to_their_defaults()
+    {
+        var revert = CommandLineOptions.Parse(["revert", "--server", "dev"]);
+        var seed = CommandLineOptions.Parse(["seed", "--area", "FR-BRE"]);
+
+        Assert.NotNull(revert);
+        Assert.Null(revert.JournalPath);
+        Assert.NotNull(seed);
+        Assert.Null(seed.Limit);
+    }
+
+    [Fact]
+    public void Parse_reads_an_approve_command()
+    {
+        var options = CommandLineOptions.Parse(["approve", "--server", "prod"]);
+
+        Assert.NotNull(options);
+        Assert.Equal(BotCommand.Approve, options.Command);
+        Assert.False(options.Writes);
+    }
+
+    [Fact]
     public void Parse_rejects_what_makes_no_sense()
     {
         Assert.Null(CommandLineOptions.Parse(["delete"]));
         Assert.Null(CommandLineOptions.Parse(["1"]));
-        Assert.Null(CommandLineOptions.Parse(["revert"]));
+        Assert.Null(CommandLineOptions.Parse(["revert", "--area", "FR-BRE"]));
+        Assert.Null(CommandLineOptions.Parse(["approve", "--limit", "5"]));
         Assert.Null(CommandLineOptions.Parse(["apply", "--offline", "--input", "export.json"]));
         Assert.Null(CommandLineOptions.Parse(["plan", "--offline"]));
         Assert.Null(CommandLineOptions.Parse(["plan", "--area", "FR-BRE", "--nodes", "ids.txt"]));
-        Assert.Null(CommandLineOptions.Parse(["seed", "--input", "export.json"]));
+        Assert.Null(CommandLineOptions.Parse(["seed", "--nodes", "ids.txt"]));
         Assert.Null(CommandLineOptions.Parse(["apply", "--limit", "0"]));
     }
 }

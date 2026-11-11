@@ -30,9 +30,8 @@ public static class Banner
 
     // Product name and version, for the User-Agent header and the created_by
     // tag of the changesets.
-    public static string ProductVersion()
-    {
-        var name = typeof(Banner).Assembly.GetName();
-        return $"{name.Name ?? DefaultName}/{name.Version?.ToString(3) ?? "1.0.0"}";
-    }
+    public static string ProductVersion() =>
+        $"{ProductName()}/{typeof(Banner).Assembly.GetName().Version?.ToString(3) ?? "1.0.0"}";
+
+    public static string ProductName() => typeof(Banner).Assembly.GetName().Name ?? DefaultName;
 }

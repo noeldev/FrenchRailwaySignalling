@@ -7,39 +7,53 @@ using Signalling.Rules;
 
 namespace RailwayMapBot.Reporting;
 
-// Writes the exact list of the corrections the bot makes, as wikitext tables
-// for the page documenting the edit: an automated edit is approved for a
-// stated list of changes, not for "fixing tags". The list comes from the rule
-// table and the policy, so it cannot drift from what the bot does.
+// Writes the exact list of the corrections the bot makes: an automated edit
+// is approved for a stated list of changes, not for "fixing tags". The list
+// comes from the rule table and the policy, so it cannot drift from what the
+// bot does. Two files hold the same tables:
+// - corrections.md, to read it locally;
+// - corrections.wiki, to paste into the wiki page documenting the edit.
 public static class CorrectionListWriter
 {
-    public const string FileName = "corrections.wiki";
+    public const string MarkdownFileName = "corrections.md";
+    public const string WikiFileName = "corrections.wiki";
 
-    public static void Write(string path, RuleTable table, PolicySettings policy, string rulesHash)
+    // Writes both files into the folder and returns their paths.
+    public static IReadOnlyList<string> Write(string folder, RuleTable table, PolicySettings policy, string rulesHash)
+    {
+        var markdown = Path.Combine(folder, MarkdownFileName);
+        var wiki = Path.Combine(folder, WikiFileName);
+        File.WriteAllText(markdown, Render(new MarkdownFormat(), table, policy, rulesHash));
+        File.WriteAllText(wiki, Render(new WikiFormat(), table, policy, rulesHash));
+        return [markdown, wiki];
+    }
+
+    private static string Render(ITableFormat format, RuleTable table, PolicySettings policy, string rulesHash)
     {
         var automated = table.TagReplacements.Where(entry => !IsLeftToMappers(entry, policy)).ToList();
         var manual = table.TagReplacements.Where(entry => IsLeftToMappers(entry, policy)).ToList();
+        var code = format.Code;
 
         var text = new StringBuilder();
-        text.AppendLine($"Rule table: <code>sha256 {rulesHash}</code>.");
+        text.AppendLine($"Rule table: {code($"sha256 {rulesHash}")}.");
         text.AppendLine();
 
-        AppendTable(text, $"Renamed values ({table.ValueReplacements.Count})", ["Key", "Old value", "New value"],
-            table.ValueReplacements.Select(entry => new[] { Code(entry.Key), Code(entry.From), entry.To.Length > 0 ? Code(entry.To) : "(removed)" }));
+        format.AppendTable(text, $"Renamed values ({table.ValueReplacements.Count})", ["Key", "Old value", "New value"],
+            table.ValueReplacements.Select(entry => new[] { code(entry.Key), code(entry.From), entry.To.Length > 0 ? code(entry.To) : "(removed)" }));
 
-        AppendTable(text, $"Replaced tagging ({automated.Count})", ["Tagging found", "Change"],
-            automated.Select(entry => new[] { Tagging(entry), Change(entry) }));
+        format.AppendTable(text, $"Replaced tagging ({automated.Count})", ["Tagging found", "Change"],
+            automated.Select(entry => new[] { Tagging(entry, code), Change(entry, code) }));
 
-        AppendTable(text, $"Redundant tags removed ({table.Redundancies.Count})", ["Tagging found", "Change", "Reason"],
-            table.Redundancies.Select(entry => new[] { Tagging(entry), Change(entry), entry.Note ?? string.Empty }));
+        format.AppendTable(text, $"Redundant tags removed ({table.Redundancies.Count})", ["Tagging found", "Change", "Reason"],
+            table.Redundancies.Select(entry => new[] { Tagging(entry, code), Change(entry, code), entry.Note ?? string.Empty }));
 
-        AppendTable(text, $"Computed tags added ({table.Completions.Count})", ["Tagging found", "Change"],
-            table.Completions.Select(entry => new[] { Tagging(entry), Change(entry) }));
+        format.AppendTable(text, $"Computed tags added ({table.Completions.Count})", ["Tagging found", "Change"],
+            table.Completions.Select(entry => new[] { Tagging(entry, code), Change(entry, code) }));
 
-        AppendTable(text, $"Not automated, left to mappers ({manual.Count})", ["Tagging found", "Reason"],
-            manual.Select(entry => new[] { Tagging(entry), Reason(entry) }));
+        format.AppendTable(text, $"Not automated, left to mappers ({manual.Count})", ["Tagging found", "Reason"],
+            manual.Select(entry => new[] { Tagging(entry, code), Reason(entry) }));
 
-        File.WriteAllText(path, text.ToString());
+        return text.ToString();
     }
 
     // A replacement that only reports, guesses, or needs a manual complement.
@@ -53,34 +67,64 @@ public static class CorrectionListWriter
         : entry.Suggest ? "the replacement is a guess"
         : $"needs a manual complement: {entry.Note}";
 
-    private static string Tagging(TagReplacement entry) =>
-        string.Join(" + ", entry.Match.Select(tag => tag.Value is null ? $"no {Code(tag.Key)}" : Code($"{tag.Key}={tag.Value}")));
+    private static string Tagging(TagReplacement entry, Func<string, string> code) =>
+        string.Join(" + ", entry.Match.Select(tag => tag.Value is null ? $"no {code(tag.Key)}" : code($"{tag.Key}={tag.Value}")));
 
-    private static string Change(TagReplacement entry)
+    private static string Change(TagReplacement entry, Func<string, string> code)
     {
-        var steps = entry.Rename.Select(tag => $"rename {Code(tag.Key)} to {Code(tag.Value)}")
-            .Concat(entry.Remove.Select(key => $"remove {Code(key)}"))
-            .Concat(entry.Set.Select(tag => $"set {Code($"{tag.Key}={tag.Value}")}"))
-            .Concat(entry.Default.Select(tag => $"set {Code($"{tag.Key}={tag.Value}")} if absent"));
+        var steps = entry.Rename.Select(tag => $"rename {code(tag.Key)} to {code(tag.Value)}")
+            .Concat(entry.Remove.Select(key => $"remove {code(key)}"))
+            .Concat(entry.Set.Select(tag => $"set {code($"{tag.Key}={tag.Value}")}"))
+            .Concat(entry.Default.Select(tag => $"set {code($"{tag.Key}={tag.Value}")} if absent"));
 
         return string.Join("; ", steps);
     }
 
-    // A pipe would end the table cell.
-    private static string Code(string value) => $"<code>{value.Replace("|", "&#124;", StringComparison.Ordinal)}</code>";
-
-    private static void AppendTable(StringBuilder text, string title, string[] columns, IEnumerable<string[]> rows)
+    private interface ITableFormat
     {
-        text.AppendLine("{| class=\"wikitable mw-collapsible mw-collapsed\"");
-        text.AppendLine($"|+ {title}");
-        text.AppendLine("! " + string.Join(" !! ", columns));
-        foreach (var row in rows)
-        {
-            text.AppendLine("|-");
-            text.AppendLine("| " + string.Join(" || ", row));
-        }
+        string Code(string value);
 
-        text.AppendLine("|}");
-        text.AppendLine();
+        void AppendTable(StringBuilder text, string title, string[] columns, IEnumerable<string[]> rows);
+    }
+
+    // Collapsed wikitext tables. A pipe would end the table cell.
+    private sealed class WikiFormat : ITableFormat
+    {
+        public string Code(string value) => $"<code>{value.Replace("|", "&#124;", StringComparison.Ordinal)}</code>";
+
+        public void AppendTable(StringBuilder text, string title, string[] columns, IEnumerable<string[]> rows)
+        {
+            text.AppendLine("{| class=\"wikitable mw-collapsible mw-collapsed\"");
+            text.AppendLine($"|+ {title}");
+            text.AppendLine("! " + string.Join(" !! ", columns));
+            foreach (var row in rows)
+            {
+                text.AppendLine("|-");
+                text.AppendLine("| " + string.Join(" || ", row));
+            }
+
+            text.AppendLine("|}");
+            text.AppendLine();
+        }
+    }
+
+    // Markdown tables, one section each. A pipe would end the table cell.
+    private sealed class MarkdownFormat : ITableFormat
+    {
+        public string Code(string value) => $"`{value.Replace("|", "\\|", StringComparison.Ordinal)}`";
+
+        public void AppendTable(StringBuilder text, string title, string[] columns, IEnumerable<string[]> rows)
+        {
+            text.AppendLine($"## {title}");
+            text.AppendLine();
+            text.AppendLine("| " + string.Join(" | ", columns) + " |");
+            text.AppendLine("|" + string.Concat(columns.Select(_ => "---|")));
+            foreach (var row in rows)
+            {
+                text.AppendLine("| " + string.Join(" | ", row) + " |");
+            }
+
+            text.AppendLine();
+        }
     }
 }

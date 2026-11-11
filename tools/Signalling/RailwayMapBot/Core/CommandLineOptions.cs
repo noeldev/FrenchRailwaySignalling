@@ -11,11 +11,13 @@ public enum BotCommand
     Seed,
     Login,
     Rules,
+    Approve,
 }
 
-// Parses and holds the command line. Parse returns null when the arguments are
-// invalid or when help was requested, so Program can exit early.
-public sealed class CommandLineOptions
+// Parses and holds the command line of one command. Parse returns null when
+// the arguments are invalid or when help was requested, so Program can exit
+// early. The interactive session builds the same options from its questions.
+public sealed record CommandLineOptions
 {
     public required BotCommand Command { get; init; }
 
@@ -34,7 +36,7 @@ public sealed class CommandLineOptions
     // File of node ids (one per line) read instead of querying Overpass.
     public string? NodesPath { get; init; }
 
-    // Journal of the run to revert.
+    // Journal of the run to revert; the last apply run of the server when null.
     public string? JournalPath { get; init; }
 
     // Largest number of edits (plan, apply, revert) or of test nodes (seed).
@@ -138,10 +140,9 @@ public sealed class CommandLineOptions
         var error = command switch
         {
             _ when sources > 1 => "Use only one of --area, --input and --nodes.",
-            BotCommand.Revert when journalPath is null => "Missing journal: the journal.jsonl of the run to revert.",
-            BotCommand.Revert or BotCommand.Login or BotCommand.Rules when sources > 0 => $"--area, --input and --nodes do not apply to {args[0]}.",
+            BotCommand.Revert or BotCommand.Login or BotCommand.Rules or BotCommand.Approve when sources > 0 => $"--area, --input and --nodes do not apply to {args[0]}.",
+            BotCommand.Login or BotCommand.Rules or BotCommand.Approve when limit is not null => $"--limit does not apply to {args[0]}.",
             BotCommand.Seed when nodesPath is not null => "--nodes does not apply to seed.",
-            BotCommand.Seed when limit is null => "Missing --limit: the number of test nodes to create.",
             not BotCommand.Plan when offline => "--offline only applies to plan.",
             BotCommand.Plan when offline && inputPath is null => "--offline needs --input.",
             _ => null,
@@ -195,28 +196,36 @@ public sealed class CommandLineOptions
             OpenStreetMap, as a documented automated edit. Nothing is written without the
             apply, revert or seed command, and the sandbox server is the default.
 
-            Usage:
-              RailwayMapBot plan   [source] [options]   Dry run: report what apply would do.
-              RailwayMapBot apply  [source] [options]   Upload the fixes, area by area.
-              RailwayMapBot revert <journal> [options]  Restore the tags a run replaced, on the
-                                                        nodes nobody edited since.
-              RailwayMapBot seed   [source] --limit <n> Create test nodes on a sandbox server,
-                                                        copied from signals to fix.
-              RailwayMapBot login  [options]            Authorize the bot account (OAuth 2).
-              RailwayMapBot rules                       Write the list of the corrections (wikitext)
-                                                        for the page documenting the edit.
+            Without a command, the program asks for the server, then for each command.
 
-            Source (default: every configured area, read from Overpass):
+            Usage:
+              RailwayMapBot                             Interactive session.
+              RailwayMapBot plan   [source] [options]   Dry run: report what apply would do,
+                                                        nothing written.
+              RailwayMapBot apply  [source] [options]   Upload the fixes, area by area.
+              RailwayMapBot revert [journal] [options]  Restore the tags a run replaced, on the
+                                                        nodes nobody edited since (default: the
+                                                        last apply run of the server).
+              RailwayMapBot seed   [source] [options]   Sandbox only: create test nodes copied
+                                                        from signals to fix (default: 50).
+              RailwayMapBot login  [options]            Register and authorize the bot account
+                                                        (OAuth 2), guided.
+              RailwayMapBot rules                       Write the list of the corrections, for
+                                                        the page documenting the edit.
+              RailwayMapBot approve [options]           Record the current rule table as the one
+                                                        discussed, so apply accepts it.
+
+            Source (default: every configured area, read from Overpass; on a sandbox,
+            the test nodes of the last seed):
               --area <code>[,<code>]  Only these areas, for example FR-BRE.
-              --input <path>          Overpass export (raw data, JSON) instead of a query.
-              --nodes <path>          Node ids, one per line, read from the server (the
-                                      file written by seed, for example).
+              --input <path>          Overpass answer (raw data, JSON) instead of a query,
+                                      for example one saved by an earlier run.
+              --nodes <path>          Node ids, one per line, read from the server.
 
             Options:
               --server <name>         Server profile of the settings (default: the
                                       configured one, the sandbox).
-              --limit <n>             Largest number of edits of the run (default: the
-                                      configured one).
+              --limit <n>             Largest number of edits of the run, or of test nodes.
               --offline               plan only, with --input: do not read the server.
               --yes                   Do not ask for confirmation before writing.
               --settings <path>       Settings file read over appsettings.json (another

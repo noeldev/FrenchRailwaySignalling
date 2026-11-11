@@ -16,6 +16,9 @@ public static class RunReport
 
     private const int MaxMappers = 30;
 
+    // Computed values (captions...) make many changes of one node each.
+    private const int MaxTagChanges = 100;
+
     private static readonly IReadOnlyDictionary<SkipReason, string> SkipLabels = new Dictionary<SkipReason, string>
     {
         [SkipReason.NothingToFix] = "Nothing to fix any more (already fixed since the nodes were listed)",
@@ -75,9 +78,10 @@ public static class RunReport
         }
 
         text.AppendLine();
-        AppendCounts(text, "Corrections made", "Correction", summary.Corrections, int.MaxValue);
+        AppendCounts(text, "Tag changes", "Change (+ added, - removed, ~ changed)", summary.TagChanges, MaxTagChanges);
+        AppendCounts(text, "Rules applied", "Rule (tagging found)", summary.Corrections, int.MaxValue);
         AppendSkips(text, summary);
-        AppendCounts(text, "Corrections left to a human", "Correction", summary.ReviewCorrections, int.MaxValue);
+        AppendCounts(text, "Rules left to a human", "Rule (tagging found)", summary.ReviewCorrections, int.MaxValue);
         AppendCounts(text, "Last mappers of the edited nodes", "Mapper", summary.Mappers, MaxMappers);
 
         File.WriteAllText(path, text.ToString());

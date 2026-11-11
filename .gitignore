@@ -28,5 +28,6 @@
 /data/
 
 # Local output folders
+/bot/
 /tools/Signalling/audit/
 /tools/SvgSquarer/icon-backup/

@@ -9,7 +9,8 @@ using RailwayMapBot.Reporting;
 
 namespace RailwayMapBot.Execution;
 
-// Runs a planner over the listed nodes, area by area and batch by batch:
+// Runs a planner over the listed nodes, area by area and batch by batch (see
+// ChangesetBatcher):
 // 1. read the nodes of the batch again from the server, just before deciding;
 // 2. decide on that fresh data what to edit and what to skip;
 // 3. write the edits to the journal (and to an osmChange file), then upload
@@ -41,7 +42,7 @@ public sealed class EditRunner(
             foreach (var group in groups)
             {
                 summary.Areas.Add(new AreaSummary(group.Name, group.Listed, group.Nodes.Count));
-                foreach (var chunk in group.Nodes.Chunk(limits.MaxNodesPerChangeset))
+                foreach (var chunk in ChangesetBatcher.Split(group.Nodes, limits))
                 {
                     if (stop.IsCancellationRequested)
                     {

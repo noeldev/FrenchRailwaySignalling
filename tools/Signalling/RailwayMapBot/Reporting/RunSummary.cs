@@ -12,6 +12,9 @@ public sealed class RunSummary
 
     public List<ChangesetSummary> Changesets { get; } = [];
 
+    // Nodes per tag change (see TagChanges), among the edited ones.
+    public Dictionary<string, int> TagChanges { get; } = new(StringComparer.Ordinal);
+
     // Nodes per correction, among the edited ones.
     public Dictionary<string, int> Corrections { get; } = new(StringComparer.Ordinal);
 
@@ -33,6 +36,11 @@ public sealed class RunSummary
     {
         Areas[^1].Edits++;
         Count(Mappers, decision.Node.User);
+        foreach (var change in Reporting.TagChanges.Describe(decision.Node.Tags, decision.NewTags!))
+        {
+            Count(TagChanges, change);
+        }
+
         foreach (var correction in decision.Corrections)
         {
             Count(Corrections, correction);
