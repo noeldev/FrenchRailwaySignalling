@@ -7,22 +7,25 @@ using RailwayMapBot.Osm;
 namespace RailwayMapBot.Planning;
 
 // Lists the nodes to check, grouped by area, from one of three sources: an
-// Overpass query per area (the normal case), an Overpass export, or a file of
-// node ids read from the OSM server.
+// Overpass query per area (the normal case), an Overpass answer saved before,
+// or a file of node ids read from the OSM server. The answers of Overpass are
+// saved in the given folder, when there is one.
 public sealed class CandidateLoader(OverpassClient overpass, OsmApiClient api, BotSettings settings)
 {
-    public async Task<IReadOnlyList<KeyValuePair<string, IReadOnlyList<OsmNode>>>> LoadAsync(CommandLineOptions options, CancellationToken cancellationToken)
+    public const string AnswerFilePrefix = "overpass-";
+
+    public async Task<IReadOnlyList<KeyValuePair<string, IReadOnlyList<OsmNode>>>> LoadAsync(CommandLineOptions options, string? saveFolder, CancellationToken cancellationToken)
     {
         if (options.InputPath is { } inputPath)
         {
-            Console.WriteLine($"Reading nodes from '{inputPath}'...");
+            Console.WriteLine($"Reading nodes from '{Path.GetFullPath(inputPath)}'...");
             await using var stream = File.OpenRead(inputPath);
             return [KeyValuePair.Create(Path.GetFileName(inputPath), OverpassReader.Read(stream))];
         }
 
         if (options.NodesPath is { } nodesPath)
         {
-            Console.WriteLine($"Reading the nodes listed in '{nodesPath}' from the server...");
+            Console.WriteLine($"Reading the nodes listed in '{Path.GetFullPath(nodesPath)}' from the server...");
             var ids = File.ReadLines(nodesPath).Where(line => !string.IsNullOrWhiteSpace(line)).Select(line => long.Parse(line.Trim()));
             return [KeyValuePair.Create(Path.GetFileName(nodesPath), await api.GetNodesAsync(ids, cancellationToken))];
         }
@@ -36,7 +39,8 @@ public sealed class CandidateLoader(OverpassClient overpass, OsmApiClient api, B
             }
 
             Console.WriteLine($"Listing the nodes of {area.Name} ({area.Code}) with Overpass...");
-            var nodes = await overpass.QueryAsync(area.Code, cancellationToken);
+            var savePath = saveFolder is null ? null : Path.Combine(saveFolder, $"{AnswerFilePrefix}{area.Code}.json");
+            var nodes = await overpass.QueryAsync(area.Code, savePath, cancellationToken);
             if (nodes.Count == 0)
             {
                 Console.WriteLine($"  Warning: no node found in {area.Code}; check the area code.");

@@ -76,6 +76,11 @@ public static class SettingsValidator
         var limits = settings.Limits;
         RequireRange(errors, limits.MaxEditsPerRun, 1, int.MaxValue, "limits:maxEditsPerRun");
         RequireRange(errors, limits.MaxNodesPerChangeset, 1, MaxChangesetSize, "limits:maxNodesPerChangeset");
+        if (limits.MaxChangesetSpanDegrees is <= 0 or > 180)
+        {
+            errors.Add($"limits:maxChangesetSpanDegrees must be above 0 and at most 180 (found {limits.MaxChangesetSpanDegrees}).");
+        }
+
         RequireRange(errors, limits.NodesPerRequest, 1, 700, "limits:nodesPerRequest");
         RequireRange(errors, limits.DelayBetweenChangesetsSeconds, 0, 3600, "limits:delayBetweenChangesetsSeconds");
         RequireRange(errors, limits.ConflictRetries, 0, 10, "limits:conflictRetries");

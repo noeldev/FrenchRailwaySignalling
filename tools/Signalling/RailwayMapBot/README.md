@@ -11,80 +11,86 @@ It is written to follow the [Automated Edits code of conduct](https://wiki.opens
 | Only trivial, certain corrections | Fixes that guess (`suggest`) or need a manual complement (a rule `note`) are left to a human, as are conflicts, blocked rules and undocumented tags (`FixPlanner`, `policy` settings). |
 | Respect the mappers | A node edited in the last 24 hours is left alone (`quietPeriodHours`). Mappers and nodes can be opted out (`optOut`): a node an opted-out mapper ever edited is skipped (its history is read), not only the nodes they edited last. |
 | Start small, get feedback | The sandbox server is the default; `plan` is a dry run; `apply` is bounded by `--limit` (200 by default) and `--area`. |
-| Changesets grouped in small regions, good comments | One series of changesets per area (French regions), at most 500 nodes each, comment in French naming the area. A node is edited once, with all its fixes. |
+| Changesets grouped in small regions, good comments | One series of changesets per area (French regions), split by squares of 1 degree (`maxChangesetSpanDegrees`, under the bounding box limit the server sets for new accounts) and at most 500 nodes each, comment in French naming the area. A node is edited once, with all its fixes. |
 | Identify the edits | Dedicated account, checked before the first write; `bot=yes`, `mechanical=yes`, `created_by` and `description` (the wiki page) on every changeset; settings without them are refused. |
 | Be able to revert | Every run writes a journal with the tags before and after; `revert` restores them on the nodes nobody edited since. |
-| Document what was done | Every run writes `report.md`: areas, changesets with links, corrections and counts. |
+| Document what was done | Every run writes `report.md`: areas, changesets with links, tag changes, rules applied and counts. |
+
+## Getting started
+
+Start the program without arguments (in Visual Studio: F5 on the project). It asks for the server, offers to log in, then asks for one command after the other, with the few values each one needs, and tells after each command which files it wrote and what to check in them. Nothing is written to a server without a confirmation where the name of the server must be typed.
+
+The usual order:
+
+1. **prod, `plan`**: dry run on the real data, nothing written. Read `report.md`, open a few `changes-NNN.osc` in JOSM (never upload them).
+2. **dev, `login`, `seed`, `plan`, `apply`, `revert`**: rehearsal on the sandbox, a separate database without the French signals. `seed` copies signals to fix as test nodes (on a small grid, not at their real place); `plan` and `apply` then work on them, and `revert` undoes the last `apply`.
+3. **`rules`**: writes the list of the corrections. Publish `corrections.wiki` on the wiki page, discuss the edit.
+4. **prod, `login`, `approve`**: once the edit is accepted, records the rule table as approved.
+5. **prod, `apply`**: a small area first (`FR-BRE`, 50 edits), then wait for feedback, then the rest area by area.
 
 ## Commands
 
-```
-RailwayMapBot plan   [source] [options]    Dry run: report what apply would do.
-RailwayMapBot apply  [source] [options]    Upload the fixes, area by area.
-RailwayMapBot revert <journal> [options]   Restore the tags a run replaced.
-RailwayMapBot seed   [source] --limit <n>  Create test nodes on a sandbox server.
-RailwayMapBot login  [options]             Authorize the bot account (OAuth 2).
-RailwayMapBot rules                        Write the list of the corrections (wikitext).
-```
+| Command | What it does | Writes to the server |
+|---|---|---|
+| `plan` | Dry run: the report of what `apply` would do. | no |
+| `apply` | Uploads the fixes, area by area. | yes |
+| `revert` | Restores the tags the last `apply` run replaced (or the run of a given journal), on the nodes nobody edited since. | yes |
+| `seed` | Sandbox only: creates test nodes copied from signals to fix (50 by default). | yes, sandbox only |
+| `login` | Registers the OAuth 2 application if needed and authorizes the bot account, guided; saves the account, client ID and token. | no |
+| `rules` | Writes the list of the corrections: `corrections.md` to read it, `corrections.wiki` for the wiki page. | no |
+| `approve` | Records the current rule table as the one discussed and accepted, so `apply` accepts it. | no |
 
-Run `RailwayMapBot --help` for the options. The source is every configured area by default (`--area FR-BRE` for one), an Overpass export (`--input`) or a list of node ids (`--nodes`).
+The same commands run from the command line, for scripts: `RailwayMapBot plan --server prod --area FR-BRE`. Run `RailwayMapBot --help` for the options. The source is every configured area by default (`--area FR-BRE` for one), an Overpass answer (`--input`, for example one saved by an earlier run) or a list of node ids (`--nodes`). On the sandbox, `plan` and `apply` work on the test nodes of the last `seed`.
 
 A run can be stopped with Ctrl+C: the current changeset is completed and closed first. There is no checkpoint file to manage: running the same command again resumes the work, because every decision is taken on fresh data and a fixed signal is no longer a candidate.
 
 ## Output
 
-Each run writes a folder under `bot/runs/` (setting `output`), named after its start time, command and server:
+Everything is written under `bot/runs/` (setting `output`, ignored by git). Each run writes a folder named after its start time, command and server (`offline` for an offline plan):
 
-- `report.md` - the report to publish: areas, changesets (with links to the changeset and to OSMCha), corrections made, nodes left untouched and why, last mappers of the edited nodes;
-- `journal.jsonl` - one JSON object per line: the run, each batch with the tags of every node before and after (written before the upload), the result of the upload, each skipped node with its reason. This is the input of `revert`;
-- `changes-NNN.osc` - the osmChange document of each batch, as uploaded (or as it would be, in a dry run). JOSM opens these files, which is a convenient way to review a dry run.
+- `report.md` - the report to publish: areas, changesets (with links to the changeset and to OSMCha), tag changes (`+` added, `-` removed, `~` changed), rules applied, nodes left untouched and why, last mappers of the edited nodes;
+- `changes-NNN.osc` - the osmChange document of each batch, as uploaded (or as it would be, in a dry run). JOSM opens these files, which is a convenient way to review a dry run;
+- `journal.jsonl` - one JSON object per line: the run, each batch with the tags of every node before and after (written before the upload), the result of the upload, each skipped node with its reason. This is the input of `revert`: keep the journals of the real runs;
+- `overpass-<area>.json` - the data received from Overpass, which `plan --offline --input <file>` reads again.
+
+Besides: `corrections.md` and `corrections.wiki` (written by `rules` and `approve`), and `seeded-nodes-<server>.txt`, the ids of the test nodes of the last `seed`. The folders of dry runs can be deleted at any time.
 
 ## Settings
 
 Everything that depends on a country, a scheme or a server is in `appsettings.json`: wiki pages, key and country prefixes, rule table, scope, servers, Overpass query, areas, changeset comments and tags, policy, opt-out list and limits. Another country uses its own file, read over the default one with `--settings <path>`.
 
-The accounts and client ids go into `appsettings.local.json`, next to `appsettings.json` (ignored by git):
+The values of the operator are written by the program itself in the user profile, never in the repository, and there is nothing to edit by hand:
 
-```json
-{
-  "servers": {
-    "dev": { "account": "RailwayMapBot", "clientId": "..." },
-    "prod": { "account": "RailwayMapBot", "clientId": "..." }
+- `%APPDATA%\RailwayMapBot\settings.json` - the account (its display name, not the e-mail address) and the client ID of each server, written by `login`, and the approved rule table, written by `approve`. It is read over `appsettings.json` and has the same layout:
+
+  ```json
+  {
+    "servers": {
+      "dev": { "account": "...", "clientId": "..." },
+      "prod": { "account": "...", "clientId": "...", "approvedRulesSha256": "..." }
+    }
   }
-}
-```
+  ```
 
-The access tokens are stored by `login` in the user profile (`%APPDATA%\RailwayMapBot\tokens.json`), never in the repository.
+- `%APPDATA%\RailwayMapBot\tokens.json` - the access tokens, written by `login`.
 
-## Setting up an account (once per server)
+## Accounts
 
-The sandbox (`dev`, https://master.apis.dev.openstreetmap.org) and the production server (`prod`, https://www.openstreetmap.org) do not share accounts: do these steps on each, starting with the sandbox.
+The sandbox (`dev`, https://master.apis.dev.openstreetmap.org) and the production server (`prod`, https://www.openstreetmap.org) do not share accounts: create the account on each, starting with the sandbox. On `prod`, the edit is made with a dedicated account: its name is the one of the wiki page `Automated edits/<name>`; on its profile, say what it is and link to that page.
 
-1. Create the dedicated account on the website of the server (Sign Up). Its name is the one of the wiki page `Automated edits/<name>`. On its profile, say what it is and link to that page.
-2. Logged in with that account, open `<website>/oauth2/applications/new` (My Settings, then "OAuth 2 applications", then "Register new application").
-3. Fill the form: Name `RailwayMapBot`; Redirect URIs `urn:ietf:wg:oauth:2.0:oob`; leave "Confidential application?" unchecked; check "Read user preferences" (`read_prefs`) and "Modify the map" (`write_api`). Click "Register".
-4. Copy the Client ID into `appsettings.local.json` (`servers:<name>:clientId`), with the account name (`servers:<name>:account`).
-5. Run `RailwayMapBot login --server dev` (or `prod`): open the printed address in the browser where the bot account is logged in, click "Authorize", and paste the code shown into the console.
+`login` does the rest: it opens the registration page of the OAuth 2 application and shows the values to type (the application is public: no client secret is used), asks for the client ID, opens the authorization page, asks for the code shown, then checks and records the name of the account.
 
-## Suggested steps
-
-Each step produces a report that can be published before the next one.
-
-1. Dry run on the real data, nothing written: `RailwayMapBot plan --server prod` (or `--area FR-BRE` first).
-2. Rehearsal on the sandbox, which has no French signals: `RailwayMapBot seed --area FR-BRE --limit 50` copies 50 signals to fix as test nodes, then `plan` and `apply` with `--nodes <seeded-nodes.txt>`, then `revert <journal.jsonl>`.
-3. Once the edit is documented and accepted: copy the hash printed by `RailwayMapBot rules` into `servers:prod:approvedRulesSha256` (in `appsettings.local.json`), then a small real run, `RailwayMapBot apply --server prod --area FR-BRE --limit 50`, then wait for feedback.
-4. The rest, area by area: `RailwayMapBot apply --server prod --area FR-BRE --limit 1000`, and so on.
-
-A new account is limited by the server in the number of edits per hour. When the limit is reached the run stops cleanly; run the same command again later.
+A new account is limited by the server in the number of edits per hour and in the size of the area of a changeset (hence the batches by squares). When the edit rate limit is reached the run stops cleanly; run the same command again later.
 
 ## When the rule table changes
 
-The edit is discussed for a stated list of corrections. After any change of `validator/rules.json`, `apply --server prod` refuses to run until the change is documented and accepted:
+The edit is discussed for a stated list of corrections. After any change of `validator/rules.json`, `apply` on `prod` refuses to run until the change is documented and accepted:
 
-1. Run `RailwayMapBot rules`: it writes `bot/runs/corrections.wiki` and prints the new hash.
-2. Replace the content of the wiki page `Automated edits/<account>/Corrections` with that file, and announce the change in the discussion.
-3. Once accepted, set the new hash in `servers:prod:approvedRulesSha256`.
+1. Run `rules` and replace the content of the wiki page `Automated edits/<account>/Corrections` with `corrections.wiki`; announce the change in the discussion.
+2. Once accepted, run `approve` on `prod`.
+
+The hash of the rule table is computed with LF line ends, so it is the same whatever the line ends of the checkout.
 
 ## Tests
 
-`RailwayMapBot.Tests` runs the whole pipeline against an in-memory OSM API (`FakeOsmServer`) that refuses version conflicts like the real one: fresh data, conflicts, limits, opt-out, dry run, journal and revert.
+`RailwayMapBot.Tests` runs the whole pipeline against an in-memory OSM API (`FakeOsmServer`) that refuses version conflicts like the real one: fresh data, conflicts, limits, opt-out, dry run, journal and revert; and the parts around it: command line, settings, changeset batches, test nodes, tag changes.

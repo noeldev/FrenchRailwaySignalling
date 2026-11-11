@@ -2,6 +2,7 @@
 // Copyright (C) 2026 Noël Danjou
 
 using System.Text.Json;
+using RailwayMapBot.Core;
 
 namespace RailwayMapBot.Auth;
 
@@ -9,8 +10,7 @@ namespace RailwayMapBot.Auth;
 // the repository, so it is never committed.
 public sealed class TokenStore(string path)
 {
-    public static string DefaultPath => Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RailwayMapBot", "tokens.json");
+    public static string DefaultPath => UserProfile.TokensPath;
 
     public string? Find(string server) => Load().GetValueOrDefault(server);
 

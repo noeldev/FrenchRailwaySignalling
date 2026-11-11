@@ -5,10 +5,10 @@ using Signalling.Schema;
 
 namespace RailwayMapBot.Core;
 
-// Configuration bound from appsettings.json, the gitignored
-// appsettings.local.json override and an optional --settings file (another
-// country, another scheme). Nothing about a country or a server lives in the
-// code. Property names are matched to the JSON keys case-insensitively.
+// Configuration bound from appsettings.json, an optional --settings file
+// (another country, another scheme) and the settings of the operator in the
+// user profile (see SettingsLoader). Nothing about a country or a server lives
+// in the code. Property names are matched to the JSON keys case-insensitively.
 public sealed class BotSettings
 {
     // Wiki pages documenting the scheme, the same as ValidatorGen's. The bot
@@ -65,11 +65,13 @@ public sealed class ServerSettings
     // Optional changeset review link of the report, with an {id} placeholder.
     public string ReviewUrl { get; set; } = string.Empty;
 
-    // Dedicated account the bot must be logged in with; any other one is
-    // refused before the first write.
+    // Display name (not the e-mail address) of the dedicated account the bot
+    // must be logged in with; any other one is refused before the first
+    // write. Set by login, in the settings of the operator.
     public string Account { get; set; } = string.Empty;
 
-    // Client ID of the OAuth 2 application registered on that account.
+    // Client ID of the OAuth 2 application registered on that account. Set by
+    // login, in the settings of the operator.
     public string ClientId { get; set; } = string.Empty;
 
     // True on a sandbox only: lets the seed command create test nodes.
@@ -77,7 +79,8 @@ public sealed class ServerSettings
 
     // SHA-256 of the rule table the community discussion was held on. When
     // set, apply refuses any other rule table: a change of the corrections
-    // must be documented and discussed first. Required outside a sandbox.
+    // must be documented and discussed first. Required outside a sandbox. Set
+    // by approve, in the settings of the operator.
     public string ApprovedRulesSha256 { get; set; } = string.Empty;
 
     // A node edited less than this long ago is left alone, since its mapper
@@ -148,6 +151,12 @@ public sealed class LimitSettings
     public int MaxEditsPerRun { get; set; }
 
     public int MaxNodesPerChangeset { get; set; }
+
+    // Largest width and height of the area of one changeset, in degrees. The
+    // OSM server refuses wider changesets from a new account (about 1.5
+    // degrees at first), so the nodes of an area are batched by squares of
+    // this size.
+    public double MaxChangesetSpanDegrees { get; set; } = 1.0;
 
     // Node ids of one read request (the URL length is limited).
     public int NodesPerRequest { get; set; }
