@@ -56,7 +56,7 @@ try
     Console.WriteLine(
         $"Wrote '{options.OutputPath}' version {version}: "
         + $"{table.ValueReplacements.Count} value replacements, {table.TagReplacements.Count} tag replacements, "
-        + $"{table.Conflicts.Count} conflicts.");
+        + $"{table.Conflicts.Count} conflicts, {table.Completions.Count} completions.");
     return 0;
 }
 catch (Exception ex)
