@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.42_2026-11-03"
+    version="1.43_2026-11-12"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -158,16 +158,16 @@
 		<link wiki="OpenRailwayMap/Tagging_in_France#Carré_(dwarf)" />
 	</chunk>
 
-	<!-- Mechanical Stop Signals (form=sign) -->
+	<!-- Mechanical Stop Signals -->
 	<chunk id="cat_mechanical_stop_signals">
 		<reference ref="base_with_plate" />
 		<reference ref="main_idreseau" />
-		<key key="railway:signal:main:form" value="sign" />
 	</chunk>
 
-	<!-- Mechanical Carré Signals -->
+	<!-- Mechanical Carré Signals (form=sign) -->
 	<chunk id="cat_mechanical_carre">
 		<reference ref="cat_mechanical_stop_signals" />
+		<key key="railway:signal:main:form" value="sign" />
 		<reference ref="carre_plates" />
 	</chunk>
 
@@ -3078,6 +3078,7 @@
 				<space />
 				<key key="railway:signal:main" value="FR:S" />
 				<reference ref="cat_mechanical_stop_signals" />
+				<key key="railway:signal:main:form" value="semaphore" />
 				<link wiki="OpenRailwayMap/Tagging_in_France#Sémaphore_(mechanical)" />
 			</item>
 
