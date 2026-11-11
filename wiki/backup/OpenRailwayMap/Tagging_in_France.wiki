@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: OpenRailwayMap/Tagging_in_France
-Last edited: 2026-11-03 00:19:10 UTC
+Last edited: 2026-11-11 22:30:59 UTC
 Last editor: Noeld
-Last edit comment: /* Tableau Lumineux de Correspondance */ add link to red-and-white_checkered_stop_marker
-Backup date: 2026-11-03 00:42:36 UTC
+Last edit comment: /* Sémaphore (mechanical) */ change form=sign to form=semaphore
+Backup date: 2026-11-11 23:17:11 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 
@@ -29,10 +29,10 @@ All railway signals must include the following tags:
 * {{TagKey|railway:signal:main}}''':ref'''=123456 where ''main'' is an example of a signal category and ''123456'' an '''idreseau''' identifier assigned by [https://www.sncf-reseau.com/ SNCF Réseau]. The '''idreseau''' value is unique for each physical signalling element represented by the node.
 
 The <code>form</code> property can take the following values:
-* <code>sign</code>: Sign or non-illuminated board (French: ''pancarte'').
-* <code>board</code>: Illuminated board (French: ''tableau lumineux'').
-* <code>light</code>: Light signal or lightbox (French: ''signal lumineux'' or ''caisson lumineux'').
 
+* <code>sign</code>: Sign or non-illuminated board (French: ''pancarte''). It may be reflectorized.
+* <code>board</code>: Illuminated board (French: ''tableau lumineux''), of the ''Caisson Fixe 1980'' (CF80) type.
+* <code>light</code>: Light signal (French: ''signal lumineux''), displaying different aspects through lights, or lightbox (French: ''caisson lumineux''), of the ''Tableau Indicateur 1966'' (TI66) type.
 
 Optional tag:
 * {{Tag|ref|}}: identifier shown on the marker plate ('''plaque de repérage''') when present.
@@ -142,7 +142,7 @@ File:SemaphoreM.PNG|Mechanical semaphore signal.
 </gallery>
 
 * {{Tag|railway:signal:main|FR:S}}
-* {{Tag|railway:signal:main:form|sign}}
+* {{Tag|railway:signal:main:form|semaphore}}
 
 == Guidon d'arrêt ==
 A stop signal that requires the driver to come to a complete stop before the signal. When open, the signal does not display any specific indication other than the red band being extinguished. It is equipped with an identification plate with the inscription '''GA''' and may also have a marker plate, both featuring inscriptions in black letters on a white background.
@@ -1007,7 +1007,7 @@ File:Signal fin de caténaire.svg|End of catenary
 * {{Tag|railway:signal:position|overhead}}
 
 == Blue-and-white checkered marker ==
-A blue-and-white checkered marker ('''jalon à damier bleu et blanc''') marks a point that electric traction units must not pass. Other trains are not concerned.
+A blue-and-white checkered marker ('''jalon à damier bleu et blanc''') marks a point beyond which electric trains must not proceed. It has the same meaning as the [[#Red-and-white_checkered_stop_marker|red-and-white checkered stop marker]]; other movements are not affected.
 
 <gallery>
 File:Jalon d'arrêt E.svg|Blue-and-white checkered marker

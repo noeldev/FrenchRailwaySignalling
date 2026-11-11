@@ -1,6 +1,6 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2026-11-03 00:42:36 UTC<br>
+**Backup generated:** 2026-11-11 23:17:11 UTC<br>
 **Category:** main<br>
 **Total pages:** 3<br>
 **Successfully backed up:** 3
@@ -26,9 +26,9 @@
 
 - **File:** [OpenRailwayMap/Tagging_in_France.wiki](OpenRailwayMap/Tagging_in_France.wiki)
 - **Wiki URL:** [OpenRailwayMap/Tagging_in_France](https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France)
-- **Last edited:** 2026-11-03 00:19:10 UTC
+- **Last edited:** 2026-11-11 22:30:59 UTC
 - **Last editor:** Noeld
-- **Edit comment:** /* Tableau Lumineux de Correspondance */ add link to red-and-white_checkered_stop_marker
+- **Edit comment:** /* Sémaphore (mechanical) */ change form=sign to form=semaphore
 
 ## About
 

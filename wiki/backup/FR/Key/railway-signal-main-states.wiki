@@ -3,7 +3,7 @@ Wiki page: FR:Key:railway:signal:main:states
 Last edited: 2026-11-02 11:36:51 UTC
 Last editor: SharpeSerana
 Last edit comment: Suppression des combinaisons d'indications qui n'existent pas dans la signalisation ferroviaire française
-Backup date: 2026-11-03 00:42:36 UTC
+Backup date: 2026-11-11 23:17:11 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/FR:Key:railway:signal:main:states
 --}}
 
