@@ -68,7 +68,7 @@ The bot only runs with the rule table that was discussed: it refuses to upload i
 |-
 | <code>comment</code> || <code>Signalisation ferroviaire française : unification du balisage et correction des erreurs de saisie (''region'', lot ''n'')</code>
 |-
-| <code>created_by</code> || <code>RailwayMapBot/''version''</code>
+| <code>created_by</code> || <code>SignalBot/''version''</code>
 |-
 | <code>bot</code> || <code>yes</code>
 |-
@@ -103,7 +103,7 @@ Each series keeps the original tags of every signal it edits. A series can be re
 == Log ==
 
 * Reports of each series (regions, changesets, corrections and counts): ‹LINK TO THE REPORTS›.
-* Source code (GPL-3.0): [https://github.com/noeldev/FrenchRailwaySignalling/tree/main/tools/Signalling/RailwayMapBot RailwayMapBot].
+* Source code (GPL-3.0): [https://github.com/noeldev/FrenchRailwaySignalling/tree/main/tools/Signalling/SignalBot SignalBot].
 
 {| class="wikitable"
 ! Date !! Region !! Signals edited !! Changesets

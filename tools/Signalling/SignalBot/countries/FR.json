@@ -1,0 +1,57 @@
+{
+  "country": {
+    "code": "FR",
+    "name": "France",
+    "selector": "area[\"ISO3166-1\"=\"FR\"][\"admin_level\"=\"2\"]"
+  },
+  "wiki": {
+    "apiUrl": "https://wiki.openstreetmap.org/w/api.php",
+    "pages": [
+      {
+        "title": "OpenRailwayMap/Tagging_in_France",
+        "role": "Scheme",
+        "local": "wiki/backup/OpenRailwayMap/Tagging_in_France.wiki"
+      },
+      {
+        "title": "FR:Key:railway:signal:main:states",
+        "role": "Domain",
+        "local": "wiki/backup/FR/Key/railway-signal-main-states.wiki"
+      },
+      {
+        "title": "FR:Key:railway:signal:distant:states",
+        "role": "Domain",
+        "local": "wiki/backup/FR/Key/railway-signal-distant-states.wiki"
+      }
+    ]
+  },
+  "keyPrefix": "railway:signal:",
+  "countryPrefix": "FR",
+  "rules": "validator/rules.json",
+  "scope": {
+    "railway": "signal"
+  },
+  "areaKinds": [
+    {
+      "name": "region",
+      "format": "ISO 3166-2 code without the FR- prefix",
+      "pattern": "[A-Z]{3}|20R",
+      "selector": "area[\"ISO3166-2\"=\"FR-{code}\"]",
+      "examples": "BRE, NOR, IDF, 20R"
+    },
+    {
+      "name": "department",
+      "format": "INSEE code",
+      "pattern": "[0-9]{2,3}|2[AB]|69[DM]",
+      "selector": "area[\"boundary\"=\"administrative\"][\"admin_level\"=\"6\"][\"ref:INSEE\"=\"{code}\"]",
+      "examples": "14, 75, 2A, 69D, 974"
+    }
+  ],
+  "changeset": {
+    "fixComment": "Signalisation ferroviaire française : unification du balisage et correction des erreurs de saisie ({area}, lot {batch})",
+    "revertComment": "Signalisation ferroviaire française : annulation de modifications automatisées ({area}, lot {batch})"
+  },
+  "optOut": {
+    "users": [],
+    "nodes": []
+  }
+}

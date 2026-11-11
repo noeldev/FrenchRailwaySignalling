@@ -9,8 +9,8 @@
     <Project Path="libs/Signalling.Wiki/Signalling.Wiki.csproj" />
   </Folder>
   <Project Path="MapRouletteGen/MapRouletteGen.csproj" />
-  <Project Path="RailwayMapBot/RailwayMapBot.csproj" />
-  <Project Path="RailwayMapBot.Tests/RailwayMapBot.Tests.csproj" />
+  <Project Path="SignalBot/SignalBot.csproj" />
+  <Project Path="SignalBot.Tests/SignalBot.Tests.csproj" />
   <Project Path="SignalAudit/SignalAudit.csproj" />
   <Project Path="TagInfoGen/TagInfoGen.csproj" />
   <Project Path="ValidatorGen/ValidatorGen.csproj" />
