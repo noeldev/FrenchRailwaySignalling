@@ -27,7 +27,14 @@ Start the program without arguments (in Visual Studio: F5 on the project). It as
 
 After each step, the program lists the files it wrote and what to check in them. Nothing is written to a server without a confirmation where the name of the server must be typed.
 
-`plan`, `apply` and `seed` ask which signals to take: every signal of the country, those of an area (region or department), or those last edited by the mappers who opted in. The last choice lists the opted-in mappers with their uid, then adds (`opt-in`) or removes (`opt-out`) mappers, one display name per line until an empty line; each name is checked on the server, which gives its uid. The updated list is shown and confirmed before going on; when it is empty, the program asks again which signals to take.
+The session asks in this order, and every menu can be left without Ctrl+C:
+
+1. **Server** - `dev`, `prod`, or `exit`.
+2. **Signals** (real map only; a sandbox has the test nodes) - `all` (every signal of the country), `area` (regions or departments; the codes are checked at once, an empty answer goes back) or `mapper` (the mappers who opted in); `back` returns to the server.
+3. **Mappers**, for the `mapper` choice - the list of the opted-in mappers with their uid, and a menu shown again after each change: `opt-in` adds and `opt-out` removes mappers, one display name per line until an empty line (each name is checked on the server, which gives its uid); `continue` goes on with the list; `back` returns to the signals.
+4. **Step** - the table above, plus `signals` (choose other signals), `server` (choose another server) and `exit`. The server and the signals chosen are shown above the steps and kept from one step to the next, so `plan` and `apply` cover the same signals.
+
+Before a step runs, one sentence tells what it is about to do, for example `[apply] on server 'prod' for the signals of area BRE: upload at most 200 fixes as 'signalbot'.`, followed by `Do you want to proceed? (y/n) [n]`. A "no" does nothing and returns to the steps.
 
 The opted-in mappers are kept per country in the user profile (see Settings), never in the repository: the identifiers of mappers are not committed.
 
@@ -59,6 +66,19 @@ The filter areas of a profile are listed in `areaKinds`: a pattern to recognize 
 
 A department is selected by its INSEE code rather than by ISO 3166-2, which differs for some of them (Paris is `FR-75C`). The Rhone is `69D` and the Metropole de Lyon `69M`. A filter area is named in the changesets after its `name` in OpenStreetMap.
 
+## When Overpass fails
+
+Overpass is a shared server, often loaded: timeouts are expected. It only lists the candidate signals, so a failure can never write anything wrong, but a partial list would silently leave signals out. The rules:
+
+- The query carries its time limit (`overpass.timeoutSeconds`, 600 s), and the program waits one minute longer than that for the answer, so it never gives up on a query the server is still running.
+- A transient failure is tried again (`overpass.retries`, 3 times), after a wait that doubles each time (`overpass.retryDelaySeconds`, 30 s, then 60 s, 120 s), or the wait the server asks for: no answer in time, `429` (rate limit), `5xx` (load), a connection cut off, truncated JSON, or an answer the server could not complete (it then sends what it found with a `remark`: such a partial answer is always refused).
+- With several addresses in `overpass.endpoints`, each new try goes to the next one.
+- A query the server refuses (`400`) is not tried again: its error message is shown.
+- When every try failed, the command stops before anything is written, with the reason. Run it again later; nothing has to be undone.
+- An answer is saved (`overpass-<area>.json`) only when it is complete. The program shows the time of the OSM data it was computed on, and warns when Overpass is hours behind.
+
+Overpass is queried with an HTTP client of its own, which never carries the access token of the bot account.
+
 ## Output
 
 Everything is written under `bot/runs/<country>/` (setting `output`, ignored by git). Each run writes a folder named after its start time, command and server (`offline` for an offline plan):
@@ -72,7 +92,7 @@ Besides: `corrections.md` and `corrections.wiki` (written by `rules`), and `seed
 
 ## Settings
 
-`appsettings.json` holds what does not depend on a country: servers, Overpass endpoint and query, changeset tags, policy and limits. The values of the operator are written by the program itself in the user profile, never in the repository, and there is nothing to edit by hand:
+`appsettings.json` holds what does not depend on a country: servers, Overpass endpoints, time limit, retries and query, changeset tags, policy and limits. The values of the operator are written by the program itself in the user profile, never in the repository, and there is nothing to edit by hand:
 
 - `%APPDATA%\SignalBot\settings.json` - the account (its display name, not the e-mail address) and the client ID of each server, written by `login`;
 - `%APPDATA%\SignalBot\opted-in-<country>.json` - the mappers who opted in (uid and display name), written by the interactive session;
@@ -96,4 +116,4 @@ The hash of the rule table is computed with LF line ends, so it is the same what
 
 ## Tests
 
-`SignalBot.Tests` runs the whole pipeline against an in-memory OSM API (`FakeOsmServer`) that refuses version conflicts like the real one: fresh data, conflicts, limits, opt-in and opt-out, dry run, journal and revert; and the parts around it: command line, settings, opted-in mappers, changeset batches, test nodes, tag changes.
+`SignalBot.Tests` runs the whole pipeline against an in-memory OSM API (`FakeOsmServer`) that refuses version conflicts like the real one: fresh data, conflicts, limits, opt-in and opt-out, dry run, journal and revert; and the parts around it: command line, settings, opted-in mappers, changeset batches, test nodes, tag changes, the Overpass client against an interpreter that fails in every way listed above (`FakeOverpass`), and the menus of the interactive session with a scripted operator.

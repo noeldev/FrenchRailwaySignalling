@@ -10,20 +10,35 @@ namespace SignalBot.Osm;
 // version 0, which only an offline plan accepts. The name of the area comes
 // from an area element, when the query outputs one (.scope out tags;). Other
 // elements are ignored.
+// An answer is all or nothing: Overpass answers a query it could not complete
+// (timeout, memory) with the elements found so far and a "remark", and a
+// connection cut off leaves truncated JSON. Both are refused as a whole, so
+// a partial list is never taken for the list.
 public static class OverpassReader
 {
     public static OverpassAnswer Read(Stream stream)
     {
-        using var document = JsonDocument.Parse(stream);
-        if (!document.RootElement.TryGetProperty("elements", out var elements))
+        try
         {
-            // Overpass reports a failed query (timeout, load) in a "remark".
-            throw new InvalidDataException("Not an Overpass raw data answer (no \"elements\" array).");
+            using var document = JsonDocument.Parse(stream);
+            return Read(document.RootElement);
+        }
+        catch (Exception ex) when (ex is JsonException or KeyNotFoundException or InvalidOperationException or FormatException)
+        {
+            throw new OverpassException($"the answer is not complete Overpass raw data ({ex.Message})", isTransient: true);
+        }
+    }
+
+    private static OverpassAnswer Read(JsonElement root)
+    {
+        if (root.ValueKind != JsonValueKind.Object || !root.TryGetProperty("elements", out var elements))
+        {
+            throw new OverpassException("the answer is not Overpass raw data (no \"elements\" array)", isTransient: true);
         }
 
-        if (document.RootElement.TryGetProperty("remark", out var remark))
+        if (root.TryGetProperty("remark", out var remark))
         {
-            throw new InvalidDataException($"Overpass did not complete the query: {remark.GetString()}");
+            throw new OverpassException($"the query was not completed ({remark.GetString()})", isTransient: true);
         }
 
         List<OsmNode> nodes = [];
@@ -53,8 +68,16 @@ public static class OverpassReader
                 element.TryGetProperty("uid", out var uid) ? uid.GetInt64() : 0));
         }
 
-        return new OverpassAnswer(nodes, areaName);
+        return new OverpassAnswer(nodes, areaName, ReadDataTime(root));
     }
+
+    // "osm3s": { "timestamp_osm_base": "2026-11-13T21:58:12Z" }
+    private static DateTimeOffset? ReadDataTime(JsonElement root) =>
+        root.TryGetProperty("osm3s", out var osm3s)
+        && osm3s.TryGetProperty("timestamp_osm_base", out var time)
+        && time.TryGetDateTimeOffset(out var value)
+            ? value
+            : null;
 
     private static Dictionary<string, string> ReadTags(JsonElement tags) =>
         tags.EnumerateObject()

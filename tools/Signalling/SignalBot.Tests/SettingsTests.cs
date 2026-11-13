@@ -44,8 +44,22 @@ public sealed class SettingsTests
 
         var errors = SettingsValidator.Validate(settings);
 
-        // The query lacks both {area} and {mapper}.
-        Assert.Equal(5, errors.Count);
+        // The query lacks {timeout}, {area} and {mapper}.
+        Assert.Equal(6, errors.Count);
+    }
+
+    [Fact]
+    public void Validation_requires_a_secure_overpass_endpoint_and_sane_retries()
+    {
+        var settings = Load();
+        settings.Overpass.Endpoints = ["http://overpass.example/api/interpreter"];
+        settings.Overpass.TimeoutSeconds = 0;
+        settings.Overpass.Retries = 50;
+
+        Assert.Equal(3, SettingsValidator.Validate(settings).Count);
+
+        settings.Overpass.Endpoints = [];
+        Assert.Equal(3, SettingsValidator.Validate(settings).Count);
     }
 
     // The shipped settings and the French profile, without the settings of

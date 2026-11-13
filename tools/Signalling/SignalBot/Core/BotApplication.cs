@@ -119,7 +119,7 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         var account = mode == RunMode.Write ? await AuthenticateAsync(client, api, stop) : Server.Account;
 
         var folder = CreateRunFolder(mode);
-        var groups = Prefilter(await LoadCandidatesAsync(client, api, source, optedIn, folder, stop), planner);
+        var groups = Prefilter(await LoadCandidatesAsync(api, source, optedIn, folder, stop), planner);
         // A dry run shows everything; a real run is bounded unless told otherwise.
         var limit = options.Limit ?? (mode == RunMode.Write ? settings.Limits.MaxEditsPerRun : int.MaxValue);
 
@@ -201,7 +201,7 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
 
         var account = await AuthenticateAsync(client, api, stop);
         var planner = await CreateFixPlannerAsync(client, TimeSpan.Zero, optedIn: null, stop);
-        var listed = await LoadCandidatesAsync(client, api, options, new OptedInMappers([]), saveFolder: null, stop);
+        var listed = await LoadCandidatesAsync(api, options, new OptedInMappers([]), saveFolder: null, stop);
         var nodes = Seeder.Select(listed.SelectMany(group => group.Value).Select(planner.Decide), options.Limit ?? Seeder.DefaultCount);
 
         if (nodes.Count == 0)
@@ -289,9 +289,15 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         return new FixPlanner(fixer, settings.Scope, settings.Policy, settings.OptOut, optedIn, quietPeriod, TimeProvider.System);
     }
 
-    private Task<IReadOnlyList<KeyValuePair<string, IReadOnlyList<OsmNode>>>> LoadCandidatesAsync(
-        HttpClient client, OsmApiClient api, CommandLineOptions source, OptedInMappers optedIn, string? saveFolder, CancellationToken stop) =>
-        new CandidateLoader(new OverpassClient(client, settings.Overpass, settings.Limits), api, settings, optedIn).LoadAsync(source, saveFolder, stop);
+    // Overpass gets a client of its own: the client of the OSM server carries
+    // the access token of the bot account once the command is authenticated.
+    private async Task<IReadOnlyList<KeyValuePair<string, IReadOnlyList<OsmNode>>>> LoadCandidatesAsync(
+        OsmApiClient api, CommandLineOptions source, OptedInMappers optedIn, string? saveFolder, CancellationToken stop)
+    {
+        using var overpassClient = OsmHttpClient.CreateOverpass(settings);
+        var loader = new CandidateLoader(new OverpassClient(overpassClient, settings.Overpass), api, settings, optedIn, TimeProvider.System);
+        return await loader.LoadAsync(source, saveFolder, stop);
+    }
 
     // Keeps the nodes the planner has something to say about, so the server
     // is only asked for those.
