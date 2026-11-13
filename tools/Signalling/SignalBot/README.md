@@ -83,7 +83,7 @@ The first two have the layout of `appsettings.json` and are read over it, for ex
 
 The sandbox (`dev`, https://master.apis.dev.openstreetmap.org) and the production server (`prod`, https://www.openstreetmap.org) do not share accounts: create the account on each. On `prod`, the edit is made with a dedicated account: its name is the one of the wiki page `Automated edits/<name>`; on its profile, say what it is and link to that page.
 
-`login` does the rest: it opens the registration page of the OAuth 2 application and shows the values to type (the application is public: no client secret is used), asks for the client ID, opens the authorization page, asks for the code shown, then checks and records the name of the account.
+`login` does the rest: it asks whether the OAuth 2 application is already registered on the account; if not, it opens the registration page and shows the values to type (the application is public: no client secret is used), otherwise it opens the list of the applications of the account, where the name of the application leads to its client ID; it then asks for the client ID, opens the authorization page, asks for the code shown, then checks and records the name of the account.
 
 A new account is limited by the server in the number of edits per hour and in the size of the area of a changeset (hence the batches by squares). When the edit rate limit is reached the run stops cleanly; run the same command again later.
 
