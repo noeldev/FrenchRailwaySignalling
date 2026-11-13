@@ -4,14 +4,15 @@
 namespace SignalBot.Core;
 
 // Questions asked to the operator in the console. An empty answer takes the
-// default shown between brackets.
+// default shown between brackets. When the input is closed (end of a script,
+// Ctrl+Z), the question is cancelled instead of being asked forever.
 public static class ConsolePrompt
 {
     public static string Ask(string question, string defaultValue = "")
     {
         Console.Write(defaultValue.Length > 0 ? $"{question} [{defaultValue}]: " : $"{question}: ");
-        var answer = Console.ReadLine()?.Trim();
-        return string.IsNullOrEmpty(answer) ? defaultValue : answer;
+        var answer = ReadLine().Trim();
+        return answer.Length == 0 ? defaultValue : answer;
     }
 
     // Asks again until something is typed.
@@ -89,7 +90,7 @@ public static class ConsolePrompt
         Console.WriteLine();
         Console.WriteLine($"About to {action}.");
         Console.Write($"Type the server name ({server}) to confirm: ");
-        if (Console.ReadLine()?.Trim() == server)
+        if (ReadLine().Trim() == server)
         {
             return true;
         }
@@ -101,6 +102,9 @@ public static class ConsolePrompt
     public static void WaitForEnter(string message)
     {
         Console.Write($"{message} ");
-        Console.ReadLine();
+        ReadLine();
     }
+
+    private static string ReadLine() =>
+        Console.ReadLine() ?? throw new OperationCanceledException("The input was closed.");
 }

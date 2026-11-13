@@ -5,70 +5,120 @@ using SignalBot.Osm;
 
 namespace SignalBot.Core;
 
-// The program started without a command. It asks for the country (when there
-// are several profiles) and the server, then guides the first steps on it:
-// - not logged in: log in now?
-// - sandbox: nothing can be done there without logging in, nor without test
-//   signals (the sandbox has none): create them now? A "no" leads back to
-//   the choice of the server.
-// Then it offers only the steps that can be taken now, in their order, the
-// first one not done yet by default:
-// - real map: plan, login (until logged in), apply (once logged in), revert
-//   (after an apply);
-// - sandbox: login (until logged in), seed (once logged in), plan and apply
-//   (once test nodes exist), revert (after an apply).
+// The program started without a command. It asks, in this order:
+// 1. the country (when there are several profiles);
+// 2. the server (or to quit), and guides the first steps on it:
+//    - not logged in: log in now?
+//    - sandbox: nothing can be done there without logging in, nor without
+//      test signals (the sandbox has none): create them now? A "no" leads
+//      back to the choice of the server;
+// 3. the signals to work on (see SignalSelector); a sandbox only has the
+//    test nodes;
+// 4. the step (see SessionSteps): only those that can be taken now, the first
+//    one not done yet by default.
+// The server and the signals chosen are shown above the steps and kept from
+// one step to the next. Before a step runs, one sentence tells what it is
+// about to do (see CommandRecap) and the operator is asked to proceed; a
+// "no" leads back to the steps, where the signals or the server can be
+// chosen again, or the program left.
 // Every command runs exactly as from the command line.
 public sealed class InteractiveSession(string repositoryRoot, StopSignal stopSignal)
 {
-    private const string ServerChoice = "server";
-    private const string ExitChoice = "exit";
-
     public async Task<int> RunAsync()
     {
         var country = ChooseCountry();
-        var server = await EnterServerAsync(country);
+        while (true)
+        {
+            var server = await EnterServerAsync(country);
+            if (server is null)
+            {
+                return 0;
+            }
 
+            var settings = SettingsLoader.Load(country);
+            var state = new BotState(settings, server, repositoryRoot);
+
+            var selection = state.Server.AllowSeeding ? SignalSelection.TestNodes : await SelectSignalsAsync(settings, state, current: null);
+            if (selection is not null && await RunStepsAsync(country, server, selection))
+            {
+                return 0;
+            }
+
+            Console.WriteLine();
+        }
+    }
+
+    // Offers the steps until the operator leaves: true to quit the program,
+    // false to choose another server.
+    private async Task<bool> RunStepsAsync(string country, string server, SignalSelection selection)
+    {
         while (true)
         {
             // Read again: login writes the settings of the operator.
             var settings = SettingsLoader.Load(country);
             var state = new BotState(settings, server, repositoryRoot);
-            var steps = Steps(state);
+            var steps = SessionSteps.For(state);
 
             Console.WriteLine();
             Console.WriteLine($"{settings.Country.Name}, server '{server}', "
                 + (state.IsLoggedIn ? $"bot account '{state.Server.Account}'." : "not logged in."));
-            var next = steps.FirstOrDefault(step => !step.Done).Name ?? ExitChoice;
+            Console.WriteLine($"Signals: {selection.Describe(settings)}.");
+            var next = steps.FirstOrDefault(step => !step.Done)?.Name ?? SessionSteps.Exit;
             var choice = ConsolePrompt.Choose("Step", [.. steps.Select(step => (step.Name, step.Description))], next);
             Console.WriteLine();
 
-            if (choice == ExitChoice)
+            switch (choice)
             {
-                return 0;
+                case SessionSteps.Exit:
+                    return true;
+
+                case SessionSteps.Server:
+                    return false;
+
+                case SessionSteps.Signals:
+                    selection = await SelectSignalsAsync(settings, state, selection) ?? selection;
+                    continue;
             }
 
-            if (choice == ServerChoice)
+            var options = AskDetails(new CommandLineOptions { Command = Enum.Parse<BotCommand>(choice, ignoreCase: true), Server = server, Country = country }, settings, selection);
+            if (options.Command == BotCommand.Login || Proceed(CommandRecap.Describe(options, settings, state, selection)))
             {
-                server = await EnterServerAsync(country);
-                continue;
+                await RunCommandAsync(settings, options);
             }
-
-            var command = Enum.Parse<BotCommand>(choice, ignoreCase: true);
-            var options = new CommandLineOptions { Command = command, Server = server, Country = country };
-            await RunCommandAsync(settings, await AskSourceAsync(options, settings, state));
         }
     }
 
-    // Asks for a server until the first steps on it are taken.
-    private async Task<string> EnterServerAsync(string country)
+    private static bool Proceed(string recap)
+    {
+        Console.WriteLine(recap);
+        if (ConsolePrompt.YesNo("Do you want to proceed?", defaultValue: false))
+        {
+            Console.WriteLine();
+            return true;
+        }
+
+        Console.WriteLine("Nothing was done.");
+        return false;
+    }
+
+    // Asks for a server until the first steps on it are taken; null to quit.
+    private async Task<string?> EnterServerAsync(string country)
     {
         while (true)
         {
             var server = ChooseServer(SettingsLoader.Load(country));
+            if (server == SessionSteps.Exit)
+            {
+                return null;
+            }
+
+            Console.WriteLine();
             if (await GuideAsync(country, server))
             {
                 return server;
             }
+
+            Console.WriteLine();
         }
     }
 
@@ -101,7 +151,7 @@ public sealed class InteractiveSession(string repositoryRoot, StopSignal stopSig
         }
 
         var seed = new CommandLineOptions { Command = BotCommand.Seed, Server = server, Country = country };
-        await RunCommandAsync(settings, await AskSourceAsync(seed, settings, state));
+        await RunCommandAsync(settings, AskDetails(seed, settings, SignalSelection.TestNodes));
         return true;
     }
 
@@ -124,114 +174,30 @@ public sealed class InteractiveSession(string repositoryRoot, StopSignal stopSig
             .Select(server => (server.Key, server.Value.AllowSeeding
                 ? $"sandbox, separate from the real map ({server.Value.WebUrl})"
                 : $"the real map ({server.Value.WebUrl})"))
+            .Append((SessionSteps.Exit, "quit"))
             .ToList();
         return ConsolePrompt.Choose("Server", choices, settings.DefaultServer);
     }
 
-    // The steps that can be taken now, in their order. Done marks a step
-    // already taken, so the default is the next one.
-    private static List<(string Name, string Description, bool Done)> Steps(BotState state)
+    // The mappers typed are looked up on the server chosen.
+    private static async Task<SignalSelection?> SelectSignalsAsync(BotSettings settings, BotState state, SignalSelection? current)
     {
-        var sandbox = state.Server.AllowSeeding;
-        var applyReady = state.IsLoggedIn && (!sandbox || state.HasSeededNodes);
-        List<(string Name, string Description, bool Done)> steps = [];
-
-        if (sandbox)
-        {
-            AddIf(steps, !state.IsLoggedIn, BotCommand.Login, "log in with the bot account of the sandbox", false);
-            AddIf(steps, state.IsLoggedIn, BotCommand.Seed, "create test nodes, copied from real signals to fix", state.HasSeededNodes);
-            AddIf(steps, state.HasSeededNodes, BotCommand.Plan, "dry run on the test nodes, nothing written", state.HasRun(BotCommand.Plan));
-        }
-        else
-        {
-            AddIf(steps, true, BotCommand.Plan, "dry run on the real data, nothing written", state.HasRun(BotCommand.Plan));
-            AddIf(steps, !state.IsLoggedIn, BotCommand.Login, "log in with the bot account", false);
-        }
-
-        AddIf(steps, applyReady, BotCommand.Apply, sandbox ? "fix the test nodes" : "upload the fixes to the real map", state.LastApplyJournal is not null);
-        AddIf(steps, state.LastApplyJournal is not null, BotCommand.Revert, "undo the last apply", true);
-        steps.Add((ServerChoice, "change server", true));
-        steps.Add((ExitChoice, "quit", true));
-        return steps;
+        using var client = OsmHttpClient.Create(settings, state.Server);
+        var editor = new OptedInMapperEditor(new OsmApiClient(client, settings.Limits), new OptedInMapperStore(UserProfile.OptedInMappersPath(settings.Country.Code)));
+        return await new SignalSelector(settings, editor).AskAsync(current, CancellationToken.None);
     }
 
-    private static void AddIf(List<(string Name, string Description, bool Done)> steps, bool available, BotCommand command, string description, bool done)
-    {
-        if (available)
+    // What a command still needs to know: the signals chosen, the number of
+    // test signals of seed (which copies signals of the whole country), the
+    // largest number of edits of apply.
+    private static CommandLineOptions AskDetails(CommandLineOptions options, BotSettings settings, SignalSelection selection) =>
+        options.Command switch
         {
-            steps.Add((command.ToString().ToLowerInvariant(), description, done));
-        }
-    }
-
-    // seed copies signals of the whole country: only their number is asked.
-    // plan and apply on the real map: every signal of the country, those of
-    // areas, or those of the mappers who opted in (see OptedInMapperEditor;
-    // back to this choice when none is left or the operator declines). On a
-    // sandbox, plan and apply work on the test nodes.
-    private static async Task<CommandLineOptions> AskSourceAsync(CommandLineOptions options, BotSettings settings, BotState state)
-    {
-        if (options.Command is BotCommand.Seed)
-        {
-            return options with { Limit = ConsolePrompt.Number("Number of test signals", Execution.Seeder.DefaultCount) };
-        }
-
-        if (options.Command is not (BotCommand.Plan or BotCommand.Apply) || state.Server.AllowSeeding)
-        {
-            return options;
-        }
-
-        options = await AskSignalsAsync(options, settings, state);
-
-        return options.Command is BotCommand.Apply
-            ? options with { Limit = ConsolePrompt.Number("Largest number of edits", settings.Limits.MaxEditsPerRun) }
-            : options;
-    }
-
-    private static async Task<CommandLineOptions> AskSignalsAsync(CommandLineOptions options, BotSettings settings, BotState state)
-    {
-        while (true)
-        {
-            Console.WriteLine("Signals:");
-            var filter = ConsolePrompt.Choose("Signals",
-            [
-                ("all", $"every signal of {settings.Country.Name}"),
-                ("area", "the signals of a region or a department"),
-                ("mapper", "the signals last edited by the mappers who opted in"),
-            ], "all");
-
-            switch (filter)
-            {
-                case "area":
-                    return options with { Areas = AskAreas(settings) };
-
-                case "mapper":
-                    {
-                        using var client = OsmHttpClient.Create(settings, state.Server);
-                        var editor = new OptedInMapperEditor(new OsmApiClient(client, settings.Limits), new OptedInMapperStore(UserProfile.OptedInMappersPath(settings.Country.Code)));
-                        if (await editor.RunAsync(CancellationToken.None))
-                        {
-                            return options with { OptedIn = true };
-                        }
-
-                        Console.WriteLine();
-                        break;
-                    }
-
-                default:
-                    return options;
-            }
-        }
-    }
-
-    private static List<string> AskAreas(BotSettings settings)
-    {
-        Console.WriteLine(AreaResolver.Describe(settings.AreaKinds));
-        return
-        [
-            .. ConsolePrompt.Required("Areas, comma-separated")
-                .Split(',', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries),
-        ];
-    }
+            BotCommand.Seed => options with { Limit = ConsolePrompt.Number("Number of test signals", Execution.Seeder.DefaultCount) },
+            BotCommand.Plan => selection.ApplyTo(options),
+            BotCommand.Apply => selection.ApplyTo(options) with { Limit = ConsolePrompt.Number("Largest number of edits", settings.Limits.MaxEditsPerRun) },
+            _ => options,
+        };
 
     // An error ends the command, not the session.
     private async Task RunCommandAsync(BotSettings settings, CommandLineOptions options)

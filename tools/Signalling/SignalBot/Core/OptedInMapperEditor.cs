@@ -5,41 +5,71 @@ using SignalBot.Osm;
 
 namespace SignalBot.Core;
 
-// The "mapper" choice of the interactive session: lists the mappers who opted
-// in, adds (opt-in) or removes (opt-out) mappers one display name at a time,
-// then asks whether to fix their signals. Every display name typed is checked
-// on the server, which gives its uid.
+// The "mapper" choice of the interactive session: a menu shown again after
+// each change, with the list of the mappers who opted in, until the operator
+// goes on or back:
+// - opt-in adds mappers, opt-out removes mappers, one display name per line
+//   until an empty line; every name typed is checked on the server, which
+//   gives its uid;
+// - continue goes on with the list as it is (offered once it is not empty);
+// - back returns to the choice of the signals.
+// Every change is saved at once: the list is the same in the next session.
 public sealed class OptedInMapperEditor(OsmApiClient api, OptedInMapperStore store)
 {
     private const string OptIn = "opt-in";
     private const string OptOut = "opt-out";
+    private const string Continue = "continue";
+    private const string Back = "back";
 
-    // True when the operator confirmed fixing the signals of the opted-in
-    // mappers; false to go back to the choice of the signals.
-    public async Task<bool> RunAsync(CancellationToken cancellationToken)
+    // The mappers to go on with, or null when the operator went back.
+    public async Task<OptedInMappers?> RunAsync(CancellationToken cancellationToken)
     {
         var mappers = store.Load();
-        Print(mappers);
+        while (true)
+        {
+            Console.WriteLine();
+            Print(mappers);
 
-        Console.WriteLine("Mappers:");
-        var choice = ConsolePrompt.Choose("Mappers",
-        [
-            (OptIn, "add mappers whose signals may be fixed"),
-            (OptOut, "remove mappers from the list"),
-        ], OptIn);
+            var hasMappers = mappers.Users.Count > 0;
+            List<(string Name, string Description)> choices = [(OptIn, "add mappers whose signals may be fixed")];
+            if (hasMappers)
+            {
+                choices.Add((OptOut, "remove mappers from the list"));
+                choices.Add((Continue, $"go on with {(mappers.Users.Count == 1 ? "this mapper" : $"these {mappers.Users.Count} mappers")}"));
+            }
 
+            choices.Add((Back, "back to the choice of the signals"));
+
+            Console.WriteLine("Mappers:");
+            switch (ConsolePrompt.Choose("Mappers", choices, hasMappers ? Continue : OptIn))
+            {
+                case Continue:
+                    return mappers;
+
+                case Back:
+                    return null;
+
+                case var choice:
+                    await EditAsync(mappers, add: choice == OptIn, cancellationToken);
+                    break;
+            }
+        }
+    }
+
+    private async Task EditAsync(OptedInMappers mappers, bool add, CancellationToken cancellationToken)
+    {
         Console.WriteLine("One display name per line, as on the profile page; an empty line ends.");
         while (true)
         {
-            var name = ConsolePrompt.Ask(choice == OptIn ? "Add mapper" : "Remove mapper");
+            var name = ConsolePrompt.Ask(add ? "Add mapper" : "Remove mapper");
             if (name.Length == 0)
             {
-                break;
+                return;
             }
 
             try
             {
-                Console.WriteLine(choice == OptIn ? await AddAsync(mappers, name, cancellationToken) : await RemoveAsync(mappers, name, cancellationToken));
+                Console.WriteLine(add ? await AddAsync(mappers, name, cancellationToken) : await RemoveAsync(mappers, name, cancellationToken));
                 store.Save(mappers);
             }
             catch (Exception ex) when (ex is HttpRequestException or OsmApiException or TaskCanceledException && !cancellationToken.IsCancellationRequested)
@@ -47,11 +77,6 @@ public sealed class OptedInMapperEditor(OsmApiClient api, OptedInMapperStore sto
                 Console.WriteLine($"  The server could not be asked about '{name}': {ex.Message}");
             }
         }
-
-        Console.WriteLine();
-        Print(mappers);
-        return mappers.Users.Count > 0
-            && ConsolePrompt.YesNo($"Fix only the signals last edited by {(mappers.Users.Count == 1 ? "this mapper" : $"these {mappers.Users.Count} mappers")}?", defaultValue: true);
     }
 
     private async Task<string> AddAsync(OptedInMappers mappers, string name, CancellationToken cancellationToken)

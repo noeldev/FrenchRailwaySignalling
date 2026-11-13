@@ -89,14 +89,27 @@ public sealed class ServerSettings
 
 public sealed class OverpassSettings
 {
-    public string Endpoint { get; set; } = string.Empty;
+    // Overpass interpreters, the first one used first; after a failure the
+    // query is tried again on the next one.
+    public List<string> Endpoints { get; set; } = [];
+
+    // Time limit of a query on the server, put in place of {timeout} in the
+    // query; the request waits a little longer for the answer.
+    public int TimeoutSeconds { get; set; }
+
+    // Times a query is tried again after a transient failure (timeout, load,
+    // rate limit, incomplete answer).
+    public int Retries { get; set; }
+
+    // Wait before the first new try; doubled before each next one.
+    public int RetryDelaySeconds { get; set; }
 
     // Pause between two area queries.
     public int DelaySeconds { get; set; }
 
-    // Overpass QL query, one line per entry. {area} is replaced by the area
-    // statement of the country or of a filter area (see AreaKindSettings),
-    // {mapper} by the mapper filter or nothing. It must output the nodes with
+    // Overpass QL query, one line per entry. {timeout} is replaced by the
+    // time limit, {area} by the area statement of the country or of a filter
+    // area (see AreaKindSettings), {mapper} by the mapper filter or nothing. It must output the nodes with
     // their metadata (out meta), and may output the area (.scope out tags;)
     // to give its name.
     public List<string> Query { get; set; } = [];

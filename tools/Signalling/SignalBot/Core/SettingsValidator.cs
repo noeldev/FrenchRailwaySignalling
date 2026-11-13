@@ -27,7 +27,6 @@ public static class SettingsValidator
         Require(errors, settings.Rules, "rules");
         Require(errors, settings.Output, "output");
         Require(errors, settings.Contact, "contact");
-        Require(errors, settings.Overpass.Endpoint, "overpass:endpoint");
         Require(errors, settings.Changeset.FixComment, "changeset:fixComment");
         Require(errors, settings.Changeset.RevertComment, "changeset:revertComment");
         Require(errors, settings.Changeset.SeedComment, "changeset:seedComment");
@@ -52,7 +51,22 @@ public static class SettingsValidator
             }
         }
 
-        foreach (var placeholder in new[] { OverpassClient.AreaPlaceholder, OverpassClient.MapperPlaceholder })
+        if (settings.Overpass.Endpoints.Count == 0)
+        {
+            errors.Add("overpass:endpoints: at least one address is required.");
+        }
+
+        for (var i = 0; i < settings.Overpass.Endpoints.Count; i++)
+        {
+            RequireUrl(errors, settings.Overpass.Endpoints[i], $"overpass:endpoints:{i}");
+        }
+
+        RequireRange(errors, settings.Overpass.TimeoutSeconds, 10, 3600, "overpass:timeoutSeconds");
+        RequireRange(errors, settings.Overpass.Retries, 0, 10, "overpass:retries");
+        RequireRange(errors, settings.Overpass.RetryDelaySeconds, 0, 600, "overpass:retryDelaySeconds");
+        RequireRange(errors, settings.Overpass.DelaySeconds, 0, 600, "overpass:delaySeconds");
+
+        foreach (var placeholder in new[] { OverpassClient.TimeoutPlaceholder, OverpassClient.AreaPlaceholder, OverpassClient.MapperPlaceholder })
         {
             if (!settings.Overpass.Query.Any(line => line.Contains(placeholder, StringComparison.Ordinal)))
             {
