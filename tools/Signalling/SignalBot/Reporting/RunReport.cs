@@ -40,7 +40,7 @@ public static class RunReport
             : "The changesets below were uploaded by this run.");
         text.AppendLine();
         text.AppendLine($"- Server: {run.Server} ({server.WebUrl})");
-        text.AppendLine($"- Account: {(run.Account.Length > 0 ? run.Account : "-")}");
+        text.AppendLine($"- Account: {DescribeAccount(run)}");
         text.AppendLine($"- Started: {run.Started.UtcDateTime:yyyy-MM-dd HH:mm} UTC");
         text.AppendLine($"- Source: {run.Source}");
         text.AppendLine($"- Edit limit: {(run.EditLimit == int.MaxValue ? "none" : run.EditLimit)}");
@@ -86,6 +86,13 @@ public static class RunReport
 
         File.WriteAllText(path, text.ToString());
     }
+
+    // A dry run names the bot account apply would use, which it does not log
+    // in with.
+    private static string DescribeAccount(RunInfo run) =>
+        run.Account.Length == 0 ? "- (not logged in)"
+        : run.DryRun ? $"{run.Account} (not used: dry run)"
+        : run.Account;
 
     private static string Link(ChangesetSummary changeset, ServerSettings server)
     {

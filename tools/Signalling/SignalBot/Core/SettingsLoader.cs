@@ -8,11 +8,8 @@ namespace SignalBot.Core;
 // Reads the settings of one country, each source over the previous one:
 // 1. appsettings.json, next to the program: what does not depend on a country;
 // 2. the profile of the country (countries/<code>.json);
-// 3. the settings of the operator (accounts, client ids), written by login;
-// 4. the settings of the operator for the country (approved rule tables),
-//    written by approve.
-// Read again before every command, so what login or approve wrote is used at
-// once.
+// 3. the settings of the operator (accounts, client ids), written by login.
+// Read again before every command, so what login wrote is used at once.
 public static class SettingsLoader
 {
     public static BotSettings Load(string countryCode)
@@ -22,9 +19,9 @@ public static class SettingsLoader
             .AddJsonFile("appsettings.json", optional: false);
 
         AddFile(builder, CountryProfiles.PathOf(countryCode));
-        foreach (var path in new[] { UserProfile.SettingsPath, UserProfile.CountrySettingsPath(countryCode) }.Where(File.Exists))
+        if (File.Exists(UserProfile.SettingsPath))
         {
-            AddFile(builder, path);
+            AddFile(builder, UserProfile.SettingsPath);
         }
 
         var settings = builder.Build().Get<BotSettings>() ?? new BotSettings();

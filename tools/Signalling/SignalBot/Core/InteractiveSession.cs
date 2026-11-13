@@ -11,8 +11,8 @@ namespace SignalBot.Core;
 //   the choice of the server.
 // Then it offers only the steps that can be taken now, in their order, the
 // first one not done yet by default:
-// - real map: plan, approve (until the rule table is approved), login (until
-//   logged in), apply (once approved and logged in), revert (after an apply);
+// - real map: plan, login (until logged in), apply (once logged in), revert
+//   (after an apply);
 // - sandbox: login (until logged in), seed (once logged in), plan and apply
 //   (once test nodes exist), revert (after an apply).
 // Every command runs exactly as from the command line.
@@ -28,7 +28,7 @@ public sealed class InteractiveSession(string repositoryRoot, StopSignal stopSig
 
         while (true)
         {
-            // Read again: login and approve write the settings of the operator.
+            // Read again: login writes the settings of the operator.
             var settings = SettingsLoader.Load(country);
             var state = new BotState(settings, server, repositoryRoot);
             var steps = Steps(state);
@@ -131,7 +131,7 @@ public sealed class InteractiveSession(string repositoryRoot, StopSignal stopSig
     private static List<(string Name, string Description, bool Done)> Steps(BotState state)
     {
         var sandbox = state.Server.AllowSeeding;
-        var applyReady = state.IsLoggedIn && state.IsApproved && (!sandbox || state.HasSeededNodes);
+        var applyReady = state.IsLoggedIn && (!sandbox || state.HasSeededNodes);
         List<(string Name, string Description, bool Done)> steps = [];
 
         if (sandbox)
@@ -143,7 +143,6 @@ public sealed class InteractiveSession(string repositoryRoot, StopSignal stopSig
         else
         {
             AddIf(steps, true, BotCommand.Plan, "dry run on the real data, nothing written", state.HasRun(BotCommand.Plan));
-            AddIf(steps, !state.IsApproved, BotCommand.Approve, "review the corrections and approve the rule table", false);
             AddIf(steps, !state.IsLoggedIn, BotCommand.Login, "log in with the bot account", false);
         }
 
