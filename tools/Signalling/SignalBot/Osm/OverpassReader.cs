@@ -49,7 +49,8 @@ public static class OverpassReader
                 element.GetProperty("lon").GetDouble(),
                 element.TryGetProperty("timestamp", out var timestamp) ? timestamp.GetDateTimeOffset() : DateTimeOffset.UnixEpoch,
                 element.TryGetProperty("user", out var user) ? user.GetString() ?? string.Empty : string.Empty,
-                element.TryGetProperty("tags", out var tags) ? ReadTags(tags) : new Dictionary<string, string>()));
+                element.TryGetProperty("tags", out var tags) ? ReadTags(tags) : new Dictionary<string, string>(),
+                element.TryGetProperty("uid", out var uid) ? uid.GetInt64() : 0));
         }
 
         return new OverpassAnswer(nodes, areaName);

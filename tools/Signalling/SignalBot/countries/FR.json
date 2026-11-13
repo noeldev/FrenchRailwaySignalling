@@ -51,7 +51,6 @@
     "revertComment": "Signalisation ferroviaire française : annulation de modifications automatisées ({area}, lot {batch})"
   },
   "optOut": {
-    "users": [],
     "nodes": []
   }
 }

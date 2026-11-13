@@ -22,7 +22,6 @@ namespace SignalBot.Execution;
 public sealed class EditRunner(
     OsmApiClient api,
     IEditPlanner planner,
-    ContributorGuard guard,
     RunJournal journal,
     RunSummary summary,
     ChangesetTagBuilder tagBuilder,
@@ -163,7 +162,7 @@ public sealed class EditRunner(
         }
 
         var fresh = await api.GetNodesAsync(listed.Select(node => node.Id), cancellationToken);
-        return await guard.ApplyAsync([.. fresh.Select(planner.Decide)], cancellationToken);
+        return [.. fresh.Select(planner.Decide)];
     }
 
     // Journal first, then the osmChange file: both exist before the upload.

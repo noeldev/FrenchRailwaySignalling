@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Noël Danjou
 
+using SignalBot.Osm;
+
 namespace SignalBot.Core;
 
 // The program started without a command. It asks for the country (when there
@@ -53,7 +55,7 @@ public sealed class InteractiveSession(string repositoryRoot, StopSignal stopSig
 
             var command = Enum.Parse<BotCommand>(choice, ignoreCase: true);
             var options = new CommandLineOptions { Command = command, Server = server, Country = country };
-            await RunCommandAsync(settings, AskSource(options, settings, state));
+            await RunCommandAsync(settings, await AskSourceAsync(options, settings, state));
         }
     }
 
@@ -99,7 +101,7 @@ public sealed class InteractiveSession(string repositoryRoot, StopSignal stopSig
         }
 
         var seed = new CommandLineOptions { Command = BotCommand.Seed, Server = server, Country = country };
-        await RunCommandAsync(settings, AskSource(seed, settings, state));
+        await RunCommandAsync(settings, await AskSourceAsync(seed, settings, state));
         return true;
     }
 
@@ -162,9 +164,11 @@ public sealed class InteractiveSession(string repositoryRoot, StopSignal stopSig
     }
 
     // seed copies signals of the whole country: only their number is asked.
-    // plan and apply on the real map: every signal of the country, or a
-    // filter. On a sandbox, plan and apply work on the test nodes.
-    private static CommandLineOptions AskSource(CommandLineOptions options, BotSettings settings, BotState state)
+    // plan and apply on the real map: every signal of the country, those of
+    // areas, or those of the mappers who opted in (see OptedInMapperEditor;
+    // back to this choice when none is left or the operator declines). On a
+    // sandbox, plan and apply work on the test nodes.
+    private static async Task<CommandLineOptions> AskSourceAsync(CommandLineOptions options, BotSettings settings, BotState state)
     {
         if (options.Command is BotCommand.Seed)
         {
@@ -176,24 +180,47 @@ public sealed class InteractiveSession(string repositoryRoot, StopSignal stopSig
             return options;
         }
 
-        Console.WriteLine("Signals:");
-        var filter = ConsolePrompt.Choose("Signals",
-        [
-            ("all", $"every signal of {settings.Country.Name}"),
-            ("area", "the signals of a region or a department"),
-            ("mapper", "the signals last edited by one mapper"),
-        ], "all");
-
-        options = filter switch
-        {
-            "area" => options with { Areas = AskAreas(settings) },
-            "mapper" => options with { Mapper = ConsolePrompt.Required("Mapper (display name, as on the profile page)") },
-            _ => options,
-        };
+        options = await AskSignalsAsync(options, settings, state);
 
         return options.Command is BotCommand.Apply
             ? options with { Limit = ConsolePrompt.Number("Largest number of edits", settings.Limits.MaxEditsPerRun) }
             : options;
+    }
+
+    private static async Task<CommandLineOptions> AskSignalsAsync(CommandLineOptions options, BotSettings settings, BotState state)
+    {
+        while (true)
+        {
+            Console.WriteLine("Signals:");
+            var filter = ConsolePrompt.Choose("Signals",
+            [
+                ("all", $"every signal of {settings.Country.Name}"),
+                ("area", "the signals of a region or a department"),
+                ("mapper", "the signals last edited by the mappers who opted in"),
+            ], "all");
+
+            switch (filter)
+            {
+                case "area":
+                    return options with { Areas = AskAreas(settings) };
+
+                case "mapper":
+                    {
+                        using var client = OsmHttpClient.Create(settings, state.Server);
+                        var editor = new OptedInMapperEditor(new OsmApiClient(client, settings.Limits), new OptedInMapperStore(UserProfile.OptedInMappersPath(settings.Country.Code)));
+                        if (await editor.RunAsync(CancellationToken.None))
+                        {
+                            return options with { OptedIn = true };
+                        }
+
+                        Console.WriteLine();
+                        break;
+                    }
+
+                default:
+                    return options;
+            }
+        }
     }
 
     private static List<string> AskAreas(BotSettings settings)

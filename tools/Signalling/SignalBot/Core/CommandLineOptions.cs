@@ -34,6 +34,10 @@ public sealed record CommandLineOptions
     // Filter: only the nodes whose last version is by this mapper.
     public string? Mapper { get; init; }
 
+    // Filter: only the nodes whose last version is by a mapper who opted in
+    // (see OptedInMappers).
+    public bool OptedIn { get; init; }
+
     // Overpass export read instead of querying Overpass.
     public string? InputPath { get; init; }
 
@@ -77,6 +81,7 @@ public sealed record CommandLineOptions
         List<string> areas = [];
         var offline = false;
         var assumeYes = false;
+        var optedIn = false;
 
         for (var i = 1; i < args.Length; i++)
         {
@@ -93,6 +98,10 @@ public sealed record CommandLineOptions
 
                 case "--yes":
                     assumeYes = true;
+                    break;
+
+                case "--opted-in":
+                    optedIn = true;
                     break;
 
                 case "--server":
@@ -145,12 +154,15 @@ public sealed record CommandLineOptions
             }
         }
 
-        // --area and --mapper filter the same Overpass query: they combine.
-        var sources = (areas.Count > 0 || mapper is not null ? 1 : 0) + (inputPath is null ? 0 : 1) + (nodesPath is null ? 0 : 1);
+        // --area, --mapper and --opted-in filter the same Overpass query: they
+        // combine, except the two mapper filters.
+        var sources = (areas.Count > 0 || mapper is not null || optedIn ? 1 : 0) + (inputPath is null ? 0 : 1) + (nodesPath is null ? 0 : 1);
         var error = command switch
         {
-            _ when sources > 1 => "--input and --nodes do not combine with each other or with --area and --mapper.",
-            BotCommand.Revert or BotCommand.Login or BotCommand.Rules when sources > 0 => $"--area, --mapper, --input and --nodes do not apply to {args[0]}.",
+            _ when sources > 1 => "--input and --nodes do not combine with each other or with --area, --mapper and --opted-in.",
+            _ when mapper is not null && optedIn => "--mapper and --opted-in do not combine.",
+            BotCommand.Revert or BotCommand.Login or BotCommand.Rules when sources > 0 => $"--area, --mapper, --opted-in, --input and --nodes do not apply to {args[0]}.",
+            BotCommand.Seed when optedIn => "--opted-in does not apply to seed.",
             BotCommand.Login or BotCommand.Rules when limit is not null => $"--limit does not apply to {args[0]}.",
             BotCommand.Seed when nodesPath is not null => "--nodes does not apply to seed.",
             not BotCommand.Plan when offline => "--offline only applies to plan.",
@@ -176,6 +188,7 @@ public sealed record CommandLineOptions
             Limit = limit,
             Offline = offline,
             AssumeYes = assumeYes,
+            OptedIn = optedIn,
         };
     }
 
@@ -227,6 +240,8 @@ public sealed record CommandLineOptions
               --area <code>[,<code>]  Filter: only these areas, for example a region (BRE) or
                                       a department (14), as configured for the country.
               --mapper <name>         Filter: only the nodes last edited by this mapper.
+              --opted-in              Filter: only the nodes last edited by a mapper who
+                                      opted in (lists kept by the interactive session).
               --input <path>          Overpass answer (raw data, JSON), for example one saved
                                       by an earlier run.
               --nodes <path>          Node ids, one per line, read from the server.

@@ -28,7 +28,8 @@ public static class OsmXml
                 visible ? ReadCoordinate(node, "lon") : 0,
                 (DateTimeOffset?)node.Attribute("timestamp") ?? DateTimeOffset.UnixEpoch,
                 (string?)node.Attribute("user") ?? string.Empty,
-                node.Elements("tag").ToDictionary(tag => (string)tag.Attribute("k")!, tag => (string)tag.Attribute("v")!, StringComparer.Ordinal));
+                node.Elements("tag").ToDictionary(tag => (string)tag.Attribute("k")!, tag => (string)tag.Attribute("v")!, StringComparer.Ordinal),
+                (long?)node.Attribute("uid") ?? 0);
         }),
     ];
 
@@ -40,6 +41,12 @@ public static class OsmXml
 
     public static string ReadUserName(XDocument document) =>
         (string?)document.Root!.Element("user")?.Attribute("display_name") ?? string.Empty;
+
+    // The author of the first changeset of a list, or null for an empty list.
+    public static OsmUser? ReadChangesetUser(XDocument document) =>
+        document.Root!.Element("changeset") is { } changeset
+            ? new OsmUser((long?)changeset.Attribute("uid") ?? 0, (string?)changeset.Attribute("user") ?? string.Empty)
+            : null;
 
     public static XDocument WriteChangeset(IReadOnlyDictionary<string, string> tags) =>
         new(new XElement("osm", new XElement("changeset", WriteTags(tags))));

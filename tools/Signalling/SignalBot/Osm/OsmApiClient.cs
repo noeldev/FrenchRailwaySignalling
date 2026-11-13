@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Noël Danjou
 
+using System.Net;
 using System.Text;
 using System.Xml.Linq;
 using SignalBot.Core;
@@ -28,11 +29,20 @@ public sealed class OsmApiClient(HttpClient client, LimitSettings limits)
         return nodes;
     }
 
-    // Names of everyone who edited the node, from its history.
-    public async Task<IReadOnlySet<string>> GetNodeContributorsAsync(long id, CancellationToken cancellationToken) =>
-        OsmXml.ReadNodes(await ReadAsync($"{ApiPath}node/{id}/history", cancellationToken))
-            .Select(node => node.User)
-            .ToHashSet(StringComparer.Ordinal);
+    // The account with this display name, read from its last changeset, or
+    // null when no account of that name has made any changeset (the API has no
+    // other lookup by name).
+    public async Task<OsmUser?> FindUserAsync(string displayName, CancellationToken cancellationToken)
+    {
+        try
+        {
+            return OsmXml.ReadChangesetUser(await ReadAsync($"{ApiPath}changesets?display_name={Uri.EscapeDataString(displayName)}&limit=1", cancellationToken));
+        }
+        catch (OsmApiException ex) when (ex.Status == HttpStatusCode.NotFound)
+        {
+            return null;
+        }
+    }
 
     // Display name of the account the token belongs to.
     public async Task<string> GetAccountNameAsync(CancellationToken cancellationToken) =>

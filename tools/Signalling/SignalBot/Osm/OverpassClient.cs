@@ -6,8 +6,8 @@ using SignalBot.Core;
 namespace SignalBot.Osm;
 
 // Runs the configured query for one area, with an optional mapper filter
-// (the nodes whose last version is by that mapper). Overpass only lists the
-// candidates:
+// (the nodes whose last version is by one of the given mappers, see
+// UserFilter and UidFilter). Overpass only lists the candidates:
 // every node is read again from the OSM server before it is edited. The answer
 // can be saved as received, to be read again with --input.
 public sealed class OverpassClient(HttpClient client, OverpassSettings settings, LimitSettings limits)
@@ -15,11 +15,11 @@ public sealed class OverpassClient(HttpClient client, OverpassSettings settings,
     public const string AreaPlaceholder = "{area}";
     public const string MapperPlaceholder = "{mapper}";
 
-    public async Task<OverpassAnswer> QueryAsync(string areaSelector, string? mapper, string? savePath, CancellationToken cancellationToken)
+    public async Task<OverpassAnswer> QueryAsync(string areaSelector, string mapperFilter, string? savePath, CancellationToken cancellationToken)
     {
         var query = string.Join('\n', settings.Query)
             .Replace(AreaPlaceholder, areaSelector, StringComparison.Ordinal)
-            .Replace(MapperPlaceholder, MapperFilter(mapper), StringComparison.Ordinal);
+            .Replace(MapperPlaceholder, mapperFilter, StringComparison.Ordinal);
 
         for (var attempt = 0; ; attempt++)
         {
@@ -47,8 +47,11 @@ public sealed class OverpassClient(HttpClient client, OverpassSettings settings,
         }
     }
 
-    // Overpass filter on the user of the last version; quotes and backslashes
-    // are escaped in the name.
-    private static string MapperFilter(string? mapper) =>
-        mapper is null ? string.Empty : $"(user:\"{mapper.Replace("\\", "\\\\", StringComparison.Ordinal).Replace("\"", "\\\"", StringComparison.Ordinal)}\")";
+    // Overpass filter on the display name of the user of the last version;
+    // quotes and backslashes are escaped in the name.
+    public static string UserFilter(string name) =>
+        $"(user:\"{name.Replace("\\", "\\\\", StringComparison.Ordinal).Replace("\"", "\\\"", StringComparison.Ordinal)}\")";
+
+    // Overpass filter on the uid of the user of the last version.
+    public static string UidFilter(IEnumerable<long> uids) => $"(uid:{string.Join(',', uids)})";
 }

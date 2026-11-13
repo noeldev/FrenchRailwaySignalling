@@ -8,15 +8,18 @@ namespace SignalBot.Planning;
 
 // Decides whether a signal gets its fix. Every check that protects the work
 // of the mappers is here, and runs on the data just read from the server.
+// Given the uids of the mappers who opted in, a node is fixed only when the
+// mapper of its last version is one of them: the map shows the last versions,
+// so they say whose signals these are.
 public sealed class FixPlanner(
     SignalFixer fixer,
     IReadOnlyDictionary<string, string> scope,
     PolicySettings policy,
     OptOutSettings optOut,
+    IReadOnlySet<long>? optedIn,
     TimeSpan quietPeriod,
     TimeProvider clock) : IEditPlanner
 {
-    private readonly HashSet<string> _optedOutUsers = new(optOut.Users, StringComparer.Ordinal);
     private readonly HashSet<long> _optedOutNodes = [.. optOut.Nodes];
 
     public EditDecision Decide(OsmNode node)
@@ -37,9 +40,14 @@ public sealed class FixPlanner(
             return EditDecision.Skipped(node, SkipReason.NothingToFix);
         }
 
-        if (_optedOutNodes.Contains(node.Id) || _optedOutUsers.Contains(node.User))
+        if (_optedOutNodes.Contains(node.Id))
         {
             return EditDecision.Skipped(node, SkipReason.OptedOut, fix.Corrections);
+        }
+
+        if (optedIn is not null && !optedIn.Contains(node.Uid))
+        {
+            return EditDecision.Skipped(node, SkipReason.NotOptedIn, fix.Corrections);
         }
 
         if ((policy.SkipSuggestions && fix.IsSuggestion) || (policy.SkipIncomplete && fix.NeedsComplement))
