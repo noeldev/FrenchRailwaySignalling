@@ -18,13 +18,13 @@ public sealed class LocalSettingsStoreTests
             var store = new LocalSettingsStore(path);
 
             store.Set("dev", new Dictionary<string, string> { [LocalSettingsStore.Account] = "bot", [LocalSettingsStore.ClientId] = "abc" });
-            store.Set("prod", new Dictionary<string, string> { [LocalSettingsStore.ApprovedRulesSha256] = "123" });
+            store.Set("prod", new Dictionary<string, string> { [LocalSettingsStore.ClientId] = "123" });
             store.Set("dev", new Dictionary<string, string> { [LocalSettingsStore.Account] = "other" });
 
             var servers = JsonNode.Parse(File.ReadAllText(path))!["servers"]!;
             Assert.Equal("other", (string?)servers["dev"]!["account"]);
             Assert.Equal("abc", (string?)servers["dev"]!["clientId"]);
-            Assert.Equal("123", (string?)servers["prod"]!["approvedRulesSha256"]);
+            Assert.Equal("123", (string?)servers["prod"]!["clientId"]);
         }
         finally
         {

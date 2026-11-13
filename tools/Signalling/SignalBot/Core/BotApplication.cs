@@ -15,9 +15,9 @@ namespace SignalBot.Core;
 
 // Wires the parts together for one command. The rules of an automated edit
 // that do not depend on the data are enforced here, before anything is
-// written: the sandbox unless asked otherwise, the dedicated account, the
-// approved rule table and the confirmation of the operator. Each command ends
-// with the files it wrote and what to check in them.
+// written: the sandbox unless asked otherwise, the dedicated account and the
+// confirmation of the operator. Each command ends with the files it wrote and
+// what to check in them.
 public sealed class BotApplication(BotSettings settings, CommandLineOptions options, string repositoryRoot)
 {
     private readonly string _serverName = options.Server ?? settings.DefaultServer;
@@ -44,7 +44,6 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         {
             BotCommand.Login => await LoginAsync(client, api, stop),
             BotCommand.Rules => WriteCorrectionList(),
-            BotCommand.Approve => Approve(),
             BotCommand.Seed => await SeedAsync(client, api, stop),
             BotCommand.Revert => await RevertAsync(client, api, stop),
             _ => await FixAsync(client, api, stop),
@@ -110,12 +109,8 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         // An unknown area code is reported before anything is read or written.
         _ = new AreaResolver(settings).Resolve(source.Areas);
         var planner = await CreateFixPlannerAsync(client, mode == RunMode.Offline ? TimeSpan.Zero : TimeSpan.FromHours(Server.QuietPeriodHours), stop);
-        if (mode == RunMode.Write)
-        {
-            RequireApprovedRules();
-        }
-
-        var account = mode == RunMode.Write ? await AuthenticateAsync(client, api, stop) : string.Empty;
+        // A dry run names the bot account apply would use, without checking it.
+        var account = mode == RunMode.Write ? await AuthenticateAsync(client, api, stop) : Server.Account;
 
         var folder = CreateRunFolder(mode);
         var groups = Prefilter(await LoadCandidatesAsync(client, api, source, folder, stop), planner);
@@ -266,27 +261,6 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         return summary.Failed ? 1 : 0;
     }
 
-    // The corrections are those the community was shown: another rule table
-    // is a change of scope, to document and discuss before it is applied.
-    private void RequireApprovedRules()
-    {
-        var approved = Server.ApprovedRulesSha256;
-        if (approved.Length == 0 && Server.AllowSeeding)
-        {
-            return;
-        }
-
-        if (approved.Length == 0)
-        {
-            throw new InvalidOperationException($"No rule table approved for '{_serverName}': run approve first.");
-        }
-
-        if (!approved.Equals(RulesHash, StringComparison.OrdinalIgnoreCase))
-        {
-            throw new InvalidOperationException($"The rule table changed since it was approved for '{_serverName}': run approve.");
-        }
-    }
-
     private int WriteCorrectionList()
     {
         Directory.CreateDirectory(OutputRoot);
@@ -296,37 +270,6 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         Console.WriteLine("      the corrections, to read");
         Console.WriteLine($"  {paths[1]}");
         Console.WriteLine("      the same, as wikitext");
-        return 0;
-    }
-
-    // Records the current rule table as the one apply may use on the server:
-    // apply refuses any other table, so the corrections made are always the
-    // listed ones.
-    private int Approve()
-    {
-        WriteCorrectionList();
-        Console.WriteLine();
-        if (Server.ApprovedRulesSha256.Equals(RulesHash, StringComparison.OrdinalIgnoreCase))
-        {
-            Console.WriteLine($"This rule table is already approved for '{_serverName}'.");
-            return 0;
-        }
-
-        Console.WriteLine(Server.ApprovedRulesSha256.Length == 0
-            ? $"No rule table is approved for '{_serverName}' yet."
-            : $"The rule table changed since the approval for '{_serverName}'.");
-        Console.WriteLine($"Read {CorrectionListWriter.MarkdownFileName} before approving.");
-        if (!Confirm($"approve the rule table sha256 {RulesHash} for '{_serverName}'"))
-        {
-            return 1;
-        }
-
-        var path = UserProfile.CountrySettingsPath(settings.Country.Code);
-        new LocalSettingsStore(path).Set(_serverName, new Dictionary<string, string>
-        {
-            [LocalSettingsStore.ApprovedRulesSha256] = RulesHash,
-        });
-        Console.WriteLine($"Approved, saved in '{path}'.");
         return 0;
     }
 

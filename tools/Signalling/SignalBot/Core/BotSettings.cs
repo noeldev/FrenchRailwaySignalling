@@ -82,12 +82,6 @@ public sealed class ServerSettings
     // True on a sandbox only: lets the seed command create test nodes.
     public bool AllowSeeding { get; set; }
 
-    // SHA-256 of the rule table of the country apply may use: any other one
-    // is refused, so the corrections made are always the listed ones.
-    // Required outside a sandbox. Set by approve, in the settings of the
-    // operator for the country.
-    public string ApprovedRulesSha256 { get; set; } = string.Empty;
-
     // A node edited less than this long ago is left alone, since its mapper
     // may still be working on it.
     public int QuietPeriodHours { get; set; }

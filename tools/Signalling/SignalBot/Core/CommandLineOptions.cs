@@ -11,7 +11,6 @@ public enum BotCommand
     Seed,
     Login,
     Rules,
-    Approve,
 }
 
 // Parses and holds the command line of one command. Parse returns null when
@@ -151,8 +150,8 @@ public sealed record CommandLineOptions
         var error = command switch
         {
             _ when sources > 1 => "--input and --nodes do not combine with each other or with --area and --mapper.",
-            BotCommand.Revert or BotCommand.Login or BotCommand.Rules or BotCommand.Approve when sources > 0 => $"--area, --mapper, --input and --nodes do not apply to {args[0]}.",
-            BotCommand.Login or BotCommand.Rules or BotCommand.Approve when limit is not null => $"--limit does not apply to {args[0]}.",
+            BotCommand.Revert or BotCommand.Login or BotCommand.Rules when sources > 0 => $"--area, --mapper, --input and --nodes do not apply to {args[0]}.",
+            BotCommand.Login or BotCommand.Rules when limit is not null => $"--limit does not apply to {args[0]}.",
             BotCommand.Seed when nodesPath is not null => "--nodes does not apply to seed.",
             not BotCommand.Plan when offline => "--offline only applies to plan.",
             BotCommand.Plan when offline && inputPath is null => "--offline needs --input.",
@@ -222,8 +221,6 @@ public sealed record CommandLineOptions
                                                     signals to fix (default: 50).
               SignalBot login  [options]            Register and authorize the bot account (OAuth 2).
               SignalBot rules  [options]            Write the list of the corrections.
-              SignalBot approve [options]           Record the current rule table as the one apply
-                                                    may use on the server.
 
             Source (default: the whole country, read from Overpass; on a sandbox, the test
             nodes of the last seed):

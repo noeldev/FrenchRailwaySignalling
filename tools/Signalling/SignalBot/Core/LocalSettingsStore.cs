@@ -15,7 +15,6 @@ public sealed class LocalSettingsStore(string path)
 {
     public const string Account = "account";
     public const string ClientId = "clientId";
-    public const string ApprovedRulesSha256 = "approvedRulesSha256";
 
     private static readonly JsonSerializerOptions Options = new() { WriteIndented = true };
 

@@ -9,7 +9,7 @@ using SignalBot.Reporting;
 namespace SignalBot.Core;
 
 // Where the files of a country and a server are, and how far the work went:
-// logged in, rule table approved, test nodes seeded, apply runs to revert.
+// logged in, test nodes seeded, apply runs to revert.
 // The commands read it to find their files, the interactive session to offer
 // only the steps that can be taken.
 public sealed class BotState(BotSettings settings, string serverName, string repositoryRoot)
@@ -35,11 +35,6 @@ public sealed class BotState(BotSettings settings, string serverName, string rep
 
     // The bot account of the server is known and has a token.
     public bool IsLoggedIn => Server.Account.Length > 0 && new TokenStore(TokenStore.DefaultPath).Find(serverName) is not null;
-
-    // apply may run: a sandbox needs no approval.
-    public bool IsApproved =>
-        Server.ApprovedRulesSha256.Equals(RulesHash, StringComparison.OrdinalIgnoreCase)
-        || (Server.AllowSeeding && Server.ApprovedRulesSha256.Length == 0);
 
     public bool HasSeededNodes => File.Exists(SeededNodesPath);
 

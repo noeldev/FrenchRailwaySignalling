@@ -54,22 +54,12 @@ public sealed class CommandLineOptionsTests
     }
 
     [Fact]
-    public void Parse_reads_an_approve_command()
-    {
-        var options = CommandLineOptions.Parse(["approve", "--server", "prod"]);
-
-        Assert.NotNull(options);
-        Assert.Equal(BotCommand.Approve, options.Command);
-        Assert.False(options.Writes);
-    }
-
-    [Fact]
     public void Parse_rejects_what_makes_no_sense()
     {
         Assert.Null(CommandLineOptions.Parse(["delete"]));
         Assert.Null(CommandLineOptions.Parse(["1"]));
         Assert.Null(CommandLineOptions.Parse(["revert", "--area", "BRE"]));
-        Assert.Null(CommandLineOptions.Parse(["approve", "--limit", "5"]));
+        Assert.Null(CommandLineOptions.Parse(["rules", "--limit", "5"]));
         Assert.Null(CommandLineOptions.Parse(["plan", "--mapper", "someone", "--input", "export.json"]));
         Assert.Null(CommandLineOptions.Parse(["apply", "--offline", "--input", "export.json"]));
         Assert.Null(CommandLineOptions.Parse(["plan", "--offline"]));
