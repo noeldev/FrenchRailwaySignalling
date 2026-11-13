@@ -38,6 +38,9 @@ public sealed class TestBot : IDisposable
 
     public OptOutSettings OptOut { get; } = new();
 
+    // Uids of the opted-in mappers, when only their signals are fixed.
+    public IReadOnlySet<long>? OptedIn { get; set; }
+
     public TimeSpan QuietPeriod { get; set; } = TimeSpan.Zero;
 
     public string Folder { get; } = Directory.CreateTempSubdirectory("railwaymapbot-").FullName;
@@ -86,7 +89,7 @@ public sealed class TestBot : IDisposable
             "FR");
 
         var fixer = new SignalFixer(table, schema, "railway:signal:", "FR", Policy.FixMistypedValues);
-        return new FixPlanner(fixer, Tags(("railway", "signal")), Policy, OptOut, QuietPeriod, TimeProvider.System);
+        return new FixPlanner(fixer, Tags(("railway", "signal")), Policy, OptOut, OptedIn, QuietPeriod, TimeProvider.System);
     }
 
     // Runs the planner over the nodes as listed (the current ones of the
@@ -111,7 +114,7 @@ public sealed class TestBot : IDisposable
         });
 
         var api = new OsmApiClient(Server.CreateClient(), Limits);
-        var runner = new EditRunner(api, planner ?? CreateFixPlanner(), new ContributorGuard(api, planner is null ? OptOut : new OptOutSettings()), journal, summary, new ChangesetTagBuilder(settings), Limits, mode, "Unification ({area}, lot {batch})", Folder);
+        var runner = new EditRunner(api, planner ?? CreateFixPlanner(), journal, summary, new ChangesetTagBuilder(settings), Limits, mode, "Unification ({area}, lot {batch})", Folder);
 
         IReadOnlyList<OsmNode> nodes = listed ?? [.. Server.Nodes.Values.OrderBy(node => node.Id)];
         await runner.RunAsync([new CandidateGroup(Area, nodes.Count, nodes)], limit, stop);

@@ -166,10 +166,10 @@ public sealed class EditRunnerTests
     public async Task Apply_skips_deleted_opted_out_recent_and_out_of_scope_nodes()
     {
         using var bot = new TestBot { QuietPeriod = TimeSpan.FromHours(24) };
-        bot.OptOut.Users.Add("careful mapper");
+        bot.OptOut.Nodes.Add(2);
         bot.OptOut.Nodes.Add(4);
         bot.Server.Add(1, 1, TestBot.Legacy);
-        bot.Server.Add(2, 1, TestBot.Legacy, user: "careful mapper");
+        bot.Server.Add(2, 1, TestBot.Legacy);
         bot.Server.Add(3, 1, TestBot.Legacy, timestamp: DateTimeOffset.UtcNow.AddHours(-1));
         bot.Server.Add(4, 1, TestBot.Legacy);
         bot.Server.Add(5, 1, TestBot.Tags(("railway", "milestone"), ("railway:signal:main", "FR:CARRE")));
@@ -187,20 +187,21 @@ public sealed class EditRunnerTests
     }
 
     [Fact]
-    public async Task Apply_skips_a_node_an_opted_out_mapper_ever_edited()
+    public async Task Apply_fixes_only_the_signals_last_edited_by_an_opted_in_mapper()
     {
-        using var bot = new TestBot();
-        bot.OptOut.Users.Add("careful mapper");
-        bot.Server.Add(1, 1, TestBot.Legacy, user: "careful mapper");
-        bot.Server.EditAs("someone else", 1, TestBot.Legacy);
-        bot.Server.Add(2, 1, TestBot.Legacy);
+        using var bot = new TestBot { OptedIn = new HashSet<long> { FakeOsmServer.UidOf("willing mapper") } };
+        bot.Server.Add(1, 1, TestBot.Legacy, user: "willing mapper");
+        bot.Server.Add(2, 1, TestBot.Legacy, user: "willing mapper");
+        bot.Server.EditAs("someone else", 2, TestBot.Legacy);
+        bot.Server.Add(3, 1, TestBot.Legacy, user: "someone else");
+        bot.Server.EditAs("willing mapper", 3, TestBot.Legacy);
 
         var summary = await bot.RunAsync(RunMode.Write);
 
-        Assert.Equal(1, summary.EditCount);
-        Assert.Equal(1, summary.Skips[SkipReason.OptedOut]);
-        Assert.Equal("someone else", bot.Server.Nodes[1].User);
-        Assert.Equal("FR:C", bot.Server.Nodes[2].Tags["railway:signal:main"]);
+        Assert.Equal(2, summary.EditCount);
+        Assert.Equal(1, summary.Skips[SkipReason.NotOptedIn]);
+        Assert.Equal("FR:CARRE", bot.Server.Nodes[2].Tags["railway:signal:main"]);
+        Assert.Equal("FR:C", bot.Server.Nodes[3].Tags["railway:signal:main"]);
     }
 
     [Fact]

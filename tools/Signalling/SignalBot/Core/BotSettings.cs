@@ -162,13 +162,12 @@ public sealed class PolicySettings
     public bool FixMistypedValues { get; set; } = true;
 }
 
-// Mappers and nodes the bot must leave untouched, on request.
+// Nodes the bot must leave untouched, on request. Mappers are not listed
+// here: the bot only fixes the signals of the mappers who opted in, kept by
+// the operator (see OptedInMappers), since their identifiers are never
+// committed.
 public sealed class OptOutSettings
 {
-    // Nodes one of these users ever edited are skipped (the history of each
-    // node to edit is read when the list is not empty).
-    public List<string> Users { get; set; } = [];
-
     public List<long> Nodes { get; set; } = [];
 }
 

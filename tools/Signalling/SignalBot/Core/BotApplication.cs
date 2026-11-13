@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Noël Danjou
 
-using System.Net;
 using System.Net.Http.Headers;
 using SignalBot.Auth;
 using SignalBot.Execution;
@@ -37,7 +36,7 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
 
     public async Task<int> RunAsync(CancellationToken stop)
     {
-        using var client = CreateClient(Server);
+        using var client = OsmHttpClient.Create(settings, Server);
         var api = new OsmApiClient(client, settings.Limits);
 
         return options.Command switch
@@ -108,12 +107,19 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         var source = ResolveSource(mode);
         // An unknown area code is reported before anything is read or written.
         _ = new AreaResolver(settings).Resolve(source.Areas);
-        var planner = await CreateFixPlannerAsync(client, mode == RunMode.Offline ? TimeSpan.Zero : TimeSpan.FromHours(Server.QuietPeriodHours), stop);
+        var optedIn = new OptedInMapperStore(UserProfile.OptedInMappersPath(settings.Country.Code)).Load();
+        if (source.OptedIn && optedIn.Users.Count == 0)
+        {
+            Console.WriteLine("No mapper has opted in: nothing to do.");
+            return 0;
+        }
+
+        var planner = await CreateFixPlannerAsync(client, mode == RunMode.Offline ? TimeSpan.Zero : TimeSpan.FromHours(Server.QuietPeriodHours), source.OptedIn ? optedIn.Uids : null, stop);
         // A dry run names the bot account apply would use, without checking it.
         var account = mode == RunMode.Write ? await AuthenticateAsync(client, api, stop) : Server.Account;
 
         var folder = CreateRunFolder(mode);
-        var groups = Prefilter(await LoadCandidatesAsync(client, api, source, folder, stop), planner);
+        var groups = Prefilter(await LoadCandidatesAsync(client, api, source, optedIn, folder, stop), planner);
         // A dry run shows everything; a real run is bounded unless told otherwise.
         var limit = options.Limit ?? (mode == RunMode.Write ? settings.Limits.MaxEditsPerRun : int.MaxValue);
 
@@ -123,7 +129,7 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
             return 1;
         }
 
-        return await ExecuteAsync(api, planner, new ContributorGuard(api, settings.OptOut), groups, mode, limit, settings.Changeset.FixComment, account, source, folder, stop);
+        return await ExecuteAsync(api, planner, groups, mode, limit, settings.Changeset.FixComment, account, source, folder, stop);
     }
 
     // On a sandbox, the nodes are the test nodes of seed: its database has no
@@ -136,7 +142,7 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
             return options;
         }
 
-        if (options.Areas.Count > 0 || options.Mapper is not null || options.InputPath is not null)
+        if (options.Areas.Count > 0 || options.Mapper is not null || options.OptedIn || options.InputPath is not null)
         {
             throw new InvalidOperationException($"'{_serverName}' is a sandbox without the real signals: plan and apply work there on the test nodes of seed (or --nodes).");
         }
@@ -183,8 +189,7 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         }
 
         var planner = new RevertPlanner(edits.ToDictionary(edit => edit.Value.Id, edit => edit.Value));
-        // A revert restores the tags whoever mapped the node: no opt-out applies.
-        return await ExecuteAsync(api, planner, new ContributorGuard(api, new OptOutSettings()), groups, RunMode.Write, limit, settings.Changeset.RevertComment, account, options, CreateRunFolder(RunMode.Write), stop);
+        return await ExecuteAsync(api, planner, groups, RunMode.Write, limit, settings.Changeset.RevertComment, account, options, CreateRunFolder(RunMode.Write), stop);
     }
 
     private async Task<int> SeedAsync(HttpClient client, OsmApiClient api, CancellationToken stop)
@@ -195,8 +200,8 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         }
 
         var account = await AuthenticateAsync(client, api, stop);
-        var planner = await CreateFixPlannerAsync(client, TimeSpan.Zero, stop);
-        var listed = await LoadCandidatesAsync(client, api, options, saveFolder: null, stop);
+        var planner = await CreateFixPlannerAsync(client, TimeSpan.Zero, optedIn: null, stop);
+        var listed = await LoadCandidatesAsync(client, api, options, new OptedInMappers([]), saveFolder: null, stop);
         var nodes = Seeder.Select(listed.SelectMany(group => group.Value).Select(planner.Decide), options.Limit ?? Seeder.DefaultCount);
 
         if (nodes.Count == 0)
@@ -221,7 +226,6 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
     private async Task<int> ExecuteAsync(
         OsmApiClient api,
         IEditPlanner planner,
-        ContributorGuard guard,
         IReadOnlyList<CandidateGroup> groups,
         RunMode mode,
         int limit,
@@ -247,7 +251,7 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         using (var journal = new RunJournal(Path.Combine(folder, RunJournal.FileName)))
         {
             journal.Write(new JournalRecord("run") { Run = run });
-            var runner = new EditRunner(api, planner, guard, journal, summary, new ChangesetTagBuilder(settings.Changeset), settings.Limits, mode, commentTemplate, folder);
+            var runner = new EditRunner(api, planner, journal, summary, new ChangesetTagBuilder(settings.Changeset), settings.Limits, mode, commentTemplate, folder);
             await runner.RunAsync(groups, limit, stop);
             journal.Write(new JournalRecord("end") { Outcome = summary.Outcome });
         }
@@ -273,7 +277,7 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         return 0;
     }
 
-    private async Task<FixPlanner> CreateFixPlannerAsync(HttpClient client, TimeSpan quietPeriod, CancellationToken stop)
+    private async Task<FixPlanner> CreateFixPlannerAsync(HttpClient client, TimeSpan quietPeriod, IReadOnlySet<long>? optedIn, CancellationToken stop)
     {
         // Only the reviewed local copies of the wiki pages are used, like the
         // published validator rules: the live wiki can change at any time.
@@ -282,12 +286,12 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
 
         Console.WriteLine($"Reading rules from '{RulesPath}'...");
         var fixer = new SignalFixer(RuleTable.Load(RulesPath), schema, settings.KeyPrefix, settings.CountryPrefix, settings.Policy.FixMistypedValues);
-        return new FixPlanner(fixer, settings.Scope, settings.Policy, settings.OptOut, quietPeriod, TimeProvider.System);
+        return new FixPlanner(fixer, settings.Scope, settings.Policy, settings.OptOut, optedIn, quietPeriod, TimeProvider.System);
     }
 
     private Task<IReadOnlyList<KeyValuePair<string, IReadOnlyList<OsmNode>>>> LoadCandidatesAsync(
-        HttpClient client, OsmApiClient api, CommandLineOptions source, string? saveFolder, CancellationToken stop) =>
-        new CandidateLoader(new OverpassClient(client, settings.Overpass, settings.Limits), api, settings).LoadAsync(source, saveFolder, stop);
+        HttpClient client, OsmApiClient api, CommandLineOptions source, OptedInMappers optedIn, string? saveFolder, CancellationToken stop) =>
+        new CandidateLoader(new OverpassClient(client, settings.Overpass, settings.Limits), api, settings, optedIn).LoadAsync(source, saveFolder, stop);
 
     // Keeps the nodes the planner has something to say about, so the server
     // is only asked for those.
@@ -352,18 +356,7 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         : source.InputPath is { } input ? $"Overpass answer {Path.GetFileName(input)}{(source.Offline ? " (offline)" : string.Empty)}"
         : source.NodesPath is { } nodes ? (nodes == SeededNodesPath ? "test nodes of the last seed" : $"node list {Path.GetFileName(nodes)}")
         : $"Overpass, {(source.Areas.Count > 0 ? $"areas {string.Join(", ", source.Areas)}" : settings.Country.Name)}"
-            + (source.Mapper is null ? string.Empty : $", nodes last edited by {source.Mapper}");
-
-    // The OSM servers and Overpass ask for an identifiable User-Agent.
-    private HttpClient CreateClient(ServerSettings server)
-    {
-        var handler = new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All };
-        var client = new HttpClient(handler)
-        {
-            BaseAddress = new Uri(server.ApiUrl.TrimEnd('/') + "/"),
-            Timeout = TimeSpan.FromSeconds(settings.Limits.RequestTimeoutSeconds),
-        };
-        client.DefaultRequestHeaders.UserAgent.ParseAdd($"{Banner.ProductVersion()} (+{settings.Contact})");
-        return client;
-    }
+            + (source.Mapper is not null ? $", nodes last edited by {source.Mapper}"
+                : source.OptedIn ? ", nodes last edited by an opted-in mapper"
+                : string.Empty);
 }

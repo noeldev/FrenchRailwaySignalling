@@ -54,12 +54,26 @@ public sealed class CommandLineOptionsTests
     }
 
     [Fact]
+    public void Parse_combines_an_area_and_the_opted_in_mappers()
+    {
+        var options = CommandLineOptions.Parse(["apply", "--server", "prod", "--area", "BRE", "--opted-in"]);
+
+        Assert.NotNull(options);
+        Assert.True(options.OptedIn);
+        Assert.Null(options.Mapper);
+        Assert.Equal(["BRE"], options.Areas.ToArray());
+    }
+
+    [Fact]
     public void Parse_rejects_what_makes_no_sense()
     {
         Assert.Null(CommandLineOptions.Parse(["delete"]));
         Assert.Null(CommandLineOptions.Parse(["1"]));
         Assert.Null(CommandLineOptions.Parse(["revert", "--area", "BRE"]));
         Assert.Null(CommandLineOptions.Parse(["rules", "--limit", "5"]));
+        Assert.Null(CommandLineOptions.Parse(["plan", "--opted-in", "--mapper", "someone"]));
+        Assert.Null(CommandLineOptions.Parse(["plan", "--opted-in", "--input", "export.json"]));
+        Assert.Null(CommandLineOptions.Parse(["seed", "--opted-in"]));
         Assert.Null(CommandLineOptions.Parse(["plan", "--mapper", "someone", "--input", "export.json"]));
         Assert.Null(CommandLineOptions.Parse(["apply", "--offline", "--input", "export.json"]));
         Assert.Null(CommandLineOptions.Parse(["plan", "--offline"]));
