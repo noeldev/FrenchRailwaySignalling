@@ -265,6 +265,25 @@ public sealed class EditRunnerTests
         Assert.Equal("railway:signal:main=FR:CARRE", Assert.Single(edit.Value.Corrections));
     }
 
+    // An editor that takes the journal for one JSON document may reformat it:
+    // it must still be readable, since revert depends on it.
+    [Fact]
+    public async Task Journal_is_read_whatever_its_line_breaks()
+    {
+        using var bot = new TestBot();
+        bot.Server.Add(1, 3, TestBot.Legacy);
+        await bot.RunAsync(RunMode.Write);
+
+        var records = File.ReadAllLines(bot.JournalPath)
+            .Select(line => System.Text.Json.Nodes.JsonNode.Parse(line)!.ToJsonString(new System.Text.Json.JsonSerializerOptions { WriteIndented = true }));
+        File.WriteAllText(bot.JournalPath, string.Join(" ", records), new System.Text.UTF8Encoding(encoderShouldEmitUTF8Identifier: true));
+
+        var (run, edits) = RunJournal.ReadUploads(bot.JournalPath);
+
+        Assert.Equal("test-run", run.RunId);
+        Assert.Equal("FR:C", Assert.Single(edits).Value.After["railway:signal:main"]);
+    }
+
     [Fact]
     public async Task Revert_restores_only_the_nodes_nobody_edited_since()
     {

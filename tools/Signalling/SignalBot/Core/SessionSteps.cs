@@ -12,7 +12,8 @@ public sealed record SessionStep(string Name, string Description, bool Done);
 //   (after an apply), signals (choose other signals);
 // - sandbox: login (until logged in), seed (once logged in), plan and apply
 //   (once test nodes exist), revert (after an apply);
-// then server (choose another server) and exit.
+// then logout (once logged in, to log in again with another account or client
+// ID), server (choose another server) and exit.
 public static class SessionSteps
 {
     public const string Signals = "signals";
@@ -44,6 +45,7 @@ public static class SessionSteps
             steps.Add(new SessionStep(Signals, "choose other signals", true));
         }
 
+        AddIf(steps, state.IsLoggedIn, BotCommand.Logout, "forget the bot account, to log in with another account or client ID", true);
         steps.Add(new SessionStep(Server, "choose another server", true));
         steps.Add(new SessionStep(Exit, "quit", true));
         return steps;

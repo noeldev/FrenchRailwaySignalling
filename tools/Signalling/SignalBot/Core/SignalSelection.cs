@@ -24,8 +24,9 @@ public enum SignalScope
 // made, to name them; the command reads the list itself when it runs.
 public sealed record SignalSelection(SignalScope Scope, IReadOnlyList<string> Areas, IReadOnlyList<string> Mappers)
 {
-    // Names listed in a description before "and N more".
-    private const int MaxNames = 5;
+    // Beyond this number, the mappers are counted, not named: the list was
+    // shown in full when it was chosen.
+    private const int MaxNames = 3;
 
     public static SignalSelection Country { get; } = new(SignalScope.Country, [], []);
 
@@ -35,11 +36,14 @@ public sealed record SignalSelection(SignalScope Scope, IReadOnlyList<string> Ar
 
     public static SignalSelection ForMappers(IReadOnlyList<string> names) => new(SignalScope.OptedInMappers, [], names);
 
-    // The selection in words, to complete "for ..." or "Signals: ...".
+    // The selection in a few words, to complete "Signals: ...". It stays
+    // short however many mappers opted in.
     public string Describe(BotSettings settings) => Scope switch
     {
-        SignalScope.Areas => $"the signals of {(Areas.Count == 1 ? "area" : "areas")} {string.Join(", ", Areas)}",
-        SignalScope.OptedInMappers => $"the signals last edited by {(Mappers.Count == 1 ? "the opted-in mapper" : $"the {Mappers.Count} opted-in mappers")} ({Names()})",
+        SignalScope.Areas => $"{(Areas.Count == 1 ? "area" : "areas")} {string.Join(", ", Areas)}",
+        SignalScope.OptedInMappers when Mappers.Count == 1 => $"last edited by the opted-in mapper {Mappers[0]}",
+        SignalScope.OptedInMappers when Mappers.Count <= MaxNames => $"last edited by the {Mappers.Count} opted-in mappers ({string.Join(", ", Mappers)})",
+        SignalScope.OptedInMappers => $"last edited by the {Mappers.Count} opted-in mappers",
         SignalScope.TestNodes => "the test nodes of the last seed",
         _ => $"every signal of {settings.Country.Name}",
     };
@@ -51,7 +55,4 @@ public sealed record SignalSelection(SignalScope Scope, IReadOnlyList<string> Ar
         SignalScope.OptedInMappers => options with { OptedIn = true },
         _ => options,
     };
-
-    private string Names() =>
-        string.Join(", ", Mappers.Take(MaxNames)) + (Mappers.Count > MaxNames ? $" and {Mappers.Count - MaxNames} more" : string.Empty);
 }

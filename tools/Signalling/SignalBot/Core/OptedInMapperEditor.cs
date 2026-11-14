@@ -8,9 +8,10 @@ namespace SignalBot.Core;
 // The "mapper" choice of the interactive session: a menu shown again after
 // each change, with the list of the mappers who opted in, until the operator
 // goes on or back:
-// - opt-in adds mappers, opt-out removes mappers, one display name per line
-//   until an empty line; every name typed is checked on the server, which
-//   gives its uid;
+// - opt-in adds mappers, one display name per line until an empty line;
+//   every name typed is checked on the server, which gives its uid;
+// - opt-out removes mappers, one per line until an empty line, by their
+//   number in the list (shown again after each removal) or by display name;
 // - continue goes on with the list as it is (offered once it is not empty);
 // - back returns to the choice of the signals.
 // Every change is saved at once: the list is the same in the next session.
@@ -58,8 +59,10 @@ public sealed class OptedInMapperEditor(OsmApiClient api, OptedInMapperStore sto
 
     private async Task EditAsync(OptedInMappers mappers, bool add, CancellationToken cancellationToken)
     {
-        Console.WriteLine("One display name per line, as on the profile page; an empty line ends.");
-        while (true)
+        Console.WriteLine(add
+            ? "One display name per line, as on the profile page; an empty line ends."
+            : "One number of the list, or one display name, per line; an empty line ends.");
+        while (add || mappers.Users.Count > 0)
         {
             var name = ConsolePrompt.Ask(add ? "Add mapper" : "Remove mapper");
             if (name.Length == 0)
@@ -71,6 +74,11 @@ public sealed class OptedInMapperEditor(OsmApiClient api, OptedInMapperStore sto
             {
                 Console.WriteLine(add ? await AddAsync(mappers, name, cancellationToken) : await RemoveAsync(mappers, name, cancellationToken));
                 store.Save(mappers);
+                if (!add && mappers.Users.Count > 0)
+                {
+                    // The numbers changed.
+                    Print(mappers);
+                }
             }
             catch (Exception ex) when (ex is HttpRequestException or OsmApiException or TaskCanceledException && !cancellationToken.IsCancellationRequested)
             {
@@ -90,10 +98,15 @@ public sealed class OptedInMapperEditor(OsmApiClient api, OptedInMapperStore sto
         return mappers.Add(user) ? $"  Added: {user}" : $"  Already in the list: {user}";
     }
 
-    // By the name in the list first; a mapper who changed their name since
-    // is found by uid.
+    // By the number in the list, else by the name in the list; a mapper who
+    // changed their name since is found by uid.
     private async Task<string> RemoveAsync(OptedInMappers mappers, string name, CancellationToken cancellationToken)
     {
+        if (int.TryParse(name, out var number) && number >= 1 && number <= mappers.Users.Count)
+        {
+            return $"  Removed: {mappers.Remove(mappers.Users[number - 1].Uid)}";
+        }
+
         var user = mappers.Remove(name);
         if (user is null && await api.FindUserAsync(name, cancellationToken) is { } found)
         {
@@ -112,9 +125,10 @@ public sealed class OptedInMapperEditor(OsmApiClient api, OptedInMapperStore sto
         }
 
         Console.WriteLine("Opted-in mappers:");
-        foreach (var user in mappers.Users)
+        var width = mappers.Users.Count.ToString().Length;
+        for (var i = 0; i < mappers.Users.Count; i++)
         {
-            Console.WriteLine($"  {user}");
+            Console.WriteLine($"  {(i + 1).ToString().PadLeft(width)}. {mappers.Users[i]}");
         }
     }
 }

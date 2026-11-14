@@ -51,6 +51,33 @@ public sealed class InteractiveMenuTests : IDisposable
     }
 
     [Fact]
+    public async Task Mappers_are_removed_by_their_number_in_the_list()
+    {
+        _store.Save(new OptedInMappers([new OsmUser(1, "Alice"), new OsmUser(2, "Bob"), new OsmUser(3, "Carol")]));
+        using var console = new ConsoleScript("opt-out", "2", "2", "9", "", "continue");
+
+        var mappers = await Editor.RunAsync(CancellationToken.None);
+
+        // The list is numbered again after each removal: 2 is Bob, then Carol;
+        // 9 is no number of the list, and is taken for a name.
+        Assert.Equal("Alice", Assert.Single(mappers!.Users).Name);
+        Assert.Contains("  2. Bob (uid 2)", console.Printed);
+        Assert.Contains("Removed: Bob (uid 2)", console.Printed);
+        Assert.Contains("Removed: Carol (uid 3)", console.Printed);
+        Assert.Contains("Not in the list: 9", console.Printed);
+    }
+
+    [Fact]
+    public async Task Removing_the_last_mapper_returns_to_the_menu()
+    {
+        _store.Save(new OptedInMappers([new OsmUser(1, "Alice")]));
+        using var console = new ConsoleScript("opt-out", "1", "back");
+
+        Assert.Null(await Editor.RunAsync(CancellationToken.None));
+        Assert.Empty(_store.Load().Users);
+    }
+
+    [Fact]
     public async Task Mappers_menu_offers_to_go_on_only_with_a_mapper_and_goes_on_by_default()
     {
         using var console = new ConsoleScript("continue", "", "Alice", "", "");
@@ -90,7 +117,7 @@ public sealed class InteractiveMenuTests : IDisposable
         using var console = new ConsoleScript("");
 
         Assert.Null(await new SignalSelector(_settings, Editor).AskAsync(SignalSelection.ForAreas(["BRE"]), CancellationToken.None));
-        Assert.Contains("keep the signals of area BRE", console.Printed);
+        Assert.Contains("keep the current choice (area BRE)", console.Printed);
     }
 
     [Fact]
@@ -102,7 +129,7 @@ public sealed class InteractiveMenuTests : IDisposable
 
         Assert.Equal(SignalScope.OptedInMappers, selection!.Scope);
         Assert.True(selection.ApplyTo(new CommandLineOptions { Command = BotCommand.Plan }).OptedIn);
-        Assert.Equal("the signals last edited by the opted-in mapper (Alice)", selection.Describe(_settings));
+        Assert.Equal("last edited by the opted-in mapper Alice", selection.Describe(_settings));
     }
 
     // A script that ends, or Ctrl+Z: the question is not asked forever.

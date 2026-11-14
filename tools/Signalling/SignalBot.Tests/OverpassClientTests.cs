@@ -8,6 +8,7 @@ using SignalBot.Osm;
 namespace SignalBot.Tests;
 
 // Overpass fails often (timeouts, load): what the client does then.
+[Collection(ConsoleScript.Collection)]
 public sealed class OverpassClientTests
 {
     private const string Main = "https://overpass.test/api/interpreter";
@@ -114,7 +115,23 @@ public sealed class OverpassClientTests
 
         Assert.Single(_server.Requests);
         Assert.False(error.IsTransient);
-        Assert.Contains("Error : line 2: parse error: Unknown type \"aera\"", error.Message);
+        Assert.Contains("400 Bad Request (line 2: parse error: Unknown type \"aera\")", error.Message);
+    }
+
+    // The front server of Overpass explains a refusal in a long text: only
+    // its first sentence is shown, and the next try on its own line.
+    [Fact]
+    public async Task Query_reports_a_failure_in_one_short_line()
+    {
+        using var console = new ConsoleScript();
+        _server
+            .Answer(HttpStatusCode.BadGateway, "# 502 Gateway Timeout\n\nThis Overpass API server is currently at capacity. All query workers are busy and the request queue is full.\n\n## What to do\n\nRetry your request using exponential backoff.")
+            .Answer(HttpStatusCode.OK, FakeOverpass.Complete);
+
+        await QueryAsync();
+
+        Assert.Contains($"  Overpass (overpass.test): 502 Bad Gateway (This Overpass API server is currently at capacity).{Environment.NewLine}  Trying again in 0 s (try 2 of 3)...", console.Printed);
+        Assert.DoesNotContain("What to do", console.Printed);
     }
 
     [Fact]

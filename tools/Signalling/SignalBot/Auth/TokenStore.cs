@@ -23,6 +23,15 @@ public sealed class TokenStore(string path)
         File.WriteAllText(path, JsonSerializer.Serialize(tokens));
     }
 
+    public void Remove(string server)
+    {
+        var tokens = Load();
+        if (tokens.Remove(server))
+        {
+            File.WriteAllText(path, JsonSerializer.Serialize(tokens));
+        }
+    }
+
     private Dictionary<string, string> Load() =>
         File.Exists(path)
             ? JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(path)) ?? []

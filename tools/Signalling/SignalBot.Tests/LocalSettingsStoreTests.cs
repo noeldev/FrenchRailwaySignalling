@@ -25,6 +25,22 @@ public sealed class LocalSettingsStoreTests
             Assert.Equal("other", (string?)servers["dev"]!["account"]);
             Assert.Equal("abc", (string?)servers["dev"]!["clientId"]);
             Assert.Equal("123", (string?)servers["prod"]!["clientId"]);
+
+            // Logging out of a server forgets its values, not those of the others.
+            store.Remove("dev", [LocalSettingsStore.Account, LocalSettingsStore.ClientId]);
+            store.Remove("nowhere", [LocalSettingsStore.Account]);
+
+            servers = JsonNode.Parse(File.ReadAllText(path))!["servers"]!;
+            Assert.Null(servers["dev"]!["account"]);
+            Assert.Null(servers["dev"]!["clientId"]);
+            Assert.Equal("123", (string?)servers["prod"]!["clientId"]);
+
+            var tokens = new SignalBot.Auth.TokenStore(Path.Combine(folder, "profile", "tokens.json"));
+            tokens.Save("dev", "token-dev");
+            tokens.Save("prod", "token-prod");
+            tokens.Remove("dev");
+            Assert.Null(tokens.Find("dev"));
+            Assert.Equal("token-prod", tokens.Find("prod"));
         }
         finally
         {
