@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 Noël Danjou
 
+using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -34,9 +35,19 @@ public sealed class RunJournal(string path) : IDisposable
         RunInfo? run = null;
         SortedDictionary<int, JournalRecord> batches = [];
 
-        foreach (var line in File.ReadLines(path).Where(line => !string.IsNullOrWhiteSpace(line)))
+        // The file is a sequence of JSON objects, written one per line (JSON
+        // Lines). It is read as a sequence, wherever the line breaks are, so a
+        // journal reformatted and saved by an editor can still be reverted.
+        var content = File.ReadAllBytes(path).AsSpan();
+        if (content.StartsWith(Encoding.UTF8.Preamble))
         {
-            var record = JsonSerializer.Deserialize<JournalRecord>(line, Options)
+            content = content[Encoding.UTF8.Preamble.Length..];
+        }
+
+        var reader = new Utf8JsonReader(content, new JsonReaderOptions { AllowMultipleValues = true });
+        while (reader.Read())
+        {
+            var record = JsonSerializer.Deserialize<JournalRecord>(ref reader, Options)
                 ?? throw new InvalidDataException($"Empty journal record in {path}");
 
             run ??= record.Run;

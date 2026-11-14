@@ -62,7 +62,7 @@ public sealed class InteractiveSession(string repositoryRoot, StopSignal stopSig
             Console.WriteLine();
             Console.WriteLine($"{settings.Country.Name}, server '{server}', "
                 + (state.IsLoggedIn ? $"bot account '{state.Server.Account}'." : "not logged in."));
-            Console.WriteLine($"Signals: {selection.Describe(settings)}.");
+            Console.WriteLine($"Signals: {selection.Describe(settings)}");
             var next = steps.FirstOrDefault(step => !step.Done)?.Name ?? SessionSteps.Exit;
             var choice = ConsolePrompt.Choose("Step", [.. steps.Select(step => (step.Name, step.Description))], next);
             Console.WriteLine();

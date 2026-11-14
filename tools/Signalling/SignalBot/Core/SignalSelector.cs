@@ -27,7 +27,7 @@ public sealed class SignalSelector(BotSettings settings, OptedInMapperEditor map
                 (All, $"every signal of {settings.Country.Name}"),
                 (Area, "the signals of regions or departments"),
                 (Mapper, "the signals last edited by the mappers who opted in"),
-                (Back, current is null ? "back to the choice of the server" : $"keep {current.Describe(settings)}"),
+                (Back, current is null ? "back to the choice of the server" : $"keep the current choice ({current.Describe(settings)})"),
             ], current is null ? All : Back);
 
             switch (choice)

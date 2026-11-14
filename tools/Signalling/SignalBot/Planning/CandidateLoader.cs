@@ -42,7 +42,7 @@ public sealed class CandidateLoader(OverpassClient overpass, OsmApiClient api, B
         }
 
         var (filter, mapper) = options.Mapper is { } name ? (OverpassClient.UserFilter(name), $", last edited by {name}")
-            : options.OptedIn ? (OverpassClient.UidFilter(optedIn.Uids), $", last edited by the {optedIn.Users.Count} opted-in mappers")
+            : options.OptedIn ? (OverpassClient.UidFilter(optedIn.Uids), optedIn.Users.Count == 1 ? ", last edited by the opted-in mapper" : $", last edited by the {optedIn.Users.Count} opted-in mappers")
             : (string.Empty, string.Empty);
 
         List<KeyValuePair<string, IReadOnlyList<OsmNode>>> groups = [];

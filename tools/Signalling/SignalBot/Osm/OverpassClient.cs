@@ -38,7 +38,7 @@ public sealed partial class OverpassClient(HttpClient client, OverpassSettings s
 
     private static readonly TimeSpan MaxRetryDelay = TimeSpan.FromMinutes(10);
 
-    private const int MaxErrorLength = 300;
+    private const int MaxErrorLength = 200;
 
     public async Task<OverpassAnswer> QueryAsync(string areaSelector, string mapperFilter, string? savePath, CancellationToken cancellationToken)
     {
@@ -65,7 +65,8 @@ public sealed partial class OverpassClient(HttpClient client, OverpassSettings s
             {
                 var delay = ex.RetryAfter ?? TimeSpan.FromSeconds(settings.RetryDelaySeconds * Math.Pow(2, attempt));
                 delay = delay < TimeSpan.Zero ? TimeSpan.Zero : delay < MaxRetryDelay ? delay : MaxRetryDelay;
-                Console.WriteLine($"  Overpass ({new Uri(endpoint).Host}): {ex.Message}. Try {attempt + 2} of {settings.Retries + 1} in {Math.Ceiling(delay.TotalSeconds)} s...");
+                Console.WriteLine($"  Overpass ({new Uri(endpoint).Host}): {ex.Message}.");
+                Console.WriteLine($"  Trying again in {Math.Ceiling(delay.TotalSeconds)} s (try {attempt + 2} of {settings.Retries + 1})...");
                 await Task.Delay(delay, cancellationToken);
             }
             catch (OverpassException ex)
@@ -96,7 +97,7 @@ public sealed partial class OverpassClient(HttpClient client, OverpassSettings s
             var status = (int)response.StatusCode;
             var retryAfter = response.Headers.RetryAfter;
             throw new OverpassException(
-                $"{status} {response.StatusCode}{DescribeError(body)}",
+                $"{status} {response.ReasonPhrase}{DescribeError(body)}",
                 isTransient: response.StatusCode is HttpStatusCode.TooManyRequests or HttpStatusCode.RequestTimeout || status >= 500,
                 retryAfter?.Delta ?? retryAfter?.Date - DateTimeOffset.UtcNow);
         }
@@ -110,13 +111,26 @@ public sealed partial class OverpassClient(HttpClient client, OverpassSettings s
         }
     }
 
-    // Overpass explains an error in an HTML page: its text, in short.
+    // The reason of an error, in one short line. Overpass explains a refused
+    // query in an HTML page (<p><strong>Error</strong>: line 2: parse error
+    // ...</p>), its front server explains a refusal in a text with "#"
+    // headings: the error paragraphs of the first, the first sentence of the
+    // second.
     private static string DescribeError(byte[] body)
     {
-        var text = WhitespaceRegex().Replace(MarkupRegex().Replace(Encoding.UTF8.GetString(body), " "), " ").Trim();
-        return text.Length == 0 ? string.Empty
-            : text.Length <= MaxErrorLength ? $": {text}"
-            : $": {text[..MaxErrorLength]}...";
+        var text = Encoding.UTF8.GetString(body);
+        var errors = ErrorParagraphRegex().Matches(text);
+        var reason = errors.Count > 0
+            ? string.Join(" ", errors.Select(error => error.Groups[1].Value))
+            : text.Split('\n').Select(line => line.Trim()).FirstOrDefault(line => line.Length > 0 && !line.StartsWith('#') && !line.StartsWith('<')) ?? string.Empty;
+
+        reason = WhitespaceRegex().Replace(MarkupRegex().Replace(reason, " "), " ").Trim().TrimStart(':').Trim();
+        var sentence = reason.IndexOf(". ", StringComparison.Ordinal);
+        reason = (sentence > 0 ? reason[..sentence] : reason).TrimEnd('.');
+
+        return reason.Length == 0 ? string.Empty
+            : reason.Length <= MaxErrorLength ? $" ({reason})"
+            : $" ({reason[..MaxErrorLength]}...)";
     }
 
     // Overpass filter on the display name of the user of the last version;
@@ -126,6 +140,9 @@ public sealed partial class OverpassClient(HttpClient client, OverpassSettings s
 
     // Overpass filter on the uid of the user of the last version.
     public static string UidFilter(IEnumerable<long> uids) => $"(uid:{string.Join(',', uids)})";
+
+    [GeneratedRegex("<p>\\s*<strong[^>]*>\\s*Error\\s*</strong>(.*?)</p>", RegexOptions.Singleline | RegexOptions.IgnoreCase)]
+    private static partial Regex ErrorParagraphRegex();
 
     [GeneratedRegex("<[^>]*>")]
     private static partial Regex MarkupRegex();

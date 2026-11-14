@@ -32,6 +32,23 @@ public sealed class LocalSettingsStore(string path)
         File.WriteAllText(path, root.ToJsonString(Options));
     }
 
+    // Forgets the values of a server; the others are kept.
+    public void Remove(string server, IEnumerable<string> keys)
+    {
+        var root = Load();
+        if (root["servers"]?[server] is not JsonObject entry)
+        {
+            return;
+        }
+
+        foreach (var key in keys)
+        {
+            entry.Remove(key);
+        }
+
+        File.WriteAllText(path, root.ToJsonString(Options));
+    }
+
     private JsonObject Load() =>
         File.Exists(path) ? JsonNode.Parse(File.ReadAllText(path)) as JsonObject ?? [] : [];
 

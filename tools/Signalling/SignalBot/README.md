@@ -22,8 +22,8 @@ Start the program without arguments (in Visual Studio: F5 on the project). It as
 
 | Server | Steps |
 |---|---|
-| `prod`, the real map | `plan`; `login` until logged in; `apply` once logged in; `revert` after an `apply`. |
-| `dev`, the sandbox | `login` until logged in; `seed` once logged in; `plan` and `apply` once test nodes exist; `revert` after an `apply`. |
+| `prod`, the real map | `plan`; `login` until logged in; `apply` once logged in; `revert` after an `apply`; `logout` once logged in. |
+| `dev`, the sandbox | `login` until logged in; `seed` once logged in; `plan` and `apply` once test nodes exist; `revert` after an `apply`; `logout` once logged in. |
 
 After each step, the program lists the files it wrote and what to check in them. Nothing is written to a server without a confirmation where the name of the server must be typed.
 
@@ -31,10 +31,19 @@ The session asks in this order, and every menu can be left without Ctrl+C:
 
 1. **Server** - `dev`, `prod`, or `exit`.
 2. **Signals** (real map only; a sandbox has the test nodes) - `all` (every signal of the country), `area` (regions or departments; the codes are checked at once, an empty answer goes back) or `mapper` (the mappers who opted in); `back` returns to the server.
-3. **Mappers**, for the `mapper` choice - the list of the opted-in mappers with their uid, and a menu shown again after each change: `opt-in` adds and `opt-out` removes mappers, one display name per line until an empty line (each name is checked on the server, which gives its uid); `continue` goes on with the list; `back` returns to the signals.
+3. **Mappers**, for the `mapper` choice - the list of the opted-in mappers with their uid, and a menu shown again after each change: `opt-in` adds mappers, one display name per line until an empty line (each name is checked on the server, which gives its uid); `opt-out` removes mappers, one per line, by their number in the list or by display name; `continue` goes on with the list; `back` returns to the signals.
 4. **Step** - the table above, plus `signals` (choose other signals), `server` (choose another server) and `exit`. The server and the signals chosen are shown above the steps and kept from one step to the next, so `plan` and `apply` cover the same signals.
 
-Before a step runs, one sentence tells what it is about to do, for example `[apply] on server 'prod' for the signals of area BRE: upload at most 200 fixes as 'signalbot'.`, followed by `Do you want to proceed? (y/n) [n]`. A "no" does nothing and returns to the steps.
+Before a step runs, a short summary tells what it is about to do, followed by `Do you want to proceed? (y/n) [n]`. A "no" does nothing and returns to the steps.
+
+```
+[apply] on server 'prod'
+  Signals: last edited by the 43 opted-in mappers
+  Action:  upload at most 200 fixes as 'signalbot'
+Do you want to proceed? (y/n) [n]:
+```
+
+The access token of a server does not expire: once logged in, `login` is no longer offered and nothing is asked in the browser. `logout` revokes the token on the server and forgets the account and its client ID on this computer; `login` then asks for them again, which is the way to change the account or the client ID.
 
 The opted-in mappers are kept per country in the user profile (see Settings), never in the repository: the identifiers of mappers are not committed.
 
@@ -47,6 +56,7 @@ The opted-in mappers are kept per country in the user profile (see Settings), ne
 | `revert` | Restores the tags the last `apply` run replaced (or the run of a given journal), on the nodes nobody edited since. | yes |
 | `seed` | Sandbox only: creates test nodes copied from real signals to fix (50 by default), so that `apply` and `revert` can be tried there. The sandbox is a separate database, without the signals of the real map. | yes, sandbox only |
 | `login` | Registers the OAuth 2 application if needed and authorizes the bot account, guided; saves the account, client ID and token. | no |
+| `logout` | Revokes the access token on the server and forgets the account, client ID and token on this computer. The application stays registered on the account. | no |
 | `rules` | Writes the list of the corrections (command line). | no |
 
 The same commands run from the command line, for scripts: `SignalBot plan --server prod --area BRE`. Run `SignalBot --help` for the options. The source is the whole country by default; `--area` (regions or departments, `--area BRE`, `--area 14,75`) and `--mapper` (`--mapper "Noël Danjou"`) or `--opted-in` (the mappers who opted in) filter it and combine; `--input` reads an Overpass answer instead (for example one saved by an earlier run) and `--nodes` a list of node ids. On the sandbox, `plan` and `apply` work on the test nodes of the last `seed`.
@@ -85,7 +95,7 @@ Everything is written under `bot/runs/<country>/` (setting `output`, ignored by 
 
 - `report.md` - the report to publish: areas, changesets (with links to the changeset and to OSMCha), tag changes (`+` added, `-` removed, `~` changed), rules applied, nodes left untouched and why, last mappers of the edited nodes;
 - `changes-NNN.osc` - the osmChange document of each batch, as uploaded (or as it would be, in a dry run). JOSM opens these files, which is a convenient way to review a dry run;
-- `journal.jsonl` - one JSON object per line: the run, each batch with the tags of every node before and after (written before the upload), the result of the upload, each skipped node with its reason. This is the input of `revert`: keep the journals of the real runs;
+- `journal.jsonl` - [JSON Lines](https://jsonlines.org/), one JSON object per line (an editor that expects a single JSON document, like Visual Studio, reports "only one top-level item is allowed": the file is right, and need not be reformatted): the run, each batch with the tags of every node before and after (written before the upload), the result of the upload, each skipped node with its reason. This is the input of `revert`: keep the journals of the real runs;
 - `overpass-<area>.json` - the data received from Overpass, which `plan --offline --input <file>` reads again.
 
 Besides: `corrections.md` and `corrections.wiki` (written by `rules`), and `seeded-nodes-<server>.txt`, the ids of the test nodes of the last `seed`. The folders of dry runs can be deleted at any time.

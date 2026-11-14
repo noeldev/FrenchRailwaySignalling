@@ -42,6 +42,7 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         return options.Command switch
         {
             BotCommand.Login => await LoginAsync(client, api, stop),
+            BotCommand.Logout => await LogoutAsync(client, stop),
             BotCommand.Rules => WriteCorrectionList(),
             BotCommand.Seed => await SeedAsync(client, api, stop),
             BotCommand.Revert => await RevertAsync(client, api, stop),
@@ -98,6 +99,31 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         });
 
         Console.WriteLine($"Logged in to '{_serverName}' as '{account}'.");
+        return 0;
+    }
+
+    // The opposite of login: the access token is revoked on the server, then
+    // the token, the account and the client ID are forgotten here, so the next
+    // login asks for them again (another account, another application). The
+    // application stays registered on the account.
+    private async Task<int> LogoutAsync(HttpClient client, CancellationToken stop)
+    {
+        var token = _tokens.Find(_serverName);
+        if (token is null && Server.Account.Length == 0)
+        {
+            Console.WriteLine($"Not logged in to '{_serverName}'.");
+            return 0;
+        }
+
+        if (token is not null && !await new OAuthLogin(client, Server).RevokeAsync(Server.ClientId, token, stop))
+        {
+            Console.WriteLine($"The access token could not be revoked on '{_serverName}': revoke it on the website, under the account settings, in the authorized OAuth 2 applications ({Server.WebUrl.TrimEnd('/')}/oauth2/authorized_applications).");
+        }
+
+        _tokens.Remove(_serverName);
+        new LocalSettingsStore(UserProfile.SettingsPath).Remove(_serverName, [LocalSettingsStore.Account, LocalSettingsStore.ClientId]);
+
+        Console.WriteLine($"Logged out of '{_serverName}': the bot account '{Server.Account}' and its client ID are forgotten on this computer.");
         return 0;
     }
 

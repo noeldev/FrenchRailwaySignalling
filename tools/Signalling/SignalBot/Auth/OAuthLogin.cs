@@ -55,4 +55,25 @@ public sealed class OAuthLogin(HttpClient client, ServerSettings server)
         return document.RootElement.GetProperty("access_token").GetString()
             ?? throw new InvalidOperationException("The server returned no access token.");
     }
+
+    // Asks the server to revoke an access token, which can then no longer be
+    // used by anyone. False when the server could not be asked or refused.
+    public async Task<bool> RevokeAsync(string clientId, string token, CancellationToken cancellationToken)
+    {
+        try
+        {
+            using var content = new FormUrlEncodedContent(
+            [
+                KeyValuePair.Create("token", token),
+                KeyValuePair.Create("client_id", clientId),
+            ]);
+
+            using var response = await client.PostAsync($"{server.WebUrl.TrimEnd('/')}/oauth2/revoke", content, cancellationToken);
+            return response.IsSuccessStatusCode;
+        }
+        catch (Exception ex) when (ex is HttpRequestException or TaskCanceledException && !cancellationToken.IsCancellationRequested)
+        {
+            return false;
+        }
+    }
 }
