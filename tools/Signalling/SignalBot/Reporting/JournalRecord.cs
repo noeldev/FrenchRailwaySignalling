@@ -4,7 +4,8 @@
 namespace SignalBot.Reporting;
 
 // What identifies a run, written first in its journal and at the top of its
-// report. The hash tells which rule table took the decisions.
+// report. The hash tells which rule table took the decisions. A revert run
+// names the run it undoes (Reverts).
 public sealed record RunInfo(
     string RunId,
     string Command,
@@ -15,7 +16,8 @@ public sealed record RunInfo(
     string Source,
     int EditLimit,
     bool DryRun,
-    string RulesSha256);
+    string RulesSha256,
+    string? Reverts = null);
 
 // One edited node: the version it was read at, its last mapper, and its tags
 // before and after. This is all a revert needs.

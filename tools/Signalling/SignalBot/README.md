@@ -22,8 +22,8 @@ Start the program without arguments (in Visual Studio: F5 on the project). It as
 
 | Server | Steps |
 |---|---|
-| `prod`, the real map | `plan`; `login` until logged in; `apply` once logged in; `revert` after an `apply`; `logout` once logged in. |
-| `dev`, the sandbox | `login` until logged in; `seed` once logged in; `plan` and `apply` once test nodes exist; `revert` after an `apply`; `logout` once logged in. |
+| `prod`, the real map | `plan`; `login` until logged in; `apply` once logged in; `revert` while an `apply` run is not reverted; `logout` once logged in. |
+| `dev`, the sandbox | `login` until logged in; `seed` once logged in; `plan` and `apply` once test nodes exist; `revert` while an `apply` run is not reverted; `logout` once logged in. |
 
 After each step, the program lists the files it wrote and what to check in them. Nothing is written to a server without a confirmation where the name of the server must be typed.
 
@@ -53,8 +53,8 @@ The opted-in mappers are kept per country in the user profile (see Settings), ne
 |---|---|---|
 | `plan` | Dry run: the report of what `apply` would do. | no |
 | `apply` | Uploads the fixes. | yes |
-| `revert` | Restores the tags the last `apply` run replaced (or the run of a given journal), on the nodes nobody edited since. | yes |
-| `seed` | Sandbox only: creates test nodes copied from real signals to fix (50 by default), so that `apply` and `revert` can be tried there. The sandbox is a separate database, without the signals of the real map. | yes, sandbox only |
+| `revert` | Restores the tags an `apply` run replaced, on the nodes nobody edited since: the newest `apply` run of the server not reverted yet, so that reverting again undoes the runs from the newest to the oldest (or the run of a given journal). Only the runs of the server chosen count, and a journal of another server is refused: a revert on `dev` never touches a run on `prod`, and the other way round. | yes |
+| `seed` | Sandbox only: creates test nodes copied from real signals to fix (50 by default), so that `apply` and `revert` can be tried there. The sandbox is a separate database, without the signals of the real map. The copies keep the tags and the positions of the real signals: first one signal per correction, then the others one square of the grid after the other, so that they spread over the country; they are uploaded one changeset per square, like the fixes. With a few hundred of them, `apply` meets the same limits as on the real map (squares, edits per run). | yes, sandbox only |
 | `login` | Registers the OAuth 2 application if needed and authorizes the bot account, guided; saves the account, client ID and token. | no |
 | `logout` | Revokes the access token on the server and forgets the account, client ID and token on this computer. The application stays registered on the account. | no |
 | `rules` | Writes the list of the corrections (command line). | no |
@@ -95,7 +95,7 @@ Everything is written under `bot/runs/<country>/` (setting `output`, ignored by 
 
 - `report.md` - the report to publish: areas, changesets (with links to the changeset and to OSMCha), tag changes (`+` added, `-` removed, `~` changed), rules applied, nodes left untouched and why, last mappers of the edited nodes;
 - `changes-NNN.osc` - the osmChange document of each batch, as uploaded (or as it would be, in a dry run). JOSM opens these files, which is a convenient way to review a dry run;
-- `journal.jsonl` - [JSON Lines](https://jsonlines.org/), one JSON object per line (an editor that expects a single JSON document, like Visual Studio, reports "only one top-level item is allowed": the file is right, and need not be reformatted): the run, each batch with the tags of every node before and after (written before the upload), the result of the upload, each skipped node with its reason. This is the input of `revert`: keep the journals of the real runs;
+- `journal.jsonl` - [JSON Lines](https://jsonlines.org/), one JSON object per line (an editor that expects a single JSON document, like Visual Studio, reports "only one top-level item is allowed": the file is right, and need not be reformatted): the run, each batch with the tags of every node before and after (written before the upload), the result of the upload, each skipped node with its reason. This is the input of `revert`, and the journal of a revert names the run it undid: keep the journals of the real runs;
 - `overpass-<area>.json` - the data received from Overpass, which `plan --offline --input <file>` reads again.
 
 Besides: `corrections.md` and `corrections.wiki` (written by `rules`), and `seeded-nodes-<server>.txt`, the ids of the test nodes of the last `seed`. The folders of dry runs can be deleted at any time.
@@ -112,7 +112,7 @@ The first one has the layout of `appsettings.json` and is read over it, for exam
 
 ## Accounts
 
-The same account logs in to the sandbox (`dev`, https://master.apis.dev.openstreetmap.org) and to the production server (`prod`, https://www.openstreetmap.org), but each server has its own OAuth 2 application, hence its own client ID: run `login` on each. On `prod`, the edit is made with a dedicated account; on its profile, say what it is and link to the page documenting the edit.
+The same account logs in to the sandbox (`dev`, https://master.apis.dev.openstreetmap.org) and to the production server (`prod`, https://www.openstreetmap.org), but each server has its own OAuth 2 application, hence its own client ID: run `login` on each. On `prod`, the edit is made with a dedicated account; on its profile, say what it is and link to the page documenting the edit: `osm-profile.md` is the text of the profile of `signalbot`, in English and French, to paste in the description of the profile (Edit Profile > Description, Markdown).
 
 `login` does the rest: it asks whether the OAuth 2 application is already registered on the account; if not, it opens the registration page and shows the values to type (the application is public: no client secret is used), otherwise it opens the list of the applications of the account, where the name of the application leads to its client ID; it then asks for the client ID, opens the authorization page, asks for the code shown, then checks and records the name of the account.
 
@@ -126,4 +126,4 @@ The hash of the rule table is computed with LF line ends, so it is the same what
 
 ## Tests
 
-`SignalBot.Tests` runs the whole pipeline against an in-memory OSM API (`FakeOsmServer`) that refuses version conflicts like the real one: fresh data, conflicts, limits, opt-in and opt-out, dry run, journal and revert; and the parts around it: command line, settings, opted-in mappers, changeset batches, test nodes, tag changes, the Overpass client against an interpreter that fails in every way listed above (`FakeOverpass`), and the menus of the interactive session with a scripted operator.
+`SignalBot.Tests` runs the whole pipeline against an in-memory OSM API (`FakeOsmServer`) that refuses version conflicts like the real one: fresh data, conflicts, limits, opt-in and opt-out, dry run, journal and revert; and the parts around it: command line, settings, opted-in mappers, changeset batches, test nodes, tag changes, the apply run that revert undoes on each server, the Overpass client against an interpreter that fails in every way listed above (`FakeOverpass`), and the menus of the interactive session with a scripted operator.

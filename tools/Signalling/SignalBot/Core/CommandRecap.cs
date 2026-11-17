@@ -18,7 +18,7 @@ public static class CommandRecap
         {
             BotCommand.Plan => "dry run, nothing is written",
             BotCommand.Apply => $"upload at most {options.Limit} fixes as '{account}'",
-            BotCommand.Seed => $"create {options.Limit} test signals as '{account}', copied from signals of {settings.Country.Name} to fix",
+            BotCommand.Seed => $"create {options.Limit} test signals as '{account}', copied from signals of {settings.Country.Name} to fix, at their positions",
             BotCommand.Revert => $"restore, as '{account}', the tags replaced by run {RunId(state.LastApplyJournal)}, on the signals nobody edited since",
             BotCommand.Logout => $"revoke the access token of '{account}', then forget the account and its client ID on this computer",
             _ => null,

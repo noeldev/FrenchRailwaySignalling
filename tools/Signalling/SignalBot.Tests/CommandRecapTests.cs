@@ -47,7 +47,7 @@ public sealed class CommandRecapTests
     public void Seed_and_logout_tell_what_is_done_without_a_signals_line()
     {
         Assert.Equal(
-            new[] { "[seed] on server 'dev'", "  Action:  create 50 test signals as 'signalbot', copied from signals of France to fix" },
+            new[] { "[seed] on server 'dev'", "  Action:  create 50 test signals as 'signalbot', copied from signals of France to fix, at their positions" },
             Describe(BotCommand.Seed, "dev", SignalSelection.TestNodes, 50));
         Assert.Equal(
             new[] { "[logout] on server 'prod'", "  Action:  revoke the access token of 'signalbot', then forget the account and its client ID on this computer" },

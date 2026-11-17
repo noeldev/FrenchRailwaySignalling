@@ -15,10 +15,13 @@ public static class ChangesetBatcher
 {
     public static IEnumerable<OsmNode[]> Split(IReadOnlyList<OsmNode> nodes, LimitSettings limits) =>
         nodes
-            .GroupBy(node => (Row: Cell(node.Lat, limits.MaxChangesetSpanDegrees), Column: Cell(node.Lon, limits.MaxChangesetSpanDegrees)))
+            .GroupBy(node => Square(node, limits.MaxChangesetSpanDegrees))
             .OrderBy(square => square.Key.Row)
             .ThenBy(square => square.Key.Column)
             .SelectMany(square => square.OrderBy(node => node.Id).Chunk(limits.MaxNodesPerChangeset));
+
+    // The square of the grid a node is in.
+    public static (long Row, long Column) Square(OsmNode node, double span) => (Cell(node.Lat, span), Cell(node.Lon, span));
 
     private static long Cell(double coordinate, double span) => (long)Math.Floor(coordinate / span);
 }

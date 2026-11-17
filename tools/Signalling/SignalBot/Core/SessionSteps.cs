@@ -39,7 +39,7 @@ public static class SessionSteps
         }
 
         AddIf(steps, applyReady, BotCommand.Apply, sandbox ? "fix the test nodes" : "upload the fixes to the real map", state.LastApplyJournal is not null);
-        AddIf(steps, state.LastApplyJournal is not null, BotCommand.Revert, "undo the last apply", true);
+        AddIf(steps, state.LastApplyJournal is not null, BotCommand.Revert, "undo the last apply not undone yet", true);
         if (!sandbox)
         {
             steps.Add(new SessionStep(Signals, "choose other signals", true));

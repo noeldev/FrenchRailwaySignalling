@@ -215,7 +215,7 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         }
 
         var planner = new RevertPlanner(edits.ToDictionary(edit => edit.Value.Id, edit => edit.Value));
-        return await ExecuteAsync(api, planner, groups, RunMode.Write, limit, settings.Changeset.RevertComment, account, options, CreateRunFolder(RunMode.Write), stop);
+        return await ExecuteAsync(api, planner, groups, RunMode.Write, limit, settings.Changeset.RevertComment, account, options, CreateRunFolder(RunMode.Write), stop, reverts: run.RunId);
     }
 
     private async Task<int> SeedAsync(HttpClient client, OsmApiClient api, CancellationToken stop)
@@ -228,7 +228,7 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         var account = await AuthenticateAsync(client, api, stop);
         var planner = await CreateFixPlannerAsync(client, TimeSpan.Zero, optedIn: null, stop);
         var listed = await LoadCandidatesAsync(api, options, new OptedInMappers([]), saveFolder: null, stop);
-        var nodes = Seeder.Select(listed.SelectMany(group => group.Value).Select(planner.Decide), options.Limit ?? Seeder.DefaultCount);
+        var nodes = Seeder.Select(listed.SelectMany(group => group.Value).Select(planner.Decide), options.Limit ?? Seeder.DefaultCount, settings.Limits.MaxChangesetSpanDegrees);
 
         if (nodes.Count == 0)
         {
@@ -241,11 +241,17 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
             return 1;
         }
 
-        var ids = await new Seeder(api, new ChangesetTagBuilder(settings.Changeset), settings.Changeset).CreateAsync(nodes, stop);
+        var ids = await new Seeder(api, new ChangesetTagBuilder(settings.Changeset), settings.Changeset, settings.Limits).CreateAsync(nodes, stop);
+        if (ids.Count == 0)
+        {
+            Console.WriteLine("Stopped before the first changeset: no test node created.");
+            return 1;
+        }
+
         Directory.CreateDirectory(OutputRoot);
         File.WriteAllLines(SeededNodesPath, ids.Select(id => id.ToString()));
 
-        Console.WriteLine($"Created {ids.Count} test nodes, listed in '{SeededNodesPath}'.");
+        Console.WriteLine($"Created {ids.Count} test nodes{(ids.Count < nodes.Count ? $" of {nodes.Count} (stopped)" : string.Empty)}, listed in '{SeededNodesPath}'.");
         return 0;
     }
 
@@ -259,7 +265,8 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
         string account,
         CommandLineOptions source,
         string folder,
-        CancellationToken stop)
+        CancellationToken stop,
+        string? reverts = null)
     {
         var run = new RunInfo(
             Path.GetFileName(folder),
@@ -268,10 +275,11 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
             account,
             Banner.ProductVersion(),
             _started,
-            DescribeSource(source),
+            reverts is null ? DescribeSource(source) : $"journal of run {reverts}",
             limit,
             DryRun: mode != RunMode.Write,
-            RulesHash);
+            RulesHash,
+            reverts);
 
         var summary = new RunSummary();
         using (var journal = new RunJournal(Path.Combine(folder, RunJournal.FileName)))
@@ -384,8 +392,7 @@ public sealed class BotApplication(BotSettings settings, CommandLineOptions opti
     }
 
     private string DescribeSource(CommandLineOptions source) =>
-        options.Command == BotCommand.Revert ? "journal of an earlier run"
-        : source.InputPath is { } input ? $"Overpass answer {Path.GetFileName(input)}{(source.Offline ? " (offline)" : string.Empty)}"
+        source.InputPath is { } input ? $"Overpass answer {Path.GetFileName(input)}{(source.Offline ? " (offline)" : string.Empty)}"
         : source.NodesPath is { } nodes ? (nodes == SeededNodesPath ? "test nodes of the last seed" : $"node list {Path.GetFileName(nodes)}")
         : $"Overpass, {(source.Areas.Count > 0 ? $"areas {string.Join(", ", source.Areas)}" : settings.Country.Name)}"
             + (source.Mapper is not null ? $", nodes last edited by {source.Mapper}"

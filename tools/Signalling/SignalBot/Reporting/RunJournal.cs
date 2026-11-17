@@ -28,16 +28,49 @@ public sealed class RunJournal(string path) : IDisposable
 
     public void Dispose() => _writer.Dispose();
 
+    // The run of a journal, from its first record.
+    public static RunInfo ReadRun(string path)
+    {
+        RunInfo? run = null;
+        ReadRecords(path, record =>
+        {
+            run = record.Run;
+            return false;
+        });
+        return run ?? throw new InvalidDataException($"Not a run journal (no run record): {path}");
+    }
+
     // The run of a journal and the edits it sent to the server, by area. A
     // batch decided again after a conflict replaces its first writing.
     public static (RunInfo Run, IReadOnlyList<KeyValuePair<string, JournalEdit>> Edits) ReadUploads(string path)
     {
         RunInfo? run = null;
         SortedDictionary<int, JournalRecord> batches = [];
+        ReadRecords(path, record =>
+        {
+            run ??= record.Run;
+            if (record is { Type: "batch", Batch: { } batch, Changeset: not null })
+            {
+                batches[batch] = record;
+            }
 
-        // The file is a sequence of JSON objects, written one per line (JSON
-        // Lines). It is read as a sequence, wherever the line breaks are, so a
-        // journal reformatted and saved by an editor can still be reverted.
+            return true;
+        });
+
+        if (run is null)
+        {
+            throw new InvalidDataException($"Not a run journal (no run record): {path}");
+        }
+
+        return (run, [.. batches.Values.SelectMany(batch => batch.Edits!.Select(edit => KeyValuePair.Create(batch.Area!, edit)))]);
+    }
+
+    // Gives the records of a journal in order, until visit returns false.
+    // The file is a sequence of JSON objects, written one per line (JSON
+    // Lines). It is read as a sequence, wherever the line breaks are, so a
+    // journal reformatted and saved by an editor can still be reverted.
+    private static void ReadRecords(string path, Func<JournalRecord, bool> visit)
+    {
         var content = File.ReadAllBytes(path).AsSpan();
         if (content.StartsWith(Encoding.UTF8.Preamble))
         {
@@ -49,19 +82,10 @@ public sealed class RunJournal(string path) : IDisposable
         {
             var record = JsonSerializer.Deserialize<JournalRecord>(ref reader, Options)
                 ?? throw new InvalidDataException($"Empty journal record in {path}");
-
-            run ??= record.Run;
-            if (record is { Type: "batch", Batch: { } batch, Changeset: not null })
+            if (!visit(record))
             {
-                batches[batch] = record;
+                return;
             }
         }
-
-        if (run is null)
-        {
-            throw new InvalidDataException($"Not a run journal (no run record): {path}");
-        }
-
-        return (run, [.. batches.Values.SelectMany(batch => batch.Edits!.Select(edit => KeyValuePair.Create(batch.Area!, edit)))]);
     }
 }

@@ -38,23 +38,77 @@ public sealed class BotState(BotSettings settings, string serverName, string rep
 
     public bool HasSeededNodes => File.Exists(SeededNodesPath);
 
-    // The journal of the last apply run on the server, unless a revert ran
-    // after it. Run folders start with their start time, so their names sort
-    // in time order.
+    // The journal of the newest apply run on the server that uploaded edits
+    // and has not been reverted yet: reverting again and again undoes the
+    // apply runs from the newest to the oldest. Only the runs of this server
+    // count: the folder of a run ends with the name of its server.
     public string? LastApplyJournal
     {
         get
         {
-            var apply = LastRunFolder(BotCommand.Apply);
-            var journal = apply is null ? null : Path.Combine(apply, RunJournal.FileName);
-            return journal is not null && File.Exists(journal) && string.CompareOrdinal(apply, LastRunFolder(BotCommand.Revert)) > 0 ? journal : null;
+            var applies = RunFolders(BotCommand.Apply);
+            var reverted = RevertedRuns(applies);
+            return applies
+                .Where(folder => !reverted.Contains(Path.GetFileName(folder)))
+                .Select(folder => Path.Combine(folder, RunJournal.FileName))
+                .FirstOrDefault(HasUploads);
         }
     }
 
-    public bool HasRun(BotCommand command) => LastRunFolder(command) is not null;
+    public bool HasRun(BotCommand command) => RunFolders(command).Count > 0;
 
-    private string? LastRunFolder(BotCommand command) =>
+    // The run folders of a command on the server, newest first. Their names
+    // start with their start time, so they sort in time order.
+    private IReadOnlyList<string> RunFolders(BotCommand command) =>
         Directory.Exists(OutputRoot)
-            ? Directory.GetDirectories(OutputRoot, $"*-{command.ToString().ToLowerInvariant()}-{serverName}").Max(StringComparer.Ordinal)
-            : null;
+            ? [.. Directory.GetDirectories(OutputRoot, $"*-{command.ToString().ToLowerInvariant()}-{serverName}").OrderDescending(StringComparer.Ordinal)]
+            : [];
+
+    // The names of the apply runs undone by the revert runs of the server. A
+    // revert journal names the run it undid; one written before it did so
+    // undid the newest apply run started before it.
+    private HashSet<string> RevertedRuns(IReadOnlyList<string> applies)
+    {
+        HashSet<string> reverted = new(StringComparer.Ordinal);
+        foreach (var folder in RunFolders(BotCommand.Revert))
+        {
+            var journal = Path.Combine(folder, RunJournal.FileName);
+            var undone = File.Exists(journal)
+                ? ReadRunOrNull(journal)?.Reverts ?? applies.FirstOrDefault(apply => string.CompareOrdinal(apply, folder) < 0)
+                : null;
+            if (undone is not null)
+            {
+                reverted.Add(Path.GetFileName(undone));
+            }
+        }
+
+        return reverted;
+    }
+
+    // An apply run stopped before its first upload has nothing to revert. A
+    // journal that cannot be read is left to the revert command, which
+    // reports why when it is given the journal.
+    private static bool HasUploads(string journal)
+    {
+        try
+        {
+            return File.Exists(journal) && RunJournal.ReadUploads(journal).Edits.Count > 0;
+        }
+        catch (Exception ex) when (ex is InvalidDataException or System.Text.Json.JsonException)
+        {
+            return false;
+        }
+    }
+
+    private static RunInfo? ReadRunOrNull(string journal)
+    {
+        try
+        {
+            return RunJournal.ReadRun(journal);
+        }
+        catch (Exception ex) when (ex is InvalidDataException or System.Text.Json.JsonException)
+        {
+            return null;
+        }
+    }
 }
