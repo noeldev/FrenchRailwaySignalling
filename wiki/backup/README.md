@@ -1,6 +1,6 @@
 ﻿# OSM Wiki Pages Backup
 
-**Backup generated:** 2026-11-11 23:56:55 UTC<br>
+**Backup generated:** 2026-11-17 05:53:06 UTC<br>
 **Category:** main<br>
 **Total pages:** 3<br>
 **Successfully backed up:** 3
@@ -10,9 +10,9 @@
 
 - **File:** [FR/Key/railway-signal-distant-states.wiki](FR/Key/railway-signal-distant-states.wiki)
 - **Wiki URL:** [FR:Key:railway:signal:distant:states](https://wiki.openstreetmap.org/wiki/FR:Key:railway:signal:distant:states)
-- **Last edited:** 2026-07-10 23:05:26 UTC
+- **Last edited:** 2026-11-12 01:34:34 UTC
 - **Last editor:** Noeld
-- **Edit comment:** /* Available states */ fix FR:(VL) category
+- **Edit comment:** /* Available states */ remove unused aspects
 
 ### FR:Key:railway:signal:main:states
 

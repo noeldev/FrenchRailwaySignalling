@@ -3,7 +3,7 @@ Wiki page: OpenRailwayMap/Tagging_in_France
 Last edited: 2026-11-11 23:55:36 UTC
 Last editor: Noeld
 Last edit comment: /* General tags */ update form property description
-Backup date: 2026-11-11 23:56:55 UTC
+Backup date: 2026-11-17 05:53:06 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/OpenRailwayMap/Tagging_in_France
 --}}
 

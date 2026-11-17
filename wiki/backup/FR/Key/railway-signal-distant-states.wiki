@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: FR:Key:railway:signal:distant:states
-Last edited: 2026-07-10 23:05:26 UTC
+Last edited: 2026-11-12 01:34:34 UTC
 Last editor: Noeld
-Last edit comment: /* Available states */ fix FR:(VL) category
-Backup date: 2026-11-11 23:56:55 UTC
+Last edit comment: /* Available states */ remove unused aspects
+Backup date: 2026-11-17 05:53:06 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/FR:Key:railway:signal:distant:states
 --}}
 
@@ -25,17 +25,8 @@ Source URL: https://wiki.openstreetmap.org/wiki/FR:Key:railway:signal:distant:st
 |{{TagValue|railway:signal:distant:states|FR:R}}
 |30 km/h speed restriction (Ralentissement 30)
 |-
-|{{TagValue|railway:signal:distant:states|FR:R+A}}
-|30 km/h speed restriction and caution aspect
-|-
-|{{TagValue|railway:signal:distant:states|FR:R+(A)}}
-|30 km/h speed restriction and advance caution aspect
-|-
 |{{TagValue|railway:signal:distant:states|FR:(R)}}
 |60 km/h speed restriction (Ralentissement 60)
-|-
-|{{TagValue|railway:signal:distant:states|FR:(R)+A}}
-|60 km/h speed restriction and caution aspect
 |-
 |{{TagValue|railway:signal:distant:states|FR:(R)+(A)}}
 |60 km/h speed restriction and advance caution aspect
@@ -44,7 +35,7 @@ Source URL: https://wiki.openstreetmap.org/wiki/FR:Key:railway:signal:distant:st
 |Clear aspect (Feu vert)
 |-
 |{{TagValue|railway:signal:distant:states|FR:(VL)}}
-|Flashing green light
+|Flashing green light (Feu vert clignotant)
 |}
 
 == See also ==
