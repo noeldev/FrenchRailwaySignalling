@@ -59,7 +59,7 @@ In JOSM, go to **Edit** → **Preferences** → **Data Validator** → **Tag che
 
 `validator/rules.json` is the only hand-maintained input. It holds these lists:
 
-- `valueReplacements` rename a value in place. The value is matched as a token, so the same entry also fixes a `;` separated list; an empty `to` drops the token:
+- `valueReplacements` rename a value in place. The value is matched as a token, so the same entry also fixes a `;` separated list; an empty `to` drops the token, for a value that is not documented at all, such as an aspect that does not exist (the validator then says the value is not documented rather than deprecated):
   ```json
   { "key": "railway:signal:main:states", "from": "FR:CV", "to": "FR:Cv" }
   ```

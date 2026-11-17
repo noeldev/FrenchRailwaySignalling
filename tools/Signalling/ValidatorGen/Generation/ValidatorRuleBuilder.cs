@@ -86,7 +86,8 @@ public sealed class ValidatorRuleBuilder(TagSchema schema, RuleTable table, Vali
         List<string> declarations =
         [
             scope.SetHandled(entry.Key),
-            $"throwError: tr(\"{{0}}={{1}} is deprecated\", {Quote(entry.Key)}, {Quote(entry.From)})",
+            // An empty replacement drops a value that is not documented at all.
+            $"throwError: tr(\"{{0}}={{1}} {(entry.To.Length > 0 ? "is deprecated" : "is not documented")}\", {Quote(entry.Key)}, {Quote(entry.From)})",
             $"fixAdd: {fix}",
             $"assertMatch: {Quote(AssertNode(scope.InScope([KeyValuePair.Create(entry.Key, entry.From)])))}",
         ];

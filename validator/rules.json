@@ -76,6 +76,21 @@
       "to": "FR:(M)"
     },
     {
+      "key": "railway:signal:main:states",
+      "from": "FR:R+A",
+      "to": ""
+    },
+    {
+      "key": "railway:signal:main:states",
+      "from": "FR:R+(A)",
+      "to": ""
+    },
+    {
+      "key": "railway:signal:main:states",
+      "from": "FR:(R)+A",
+      "to": ""
+    },
+    {
       "key": "railway:signal:distant:states",
       "from": "FR:VLc",
       "to": "FR:(VL)"
@@ -93,17 +108,17 @@
     {
       "key": "railway:signal:distant:states",
       "from": "FR:R(A)",
-      "to": "FR:R+A"
+      "to": ""
     },
     {
       "key": "railway:signal:distant:states",
       "from": "FR:R(Ac)",
-      "to": "FR:R+(A)"
+      "to": ""
     },
     {
       "key": "railway:signal:distant:states",
       "from": "FR:Rc(A)",
-      "to": "FR:(R)+A"
+      "to": ""
     },
     {
       "key": "railway:signal:distant:states",

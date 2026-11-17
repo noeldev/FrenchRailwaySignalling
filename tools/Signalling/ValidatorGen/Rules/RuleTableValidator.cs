@@ -58,7 +58,8 @@ public static class RuleTableValidator
             yield return $"{label}: {entry.From} is documented, so it is not legacy.";
         }
 
-        if (!schema.IsDocumentedValue(entry.Key, entry.To))
+        // An empty replacement drops the token: nothing to document.
+        if (entry.To.Length > 0 && !schema.IsDocumentedValue(entry.Key, entry.To))
         {
             yield return $"{label}: the replacement {entry.To} is not documented.";
         }
