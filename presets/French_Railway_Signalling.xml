@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.43_2026-11-12"
+    version="1.44_2026-11-23"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -244,7 +244,7 @@
 			fr.text="Identifiant Réseau"
 			length="7" />
 		<combo
-			key="railway:signal:train_protection:main:type"
+			key="railway:signal:traversable"
 			text="Identification plate"
 			fr.text="Plaque d'identification"
 			editable="false"
@@ -266,7 +266,7 @@
 				fr.text="Caractéristiques complémentaires" />
 			<space />
 			<check
-				key="railway:signal:train_protection:main:passing_light"
+				key="railway:signal:traversable:passing_light"
 				text="White passing light"
 				fr.text="Feu blanc de franchissement"
 				disable_off="true"/>
@@ -707,6 +707,15 @@
 			length="7" />
 	</chunk>
 
+	<chunk id="cat_main_repeated">
+		<reference ref="base_common" />
+		<text
+			key="railway:signal:main_repeated:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
+	</chunk>
+
 	<!-- Level crossing advance boards (form=sign) -->
 	<chunk id="cat_crossing_hint">
 		<reference ref="base_common" />
@@ -830,11 +839,13 @@
 		</optional>
 	</chunk>
 
-	<!-- Common plates for Carré / Carré violet -->
+	<!-- Block identification plate of Carre / Carre violet: it applies when the
+	     signal shows the Semaphore aspect, so it is mapped like the identification
+	     plate of a Semaphore (railway:signal:traversable). Never on a low-type Cv. -->
 	<chunk id="carre_plates">
 		<space />
 		<combo
-			key="railway:signal:main:type"
+			key="railway:signal:traversable"
 			text="Block Identification Plate"
 			fr.text="Plaque de Cantonnement"
 			values_sort="false"
@@ -851,7 +862,7 @@
 				icon="icons/plates/PR.svg" icon_size="24"/>
 		</combo>
 		<text
-			key="railway:signal:main:caption"
+			key="railway:signal:traversable:caption"
 			text="Plate caption"
 			fr.text="Libellé de la plaque" />
 	</chunk>
@@ -931,7 +942,7 @@
 		<key key="railway:signal:main" value="FR:S" />
 		<space />
 		<combo
-			key="railway:signal:main:type"
+			key="railway:signal:traversable"
 			text="Identification Plate"
 			fr.text="Plaque d'Identification"
 			editable="false"
@@ -4762,10 +4773,10 @@
 					text="Dispositif d'Aide à la Mise en Mouvement (DAMM)"
 					fr.text="Dispositif d'Aide à la Mise en Mouvement (DAMM)" />
 				<space />
-				<key key="railway:signal:departure" value="FR:DAMM" />
-				<key key="railway:signal:departure:form" value="light" />
-				<reference ref="cat_departure" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Dispositifs_d'Aide_à_la_Mise_en_Mouvement" />
+				<key key="railway:signal:main_repeated" value="FR:DAMM" />
+				<key key="railway:signal:main_repeated:form" value="light" />
+				<reference ref="cat_main_repeated" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Dispositif_d'Aide_à_la_Mise_en_Mouvement" />
 			</item>
 
 			<separator />

@@ -251,7 +251,7 @@
       "to": "board"
     },
     {
-      "key": "railway:signal:train_protection:main:type",
+      "key": "railway:signal:traversable",
       "from": "FR:NF",
       "to": "FR:Nf"
     },
@@ -1396,7 +1396,7 @@
     {
       "match": {
         "railway:signal:main:plate": "FR:F",
-        "railway:signal:main:type": "*"
+        "railway:signal:traversable": "*"
       },
       "remove": [
         "railway:signal:main:plate"
@@ -1405,16 +1405,16 @@
     {
       "match": {
         "railway:signal:main:plate": "FR:F",
-        "railway:signal:main:type": null
+        "railway:signal:traversable": null
       },
       "rename": {
-        "railway:signal:main:plate": "railway:signal:main:type"
+        "railway:signal:main:plate": "railway:signal:traversable"
       }
     },
     {
       "match": {
         "railway:signal:main:plate": "FR:PR",
-        "railway:signal:main:type": "*"
+        "railway:signal:traversable": "*"
       },
       "remove": [
         "railway:signal:main:plate"
@@ -1423,16 +1423,16 @@
     {
       "match": {
         "railway:signal:main:plate": "FR:PR",
-        "railway:signal:main:type": null
+        "railway:signal:traversable": null
       },
       "rename": {
-        "railway:signal:main:plate": "railway:signal:main:type"
+        "railway:signal:main:plate": "railway:signal:traversable"
       }
     },
     {
       "match": {
         "railway:signal:main:plate": "FR:BM",
-        "railway:signal:main:type": "*"
+        "railway:signal:traversable": "*"
       },
       "remove": [
         "railway:signal:main:plate"
@@ -1441,19 +1441,19 @@
     {
       "match": {
         "railway:signal:main:plate": "FR:BM",
-        "railway:signal:main:type": null
+        "railway:signal:traversable": null
       },
       "rename": {
-        "railway:signal:main:plate": "railway:signal:main:type"
+        "railway:signal:main:plate": "railway:signal:traversable"
       }
     },
     {
       "match": {
         "railway:signal:main:plate": "F",
-        "railway:signal:main:type": null
+        "railway:signal:traversable": null
       },
       "set": {
-        "railway:signal:main:type": "FR:F"
+        "railway:signal:traversable": "FR:F"
       },
       "remove": [
         "railway:signal:main:plate"
@@ -1462,7 +1462,7 @@
     {
       "match": {
         "railway:signal:main:plate": "F",
-        "railway:signal:main:type": "*"
+        "railway:signal:traversable": "*"
       },
       "remove": [
         "railway:signal:main:plate"
@@ -1471,10 +1471,10 @@
     {
       "match": {
         "railway:signal:main:plate": "PR",
-        "railway:signal:main:type": null
+        "railway:signal:traversable": null
       },
       "set": {
-        "railway:signal:main:type": "FR:PR"
+        "railway:signal:traversable": "FR:PR"
       },
       "remove": [
         "railway:signal:main:plate"
@@ -1483,7 +1483,7 @@
     {
       "match": {
         "railway:signal:main:plate": "PR",
-        "railway:signal:main:type": "*"
+        "railway:signal:traversable": "*"
       },
       "remove": [
         "railway:signal:main:plate"
@@ -1508,16 +1508,16 @@
     {
       "match": {
         "railway:signal:main:plates": "FR:F",
-        "railway:signal:main:type": null
+        "railway:signal:traversable": null
       },
       "rename": {
-        "railway:signal:main:plates": "railway:signal:main:type"
+        "railway:signal:main:plates": "railway:signal:traversable"
       }
     },
     {
       "match": {
         "railway:signal:main:plates": "FR:F",
-        "railway:signal:main:type": "*"
+        "railway:signal:traversable": "*"
       },
       "remove": [
         "railway:signal:main:plates"
@@ -1528,22 +1528,22 @@
         "railway:signal:main:caption:marker": "*"
       },
       "rename": {
-        "railway:signal:main:caption:marker": "railway:signal:main:caption"
+        "railway:signal:main:caption:marker": "ref"
       }
     },
     {
       "match": {
         "railway:signal:main:plate:block": "FR:PR",
-        "railway:signal:main:type": null
+        "railway:signal:traversable": null
       },
       "rename": {
-        "railway:signal:main:plate:block": "railway:signal:main:type"
+        "railway:signal:main:plate:block": "railway:signal:traversable"
       }
     },
     {
       "match": {
         "railway:signal:main:plate:block": "FR:PR",
-        "railway:signal:main:type": "*"
+        "railway:signal:traversable": "*"
       },
       "remove": [
         "railway:signal:main:plate:block"
@@ -1552,10 +1552,10 @@
     {
       "match": {
         "railway:signal:main:plate:block": "PR",
-        "railway:signal:main:type": null
+        "railway:signal:traversable": null
       },
       "set": {
-        "railway:signal:main:type": "FR:PR"
+        "railway:signal:traversable": "FR:PR"
       },
       "remove": [
         "railway:signal:main:plate:block"
@@ -1564,7 +1564,7 @@
     {
       "match": {
         "railway:signal:main:plate:block": "PR",
-        "railway:signal:main:type": "*"
+        "railway:signal:traversable": "*"
       },
       "remove": [
         "railway:signal:main:plate:block"
@@ -1573,20 +1573,139 @@
     {
       "match": {
         "railway:signal:main:plate:block": "FR:BM",
-        "railway:signal:main:type": null
+        "railway:signal:traversable": null
       },
       "rename": {
-        "railway:signal:main:plate:block": "railway:signal:main:type"
+        "railway:signal:main:plate:block": "railway:signal:traversable"
       }
     },
     {
       "match": {
         "railway:signal:main:plate:block": "FR:BM",
-        "railway:signal:main:type": "*"
+        "railway:signal:traversable": "*"
       },
       "remove": [
         "railway:signal:main:plate:block"
       ]
+    },
+    {
+      "match": {
+        "railway:signal:main:type": "FR:F",
+        "railway:signal:traversable": "*"
+      },
+      "remove": [
+        "railway:signal:main:type"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:main:type": "FR:F",
+        "railway:signal:traversable": null
+      },
+      "rename": {
+        "railway:signal:main:type": "railway:signal:traversable"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:main:type": "FR:PR",
+        "railway:signal:traversable": "*"
+      },
+      "remove": [
+        "railway:signal:main:type"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:main:type": "FR:PR",
+        "railway:signal:traversable": null
+      },
+      "rename": {
+        "railway:signal:main:type": "railway:signal:traversable"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:main:type": "FR:BM",
+        "railway:signal:traversable": "*"
+      },
+      "remove": [
+        "railway:signal:main:type"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:main:type": "FR:BM",
+        "railway:signal:traversable": null
+      },
+      "rename": {
+        "railway:signal:main:type": "railway:signal:traversable"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:train_protection:main:type": "*",
+        "railway:signal:traversable": "*"
+      },
+      "remove": [
+        "railway:signal:train_protection:main:type"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:train_protection:main:type": "*",
+        "railway:signal:traversable": null
+      },
+      "rename": {
+        "railway:signal:train_protection:main:type": "railway:signal:traversable"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:main:caption": "*",
+        "railway:signal:traversable": "*",
+        "railway:signal:traversable:caption": null
+      },
+      "rename": {
+        "railway:signal:main:caption": "railway:signal:traversable:caption"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:train_protection:main:passing_light": "*",
+        "railway:signal:traversable:passing_light": "*"
+      },
+      "remove": [
+        "railway:signal:train_protection:main:passing_light"
+      ]
+    },
+    {
+      "match": {
+        "railway:signal:train_protection:main:passing_light": "*",
+        "railway:signal:traversable:passing_light": null
+      },
+      "rename": {
+        "railway:signal:train_protection:main:passing_light": "railway:signal:traversable:passing_light"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:departure": "FR:DAMM",
+        "railway:signal:main_repeated": null
+      },
+      "set": {
+        "railway:signal:main_repeated": "FR:DAMM"
+      },
+      "rename": {
+        "railway:signal:departure:form": "railway:signal:main_repeated:form",
+        "railway:signal:departure:ref": "railway:signal:main_repeated:ref"
+      },
+      "remove": [
+        "railway:signal:departure"
+      ],
+      "default": {
+        "railway:signal:main_repeated:form": "light"
+      }
     },
     {
       "match": {
@@ -2809,7 +2928,7 @@
         "railway:signal:main:plate:caption": "*"
       },
       "rename": {
-        "railway:signal:main:plate:caption": "railway:signal:main:caption"
+        "railway:signal:main:plate:caption": "railway:signal:traversable:caption"
       }
     },
     {
