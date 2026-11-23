@@ -1,10 +1,27 @@
 ﻿{{!--
 Wiki page: Tag:railway:signal:main:states=FR:A
-Last edited: 2024-06-16 01:43:58 UTC
-Last editor: Noeld
-Last edit comment: Created.
-Backup date: 2026-02-17 22:47:00 UTC
+Last edited: 2026-03-17 12:48:59 UTC
+Last editor: Kjon
+Last edit comment: group=railways
+Backup date: 2026-11-23 19:48:07 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:states=FR:A
 --}}
 
+{{ValueDescription
+| key           = railway:signal:main:states
+| value         = FR:A
+| image         = File:A_Cible_A1.svg
+| description   = Avertissement
+| group         = railways
+| onNode        = yes
+| onWay         = no
+| onArea        = no
+| onRelation    = no
+| requires      = {{Key|railway:signal:main}}
+| implies       = 
+| combination   = 
+| seeAlso       = 
+| status        = in use
+| statuslink    = 
+}}
 {{Template:FR:RailwaySignalState|state=A}}

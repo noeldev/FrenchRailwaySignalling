@@ -1,10 +1,17 @@
 ﻿{{!--
 Wiki page: Tag:railway:signal:main:states=FR:C
-Last edited: 2024-06-16 01:38:49 UTC
+Last edited: 2026-08-19 03:20:40 UTC
 Last editor: Noeld
-Last edit comment: Updated inline syntax.
-Backup date: 2026-02-17 22:47:00 UTC
+Last edit comment: update template
+Backup date: 2026-11-23 19:48:06 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:states=FR:C
 --}}
 
+{{ValueDescription
+|key=railway:signal:main:states
+|value=FR:C
+|group=railways
+|onNode=yes
+|status=in use
+}}
 {{Template:FR:RailwaySignalState|state=C}}

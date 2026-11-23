@@ -3,7 +3,7 @@ Wiki page: Template:FR:RailwaySignalShape/doc
 Last edited: 2026-02-16 04:29:05 UTC
 Last editor: Noeld
 Last edit comment: /* Exemples */ Updated.
-Backup date: 2026-02-17 00:40:16 UTC
+Backup date: 2026-11-23 19:48:06 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalShape/doc
 --}}
 

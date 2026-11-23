@@ -1,27 +1,27 @@
 ﻿{{!--
 Wiki page: Tag:railway:signal:distant:states=FR:D
-Last edited: 2024-10-19 23:38:10 UTC
-Last editor: Noeld
-Last edit comment: Edits
-Backup date: 2026-02-17 22:46:59 UTC
+Last edited: 2026-03-17 12:47:46 UTC
+Last editor: Kjon
+Last edit comment: group=railways
+Backup date: 2026-11-23 19:48:06 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/Tag:railway:signal:distant:states=FR:D
 --}}
 
 {{ValueDescription
 | key           = railway:signal:distant:states
 | value         = FR:D
-| image         = 
-| description   = 
-| group         = 
-| onNode        = 
-| onWay         = 
-| onArea        = 
-| onRelation    = 
-| requires      = 
+| image         = File:D_Cible_R6.svg
+| description   = Disque
+| group         = railways
+| onNode        = yes
+| onWay         = no
+| onArea        = no
+| onRelation    = no
+| requires      = {{Key|railway:signal:distant}}
 | implies       = 
 | combination   = 
 | seeAlso       = 
-| status        = 
+| status        = in use
 | statuslink    = 
 }}
 {{Template:FR:RailwaySignalState|state=D|category=distant}}

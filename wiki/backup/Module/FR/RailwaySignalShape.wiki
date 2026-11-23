@@ -3,7 +3,7 @@ Wiki page: Module:FR:RailwaySignalShape
 Last edited: 2026-02-16 19:24:30 UTC
 Last editor: Noeld
 Last edit comment: Updated SVG filename format and renamed getNumSignalHeads to getNumHeadLayouts to better reflect layout logic
-Backup date: 2026-02-17 00:40:16 UTC
+Backup date: 2026-11-23 19:48:06 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/Module:FR:RailwaySignalShape
 --}}
 

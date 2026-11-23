@@ -3,7 +3,7 @@ Wiki page: FR:Key:railway:signal:distant:states
 Last edited: 2026-11-12 01:34:34 UTC
 Last editor: Noeld
 Last edit comment: /* Available states */ remove unused aspects
-Backup date: 2026-11-17 05:53:06 UTC
+Backup date: 2026-11-23 19:48:05 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/FR:Key:railway:signal:distant:states
 --}}
 

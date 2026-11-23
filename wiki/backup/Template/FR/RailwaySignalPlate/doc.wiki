@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: Template:FR:RailwaySignalPlate/doc
-Last edited: 2024-07-11 03:33:34 UTC
+Last edited: 2024-07-11 01:33:34 UTC
 Last editor: Noeld
 Last edit comment: Edits.
-Backup date: 2025-08-09 02:16:18 UTC
+Backup date: 2026-11-23 19:48:07 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalPlate/doc
 --}}
 

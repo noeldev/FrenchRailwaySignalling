@@ -1,10 +1,10 @@
 ﻿{{!--
 Wiki page: Tag:railway:signal:main:states=FR:CV
-Last edited: 2024-06-16 01:48:13 UTC
+Last edited: 2026-08-19 02:13:39 UTC
 Last editor: Noeld
-Last edit comment: Created.
-Backup date: 2026-02-17 22:47:00 UTC
+Last edit comment: add redirection
+Backup date: 2026-11-23 19:48:06 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:states=FR:CV
 --}}
 
-{{Template:FR:RailwaySignalState|state=CV}}
+#REDIRECT [[Tag:railway:signal:main:states=FR:Cv]]

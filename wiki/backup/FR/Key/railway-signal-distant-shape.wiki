@@ -1,0 +1,27 @@
+﻿{{!--
+Wiki page: FR:Key:railway:signal:distant:shape
+Last edited: 2026-11-23 19:38:33 UTC
+Last editor: Noeld
+Last edit comment: Created page with "Distant signals in France ('''signaux à distance''': [[OpenRailwayMap/Tagging in France#Avertissement|Avertissement]] or [[OpenRailwayMap/Tagging in France#Disque|Disque]]) are always presented on an R-type signal head ('''châssis-écran de type R'''). The shape is therefore implicit and {{TagKey|railway:signal:distant:shape}} is not used.  [[File:SNCF_R-type_head_outline.svg|frameless|122px]]  {| class="wikitable" |+ |Description |Up to 6 lights |- |Dimensions |1270 x..."
+Backup date: 2026-11-23 19:48:05 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/FR:Key:railway:signal:distant:shape
+--}}
+
+Distant signals in France ('''signaux à distance''': [[OpenRailwayMap/Tagging in France#Avertissement|Avertissement]] or [[OpenRailwayMap/Tagging in France#Disque|Disque]]) are always presented on an R-type signal head ('''châssis-écran de type R'''). The shape is therefore implicit and {{TagKey|railway:signal:distant:shape}} is not used.
+
+[[File:SNCF_R-type_head_outline.svg|frameless|122px]]
+
+{| class="wikitable"
+|+
+|Description
+|Up to 6 lights
+|-
+|Dimensions
+|1270 x 1220 mm
+|}
+
+See also:
+* [[FR:Key:railway:signal:main:shape]] (main signal heads)
+* [[FR:Key:railway:signal:distant:states]] (available states)
+
+[[Category:OpenRailwayMap]]

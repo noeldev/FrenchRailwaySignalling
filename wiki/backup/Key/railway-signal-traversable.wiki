@@ -1,0 +1,62 @@
+﻿{{!--
+Wiki page: Key:railway:signal:traversable
+Last edited: 2026-11-23 19:19:11 UTC
+Last editor: Noeld
+Last edit comment: /* Country-specific values */ add France
+Backup date: 2026-11-23 19:48:06 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/Key:railway:signal:traversable
+--}}
+
+{{KeyDescription}}
+
+The tag {{Key|railway:signal:traversable}} is used to map markings on railway signals which indicate how to proceed in the case of a signal failure.
+
+== How to map ==
+The tag {{Tag|railway:signal:traversable}} should be added to the {{IconNode}} node of the main/minor signal to which it applies. Its value is the country-specific name of the respective marking.
+
+An additional sub-tag {{Tag|railway:signal:traversable:type}} is used to desribe the behaviour prescribed by the marking in an internationally standardised way.
+
+=== Country-specific values ===
+* [[OpenRailwayMap/Tagging in Germany#Post Plates|Germany]] (+ tram signal [[OpenRailwayMap/Tagging Trams in Germany#So 4|So 4]])
+* [[OpenRailwayMap/Tagging in Luxembourg#RF7|Luxembourg]]
+* [[OpenRailwayMap/Tagging in France#Sémaphore|France]]
+* …
+
+=== Traversable types ===
+The following table presents possible values for the {{Tag|railway:signal:traversable:type}} key. When applicable, several values may be used and separated using a semicolon. For common combinations see [https://taginfo.openstreetmap.org/keys/railway:signal:traversable:type#values taginfo].
+
+{| class="wikitable"
+|-
+! Value
+! Description
+|-
+| {{TagValue|railway:signal:traversable:type|no}}
+| Trains may never pass a signal being defect or showing red.
+|-
+| {{TagValue|railway:signal:traversable:type|written_default_speed}}
+| Trains may proceed with default speed (reduced speed if there are switches behind the signal) if they have a written command.
+|-
+| {{TagValue|railway:signal:traversable:type|written_on_sight}}
+| Trains may proceed on sight if they have a written command.
+|-
+| {{TagValue|railway:signal:traversable:type|dictated_default_speed}}
+| Trains may proceed with default speed (reduced speed if there are switches behind the signal) if they have a command which has been dictated via phone or radio.
+|-
+| {{TagValue|railway:signal:traversable:type|dictated_on_sight}}
+| Trains may proceed on sight if they have a command which has been dictated via phone or radio.
+|-
+| {{TagValue|railway:signal:traversable:type|oral_default_speed}}
+| Trains may proceed with default speed (reduced speed if there are switches behind the signal) if they get an oral permission (spoken out, via phone or via radio).
+|-
+| {{TagValue|railway:signal:traversable:type|oral_on_sight}}
+| Trains may proceed on sight if they get an oral permission (spoken out, via phone or via radio).
+|-
+| {{TagValue|railway:signal:traversable:type|on_no_contact_on_sight}}
+| Trains may proceed on sight if the cannot establish a connection with the signal box via phone or radio.
+|-
+| {{TagValue|railway:signal:traversable:type|always_on_sight}}
+| Trains may proceed on sight. A permission is not necessary.
+|}
+
+== See also ==
+* [https://lists.openrailwaymap.org/archives/openrailwaymap/2016-February/000393.html &#91;openrailwaymap&#93; schwarz-weiße, gelb-weiße und rote Mastschilder an Haupt-/Mehrabschnittsignalen] – suggestion of this tagging on the OpenRailwayMap mailing list (German/English)

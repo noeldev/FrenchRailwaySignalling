@@ -1,10 +1,20 @@
 ﻿{{!--
 Wiki page: Tag:railway:signal:main:shape=FR:K
-Last edited: 2024-06-26 23:05:30 UTC
+Last edited: 2026-10-12 21:59:27 UTC
 Last editor: Noeld
-Last edit comment: Created.
-Backup date: 2026-02-17 22:46:59 UTC
+Last edit comment: restore K shape
+Backup date: 2026-11-23 19:48:06 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/Tag:railway:signal:main:shape=FR:K
 --}}
+
+{{ValueDescription
+|key=railway:signal:main:shape
+|value=FR:K
+|group=railways
+|onNode=yes
+|onWay=no
+|onArea=no
+|onRelation=no
+}}
 
 {{Template:FR:RailwaySignalShape|shape=K}}

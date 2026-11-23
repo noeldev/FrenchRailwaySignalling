@@ -1,0 +1,9 @@
+﻿{{!--
+Wiki page: Key:railway:signal:*
+Last edited: 2026-11-22 18:10:20 UTC
+Last editor: Noeld
+Last edit comment: Unused/deprecated
+Backup date: 2026-11-23 19:48:06 UTC
+Source URL: https://wiki.openstreetmap.org/wiki/Key:railway:signal:*
+--}}
+

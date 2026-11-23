@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: Template:FR:RailwaySignalStateDescription
-Last edited: 2024-10-25 01:31:33 UTC
+Last edited: 2026-02-20 04:09:13 UTC
 Last editor: Noeld
-Last edit comment: Removed "See also" section.
-Backup date: 2025-08-09 02:16:18 UTC
+Last edit comment: /* Examples */ Fix missing tag
+Backup date: 2026-11-23 19:48:07 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalStateDescription
 --}}
 
@@ -20,10 +20,11 @@ Source URL: https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalStateDe
 
 {{{action}}}
 
+<includeonly>
 ==Examples==
 <!-- The examples are generated from the Lua module -->
 
-Rendering on different types of signals.
+Example rendering on different signal head types.
 </includeonly>
 <noinclude>
 {{Documentation}}

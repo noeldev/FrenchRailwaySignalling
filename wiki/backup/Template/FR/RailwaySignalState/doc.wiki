@@ -1,9 +1,9 @@
 ﻿{{!--
 Wiki page: Template:FR:RailwaySignalState/doc
-Last edited: 2024-07-17 16:07:12 UTC
+Last edited: 2026-08-19 03:04:51 UTC
 Last editor: Noeld
-Last edit comment: Edits.
-Backup date: 2026-02-17 00:40:16 UTC
+Last edit comment: move X aspect
+Backup date: 2026-11-23 19:48:06 UTC
 Source URL: https://wiki.openstreetmap.org/wiki/Template:FR:RailwaySignalState/doc
 --}}
 
@@ -28,9 +28,10 @@ Ce template est utilisé pour documenter les différents aspects des principaux 
 			"description": "Nom abrégé de l'aspect.",
 			"suggestedvalues": [
 				"C",
-				"CV",
+				"Cv",
 				"S",
 				"(S)",
+                "X",
 				"D",
 				"A",
 				"(A)",
@@ -60,8 +61,7 @@ Ce template est utilisé pour documenter les différents aspects des principaux 
 			"type": "line",
 			"suggestedvalues": [
 				"main",
-				"distant",
-				"shunting"
+				"distant"
 			],
 			"default": "main",
 			"required": false
