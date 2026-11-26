@@ -733,21 +733,43 @@
     },
     {
       "match": {
-        "railway:signal:route_distant": "FR:TIDD"
+        "railway:signal:route_distant": "FR:TLD",
+        "railway:signal:route": null
       },
       "set": {
-        "railway:signal:switch": "FR:TIDD"
+        "railway:signal:route": "FR:TLD"
       },
       "rename": {
-        "railway:signal:route_distant:form": "railway:signal:switch:form",
-        "railway:signal:route_distant:ref": "railway:signal:switch:ref"
+        "railway:signal:route_distant:form": "railway:signal:route:form",
+        "railway:signal:route_distant:ref": "railway:signal:route:ref",
+        "railway:signal:route_distant:shape": "railway:signal:route:shape",
+        "railway:signal:route_distant:caption": "railway:signal:route:caption"
       },
       "remove": [
-        "railway:signal:route_distant",
-        "railway:signal:route_distant:states"
+        "railway:signal:route_distant"
       ],
       "default": {
-        "railway:signal:switch:form": "light"
+        "railway:signal:route:form": "light"
+      }
+    },
+    {
+      "match": {
+        "railway:signal:switch": "FR:TIDD",
+        "railway:signal:route_distant": null
+      },
+      "set": {
+        "railway:signal:route_distant": "FR:TIDD"
+      },
+      "rename": {
+        "railway:signal:switch:form": "railway:signal:route_distant:form",
+        "railway:signal:switch:ref": "railway:signal:route_distant:ref",
+        "railway:signal:switch:states": "railway:signal:route_distant:states"
+      },
+      "remove": [
+        "railway:signal:switch"
+      ],
+      "default": {
+        "railway:signal:route_distant:form": "light"
       }
     },
     {
@@ -2423,10 +2445,10 @@
     },
     {
       "match": {
-        "railway:signal:route_distant:shape": "double"
+        "railway:signal:route:shape": "double"
       },
       "remove": [
-        "railway:signal:route_distant:shape"
+        "railway:signal:route:shape"
       ]
     },
     {

@@ -2,7 +2,7 @@
 <presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0"
     author="Noël Danjou"
 	icon="icons/SNCF_logo.png"
-    version="1.44_2026-11-23"
+    version="1.45_2026-11-26"
     description="Presets for French railway signalling"
     fr.description="Préréglages pour la signalisation ferroviaire en France"
     shortdescription="French Railway Signalling"
@@ -315,6 +315,26 @@
 		<key key="railway:signal:distant:form" value="light" />
 		<text
 			key="railway:signal:distant:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
+	</chunk>
+
+	<!-- Level Indicators (B board) -->
+	<chunk id="cat_level">
+		<reference ref="base_common" />
+		<text
+			key="railway:signal:level:ref"
+			text="Network ID"
+			fr.text="Identifiant Réseau"
+			length="7" />
+	</chunk>
+
+	<!-- Route Indicators -->
+	<chunk id="cat_route">
+		<reference ref="base_common" />
+		<text
+			key="railway:signal:route:ref"
 			text="Network ID"
 			fr.text="Identifiant Réseau"
 			length="7" />
@@ -1043,7 +1063,7 @@
 	<!-- TIDD aspects -->
 	<chunk id="decl_tidd_states">
 		<multiselect
-			key="railway:signal:switch:states"
+			key="railway:signal:route_distant:states"
 			text="Aspects"
 			fr.text="Aspects"
 			default=""
@@ -3452,8 +3472,25 @@
 					fr.text="Signaux implantés à droite de la voie" />
 				<space />
 				<key key="railway:signal:minor" value="FR:signals_on_right" />
-				<key key="railway:signal:minor:form" value="sign" />
 				<reference ref="cat_minor" />
+				<combo
+					key="railway:signal:minor:form"
+					text="Signal presentation"
+					fr.text="Présentation du signal"
+					default="sign"
+					editable="false"
+					values_sort="false">
+					<list_entry
+						value="sign"
+						display_value="Board"
+						fr.display_value="Pancarte"
+						icon="icons/signs/signals_on_right.svg" icon_size="24"/>
+					<list_entry
+						value="light"
+						display_value="Light box"
+						fr.display_value="Caisson lumineux"
+						icon="icons/boxes/signals_on_right.svg" icon_size="24"/>
+				</combo>
 				<link wiki="OpenRailwayMap/Tagging_in_France#Signals_on_right_sign" />
 			</item>
 
@@ -3468,8 +3505,25 @@
 					fr.text="Signaux implantés à gauche de la voie" />
 				<space />
 				<key key="railway:signal:minor" value="FR:signals_on_left" />
-				<key key="railway:signal:minor:form" value="sign" />
 				<reference ref="cat_minor" />
+				<combo
+					key="railway:signal:minor:form"
+					text="Signal presentation"
+					fr.text="Présentation du signal"
+					default="sign"
+					editable="false"
+					values_sort="false">
+					<list_entry
+						value="sign"
+						display_value="Board"
+						fr.display_value="Pancarte"
+						icon="icons/signs/signals_on_left.svg" icon_size="24"/>
+					<list_entry
+						value="light"
+						display_value="Light box"
+						fr.display_value="Caisson lumineux"
+						icon="icons/boxes/signals_on_left.svg" icon_size="24"/>
+				</combo>
 				<link wiki="OpenRailwayMap/Tagging_in_France#Signals_on_left_sign" />
 			</item>
 
@@ -3582,6 +3636,692 @@
 				<link wiki="OpenRailwayMap/Tagging_in_France#Mirlitons" />
 			</item>
 
+		</group>
+
+		<separator />
+
+		<!-- Chevrons -->
+		<group
+			name="Chevrons"
+			fr.name="Chevrons"
+			icon="icons/signs/chevron_down.svg">
+
+			<!-- Facing switch (speed limit) -->
+			<item
+				name="Downward-pointing Chevron"
+				fr.name="Chevron pointe en bas"
+				type="node"
+				icon="icons/signs/chevron_down.svg"
+				match_expression="-&quot;railway:signal:speed_limit:switch:type&quot;=trailing">
+				<label
+					text="Downward-pointing chevron (facing switch)"
+					fr.text="Chevron pointe en bas (aiguille prise en pointe)" />
+				<space />
+				<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
+				<key key="railway:signal:speed_limit:switch" value="FR:chevron" />
+				<key key="railway:signal:speed_limit:switch:form" value="sign" />
+				<key key="railway:signal:speed_limit:switch:type" match="none"/>
+				<key key="ref" match="none"/>
+				<reference ref="base_common" />
+				<text
+					key="railway:signal:speed_limit:switch:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau"
+					length="7" />
+
+				<item_separator />
+				<preset_link preset_name="Upward-pointing Chevron (Trailing Switch)" text=""/>
+
+				<link wiki="OpenRailwayMap/Tagging_in_France#Chevron_pointe_en_bas" />
+			</item>
+
+			<!-- Trailing switch (speed limit) -->
+			<item
+				name="Upward-pointing Chevron (Trailing Switch)"
+				fr.name="Chevron pointe en haut (Aiguille en Talon)"
+				type="node"
+				icon="icons/signs/chevron_up.svg">
+				<label
+					text="Upward-pointing chevron (trailing switch)"
+					fr.text="Chevron pointe en haut (aiguille prise en talon)" />
+				<space />
+				<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
+				<key key="railway:signal:speed_limit:switch" value="FR:chevron" />
+				<key key="railway:signal:speed_limit:switch:form" value="sign" />
+				<key key="railway:signal:speed_limit:switch:type" value="trailing" />
+				<key key="ref" match="none"/>
+				<reference ref="base_common" />
+				<text
+					key="railway:signal:speed_limit:switch:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau"
+					length="7" />
+
+				<item_separator />
+				<preset_link preset_name="Downward-pointing Chevron" text=""/>
+				<preset_link preset_name="Upward-pointing Chevron (Stop)" text=""/>
+
+				<link wiki="OpenRailwayMap/Tagging_in_France#Chevron_pointe_en_bas" />
+			</item>
+
+			<separator />
+
+			<!-- Stop point -->
+			<item
+				name="Upward-pointing Chevron (Stop)"
+				fr.name="Chevron pointe en haut (Repère d'Arrêt)"
+				type="node"
+				icon="icons/signs/chevron_up.svg">
+				<label
+					text="Upward-pointing chevron (stop point)"
+					fr.text="Chevron pointe en haut (point d'arrêt)" />
+				<space />
+				<key key="railway:signal:stop" value="FR:chevron" />
+				<key key="railway:signal:stop:form" value="sign" />
+				<reference ref="base_with_plate" />
+				<text
+					key="railway:signal:stop:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau"
+					length="7" />
+
+				<item_separator />
+				<preset_link preset_name="Upward-pointing Chevron (Trailing Switch)" text=""/>
+
+				<link wiki="OpenRailwayMap/Tagging_in_France#Chevron_pointe_en_haut" />
+			</item>
+
+		</group>
+
+		<!-- Speed Limits -->
+		<group
+			name="Speed Limits"
+			fr.name="Limitations de Vitesse"
+			icon="icons/signs/TIV-D_diamond.svg">
+
+			<!-- Switchable Speed Indicators -->
+			<group
+				name="Switchable Speed Indicators"
+				fr.name="TIV Mobiles"
+				icon="icons/boards/TIV-D_diamond.svg">
+
+				<!-- Switchable TIV-D -->
+				<item
+					name="Switchable TIV-D"
+					fr.name="TIV-D Mobile"
+					type="node"
+					icon="icons/boards/TIV-D_diamond.svg">
+					<label
+						text="Switchable TIV-D"
+						fr.text="TIV-D Mobile" />
+					<space />
+					<key key="railway:signal:speed_limit_distant" value="FR:speed_indicator" />
+					<key key="railway:signal:speed_limit_distant:switchable" value="FR:TIV-D" />
+					<reference ref="base_with_plate" />
+					<text
+						key="railway:signal:speed_limit_distant:switchable:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
+					<combo
+						key="railway:signal:speed_limit_distant:switchable:form"
+						text="Signal presentation"
+						fr.text="Présentation du signal"
+						editable="false"
+						values_sort="false">
+						<list_entry
+							value="sign"
+							display_value="Board"
+							fr.display_value="Pancarte"
+							icon="icons/signs/TIV-D_diamond.svg" icon_size="24"/>
+						<list_entry
+							value="board"
+							display_value="Illuminated board"
+							fr.display_value="Tableau lumineux"
+							icon="icons/boards/TIV-D_diamond.svg" icon_size="24"/>
+						<list_entry
+							value="light"
+							display_value="Light box"
+							fr.display_value="Caisson lumineux"
+							icon="icons/boxes/TIV-D.svg" icon_size="24"/>
+					</combo>
+					<combo
+						key="railway:signal:speed_limit_distant:switchable:speed"
+						text="Speed Limit (km/h)"
+						fr.text="Vitesse Maximale (km/h)"
+						values="60,70,80,90,100,110,120,130,140,150,160"
+						values_sort="false"
+						editable="false"/>
+					<combo
+						key="railway:signal:speed_limit_distant:switchable:turn_direction"
+						text="Speed restricted route"
+						fr.text="Route à vitesse restreinte"
+						editable="false"
+						values_sort="false">
+						<list_entry
+							value="left"
+							display_value="Left"
+							fr.display_value="Gauche"/>
+						<list_entry
+							value="through"
+							display_value="Through"
+							fr.display_value="Directe"/>
+						<list_entry
+							value="right"
+							display_value="Right"
+							fr.display_value="Droite"/>
+						<list_entry
+							value="thrown"
+							display_value="Thrown"
+							fr.display_value="Déviée"/>
+					</combo>
+					<link wiki="OpenRailwayMap/Tagging_in_France#Switchable_TIV-D" />
+				</item>
+
+				<!-- Switchable TIV-R -->
+				<item
+					name="Switchable TIV-R"
+					fr.name="TIV-R Mobile"
+					type="node"
+					icon="icons/boards/TIV-R.svg">
+					<label
+						text="Switchable TIV-R"
+						fr.text="TIV-R Mobile" />
+					<space />
+					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
+					<key key="railway:signal:speed_limit:switchable" value="FR:TIV-R" />
+					<reference ref="base_common" />
+					<text
+						key="railway:signal:speed_limit:switchable:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
+					<combo
+						key="railway:signal:speed_limit:switchable:form"
+						text="Signal presentation"
+						fr.text="Présentation du signal"
+						editable="false"
+						values_sort="false">
+						<list_entry
+							value="board"
+							display_value="Illuminated board"
+							fr.display_value="Tableau lumineux"
+							icon="icons/boards/TIV-R.svg" icon_size="24"/>
+						<list_entry
+							value="light"
+							display_value="Light box"
+							fr.display_value="Caisson lumineux"
+							icon="icons/boxes/TIV-R.svg" icon_size="24"/>
+					</combo>
+					<combo
+						key="railway:signal:speed_limit:switchable:speed"
+						text="Speed Limit (km/h)"
+						fr.text="Vitesse Maximale (km/h)"
+						editable="false"
+						values="30,40,60,70,80,90,100,110,120,130,140,150,160"
+						values_sort="false"/>
+					<combo
+						key="railway:signal:speed_limit:switchable:turn_direction"
+						text="Speed restricted route"
+						fr.text="Route à vitesse restreinte"
+						editable="false"
+						values_sort="false">
+						<list_entry
+							value="left"
+							display_value="Left"
+							fr.display_value="Gauche"/>
+						<list_entry
+							value="through"
+							display_value="Through"
+							fr.display_value="Directe"/>
+						<list_entry
+							value="right"
+							display_value="Right"
+							fr.display_value="Droite"/>
+						<list_entry
+							value="thrown"
+							display_value="Thrown"
+							fr.display_value="Déviée"/>
+					</combo>
+					<item_separator />
+					<preset_link preset_name="Downward-pointing Chevron" text=""/>
+					<link wiki="OpenRailwayMap/Tagging_in_France#Switchable_TIV-R" />
+				</item>
+
+			</group>
+
+			<!-- Fixed Speed Indicators -->
+			<group
+				name="Fixed Speed Indicators"
+				fr.name="TIV Fixes"
+				icon="icons/signs/TIV-D_square.svg">
+
+				<!-- Fixed Ordinary-Type TIV-D -->
+				<item
+					name="Ordinary-type TIV-D (diamond)"
+					fr.name="TIV-D du Type Ordinaire (losange)"
+					type="node"
+					icon="icons/signs/TIV-D_diamond.svg">
+					<label
+						text="Fixed distant speed indicator of the ordinary type (diamond shape)"
+						fr.text="TIV fixe à distance du type ordinaire, en forme de losange" />
+					<space />
+					<key key="railway:crocodile" value="yes" />
+					<reference ref="cat_ordinary_speed_indicator" />
+					<combo
+						key="railway:signal:speed_limit_distant:fixed:form"
+						text="Signal presentation"
+						fr.text="Présentation du signal"
+						editable="false"
+						values_sort="false">
+						<list_entry
+							value="sign"
+							display_value="Board"
+							fr.display_value="Pancarte"
+							icon="icons/signs/TIV-D_diamond.svg"
+							icon_size="24"/>
+						<list_entry
+							value="board"
+							display_value="Illuminated board"
+							fr.display_value="Tableau lumineux"
+							icon="icons/boards/TIV-D_diamond.svg"
+							icon_size="24"/>
+					</combo>
+					<space />
+					<multiselect
+						key="railway:signal:speed_limit_distant:fixed:speed"
+						text="Speed Limit(s) (km/h)"
+						fr.text="Vitesse(s) Maximale(s) (km/h)"
+						values="10;20;30;40;50;60;70;80;85;90;95;100;105;110;115;120"
+						rows="5"
+						values_sort="false"/>
+					<item_separator />
+					<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
+					<reference ref="cat_ordinary_speed_indicator_presets" />
+				</item>
+
+				<item
+					name="Ordinary-type TIV-D (square)"
+					fr.name="TIV-D du Type Ordinaire (carré)"
+					type="node"
+					icon="icons/signs/TIV-D_square.svg"
+					match_expression="-&quot;railway:crocodile&quot;=*">
+					<label
+						text="Fixed distant speed indicator of the ordinary type (square shape)"
+						fr.text="TIV fixe à distance du type ordinaire, de forme carrée" />
+					<space />
+					<key key="railway:crocodile" match="none" />
+					<reference ref="cat_ordinary_speed_indicator" />
+					<combo
+						key="railway:signal:speed_limit_distant:fixed:form"
+						text="Signal presentation"
+						fr.text="Présentation du signal"
+						editable="false"
+						values_sort="false">
+						<list_entry
+							value="sign"
+							display_value="Board"
+							fr.display_value="Pancarte"
+							icon="icons/signs/TIV-D_square.svg"
+							icon_size="24"/>
+						<list_entry
+							value="board"
+							display_value="Illuminated board"
+							fr.display_value="Tableau lumineux"
+							icon="icons/boards/TIV-D_square.svg"
+							icon_size="24"/>
+					</combo>
+					<space />
+					<multiselect
+						key="railway:signal:speed_limit_distant:fixed:speed"
+						text="Speed Limit(s) (km/h)"
+						fr.text="Vitesse(s) Maximale(s) (km/h)"
+						values="10;20;30;40;50;60;70;80;85;90;95;100;105;110;115;120;125;130;135;140"
+						rows="5"
+						values_sort="false"/>
+					<item_separator />
+					<preset_link preset_name="Ordinary-type TIV-D (diamond)" text=""/>
+					<reference ref="cat_ordinary_speed_indicator_presets" />
+				</item>
+
+				<!-- B-Type TIV-D -->
+				<item
+					name="B-type TIV-D"
+					fr.name="TIV-D du Type B"
+					type="node"
+					icon="icons/signs/TIV-D_B.svg">
+					<label
+						text="B-type fixed distant speed indicator"
+						fr.text="TIV fixe à distance du type B" />
+					<space />
+					<key key="railway:signal:speed_limit_distant" value="FR:speed_indicator" />
+					<key key="railway:signal:speed_limit_distant:fast" value="FR:TIV-D" />
+					<key key="railway:signal:speed_limit_distant:fast:form" value="sign" />
+					<reference ref="base_common" />
+					<text
+						key="railway:signal:speed_limit_distant:fast:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
+					<combo
+						key="railway:signal:speed_limit_distant:fast:speed"
+						text="Speed Limit (km/h)"
+						fr.text="Vitesse Maximale (km/h)"
+						editable="false"
+						values="60,70,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,160,170,180,190"
+						values_sort="false" />
+
+					<item_separator />
+
+					<preset_link preset_name="Ordinary-type TIV-D (diamond)" text=""/>
+					<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
+					<preset_link preset_name="C-type TIV-D" text=""/>
+					<preset_link preset_name="Z Board" text=""/>
+					<preset_link preset_name="R Board" text=""/>
+
+					<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_B-type_TIV-D" />
+				</item>
+
+				<!-- C-Type TIV-D -->
+				<item
+					name="C-type TIV-D"
+					fr.name="TIV-D du Type C"
+					type="node"
+					icon="icons/signs/TIV-D_C.svg">
+					<label
+						text="C-type fixed distant speed indicator"
+						fr.text="TIV fixe à distance du type C" />
+					<space />
+					<key key="railway:signal:speed_limit_distant" value="FR:speed_indicator" />
+					<key key="railway:signal:speed_limit_distant:railcar" value="FR:TIV-D" />
+					<key key="railway:signal:speed_limit_distant:railcar:form" value="sign" />
+					<reference ref="base_common" />
+					<text
+						key="railway:signal:speed_limit_distant:railcar:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
+					<space />
+					<combo
+						key="railway:signal:speed_limit_distant:railcar:speed"
+						text="Speed Limit (km/h)"
+						fr.text="Vitesse Maximale (km/h)"
+						editable="false"
+						values="40,50,60,70,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,160"
+						values_sort="false" />
+
+					<item_separator />
+
+					<preset_link preset_name="Ordinary-type TIV-D (diamond)" text=""/>
+					<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
+					<preset_link preset_name="B-type TIV-D" text=""/>
+					<preset_link preset_name="Z Board" text=""/>
+					<preset_link preset_name="R Board" text=""/>
+
+					<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_C-type_TIV-D" />
+				</item>
+
+				<separator />
+
+				<!-- Z Board -->
+				<item
+					name="Z Board"
+					fr.name="Pancarte Z"
+					type="node"
+					icon="icons/signs/Z.svg">
+					<label
+						text="Z Board"
+						fr.text="Pancarte Z" />
+					<space />
+					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
+					<key key="railway:signal:speed_limit:marker" value="FR:Z" />
+					<key key="railway:signal:speed_limit:marker:form" value="sign" />
+					<key key="railway:signal:speed_limit:marker:function" value="entry" />
+					<reference ref="base_common" />
+					<text
+						key="railway:signal:speed_limit:marker:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
+
+					<item_separator />
+
+					<preset_link preset_name="Ordinary-type TIV-D (diamond)" text=""/>
+					<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
+					<preset_link preset_name="B-type TIV-D" text=""/>
+					<preset_link preset_name="C-type TIV-D" text=""/>
+					<preset_link preset_name="Speed Marker" text=""/>
+
+					<link wiki="OpenRailwayMap/Tagging_in_France#Z_sign" />
+				</item>
+
+				<!-- R Board -->
+				<item
+					name="R Board"
+					fr.name="Pancarte R"
+					type="node"
+					icon="icons/signs/R.svg">
+					<label
+						text="R Board"
+						fr.text="Pancarte R" />
+					<space />
+					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
+					<key key="railway:signal:speed_limit:marker" value="FR:R" />
+					<key key="railway:signal:speed_limit:marker:form" value="sign" />
+					<key key="railway:signal:speed_limit:marker:function" value="exit" />
+					<reference ref="base_common" />
+					<text
+						key="railway:signal:speed_limit:marker:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
+
+					<item_separator />
+
+					<preset_link preset_name="Ordinary-type TIV-D (diamond)" text=""/>
+					<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
+					<preset_link preset_name="B-type TIV-D" text=""/>
+					<preset_link preset_name="C-type TIV-D" text=""/>
+					<preset_link preset_name="Speed Marker" text=""/>
+
+					<link wiki="OpenRailwayMap/Tagging_in_France#R_sign" />
+				</item>
+				
+				<separator />
+
+				<!-- Speed Marker -->
+				<item
+					name="Speed Marker"
+					fr.name="Repère de Vitesse"
+					type="node"
+					icon="icons/signs/Km.svg">
+					<label
+						text="Speed Marker"
+						fr.text="Repère de Vitesse" />
+					<space />
+					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
+					<key key="railway:signal:speed_limit:transition" value="FR:Km" />
+					<key key="railway:signal:speed_limit:transition:form" value="sign" />
+					<reference ref="base_common" />
+					<text
+						key="railway:signal:speed_limit:transition:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
+					<text
+						key="railway:signal:speed_limit:transition:caption"
+						text="Board caption"
+						fr.text="Libellé de la pancarte" />
+
+					<item_separator />
+
+					<preset_link preset_name="Ordinary-type TIV-D (diamond)" text=""/>
+					<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
+					<preset_link preset_name="B-type TIV-D" text=""/>
+					<preset_link preset_name="C-type TIV-D" text=""/>
+					<preset_link preset_name="Z Board" text=""/>
+					<preset_link preset_name="R Board" text=""/>
+
+					<link wiki="OpenRailwayMap/Tagging_in_France#Speed_marker_(Km_sign)" />
+				</item>
+
+			</group>
+
+			<!-- P Board -->
+			<item
+				name="P Board"
+				fr.name="Tableau P"
+				type="node"
+				icon="icons/boards/P.svg">
+				<label
+					text="P Board"
+					fr.text="Tableau P" />
+				<space />
+				<key key="railway:signal:speed_limit_distant" value="FR:P" />
+				<reference ref="base_common" />
+				<text
+					key="railway:signal:speed_limit_distant:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau"
+					length="7" />
+				<combo
+					key="railway:signal:speed_limit_distant:form"
+					text="Signal presentation"
+					fr.text="Présentation du signal"
+					editable="false"
+					values_sort="false">
+					<list_entry value="board"
+								display_value="Illuminated board"
+								fr.display_value="Tableau lumineux"
+								icon="icons/boards/P.svg" icon_size="24"/>
+					<list_entry value="light"
+								display_value="Light box"
+								fr.display_value="Caisson lumineux"
+								icon="icons/boxes/P.svg" icon_size="24"/>
+				</combo>
+				<link wiki="OpenRailwayMap/Tagging_in_France#Speed_limit_announcement_(P_board)" />
+			</item>
+
+			<separator />
+
+			<!-- Pentagonal Speed Indicators -->
+			<group
+				name="Pentagonal Speed Indicators"
+				fr.name="TIV Pentagonaux"
+				icon="icons/signs/pentagonal_speed_indicator.svg">
+
+				<!-- Distant -->
+				<item
+					name="Distant Speed Indicator"
+					fr.name="TIV à Distance"
+					type="node"
+					icon="icons/signs/pentagonal_distant_speed_indicator.svg">
+					<label
+						text="Pentagonal distant speed indicator"
+						fr.text="TIV à distance de forme pentagonale" />
+					<space />
+					<key key="railway:signal:speed_limit_distant" value="FR:speed_indicator" />
+					<key key="railway:signal:speed_limit_distant:freight" value="FR:TIV-D" />
+					<key key="railway:signal:speed_limit_distant:freight:form" value="sign" />
+					<reference ref="base_with_plate" />
+					<text
+						key="railway:signal:speed_limit_distant:freight:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
+					<combo
+						key="railway:signal:speed_limit_distant:freight:speed"
+						text="Speed Limit (km/h)"
+						fr.text="Vitesse Maximale (km/h)"
+						editable="false"
+						values="10,20,30,40,50,60,70,80,90"
+						values_sort="false"/>
+
+					<item_separator />
+
+					<preset_link preset_name="L Board" />
+
+					<link wiki="OpenRailwayMap/Tagging_in_France#Pentagonal_distant_TIV" />
+				</item>
+
+				<!-- L Board -->
+				<item
+					name="L Board"
+					fr.name="Pancarte L"
+					type="node"
+					icon="icons/signs/locomotive_restriction.svg">
+					<label
+						text="L Board (locomotive restriction)"
+						fr.text="Pancarte L (locomotive)" />
+					<space />
+					<key key="railway:signal:speed_limit_distant:restriction" value="FR:L"/>
+					<key key="railway:signal:speed_limit_distant:restriction:form" value="sign"/>
+					<reference ref="base_common" />
+					<text
+						key="railway:signal:speed_limit_distant:restriction:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#Locomotive_restriction_(L_sign)" />
+				</item>
+
+				<separator />
+
+				<!-- Execution -->
+				<item
+					name="Speed Indicator"
+					fr.name="TIV d'Exécution"
+					type="node"
+					icon="icons/signs/pentagonal_speed_indicator.svg">
+					<label
+						text="Pentagonal speed indicator"
+						fr.text="TIV d'exécution de forme pentagonale" />
+					<space />
+					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
+					<key key="railway:signal:speed_limit:freight" value="FR:TIV-E" />
+					<key key="railway:signal:speed_limit:freight:form" value="sign" />
+					<key key="railway:signal:speed_limit:freight:function" value="entry" />
+					<reference ref="base_common" />
+					<text
+						key="railway:signal:speed_limit:freight:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
+					<combo
+						key="railway:signal:speed_limit:freight:speed"
+						text="Speed Limit (km/h)"
+						fr.text="Vitesse Maximale (km/h)"
+						editable="false"
+						values="10,20,30,40,50,60,70,80,90"
+						values_sort="false"/>
+					<link wiki="OpenRailwayMap/Tagging_in_France#Pentagonal_TIV" />
+				</item>
+
+				<!-- White Board -->
+				<item
+					name="White board"
+					fr.name="Tableau blanc"
+					type="node"
+					icon="icons/signs/pentagonal_white_board.svg">
+					<label
+						text="White pentagonal board"
+						fr.text="Tableau blanc de forme pentagonale" />
+					<space />
+					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
+					<key key="railway:signal:speed_limit:freight" value="FR:white_board" />
+					<key key="railway:signal:speed_limit:freight:form" value="sign" />
+					<key key="railway:signal:speed_limit:freight:function" value="exit" />
+					<key key="railway:signal:speed_limit:freight:speed" match="none" />
+					<reference ref="base_common" />
+					<text
+						key="railway:signal:speed_limit:freight:ref"
+						text="Network ID"
+						fr.text="Identifiant Réseau"
+						length="7" />
+					<link wiki="OpenRailwayMap/Tagging_in_France#Pentagonal_white_board" />
+				</item>
+
+			</group>
 		</group>
 
 		<separator />
@@ -5503,695 +6243,64 @@
 
 		<separator />
 
-		<!-- Chevrons -->
-		<group
-			name="Chevrons"
-			fr.name="Chevrons"
-			icon="icons/signs/chevron_down.svg">
-
-			<!-- Facing switch (speed limit) -->
-			<item
-				name="Downward-pointing Chevron"
-				fr.name="Chevron pointe en bas"
-				type="node"
-				icon="icons/signs/chevron_down.svg"
-				match_expression="-&quot;railway:signal:speed_limit:switch:type&quot;=trailing">
-				<label
-					text="Downward-pointing chevron (facing switch)"
-					fr.text="Chevron pointe en bas (aiguille prise en pointe)" />
-				<space />
-				<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
-				<key key="railway:signal:speed_limit:switch" value="FR:chevron" />
-				<key key="railway:signal:speed_limit:switch:form" value="sign" />
-				<key key="railway:signal:speed_limit:switch:type" match="none"/>
-				<key key="ref" match="none"/>
-				<reference ref="base_common" />
-				<text
-					key="railway:signal:speed_limit:switch:ref"
-					text="Network ID"
-					fr.text="Identifiant Réseau"
-					length="7" />
-
-				<item_separator />
-				<preset_link preset_name="Upward-pointing Chevron (Trailing Switch)" text=""/>
-
-				<link wiki="OpenRailwayMap/Tagging_in_France#Chevron_pointe_en_bas" />
-			</item>
-
-			<!-- Trailing switch (speed limit) -->
-			<item
-				name="Upward-pointing Chevron (Trailing Switch)"
-				fr.name="Chevron pointe en haut (Aiguille en Talon)"
-				type="node"
-				icon="icons/signs/chevron_up.svg">
-				<label
-					text="Upward-pointing chevron (trailing switch)"
-					fr.text="Chevron pointe en haut (aiguille prise en talon)" />
-				<space />
-				<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
-				<key key="railway:signal:speed_limit:switch" value="FR:chevron" />
-				<key key="railway:signal:speed_limit:switch:form" value="sign" />
-				<key key="railway:signal:speed_limit:switch:type" value="trailing" />
-				<key key="ref" match="none"/>
-				<reference ref="base_common" />
-				<text
-					key="railway:signal:speed_limit:switch:ref"
-					text="Network ID"
-					fr.text="Identifiant Réseau"
-					length="7" />
-
-				<item_separator />
-				<preset_link preset_name="Downward-pointing Chevron" text=""/>
-				<preset_link preset_name="Upward-pointing Chevron (Stop)" text=""/>
-
-				<link wiki="OpenRailwayMap/Tagging_in_France#Chevron_pointe_en_bas" />
-			</item>
-
-			<separator />
-
-			<!-- Stop point -->
-			<item
-				name="Upward-pointing Chevron (Stop)"
-				fr.name="Chevron pointe en haut (Repère d'Arrêt)"
-				type="node"
-				icon="icons/signs/chevron_up.svg">
-				<label
-					text="Upward-pointing chevron (stop point)"
-					fr.text="Chevron pointe en haut (point d'arrêt)" />
-				<space />
-				<key key="railway:signal:stop" value="FR:chevron" />
-				<key key="railway:signal:stop:form" value="sign" />
-				<reference ref="base_with_plate" />
-				<text
-					key="railway:signal:stop:ref"
-					text="Network ID"
-					fr.text="Identifiant Réseau"
-					length="7" />
-
-				<item_separator />
-				<preset_link preset_name="Upward-pointing Chevron (Trailing Switch)" text=""/>
-
-				<link wiki="OpenRailwayMap/Tagging_in_France#Chevron_pointe_en_haut" />
-			</item>
-
-		</group>
-
-		<!-- Speed Limits -->
-		<group
-			name="Speed Limits"
-			fr.name="Limitations de Vitesse"
-			icon="icons/signs/TIV-D_diamond.svg">
-
-			<!-- Switchable Speed Indicators -->
-			<group
-				name="Switchable Speed Indicators"
-				fr.name="TIV Mobiles"
-				icon="icons/boards/TIV-D_diamond.svg">
-
-				<!-- Switchable TIV-D -->
-				<item
-					name="Switchable TIV-D"
-					fr.name="TIV-D Mobile"
-					type="node"
-					icon="icons/boards/TIV-D_diamond.svg">
-					<label
-						text="Switchable TIV-D"
-						fr.text="TIV-D Mobile" />
-					<space />
-					<key key="railway:signal:speed_limit_distant" value="FR:speed_indicator" />
-					<key key="railway:signal:speed_limit_distant:switchable" value="FR:TIV-D" />
-					<reference ref="base_with_plate" />
-					<text
-						key="railway:signal:speed_limit_distant:switchable:ref"
-						text="Network ID"
-						fr.text="Identifiant Réseau"
-						length="7" />
-					<combo
-						key="railway:signal:speed_limit_distant:switchable:form"
-						text="Signal presentation"
-						fr.text="Présentation du signal"
-						editable="false"
-						values_sort="false">
-						<list_entry
-							value="sign"
-							display_value="Board"
-							fr.display_value="Pancarte"
-							icon="icons/signs/TIV-D_diamond.svg" icon_size="24"/>
-						<list_entry
-							value="board"
-							display_value="Illuminated board"
-							fr.display_value="Tableau lumineux"
-							icon="icons/boards/TIV-D_diamond.svg" icon_size="24"/>
-						<list_entry
-							value="light"
-							display_value="Light box"
-							fr.display_value="Caisson lumineux"
-							icon="icons/boxes/TIV-D.svg" icon_size="24"/>
-					</combo>
-					<combo
-						key="railway:signal:speed_limit_distant:switchable:speed"
-						text="Speed Limit (km/h)"
-						fr.text="Vitesse Maximale (km/h)"
-						values="60,70,80,90,100,110,120,130,140,150,160"
-						values_sort="false"
-						editable="false"/>
-					<combo
-						key="railway:signal:speed_limit_distant:switchable:turn_direction"
-						text="Speed restricted route"
-						fr.text="Route à vitesse restreinte"
-						editable="false"
-						values_sort="false">
-						<list_entry
-							value="left"
-							display_value="Left"
-							fr.display_value="Gauche"/>
-						<list_entry
-							value="through"
-							display_value="Through"
-							fr.display_value="Directe"/>
-						<list_entry
-							value="right"
-							display_value="Right"
-							fr.display_value="Droite"/>
-						<list_entry
-							value="thrown"
-							display_value="Thrown"
-							fr.display_value="Déviée"/>
-					</combo>
-					<link wiki="OpenRailwayMap/Tagging_in_France#Switchable_TIV-D" />
-				</item>
-
-				<!-- Switchable TIV-R -->
-				<item
-					name="Switchable TIV-R"
-					fr.name="TIV-R Mobile"
-					type="node"
-					icon="icons/boards/TIV-R.svg">
-					<label
-						text="Switchable TIV-R"
-						fr.text="TIV-R Mobile" />
-					<space />
-					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
-					<key key="railway:signal:speed_limit:switchable" value="FR:TIV-R" />
-					<reference ref="base_common" />
-					<text
-						key="railway:signal:speed_limit:switchable:ref"
-						text="Network ID"
-						fr.text="Identifiant Réseau"
-						length="7" />
-					<combo
-						key="railway:signal:speed_limit:switchable:form"
-						text="Signal presentation"
-						fr.text="Présentation du signal"
-						editable="false"
-						values_sort="false">
-						<list_entry
-							value="board"
-							display_value="Illuminated board"
-							fr.display_value="Tableau lumineux"
-							icon="icons/boards/TIV-R.svg" icon_size="24"/>
-						<list_entry
-							value="light"
-							display_value="Light box"
-							fr.display_value="Caisson lumineux"
-							icon="icons/boxes/TIV-R.svg" icon_size="24"/>
-					</combo>
-					<combo
-						key="railway:signal:speed_limit:switchable:speed"
-						text="Speed Limit (km/h)"
-						fr.text="Vitesse Maximale (km/h)"
-						editable="false"
-						values="30,40,60,70,80,90,100,110,120,130,140,150,160"
-						values_sort="false"/>
-					<combo
-						key="railway:signal:speed_limit:switchable:turn_direction"
-						text="Speed restricted route"
-						fr.text="Route à vitesse restreinte"
-						editable="false"
-						values_sort="false">
-						<list_entry
-							value="left"
-							display_value="Left"
-							fr.display_value="Gauche"/>
-						<list_entry
-							value="through"
-							display_value="Through"
-							fr.display_value="Directe"/>
-						<list_entry
-							value="right"
-							display_value="Right"
-							fr.display_value="Droite"/>
-						<list_entry
-							value="thrown"
-							display_value="Thrown"
-							fr.display_value="Déviée"/>
-					</combo>
-					<item_separator />
-					<preset_link preset_name="Downward-pointing Chevron" text=""/>
-					<link wiki="OpenRailwayMap/Tagging_in_France#Switchable_TIV-R" />
-				</item>
-
-			</group>
-
-			<!-- Fixed Speed Indicators -->
-			<group
-				name="Fixed Speed Indicators"
-				fr.name="TIV Fixes"
-				icon="icons/signs/TIV-D_square.svg">
-
-				<!-- Fixed Ordinary-Type TIV-D -->
-				<item
-					name="Ordinary-type TIV-D (diamond)"
-					fr.name="TIV-D du Type Ordinaire (losange)"
-					type="node"
-					icon="icons/signs/TIV-D_diamond.svg">
-					<label
-						text="Fixed distant speed indicator of the ordinary type (diamond shape)"
-						fr.text="TIV fixe à distance du type ordinaire, en forme de losange" />
-					<space />
-					<key key="railway:crocodile" value="yes" />
-					<reference ref="cat_ordinary_speed_indicator" />
-					<combo
-						key="railway:signal:speed_limit_distant:fixed:form"
-						text="Signal presentation"
-						fr.text="Présentation du signal"
-						editable="false"
-						values_sort="false">
-						<list_entry
-							value="sign"
-							display_value="Board"
-							fr.display_value="Pancarte"
-							icon="icons/signs/TIV-D_diamond.svg"
-							icon_size="24"/>
-						<list_entry
-							value="board"
-							display_value="Illuminated board"
-							fr.display_value="Tableau lumineux"
-							icon="icons/boards/TIV-D_diamond.svg"
-							icon_size="24"/>
-					</combo>
-					<space />
-					<multiselect
-						key="railway:signal:speed_limit_distant:fixed:speed"
-						text="Speed Limit(s) (km/h)"
-						fr.text="Vitesse(s) Maximale(s) (km/h)"
-						values="10;20;30;40;50;60;70;80;85;90;95;100;105;110;115;120"
-						rows="5"
-						values_sort="false"/>
-					<item_separator />
-					<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
-					<reference ref="cat_ordinary_speed_indicator_presets" />
-				</item>
-
-				<item
-					name="Ordinary-type TIV-D (square)"
-					fr.name="TIV-D du Type Ordinaire (carré)"
-					type="node"
-					icon="icons/signs/TIV-D_square.svg"
-					match_expression="-&quot;railway:crocodile&quot;=*">
-					<label
-						text="Fixed distant speed indicator of the ordinary type (square shape)"
-						fr.text="TIV fixe à distance du type ordinaire, de forme carrée" />
-					<space />
-					<key key="railway:crocodile" match="none" />
-					<reference ref="cat_ordinary_speed_indicator" />
-					<combo
-						key="railway:signal:speed_limit_distant:fixed:form"
-						text="Signal presentation"
-						fr.text="Présentation du signal"
-						editable="false"
-						values_sort="false">
-						<list_entry
-							value="sign"
-							display_value="Board"
-							fr.display_value="Pancarte"
-							icon="icons/signs/TIV-D_square.svg"
-							icon_size="24"/>
-						<list_entry
-							value="board"
-							display_value="Illuminated board"
-							fr.display_value="Tableau lumineux"
-							icon="icons/boards/TIV-D_square.svg"
-							icon_size="24"/>
-					</combo>
-					<space />
-					<multiselect
-						key="railway:signal:speed_limit_distant:fixed:speed"
-						text="Speed Limit(s) (km/h)"
-						fr.text="Vitesse(s) Maximale(s) (km/h)"
-						values="10;20;30;40;50;60;70;80;85;90;95;100;105;110;115;120;125;130;135;140"
-						rows="5"
-						values_sort="false"/>
-					<item_separator />
-					<preset_link preset_name="Ordinary-type TIV-D (diamond)" text=""/>
-					<reference ref="cat_ordinary_speed_indicator_presets" />
-				</item>
-
-				<!-- B-Type TIV-D -->
-				<item
-					name="B-type TIV-D"
-					fr.name="TIV-D du Type B"
-					type="node"
-					icon="icons/signs/TIV-D_B.svg">
-					<label
-						text="B-type fixed distant speed indicator"
-						fr.text="TIV fixe à distance du type B" />
-					<space />
-					<key key="railway:signal:speed_limit_distant" value="FR:speed_indicator" />
-					<key key="railway:signal:speed_limit_distant:fast" value="FR:TIV-D" />
-					<key key="railway:signal:speed_limit_distant:fast:form" value="sign" />
-					<reference ref="base_common" />
-					<text
-						key="railway:signal:speed_limit_distant:fast:ref"
-						text="Network ID"
-						fr.text="Identifiant Réseau"
-						length="7" />
-					<combo
-						key="railway:signal:speed_limit_distant:fast:speed"
-						text="Speed Limit (km/h)"
-						fr.text="Vitesse Maximale (km/h)"
-						editable="false"
-						values="60,70,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,160,170,180,190"
-						values_sort="false" />
-
-					<item_separator />
-
-					<preset_link preset_name="Ordinary-type TIV-D (diamond)" text=""/>
-					<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
-					<preset_link preset_name="C-type TIV-D" text=""/>
-					<preset_link preset_name="Z Board" text=""/>
-					<preset_link preset_name="R Board" text=""/>
-
-					<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_B-type_TIV-D" />
-				</item>
-
-				<!-- C-Type TIV-D -->
-				<item
-					name="C-type TIV-D"
-					fr.name="TIV-D du Type C"
-					type="node"
-					icon="icons/signs/TIV-D_C.svg">
-					<label
-						text="C-type fixed distant speed indicator"
-						fr.text="TIV fixe à distance du type C" />
-					<space />
-					<key key="railway:signal:speed_limit_distant" value="FR:speed_indicator" />
-					<key key="railway:signal:speed_limit_distant:railcar" value="FR:TIV-D" />
-					<key key="railway:signal:speed_limit_distant:railcar:form" value="sign" />
-					<reference ref="base_common" />
-					<text
-						key="railway:signal:speed_limit_distant:railcar:ref"
-						text="Network ID"
-						fr.text="Identifiant Réseau"
-						length="7" />
-					<space />
-					<combo
-						key="railway:signal:speed_limit_distant:railcar:speed"
-						text="Speed Limit (km/h)"
-						fr.text="Vitesse Maximale (km/h)"
-						editable="false"
-						values="40,50,60,70,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,160"
-						values_sort="false" />
-
-					<item_separator />
-
-					<preset_link preset_name="Ordinary-type TIV-D (diamond)" text=""/>
-					<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
-					<preset_link preset_name="B-type TIV-D" text=""/>
-					<preset_link preset_name="Z Board" text=""/>
-					<preset_link preset_name="R Board" text=""/>
-
-					<link wiki="OpenRailwayMap/Tagging_in_France#Fixed_C-type_TIV-D" />
-				</item>
-
-				<separator />
-
-				<!-- Z Board -->
-				<item
-					name="Z Board"
-					fr.name="Pancarte Z"
-					type="node"
-					icon="icons/signs/Z.svg">
-					<label
-						text="Z Board"
-						fr.text="Pancarte Z" />
-					<space />
-					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
-					<key key="railway:signal:speed_limit:marker" value="FR:Z" />
-					<key key="railway:signal:speed_limit:marker:form" value="sign" />
-					<key key="railway:signal:speed_limit:marker:function" value="entry" />
-					<reference ref="base_common" />
-					<text
-						key="railway:signal:speed_limit:marker:ref"
-						text="Network ID"
-						fr.text="Identifiant Réseau"
-						length="7" />
-
-					<item_separator />
-
-					<preset_link preset_name="Ordinary-type TIV-D (diamond)" text=""/>
-					<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
-					<preset_link preset_name="B-type TIV-D" text=""/>
-					<preset_link preset_name="C-type TIV-D" text=""/>
-					<preset_link preset_name="Speed Marker" text=""/>
-
-					<link wiki="OpenRailwayMap/Tagging_in_France#Z_sign" />
-				</item>
-
-				<!-- R Board -->
-				<item
-					name="R Board"
-					fr.name="Pancarte R"
-					type="node"
-					icon="icons/signs/R.svg">
-					<label
-						text="R Board"
-						fr.text="Pancarte R" />
-					<space />
-					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
-					<key key="railway:signal:speed_limit:marker" value="FR:R" />
-					<key key="railway:signal:speed_limit:marker:form" value="sign" />
-					<key key="railway:signal:speed_limit:marker:function" value="exit" />
-					<reference ref="base_common" />
-					<text
-						key="railway:signal:speed_limit:marker:ref"
-						text="Network ID"
-						fr.text="Identifiant Réseau"
-						length="7" />
-
-					<item_separator />
-
-					<preset_link preset_name="Ordinary-type TIV-D (diamond)" text=""/>
-					<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
-					<preset_link preset_name="B-type TIV-D" text=""/>
-					<preset_link preset_name="C-type TIV-D" text=""/>
-					<preset_link preset_name="Speed Marker" text=""/>
-
-					<link wiki="OpenRailwayMap/Tagging_in_France#R_sign" />
-				</item>
-
-				<!-- Speed Marker -->
-				<item
-					name="Speed Marker"
-					fr.name="Repère de Vitesse"
-					type="node"
-					icon="icons/signs/Km.svg">
-					<label
-						text="Speed Marker"
-						fr.text="Repère de Vitesse" />
-					<space />
-					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
-					<key key="railway:signal:speed_limit:transition" value="FR:Km" />
-					<key key="railway:signal:speed_limit:transition:form" value="sign" />
-					<reference ref="base_common" />
-					<text
-						key="railway:signal:speed_limit:transition:ref"
-						text="Network ID"
-						fr.text="Identifiant Réseau"
-						length="7" />
-					<text
-						key="railway:signal:speed_limit:transition:caption"
-						text="Board caption"
-						fr.text="Libellé de la pancarte" />
-
-					<item_separator />
-
-					<preset_link preset_name="Ordinary-type TIV-D (diamond)" text=""/>
-					<preset_link preset_name="Ordinary-type TIV-D (square)" text=""/>
-					<preset_link preset_name="B-type TIV-D" text=""/>
-					<preset_link preset_name="C-type TIV-D" text=""/>
-					<preset_link preset_name="Z Board" text=""/>
-					<preset_link preset_name="R Board" text=""/>
-
-					<link wiki="OpenRailwayMap/Tagging_in_France#Speed_marker_(Km_sign)" />
-				</item>
-
-			</group>
-
-			<!-- P Board -->
-			<item
-				name="P Board"
-				fr.name="Tableau P"
-				type="node"
-				icon="icons/boards/P.svg">
-				<label
-					text="P Board"
-					fr.text="Tableau P" />
-				<space />
-				<key key="railway:signal:speed_limit_distant" value="FR:P" />
-				<reference ref="base_common" />
-				<text
-					key="railway:signal:speed_limit_distant:ref"
-					text="Network ID"
-					fr.text="Identifiant Réseau"
-					length="7" />
-				<combo
-					key="railway:signal:speed_limit_distant:form"
-					text="Signal presentation"
-					fr.text="Présentation du signal"
-					editable="false"
-					values_sort="false">
-					<list_entry value="board"
-								display_value="Illuminated board"
-								fr.display_value="Tableau lumineux"
-								icon="icons/boards/P.svg" icon_size="24"/>
-					<list_entry value="light"
-								display_value="Light box"
-								fr.display_value="Caisson lumineux"
-								icon="icons/boxes/P.svg" icon_size="24"/>
-				</combo>
-				<link wiki="OpenRailwayMap/Tagging_in_France#Speed_limit_announcement_(P_board)" />
-			</item>
-
-			<separator />
-
-			<!-- Pentagonal Speed Indicators -->
-			<group
-				name="Pentagonal Speed Indicators"
-				fr.name="TIV Pentagonaux"
-				icon="icons/signs/pentagonal_speed_indicator.svg">
-
-				<!-- Distant -->
-				<item
-					name="Distant Speed Indicator"
-					fr.name="TIV à Distance"
-					type="node"
-					icon="icons/signs/pentagonal_distant_speed_indicator.svg">
-					<label
-						text="Pentagonal distant speed indicator"
-						fr.text="TIV à distance de forme pentagonale" />
-					<space />
-					<key key="railway:signal:speed_limit_distant" value="FR:speed_indicator" />
-					<key key="railway:signal:speed_limit_distant:freight" value="FR:TIV-D" />
-					<key key="railway:signal:speed_limit_distant:freight:form" value="sign" />
-					<reference ref="base_with_plate" />
-					<text
-						key="railway:signal:speed_limit_distant:freight:ref"
-						text="Network ID"
-						fr.text="Identifiant Réseau"
-						length="7" />
-					<combo
-						key="railway:signal:speed_limit_distant:freight:speed"
-						text="Speed Limit (km/h)"
-						fr.text="Vitesse Maximale (km/h)"
-						editable="false"
-						values="10,20,30,40,50,60,70,80,90"
-						values_sort="false"/>
-
-					<item_separator />
-
-					<preset_link preset_name="L Board" />
-
-					<link wiki="OpenRailwayMap/Tagging_in_France#Pentagonal_distant_TIV" />
-				</item>
-
-				<!-- L Board -->
-				<item
-					name="L Board"
-					fr.name="Pancarte L"
-					type="node"
-					icon="icons/signs/locomotive_restriction.svg">
-					<label
-						text="L Board (locomotive restriction)"
-						fr.text="Pancarte L (locomotive)" />
-					<space />
-					<key key="railway:signal:speed_limit_distant:restriction" value="FR:L"/>
-					<key key="railway:signal:speed_limit_distant:restriction:form" value="sign"/>
-					<reference ref="base_common" />
-					<text
-						key="railway:signal:speed_limit_distant:restriction:ref"
-						text="Network ID"
-						fr.text="Identifiant Réseau"
-						length="7" />
-					<link wiki="OpenRailwayMap/Tagging_in_France#Locomotive_restriction_(L_sign)" />
-				</item>
-
-				<separator />
-
-				<!-- Execution -->
-				<item
-					name="Speed Indicator"
-					fr.name="TIV d'Exécution"
-					type="node"
-					icon="icons/signs/pentagonal_speed_indicator.svg">
-					<label
-						text="Pentagonal speed indicator"
-						fr.text="TIV d'exécution de forme pentagonale" />
-					<space />
-					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
-					<key key="railway:signal:speed_limit:freight" value="FR:TIV-E" />
-					<key key="railway:signal:speed_limit:freight:form" value="sign" />
-					<key key="railway:signal:speed_limit:freight:function" value="entry" />
-					<reference ref="base_common" />
-					<text
-						key="railway:signal:speed_limit:freight:ref"
-						text="Network ID"
-						fr.text="Identifiant Réseau"
-						length="7" />
-					<combo
-						key="railway:signal:speed_limit:freight:speed"
-						text="Speed Limit (km/h)"
-						fr.text="Vitesse Maximale (km/h)"
-						editable="false"
-						values="10,20,30,40,50,60,70,80,90"
-						values_sort="false"/>
-					<link wiki="OpenRailwayMap/Tagging_in_France#Pentagonal_TIV" />
-				</item>
-
-				<!-- White Board -->
-				<item
-					name="White board"
-					fr.name="Tableau blanc"
-					type="node"
-					icon="icons/signs/pentagonal_white_board.svg">
-					<label
-						text="White pentagonal board"
-						fr.text="Tableau blanc de forme pentagonale" />
-					<space />
-					<key key="railway:signal:speed_limit" value="FR:speed_indicator" />
-					<key key="railway:signal:speed_limit:freight" value="FR:white_board" />
-					<key key="railway:signal:speed_limit:freight:form" value="sign" />
-					<key key="railway:signal:speed_limit:freight:function" value="exit" />
-					<key key="railway:signal:speed_limit:freight:speed" match="none" />
-					<reference ref="base_common" />
-					<text
-						key="railway:signal:speed_limit:freight:ref"
-						text="Network ID"
-						fr.text="Identifiant Réseau"
-						length="7" />
-					<link wiki="OpenRailwayMap/Tagging_in_France#Pentagonal_white_board" />
-				</item>
-
-			</group>
-		</group>
-
-		<separator />
-
 		<!-- Route Indicators -->
 		<group
 			name="Route Indicators"
 			fr.name="Indicateurs de Direction"
 			icon="icons/signals/ID3.svg">
+
+			<!-- TIDD -->
+			<item
+				name="TIDD"
+				fr.name="TIDD"
+				type="node"
+				icon="icons/boxes/TIDD.svg">
+				<label
+					text="Tableau Indicateur de Direction à Distance (TIDD)"
+					fr.text="Tableau Indicateur de Direction à Distance (TIDD)" />
+				<space />
+				<key key="railway:signal:route_distant" value="FR:TIDD" />
+				<key key="railway:signal:route_distant:form" value="light" />
+				<reference ref="cat_route_distant" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Tableau_Indicateur_de_Direction_à_Distance" />
+			</item>
+
+			<!-- TLD -->
+			<item
+				name="TLD"
+				fr.name="TLD"
+				type="node"
+				icon="icons/boxes/TLD_double.svg">
+				<label
+					text="Tableau Lumineux de Direction (TLD)"
+					fr.text="Tableau Lumineux de Direction (TLD)" />
+				<space />
+				<key key="railway:signal:route" value="FR:TLD" />
+				<key key="railway:signal:route:form" value="light" />
+				<reference ref="cat_route" />
+				<combo
+					key="railway:signal:route:shape"
+					text="Light box type"
+					fr.text="Type de caisson"
+					editable="false"
+					values_sort="false">
+					<list_entry
+						value=""
+						display_value="Double"
+						fr.display_value="Double"
+						icon="icons/boxes/TLD_double.svg" icon_size="24"/>
+					<list_entry
+						value="wide"
+						display_value="Wide"
+						fr.display_value="Large"
+						icon="icons/boxes/TLD_wide.svg" icon_size="24"/>
+				</combo>
+				<text
+					key="railway:signal:route:caption"
+					text="Board caption"
+					fr.text="Libellé du tableau" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Tableau_Lumineux_de_Direction" />
+			</item>
 
 			<!-- ID -->
 			<item
@@ -6204,12 +6313,7 @@
 				<space />
 				<key key="railway:signal:route" value="FR:ID" />
 				<key key="railway:signal:route:form" value="light" />
-				<reference ref="base_common" />
-				<text
-					key="railway:signal:route:ref"
-					text="Network ID"
-					fr.text="Identifiant Réseau"
-					length="7" />
+				<reference ref="cat_route" />
 				<combo
 					key="railway:signal:route:states"
 					text="Number of Directions"
@@ -6234,64 +6338,6 @@
 						fr.display_value="5 Directions" />
 				</combo>
 				<link wiki="OpenRailwayMap/Tagging_in_France#Indicateur_de_Direction" />
-			</item>
-
-			<!-- TIDD -->
-			<item
-				name="TIDD"
-				fr.name="TIDD"
-				type="node"
-				icon="icons/boxes/TIDD.svg">
-				<label
-					text="Tableau Indicateur de Direction à Distance (TIDD)"
-					fr.text="Tableau Indicateur de Direction à Distance (TIDD)" />
-				<space />
-				<key key="railway:signal:switch" value="FR:TIDD" />
-				<key key="railway:signal:switch:form" value="light" />
-				<reference ref="base_common" />
-				<text
-					key="railway:signal:switch:ref"
-					text="Network ID"
-					fr.text="Identifiant Réseau"
-					length="7" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Tableau_Indicateur_de_Direction_à_Distance" />
-			</item>
-
-			<!-- TLD -->
-			<item
-				name="TLD"
-				fr.name="TLD"
-				type="node"
-				icon="icons/boxes/TLD_double.svg">
-				<label
-					text="Tableau Lumineux de Direction (TLD)"
-					fr.text="Tableau Lumineux de Direction (TLD)" />
-				<space />
-				<key key="railway:signal:route_distant" value="FR:TLD" />
-				<key key="railway:signal:route_distant:form" value="light" />
-				<reference ref="cat_route_distant" />
-				<combo
-					key="railway:signal:route_distant:shape"
-					text="Light box type"
-					fr.text="Type de caisson"
-					editable="false"
-					values_sort="false">
-					<list_entry
-						value=""
-						display_value="Double"
-						fr.display_value="Double"
-						icon="icons/boxes/TLD_double.svg" icon_size="24"/>
-					<list_entry
-						value="wide"
-						display_value="Wide"
-						fr.display_value="Large"
-						icon="icons/boxes/TLD_wide.svg" icon_size="24"/>
-				</combo>
-				<text
-					key="railway:signal:route_distant:caption"
-					text="Board caption"
-					fr.text="Libellé du tableau" />
-				<link wiki="OpenRailwayMap/Tagging_in_France#Tableau_Lumineux_de_Direction" />
 			</item>
 
 			<separator />
@@ -6354,6 +6400,78 @@
 			</item>
 
 		</group>
+
+		<!-- Level Indicators -->
+		<group
+			name="Level Indicators"
+			fr.name="Indicateurs de Niveau"
+			icon="icons/boxes/TIND_surface.svg">
+
+			<!-- TIND surface -->
+			<item
+				name="TIND Surface"
+				fr.name="TIND Surface"
+				type="node"
+				icon="icons/boxes/TIND_surface.svg">
+				<label
+					text="Tableau Indicateur de Niveau à Distance (TIND) - surface"
+					fr.text="Tableau Indicateur de Niveau à Distance (TIND) - surface" />
+				<space />
+				<key key="railway:signal:level_distant" value="FR:level_indicator" />
+				<key key="railway:signal:level_distant:surface" value="FR:TIND" />
+				<key key="railway:signal:level_distant:surface:form" value="light" />
+				<reference ref="base_common" />
+				<text
+					key="railway:signal:level_distant:surface:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau"
+					length="7" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Tableau_Indicateur_de_Niveau_à_Distance" />
+			</item>
+
+			<!-- TIND underground -->
+			<item
+				name="TIND Underground"
+				fr.name="TIND Souterrain"
+				type="node"
+				icon="icons/boxes/TIND_underground.svg">
+				<label
+					text="Tableau Indicateur de Niveau à Distance (TIND) - underground"
+					fr.text="Tableau Indicateur de Niveau à Distance (TIND) - souterrain" />
+				<space />
+				<key key="railway:signal:level_distant" value="FR:level_indicator" />
+				<key key="railway:signal:level_distant:underground" value="FR:TIND" />
+				<key key="railway:signal:level_distant:underground:form" value="light" />
+				<reference ref="base_common" />
+				<text
+					key="railway:signal:level_distant:underground:ref"
+					text="Network ID"
+					fr.text="Identifiant Réseau"
+					length="7" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#Tableau_Indicateur_de_Niveau_à_Distance" />
+			</item>
+
+			<separator />
+
+			<!-- B board -->
+			<item
+				name="B Board"
+				fr.name="Tableau B"
+				type="node"
+				icon="icons/boxes/B.svg">
+				<label
+					text="B board (suburban)"
+					fr.text="Tableau B (banlieue)" />
+				<space />
+				<key key="railway:signal:level" value="FR:B" />
+				<key key="railway:signal:level:form" value="light" />
+				<reference ref="cat_level" />
+				<link wiki="OpenRailwayMap/Tagging_in_France#B_board" />
+			</item>
+
+		</group>
+
+		<separator />
 
 		<!-- Wrong-Road Signalling (ICS) -->
 		<group

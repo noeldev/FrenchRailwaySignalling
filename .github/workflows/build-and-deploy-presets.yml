@@ -58,16 +58,20 @@ jobs:
 
       - name: Stamp the build line
         # Replaces the {{BUILD_*}} placeholders of the page footer with the
-        # build date and the commit; fails if one is left.
+        # build date and the commit, and {{PRESET_VERSION}} with the version
+        # attribute of the preset file; fails if one is left.
         run: |
           now=$(date -u +%s)
+          version=$(xmllint --xpath "string(/*[local-name()='presets']/@version)" ${{ env.PRESET_FILE }})
+          test -n "$version"
           sed -i \
+            -e "s|{{PRESET_VERSION}}|$version|g" \
             -e "s|{{BUILD_DATE_ISO}}|$(date -u -d @$now +%Y-%m-%dT%H:%M:%SZ)|g" \
             -e "s|{{BUILD_DATE}}|$(date -u -d @$now '+%Y-%m-%d %H:%M UTC')|g" \
             -e "s|{{BUILD_SHA}}|$GITHUB_SHA|g" \
             -e "s|{{BUILD_SHORT_SHA}}|${GITHUB_SHA::12}|g" \
             public/index.html
-          ! grep -q '{{BUILD_' public/index.html
+          ! grep -qE '\{\{(BUILD|PRESET)_' public/index.html
 
       # --- .NET tools: taginfo.json and the validator rules, into public/ ---
       - name: Setup .NET
